@@ -1,8 +1,9 @@
 <div class="sidebar" data-color = "primary">
     <div class="sidebar-wrapper">
         <div class="logo">
-            <a href="#" class="simple-text logo-mini">{{ __('BD') }}</a>
-            <a href="#" class="simple-text logo-normal">{{ __('Black Dashboard') }}</a>
+            <!--a href="#" class="simple-text logo-mini">{{ __('BD') }}</a-->
+            <!--a href="#" class="simple-text logo-normal">{{ __('Black Dashboard') }}</a-->
+            <a href="{{ route('home') }}"><img src="black/img/cidesv3.jpg" class=logo1></a>
         </div>
         <ul class="nav">
             <li @if ($pageSlug == 'dashboard') class="active " @endif>

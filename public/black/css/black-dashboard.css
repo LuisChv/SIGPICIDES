@@ -17845,6 +17845,7 @@ Copyright (c) 2015 Daniel Eden
   z-index: 1;
 }
 
+
 .card-register .card-img {
   position: absolute;
   left: 0;
@@ -17896,3 +17897,11 @@ Copyright (c) 2015 Daniel Eden
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */
+/*Logo cides*/
+.logo1{
+  border-radius: 100%;
+  display: block;
+  margin: auto;
+  height: 120px;
+  width: 120px;
+}
