@@ -17899,9 +17899,15 @@ Copyright (c) 2015 Daniel Eden
 /*# sourceMappingURL=dashboard-free.css.map */
 /*Logo cides*/
 .logo1{
+  margin: 0 auto;
   border-radius: 100%;
   display: block;
-  margin: auto;
   height: 120px;
   width: 120px;
+}
+.logo2{
+  margin: 10px 32%;
+  border-radius: 100%;
+  display: fixed;
+  height: 120px;
 }
