@@ -15,6 +15,9 @@ class CreateComponenteDeGraficasTable extends Migration
     {
         Schema::create('componente_de_graficas', function (Blueprint $table) {
             $table->id();
+            $table->integer('idindicador');
+            $table->string('ejex', 50);
+            $table->string('ejey', 50);
             $table->timestamps();
         });
     }

@@ -15,6 +15,12 @@ class CreatePlanificacionsTable extends Migration
     {
         Schema::create('planificacions', function (Blueprint $table) {
             $table->id();
+            $table->integer('idproy');
+            $table->integer('idhito');
+            $table->integer('idtarea');
+            $table->string('descripcionplan',1000);
+            $table->date('fechainicio');
+            $table->date('fechafin');
             $table->timestamps();
         });
     }

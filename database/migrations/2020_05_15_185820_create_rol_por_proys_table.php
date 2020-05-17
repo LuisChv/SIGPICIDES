@@ -15,6 +15,8 @@ class CreateRolPorProysTable extends Migration
     {
         Schema::create('rol_por_proys', function (Blueprint $table) {
             $table->id();
+            $table->char('iduer',10);
+            $table->string('rolmiembro',10);
             $table->timestamps();
         });
     }

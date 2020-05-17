@@ -15,6 +15,8 @@ class CreateTareasTable extends Migration
     {
         Schema::create('tareas', function (Blueprint $table) {
             $table->id();
+            $table->integer('idestado');
+            $table->string('nombretarea',100);
             $table->timestamps();
         });
     }

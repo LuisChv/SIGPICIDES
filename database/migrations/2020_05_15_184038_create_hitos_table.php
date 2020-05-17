@@ -15,6 +15,12 @@ class CreateHitosTable extends Migration
     {
         Schema::create('hitos', function (Blueprint $table) {
             $table->id();
+            $table->integer('iddoc');
+            $table->integer('idevaperfil');
+            $table->date('fechahito');
+            $table->string('nombrehito',20);
+            $table->date('fechaultmodif');
+            $table->boolean('actualizado');
             $table->timestamps();
         });
     }

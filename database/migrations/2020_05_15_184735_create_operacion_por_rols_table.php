@@ -15,6 +15,8 @@ class CreateOperacionPorRolsTable extends Migration
     {
         Schema::create('operacion_por_rols', function (Blueprint $table) {
             $table->id();
+            $table->integer('idrol');
+            $table->integer('idpermiso');
             $table->timestamps();
         });
     }

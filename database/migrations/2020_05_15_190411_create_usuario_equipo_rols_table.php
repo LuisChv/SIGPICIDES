@@ -15,6 +15,9 @@ class CreateUsuarioEquipoRolsTable extends Migration
     {
         Schema::create('usuario_equipo_rols', function (Blueprint $table) {
             $table->id();
+            $table->char('iduer',10);
+            $table->integer('idequi');
+            $table->integer('idrolporproy');
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ class CreateAlcancesTable extends Migration
     {
         Schema::create('alcances', function (Blueprint $table) {
             $table->id();
+            $table->string("declaracion");
             $table->timestamps();
         });
     }

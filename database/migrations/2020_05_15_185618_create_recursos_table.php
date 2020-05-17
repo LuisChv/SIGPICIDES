@@ -15,6 +15,10 @@ class CreateRecursosTable extends Migration
     {
         Schema::create('recursos', function (Blueprint $table) {
             $table->id();
+            $table->integer('idmarca');
+            $table->integer('iddelrec');
+            $table->integer('idtipoderec');
+            $table->string('nombrerec',30);
             $table->timestamps();
         });
     }

@@ -15,6 +15,8 @@ class CreateValorEjesTable extends Migration
     {
         Schema::create('valor_ejes', function (Blueprint $table) {
             $table->id();
+            $table->decimal('valorx');
+            $table->decimal('valory');
             $table->timestamps();
         });
     }

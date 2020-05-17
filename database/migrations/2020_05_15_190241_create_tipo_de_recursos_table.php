@@ -15,6 +15,7 @@ class CreateTipoDeRecursosTable extends Migration
     {
         Schema::create('tipo_de_recursos', function (Blueprint $table) {
             $table->id();
+            $table->string('nombretiporec',100);
             $table->timestamps();
         });
     }

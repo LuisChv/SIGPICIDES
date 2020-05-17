@@ -15,6 +15,9 @@ class CreateRecursosPorProysTable extends Migration
     {
         Schema::create('recursos_por_proys', function (Blueprint $table) {
             $table->id();
+            $table->integer('idproy');
+            $table->integer('idrecursos');
+            $table->integer('cantidadrec');
             $table->timestamps();
         });
     }

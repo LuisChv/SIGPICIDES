@@ -15,6 +15,8 @@ class CreateSubTipoDeInvestigacionsTable extends Migration
     {
         Schema::create('sub_tipo_de_investigacions', function (Blueprint $table) {
             $table->id();
+            $table->integer('idtipodeinv');
+            $table->string('nombresubtipo', 100);
             $table->timestamps();
         });
     }

@@ -15,6 +15,8 @@ class CreateEstadoDeTareasTable extends Migration
     {
         Schema::create('estado_de_tareas', function (Blueprint $table) {
             $table->id();
+            $table->integer('idtarea');
+            $table->string('estadotarea',20);
             $table->timestamps();
         });
     }

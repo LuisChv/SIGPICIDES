@@ -15,6 +15,9 @@ class CreateDetalleDeRecursosTable extends Migration
     {
         Schema::create('detalle_de_recursos', function (Blueprint $table) {
             $table->id();
+            $table->integer('idrecursos');
+            $table->string('descripcionrec', 100);
+            $table->string('modelo',30);
             $table->timestamps();
         });
     }

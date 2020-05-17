@@ -15,6 +15,9 @@ class CreatePermisoPorUsuariosTable extends Migration
     {
         Schema::create('permiso_por_usuarios', function (Blueprint $table) {
             $table->id();
+            $table->integer('idrol');
+            $table->integer('idusuario');
+            $table->string('username', 30);
             $table->timestamps();
         });
     }

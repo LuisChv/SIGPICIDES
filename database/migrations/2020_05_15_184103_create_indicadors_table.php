@@ -15,6 +15,17 @@ class CreateIndicadorsTable extends Migration
     {
         Schema::create('indicadors', function (Blueprint $table) {
             $table->id();
+            $table->integer('idvariable');
+            $table->integer('idcomponente');
+            $table->integer('iddoc');
+            $table->string('detalle', 1000);
+            $table->integer('cantvariables');
+            $table->boolean('nombretipoind');
+            $table->boolean('finalizado');
+            $table->string('descripdeavance', 1000);
+            $table->string('observaciones', 1000);
+            $table->boolean('tipodegrafico');
+            $table->date('fechafinalizado');
             $table->timestamps();
         });
     }

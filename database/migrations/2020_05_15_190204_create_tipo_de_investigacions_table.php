@@ -15,6 +15,7 @@ class CreateTipoDeInvestigacionsTable extends Migration
     {
         Schema::create('tipo_de_investigacions', function (Blueprint $table) {
             $table->id();
+            $table->string('nombretipoinv',100);
             $table->timestamps();
         });
     }

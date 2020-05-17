@@ -15,6 +15,8 @@ class CreateEstadoDeProysTable extends Migration
     {
         Schema::create('estado_de_proys', function (Blueprint $table) {
             $table->id();
+            $table->integer('idproy');
+            $table->string('estado',15);
             $table->timestamps();
         });
     }

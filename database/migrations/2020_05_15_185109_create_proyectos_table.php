@@ -15,6 +15,19 @@ class CreateProyectosTable extends Migration
     {
         Schema::create('proyectos', function (Blueprint $table) {
             $table->id();
+            $table->integer('idindicador');
+            $table->integer('idobjetivo');
+            $table->integer('idalcance');
+            $table->integer('idsubtipodeinv');
+            $table->integer('idplan');
+            $table->integer('idequi');
+            $table->integer('idrpp');
+            $table->integer('idfacproy');
+            $table->integer('idsoli');
+            $table->integer('idestadoproy');
+            $table->string('nombredelproy',50);
+            $table->string('descridelproy',70);
+            $table->decimal('costoproy',7);
             $table->timestamps();
         });
     }

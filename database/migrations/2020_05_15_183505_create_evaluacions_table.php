@@ -15,6 +15,10 @@ class CreateEvaluacionsTable extends Migration
     {
         Schema::create('evaluacions', function (Blueprint $table) {
             $table->id();
+            $table->integer('idcomite');
+            $table->integer('cantdeevasoli');
+            $table->string('comnetario',200);
+            $table->date('fechaeva');
             $table->timestamps();
         });
     }

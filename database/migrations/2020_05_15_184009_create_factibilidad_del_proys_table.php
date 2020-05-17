@@ -15,6 +15,12 @@ class CreateFactibilidadDelProysTable extends Migration
     {
         Schema::create('factibilidad_del_proys', function (Blueprint $table) {
             $table->id();
+            $table->integer('idproy');
+            $table->string('tecnica',1500);
+            $table->string('economia',1500);
+            $table->string('financiera',1500);
+            $table->string('operativa',1500);
+            $table->string('facextra',1500);
             $table->timestamps();
         });
     }

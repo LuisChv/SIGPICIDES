@@ -15,6 +15,9 @@ class CreateIntegracionDeComitesTable extends Migration
     {
         Schema::create('integracion_de_comites', function (Blueprint $table) {
             $table->id();
+            $table->integer('idcomite');
+            $table->integer('idusuario');
+            $table->string('username',30);
             $table->timestamps();
         });
     }

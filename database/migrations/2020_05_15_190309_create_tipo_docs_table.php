@@ -15,6 +15,8 @@ class CreateTipoDocsTable extends Migration
     {
         Schema::create('tipo_docs', function (Blueprint $table) {
             $table->id();
+            $table->integer('iddoc');
+            $table->string('nombretipodoc',100);
             $table->timestamps();
         });
     }

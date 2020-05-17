@@ -15,6 +15,12 @@ class CreateSolicitudsTable extends Migration
     {
         Schema::create('solicituds', function (Blueprint $table) {
             $table->id();
+            $table->integer('idestadosoli');
+            $table->integer('idproy');
+            $table->integer('idevperfil');
+            $table->date('fechasoli');
+            $table->boolean('notiinv');
+            $table->boolean('noticoo');
             $table->timestamps();
         });
     }

@@ -15,6 +15,8 @@ class CreateEstadoDeSoliProysTable extends Migration
     {
         Schema::create('estado_de_soli_proys', function (Blueprint $table) {
             $table->id();
+            $table->integer('idsoli');
+            $table->string('estadosoli',25);
             $table->timestamps();
         });
     }
