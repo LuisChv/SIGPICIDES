@@ -14,7 +14,7 @@
     z-index: 999;
     width: 43px;
     height: 43px;
-    background: #6574cd;
+    background: #3490dc;
     border-radius: 100%;
     transition: all 0.5s ease-in-out;
     box-shadow: 1px 3px 10px 0 rgba(0,0,0,0.3);
@@ -58,7 +58,7 @@
     text-align: center;
     display: block;
     margin: 20px 0;
-    color: #6574cd;
+    color: #3490dc;
     text-decoration: none;
     font-family: sans-serif;
     text-transform: uppercase;
