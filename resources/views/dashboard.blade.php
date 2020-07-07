@@ -20,6 +20,17 @@
                 </div>
             </div>
         </div>
+        <div class="container menuF-container">
+            <input type="checkbox" id="toggleF">
+            <label for="toggleF" class="buttonF"></label>
+
+            <nav class="navF">
+                <a href="#">Inicio</a>
+                <a href="#">Contactame</a>
+                <a href="#">Acerca de</a>
+                <a href="#">Acciones</a>
+            </nav>
+        </div>
     </div>
     @endsection
 

@@ -19,6 +19,8 @@
         <!-- CSS -->
         <link href="{{ asset('black') }}/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
         <link href="{{ asset('black') }}/css/theme.css" rel="stylesheet" />
+        <!--menu-Flotante-->
+        <link href="{{ asset('black') }}/css/menu_flotante.css" rel="stylesheet" />
     </head>
     <body class="{{ $class ?? '' }} white-content" >
         @auth()
