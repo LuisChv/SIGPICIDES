@@ -15,6 +15,7 @@ class CreatePermisoPorProysTable extends Migration
     {
         Schema::create('permiso_por_proys', function (Blueprint $table) {
             $table->id();
+            $table->string('nombrePermisoPorProy');
             $table->timestamps();
         });
     }
