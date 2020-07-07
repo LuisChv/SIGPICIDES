@@ -8,7 +8,9 @@
 
             <div class="card card-login card-white">
                 <div class="card-header">
-                        <img src="{{ asset('black') }}/img/cidesv1.jpg" alt="" class="logo2">                     
+                    <br>
+                        <img src="{{ asset('black') }}/img/cidesv1.jpg" alt="" class="logo2">
+                    <br>                     
                 </div>
                 <br>
                 <div class="card-body">
