@@ -11,7 +11,7 @@
                 <div class="card-header ">
                     <div class="row">
                         <div class="col-sm-6 text-left">
-                            <h2 class="card-title"><b>HOLA MUNDO</b></h2>
+                            <h2 class="card-title"><b>INSERTAR TITULO</b></h2>
                         </div>
                     </div>
                 </div>
