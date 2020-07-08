@@ -1,8 +1,8 @@
-@extends('layouts.app', ['class' => 'login-page', 'page' => __('Register Page')])
+@extends('layouts.app', ['class' => 'login-page', 'page' => __('Registro')])
 
 @section('content')
     <div class="row">
-        <div class="col-md-5 ml-auto">
+        <!--div class="col-md-3 ml-auto">
             <div class="info-area info-horizontal mt-5">
                 <div class="icon icon-warning">
                     <i class="tim-icons icon-wifi"></i>
@@ -36,12 +36,12 @@
                     </p>
                 </div>
             </div>
-        </div>
-        <div class="col-md-7 mr-auto">
+        </div-->
+        <div class="col-md-6 mr-auto ml-auto">
             <div class="card card-login card-white">
                 <div class="card-header">
-                    <img src="{{ asset('black') }}/img/card-register.png" alt=""><hr>
-                </div><hr><hr>
+                    <img src="{{ asset('black') }}/img/card-register2.png" alt=""><hr>
+                </div><br>
                 <form class="form" method="post" action="{{ route('register') }}">
                     @csrf
 

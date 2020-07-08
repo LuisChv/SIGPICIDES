@@ -11,12 +11,33 @@
                 <div class="card-header ">
                     <div class="row">
                         <div class="col-sm-6 text-left">
-                            <h2 class="card-title"><b>INSERTAR TITULO</b></h2>
+                            <h2 class="card-title"><b>INVESTIGACIONES & PROYECTOS</b></h2>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                        INSERTAR CONTENIDO
+                        <a href="#">Desarrollo de Sistema de Transacciones utilizando Minería de datos.</a>
+                </div>
+                <div class="card-body">
+                        <a href="#">Traductor LESSA-Español empleando sensores y Machine Learning.</a>
+                </div>
+                <div class="card-body">
+                        <a href="#">Sistema de validación de tarjetas magnéticas.</a>
+                </div>
+                <div class="card-body">
+                        <a href="#">Encriptación de datos con BlockChain.</a>
+                </div>
+                <div class="card-body">
+                        <a href="#">Dectectores de residuos bioinfecciosos en salas hospitalarias.</a>
+                </div>
+                <div class="card-body">
+                        <a href="#">Programa de enseñanza de la programación a temprana edad.</a>
+                </div>
+                <div class="card-body">
+                        <a href="#">Sistema Geográfico para el monitoreo del COVID-19 en El Salvador.</a>
+                </div>
+                <div class="card-body">
+                        <a href="#">Machine Learning en la detección de posibles casos de COVID-19.</a>
                 </div>
             </div>
         </div>
