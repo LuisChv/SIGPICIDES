@@ -13,12 +13,12 @@ class RolPermiso extends Migration
      */
     public function up()
     {
-        Schema::create('RolPermiso', function (Blueprint $table) {
+        Schema::create('rol_permiso', function (Blueprint $table) {
             $table->id();
-            $table->integer('idPermiso');
-            $table->integer('idRol');
-            $table->foreign('idPermiso')->references('id')->on('Permiso');
-            $table->foreign('idRol')->references('id')->on('Rol');
+            $table->integer('id_permiso');
+            $table->integer('id_rol');
+            $table->foreign('id_permiso')->references('id')->on('permiso')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_rol')->references('id')->on('rol')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class RolPermiso extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('RolPermiso');
+        Schema::dropIfExists('rol_permiso');
     }
 }

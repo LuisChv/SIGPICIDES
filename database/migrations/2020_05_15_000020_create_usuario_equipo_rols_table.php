@@ -13,14 +13,14 @@ class CreateUsuarioEquipoRolsTable extends Migration
      */
     public function up()
     {
-        Schema::create('UsuarioEquipoRol', function (Blueprint $table) {
+        Schema::create('usuario_equipo_rol', function (Blueprint $table) {
             $table->id();
-            $table->integer('idEquipo');
-            $table->integer('idRol');
-            $table->integer('idUsuario');
-            $table->foreign('idUsuario')->references('id')->on('users');
-            $table->foreign('idEquipo')->references('id')->on('EquipoDeInvestigacion');
-            $table->foreign('idRol')->references('id')->on('RolPorProy');
+            $table->integer('id_equipo');
+            $table->integer('id_rol');
+            $table->integer('id_usuario');
+            $table->foreign('id_usuario')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_equipo')->references('id')->on('equipo_de_investigacion')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_rol')->references('id')->on('rol_por_proy')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateUsuarioEquipoRolsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('UsuarioEquipoRol');
+        Schema::dropIfExists('usuario_equipo_rol');
     }
 }

@@ -13,13 +13,13 @@ class CreateRecursosTable extends Migration
      */
     public function up()
     {
-        Schema::create('Recurso', function (Blueprint $table) {
+        Schema::create('recurso', function (Blueprint $table) {
             $table->id();
-            $table->integer('idMarca');
-            $table->integer('idTipo');
+            $table->integer('id_marca');
+            $table->integer('id_tipo');
             $table->string('nombre',30);
-            $table->foreign('idMarca')->references('id')->on('Marca');
-            $table->foreign('idTipo')->references('id')->on('TipoDeRecurso');
+            $table->foreign('id_marca')->references('id')->on('marca')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_tipo')->references('id')->on('tipo_de_recurso')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateRecursosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Recurso');
+        Schema::dropIfExists('recurso');
     }
 }

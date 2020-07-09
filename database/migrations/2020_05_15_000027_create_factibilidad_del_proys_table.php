@@ -13,15 +13,15 @@ class CreateFactibilidadDelProysTable extends Migration
      */
     public function up()
     {
-        Schema::create('Factibilidad', function (Blueprint $table) {
+        Schema::create('factibilidad', function (Blueprint $table) {
             $table->id();
-            $table->integer('idProy');
+            $table->integer('id_proy');
             $table->string('tecnica',1500);
             $table->string('economia',1500);
             $table->string('financiera',1500);
             $table->string('operativa',1500);
-            $table->string('facExtra',1500);
-            $table->foreign('idProy')->references('id')->on('Proyecto');
+            $table->string('fac_extra',1500);
+            $table->foreign('id_proy')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ class CreateFactibilidadDelProysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Factibilidad');
+        Schema::dropIfExists('factibilidad');
     }
 }

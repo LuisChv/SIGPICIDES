@@ -13,14 +13,14 @@ class CreateHitosTable extends Migration
      */
     public function up()
     {
-        Schema::create('Hito', function (Blueprint $table) {
+        Schema::create('hito', function (Blueprint $table) {
             $table->id();
-            $table->integer('idPlan');
-            $table->date('fechaHito');
+            $table->integer('id_plan');
+            $table->date('fecha_hito');
             $table->string('nombre',20);
-            $table->date('ultimaModificacion');
+            $table->date('ultima_modificacion');
             $table->boolean('actualizado');
-            $table->foreign('idPlan')->references('id')->on('Planificacion');
+            $table->foreign('id_plan')->references('id')->on('planificacion')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateHitosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Hito');
+        Schema::dropIfExists('hito');
     }
 }

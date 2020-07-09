@@ -13,13 +13,13 @@ class CreateRecursosPorProysTable extends Migration
      */
     public function up()
     {
-        Schema::create('RecursosPorProy', function (Blueprint $table) {
+        Schema::create('recursos_por_proy', function (Blueprint $table) {
             $table->id();
-            $table->integer('idProy');
-            $table->integer('idRecurso');
+            $table->integer('id_proy');
+            $table->integer('id_recurso');
             $table->integer('cantidad');
-            $table->foreign('idRecurso')->references('id')->on('Recurso');
-            $table->foreign('idProy')->references('id')->on('Proyecto');
+            $table->foreign('id_recurso')->references('id')->on('recurso')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_proy')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateRecursosPorProysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('RecursosPorProy');
+        Schema::dropIfExists('recursos_por_proy');
     }
 }

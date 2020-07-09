@@ -13,9 +13,9 @@ class CreateEquipoDeInvestigacionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('EquipoDeInvestigacion', function (Blueprint $table) {
+        Schema::create('equipo_de_investigacion', function (Blueprint $table) {
             $table->id();
-            $table->boolean('hayLider');
+            $table->boolean('hay_lider');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateEquipoDeInvestigacionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('EquipoDeInvestigacion');
+        Schema::dropIfExists('equipo_de_investigacion');
     }
 }

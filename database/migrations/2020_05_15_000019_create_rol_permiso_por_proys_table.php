@@ -13,12 +13,12 @@ class CreateRolPermisoPorProysTable extends Migration
      */
     public function up()
     {
-        Schema::create('RolPermisoProy', function (Blueprint $table) {
+        Schema::create('rol_permiso_roy', function (Blueprint $table) {
             $table->id();
-            $table->integer('idRol');
-            $table->integer('idPermiso');
-            $table->foreign('idRol')->references('id')->on('RolPorProy');
-            $table->foreign('idPermiso')->references('id')->on('PermisoPorProy');
+            $table->integer('id_rol');
+            $table->integer('id_permiso');
+            $table->foreign('id_rol')->references('id')->on('rol_por_proy')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_permiso')->references('id')->on('permiso_por_proy')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateRolPermisoPorProysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('RolPermisoProy');
+        Schema::dropIfExists('rol_permiso_roy');
     }
 }

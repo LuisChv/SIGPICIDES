@@ -13,7 +13,7 @@ class CreateObjetivosTable extends Migration
      */
     public function up()
     {
-        Schema::create('Objetivo', function (Blueprint $table) {
+        Schema::create('pbjetivo', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion', 1000);
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateObjetivosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Objetivo');
+        Schema::dropIfExists('objetivo');
     }
 }

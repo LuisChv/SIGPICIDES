@@ -13,12 +13,12 @@ class CreateVariablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('Variable', function (Blueprint $table) {
+        Schema::create('variable', function (Blueprint $table) {
             $table->id();
-            $table->integer('idIndicador');
+            $table->integer('id_indicador');
             $table->string('nombre',50);
             $table->string('color',20);
-            $table->foreign('idIndicador')->references('id')->on('Indicador');
+            $table->foreign('id_indicador')->references('id')->on('indicador')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateVariablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Variable');
+        Schema::dropIfExists('variable');
     }
 }

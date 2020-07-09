@@ -13,11 +13,11 @@ class CreateEstadoDeProysTable extends Migration
      */
     public function up()
     {
-        Schema::create('EstadoDeProy', function (Blueprint $table) {
+        Schema::create('estado_de_proy', function (Blueprint $table) {
             $table->id();
-            $table->integer('idProy');
+            $table->integer('id_proy');
             $table->string('estado',15);
-            $table->foreign('idProy')->references('id')->on('Proyecto');
+            $table->foreign('id_proy')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateEstadoDeProysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('EstadoDeProy');
+        Schema::dropIfExists('estado_de_proy');
     }
 }

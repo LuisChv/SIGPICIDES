@@ -13,13 +13,13 @@ class CreatePlanificacionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('Planificacion', function (Blueprint $table) {
+        Schema::create('planificacion', function (Blueprint $table) {
             $table->id();
-            $table->integer('idProyecto');
+            $table->integer('id_proyecto');
             $table->string('descripcion',1000);
-            $table->date('fechaInicio');
-            $table->date('fechaFin');
-            $table->foreign('idProyecto')->references('id')->on('Proyecto');
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
+            $table->foreign('id_proyecto')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreatePlanificacionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Planificacion');
+        Schema::dropIfExists('planificacion');
     }
 }

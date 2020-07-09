@@ -13,12 +13,12 @@ class CreateUsuarioPermisosTable extends Migration
      */
     public function up()
     {
-        Schema::create('UsuarioPermiso', function (Blueprint $table) {
+        Schema::create('usuario_permiso', function (Blueprint $table) {
             $table->id();
-            $table->integer('idUsuario');
-            $table->integer('idPermiso');
-            $table->foreign('idUsuario')->references('id')->on('users');
-            $table->foreign('idPermiso')->references('id')->on('Permiso');
+            $table->integer('id_usuario');
+            $table->integer('id_permiso');
+            $table->foreign('id_usuario')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_permiso')->references('id')->on('permiso')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateUsuarioPermisosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('UsuarioPermiso');
+        Schema::dropIfExists('usuario_permiso');
     }
 }

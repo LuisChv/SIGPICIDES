@@ -13,11 +13,11 @@ class CreateSubTipoDeInvestigacionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('SubTipoDeInvestigacion', function (Blueprint $table) {
+        Schema::create('subtipo_de_investigacion', function (Blueprint $table) {
             $table->id();
-            $table->integer('idTipo');
+            $table->integer('id_tipo');
             $table->string('nombre', 100);
-            $table->foreign('idTipo')->references('id')->on('TipoDeInvestigacion');
+            $table->foreign('id_tipo')->references('id')->on('tipo_de_investigacion')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateSubTipoDeInvestigacionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('SubTipoDeInvestigacion');
+        Schema::dropIfExists('subtipo_de_investigacion');
     }
 }

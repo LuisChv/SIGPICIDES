@@ -13,7 +13,7 @@ class CreateComiteDeEvaluacionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ComiteDeEvaluacion', function (Blueprint $table) {
+        Schema::create('comite_de_evaluacion', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateComiteDeEvaluacionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ComiteDeEvaluacion');
+        Schema::dropIfExists('comite_de_evaluacion');
     }
 }

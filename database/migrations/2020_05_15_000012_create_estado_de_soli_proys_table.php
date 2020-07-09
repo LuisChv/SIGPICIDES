@@ -13,11 +13,11 @@ class CreateEstadoDeSoliProysTable extends Migration
      */
     public function up()
     {
-        Schema::create('EstadoDeSolicitud', function (Blueprint $table) {
+        Schema::create('estado_de_solicitud', function (Blueprint $table) {
             $table->id();
-            $table->integer('idSolicitud');
+            $table->integer('id_solicitud');
             $table->string('estado',25);
-            $table->foreign('idSolicitud')->references('id')->on('Solicitud');
+            $table->foreign('id_solicitud')->references('id')->on('solicitud')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateEstadoDeSoliProysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('EstadoDeSolicitud');
+        Schema::dropIfExists('estado_de_solicitud');
     }
 }

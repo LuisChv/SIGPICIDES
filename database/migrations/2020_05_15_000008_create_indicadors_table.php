@@ -13,18 +13,18 @@ class CreateIndicadorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('Indicador', function (Blueprint $table) {
+        Schema::create('indicador', function (Blueprint $table) {
             $table->id();
-            $table->integer('idProy');
+            $table->integer('id_proy');
             $table->string('detalle', 1000);
-            $table->integer('cantVariables');
+            $table->integer('cant_variables');
             $table->boolean('tipo');
             $table->boolean('finalizado');
-            $table->string('descripAvance', 1000);
+            $table->string('descrip_avance', 1000);
             $table->string('observaciones', 1000);
-            $table->boolean('tipoDeGrafico');
-            $table->date('fechaFin');
-            $table->foreign('idProy')->references('id')->on('Proyecto');
+            $table->boolean('tipo_de_grafico');
+            $table->date('fecha_fin');
+            $table->foreign('id_proy')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -36,6 +36,6 @@ class CreateIndicadorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Indicador');
+        Schema::dropIfExists('indicador');
     }
 }

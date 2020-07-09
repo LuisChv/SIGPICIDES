@@ -13,7 +13,7 @@ class CreatePermisoPorProysTable extends Migration
      */
     public function up()
     {
-        Schema::create('PermisoPorProy', function (Blueprint $table) {
+        Schema::create('permiso_por_proy', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreatePermisoPorProysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('PermisoPorProy');
+        Schema::dropIfExists('permiso_por_proy');
     }
 }

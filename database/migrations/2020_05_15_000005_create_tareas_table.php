@@ -13,11 +13,11 @@ class CreateTareasTable extends Migration
      */
     public function up()
     {
-        Schema::create('Tarea', function (Blueprint $table) {
+        Schema::create('tarea', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',100);
-            $table->integer('idPlan');
-            $table->foreign('idPlan')->references('id')->on('Planificacion');
+            $table->integer('id_plan');
+            $table->foreign('id_plan')->references('id')->on('planificacion')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateTareasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Tarea');
+        Schema::dropIfExists('tarea');
     }
 }

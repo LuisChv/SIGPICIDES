@@ -13,13 +13,13 @@ class CreateSolicitudsTable extends Migration
      */
     public function up()
     {
-        Schema::create('Solicitud', function (Blueprint $table) {
+        Schema::create('solicitud', function (Blueprint $table) {
             $table->id();
-            $table->integer('idProy');
+            $table->integer('id_proy');
             $table->date('fecha');
-            $table->boolean('notiInv');
-            $table->boolean('notiCoo');
-            $table->foreign('idProy')->references('id')->on('Proyecto');
+            $table->boolean('noti_inv');
+            $table->boolean('noti_coo');
+            $table->foreign('id_proy')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateSolicitudsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Solicitud');
+        Schema::dropIfExists('solicitud');
     }
 }

@@ -13,15 +13,15 @@ class CreateProyectosTable extends Migration
      */
     public function up()
     {
-        Schema::create('Proyecto', function (Blueprint $table) {
+        Schema::create('proyecto', function (Blueprint $table) {
             $table->id();
-            $table->integer('idSubTipo');
-            $table->integer('idEquipo');
+            $table->integer('id_subtipo');
+            $table->integer('id_equipo');
             $table->string('nombre',50);
             $table->string('descripcion',70);
             $table->decimal('costo',7);
-            $table->foreign('idSubTipo')->references('id')->on('SubTipoDeInvestigacion');
-            $table->foreign('idEquipo')->references('id')->on('EquipoDeInvestigacion');
+            $table->foreign('id_subtipo')->references('id')->on('subtipo_de_investigacion')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_equipo')->references('id')->on('equipo_de_investigacion')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ class CreateProyectosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Proyecto');
+        Schema::dropIfExists('proyecto');
     }
 }

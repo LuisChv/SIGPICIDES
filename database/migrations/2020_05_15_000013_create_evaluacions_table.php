@@ -13,17 +13,17 @@ class CreateEvaluacionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('Evaluacion', function (Blueprint $table) {
+        Schema::create('evaluacion', function (Blueprint $table) {
             $table->id();
-            $table->integer('idComite');
-            $table->integer('idSolicitud');
-            $table->integer('idHito');
-            $table->integer('cantEva');
+            $table->integer('id_comite');
+            $table->integer('id_solicitud');
+            $table->integer('id_hito');
+            $table->integer('cant_eva');
             $table->string('comentario',200);
             $table->date('fecha');
-            $table->foreign('idComite')->references('id')->on('ComiteDeEvaluacion');
-            $table->foreign('idSolicitud')->references('id')->on('Solicitud');
-            $table->foreign('idHito')->references('id')->on('Hito');
+            $table->foreign('id_comite')->references('id')->on('comite_de_evaluacion')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_solicitud')->references('id')->on('solicitud')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_hito')->references('id')->on('hito')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ class CreateEvaluacionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Evaluacion');
+        Schema::dropIfExists('evaluacion');
     }
 }

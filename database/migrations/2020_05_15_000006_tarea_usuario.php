@@ -13,12 +13,12 @@ class TareaUsuario extends Migration
      */
     public function up()
     {
-        Schema::create('TareaUsuario', function (Blueprint $table) {
+        Schema::create('tarea_usuario', function (Blueprint $table) {
             $table->id();
-            $table->integer("idUsuario");
-            $table->integer("idTarea");
-            $table->foreign('idUsuario')->references('id')->on('users');
-            $table->foreign('idTarea')->references('id')->on('Tarea');
+            $table->integer("id_usuario");
+            $table->integer("id_tarea");
+            $table->foreign('id_usuario')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_tarea')->references('id')->on('tarea')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class TareaUsuario extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('TareaUsuario');
+        Schema::dropIfExists('tarea_usuario');
     }
 }

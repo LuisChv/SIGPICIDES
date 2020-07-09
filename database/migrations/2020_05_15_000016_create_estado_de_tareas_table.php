@@ -13,11 +13,11 @@ class CreateEstadoDeTareasTable extends Migration
      */
     public function up()
     {
-        Schema::create('EstadoDeTarea', function (Blueprint $table) {
+        Schema::create('estado_de_tarea', function (Blueprint $table) {
             $table->id();
-            $table->integer('idTarea');
+            $table->integer('id_tarea');
             $table->string('estado',20);
-            $table->foreign('idTarea')->references('id')->on('Tarea');
+            $table->foreign('id_tarea')->references('id')->on('tarea')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateEstadoDeTareasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('EstadoDeTarea');
+        Schema::dropIfExists('estado_de_tarea');
     }
 }

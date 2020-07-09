@@ -13,12 +13,12 @@ class CreateValorEjesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ValorEje', function (Blueprint $table) {
+        Schema::create('valor_eje', function (Blueprint $table) {
             $table->id();
-            $table->integer('idVariable');
-            $table->decimal('valorX');
-            $table->decimal('valorY');
-            $table->foreign('idVariable')->references('id')->on('Variable');
+            $table->integer('id_variable');
+            $table->decimal('valor_x');
+            $table->decimal('valor_y');
+            $table->foreign('id_variable')->references('id')->on('variable')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateValorEjesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ValorEje');
+        Schema::dropIfExists('valor_eje');
     }
 }

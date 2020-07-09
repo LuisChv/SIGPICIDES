@@ -13,11 +13,11 @@ class CreateAlcancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('Alcance', function (Blueprint $table) {
+        Schema::create('alcance', function (Blueprint $table) {
             $table->id();
             $table->string("descripcion");
-            $table->integer("idProyecto");
-            $table->foreign('idProyecto')->references('id')->on('Proyecto');
+            $table->integer("id_proyecto");
+            $table->foreign('id_proyecto')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateAlcancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Alcance');
+        Schema::dropIfExists('alcance');
     }
 }

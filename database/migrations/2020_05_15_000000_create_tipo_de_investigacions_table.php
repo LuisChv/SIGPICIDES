@@ -13,7 +13,7 @@ class CreateTipoDeInvestigacionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('TipoDeInvestigacion', function (Blueprint $table) {
+        Schema::create('tipo_de_investigacion', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',100);
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateTipoDeInvestigacionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('TipoDeInvestigacion');
+        Schema::dropIfExists('tipo_de_investigacion');
     }
 }

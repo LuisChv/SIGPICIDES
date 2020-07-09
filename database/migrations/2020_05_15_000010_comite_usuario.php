@@ -13,12 +13,12 @@ class ComiteUsuario extends Migration
      */
     public function up()
     {
-        Schema::create('ComiteUsuario', function (Blueprint $table) {
+        Schema::create('comite_usuario', function (Blueprint $table) {
             $table->id();
-            $table->integer('idUsuario');
-            $table->integer('idComite');
-            $table->foreign('idUsuario')->references('id')->on('users');
-            $table->foreign('idComite')->references('id')->on('ComiteDeEvaluacion');
+            $table->integer('id_usuario');
+            $table->integer('id_comite');
+            $table->foreign('id_usuario')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_comite')->references('id')->on('comite_de_evaluacion')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class ComiteUsuario extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ComiteUsuario');
+        Schema::dropIfExists('comite_usuario');
     }
 }

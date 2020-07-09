@@ -13,12 +13,12 @@ class CreateComponenteDeGraficasTable extends Migration
      */
     public function up()
     {
-        Schema::create('ComponenteDeGrafica', function (Blueprint $table) {
+        Schema::create('componente_de_grafica', function (Blueprint $table) {
             $table->id();
-            $table->integer('idIndicador');
-            $table->string('ejeX', 50);
-            $table->string('ejeY', 50);
-            $table->foreign('idIndicador')->references('id')->on('Indicador');
+            $table->integer('id_indicador');
+            $table->string('eje_x', 50);
+            $table->string('eje_y', 50);
+            $table->foreign('id_indicador')->references('id')->on('indicador')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateComponenteDeGraficasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ComponenteDeGrafica');
+        Schema::dropIfExists('componente_de_grafica');
     }
 }

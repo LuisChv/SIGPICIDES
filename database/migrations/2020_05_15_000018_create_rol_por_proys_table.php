@@ -13,7 +13,7 @@ class CreateRolPorProysTable extends Migration
      */
     public function up()
     {
-        Schema::create('RolPorProy', function (Blueprint $table) {
+        Schema::create('rol_por_proy', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',10);
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateRolPorProysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('RolPorProy');
+        Schema::dropIfExists('rol_por_proy');
     }
 }

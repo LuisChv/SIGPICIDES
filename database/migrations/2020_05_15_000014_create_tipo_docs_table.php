@@ -13,7 +13,7 @@ class CreateTipoDocsTable extends Migration
      */
     public function up()
     {
-        Schema::create('TipoDoc', function (Blueprint $table) {
+        Schema::create('tipo_doc', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',100);
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateTipoDocsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('TipoDoc');
+        Schema::dropIfExists('tipo_doc');
     }
 }
