@@ -16,14 +16,12 @@ class CreateEvaluacionsTable extends Migration
         Schema::create('Evaluacion', function (Blueprint $table) {
             $table->id();
             $table->integer('idComite');
-            $table->integer('idUsuario');
             $table->integer('idSolicitud');
             $table->integer('idHito');
             $table->integer('cantEva');
             $table->string('comentario',200);
             $table->date('fecha');
             $table->foreign('idComite')->references('id')->on('ComiteDeEvaluacion');
-            $table->foreign('idUsuario')->references('id')->on('users');
             $table->foreign('idSolicitud')->references('id')->on('Solicitud');
             $table->foreign('idHito')->references('id')->on('Hito');
             $table->timestamps();
