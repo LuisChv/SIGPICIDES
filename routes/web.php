@@ -19,15 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-<<<<<<< HEAD
 Route::get('/', 'HomeController@index')->name('home');
 
-=======
-Route::get('home/', 'HomeController@index')->name('home');
-Auth::routes();
 
 Route::get('home/', 'HomeController@index')->name('home')->middleware('auth');
->>>>>>> e6adc5d12902e09607398056a6090f67cf848c13
 
 Route::group(['middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
