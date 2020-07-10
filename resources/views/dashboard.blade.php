@@ -1,7 +1,7 @@
 @extends('layouts.app', ['pageSlug' => 'dashboard'])
 
 @section('title')
-    INSERTAR TITULO AQUI
+    Inicio
 @endsection
 
 @section('content')
