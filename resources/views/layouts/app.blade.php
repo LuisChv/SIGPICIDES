@@ -21,6 +21,7 @@
         <link href="{{ asset('black') }}/css/theme.css" rel="stylesheet" />
         <!--menu-Flotante-->
         <link href="{{ asset('black') }}/css/menu_flotante.css" rel="stylesheet" />
+        
     </head>
     <body class="{{ $class ?? '' }} white-content" >
         @auth()
