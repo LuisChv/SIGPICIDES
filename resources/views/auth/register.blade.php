@@ -12,9 +12,9 @@
                     <img src="{{ asset('black') }}/img/favicon.png" alt=""><hr>
                 </div>
                 <div class="description">
-                    <h3 class="info-title" align='center'>{{ __('SIGPICIDES') }}</h3>
+                    <!--h3 class="info-title" align='center'>{{ __('UNETE') }}</h3-->
                     <p class="description" align='justify'>
-                        {{ __('We\'ve created the marketing campaign of the website. It was a very interesting collaboration.') }}
+                        {{ __('Registra tu primera solicitud de investigación. Únete al equipo de CIDES.') }}
                     </p>
                 </div>
             </div>
