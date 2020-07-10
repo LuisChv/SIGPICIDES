@@ -118,13 +118,16 @@
                             <input type="date" name="fecha_nac" class="form-control {{ $errors->has('fecha_nac') ? ' is-invalid' : '' }}" placeholder="{{ __('Fecha de nacimiento') }}">
                             @include('alerts.feedback', ['field' => 'fecha_nac'])
                         </div>
-                        <div class="form-check text-left">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox">
-                                <span class="form-check-sign"></span>
-                                {{ __('I agree to the') }}
-                                <a href="#">{{ __('terms and conditions') }}</a>.
-                            </label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="tim-icons icon-minimal-down"></i>
+                                </div>
+                            </div>
+                            <select class="form-control" id="sexo" name="sexo">
+                                <option>Femenino</option>
+                                <option>Masculino</option>
+                            </select>                            
                         </div>
                     </div>
                     <div class="card-footer">

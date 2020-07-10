@@ -74,6 +74,8 @@ class RegisterController extends Controller
             'fecha_nac' => $data['fecha_nac'],
             'institucion' => $data['institucion'],
             'descripcion' => $data['descripcion'],
+            'sexo' => ($data['sexo'] == "Masculino"),
         ]);
+        
     }
 }

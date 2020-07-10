@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
             'fecha_nac' => '1998-08-22',
             'institucion' => 'Universidad de El Salvador',
             'descripcion' => 'admin',
+            'sexo' => true,
             'created_at' => now(),
             'updated_at' => now()
         ]);

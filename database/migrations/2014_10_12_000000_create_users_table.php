@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->date('fecha_nac');
             $table->string('institucion');
             $table->string('descripcion');
+            $table->boolean('sexo');
             $table->timestamps();
         });
     }
