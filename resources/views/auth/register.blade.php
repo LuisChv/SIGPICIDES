@@ -6,19 +6,19 @@
 
 @section('content')
     <div class="row">
-        <!--div class="col-md-3 ml-auto">
+        <div class="col-md-3 ml-auto">
             <div class="info-area info-horizontal mt-5">
                 <div class="icon icon-warning">
-                    <i class="tim-icons icon-wifi"></i>
+                    <img src="{{ asset('black') }}/img/favicon.png" alt=""><hr>
                 </div>
                 <div class="description">
-                    <h3 class="info-title">{{ __('Marketing') }}</h3>
-                    <p class="description">
+                    <h3 class="info-title" align='center'>{{ __('SIGPICIDES') }}</h3>
+                    <p class="description" align='justify'>
                         {{ __('We\'ve created the marketing campaign of the website. It was a very interesting collaboration.') }}
                     </p>
                 </div>
             </div>
-            <div class="info-area info-horizontal">
+            <!--div class="info-area info-horizontal">
                 <div class="icon icon-primary">
                     <i class="tim-icons icon-triangle-right-17"></i>
                 </div>
@@ -39,16 +39,12 @@
                         {{ __('There is also a Fully Customizable CMS Admin Dashboard for this product.') }}
                     </p>
                 </div>
-            </div>
-        </div-->
+            </div-->
+        </div>
         <div class="col-md-6 mr-auto ml-auto">
             <div class="card card-login card-white">
-                <div class="card-header">
-                    <img src="{{ asset('black') }}/img/card-register2.png" alt=""><hr>
-                </div><br>
                 <form class="form" method="post" action="{{ route('register') }}">
                     @csrf
-
                     <div class="card-body">
                         <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
