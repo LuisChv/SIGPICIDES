@@ -17268,6 +17268,7 @@ Copyright (c) 2015 Daniel Eden
 
 .card .card-body {
   padding: 15px;
+  padding-bottom: 0;
 }
 
 .card .card-body.table-full-width {
@@ -17501,6 +17502,8 @@ Copyright (c) 2015 Daniel Eden
   background-color: transparent;
   border: 0;
   padding: 15px;
+  padding-top:0px;
+  padding-bottom: 0px;
 }
 
 .card .card-footer .stats i {
@@ -17767,7 +17770,7 @@ Copyright (c) 2015 Daniel Eden
 
 .full-page>.content {
   padding-bottom: 150px;
-  padding-top: 150px;
+  padding-top: 120px;
 }
 
 .full-page .footer {
