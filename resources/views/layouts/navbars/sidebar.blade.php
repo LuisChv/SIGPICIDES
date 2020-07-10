@@ -24,13 +24,13 @@
                 <div class="collapse" id="misSolicitudes">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile') class="active " @endif>
-                            <a href="{{ route('profile.edit')  }}">
+                            <a href="{{ route('solicitud.registro')  }}">
                                 <i class="tim-icons icon-send"></i>
                                 <p>{{ __('Enviar solicitud') }}</p>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'users') class="active " @endif>
-                            <a href="{{ route('user.index')  }}">
+                            <a href="{{ route('solicitud.consultar')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ __('Historial') }}</p>
                             </a>
@@ -99,7 +99,7 @@
                 </a>
             </li>
             <li @if ($pageSlug == 'typography') class="active " @endif>
-                <a href="{{ route('pages.typography') }}">
+                <a href="{{ route('pages.icons') }}">
                     <i class="tim-icons icon-laptop"></i>
                     <p>{{ __('Recursos') }}</p>
                 </a>
