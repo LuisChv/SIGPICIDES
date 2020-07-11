@@ -23,6 +23,7 @@ Route::get('home/', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('home/', 'HomeController@index')->name('home')->middleware('auth');
+//<a href="{{route('routename', párametros)}}"
 
 Route::group(['middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
