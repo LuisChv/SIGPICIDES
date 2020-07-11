@@ -73,4 +73,13 @@ class PageController extends Controller
     {
         return view('pages.upgrade');
     }
+
+    public function registro()
+    {
+        return view('solicitud.registro');
+    }
+    public function consultarSolicitudes()
+    {
+        return view('solicitud.consultar');
+    }
 }

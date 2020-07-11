@@ -38,13 +38,15 @@
                 <div class="collapse" id="misSolicitudes">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile') class="active " @endif>
-                            <a href="{{ route('solicitudes.index') }}">
+
+
+                            <a href="{{ route('solicitud.registro')  }}">
                                 <i class="tim-icons icon-send"></i>
                                 <p>{{ __('Consultar') }}</p>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'users') class="active " @endif>
-                            <a href="#">
+                            <a href="{{ route('solicitud.consultar')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ __('Enviar solicitud') }}</p>
                             </a>
@@ -120,6 +122,7 @@
             @can('recursos.index')
             <li @if ($pageSlug == 'typography') class="active " @endif>
                 <a href="{{ route('recursos.index') }}">
+
                     <i class="tim-icons icon-laptop"></i>
                     <p>{{ __('Recursos') }}</p>
                 </a>
