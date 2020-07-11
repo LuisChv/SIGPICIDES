@@ -23,7 +23,7 @@ class RecursoController extends Controller
      */
     public function create()
     {
-        //
+        return view ('simpleViews.recursos.crear');
     }
 
     /**
@@ -56,7 +56,7 @@ class RecursoController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view ('simpleViews.recursos.editar');
     }
 
     /**

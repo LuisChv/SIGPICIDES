@@ -111,25 +111,25 @@ Route::middleware(['auth'])->group(function(){
     ->middleware('has.permission:proyectos.edit');
     
     //Recursos
-    Route::post('recursos/store', 'ProyectoController@store')->name('recursos.store')
+    Route::post('recursos/store', 'RecursoController@store')->name('recursos.store')
     ->middleware('has.permission:recursos.create');
 
-    Route::get('recursos', 'ProyectoController@index')->name('recursos.index')
+    Route::get('recursos', 'RecursoController@index')->name('recursos.index')
     ->middleware('has.permission:recursos.index');
 
-    Route::get('recursos/create', 'ProyectoController@create')->name('recursos.create')
+    Route::get('recursos/create', 'RecursoController@create')->name('recursos.create')
     ->middleware('has.permission:recursos.create');
 
-    Route::put('recursos/{proyecto}', 'ProyectoController@update')->name('recursos.update')
+    Route::put('recursos/{proyecto}', 'RecursoController@update')->name('recursos.update')
     ->middleware('has.permission:recursos.edit');
 
-    Route::get('recursos/{proyecto}', 'ProyectoController@show')->name('recursos.show')
+    Route::get('recursos/{proyecto}', 'RecursoController@show')->name('recursos.show')
     ->middleware('has.permission:recursos.show');
 
-    Route::delete('recursos/{proyecto}', 'ProyectoController@destroy')->name('recursos.destroy')
+    Route::delete('recursos/{proyecto}', 'RecursoController@destroy')->name('recursos.destroy')
     ->middleware('has.permission:recursos.destroy');
 
-    Route::get('recursos/{proyecto}/edit', 'ProyectoController@edit')->name('recursos.edit')
+    Route::get('recursos/{proyecto}/edit', 'RecursoController@edit')->name('recursos.edit')
     ->middleware('has.permission:recursos.edit');
 
     //Solicitudes
