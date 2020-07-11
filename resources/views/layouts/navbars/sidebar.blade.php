@@ -4,7 +4,7 @@
             <!--a href="#" class="simple-text logo-mini">{{ __('BD') }}</a-->
             <!--a href="#" class="simple-text logo-normal">{{ __('Black Dashboard') }}</a-->
             <br/>
-            <a href="{{ route('home') }}"><img src="black/img/cidesv3.jpg" class=logo1></a>
+            <a href="{{ route('home') }}"><img src="/black/img/cidesv3.jpg" class=logo1></a>
             <br/>
         </div>
         <ul class="nav">
