@@ -19,11 +19,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
-
-
 Route::get('home/', 'HomeController@index')->name('home')->middleware('auth');
 
+//Routes de Icons, Maps, notificaciones ........
 Route::group(['middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
 		Route::get('maps', ['as' => 'pages.maps', 'uses' => 'PageController@maps']);
@@ -33,18 +31,15 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('typography', ['as' => 'pages.typography', 'uses' => 'PageController@typography']);
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'PageController@upgrade']);
 });
-
-
+//Routes de Perfil de usuario
 Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'UserController', ['except' => ['show']]);
+	//Route::resource('user', 'UserController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
-
-//Routes
-
+//Routes 
 Route::middleware(['auth'])->group(function(){
 
     //Roles
@@ -91,6 +86,92 @@ Route::middleware(['auth'])->group(function(){
     Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')
     ->middleware('has.permission:users.edit');
 
+    //Proyectos
+    Route::post('proyectos/store', 'ProyectoController@store')->name('proyectos.store')
+    ->middleware('has.permission:proyectos.create');
+
+    Route::get('proyectos', 'ProyectoController@index')->name('proyectos.index')
+    ->middleware('has.permission:proyectos.index');
+
+    Route::get('proyectos/create', 'ProyectoController@create')->name('proyectos.create')
+    ->middleware('has.permission:proyectos.create');
+
+    Route::put('proyectos/{proyecto}', 'ProyectoController@update')->name('proyectos.update')
+    ->middleware('has.permission:proyectos.edit');
+
+    Route::get('proyectos/{proyecto}', 'ProyectoController@show')->name('proyectos.show')
+    ->middleware('has.permission:proyectos.show');
+
+    Route::delete('proyectos/{proyecto}', 'ProyectoController@destroy')->name('proyectos.destroy')
+    ->middleware('has.permission:proyectos.destroy');
+
+    Route::get('proyectos/{proyecto}/edit', 'ProyectoController@edit')->name('proyectos.edit')
+    ->middleware('has.permission:proyectos.edit');
+    
+    //Recursos
+    Route::post('recursos/store', 'ProyectoController@store')->name('recursos.store')
+    ->middleware('has.permission:recursos.create');
+
+    Route::get('recursos', 'ProyectoController@index')->name('recursos.index')
+    ->middleware('has.permission:recursos.index');
+
+    Route::get('recursos/create', 'ProyectoController@create')->name('recursos.create')
+    ->middleware('has.permission:recursos.create');
+
+    Route::put('recursos/{proyecto}', 'ProyectoController@update')->name('recursos.update')
+    ->middleware('has.permission:recursos.edit');
+
+    Route::get('recursos/{proyecto}', 'ProyectoController@show')->name('recursos.show')
+    ->middleware('has.permission:recursos.show');
+
+    Route::delete('recursos/{proyecto}', 'ProyectoController@destroy')->name('recursos.destroy')
+    ->middleware('has.permission:recursos.destroy');
+
+    Route::get('recursos/{proyecto}/edit', 'ProyectoController@edit')->name('recursos.edit')
+    ->middleware('has.permission:recursos.edit');
+
     //Solicitudes
+    Route::post('solicitudes/store', 'SolicitudController@store')->name('solicitudes.store')
+    ->middleware('has.permission:solicitudes.create');
+
+    Route::get('solicitudes', 'SolicitudController@index')->name('solicitudes.index')
+    ->middleware('has.permission:solicitudes.index');
+
+    Route::get('solicitudes/create', 'SolicitudController@create')->name('solicitudes.create')
+    ->middleware('has.permission:solicitudes.create');
+
+    Route::put('solicitudes/{proyecto}', 'SolicitudController@update')->name('solicitudes.update')
+    ->middleware('has.permission:solicitudes.edit');
+
+    Route::get('solicitudes/{proyecto}', 'SolicitudController@show')->name('solicitudes.show')
+    ->middleware('has.permission:solicitudes.show');
+
+    Route::delete('solicitudes/{proyecto}', 'SolicitudController@destroy')->name('solicitudes.destroy')
+    ->middleware('has.permission:solicitudes.destroy');
+
+    Route::get('solicitudes/{proyecto}/edit', 'SolicitudController@edit')->name('solicitudes.edit')
+    ->middleware('has.permission:solicitudes.edit');
+
+    //Indicadores
+    Route::post('indicadores/store', 'IndicadorController@store')->name('indicadores.store')
+    ->middleware('has.permission:indicadores.create');
+
+    Route::get('indicadores', 'IndicadorController@index')->name('indicadores.index')
+    ->middleware('has.permission:indicadores.index');
+
+    Route::get('indicadores/create', 'IndicadorController@create')->name('indicadores.create')
+    ->middleware('has.permission:indicadores.create');
+
+    Route::put('indicadores/{proyecto}', 'IndicadorController@update')->name('indicadores.update')
+    ->middleware('has.permission:indicadores.edit');
+
+    Route::get('indicadores/{proyecto}', 'IndicadorController@show')->name('indicadores.show')
+    ->middleware('has.permission:indicadores.show');
+
+    Route::delete('indicadores/{proyecto}', 'IndicadorController@destroy')->name('indicadores.destroy')
+    ->middleware('has.permission:indicadores.destroy');
+
+    Route::get('indicadores/{proyecto}/edit', 'IndicadorController@edit')->name('indicadores.edit')
+    ->middleware('has.permission:indicadores.edit');
 
 });

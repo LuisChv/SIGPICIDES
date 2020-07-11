@@ -12,7 +12,7 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        //Permisos de usuario
+        //Usuarios
         Permission::create([
             'name'          => 'Navegar Usuarios',
             'slug'          => 'users.index',
@@ -72,6 +72,39 @@ class PermissionsTableSeeder extends Seeder
             'description'   => 'Elimina los roles del sistema',
         ]);
 
+
+        //Proyectos
+        Permission::create([
+            'name'          => 'Navegar Proyectos',
+            'slug'          => 'proyectos.index',
+            'description'   => 'Navega todos los Proyectos del sistema',
+        ]);
+
+
+        Permission::create([
+            'name'          => 'Ver detalle Proyectos',
+            'slug'          => 'proyectos.show',
+            'description'   => 'Ver en detalle cada Proyecto del sistema',
+        ]);
+
+        Permission::create([
+            'name'          => 'Crear Proyectos',
+            'slug'          => 'proyectos.create',
+            'description'   => 'Crea los Proyectos del sistema',
+        ]);
+    
+        Permission::create([
+            'name'          => 'Edicion Proyectos',
+            'slug'          => 'proyectos.edit',
+            'description'   => 'Edita los datos de un Proyecto sistema',
+        ]);
+
+        Permission::create([
+            'name'          => 'Eliminar Proyectos',
+            'slug'          => 'proyectos.destroy',
+            'description'   => 'Elimina los Proyectos del sistema',
+        ]);
+
         //Recursos
         Permission::create([
             'name'          => 'Navegar Recursos',
@@ -102,6 +135,71 @@ class PermissionsTableSeeder extends Seeder
             'name'          => 'Eliminar Recursos',
             'slug'          => 'recursos.destroy',
             'description'   => 'Elimina los Recursos del sistema',
+        ]);
+
+        //Solicitudes
+        Permission::create([
+            'name'          => 'Navegar Solicitudes',
+            'slug'          => 'solicitudes.index',
+            'description'   => 'Navega todos los Solicitudes del sistema',
+        ]);
+
+
+        Permission::create([
+            'name'          => 'Ver detalle Solicitudes',
+            'slug'          => 'solicitudes.show',
+            'description'   => 'Ver en detalle cada Solicitud del sistema',
+        ]);
+
+        Permission::create([
+            'name'          => 'Crear Solicitudes',
+            'slug'          => 'solicitudes.create',
+            'description'   => 'Crea los Solicitudes del sistema',
+        ]);
+    
+        Permission::create([
+            'name'          => 'Edicion Solicitudes',
+            'slug'          => 'solicitudes.edit',
+            'description'   => 'Edita los datos de un Solicitudes del sistema',
+        ]);
+
+        Permission::create([
+            'name'          => 'Eliminar Solicitudes',
+            'slug'          => 'solicitudes.destroy',
+            'description'   => 'Elimina los Solicitudes del sistema',
+        ]);
+
+
+         //Indicadores
+         Permission::create([
+            'name'          => 'Navegar Indicadores',
+            'slug'          => 'indicadores.index',
+            'description'   => 'Navega todos los Indicadores del sistema',
+        ]);
+
+
+        Permission::create([
+            'name'          => 'Ver detalle Indicadores',
+            'slug'          => 'indicadores.show',
+            'description'   => 'Ver en detalle cada Indicadores del sistema',
+        ]);
+
+        Permission::create([
+            'name'          => 'Crear Indicadores',
+            'slug'          => 'indicadores.create',
+            'description'   => 'Crea los Indicadores del sistema',
+        ]);
+    
+        Permission::create([
+            'name'          => 'Edicion Indicadores',
+            'slug'          => 'indicadores.edit',
+            'description'   => 'Edita los datos de un Indicadores del sistema',
+        ]);
+
+        Permission::create([
+            'name'          => 'Eliminar Indicadores',
+            'slug'          => 'indicadores.destroy',
+            'description'   => 'Elimina los Indicadores del sistema',
         ]);
     }
 }

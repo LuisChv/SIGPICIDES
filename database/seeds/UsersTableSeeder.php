@@ -23,5 +23,10 @@ class UsersTableSeeder extends Seeder
 
         ]);
 
+        Role::create([
+            'name'          => 'Investigador',
+            'slug'          => 'investigador',
+        ]);
+
     }
 }
