@@ -13,7 +13,7 @@ class RecursoController extends Controller
      */
     public function index()
     {
-        //
+        return view ('simpleViews.recursos.listar');
     }
 
     /**
