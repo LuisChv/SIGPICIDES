@@ -13,7 +13,7 @@ class CreateObjetivosTable extends Migration
      */
     public function up()
     {
-        Schema::create('pbjetivo', function (Blueprint $table) {
+        Schema::create('objetivo', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion', 1000);
             $table->timestamps();
