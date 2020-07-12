@@ -79,3 +79,11 @@
     transform: rotate(135deg);
     box-shadow: 0 0 0 0 transparent;
 }
+
+.selectorWapis{
+    -o-appearance: none;
+   -ms-appearance: none;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+}

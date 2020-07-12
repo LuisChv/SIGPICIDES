@@ -22,10 +22,11 @@
                                     <i class="tim-icons icon-minimal-down"></i>
                                 </div>
                             </div>
-                            <select class="form-control" id="tipoRec" name="tipoRec">
+                            <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
                                 <option>--Seleccionar Tipo de recurso--</option>
-                                <option>Tipo 1</option>
-                                <option>Tipo 2</option>
+                                @foreach ($tiporec as $tipo)
+                                <option>{{ $tipo->nombre }}</option>
+                                @endforeach
                             </select>                            
                         </div>
 
@@ -45,10 +46,11 @@
                                     <i class="tim-icons icon-minimal-down"></i>
                                 </div>
                             </div>
-                            <select class="form-control" id="marca" name="marca">
+                            <select class="form-control selectorWapis" id="marca" name="marca">
                                 <option>--Seleccionar marca--</option>
-                                <option>Marca 1</option>
-                                <option>Marca 2</option>
+                                @foreach ($marcas as $marca)
+                                <option>{{ $marca->nombre }}</option>
+                                @endforeach
                             </select>                            
                         </div>
 
