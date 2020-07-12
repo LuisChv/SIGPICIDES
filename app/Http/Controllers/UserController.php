@@ -25,4 +25,10 @@ class UserController extends Controller
             'data' => $data
         ]);
     }
+    public function create(){
+        $roles=\App\Role::all();
+        return view ('users.crear', [
+            'roles'=> $roles
+        ]);
+    }
 }

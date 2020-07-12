@@ -8,19 +8,17 @@
             <div class="card">
                 <div class="card-header ">
                     <div class="row">
-                        <div class="col-sm-8 text-left">
+                        <div class="col-sm-10 text-left">
                             <h2 class="card-title"><b>Administración de Usuarios</b></h2>
                         </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <!--NUEVO RECURSO-->
-                    <div class="col-sm-2">
-                        <a role="button" class="btn btn-primary" href="{{ route('recursos.create')  }}">
+                        <div class="col-sm-2 text-right">
+                        <a role="button" class="btn btn-primary" href="{{ route('users.create')  }}">
                             <i class="tim-icons icon-simple-add"></i>
                         </a>
                     </div>
-                    <!--Dropdown para recurso-->
+                    </div>
+                </div>
+                <div class="card-body">
                     <div class="container list-group">
                         <table class="table">
                             <thead>
