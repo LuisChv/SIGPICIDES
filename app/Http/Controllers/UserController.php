@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Caffeinated\Shinobi\Models\Role;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,13 +21,13 @@ class UserController extends Controller
         return view ('users.usuariosDashboard');
     }
     public function index(){
-        $data=\App\User::all();
+        $data = User::all();
         return view ('users.index',[
             'data' => $data
         ]);
     }
     public function create(){
-        $roles=\App\Role::all();
+        $roles = Role::all();
         return view ('users.crear', [
             'roles'=> $roles
         ]);
