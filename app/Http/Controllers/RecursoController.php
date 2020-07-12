@@ -11,9 +11,11 @@ class RecursoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
-        return view ('simpleViews.recursos.listar');
+        $recursos=Recursos::lates()->get();
+        return view ('simpleViews.recursos.listar', ['recursos'=>$recursos]);
     }
 
     /**
@@ -32,9 +34,26 @@ class RecursoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        //
+        $validatedAttributes = request()->validate([
+            'id_marca'=> 'required',
+            'id_tipo'=> 'required',
+            'nombre'=> 'required'
+        ]);
+        Recursos::create($validatedAttributes);
+        //Luego crear su respectivo detalle consiguiendo el id del recurso creado
+        return redirect('/recursos');
+        /*
+            $article= new Article();
+
+            $article->title= request('title');
+            $article->excerp= request('excerp');
+            $article->body= request('body');
+
+            $article->save();
+        */
     }
 
     /**
@@ -43,9 +62,15 @@ class RecursoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
     public function show($id)
     {
-        //
+        //Buscar el recurso con el id de entrada
+        $recurso=Recursos::findOrFail($id);
+        //Buscar el detalle del recurso del recurso consultado
+        $detalleRecurso=detalleRecurso::...
+        //Retornar la vista
+        return view ('simpleViews.recursos.show', ['recurso'=>$recurso, 'detalle'=>$detalleRecurso]);
     }
 
     /**
@@ -56,7 +81,9 @@ class RecursoController extends Controller
      */
     public function edit($id)
     {
-        return view ('simpleViews.recursos.editar');
+        $recurso= Recursos::find($id);
+        $detalleRecurso= DetalleDeRecurso::find($id) 
+        return view ('simpleViews.recursos.editar',['recurso'=>$recurso, 'detalle'=>$detalleRecurso]);
     }
 
     /**
@@ -68,7 +95,23 @@ class RecursoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        /*
+        //Para actualizar
+        $article->update($validatedAttributes); 
+
+        public function update($id){
+    //Persiste the edited resource
+    $article= Article::find($id);
+    $article->title= request('title');
+    $article->excerp= request('excerp');
+    $article->body= request('body');
+
+    $article->save();
+    return redirect('/articles/'. $article->id);
+    //@method('PUT') 
+}
+        */
+
     }
 
     /**
