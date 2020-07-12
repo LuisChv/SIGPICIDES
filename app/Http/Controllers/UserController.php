@@ -19,4 +19,10 @@ class UserController extends Controller
         //return view('users.index', ['users' => $model->paginate(15)]);
         return view ('users.usuariosDashboard');
     }
+    public function index(){
+        $data=\App\User::all();
+        return view ('users.index',[
+            'data' => $data
+        ]);
+    }
 }
