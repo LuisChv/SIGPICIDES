@@ -108,11 +108,10 @@
                     </ul>
                 </div>
             </li>
-            @endcan
-           
+            @endcan          
             @can('users.index')
             <li @if ($pageSlug == 'notifications') class="active " @endif>
-                <a href="{{ route('users.index') }}">
+                <a href="{{ route('users.control') }}">
                     <i class="tim-icons icon-single-02"></i>
                     <p>{{ __('Usuarios') }}</p>
                 </a>
@@ -128,6 +127,15 @@
                 </a>
             </li>
             @endcan
+            @can('tipo_de_investigacion.index')
+            <li @if ($pageSlug == 'notifications') class="active " @endif>
+                <a href="{{ route('tipo_investigacion.index') }}">
+
+                    <i class="tim-icons icon-globe-2"></i>
+                    <p>{{ __('Tipo de Investigacion') }}</p>
+                </a>
+            </li>
+            @endcan 
         </ul>
     </div>
 </div>
