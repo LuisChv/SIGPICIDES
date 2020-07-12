@@ -23,7 +23,12 @@ class RecursoController extends Controller
      */
     public function create()
     {
-        return view ('simpleViews.recursos.crear');
+        $marcas=\App\Marca::all();
+        $tiporec=\App\TipoDeRecursos::all();
+        return view ('simpleViews.recursos.crear', [
+            'marcas' => $marcas, 
+            'tiporec' => $tiporec
+        ]);
     }
 
     /**
