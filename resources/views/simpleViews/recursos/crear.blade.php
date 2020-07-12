@@ -14,7 +14,8 @@
                 </div>
             </div>
             <div class="card-body">
-                <form>
+                <form method="POST" action="/recursos">
+                @csrf 
                     <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
                         <div class="input-group col-sm-5">
                             <div class="input-group-prepend">

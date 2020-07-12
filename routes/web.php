@@ -112,7 +112,7 @@ Route::middleware(['auth'])->group(function(){
     ->middleware('has.permission:proyectos.edit');
     
     //Recursos
-    Route::post('recursos/store', 'RecursoController@store')->name('recursos.store')
+    Route::post('recursos', 'RecursoController@store')->name('recursos.store')
     ->middleware('has.permission:recursos.create');
 
     Route::get('recursos', 'RecursoController@index')->name('recursos.index')

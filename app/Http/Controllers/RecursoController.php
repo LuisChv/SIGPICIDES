@@ -14,8 +14,9 @@ class RecursoController extends Controller
     
     public function index()
     {
-        $recursos=Recursos::lates()->get();
-        return view ('simpleViews.recursos.listar', ['recursos'=>$recursos]);
+        //$recursos=Recursos::take(3)->latest()->get();
+        //return view ('simpleViews.recursos.listar', ['recursos'=>$recursos]);
+        return view ('simpleViews.recursos.listar');
     }
 
     /**
@@ -40,25 +41,34 @@ class RecursoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request)
+    public function store()
     {
-        $validatedAttributes = request()->validate([
-            'id_marca'=> 'required',
-            'id_tipo'=> 'required',
-            'nombre'=> 'required'
+        //dump(request()->all());  //trae todo lo del formulario
+        //$recurso= \DB::table('marca')->where('id', 1)->first(); Forma para hacer consultas
+        //dd($recurso);
+        request()->validate([
+            'tipoRec'=> 'required',
+            'nombre'=> 'required',
+            'marca'=> 'required',
+            'modelo'=> 'required',
+            'descripcion'=> 'required'
         ]);
-        Recursos::create($validatedAttributes);
-        //Luego crear su respectivo detalle consiguiendo el id del recurso creado
+        $recurso= new \App\Recursos();
+        $recurso->id_marca=1;
+        $recurso->id_tipo=1;
+        $recurso->nombre=request('nombre');
+        
+        $recurso->save();
+        $detalleRecurso=new \App\DetalleDeRecurso();
+        $detalleRecurso->id_recurso=$recurso->id;
+        $detalleRecurso->modelo= request('modelo');
+        $detalleRecurso->descripcion= request('descripcion');
+        $detalleRecurso->save();
         return redirect('/recursos');
-        /*
-            $article= new Article();
-
-            $article->title= request('title');
-            $article->excerp= request('excerp');
-            $article->body= request('body');
-
-            $article->save();
-        */
+        //Recursos::create($validatedAttributes);
+        //Luego crear su respectivo detalle consiguiendo el id del recurso creado
+        //return redirect('/recursos');
+        //$recurso= \DB::table('recurso')->where('id', $variable)->first();
     }
 
     /**
@@ -73,7 +83,7 @@ class RecursoController extends Controller
         //Buscar el recurso con el id de entrada
         $recurso=Recursos::findOrFail($id);
         //Buscar el detalle del recurso del recurso consultado
-        $detalleRecurso=detalleRecurso::...
+        //$detalleRecurso=detalleRecurso::...
         //Retornar la vista
         return view ('simpleViews.recursos.show', ['recurso'=>$recurso, 'detalle'=>$detalleRecurso]);
     }
@@ -87,8 +97,8 @@ class RecursoController extends Controller
     public function edit($id)
     {
         $recurso= Recursos::find($id);
-        $detalleRecurso= DetalleDeRecurso::find($id) 
-        return view ('simpleViews.recursos.editar',['recurso'=>$recurso, 'detalle'=>$detalleRecurso]);
+        $detalleRecurso= DetalleDeRecurso::find($id); 
+        //return view ('simpleViews.recursos.editar',['recurso'=>$recurso, 'detalle'=>$detalleRecurso]);
     }
 
     /**
