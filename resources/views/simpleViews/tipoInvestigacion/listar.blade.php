@@ -15,11 +15,14 @@
                 </div>
                 <div class="card-body">
                     <!--NUEVO RECURSO-->
-                    <div class="col-sm-2">
-                        <a role="button" class="btn btn-primary" href="{{ route('tipo_investigacion.create')  }}">
-                            <i class="tim-icons icon-simple-add"></i>
+                    <div class="container">
+                        <a role="button" class="btn btn-primary col-sm-2" href="{{ route('tipo_investigacion.create')  }}">
+                            <i class="tim-icons icon-simple-add"></i>&nbsp;&nbsp;Tipo
                         </a>
-                    </div>
+                        <a role="button" class="btn btn-primary col-sm-2" href="{{ route('tipo_investigacion.create')  }}">
+                            <i class="tim-icons icon-simple-add"></i>&nbsp;&nbsp;Subtipo
+                        </a>
+                    </div>                    
                     <!--Dropdown para recurso-->
                     <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
                         <div class="list-group">
@@ -37,29 +40,29 @@
                                         <i class="tim-icons icon-planet"></i>
                                         <a href="#">&nbsp;Subtipo de investigaci&oacute;n 1</a>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-success btn-sm btn-sm"><i class="tim-icons icon-pencil"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-sm"><i class="tim-icons icon-simple-remove"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
                                     </div>
                                     <div class="list-group-item col-sm-7">
                                         <i class="tim-icons icon-planet"></i>
                                         <a href="#">&nbsp;Subtipo de investigaci&oacute;n 2</a>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-success btn-sm btn-sm"><i class="tim-icons icon-pencil"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-sm"><i class="tim-icons icon-simple-remove"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
                                     </div>
                                     <div class="list-group-item col-sm-7">
                                         <i class="tim-icons icon-planet"></i>
                                         <a href="#">&nbsp;Subtipo de investigaci&oacute;n 3</a>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-success btn-sm btn-sm"><i class="tim-icons icon-pencil"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-sm"><i class="tim-icons icon-simple-remove"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
                                     </div>
                                     <div class="list-group-item col-sm-7">
                                         <i class="tim-icons icon-planet"></i>
                                         <a href="#">&nbsp;Subtipo de investigaci&oacute;n 4</a>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-success btn-sm btn-sm"><i class="tim-icons icon-pencil"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-sm"><i class="tim-icons icon-simple-remove"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
 
                                     </div>
                                 </div>
@@ -80,29 +83,29 @@
                                         <i class="tim-icons icon-planet"></i>
                                         <a href="#">&nbsp;Subtipo de investigaci&oacute;n 1</a>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-success btn-sm btn-sm"><i class="tim-icons icon-pencil"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-sm"><i class="tim-icons icon-simple-remove"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
                                     </div>
                                     <div class="list-group-item col-sm-7">
                                         <i class="tim-icons icon-planet"></i>
                                         <a href="#">&nbsp;Subtipo de investigaci&oacute;n 2</a>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-success btn-sm btn-sm"><i class="tim-icons icon-pencil"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-sm"><i class="tim-icons icon-simple-remove"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
                                     </div>
                                     <div class="list-group-item col-sm-7">
                                         <i class="tim-icons icon-planet"></i>
                                         <a href="#">&nbsp;Subtipo de investigaci&oacute;n 3</a>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-success btn-sm btn-sm"><i class="tim-icons icon-pencil"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-sm"><i class="tim-icons icon-simple-remove"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
                                     </div>
                                     <div class="list-group-item col-sm-7">
                                         <i class="tim-icons icon-planet"></i>
                                         <a href="#">&nbsp;Subtipo de investigaci&oacute;n 4</a>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-success btn-sm btn-sm"><i class="tim-icons icon-pencil"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-sm"><i class="tim-icons icon-simple-remove"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
 
                                     </div>
                                 </div>

@@ -16,23 +16,23 @@
                 <div class="card-body">
                     <div class="container">
                         <a role="button"class="btn btn-primary col-sm-5 animation-on-hover" href="{{ route('recursos.create')  }}">
-                            <i class="tim-icons icon-planet"></i>&nbsp;&nbsp;
+                            <i class="tim-icons icon-single-02"></i>&nbsp;&nbsp;
                             Usuarios
                         </a>
                         <a role="button"class="btn btn-danger col-sm-5 animation-on-hover" href="{{ route('recursos.create')  }}">
-                            <i class="tim-icons icon-planet"></i>&nbsp;&nbsp;
+                            <i class="tim-icons icon-spaceship"></i>&nbsp;&nbsp;
                             Proyectos & Permisos
                         </a> 
                         <a role="button"class="btn btn-warning col-sm-5 animation-on-hover" href="{{ route('recursos.create')  }}">
-                            <i class="tim-icons icon-planet"></i>&nbsp;&nbsp;
+                            <i class="tim-icons icon-key-25"></i>&nbsp;&nbsp;
                             Permisos
                         </a>
                         <a role="button"class="btn btn-default col-sm-5 animation-on-hover" href="{{ route('recursos.create')  }}">
-                            <i class="tim-icons icon-planet"></i>&nbsp;&nbsp;
+                            <i class="tim-icons icon-bulb-63"></i>&nbsp;&nbsp;
                             Roles & Permisos
                         </a> 
                         <a role="button"class="btn btn-success col-sm-5 animation-on-hover" href="{{ route('recursos.create')  }}">
-                            <i class="tim-icons icon-planet"></i>&nbsp;&nbsp;
+                            <i class="tim-icons icon-shape-star"></i>&nbsp;&nbsp;
                             Roles
                         </a> 
                         
