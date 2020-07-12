@@ -16,7 +16,9 @@ class RecursoController extends Controller
     {
         //$recursos=Recursos::take(3)->latest()->get();
         //return view ('simpleViews.recursos.listar', ['recursos'=>$recursos]);
-        return view ('simpleViews.recursos.listar');
+        $recursos= \App\Recursos::all();
+        $tiposrec= \App\TipoDeRecursos::all();
+        return view ('simpleViews.recursos.listar', ['recursos'=>$recursos, 'tiposrec'=>$tiposrec]);
     }
 
     /**
