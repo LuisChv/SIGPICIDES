@@ -1292,6 +1292,18 @@ class PermissionsTableSeeder extends Seeder
             'slug'          => 'objetivo.destroy',
             'description'   => 'Elimina un registro',
         ]);
+
+        Permission::create([
+            'name'          => 'Mis proyectos',
+            'slug'          => 'mis_proyectos',
+            'description'   => '',
+        ]);
+
+        Permission::create([
+            'name'          => 'Mis solicitudes',
+            'slug'          => 'mis_solicitudes',
+            'description'   => '',
+        ]);
          
     }
 }
