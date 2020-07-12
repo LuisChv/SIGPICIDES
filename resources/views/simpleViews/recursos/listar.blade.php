@@ -48,48 +48,6 @@
                         </div>
                         @endforeach
                         <!--fin de dropdown-->
-                        <div class="card list-group-item">
-                                <div role="tab" id="rec2">
-                                    <a data-toggle="collapse" data-toggle="collapse" data-target="#lista2" aria-expanded="false" aria-controls="lista2">
-                                      Categoria recurso 2&nbsp;&nbsp;
-
-                                        <i class="tim-icons icon-minimal-down"></i>
-                                    </a>
-                                </div>
-                                <div id="lista2" class="collapse" aria-labelledby="rec2" data-parent="#accordion">
-                                  <div class="list-group">                        
-                                    <div class="list-group-item col-sm-7">
-                                        <i class="tim-icons icon-planet"></i>
-                                        <a href="#">&nbsp;Recurso 1</a>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
-                                    </div>
-                                    <div class="list-group-item col-sm-7">
-                                        <i class="tim-icons icon-planet"></i>
-                                        <a href="#">&nbsp;Recurso 2</a>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
-                                    </div>
-                                    <div class="list-group-item col-sm-7">
-                                        <i class="tim-icons icon-planet"></i>
-                                        <a href="#">&nbsp;Recurso 3</a>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
-                                    </div>
-                                    <div class="list-group-item col-sm-7">
-                                        <i class="tim-icons icon-planet"></i>
-                                        <a href="#">&nbsp;Recurso 4</a>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
-
-                                    </div>
-                                </div>
-                            </div>                      
-                        </div>
                     </div>                   
                 </div>
                 <div class="card-footer"><br></div>
