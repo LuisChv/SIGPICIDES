@@ -15,10 +15,10 @@ class RolPermiso extends Migration
     {
         Schema::create('rol_permiso', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_permiso');
-            $table->integer('id_rol');
-            $table->foreign('id_permiso')->references('id')->on('permiso')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('id_rol')->references('id')->on('rol')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('permission_id')->index();
+            $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
+            $table->unsignedBigInteger('role_id')->index();
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->timestamps();
         });
     }
