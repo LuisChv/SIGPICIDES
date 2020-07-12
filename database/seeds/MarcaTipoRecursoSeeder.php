@@ -2,23 +2,15 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class MarcaTipoRecursoSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-
-        $this->call(PermissionsTableSeeder::class);
-        $this->call(RolesTableSeeder::class);
-        $this->call(PermissionRoleSeeder::class);
-        $this->call([UsersTableSeeder::class]);
-
-
-        //Marcas y tipoRecurso
         DB::table('marca')->insert([
             'id' => 1,
             'nombre' => 'HP'
@@ -55,6 +47,6 @@ class DatabaseSeeder extends Seeder
             'id' => 4,
             'nombre' => 'Recurso4'
         ]);
-        
     }
 }
+

@@ -46,6 +46,7 @@ class RecursoController extends Controller
         //dump(request()->all());  //trae todo lo del formulario
         //$recurso= \DB::table('marca')->where('id', 1)->first(); Forma para hacer consultas
         //dd($recurso);
+        //Validacion de los datos
         request()->validate([
             'tipoRec'=> 'required',
             'nombre'=> 'required',
@@ -53,22 +54,23 @@ class RecursoController extends Controller
             'modelo'=> 'required',
             'descripcion'=> 'required'
         ]);
+        //Se asignan las variables al nuevo recurso
         $recurso= new \App\Recursos();
-        $recurso->id_marca=1;
-        $recurso->id_tipo=1;
+        $marca= \DB::table('marca')->where('nombre', request('marca'))->first();
+        $tipo= \DB::table('tipo_de_recurso')->where('nombre', request('tipoRec'))->first(); 
+        $recurso->id_marca=$marca->id;
+        $recurso->id_tipo=$tipo->id;
         $recurso->nombre=request('nombre');
-        
+        //Se crea el nuevo recurso
         $recurso->save();
+        //Se asignan las variables al nuevo detalle recurso
         $detalleRecurso=new \App\DetalleDeRecurso();
         $detalleRecurso->id_recurso=$recurso->id;
         $detalleRecurso->modelo= request('modelo');
         $detalleRecurso->descripcion= request('descripcion');
+        //Se crea el nuevo detalle recurso
         $detalleRecurso->save();
         return redirect('/recursos');
-        //Recursos::create($validatedAttributes);
-        //Luego crear su respectivo detalle consiguiendo el id del recurso creado
-        //return redirect('/recursos');
-        //$recurso= \DB::table('recurso')->where('id', $variable)->first();
     }
 
     /**
