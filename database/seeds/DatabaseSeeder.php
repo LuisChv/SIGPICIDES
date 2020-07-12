@@ -41,19 +41,19 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('tipo_de_recurso')->insert([
             'id' => 1,
-            'nombre' => 'Recurso1'
+            'nombre' => 'Tipo Recurso 1'
         ]);
         DB::table('tipo_de_recurso')->insert([
             'id' => 2,
-            'nombre' => 'Recurso2'
+            'nombre' => 'Tipo Recurso2'
         ]);
         DB::table('tipo_de_recurso')->insert([
             'id' => 3,
-            'nombre' => 'Recurso3'
+            'nombre' => 'Tipo Recurso 3'
         ]);
         DB::table('tipo_de_recurso')->insert([
             'id' => 4,
-            'nombre' => 'Recurso4'
+            'nombre' => 'Tipo Recurso 4'
         ]);
         
     }

@@ -32,9 +32,9 @@
                                     </a>
                                 </div>
                                 <div id="lista1" class="collapse" aria-labelledby="rec1" data-parent="#accordion">
-                                  <div class="list-group">
-                                  @foreach($recursos as $rec)
-                                  @if($rec->id_tipo_de_recurso==$tipo->id)                        
+                                    <div class="list-group">
+                                    @foreach($recursos as $rec)
+                                    @if($rec->id_tipo==$tipo->id)                        
                                     <div class="list-group-item col-sm-7">
                                         <i class="tim-icons icon-planet"></i>
                                         <a href="#">&nbsp;{{ $rec->nombre }}</a>
@@ -42,7 +42,9 @@
                                         <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
                                         <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
                                     </div>
+                                    @endif
                                     @endforeach
+
                                 </div>
                             </div>                      
                         </div>
