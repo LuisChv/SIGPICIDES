@@ -37,7 +37,7 @@
                             @endcan
                             @can('tipo_de_investigacion.index')
                                 <li @if ($pageSlug == 'tipos_de_investigacion') class="active " @endif>
-                                    <a href="#">
+                                    <a href="{{ route('tipo_investigacion.index')  }}">
                                         <i class="tim-icons icon-tag"></i>
                                         <p>{{ __('Tipos de investigación') }}</p>
                                     </a>

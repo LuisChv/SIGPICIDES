@@ -113,8 +113,9 @@
                         </div>
                     </div>                   
                 </div>
-                <div class="card-footer"><br></div>
+                <div class="card-footer"></div>
             </div>
         </div>
+    </div>
 </div>
 @endsection
