@@ -15,7 +15,7 @@ class RolesTableSeeder extends Seeder
         Role::create([
             'name'          => 'Administrador',
             'slug'          => 'admin',
-            'special'       => 'all-access',
+            //'special'       => 'all-access',
 
         ]);
 
