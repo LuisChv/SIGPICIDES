@@ -125,7 +125,7 @@
                     <ul class="nav pl-4">
                         @can('users.index')
                             <li @if ($pageSlug == 'usuarios') class="active " @endif>
-                                <a href="#">
+                                <a href="{{ route('users.index') }}">
                                     <i class="tim-icons icon-single-02"></i>
                                     <p>{{ __('Usuarios') }}</p>
                                 </a>

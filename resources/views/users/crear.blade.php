@@ -1,26 +1,19 @@
-@extends('layouts.app', ['class' => 'login-page', 'page' => __('Registro')])
-
+@extends('layouts.app',['pageSlug' => 'dashboard'])
 @section('title')
-    Registro
+    Crear Usuario
 @endsection
-
 @section('content')
-    <div class="row">
-        <div class="col-md-3 ml-auto">
-            <div class="info-area info-horizontal mt-5">
-                <div class="icon icon-warning">
-                    <img src="{{ asset('black') }}/img/favicon.png" alt=""><hr>
-                </div>
-                <div class="description">
-                    <!--h3 class="info-title" align='center'>{{ __('UNETE') }}</h3-->
-                    <p class="description" align='justify'>
-                        {{ __('Registra tu primera solicitud de investigación. Únete al equipo de CIDES.') }}
-                    </p>
+<div class="row">
+	<div class="col-12">
+        <div class="card">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-8 text-left">
+                        <h2 class="card-title"><b>Nuevo Usuario</b></h2>
+                    </div> 
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 mr-auto ml-auto">
-            <div class="card card-login card-white">
+            <div class="card-body col-10">
                 <form class="form" method="post" action="{{ route('register') }}">
                     @csrf
                     <div class="card-body">
@@ -98,17 +91,33 @@
                                     <i class="tim-icons icon-minimal-down"></i>
                                 </div>
                             </div>
-                            <select class="form-control" id="sexo" name="sexo">
+                            <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
+                                <option>--Seleccionar Rol--</option>
+                                @foreach ($roles as $rol)
+                                <option>{{ $rol->name }}</option>
+                                @endforeach
+                            </select>                            
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="tim-icons icon-minimal-down"></i>
+                                </div>
+                            </div>
+                            <select class="form-control selectorWapis" id="sexo" name="sexo">
+                            	<option>--Seleccionar género--</option>
                                 <option>Femenino</option>
                                 <option>Masculino</option>
                             </select>                            
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary btn-round btn-lg">{{ __('Únete') }}</button>
+                        <button type="submit" class="btn btn-primary btn-round btn-lg">{{ __('Crear') }}</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+</div>
 @endsection
