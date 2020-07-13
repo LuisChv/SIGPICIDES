@@ -1,7 +1,7 @@
 @extends('layouts.app', ['pageSlug' => 'dashboard'])
 
 @section('title')
-    Inicio
+    Próximamente
 @endsection
 
 @section('content')
@@ -11,33 +11,17 @@
                 <div class="card-header ">
                     <div class="row">
                         <div class="col-sm-6 text-left">
-                            <h2 class="card-title"><b>INVESTIGACIONES & PROYECTOS</b></h2>
+                            <h2 class="card-title"><b></b></h2>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                        <a href="#">Desarrollo de Sistema de Transacciones utilizando Minería de datos.</a>
-                </div>
-                <div class="card-body">
-                        <a href="#">Traductor LESSA-Español empleando sensores y Machine Learning.</a>
-                </div>
-                <div class="card-body">
-                        <a href="#">Sistema de validación de tarjetas magnéticas.</a>
-                </div>
-                <div class="card-body">
-                        <a href="#">Encriptación de datos con BlockChain.</a>
-                </div>
-                <div class="card-body">
-                        <a href="#">Dectectores de residuos bioinfecciosos en salas hospitalarias.</a>
-                </div>
-                <div class="card-body">
-                        <a href="#">Programa de enseñanza de la programación a temprana edad.</a>
-                </div>
-                <div class="card-body">
-                        <a href="#">Sistema Geográfico para el monitoreo del COVID-19 en El Salvador.</a>
-                </div>
-                <div class="card-body">
-                        <a href="#">Machine Learning en la detección de posibles casos de COVID-19.</a>
+                    <div class="card-body text-center">
+                        <div class="icon icon-warning">
+                            <img src="{{ asset('black') }}/img/favicon.png" alt="" width="25%">
+                        </div>
+                        <p style="font-size:1000%;"><b>Próximamente</b></p>
+                    </div>
                 </div>
             </div>
         </div>

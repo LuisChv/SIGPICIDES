@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
-	<div class="col-12">
+	<div class="col-6">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
@@ -16,22 +16,35 @@
             <div class="card-body">
                 <form method="POST" action="/recursos">
                 @csrf 
-                    <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
-                        <div class="input-group col-sm-5">
+                        <div class="input-group {{ $errors->has('tipoRec') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-minimal-down"></i>
                                 </div>
                             </div>
                             <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
-                                <option>--Seleccionar Tipo de recurso--</option>
-                                @foreach ($tiporec as $tipo)
-                                <option>{{ $tipo->nombre }}</option>
-                                @endforeach
+                                <option value="" selected disabled hidden>Seleccione un tipo de recurso</option>
+                                    @foreach ($tiporec as $tipo)
+                                        <option>{{ $tipo->nombre }}</option>
+                                    @endforeach
                             </select>                            
                         </div>
 
-                        <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }} col-sm-6">
+                        <div class="input-group {{ $errors->has('marca') ? ' has-danger' : '' }}">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="tim-icons icon-minimal-down"></i>
+                                </div>
+                            </div>
+                            <select class="form-control selectorWapis" id="marca" name="marca">
+                                <option value="" selected disabled hidden>Seleccione una marca</option>
+                                    @foreach ($marcas as $marca)
+                                        <option>{{ $marca->nombre }}</option>
+                                    @endforeach
+                            </select>                             
+                        </div>
+
+                        <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-pencil"></i>
@@ -41,21 +54,7 @@
                             @include('alerts.feedback', ['field' => 'nombre'])
                         </div>
 
-                        <div class="input-group col-sm-5">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="tim-icons icon-minimal-down"></i>
-                                </div>
-                            </div>
-                            <select class="form-control selectorWapis" id="marca" name="marca">
-                                <option>--Seleccionar marca--</option>
-                                @foreach ($marcas as $marca)
-                                <option>{{ $marca->nombre }}</option>
-                                @endforeach
-                            </select>                            
-                        </div>
-
-                        <div class="input-group{{ $errors->has('modelo') ? ' has-danger' : '' }} col-sm-6">
+                        <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-pencil"></i>
@@ -65,7 +64,7 @@
                             @include('alerts.feedback', ['field' => 'modelo'])
                         </div>
 
-                        <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }} col-sm-11">
+                        <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-pencil"></i>
@@ -74,7 +73,6 @@
                             <input rows="3" type="text" rows="3" name="descripcion" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" placeholder="{{ __('Descripción') }}">
                             @include('alerts.feedback', ['field' => 'descripcion'])
                         </div>
-                    </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary btn-round btn-lg">{{ __('Crear') }}</button>
                     </div>

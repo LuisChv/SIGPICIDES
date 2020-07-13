@@ -4,18 +4,18 @@
 @endsection
 @section('content')
 <div class="row">
-	<div class="col-12">
+	<div class="col-6">
             <div class="card">
                 <div class="card-header ">
                     <div class="row">
                         <div class="col-sm-8 text-left">
                             <h2 class="card-title"><b>Recursos disponibles</b></h2>
                         </div>
-                        <div class="col-sm-2">
-                    <a role="button" class="btn btn-primary" href="{{ route('recursos.create')  }}">
-                        <i class="tim-icons icon-simple-add"></i>
-                    </a>
-                </div>
+                        <div class="col-sm-4 text-right">
+                            <a role="button" class="btn btn-primary" href="{{ route('recursos.create')  }}">
+                                <i class="tim-icons icon-simple-add"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             <div class="card-body">                

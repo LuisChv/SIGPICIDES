@@ -21,7 +21,7 @@
                         <ul class="nav pl-4">
                             @can('mis_proyectos')
                                 <li @if ($pageSlug == 'mis_proyectos') class="active " @endif>
-                                    <a href="#">
+                                    <a href="{{ route('home')  }}">
                                         <i class="tim-icons icon-shape-star"></i>
                                         <p>{{ __('Mis proyectos') }}</p>
                                     </a>
@@ -29,7 +29,7 @@
                             @endcan
                             @can('proyectos.index')
                                 <li @if ($pageSlug == 'proyectos') class="active " @endif>
-                                    <a href="#">
+                                    <a href="{{ route('home')  }}">
                                         <i class="tim-icons icon-bullet-list-67"></i>
                                         <p>{{ __('Consultar proyectos') }}</p>
                                     </a>
@@ -60,13 +60,13 @@
                     <ul class="nav pl-4">
                         @can('solicitudes.index')
                             <li @if ($pageSlug == 'solicitudes') class="active " @endif>
-                                <a href="{{ route('solicitudes.index') }}">
+                                <a href="{{ route('home') }}">
                                     <i class="tim-icons icon-bullet-list-67"></i>
                                     <p>{{ __('Consultar solicitudes') }}</p>
                                 </a>
                             </li>
                             <li @if ($pageSlug == 'solicitudes_a_evaluar') class="active " @endif>
-                                <a href="#">
+                                <a href="{{ route('home')  }}">
                                     <i class="tim-icons icon-check-2"></i>
                                     <p>{{ __('Solicitudes a evaluar') }}</p>
                                 </a>
@@ -74,7 +74,7 @@
                         @endcan
                         @can('mis_solicitudes')
                             <li @if ($pageSlug == 'mis_solicitudes') class="active " @endif>
-                                <a href="{{ route('solicitud.consultar')  }}">
+                                <a href="{{ route('home')  }}">
                                     <i class="tim-icons icon-shape-star"></i>
                                     <p>{{ __('Mis solicitudes') }}</p>
                                 </a>
@@ -82,7 +82,7 @@
                         @endcan
                         @can('solicitudes.create')
                             <li @if ($pageSlug == 'enviar_solicitud') class="active " @endif>
-                                <a href="{{ route('solicitud.registro')  }}">
+                                <a href="{{ route('home')  }}">
                                     <i class="tim-icons icon-send"></i>
                                     <p>{{ __('Enviar solicitud') }}</p>
                                 </a>
@@ -96,7 +96,6 @@
             @can('recursos.index')
                 <li @if ($pageSlug == 'recursos') class="active " @endif>
                     <a href="{{ route('recursos.index') }}">
-
                         <i class="tim-icons icon-laptop"></i>
                         <p>{{ __('Recursos') }}</p>
                     </a>
@@ -105,8 +104,7 @@
 
             @can('recursos.index')
                 <li @if ($pageSlug == 'informes') class="active " @endif>
-                    <a href="{{ route('recursos.index') }}">
-
+                    <a href="{{ route('home')  }}">
                         <i class="tim-icons icon-chart-bar-32"></i>
                         <p>{{ __('Informes') }}</p>
                     </a>
