@@ -14,8 +14,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
-       // factory(App\User::class, 10)->create();
-
+/*---------------------------------------------------------------------------------------------------*/
+        //Administrador
        User::create([
             'name' => 'Administrador',
             'email' => 'admin@gmail.com',
@@ -31,6 +31,18 @@ class UsersTableSeeder extends Seeder
             'user_id' => 1,
         ]);
 
+        $objetos = DB::select('SELECT * FROM rol_permiso WHERE role_id = 1');
+
+        foreach ($objetos as $objeto) {
+            DB::table('permission_user')->insert([
+                'permission_id' => ($objeto->permission_id),
+                'user_id' => 1,
+            ]);
+    
+        }
+
+/*---------------------------------------------------------------------------------------------------*/
+        //Coordinador
         User::create([
             'name' => 'Coordinador',
             'email' => 'coordinador@gmail.com',
@@ -46,6 +58,18 @@ class UsersTableSeeder extends Seeder
             'user_id' => 2,
         ]);
 
+        $objetos = DB::select('SELECT * FROM rol_permiso WHERE role_id = 2');
+
+        foreach ($objetos as $objeto) {
+            DB::table('permission_user')->insert([
+                'permission_id' => $objeto->permission_id,
+                'user_id' => 2,
+            ]);
+    
+        }
+
+/*---------------------------------------------------------------------------------------------------*/
+        //Director
         User::create([
             'name' => 'Director',
             'email' => 'director@gmail.com',
@@ -61,6 +85,18 @@ class UsersTableSeeder extends Seeder
             'user_id' => 3,
         ]);
 
+        $objetos = DB::select('SELECT * FROM rol_permiso WHERE role_id = 3');
+
+        foreach ($objetos as $objeto) {
+            DB::table('permission_user')->insert([
+                'permission_id' => $objeto->permission_id,
+                'user_id' => 3,
+            ]);
+    
+        }
+
+/*---------------------------------------------------------------------------------------------------*/
+        //Investigador
         User::create([
             'name' => 'Investigador',
             'email' => 'investigador@gmail.com',
@@ -75,6 +111,15 @@ class UsersTableSeeder extends Seeder
             'role_id' => 4,
             'user_id' => 4,
         ]);
+
+        $objetos = DB::select('SELECT * FROM rol_permiso WHERE role_id = 4');
+
+        foreach ($objetos as $objeto) {
+            DB::table('permission_user')->insert([
+                'permission_id' => $objeto->permission_id,
+                'user_id' => 4,
+            ]);
+        }
 
     }
 }

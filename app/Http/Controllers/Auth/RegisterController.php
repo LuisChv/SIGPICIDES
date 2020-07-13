@@ -82,6 +82,15 @@ class RegisterController extends Controller
             array('role_id' => 4, 'user_id' => $user->id)
         );
 
+        $objetos = DB::select('SELECT * FROM rol_permiso WHERE role_id = 4');
+
+        foreach ($objetos as $objeto) {
+            DB::table('permission_user')->insert([
+                'permission_id' => $objeto->permission_id,
+                'user_id' => $user->id,
+            ]);
+        }
+
         return $user;
     }
 }
