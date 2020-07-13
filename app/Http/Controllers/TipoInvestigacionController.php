@@ -16,8 +16,8 @@ class TipoInvestigacionController extends Controller
         $tipos=\App\TipoDeInvestigacion::all();
         $sub_tipos= \App\SubTipoDeInvestigacion::all();
         return view('simpleViews.tipoInvestigacion.listar',[
-            'tiposinv'=> $tipos,
-            'subtiposinv' => $sub_tipos
+            'tipos'=> $tipos,
+            'sub_tipos' => $sub_tipos
         ]);
     }
 
