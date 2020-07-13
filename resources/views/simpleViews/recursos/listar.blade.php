@@ -43,9 +43,13 @@
                                                 </td>
                                                 <td width='10%' align="right">
                                                     <a type="button" href="{{ route('recursos.edit', $rec->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;&nbsp;
+                                                <form method="POST" action="{{ route('recursos.destroy', $rec->id)}}">
                                                 </td>
                                                 <td width='10%'>
-                                                    <a type="button" href="{{ route('recursos.edit', $rec->id)}}" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
+                                                	@csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
+                                                </form> 
                                                 </td>
                                             </tr>
                                         @endif
@@ -63,7 +67,6 @@
     </div>
 </div>
 @endsection
-
 <script langiage="javascript" type="text/javascript">
     // RESALTAR LAS FILAS AL PASAR EL MOUSE
     function ResaltarFila(id_fila) {
