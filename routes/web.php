@@ -124,9 +124,6 @@ Route::middleware(['auth'])->group(function(){
     Route::get('recursos/create', 'RecursoController@create')->name('recursos.create')
     ->middleware('has.permission:recursos.create');
 
-    Route::put('recursos/{proyecto}', 'RecursoController@update')->name('recursos.update')
-    ->middleware('has.permission:recursos.edit');
-
     Route::get('recursos/{proyecto}', 'RecursoController@show')->name('recursos.show')
     ->middleware('has.permission:recursos.show');
 
@@ -134,6 +131,9 @@ Route::middleware(['auth'])->group(function(){
     ->middleware('has.permission:recursos.destroy');
 
     Route::get('recursos/{proyecto}/edit', 'RecursoController@edit')->name('recursos.edit')
+    ->middleware('has.permission:recursos.edit');
+
+    Route::put('recursos/{proyecto}', 'RecursoController@update')->name('recursos.update')
     ->middleware('has.permission:recursos.edit');
 
     //Solicitudes
