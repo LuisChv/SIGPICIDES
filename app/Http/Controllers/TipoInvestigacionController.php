@@ -28,7 +28,12 @@ class TipoInvestigacionController extends Controller
      */
     public function create()
     {
-        return view ('simpleViews.tipoInvestigacion.crearTipo');
+        $tipos=\App\TipoDeInvestigacion::all();
+        $sub_tipos= \App\SubTipoDeInvestigacion::all();
+        return view ('simpleViews.tipoInvestigacion.crearTipo',[
+            'tipos'=> $tipos,
+            'sub_tipos' => $sub_tipos
+        ]);
     }
 
     /**

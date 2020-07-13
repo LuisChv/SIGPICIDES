@@ -79,7 +79,7 @@
                                     <i class="tim-icons icon-minimal-down"></i>
                                 </div>
                             </div>
-                            <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
+                            <select class="form-control selectorWapis" id="tipoRec" name="tipoec">
                                 <option value="" selected disabled hidden>Seleccione un tipo de recurso</option>
                                     @foreach ($tiposrec as $tipo)
                                         <option>{{ $tipo->nombre }}</option>

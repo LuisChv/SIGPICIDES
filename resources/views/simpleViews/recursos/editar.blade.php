@@ -82,15 +82,15 @@
                                 </div>
                             </div>
                             <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
-                                <option>--Seleccionar Tipo de recurso--</option>
-                                @foreach ($tiposrec as $tipo)
-                                @if($recurso->id_tipo== $tipo->id)
-                                    <option selected>{{ $tipo->nombre }}</option>
-                                @else
-                                    <option>{{ $tipo->nombre }}</option>
-                                @endif
-                                
-                                @endforeach
+                                <option value="" selected disabled hidden>Seleccione un tipo de recurso</option>
+                                    @foreach ($tiposrec as $tipo)
+                                        @if($recurso->id_tipo== $tipo->id)
+                                            <option selected>{{ $tipo->nombre }}</option>
+                                        @else
+                                            <option>{{ $tipo->nombre }}</option>
+                                        @endif
+                                    
+                                    @endforeach
                             </select>                            
                         </div>
 
@@ -101,14 +101,14 @@
                                 </div>
                             </div>
                             <select class="form-control selectorWapis" id="marca" name="marca">
-                                <option>--Seleccionar marca--</option>
-                                @foreach ($marcas as $marca)
-                                @if($recurso->id_marca== $marca->id)
-                                    <option selected>{{ $marca->nombre }}</option>
-                                @else
-                                    <option>{{ $marca->nombre }}</option>
-                                @endif
-                                @endforeach
+                                <option value="" selected disabled hidden>Seleccione una marca</option>
+                                    @foreach ($marcas as $marca)
+                                        @if($recurso->id_marca== $marca->id)
+                                            <option selected>{{ $marca->nombre }}</option>
+                                        @else
+                                            <option>{{ $marca->nombre }}</option>
+                                        @endif
+                                    @endforeach
                             </select>                            
                         </div>
 

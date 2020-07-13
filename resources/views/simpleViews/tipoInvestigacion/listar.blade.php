@@ -27,7 +27,7 @@
                     <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
                         <div class="list-group">
                             @foreach ($tipos as $tipo)
-                                <div class="card list-group-item">
+                                <div class="list-group-item list-group-flush">
                                     <div role="tab" id="rec{{ $tipo->id }}">
                                         <a data-toggle="collapse" data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false" aria-controls="lista{{ $tipo->id }}">
                                             {{ $tipo->nombre }}&nbsp;&nbsp;
@@ -43,17 +43,14 @@
                                                         </td>
                                                         <td>
                                                             <i class="tim-icons icon-planet"></i>
-                                                            <a  href="recursos/{{$sub_tipo->id}}">&nbsp;{{ $sub_tipo->nombre }}</a>
+                                                            {{ $sub_tipo->nombre }}
                                                         </td>
                                                         <td width='10%'>
-                                                                <a type="button" href="tipo_investigacion/{{$sub_tipo->id}}/edit" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;&nbsp;
-                                                                <form method="POST" action="/tipo_investigacion/{{$sub_tipo->id}}">
-                                                        </td>
+                                                                <a type="button" href="{{ route('subtipo_investigacion.edit', $sub_tipo->id)  }}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>                                                        
+                                                            </td>
                                                         <td width='10%'>
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                    <button type="submit" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
-                                                                </form> 
+                                                                <a type="button" href="{{ route('subtipo_investigacion.edit', $sub_tipo->id)  }}" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>                                                        
+                                                            </td>
                                                         </td>
                                                     </tr>
                                             @endif
@@ -61,7 +58,8 @@
                                         </table>
                                     </div>                                         
                                 </div>
-                            @endforeach                   
+                            @endforeach   
+                            <br>                
                         </div>
                     </div>                   
                 </div>
