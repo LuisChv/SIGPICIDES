@@ -123,7 +123,7 @@
                                     <i class="fa fa-birthday-cake" aria-hidden="true"></i>
                                 </div>
                             </div>
-                            <input type="date" name="fecha_nac" class="form-control {{ $errors->has('fecha_nac') ? ' is-invalid' : '' }}" placeholder="{{ __('Fecha de nacimiento') }}">
+                            <input type="date" max="2002-01-01" name="fecha_nac" class="form-control {{ $errors->has('fecha_nac') ? ' is-invalid' : '' }}" placeholder="{{ __('Fecha de nacimiento') }}">
                             @include('alerts.feedback', ['field' => 'fecha_nac'])
                         </div>
                         <div class="input-group">

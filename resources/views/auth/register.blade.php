@@ -89,19 +89,21 @@
                                     <i class="fa fa-birthday-cake" aria-hidden="true"></i>
                                 </div>
                             </div>
-                            <input type="date" name="fecha_nac" class="form-control {{ $errors->has('fecha_nac') ? ' is-invalid' : '' }}" placeholder="{{ __('Fecha de nacimiento') }}">
+                            <input type="date" max="2002-01-01" name="fecha_nac" class="form-control {{ $errors->has('fecha_nac') ? ' is-invalid' : '' }}" placeholder="{{ __('Fecha de nacimiento') }}">
                             @include('alerts.feedback', ['field' => 'fecha_nac'])
                         </div>
-                        <div class="input-group">
+                        <div class="input-group {{ $errors->has('sexo') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-minimal-down"></i>
                                 </div>
                             </div>
-                            <select class="form-control" id="sexo" name="sexo">
+                            <select class="form-control selectorWapis" id="sexo" name="sexo">
+                                <option value="" selected disabled hidden>Sexo</option>
                                 <option>Femenino</option>
                                 <option>Masculino</option>
-                            </select>                            
+                            </select>    
+                            @include('alerts.feedback', ['field' => 'sexo'])                        
                         </div>
                     </div>
                     <div class="card-footer">

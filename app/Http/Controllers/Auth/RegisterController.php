@@ -56,7 +56,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'fecha_nac' => ['required', 'string'],
             'institucion' => ['required', 'string'],
-            'password' => ['required', 'string'],
+            'sexo' => ['required'],
         ]);
     }
 
