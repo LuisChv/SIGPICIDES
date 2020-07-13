@@ -43,7 +43,6 @@ class RecursoController extends Controller
     public function store()
     {
         //dump(request()->all());  //trae todo lo del formulario
-        //$recurso= \DB::table('marca')->where('id', 1)->first(); Forma para hacer consultas
         //dd($recurso);
         //Validacion de los datos
         request()->validate([
@@ -82,12 +81,16 @@ class RecursoController extends Controller
     public function show($id)
     {
         //Buscar el recurso con el id de entrada
-        //$recurso = \App\Recursos::where('id', $id)->first();
         $recurso= \App\Recursos::findOrFail($id);
         $detalleRecurso= \App\DetalleDeRecurso::where('id_recurso', $id)->first();
-        //dd($recurso);
         //Buscar el detalle del recurso del recurso consultado
-        //$detalleRecurso=detalleRecurso::...
+        $detalleRecurso= \App\DetalleDeRecurso::where('id_recurso', $id)->first();
+        //Buscar nombre de marca y tipo de recurso
+        $tiporec=\App\TipoDeRecursos::findOrFail($recurso->id_tipo);
+        $marca=\App\Marca::findOrFail($recurso->id_marca);
+        //Asignarlos
+        $recurso->id_tipo=$tiporec->nombre;
+        $recurso->id_marca=$marca->nombre;
         //Retornar la vista
         return view ('simpleViews.recursos.show', ['recurso'=>$recurso, 'detalle'=>$detalleRecurso]);
     }
@@ -100,9 +103,11 @@ class RecursoController extends Controller
      */
     public function edit($id)
     {
+        //Buscar marcas para los select
         $marcas=\App\Marca::all();
         $tiporec=\App\TipoDeRecursos::all();
-        $recurso= \DB::table('recurso')->where('id', $id)->first();
+        //Buscar recurso y su respectivo detalle
+        $recurso= \App\Recursos::findOrFail($id);
         $detalleRecurso= \App\DetalleDeRecurso::where('id_recurso', $id)->first();
         return view ('simpleViews.recursos.editar',['recurso'=>$recurso, 'detalle'=>$detalleRecurso, 'marcas' => $marcas, 
         'tiporec' => $tiporec]);
@@ -125,7 +130,8 @@ class RecursoController extends Controller
             'descripcion'=> 'required'
         ]);
         //Se asignan las variables al nuevo recurso
-        $recurso= new \App\Recursos();
+        //$recurso= \DB::table('recurso')->where('id', $id)->first();
+        $recurso= \App\Recursos::findOrFail($id);
         $marca= \DB::table('marca')->where('nombre', request('marca'))->first();
         $tipo= \DB::table('tipo_de_recurso')->where('nombre', request('tipoRec'))->first(); 
         $recurso->id_marca=$marca->id;
@@ -134,7 +140,7 @@ class RecursoController extends Controller
         //Se crea el nuevo recurso
         $recurso->save();
         //Se asignan las variables al nuevo detalle recurso
-        $detalleRecurso=new \App\DetalleDeRecurso();
+        $detalleRecurso= \App\DetalleDeRecurso::where('id_recurso', $id)->first();
         $detalleRecurso->id_recurso=$recurso->id;
         $detalleRecurso->modelo= request('modelo');
         $detalleRecurso->descripcion= request('descripcion');
@@ -152,6 +158,10 @@ class RecursoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $recurso= \App\Recursos::findOrFail($id);
+        $detalleRecurso= \App\DetalleDeRecurso::where('id_recurso', $id)->first();
+        $recurso->delete();
+        $detalleRecurso->delete();
+        return redirect('/recursos');
     }
 }

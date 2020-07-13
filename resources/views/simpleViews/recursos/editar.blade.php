@@ -14,8 +14,9 @@
                 </div>
             </div>
             <div class="card-body">
-                <form method="POST" action="/recursos">
-                @csrf 
+                <form method="POST" action="/recursos/{{$recurso->id}}">
+                @csrf
+                @method('PUT') 
                     <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
                         <div class="input-group col-sm-5">
                             <div class="input-group-prepend">
@@ -26,7 +27,12 @@
                             <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
                                 <option>--Seleccionar Tipo de recurso--</option>
                                 @foreach ($tiporec as $tipo)
-                                <option>{{ $tipo->nombre }}</option>
+                                @if($recurso->id_tipo== $tipo->id)
+                                    <option selected>{{ $tipo->nombre }}</option>
+                                @else
+                                    <option>{{ $tipo->nombre }}</option>
+                                @endif
+                                
                                 @endforeach
                             </select>                            
                         </div>
@@ -50,7 +56,11 @@
                             <select class="form-control selectorWapis" id="marca" name="marca">
                                 <option>--Seleccionar marca--</option>
                                 @foreach ($marcas as $marca)
-                                <option>{{ $marca->nombre }}</option>
+                                @if($recurso->id_marca== $marca->id)
+                                    <option selected>{{ $marca->nombre }}</option>
+                                @else
+                                    <option>{{ $marca->nombre }}</option>
+                                @endif
                                 @endforeach
                             </select>                            
                         </div>
@@ -76,7 +86,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary btn-round btn-lg">{{ __('Crear') }}</button>
+                        <button type="submit" class="btn btn-primary btn-round btn-lg">{{ __('Editar') }}</button>
                     </div>
                     <br>
                 </form>
