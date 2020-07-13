@@ -40,7 +40,7 @@
                                                         <i class="tim-icons icon-planet"></i>
                                                         <a  href="recursos/{{$rec->id}}">&nbsp;{{ $rec->nombre }}</a>
                                                     </div>
-                                                    <div class="col-sm-2 my-auto">
+                                                    <div class="col-sm-2">
                                                         <div class="row">
                                                             <a type="button" href="recursos/{{$rec->id}}/edit" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;&nbsp;
                                                             <form method="POST" action="/recursos/{{$rec->id}}">
