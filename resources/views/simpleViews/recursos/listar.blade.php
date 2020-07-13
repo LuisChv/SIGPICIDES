@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
-	<div class="col-6">
+	<div class="col-7">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
@@ -36,11 +36,11 @@
                                         @if($rec->id_tipo==$tipo->id) 
                                             <div class="container">  
                                                 <div class="row" id={{$rec->id}} onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')" onClick="CrearEnlace('#');">                     
-                                                    <div class="col-sm-10">
+                                                    <div class="col-sm-10 my-auto">
                                                         <i class="tim-icons icon-planet"></i>
                                                         <a  href="recursos/{{$rec->id}}">&nbsp;{{ $rec->nombre }}</a>
                                                     </div>
-                                                    <div class="col-sm-2">
+                                                    <div class="col-sm-2 my-auto">
                                                         <div class="row">
                                                             <a type="button" href="recursos/{{$rec->id}}/edit" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;&nbsp;
                                                             <form method="POST" action="/recursos/{{$rec->id}}">
