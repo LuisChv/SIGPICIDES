@@ -83,8 +83,9 @@ class RecursoController extends Controller
     {
         //Buscar el recurso con el id de entrada
         //$recurso = \App\Recursos::where('id', $id)->first();
-        $recurso= \DB::table('recurso')->where('id', $id)->first();
-        dd($recurso);
+        $recurso= \App\Recursos::findOrFail($id);
+        $detalleRecurso= \App\DetalleDeRecurso::where('id_recurso', $id)->first();
+        //dd($recurso);
         //Buscar el detalle del recurso del recurso consultado
         //$detalleRecurso=detalleRecurso::...
         //Retornar la vista
