@@ -181,27 +181,48 @@ Route::middleware(['auth'])->group(function(){
     ->middleware('has.permission:indicadores.edit');
 
     //Tipo de investigacion
-    Route::post('tipo_investigacion/store', 'TipoInvestigacionController@store')->name('tipo_investigacion.store')
-    ->middleware('has.permission:tipo_de_investigacion.create');
-
     Route::get('tipo_investigacion', 'TipoInvestigacionController@index')->name('tipo_investigacion.index')
     ->middleware('has.permission:tipo_de_investigacion.index');
 
+    Route::post('tipo_investigacion', 'TipoInvestigacionController@store')->name('tipo_investigacion.store')
+    ->middleware('has.permission:tipo_de_investigacion.create');    
+
     Route::get('tipo_investigacion/create', 'TipoInvestigacionController@create')->name('tipo_investigacion.create')
     ->middleware('has.permission:tipo_de_investigacion.create');
-
-    Route::put('tipo_investigacion/{proyecto}', 'TipoInvestigacionController@update')->name('tipo_investigacion.update')
-    ->middleware('has.permission:tipo_de_investigacion.edit');
-
-    Route::get('tipo_investigacion/{proyecto}', 'TipoInvestigacionController@show')->name('tipo_investigacion.show')
-    ->middleware('has.permission:tipo_de_investigacion.show');
-
-    Route::delete('tipo_investigacion/{proyecto}', 'TipoInvestigacionController@destroy')->name('tipo_investigacion.destroy')
-    ->middleware('has.permission:tipo_de_investigacion.destroy');
+    
+    //Route::get('tipo_investigacion/{proyecto}', 'TipoInvestigacionController@show')->name('tipo_investigacion.show')
+    //->middleware('has.permission:tipo_de_investigacion.show');
 
     Route::get('tipo_investigacion/{proyecto}/edit', 'TipoInvestigacionController@edit')->name('tipo_investigacion.edit')
     ->middleware('has.permission:tipo_de_investigacion.edit');
 
-    Route::get('tipo_investigacion/createTipo', 'TipoInvestigacionController@createTipo')->name('tipo_investigacion.createTipo')->middleware('has.permission:tipo_de_investigacion.create');
+    Route::put('tipo_investigacion/{proyecto}', 'TipoInvestigacionController@update')->name('tipo_investigacion.update')
+    ->middleware('has.permission:tipo_de_investigacion.edit');    
+
+    Route::delete('tipo_investigacion/{proyecto}', 'TipoInvestigacionController@destroy')->name('tipo_investigacion.destroy')
+    ->middleware('has.permission:tipo_de_investigacion.destroy');
+
+    //Subtipo de investigacion
+    //index
+    //Route::get('subtipo_investigacion/create', 'SubTipoInvestigacionController@create')->name('subtipo_investigacion.create')
+    //->middleware('has.permission:sub_tipo_de_investigacion.index');
+
+    Route::post('subtipo_investigacion', 'SubTipoInvestigacionController@store')->name('subtipo_investigacion.store')
+    ->middleware('has.permission:sub_tipo_de_investigacion.create');
+
+    Route::get('subtipo_investigacion/create', 'SubTipoInvestigacionController@create')->name('subtipo_investigacion.create')
+    ->middleware('has.permission:sub_tipo_de_investigacion.create');    
+    //Show
+    //Route::get('subtipo_investigacion/create', 'SubTipoInvestigacionController@create')->name('subtipo_investigacion.create')
+    //->middleware('has.permission:sub_tipo_de_investigacion.show');
+
+    Route::get('subtipo_investigacion/{proyecto}/edit', 'SubTipoInvestigacionController@edit')->name('subtipo_investigacion.edit')
+    ->middleware('has.permission:sub_tipo_de_investigacion.edit');
+
+    Route::put('subtipo_investigacion/{proyecto}', 'SubTipoInvestigacionController@update')->name('subtipo_investigacion.update')
+    ->middleware('has.permission:sub_tipo_de_investigacion.edit');
+
+    Route::delete('subtipo_investigacion/{proyecto}', 'SubTipoInvestigacionController@delete')->name('subtipo_investigacion.delete')
+    ->middleware('has.permission:sub_tipo_de_investigacion.destroy');
 
 });
