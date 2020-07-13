@@ -37,10 +37,14 @@
                                         @if($rec->id_tipo==$tipo->id)                        
                                             <div class="list-group-item col-sm-7">
                                                 <i class="tim-icons icon-planet"></i>
-                                                <a href="#">&nbsp;{{ $rec->nombre }}</a>
+                                                <a href="recursos/{{$rec->id}}">&nbsp;{{ $rec->nombre }}</a>
                                                 <div class="float-right">
-                                                    <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
-                                                    <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
+                                                    <a href="recursos/{{$rec->id}}/edit"><button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button></a>
+                                                    <form method="POST" action="/recursos/{{$rec->id}}">
+                                                    @csrf
+                                                    @method('DELETE') 
+                                                    <button type="submit" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         @endif
