@@ -47,9 +47,9 @@
                                                         </td>
                                                         <td width='10%'>
                                                                 <a type="button" href="tipo_investigacion/{{$sub_tipo->id}}/edit" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;&nbsp;
-                                                                <form method="POST" action="/tipo_investigacion/{{$sub_tipo->id}}">
-                                                                </td>
+                                                        </td>
                                                         <td width='10%'>
+                                                            <form method="POST" action="/tipo_investigacion/{{$sub_tipo->id}}">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                     <button type="submit" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
@@ -66,8 +66,21 @@
                     </div>                   
                 </div>
                 <div class="card-footer"></div>
-            </div>
         </div>
     </div>
 </div>
 @endsection
+<script langiage="javascript" type="text/javascript">
+    // RESALTAR LAS FILAS AL PASAR EL MOUSE
+    function ResaltarFila(id_fila) {
+    document.getElementById(id_fila).style.backgroundColor = '#C9EFFE';
+    }
+    // RESTABLECER EL FONDO DE LAS FILAS AL QUITAR EL FOCO
+    function RestablecerFila(id_fila, color) {
+    document.getElementById(id_fila).style.backgroundColor = color;
+    }
+    // CONVERTIR LAS FILAS EN LINKS
+    function CrearEnlace(url) {
+    location.href=url;
+    }
+</script>

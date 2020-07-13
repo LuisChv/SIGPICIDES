@@ -43,9 +43,9 @@
                                                     </td>
                                                     <td width='10%'>
                                                             <a type="button" href="recursos/{{$rec->id}}/edit" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;&nbsp;
-                                                            <form method="POST" action="/recursos/{{$rec->id}}">
-                                                            </td>
+                                                    </td>
                                                     <td width='10%'>
+                                                    	<form method="POST" action="/recursos/{{$rec->id}}">
                                                             @csrf
                                                             @method('DELETE')
                                                                 <button type="submit" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
