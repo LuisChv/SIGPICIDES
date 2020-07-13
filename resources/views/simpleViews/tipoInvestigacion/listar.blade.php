@@ -38,12 +38,12 @@
                                         <table width='100%'>
                                         @foreach($sub_tipos as $sub_tipo)
                                             @if($sub_tipo->id_tipo==$tipo->id) 
-                                                    <tr id={{$rec->id}} onMouseOver="ResaltarFila({{$sub_tipo->id}});" onMouseOut="RestablecerFila({{$sub_tipo->id}}, '')" onClick="CrearEnlace('#');">                     
+                                                    <tr id={{$sub_tipo->id}} onMouseOver="ResaltarFila({{$sub_tipo->id}});" onMouseOut="RestablecerFila({{$sub_tipo->id}}, '')" onClick="CrearEnlace('#');">                     
                                                         <td>
                                                         </td>
                                                         <td>
                                                             <i class="tim-icons icon-planet"></i>
-                                                            <a  href="recursos/{{$rec->id}}">&nbsp;{{ $sub_tipo->nombre }}</a>
+                                                            <a  href="recursos/{{$sub_tipo->id}}">&nbsp;{{ $sub_tipo->nombre }}</a>
                                                         </td>
                                                         <td width='10%'>
                                                                 <a type="button" href="tipo_investigacion/{{$sub_tipo->id}}/edit" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;&nbsp;
