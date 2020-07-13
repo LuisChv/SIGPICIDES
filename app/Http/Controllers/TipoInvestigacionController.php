@@ -38,8 +38,14 @@ class TipoInvestigacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        request()->validate([
+            'nombre'=> 'required'            
+        ]);
+        $tipo= new \App\TipoDeInvestigacion();
+        $tipo->nombre= request('nombre');
+        $tipo->save();
+        return redirect(route('tipo_investigacion.index'));
     }
 
     /**

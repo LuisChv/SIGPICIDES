@@ -14,7 +14,8 @@
                 </div>
             </div>
             <div class="card-body">
-                <form>
+                <form method="POST" action="{{route('subtipo_investigacion.store')}}">
+                    @csrf           
                     <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
                         <div class="input-group col-sm-5">
                             <div class="input-group-prepend">
@@ -23,9 +24,9 @@
                                 </div>
                             </div>
                             <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
-                                <option>--Seleccionar Tipo de investigación--</option>
+                                <option value="">--Seleccionar Tipo de investigación--</option>
                                 @foreach ($tiposinv as $tipo)
-                                <option>{{ $tipo->nombre }}</option>
+                            <option value="{{$tipo->id}}">{{ $tipo->nombre }}</option>
                                 @endforeach
                             </select>                            
                         </div>

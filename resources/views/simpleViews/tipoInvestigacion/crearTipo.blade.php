@@ -14,7 +14,8 @@
                 </div>
             </div>
             <div class="card-body">
-                <form>
+                <form method="POST" action="{{route('tipo_investigacion.store')}}">
+                    @csrf
                     <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
                         <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }} col-sm-6">
                             <div class="input-group-prepend">

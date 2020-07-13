@@ -39,7 +39,16 @@ class SubTipoInvestigacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'nombre'=> 'required',
+            'tipoRec'=> 'required'            
+        ]);
+        $subtipo= new SubTipoDeInvestigacion();
+        $subtipo->id_tipo=request('tipoRec');
+        $subtipo->nombre=request('nombre');
+        $subtipo->save();
+        
+        return redirect(route('tipo_investigacion.index'));
     }
 
     /**
