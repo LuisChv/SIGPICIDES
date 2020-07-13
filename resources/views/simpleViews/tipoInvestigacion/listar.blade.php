@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
-	<div class="col-6">
+	<div class="col-7">
             <div class="card">
                 <div class="card-header ">
                     <div class="row">
@@ -35,30 +35,30 @@
                                         </a>
                                     </div>
                                     <div id="lista{{ $tipo->id }}" class="collapse" aria-labelledby="rec{{ $tipo->id }}" data-parent="#accordion">
-                                        <div class="list table-sm">
+                                        <table width='100%'>
                                         @foreach($sub_tipos as $sub_tipo)
-                                        @if($sub_tipo->id_tipo==$tipo->id)
-                                        <div class="container">
-                                            <div class="row">                     
-                                                <div class="col-sm-5">
-                                                    <i class="tim-icons icon-planet"></i>
-                                                    <a href="#">&nbsp;{{ $sub_tipo->nombre }}</a>
-                                                </div>
-                                                <div class="col-sm-1">
-                                                    <div class="row">
-                                                        <a type="button" href="tipo_investigacion/{{$sub_tipo->id}}/edit" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;&nbsp;
-                                                        <form method="POST" action="/tipo_investigacion/{{$sub_tipo->id}}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                            <button type="submit" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
-                                                        </form> 
-                                                    </div>
-                                                </div>
-                                            </div>                                            
-                                        </div> 
-                                        </div>
-                                    @endif
-                                    @endforeach
+                                            @if($sub_tipo->id_tipo==$tipo->id) 
+                                                    <tr id={{$rec->id}} onMouseOver="ResaltarFila({{$sub_tipo->id}});" onMouseOut="RestablecerFila({{$sub_tipo->id}}, '')" onClick="CrearEnlace('#');">                     
+                                                        <td>
+                                                        </td>
+                                                        <td>
+                                                            <i class="tim-icons icon-planet"></i>
+                                                            <a  href="recursos/{{$rec->id}}">&nbsp;{{ $sub_tipo->nombre }}</a>
+                                                        </td>
+                                                        <td width='10%'>
+                                                                <a type="button" href="tipo_investigacion/{{$sub_tipo->id}}/edit" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;&nbsp;
+                                                                <form method="POST" action="/tipo_investigacion/{{$sub_tipo->id}}">
+                                                                </td>
+                                                        <td width='10%'>
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                    <button type="submit" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
+                                                                </form> 
+                                                        </td>
+                                                    </tr>
+                                            @endif
+                                        @endforeach
+                                        </table>
                                     </div>                                         
                                 </div>
                             @endforeach                   
