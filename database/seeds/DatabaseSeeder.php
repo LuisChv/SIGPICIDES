@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesTableSeeder::class);
         $this->call(PermissionRoleSeeder::class);
         $this->call([UsersTableSeeder::class]);
-
+        $this->call([TipoDeInvestigacionSeeder::class]);
+        $this->call([SubTipoDeInvestigacionSeeder::class]);
 
         //Marcas y tipoRecurso
         DB::table('marca')->insert([
