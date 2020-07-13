@@ -71,15 +71,15 @@
                 </div>
             </div>
             <div class="card-body">
-                <form method="POST" action="/recursos">
+                <form method="POST" action="{{route('recursos.store')}}">
                 @csrf 
-                        <div class="input-group {{ $errors->has('tiposrec') ? ' has-danger' : '' }}">
+                        <div class="input-group {{ $errors->has('tipoRec') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-minimal-down"></i>
                                 </div>
                             </div>
-                            <select class="form-control selectorWapis" id="tiposrec" name="tiposrec">
+                            <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
                                 <option value="" selected disabled hidden>Seleccione un tipo de recurso</option>
                                     @foreach ($tiposrec as $tipo)
                                         <option>{{ $tipo->nombre }}</option>

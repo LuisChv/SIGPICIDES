@@ -71,17 +71,17 @@
                 </div>
             </div>
             <div class="card-body">
-                <form method="POST" action="/recursos/{{$recurso->id}}">
+                <form method="POST" action="{{route('recursos.update', $recurso->id)}}">
                 @csrf
                 @method('PUT') 
-                    <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
-                        <div class="input-group">
+
+                        <div class="input-group{{ $errors->has('tipoRec') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-minimal-down"></i>
                                 </div>
                             </div>
-                            <select class="form-control selectorWapis" id="tiposrec" name="tiposrec">
+                            <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
                                 <option>--Seleccionar Tipo de recurso--</option>
                                 @foreach ($tiposrec as $tipo)
                                 @if($recurso->id_tipo== $tipo->id)
@@ -141,7 +141,6 @@
                             <input rows="3" type="text" rows="3" name="descripcion" value="{{$detalle->descripcion}}" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" placeholder="{{ __('Descripción') }}">
                             @include('alerts.feedback', ['field' => 'descripcion'])
                         </div>
-                    </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary btn-round btn-lg">{{ __('Editar') }}</button>
                     </div>
