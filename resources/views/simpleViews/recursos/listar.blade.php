@@ -18,12 +18,13 @@
                         </div>
                     </div>
                 </div>
-            <div class="card-body">                
+            <div class="card-body">
+                <br/>                
                     <!--Dropdown para recurso-->
                 <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
                     <div class="list-group">
                         @foreach ($tiposrec as $tipo)
-                        <div class="list-group-item list-group-flush">
+                        <div class="card list-group-item">
                             <div role="tab" id="rec{{ $tipo->id }}">
                                 <a data-toggle="collapse" data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false" aria-controls="lista{{ $tipo->id }}">
                                     {{ $tipo->nombre }}&nbsp;&nbsp;

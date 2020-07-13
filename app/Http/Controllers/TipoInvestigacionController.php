@@ -34,6 +34,11 @@ class TipoInvestigacionController extends Controller
         ]);
     }
 
+    public function createTipo()
+    {
+        return view ('simpleViews.tipoInvestigacion.crearTipo');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
