@@ -29,7 +29,7 @@
                             @foreach ($tipos as $tipo)
                                 <div class="card list-group-item">
                                     <div role="tab" id="rec{{ $tipo->id }}">
-                                        <a>
+                                        <a data-toggle="collapse" data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false" aria-controls="lista{{ $tipo->id }}">
                                             {{ $tipo->nombre }}&nbsp;&nbsp;
                                             <i class="tim-icons icon-minimal-down"></i>
                                         </a>
