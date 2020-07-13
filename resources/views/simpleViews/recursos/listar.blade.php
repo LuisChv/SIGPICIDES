@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
-	<div class="col-7">
+	<div class="col-6">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
@@ -31,30 +31,30 @@
                                 </a>
                             </div>
                             <div id="lista{{ $tipo->id }}" class="collapse" aria-labelledby="rec{{ $tipo->id }}" data-parent="#accordion">
-                                <div class="list- table-sm-12">
+                                <table width='100%'>
                                     @foreach($recursos as $rec)
-                                        @if($rec->id_tipo==$tipo->id) 
-                                            <div class="container">  
-                                                <div class="row" id={{$rec->id}} onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')" onClick="CrearEnlace('#');">                     
-                                                    <div class="col-sm-10 my-auto">
+                                        @if($rec->id_tipo==$tipo->id)  
+                                                <tr id={{$rec->id}} onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')" onClick="CrearEnlace('#');">                     
+                                                    <td>
+                                                    </td>
+                                                    <td>
                                                         <i class="tim-icons icon-planet"></i>
                                                         <a  href="recursos/{{$rec->id}}">&nbsp;{{ $rec->nombre }}</a>
-                                                    </div>
-                                                    <div class="col-sm-2 my-auto">
-                                                        <div class="row">
+                                                    </td>
+                                                    <td width='10%'>
                                                             <a type="button" href="recursos/{{$rec->id}}/edit" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;&nbsp;
                                                             <form method="POST" action="/recursos/{{$rec->id}}">
+                                                            </td>
+                                                    <td width='10%'>
                                                             @csrf
                                                             @method('DELETE')
                                                                 <button type="submit" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
                                                             </form> 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                    </td>
+                                                </tr>
                                         @endif
                                     @endforeach
-                                </div>
+                                </table>
                             </div>                      
                         </div>
                         @endforeach
