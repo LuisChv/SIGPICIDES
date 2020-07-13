@@ -11,18 +11,17 @@
                         <div class="col-sm-12 text-left">
                             <h2 class="card-title"><b>Catálogo de tipos de investigaci&oacute;n</b></h2>
                         </div>
+                        <div class="col-sm-12 text-right">
+                                <a role="button" class="btn btn-primary col-sm-4" href="{{ route('tipo_investigacion.createTipo')  }}">
+                                    <i class="tim-icons icon-simple-add"></i>&nbsp;&nbsp;Tipo
+                                </a>
+                                <a role="button" class="btn btn-primary col-sm-4" href="{{ route('tipo_investigacion.create')  }}">
+                                    <i class="tim-icons icon-simple-add"></i>&nbsp;&nbsp;Subtipo
+                                </a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <!--NUEVO RECURSO-->
-                    <div class="container text-center">
-                        <a role="button" class="btn btn-primary col-sm-4" href="{{ route('tipo_investigacion.create')  }}">
-                            <i class="tim-icons icon-simple-add"></i>&nbsp;&nbsp;Tipo
-                        </a>
-                        <a role="button" class="btn btn-primary col-sm-4" href="{{ route('tipo_investigacion.create')  }}">
-                            <i class="tim-icons icon-simple-add"></i>&nbsp;&nbsp;Subtipo
-                        </a>
-                    </div>
                     <br/>                    
                     <!--Dropdown para recurso-->
                     <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">

@@ -202,4 +202,6 @@ Route::middleware(['auth'])->group(function(){
     Route::get('tipo_investigacion/{proyecto}/edit', 'TipoInvestigacionController@edit')->name('tipo_investigacion.edit')
     ->middleware('has.permission:tipo_de_investigacion.edit');
 
+    Route::get('tipo_investigacion/createTipo', 'TipoInvestigacionController@createTipo')->name('tipo_investigacion.createTipo')->middleware('has.permission:tipo_de_investigacion.create');
+
 });
