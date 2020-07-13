@@ -17,18 +17,14 @@
                 <form method="POST" action="/recursos">
                 @csrf 
                     <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
-                        <div class="input-group col-sm-5">
+                        <div class="input-group{{ $errors->has('modelo') ? ' has-danger' : '' }} col-sm-6">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <i class="tim-icons icon-minimal-down"></i>
+                                    <i class="tim-icons icon-pencil"></i>
                                 </div>
                             </div>
-                            <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
-                                <option>--Seleccionar Tipo de recurso--</option>
-                                @foreach ($tiporec as $tipo)
-                                <option>{{ $tipo->nombre }}</option>
-                                @endforeach
-                            </select>                            
+                            <input type="text" name="tipo" class="form-control{{ $errors->has('tipo') ? ' is-invalid' : '' }}" placeholder="{{ __('Tipo') }}">
+                            @include('alerts.feedback', ['field' => 'tipo'])
                         </div>
 
                         <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }} col-sm-6">
@@ -41,18 +37,14 @@
                             @include('alerts.feedback', ['field' => 'nombre'])
                         </div>
 
-                        <div class="input-group col-sm-5">
+                        <div class="input-group{{ $errors->has('marca') ? ' has-danger' : '' }} col-sm-6">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <i class="tim-icons icon-minimal-down"></i>
+                                    <i class="tim-icons icon-pencil"></i>
                                 </div>
                             </div>
-                            <select class="form-control selectorWapis" id="marca" name="marca">
-                                <option>--Seleccionar marca--</option>
-                                @foreach ($marcas as $marca)
-                                <option>{{ $marca->nombre }}</option>
-                                @endforeach
-                            </select>                            
+                            <input type="text" name="marca" class="form-control{{ $errors->has('marca') ? ' is-invalid' : '' }}" placeholder="{{ __('Marca') }}">
+                            @include('alerts.feedback', ['field' => 'marca'])
                         </div>
 
                         <div class="input-group{{ $errors->has('modelo') ? ' has-danger' : '' }} col-sm-6">
