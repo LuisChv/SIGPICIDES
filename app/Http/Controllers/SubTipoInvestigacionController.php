@@ -27,7 +27,7 @@ class SubTipoInvestigacionController extends Controller
     {
         $sub_tipos= \App\SubTipoDeInvestigacion::all();
         $tiposinv=TipoDeInvestigacion::all();
-        return view ('simpleViews.tipoInvestigacion.crear', [
+        return view ('simpleViews.subtipoInvestigacion.crear', [
             'tiposinv' => $tiposinv,
             'tipos'=> $tiposinv,
             'sub_tipos' => $sub_tipos
@@ -60,7 +60,7 @@ class SubTipoInvestigacionController extends Controller
      * @param  \App\SubTipoDeInvestigacion  $subTipoDeInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function show(SubTipoDeInvestigacion $subTipoDeInvestigacion)
+    public function show(SubTipoDeInvestigacion $subtipo)
     {
         //
     }
@@ -71,9 +71,16 @@ class SubTipoInvestigacionController extends Controller
      * @param  \App\SubTipoDeInvestigacion  $subTipoDeInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function edit(SubTipoDeInvestigacion $subTipoDeInvestigacion)
+    public function edit(SubTipoDeInvestigacion $subtipo)
     {
-        //
+        $sub_tipos= SubTipoDeInvestigacion::all();
+        $tiposinv=TipoDeInvestigacion::all();
+        return view('simpleViews.subtipoInvestigacion.editar', [
+            'subtipo'=>$subtipo,
+            'tipos'=> $tiposinv,
+            'tiposinv' => $tiposinv,
+            'sub_tipos' => $sub_tipos
+            ]);
     }
 
     /**
@@ -83,9 +90,17 @@ class SubTipoInvestigacionController extends Controller
      * @param  \App\SubTipoDeInvestigacion  $subTipoDeInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SubTipoDeInvestigacion $subTipoDeInvestigacion)
+    public function update(Request $request, SubTipoDeInvestigacion $subtipo)
     {
-        //
+        request()->validate([
+            'nombre'=> 'required',
+            'tipoRec'=> 'required'            
+        ]);
+        $subtipo->id_tipo=request('tipoRec');
+        $subtipo->nombre=request('nombre');
+        $subtipo->save();
+        return redirect(route('tipo_investigacion.index'));
+        
     }
 
     /**
@@ -94,8 +109,8 @@ class SubTipoInvestigacionController extends Controller
      * @param  \App\SubTipoDeInvestigacion  $subTipoDeInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SubTipoDeInvestigacion $subTipoDeInvestigacion)
+    public function destroy(SubTipoDeInvestigacion $subtipo)
     {
-        //
+        dd($subtipo);
     }
 }

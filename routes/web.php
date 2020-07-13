@@ -217,13 +217,13 @@ Route::middleware(['auth'])->group(function(){
     //Route::get('subtipo_investigacion/create', 'SubTipoInvestigacionController@create')->name('subtipo_investigacion.create')
     //->middleware('has.permission:sub_tipo_de_investigacion.show');
 
-    Route::get('subtipo_investigacion/{proyecto}/edit', 'SubTipoInvestigacionController@edit')->name('subtipo_investigacion.edit')
-    ->middleware('has.permission:sub_tipo_de_investigacion.edit');
+    Route::get('subtipo_investigacion/{subtipo}/edit', 'SubTipoInvestigacionController@edit')->name('subtipo_investigacion.edit')
+    ->middleware('has.permission:sub_tipo_de_investigacionn.edit');
 
-    Route::put('subtipo_investigacion/{proyecto}', 'SubTipoInvestigacionController@update')->name('subtipo_investigacion.update')
-    ->middleware('has.permission:sub_tipo_de_investigacion.edit');
+    Route::put('subtipo_investigacion/{subtipo}', 'SubTipoInvestigacionController@update')->name('subtipo_investigacion.update')
+    ->middleware('has.permission:sub_tipo_de_investigacionn.edit');
 
-    Route::delete('subtipo_investigacion/{proyecto}', 'SubTipoInvestigacionController@delete')->name('subtipo_investigacion.delete')
+    Route::delete('subtipo_investigacion/{subtipo}', 'SubTipoInvestigacionController@destroy')->name('subtipo_investigacion.destroy')
     ->middleware('has.permission:sub_tipo_de_investigacion.destroy');
 
 });

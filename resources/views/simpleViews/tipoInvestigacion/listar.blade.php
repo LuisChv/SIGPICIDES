@@ -48,8 +48,12 @@
                                                         <td width='10%'>
                                                                 <a type="button" href="{{ route('subtipo_investigacion.edit', $sub_tipo->id)  }}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>                                                        
                                                             </td>
-                                                        <td width='10%'>
-                                                                <a type="button" href="{{ route('subtipo_investigacion.edit', $sub_tipo->id)  }}" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>                                                        
+                                                            <form method="POST" action="{{ route('subtipo_investigacion.destroy', $sub_tipo->id)}}">
+                                                        <td width='10%'>                                                                
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <a type="submit" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>                                                        
+                                                            </form>
                                                             </td>
                                                         </td>
                                                     </tr>
