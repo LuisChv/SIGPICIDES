@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\SubTipoDeInvestigacion;
+use App\TipoDeInvestigacion;
 use Illuminate\Http\Request;
 
-class TipoInvestigacionController extends Controller
+class SubTipoInvestigacionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,12 +15,7 @@ class TipoInvestigacionController extends Controller
      */
     public function index()
     {
-        $tipos=\App\TipoDeInvestigacion::all();
-        $sub_tipos= \App\SubTipoDeInvestigacion::all();
-        return view('simpleViews.tipoInvestigacion.listar',[
-            'tipos'=> $tipos,
-            'sub_tipos' => $sub_tipos
-        ]);
+        //
     }
 
     /**
@@ -28,7 +25,10 @@ class TipoInvestigacionController extends Controller
      */
     public function create()
     {
-        return view ('simpleViews.tipoInvestigacion.crearTipo');
+        $tiposinv=TipoDeInvestigacion::all();
+        return view ('simpleViews.tipoInvestigacion.crear', [
+            'tiposinv' => $tiposinv
+        ]);
     }
 
     /**
@@ -45,10 +45,10 @@ class TipoInvestigacionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\SubTipoDeInvestigacion  $subTipoDeInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(SubTipoDeInvestigacion $subTipoDeInvestigacion)
     {
         //
     }
@@ -56,10 +56,10 @@ class TipoInvestigacionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\SubTipoDeInvestigacion  $subTipoDeInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(SubTipoDeInvestigacion $subTipoDeInvestigacion)
     {
         //
     }
@@ -68,10 +68,10 @@ class TipoInvestigacionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\SubTipoDeInvestigacion  $subTipoDeInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, SubTipoDeInvestigacion $subTipoDeInvestigacion)
     {
         //
     }
@@ -79,10 +79,10 @@ class TipoInvestigacionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\SubTipoDeInvestigacion  $subTipoDeInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SubTipoDeInvestigacion $subTipoDeInvestigacion)
     {
         //
     }
