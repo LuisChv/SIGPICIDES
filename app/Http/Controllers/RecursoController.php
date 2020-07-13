@@ -25,11 +25,13 @@ class RecursoController extends Controller
      */
     public function create()
     {
+        $recursos= \App\Recursos::all();
         $marcas=\App\Marca::all();
         $tiporec=\App\TipoDeRecursos::all();
         return view ('simpleViews.recursos.crear', [
             'marcas' => $marcas, 
-            'tiporec' => $tiporec
+            'tiposrec' => $tiporec,
+            'recursos'=>$recursos,
         ]);
     }
 
@@ -80,6 +82,8 @@ class RecursoController extends Controller
     
     public function show($id)
     {
+        $recursos= \App\Recursos::all();
+        $tiposrec= \App\TipoDeRecursos::all();
         //Buscar el recurso con el id de entrada
         $recurso= \App\Recursos::findOrFail($id);
         $detalleRecurso= \App\DetalleDeRecurso::where('id_recurso', $id)->first();
@@ -92,7 +96,11 @@ class RecursoController extends Controller
         $recurso->id_tipo=$tiporec->nombre;
         $recurso->id_marca=$marca->nombre;
         //Retornar la vista
-        return view ('simpleViews.recursos.show', ['recurso'=>$recurso, 'detalle'=>$detalleRecurso]);
+        return view ('simpleViews.recursos.show', [
+            'recurso'=>$recurso,
+            'detalle'=>$detalleRecurso,
+            'recursos'=>$recursos,
+            'tiposrec'=>$tiposrec]);
     }
 
     /**
@@ -103,14 +111,19 @@ class RecursoController extends Controller
      */
     public function edit($id)
     {
+        $recursos= \App\Recursos::all();
         //Buscar marcas para los select
         $marcas=\App\Marca::all();
         $tiporec=\App\TipoDeRecursos::all();
         //Buscar recurso y su respectivo detalle
         $recurso= \App\Recursos::findOrFail($id);
         $detalleRecurso= \App\DetalleDeRecurso::where('id_recurso', $id)->first();
-        return view ('simpleViews.recursos.editar',['recurso'=>$recurso, 'detalle'=>$detalleRecurso, 'marcas' => $marcas, 
-        'tiporec' => $tiporec]);
+        return view ('simpleViews.recursos.editar',[
+            'recurso'=>$recurso, 
+            'detalle'=>$detalleRecurso, 
+            'marcas' => $marcas, 
+            'tiposrec' => $tiporec,
+            'recursos'=>$recursos]);
     }
 
     /**
