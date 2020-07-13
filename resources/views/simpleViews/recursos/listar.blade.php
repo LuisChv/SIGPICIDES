@@ -25,30 +25,30 @@
                 <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
                     <div class="list-group">
                         @foreach ($tiposrec as $tipo)
-                        <div class="card list-group-item">
-                            <div role="tab" id="rec{{ $tipo->id }}">
-                                <a data-toggle="collapse" data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false" aria-controls="lista{{ $tipo->id }}">
-                                    {{ $tipo->nombre }}&nbsp;&nbsp;
-                                    <i class="tim-icons icon-minimal-down"></i>
-                                </a>
-                            </div>
-                            <div id="lista{{ $tipo->id }}" class="collapse" aria-labelledby="rec{{ $tipo->id }}" data-parent="#accordion">
-                                <div class="list-group">
-                                @foreach($recursos as $rec)
-                                @if($rec->id_tipo==$tipo->id)                        
-                                <div class="list-group-item col-sm-7">
-                                    <i class="tim-icons icon-planet"></i>
-                                    <a href="#">&nbsp;{{ $rec->nombre }}</a>
-                                    <div class="float-right">
-                                        <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
+                            <div class="card list-group-item">
+                                <div role="tab" id="rec{{ $tipo->id }}">
+                                    <a data-toggle="collapse" data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false" aria-controls="lista{{ $tipo->id }}">
+                                        {{ $tipo->nombre }}&nbsp;&nbsp;
+                                        <i class="tim-icons icon-minimal-down"></i>
+                                    </a>
+                                </div>
+                                <div id="lista{{ $tipo->id }}" class="collapse" aria-labelledby="rec{{ $tipo->id }}" data-parent="#accordion">
+                                    <div class="list-group">
+                                    @foreach($recursos as $rec)
+                                        @if($rec->id_tipo==$tipo->id)                        
+                                            <div class="list-group-item col-sm-7">
+                                                <i class="tim-icons icon-planet"></i>
+                                                <a href="#">&nbsp;{{ $rec->nombre }}</a>
+                                                <div class="float-right">
+                                                    <button type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
+                                                    <button type="button" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                     </div>
-                                </div>
-                                @endif
-                                @endforeach
-                                </div>
-                            </div>                      
-                        </div>
+                                </div>                      
+                            </div>
                         @endforeach
                         <!--fin de dropdown-->
                     </div>                   
