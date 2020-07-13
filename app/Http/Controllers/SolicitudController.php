@@ -13,7 +13,7 @@ class SolicitudController extends Controller
      */
     public function index()
     {
-        //
+        return view('solicitud.consultar');
     }
 
     /**
