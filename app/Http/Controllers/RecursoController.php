@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 class RecursoController extends Controller
 {
     /**
@@ -14,8 +13,6 @@ class RecursoController extends Controller
     
     public function index()
     {
-        //$recursos=Recursos::take(3)->latest()->get();
-        //return view ('simpleViews.recursos.listar', ['recursos'=>$recursos]);
         $recursos= \App\Recursos::all();
         $tiposrec= \App\TipoDeRecursos::all();
         return view ('simpleViews.recursos.listar', ['recursos'=>$recursos, 'tiposrec'=>$tiposrec]);
@@ -85,7 +82,9 @@ class RecursoController extends Controller
     public function show($id)
     {
         //Buscar el recurso con el id de entrada
-        $recurso=Recursos::findOrFail($id);
+        //$recurso = \App\Recursos::where('id', $id)->first();
+        $recurso= \DB::table('recurso')->where('id', $id)->first();
+        dd($recurso);
         //Buscar el detalle del recurso del recurso consultado
         //$detalleRecurso=detalleRecurso::...
         //Retornar la vista
@@ -100,9 +99,12 @@ class RecursoController extends Controller
      */
     public function edit($id)
     {
-        $recurso= Recursos::find($id);
-        $detalleRecurso= DetalleDeRecurso::find($id); 
-        //return view ('simpleViews.recursos.editar',['recurso'=>$recurso, 'detalle'=>$detalleRecurso]);
+        $marcas=\App\Marca::all();
+        $tiporec=\App\TipoDeRecursos::all();
+        $recurso= \DB::table('recurso')->where('id', $id)->first();
+        $detalleRecurso= \App\DetalleDeRecurso::where('id_recurso', $id)->first();
+        return view ('simpleViews.recursos.editar',['recurso'=>$recurso, 'detalle'=>$detalleRecurso, 'marcas' => $marcas, 
+        'tiporec' => $tiporec]);
     }
 
     /**
@@ -114,22 +116,30 @@ class RecursoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /*
-        //Para actualizar
-        $article->update($validatedAttributes); 
-
-        public function update($id){
-    //Persiste the edited resource
-    $article= Article::find($id);
-    $article->title= request('title');
-    $article->excerp= request('excerp');
-    $article->body= request('body');
-
-    $article->save();
-    return redirect('/articles/'. $article->id);
-    //@method('PUT') 
-}
-        */
+        request()->validate([
+            'tipoRec'=> 'required',
+            'nombre'=> 'required',
+            'marca'=> 'required',
+            'modelo'=> 'required',
+            'descripcion'=> 'required'
+        ]);
+        //Se asignan las variables al nuevo recurso
+        $recurso= new \App\Recursos();
+        $marca= \DB::table('marca')->where('nombre', request('marca'))->first();
+        $tipo= \DB::table('tipo_de_recurso')->where('nombre', request('tipoRec'))->first(); 
+        $recurso->id_marca=$marca->id;
+        $recurso->id_tipo=$tipo->id;
+        $recurso->nombre=request('nombre');
+        //Se crea el nuevo recurso
+        $recurso->save();
+        //Se asignan las variables al nuevo detalle recurso
+        $detalleRecurso=new \App\DetalleDeRecurso();
+        $detalleRecurso->id_recurso=$recurso->id;
+        $detalleRecurso->modelo= request('modelo');
+        $detalleRecurso->descripcion= request('descripcion');
+        //Se crea el nuevo detalle recurso
+        $detalleRecurso->save();
+        return redirect('/recursos');
 
     }
 
