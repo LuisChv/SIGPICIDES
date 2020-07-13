@@ -13,7 +13,12 @@ class TipoInvestigacionController extends Controller
      */
     public function index()
     {
-        return view('simpleViews.tipoInvestigacion.listar');
+        $tipos=\App\TipoDeInvestigacion::all();
+        $sub_tipos= \App\SubTipoDeInvestigacion::all();
+        return view('simpleViews.tipoInvestigacion.listar',[
+            'tiposinv'=> $tipos,
+            'subtiposinv' => $sub_tipos
+        ]);
     }
 
     /**
