@@ -21,6 +21,7 @@
                     </a>
                 </div>
                     <!--Dropdown para recurso-->
+
                 <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
                     <div class="list-group">
                         @foreach ($tiposrec as $tipo)

@@ -37,7 +37,7 @@
                                     <i class="tim-icons icon-pencil"></i>
                                 </div>
                             </div>
-                            <input type="text" name="nombre" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del recurso') }}">
+                            <input type="text" name="nombre" value="{{$recurso->nombre}}" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del recurso') }}">
                             @include('alerts.feedback', ['field' => 'nombre'])
                         </div>
 
@@ -61,7 +61,7 @@
                                     <i class="tim-icons icon-pencil"></i>
                                 </div>
                             </div>
-                            <input type="text" name="modelo" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" placeholder="{{ __('Modelo') }}">
+                            <input type="text" name="modelo" value="{{$detalle->modelo}}" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" placeholder="{{ __('Modelo') }}">
                             @include('alerts.feedback', ['field' => 'modelo'])
                         </div>
 
@@ -71,7 +71,7 @@
                                     <i class="tim-icons icon-pencil"></i>
                                 </div>
                             </div>
-                            <input rows="3" type="text" rows="3" name="descripcion" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" placeholder="{{ __('Descripción') }}">
+                            <input rows="3" type="text" rows="3" name="descripcion" value="{{$detalle->descripcion}}" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" placeholder="{{ __('Descripción') }}">
                             @include('alerts.feedback', ['field' => 'descripcion'])
                         </div>
                     </div>
