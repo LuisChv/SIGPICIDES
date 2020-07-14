@@ -41,9 +41,9 @@
                                                     &nbsp;{{ $rec->nombre }}
                                                 </td>
                                                 <td width='10%' align="right">
-                                                    <a type="button" href="{{ route('recursos.edit', $rec->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;&nbsp;
-                                                 <form method="POST" id="formulario" action="{{ route('recursos.destroy', $rec->id)}}">
+                                                    <a type="button" href="{{ route('recursos.edit', $rec->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
                                                 </td>
+                                                <form method="POST" id="formulario" action="{{ route('recursos.destroy', $rec->id)}}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <td width='10%'>
