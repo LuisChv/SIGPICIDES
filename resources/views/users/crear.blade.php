@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="card-body col-12">
-                <form class="form" method="post" action="{{ route('register') }}">
+                <form class="form" method="post" action="{{ route('users.store') }}">
                     @csrf
                     <div class="card-body">
                         <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
@@ -132,7 +132,7 @@
                                     <i class="tim-icons icon-minimal-down"></i>
                                 </div>
                             </div>
-                            <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
+                            <select class="form-control selectorWapis" id="rol" name="rol">
                                 <option>--Seleccionar Rol--</option>
                                 @foreach ($roles as $rol)
                                 <option>{{ $rol->name }}</option>

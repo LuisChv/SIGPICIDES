@@ -6,6 +6,7 @@ use App\User;
 use Caffeinated\Shinobi\Models\Role;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
+use DB;
 
 class UserController extends Controller
 {
@@ -33,5 +34,54 @@ class UserController extends Controller
             'roles'=> $roles, 
             'data' => $data
         ]);
+    }
+
+    public function store(){
+         //Validacion de los datos      
+        request()->validate([
+            'name'=> 'required',
+            'email'=> 'required',
+            'password'=> 'required',
+            'fecha_nac'=> 'required',
+            'institucion'=> 'required'
+        ],
+        [
+            'name.required' => "El username es obligatorio.",
+            'email.required' => "El email es obligatoria.",
+            'password.required' => "Establecer contraseña.",
+            'fecha_nac.required' => "Seleccione su fecha de nacimiento.",
+            'institucion.required' => "La Institucion es obligatoria.",
+        ]);
+      
+
+        //Se asignan las variables al nuevo usuario
+        $user = User::create([
+            'name' => request('name'),
+            'email' => request('email'),
+            'password' => Hash::make(request('password')),
+            'fecha_nac' => request('fecha_nac'),
+            'institucion' => request('institucion'),
+            'descripcion' => request('descripcion'),
+            'sexo' => (request('sexo') == "Masculino"),
+        ]);
+
+        $role = Role::where('name', request('rol'))->first();;
+
+        DB::table('role_user')->insert(
+            array('role_id' => $role->id, 'user_id' => $user->id)
+        );
+
+        $objetos = DB::select('SELECT * FROM rol_permiso WHERE role_id = ?', [$role->id]);
+
+        foreach ($objetos as $objeto) {
+            DB::table('permission_user')->insert([
+                'permission_id' => $objeto->permission_id,
+                'user_id' => $user->id,
+            ]);
+        }
+
+        return redirect('/users');
+
+
     }
 }
