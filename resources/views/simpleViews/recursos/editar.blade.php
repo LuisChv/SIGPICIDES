@@ -31,22 +31,24 @@
                                 </a>
                             </div>
                             <div id="lista{{ $tipo->id }}" class="collapse" aria-labelledby="rec{{ $tipo->id }}" data-parent="#accordion">
-                                <table width='100%'>
+                                <table width='100%' class="table">
+                                    <br>
                                     @foreach($recursos as $rec)
                                         @if($rec->id_tipo==$tipo->id)  
-                                            <tr id={{$rec->id}} onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')" onClick="CrearEnlace('{{ route('recursos.show', $rec->id)}}');">                     
-                                                <td>
-                                                </td>
-                                                <td>
-                                                    <i class="tim-icons icon-planet"></i>
+                                            <tr >                     
+                                                <td id={{$rec->id}} onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')" onClick="CrearEnlace('{{ route('recursos.show', $rec->id)}}');" >
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;<i class="tim-icons icon-planet"></i>
                                                     &nbsp;{{ $rec->nombre }}
                                                 </td>
                                                 <td width='10%' align="right">
-                                                    <a type="button" href="{{ route('recursos.edit', $rec->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;&nbsp;
+                                                    <a type="button" href="{{ route('recursos.edit', $rec->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
                                                 </td>
+                                                <form method="POST" id="formulario" action="{{ route('recursos.destroy', $rec->id)}}">
+                                                @csrf
+                                                @method('DELETE')
                                                 <td width='10%'>
-                                                    <a type="button" href="{{ route('recursos.edit', $rec->id)}}" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
-                                                </td>
+                                                    <button type="button" onClick="confirmar()" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
+                                                </td></form>
                                             </tr>
                                         @endif
                                     @endforeach
@@ -163,5 +165,25 @@
     // CONVERTIR LAS FILAS EN LINKS
     function CrearEnlace(url) {
     location.href=url;
+    }
+    require("sweetalert");
+    function confirmar(){
+        swal({
+          title: "¿Eliminar registro?",
+          text: "Esta acción es irreversible.",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Registro eliminado", {
+              icon: "success",
+            });
+            document.getElementById("formulario").submit();
+          } else {
+            swal("Eliminación cancelada");
+          }
+        });
     }
 </script>

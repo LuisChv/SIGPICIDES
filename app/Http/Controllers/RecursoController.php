@@ -53,6 +53,13 @@ class RecursoController extends Controller
             'marca'=> 'required',
             'modelo'=> 'required',
             'descripcion'=> 'required'
+        ],
+        [
+            'tipoRec.required' => "Seleccione un tipo de recurso.",
+            'nombre.required' => "El nombre es obligatoria.",
+            'marca.required' => "Seleccione una marca.",
+            'modelo.required' => "Seleccione su sexo.",
+            'descripcion.required' => "La descripcion es obligatoria.",
         ]);
         //Se asignan las variables al nuevo recurso
         $recurso= new \App\Recursos();
@@ -139,6 +146,13 @@ class RecursoController extends Controller
             'marca'=> 'required',
             'modelo'=> 'required',
             'descripcion'=> 'required'
+        ],
+        [
+            'tipoRec.required' => "Seleccione un tipo de recurso.",
+            'nombre.required' => "El nombre es obligatoria.",
+            'marca.required' => "Seleccione una marca.",
+            'modelo.required' => "Seleccione su sexo.",
+            'descripcion.required' => "La descripcion es obligatoria.",
         ]);
         //Se asignan las variables al nuevo recurso
         //$recurso= \DB::table('recurso')->where('id', $id)->first();

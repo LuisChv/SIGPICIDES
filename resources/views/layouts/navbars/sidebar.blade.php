@@ -129,22 +129,14 @@
                                 </a>
                             </li>
                         @endcan
-                        @can('roles.index')
-                            <li @if ($pageSlug == 'roles') class="active " @endif>
-                                <a href="#">
-                                    <i class="tim-icons icon-badge"></i>
-                                    <p>{{ __('Roles') }}</p>
-                                </a>
-                            </li>
-                        @endcan
-                        @can('permission.index')
+                        @canany(['permission_role.create', 'permission_role.destroy'])
                             <li @if ($pageSlug == 'permisos') class="active " @endif>
                                 <a href="#">
                                     <i class="tim-icons icon-key-25"></i>
-                                    <p>{{ __('Permisos') }}</p>
+                                    <p>{{ __('Gestionar permisos') }}</p>
                                 </a>
                             </li>
-                        @endcan
+                        @endcanany
                     </ul>
                 </div>
             </li>
