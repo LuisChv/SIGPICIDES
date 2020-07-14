@@ -82,6 +82,71 @@ class UserController extends Controller
 
         return redirect('/users');
 
+    }
 
+    public function edit($id)
+    {
+        $data= User::all();
+        $roles= Role::all();
+      
+      
+        //Buscar user y su respectivo rol
+        $user= User::findOrFail($id);
+       
+        return view ('users.editar',[
+            'user'=>$user, 
+           // 'role'=>$role, 
+            'roles' => $roles, 
+            'data' => $data
+            ]);
+    }
+
+    public function update($id){
+        request()->validate([
+            'name'=> 'required',
+            'email'=> 'required',
+            'password'=> 'required',
+            'fecha_nac'=> 'required',
+            'institucion'=> 'required'
+        ],
+        [
+            'name.required' => "El username es obligatorio.",
+            'email.required' => "El email es obligatoria.",
+            'password.required' => "Establecer contraseña.",
+            'fecha_nac.required' => "Seleccione su fecha de nacimiento.",
+            'institucion.required' => "La Institucion es obligatoria.",
+        ]);
+      
+
+        //Se asignan las variables al nuevo usuario
+        $user = User::findOrFail($id);
+
+        $user->name=request('name');
+        $user->email=request('email');
+        $user->password=Hash::make(request('password'));
+        $user->fecha_nac=request('fecha_nac');
+        $user->institucion=request('institucion');
+        $user->descripcion=request('descripcion');
+        $user->sexo = (request('sexo') == "Masculino");
+    
+        $user->save();
+
+        $role = Role::where('name', request('rol'))->first();;
+
+        DB::table('role_user')->where('user_id', $id)->update(['role_id' => $role->id]);
+
+        $objetos = DB::select('SELECT * FROM rol_permiso WHERE role_id = ?', [$role->id]);
+
+        //Borrado de permisos por cambio de rol
+        DB::table('permission_user')->where('user_id', $id)->delete();
+       
+        foreach ($objetos as $objeto) {
+            DB::table('permission_user')->insert([
+                'permission_id' => $objeto->permission_id,
+                'user_id' => $id,
+            ]);
+        }
+
+        return redirect('/users');
     }
 }

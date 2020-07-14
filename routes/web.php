@@ -80,6 +80,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('users/create', 'UserController@create')->name('users.create')
     ->middleware('has.permission:users.create');
 
+    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')
+    ->middleware('has.permission:users.edit');
+
     Route::put('users/{user}', 'UserController@update')->name('users.update')
     ->middleware('has.permission:users.edit');
 
@@ -89,8 +92,6 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')
     ->middleware('has.permission:users.destroy');
 
-    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')
-    ->middleware('has.permission:users.edit');
 
     //Proyectos
     Route::post('proyectos/store', 'ProyectoController@store')->name('proyectos.store')
