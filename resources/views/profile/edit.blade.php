@@ -87,7 +87,7 @@
                             </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-fill btn-primary">{{ __('Save') }}</button>
+                        <button type="submit" class="btn btn-fill btn-primary">{{ __('Guardar cambios') }}</button>
                     </div>
                     <br>
                 </form>
@@ -119,7 +119,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-fill btn-primary">{{ __('Change password') }}</button>
+                        <button type="submit" class="btn btn-fill btn-primary">{{ __('Cambiar contraseña') }}</button>
                     </div>
                     <br>
                 </form>
