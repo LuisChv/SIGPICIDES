@@ -56,7 +56,17 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'fecha_nac' => ['required', 'string'],
             'institucion' => ['required', 'string'],
+            'descripcion' => ['required', 'string'],
             'sexo' => ['required'],
+        ],
+        [
+            'name.required' => "El nombre de usuario es obligatorio.",
+            'email.required' => "El correo electrónico es obligatorio.",
+            'password.required' => "La contraseña es obligatoria",
+            'fecha_nac.required' => "La fecha de nacimiento es obligatoria.",
+            'institucion.required' => "La institución de procedencia es obligatoria.",
+            'descripcion.required' => "La descripcion es obligatoria.",
+            'sexo.required' => "Seleccione su sexo.",
         ]);
     }
 

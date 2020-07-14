@@ -31,7 +31,8 @@
                                 </a>
                             </div>
                             <div id="lista{{ $tipo->id }}" class="collapse" aria-labelledby="rec{{ $tipo->id }}" data-parent="#accordion">
-                                <table width='100%'>
+                                <table width='100%' class="table">
+                                    <br>
                                     @foreach($recursos as $rec)
                                         @if($rec->id_tipo==$tipo->id)  
                                             <tr id={{$rec->id}} onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')">                     
