@@ -34,7 +34,8 @@
                                 <table width='100%'>
                                     @foreach($recursos as $rec)
                                         @if($rec->id_tipo==$tipo->id)  
-                                            <tr id={{$rec->id}} onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')" onClick="CrearEnlace('{{ route('recursos.show', $rec->id)}}');">                     
+                                            <tr id={{$rec->id}} onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')">                     
+                                                <div onClick="CrearEnlace('{{ route('recursos.show', $rec->id)}}');" >
                                                 <td>
                                                 </td>
                                                 <td>
@@ -43,14 +44,14 @@
                                                 </td>
                                                 <td width='10%' align="right">
                                                     <a type="button" href="{{ route('recursos.edit', $rec->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;&nbsp;
-                                                <form method="POST" action="{{ route('recursos.destroy', $rec->id)}}">
+                                                 <form method="POST" id="formulario" action="{{ route('recursos.destroy', $rec->id)}}">
                                                 </td>
+                                                </div>
+                                                @csrf
+                                                @method('DELETE')
                                                 <td width='10%'>
-                                                	@csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
-                                                </form> 
-                                                </td>
+                                                    <button type="button" onClick="confirmar()" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
+                                                </td></form>
                                             </tr>
                                         @endif
                                     @endforeach
@@ -67,6 +68,7 @@
     </div>
 </div>
 @endsection
+<script src="sweetalert2.all.min.js"></script>
 <script langiage="javascript" type="text/javascript">
     // RESALTAR LAS FILAS AL PASAR EL MOUSE
     function ResaltarFila(id_fila) {
@@ -80,4 +82,26 @@
     function CrearEnlace(url) {
     location.href=url;
     }
+    require("sweetalert");
+    function confirmar(){
+        swal({
+          title: "¿Eliminar registro?",
+          text: "Esta acción es irreversible.",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Registro eliminado", {
+              icon: "success",
+            });
+            document.getElementById("formulario").submit();
+          } else {
+            swal("Eliminación cancelada");
+          }
+        });
+    }
+
+    
 </script>

@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -21,6 +22,7 @@
         <link href="{{ asset('black') }}/css/theme.css" rel="stylesheet" />
         <!--menu-Flotante-->
         <link href="{{ asset('black') }}/css/menu_flotante.css" rel="stylesheet" />
+
         
     </head>
     <body class="{{ $class ?? '' }} white-content" >
@@ -79,6 +81,8 @@
                 </ul>
             </div>
         </div!-->
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="{{ asset('black') }}/js/core/jquery.min.js"></script>
         <script src="{{ asset('black') }}/js/core/popper.min.js"></script>
         <script src="{{ asset('black') }}/js/core/bootstrap.min.js"></script>
