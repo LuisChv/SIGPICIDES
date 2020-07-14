@@ -181,6 +181,7 @@ class RecursoController extends Controller
      */
     public function destroy($id)
     {
+        dd($id);
         $recurso= \App\Recursos::findOrFail($id);
         $detalleRecurso= \App\DetalleDeRecurso::where('id_recurso', $id)->first();
         $recurso->delete();
