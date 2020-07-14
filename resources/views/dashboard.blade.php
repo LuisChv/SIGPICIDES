@@ -20,7 +20,7 @@
                         <div class="icon icon-warning">
                             <img src="{{ asset('black') }}/img/favicon.png" alt="" width="25%">
                         </div>
-                        <p style="font-size:1000%;"><b>Próximamente</b></p>
+                        <p style="font-size:800%;"><b>Próximamente</b></p>
                     </div>
                 </div>
             </div>
