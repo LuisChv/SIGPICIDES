@@ -35,30 +35,26 @@
                                         </a>
                                     </div>
                                     <div id="lista{{ $tipo->id }}" class="collapse" aria-labelledby="rec{{ $tipo->id }}" data-parent="#accordion">
-                                        <table width='100%'>
-                                        @foreach($sub_tipos as $sub_tipo)
-                                            @if($sub_tipo->id_tipo==$tipo->id) 
-                                                    <tr id={{$sub_tipo->id}} onMouseOver="ResaltarFila({{$sub_tipo->id}});" onMouseOut="RestablecerFila({{$sub_tipo->id}}, '')" onClick="CrearEnlace('#');">                     
-                                                        <td>
-                                                        </td>
-                                                        <td>
-                                                            <i class="tim-icons icon-planet"></i>
-                                                            {{ $sub_tipo->nombre }}
-                                                        </td>
-                                                        <td width='10%'>
+                                        <table width='100%' class="table">
+                                            <br>
+                                            @foreach($sub_tipos as $sub_tipo)
+                                                @if($sub_tipo->id_tipo==$tipo->id) 
+                                                        <tr id={{$sub_tipo->id}} onMouseOver="ResaltarFila({{$sub_tipo->id}});" onMouseOut="RestablecerFila({{$sub_tipo->id}}, '')" onClick="CrearEnlace('#');">                     
+                                                            <td>
+                                                            </td>
+                                                            <td>
+                                                                <i class="tim-icons icon-planet"></i>
+                                                                {{ $sub_tipo->nombre }}
+                                                            </td>
+                                                            <td width='10%'>
                                                                 <a type="button" href="{{ route('subtipo_investigacion.edit', $sub_tipo->id)  }}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>                                                        
+                                                            </td>   
+                                                            <td width='10%'>    
+                                                                <a type="button" href="{{ route('subtipo_investigacion.edit', $sub_tipo->id)  }}" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></a>                                                        
                                                             </td>
-                                                            <form method="POST" action="{{ route('subtipo_investigacion.destroy', $sub_tipo->id)}}">
-                                                        <td width='10%'>                                                                
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <a type="submit" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>                                                        
-                                                            </form>
-                                                            </td>
-                                                        </td>
-                                                    </tr>
-                                            @endif
-                                        @endforeach
+                                                        </tr>
+                                                @endif
+                                            @endforeach
                                         </table>
                                     </div>                                         
                                 </div>
