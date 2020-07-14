@@ -65,7 +65,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
+                        <div class="input-group{{ $errors->has('institucion') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-bank"></i>
