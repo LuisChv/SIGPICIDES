@@ -56,10 +56,8 @@ class RecursoController extends Controller
         ]);
         //Se asignan las variables al nuevo recurso
         $recurso= new \App\Recursos();
-        $marca= \DB::table('marca')->where('nombre', request('marca'))->first();
-        $tipo= \DB::table('tipo_de_recurso')->where('nombre', request('tipoRec'))->first(); 
-        $recurso->id_marca=$marca->id;
-        $recurso->id_tipo=$tipo->id;
+        $recurso->id_marca=request('marca');
+        $recurso->id_tipo=request('tipoRec');
         $recurso->nombre=request('nombre');
         //Se crea el nuevo recurso
         $recurso->save();
@@ -145,10 +143,8 @@ class RecursoController extends Controller
         //Se asignan las variables al nuevo recurso
         //$recurso= \DB::table('recurso')->where('id', $id)->first();
         $recurso= \App\Recursos::findOrFail($id);
-        $marca= \DB::table('marca')->where('nombre', request('marca'))->first();
-        $tipo= \DB::table('tipo_de_recurso')->where('nombre', request('tipoRec'))->first(); 
-        $recurso->id_marca=$marca->id;
-        $recurso->id_tipo=$tipo->id;
+        $recurso->id_marca=request('marca');
+        $recurso->id_tipo=request('tipoRec');
         $recurso->nombre=request('nombre');
         //Se crea el nuevo recurso
         $recurso->save();

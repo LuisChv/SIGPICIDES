@@ -82,7 +82,7 @@
                             <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
                                 <option value="" selected disabled hidden>Seleccione un tipo de recurso</option>
                                     @foreach ($tiposrec as $tipo)
-                                        <option>{{ $tipo->nombre }}</option>
+                            <option value="{{$tipo->id}}">{{ $tipo->nombre }}</option>
                                     @endforeach
                             </select>                            
                         </div>
@@ -96,7 +96,7 @@
                             <select class="form-control selectorWapis" id="marca" name="marca">
                                 <option value="" selected disabled hidden>Seleccione una marca</option>
                                     @foreach ($marcas as $marca)
-                                        <option>{{ $marca->nombre }}</option>
+                            <option value="{{$marca->id}}">{{ $marca->nombre }}</option>
                                     @endforeach
                             </select>                             
                         </div>
