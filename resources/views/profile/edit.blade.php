@@ -21,7 +21,6 @@
                                     </div>
                                 </div>
                                 <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre') }}" value="{{ old('name', auth()->user()->name) }}">
-                                @include('alerts.feedback', ['field' => 'name'])
                             </div>
 
                             <div class="input-group{{ $errors->has('email') ? ' has-danger' : '' }}">
@@ -31,7 +30,6 @@
                                     </div>
                                 </div>
                                 <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Correo electrónico') }}" value="{{ old('email', auth()->user()->email) }}">
-                                @include('alerts.feedback', ['field' => 'email'])
                             </div>
 
                             <div class="input-group{{ $errors->has('institucion') ? ' has-danger' : '' }}" aria-required="true">

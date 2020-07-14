@@ -30,6 +30,12 @@ class ProfileController extends Controller
             'institucion' => ['required', 'string'],
             'descripcion' => ['required', 'string'],
             'sexo' => ['required'],
+        ],
+        [
+            'fecha_nac.required' => "La fecha de nacimiento es obligatoria.",
+            'institucion.required' => "La institución de procedencia es obligatoria.",
+            'descripcion.required' => "La descripcion es obligatoria.",
+            'sexo.required' => "Seleccione su sexo.",
         ]);
 
         $sexo = ($request->sexo == "Masculino");
