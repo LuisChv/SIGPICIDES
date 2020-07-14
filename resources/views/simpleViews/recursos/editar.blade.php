@@ -43,11 +43,11 @@
                                                 <td width='10%' align="right">
                                                     <a type="button" href="{{ route('recursos.edit', $rec->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
                                                 </td>
-                                                <form method="POST" id="formulario" action="{{ route('recursos.destroy', $rec->id)}}">
+                                                <form method="POST" id="formulario{{$rec->id}}" action="{{route('recursos.destroy', $rec->id)}}" >
                                                 @csrf
                                                 @method('DELETE')
                                                 <td width='10%'>
-                                                    <button type="button" onClick="confirmar()" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
+                                                    <button type="button" onClick="confirmar({{$rec->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
                                                 </td></form>
                                             </tr>
                                         @endif
@@ -180,8 +180,7 @@
             swal("Registro eliminado", {
               icon: "success",
             });
-            document.getElementById("formulario").submit();
-          } else {
+            document.getElementById("formulario"+valor).submit();
             swal("Eliminación cancelada");
           }
         });
