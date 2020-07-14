@@ -82,18 +82,17 @@
                                 </div>
                             </div>
                             <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
-                                <option value="">--Seleccionar Tipo de investigación--</option>
+                                <option value="" selected disabled hidden>Seleccione un tipo de investigación</option>
                                 @foreach ($tiposinv as $tipo)
-                                @if ($subtipo->id_tipo==$tipo->id)
-                                    <option value="{{$tipo->id}}" selected>{{ $tipo->nombre }}</option>
-                                @else
-                                    <option value="{{$tipo->id}}">{{ $tipo->nombre }}</option>
-                                @endif
-                                    
+                                    @if ($subtipo->id_tipo==$tipo->id)
+                                        <option value="{{$tipo->id}}" selected>{{ $tipo->nombre }}</option>
+                                    @else
+                                        <option value="{{$tipo->id}}">{{ $tipo->nombre }}</option>
+                                    @endif
                                 @endforeach
-                            </select>                            
+                            </select>
+                            @include('alerts.feedback', ['field' => 'tipoRec'])                            
                         </div>
-
                         <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
