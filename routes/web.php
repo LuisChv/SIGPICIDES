@@ -120,13 +120,13 @@ Route::middleware(['auth'])->group(function(){
     ->middleware('has.permission:recursos.index');
 
     Route::post('recursos', 'RecursoController@store')->name('recursos.store')
-    ->middleware('has.permission:recursos.create');    
+    ->middleware('has.permission:recursos.create');  
 
     Route::get('recursos/create', 'RecursoController@create')->name('recursos.create')
     ->middleware('has.permission:recursos.create');
 
     Route::get('recursos/{proyecto}', 'RecursoController@show')->name('recursos.show')
-    ->middleware('has.permission:recursos.show');
+    ->middleware('has.permission:recursos.show');    
 
     Route::delete('recursos/{proyecto}', 'RecursoController@destroy')->name('recursos.destroy')
     ->middleware('has.permission:recursos.destroy');

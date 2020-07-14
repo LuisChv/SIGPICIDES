@@ -46,7 +46,7 @@ class RecursoController extends Controller
     {
         //dump(request()->all());  //trae todo lo del formulario
         //dd($recurso);
-        //Validacion de los datos
+        //Validacion de los datos      
         request()->validate([
             'tipoRec'=> 'required',
             'nombre'=> 'required',
@@ -133,7 +133,7 @@ class RecursoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         request()->validate([
             'tipoRec'=> 'required',

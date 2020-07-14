@@ -28,7 +28,7 @@ class Recursos extends Model
     foreach ($flights as $flight) {
     echo $flight->name;
     
-    $titles = DB::table('roles')->pluck('title');
+    
 
 
     ------Listar solo una columna-----------
@@ -36,6 +36,8 @@ class Recursos extends Model
         echo $title;
     }
     $users = DB::table('users')->select('name', 'email as user_email')->get();
+
+    $titles = DB::table('roles')->pluck('title');
 
 
     ------Listar con parametros-----------
