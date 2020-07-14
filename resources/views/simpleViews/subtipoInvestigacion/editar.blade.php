@@ -35,26 +35,26 @@
                                     </a>
                                 </div>
                                 <div id="lista{{ $tipo->id }}" class="collapse" aria-labelledby="rec{{ $tipo->id }}" data-parent="#accordion">
-                                    <table width='100%'>
-                                    @foreach($sub_tipos as $sub_tipo)
-                                        @if($sub_tipo->id_tipo==$tipo->id) 
-                                                <tr id={{$sub_tipo->id}} onMouseOver="ResaltarFila({{$sub_tipo->id}});" onMouseOut="RestablecerFila({{$sub_tipo->id}}, '')" onClick="CrearEnlace('#');">                     
-                                                    <td>
-                                                    </td>
-                                                    <td>
-                                                        <i class="tim-icons icon-planet"></i>
-                                                        {{ $sub_tipo->nombre }}
-                                                    </td>
-                                                    <td width='10%'>
-                                                            <a type="button" href="{{ route('subtipo_investigacion.edit', $sub_tipo->id)  }}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>                                                        
+                                    <table width='100%' class="table">
+                                        <br>
+                                        @foreach($sub_tipos as $sub_tipo)
+                                            @if($sub_tipo->id_tipo==$tipo->id) 
+                                                    <tr id={{$sub_tipo->id}} onMouseOver="ResaltarFila({{$sub_tipo->id}});" onMouseOut="RestablecerFila({{$sub_tipo->id}}, '')" onClick="CrearEnlace('#');">                     
+                                                        <td>
                                                         </td>
-                                                    <td width='10%'>
-                                                            <a type="button" href="{{ route('subtipo_investigacion.edit', $sub_tipo->id)  }}" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>                                                        
+                                                        <td>
+                                                            <i class="tim-icons icon-planet"></i>
+                                                            {{ $sub_tipo->nombre }}
                                                         </td>
-                                                    </td>
-                                                </tr>
-                                        @endif
-                                    @endforeach
+                                                        <td width='10%'>
+                                                                <a type="button" href="{{ route('subtipo_investigacion.edit', $sub_tipo->id)  }}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>                                                        
+                                                        </td>
+                                                        <td width='10%'>
+                                                            <a type="button" href="{{ route('subtipo_investigacion.edit', $sub_tipo->id)  }}" class="btn btn-warning btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></a>                                                        
+                                                        </td>
+                                                    </tr>
+                                            @endif
+                                        @endforeach
                                     </table>
                                 </div>                                         
                             </div>
@@ -102,9 +102,9 @@
                             <input type="text" value="{{$subtipo->nombre}}" name="nombre" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del recurso') }}">
                             @include('alerts.feedback', ['field' => 'nombre'])
                         </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary btn-round btn-lg">{{ __('Editar') }}</button>
-                    </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-round btn-lg">{{ __('Editar') }}</button>
+                        </div>
                     <br>
                 </form>
             </div>
@@ -112,3 +112,17 @@
     </div>
 </div>
 @endsection
+<script langiage="javascript" type="text/javascript">
+    // RESALTAR LAS FILAS AL PASAR EL MOUSE
+    function ResaltarFila(id_fila) {
+    document.getElementById(id_fila).style.backgroundColor = '#C9EFFE';
+    }
+    // RESTABLECER EL FONDO DE LAS FILAS AL QUITAR EL FOCO
+    function RestablecerFila(id_fila, color) {
+    document.getElementById(id_fila).style.backgroundColor = color;
+    }
+    // CONVERTIR LAS FILAS EN LINKS
+    function CrearEnlace(url) {
+    location.href=url;
+    }
+</script>
