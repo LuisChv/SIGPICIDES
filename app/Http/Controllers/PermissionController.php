@@ -60,4 +60,14 @@ class PermissionController extends Controller
         }
         return redirect()->route('permission.index', $user);
     }
+
+    public function destroy()
+    {
+        $user = request('id_usuario');
+        $permission = request('id_permiso');
+        DB::table('permission_user')
+        ->whereRaw("user_id = ? AND permission_id = ?", [$user, $permission])
+        ->delete();
+        return redirect()->route('permission.index', $user);
+    }
 }
