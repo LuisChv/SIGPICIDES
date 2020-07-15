@@ -80,11 +80,17 @@
                                     <table width='100%' class="table">
                                         @foreach ($permisos_usuario as $permiso)
                                             @if($permiso->id_tabla==$tb->id)  
-                                                <tr id="{{$permiso->id}}" onMouseOver="ResaltarFila({{$permiso->id}});" onMouseOut="RestablecerFila({{$permiso->id}}, '')" onClick="CrearEnlace('');" >   
+                                                <tr id="{{$permiso->id}}" onMouseOver="ResaltarFila({{$permiso->id}});" onMouseOut="RestablecerFila({{$permiso->id}}, '')" onClick="eliminarPermiso({{ $permiso->id }});" >   
                                                     <td>
                                                     </td>                  
                                                     <td id="$permiso->id">
-                                                        &nbsp;&nbsp;{{$permiso->name}}
+                                                        <form id="eliminarPermiso{{$permiso->id}}" method="post" action="{{route('permission.destroy')}}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input hidden name="id_permiso" value="{{$permiso->id}}">
+                                                            <input hidden name="id_usuario" value="{{$user}}">
+                                                            &nbsp;&nbsp;{{$permiso->name}}
+                                                        </form>
                                                     </td>
                                                     <td>
                                                         <i class="tim-icons icon-key-25"></i>
@@ -168,5 +174,8 @@
     function añadirPermiso(valor){
         //console.log(valor);
         document.getElementById("añadirPermiso"+valor).submit();
+    }
+    function eliminarPermiso(valor){
+        document.getElementById("eliminarPermiso"+valor).submit();   
     }
 </script>
