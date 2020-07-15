@@ -29,21 +29,22 @@
                             </thead>
                             <tbody>
                                 @foreach ($data as $use)                          
-                                        <tr>
-                                            <td>{{$use->name}}</td>
-                                            <td>{{$use->email}}</td>
-                                          
-                                            <td width='10%' align="right">
-                                                <a type="button" href="{{ route('users.edit', $use->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
-                                            </td>
-                                            <form method="POST" id="" action="#" >
-                                            @csrf
-                                            @method('DELETE')
-                                                <td width='10%'>
-                                                    <button type="button" onClick="" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
-                                                </td></form>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td>{{$use->name}}</td>
+                                        <td>{{$use->email}}</td>
+                                        
+                                        <td width='10%' align="right">
+                                            <button type="button" class="btn btn-default btn-sm btn-icon btn-round"><i class="tim-icons icon-key-25"></i></button>
+                                            <a type="button" href="{{ route('users.edit', $use->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
+                                        </td>
+                                        <form method="POST" id="" action="#" >
+                                        @csrf
+                                        @method('DELETE')
+                                            <td width='10%'>
+                                                <button type="button" onClick="" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
+                                            </td></form>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
