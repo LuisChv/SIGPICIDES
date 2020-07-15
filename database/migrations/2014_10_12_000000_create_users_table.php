@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('institucion');
             $table->string('descripcion');
             $table->boolean('sexo');
+            $table->boolean('dark');
             $table->timestamps();
         });
     }
