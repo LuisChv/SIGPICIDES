@@ -66,43 +66,73 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="container list-group">
-                        <table class="table">
-                            <tbody>
-                                @foreach ($permisos_usuario as $permiso)
-                                    <tr>
-                                        <td> {{$permiso->name}} </td>
-                                        <td> <i class="tim-icons icon-key-25"></i> </td>
+                    <h4>Permisos del usuario</h4>
+                    <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                        @foreach ($tablas as $tb)
+                            @foreach ($permisos_usuario as $permiso)
+                                @if($permiso->id_tabla==$tb->id)
+                                <table class="table-sm"  width='100%'>
+                                    <tr class="list-group-flush" class="list-group-item list-group-flush" data-toggle="collapse" data-toggle="collapse" data-target="#listaB{{$tb->id}}" aria-expanded="false" aria-controls="listaB{{$tb->id}}" id="{{$tb->id}}">
+                                        <td>
+                                            {{$tb->nombre}}&nbsp;&nbsp;
+                                        </td>
                                     </tr>
-                                @endforeach            
-                            </tbody>
-                        </table>
+                                </table>
+                                <div id="listaB{{$tb->id}}" class="collapse" aria-labelledby="rec{{$tb->id}}" data-parent="#accordion">
+                                    <table width='100%' class="table">
+                                        @foreach ($permisos_usuario as $permiso)
+                                            @if($permiso->id_tabla==$tb->id)  
+                                                <tr>                     
+                                                    <td id="$permiso->id"><i class="tim-icons icon-planet"></i>
+                                                        &nbsp;{{$permiso->name}}
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    </table>
+                                </div> 
+                                @endif
+                            @endforeach                     
+                        @endforeach
+                        <!--fin de dropdown-->                  
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-2">
+    <div class="col-3">
         <div>
             <div class="card">
-                <div class="card-header ">
-                    <div class="row">
-                        <div class="col-sm-9 text-left">
-                            <h2 class="card-title"><b></b></h2>
-                        </div>
-                    </div>
-                </div>
                 <div class="card-body">
-                    <div class="container list-group">
-                        <table class="table">
-                            <tbody>
-                                @foreach ($permisos as $permiso)
-                                    <tr>
-                                        <td> {{$permiso->name}} </td>
+                    <h4>Permisos disponibles</h4>
+                    <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                        @foreach ($tablas as $tb)
+                            @foreach ($permisos as $permiso)
+                                @if($permiso->id_tabla==$tb->id)
+                                <table class="table-sm"  width='100%'>
+                                    <tr class="list-group-flush" class="list-group-item list-group-flush" data-toggle="collapse" data-toggle="collapse" data-target="#listaB{{$tb->id}}" aria-expanded="false" aria-controls="listaB{{$tb->id}}" id="{{$tb->id}}">
+                                        <td>
+                                            {{$tb->nombre}}&nbsp;&nbsp;
+                                        </td>
                                     </tr>
-                                @endforeach         
-                            </tbody>
-                        </table>
+                                </table>
+                                <div id="listaB{{$tb->id}}" class="collapse" aria-labelledby="rec{{$tb->id}}" data-parent="#accordion">
+                                    <table width='100%' class="table">
+                                        @foreach ($permisos as $permiso)
+                                            @if($permiso->id_tabla==$tb->id)  
+                                                <tr>                     
+                                                    <td id="$permiso->id"><i class="tim-icons icon-planet"></i>
+                                                        &nbsp;{{$permiso->name}}
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    </table>
+                                </div> 
+                                @endif
+                            @endforeach                     
+                        @endforeach
+                        <!--fin de dropdown-->                  
                     </div>
                 </div>
             </div>
