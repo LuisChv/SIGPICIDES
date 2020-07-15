@@ -129,7 +129,7 @@
     }
     require("sweetalert");
     function confirmar(valor){
-        //ruta.concat(variable,")}}");
+        //ruta.concat(variable,")";
         swal({
           title: "¿Eliminar registro?",
           text: "Esta acción es irreversible.",
@@ -149,7 +149,7 @@
         });
     }
     function confirmarTipo(valor){
-        //ruta.concat(variable,")}}");
+        //ruta.concat(variable,")";
         swal({
           title: "¿Eliminar registro?",
           text: "Esta acción es irreversible.",

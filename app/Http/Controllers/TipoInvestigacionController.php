@@ -72,7 +72,14 @@ class TipoInvestigacionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tipos=\App\TipoDeInvestigacion::all();
+        $sub_tipos= \App\SubTipoDeInvestigacion::all();
+        $tipo= \App\TipoDeInvestigacion::findOrFail($id);
+        return view ('simpleViews.tipoInvestigacion.editar',[
+            'tipos'=> $tipos,
+            'sub_tipos' => $sub_tipos,
+            'tipoInv'=> $tipo,
+        ]);
     }
 
     /**
@@ -84,7 +91,14 @@ class TipoInvestigacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'nombre'=> 'required'            
+        ]);
+        $tipo= \App\TipoDeInvestigacion::findOrFail($id);
+        $tipo->nombre= request('nombre');
+        $tipo->save();
+        return redirect(route('tipo_investigacion.index'));
+        
     }
 
     /**
