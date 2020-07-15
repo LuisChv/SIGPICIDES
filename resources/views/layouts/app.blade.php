@@ -25,7 +25,15 @@
 
         
     </head>
-    <body class="{{ $class ?? '' }} white-content" >
+    @auth()
+      @if (Auth::user()->dark)
+        <body class="{{ $class ?? '' }} " >
+      @else
+        <body class="{{ $class ?? '' }} white-content" >
+      @endif
+    @else
+      <body class="{{ $class ?? '' }} white-content" > 
+    @endauth
         @auth()
             <div class="wrapper">
                     @include('layouts.navbars.sidebar')

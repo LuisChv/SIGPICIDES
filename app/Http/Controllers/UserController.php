@@ -184,4 +184,12 @@ class UserController extends Controller
         $user->delete();
         return redirect('/users');
     }
+
+    public function dark($id){
+      
+        $dark = User::findOrFail($id)->dark;
+
+        DB::table('users')->where('user_id', $id)->update(['dark' => !$dark]);
+        return redirect()->back();
+    }
 }

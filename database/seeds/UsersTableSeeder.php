@@ -24,6 +24,7 @@ class UsersTableSeeder extends Seeder
             'institucion' => 'Universidad de El Salvador',
             'descripcion' => 'Soy el administrador y tengo todos los permisos',
             'sexo' => true,
+            'dark' => true
         ]);
 
         DB::table('role_user')->insert([
@@ -51,6 +52,7 @@ class UsersTableSeeder extends Seeder
             'institucion' => 'Universidad de El Salvador',
             'descripcion' => 'Soy el coordinador',
             'sexo' => true,
+            'dark' => false
         ]);
 
         DB::table('role_user')->insert([
@@ -78,6 +80,7 @@ class UsersTableSeeder extends Seeder
             'institucion' => 'Universidad de El Salvador',
             'descripcion' => 'Soy el director',
             'sexo' => true,
+            'dark' => false
         ]);
 
         DB::table('role_user')->insert([
@@ -105,6 +108,7 @@ class UsersTableSeeder extends Seeder
             'institucion' => 'Universidad de El Salvador',
             'descripcion' => 'Soy el investigador',
             'sexo' => true,
+            'dark' => false,
         ]);
 
         DB::table('role_user')->insert([
