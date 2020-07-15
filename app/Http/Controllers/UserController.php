@@ -87,6 +87,24 @@ class UserController extends Controller
 
     }
 
+
+    public function show($id)
+    {
+        $data= User::all();
+       
+        //Buscar el usuario con el id de entrada
+        $user= User::findOrFail($id);
+        
+        //Buscar nombre de rol y tipo de recurso
+       //S $role=Role::findOrFail($->id_tipo);
+        
+        //Retornar la vista
+        return view ('users.show', [
+            'user'=>$user,
+            'data'=>$data,
+        ]);
+    }
+
     public function edit($id)
     {
         $data= User::all();

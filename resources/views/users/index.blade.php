@@ -30,7 +30,9 @@
                             <tbody>
                                 @foreach ($data as $use) 
                                 <tr>                     
-                                    <td>{{$use->name}}</td>
+                                    <td id={{$use->id}} onMouseOver="ResaltarFila({{$use->id}});" onMouseOut="RestablecerFila({{$use->id}}, '')" onClick="CrearEnlace('{{ route('users.show', $use->id)}}');" >
+                                        &nbsp;&nbsp;&nbsp;&nbsp;{{$use->name}}
+                                    </td>
                                     
                                     <td>{{$use->email}}</td>
 
