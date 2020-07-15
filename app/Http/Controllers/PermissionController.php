@@ -10,12 +10,14 @@ class PermissionController extends Controller
 {
     public function index($user)
     {
-        
+        $tablas = DB::select(
+            "SELECT * FROM tabla");
+
         $permisos = DB::select(
-            "SELECT id, name FROM permissions");
+            "SELECT * FROM permissions");
 
         $permisos_usuario = DB::select(
-            "SELECT p.id, p.name 
+            "SELECT p.id, p.name, p.id_tabla 
             FROM permissions p 
             JOIN permission_user u 
             ON p.id = u.permission_id 
@@ -34,6 +36,7 @@ class PermissionController extends Controller
         return view ('simpleViews.permisos.listar', [
             'permisos'=>$permisos,
             "permisos_usuario" => $permisos_usuario,
-            "data" => $data]);
+            "data" => $data,
+            "tablas" => $tablas]);
     }
 }
