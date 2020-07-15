@@ -131,13 +131,15 @@
                                     <table width='100%' class="table">
                                         @foreach ($permisos as $permiso)
                                             @if($permiso->id_tabla==$tb->id)  
-                                                <tr  id="{{$permiso->id}}" onMouseOver="ResaltarFila({{$permiso->id}});" onMouseOut="RestablecerFila({{$permiso->id}}, '')" onClick="CrearEnlace('');" >  
-                                                    <td>
-                                                    </td>                      
-                                                    <td>
+                                            <tr  id="{{$permiso->id}}" onMouseOver="ResaltarFila({{$permiso->id}});" onMouseOut="RestablecerFila({{$permiso->id}}, '')" onClick="añadirPermiso({{ $permiso->id }});" >
+                                                <td>
+                                                    <form id="añadirPermiso{{$permiso->id}}" method="post" action="{{route('permission.store')}}">
+                                                        <input hidden name="id_permiso" value="{{$permiso->id}}">
+                                                        <input hidden name="id_usuario" value="{{$use->id}}">
                                                         &nbsp;&nbsp;{{$permiso->name}}
-                                                    </td>
-                                                </tr>
+                                                    </form>
+                                                </td>
+                                            </tr>
                                             @endif
                                         @endforeach
                                     </table>
@@ -161,8 +163,9 @@
     function RestablecerFila(id_fila, color) {
     document.getElementById(id_fila).style.backgroundColor = color;
     }
-    // CONVERTIR LAS FILAS EN LINKS
-    function CrearEnlace(url) {
-    location.href=url;
+    //añadir permiso al usuario
+    function añadirPermiso(valor){
+        console.log(valor);
+        //document.getElementById("añadirPermiso"+valor).submit();
     }
 </script>
