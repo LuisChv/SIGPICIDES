@@ -60,7 +60,7 @@
                                                     <td width='10%' align="right">
                                                         <a type="button" href="{{ route('subtipo_investigacion.edit', $sub_tipo->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
                                                     </td>
-                                                    <form method="POST" id="formulario" action="{{ route('subtipo_investigacion.destroy', $sub_tipo->id)}}">
+                                                    <form method="POST" id="formulario{{$sub_tipo->id}}" action="{{ route('subtipo_investigacion.destroy', $sub_tipo->id)}}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <td width='10%'>
@@ -141,7 +141,8 @@
     location.href=url;
     }
     require("sweetalert");
-    function confirmar(){
+    function confirmar(valor){
+        //ruta.concat(variable,")}}");
         swal({
           title: "¿Eliminar registro?",
           text: "Esta acción es irreversible.",
@@ -154,7 +155,7 @@
             swal("Registro eliminado", {
               icon: "success",
             });
-            document.getElementById("formulario").submit();
+            document.getElementById("formulario"+valor).submit();
           } else {
             swal("Eliminación cancelada");
           }
