@@ -29,21 +29,23 @@
                             </thead>
                             <tbody>
                                 @foreach ($data as $use)                          
-                                    <tr>
+                                    <tr>                     
                                         <td>{{$use->name}}</td>
-                                        <td>{{$use->email}}</td>
                                         
+                                        <td>{{$use->email}}</td>
+
                                         <td width='10%' align="right">
                                             <button type="button" class="btn btn-default btn-sm btn-icon btn-round"><i class="tim-icons icon-key-25"></i></button>
+                                        </td>
+                                        <td width='10%' align="right">
                                             <a type="button" href="{{ route('users.edit', $use->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
                                         </td>
-                                        <form method="POST" id="" action="#" >
+                                        <form method="POST" id="formulario{{$use->id}}" action="{{route('users.destroy', $use->id)}}" >
                                         @csrf
                                         @method('DELETE')
-                                            <td width='10%'>
-                                                <button type="button" onClick="" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
-                                            </td></form>
-                                        </td>
+                                        <td width='10%'>
+                                            <button type="button" onClick="confirmar({{$use->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
+                                        </td></form>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -172,3 +174,42 @@
     </div>
 </div>
 @endsection
+
+<script src="sweetalert2.all.min.js"></script>
+<script langiage="javascript" type="text/javascript">
+    // RESALTAR LAS FILAS AL PASAR EL MOUSE
+    function ResaltarFila(id_fila) {
+    document.getElementById(id_fila).style.backgroundColor = '#C9EFFE';
+    }
+    // RESTABLECER EL FONDO DE LAS FILAS AL QUITAR EL FOCO
+    function RestablecerFila(id_fila, color) {
+    document.getElementById(id_fila).style.backgroundColor = color;
+    }
+    // CONVERTIR LAS FILAS EN LINKS
+    function CrearEnlace(url) {
+    location.href=url;
+    }
+    require("sweetalert");
+    function confirmar(valor){
+        //ruta.concat(variable,")}}");
+        swal({
+          title: "¿Eliminar registro?",
+          text: "Esta acción es irreversible.",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Registro eliminado", {
+              icon: "success",
+            });
+            document.getElementById("formulario"+valor).submit();
+          } else {
+            swal("Eliminación cancelada");
+          }
+        });
+    }
+
+    
+</script>

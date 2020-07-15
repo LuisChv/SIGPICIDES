@@ -21,12 +21,15 @@ class UserController extends Controller
         //return view('users.index', ['users' => $model->paginate(15)]);
         return view ('users.usuariosDashboard');
     }
+
     public function index(){
         $data = User::all();
         return view ('users.index',[
             'data' => $data
         ]);
     }
+
+
     public function create(){
         $roles = Role::all();
         $data = User::all();
@@ -88,14 +91,12 @@ class UserController extends Controller
     {
         $data= User::all();
         $roles= Role::all();
-      
-      
+    
         //Buscar user y su respectivo rol
         $user= User::findOrFail($id);
        
         return view ('users.editar',[
             'user'=>$user, 
-           // 'role'=>$role, 
             'roles' => $roles, 
             'data' => $data
             ]);
@@ -118,7 +119,7 @@ class UserController extends Controller
         ]);
       
 
-        //Se asignan las variables al nuevo usuario
+        //Modificar datos de usuario
         $user = User::findOrFail($id);
 
         $user->name=request('name');
@@ -147,6 +148,18 @@ class UserController extends Controller
             ]);
         }
 
+        return redirect('/users');
+    }
+
+
+    public function destroy($id)
+    {
+        //dd($id);
+        $user= User::findOrFail($id);
+       
+        DB::table('permission_user')->where('user_id', $id)->delete();
+        DB::table('role_user')->where('user_id', $id)->delete();
+        $user->delete();
         return redirect('/users');
     }
 }
