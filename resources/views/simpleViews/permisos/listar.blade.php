@@ -143,7 +143,7 @@
                                                         @csrf
                                                         <input hidden name="id_permiso" value="{{$permiso->id}}">
                                                         <input hidden name="id_usuario" value="{{$user}}">
-                                                        &nbsp;&nbsp;{{$permiso->name}}
+                                                        <i class="tim-icons icon-simple-add "></i>&nbsp;&nbsp;{{$permiso->name}}
                                                     </form>
                                                 </td>
                                             </tr>

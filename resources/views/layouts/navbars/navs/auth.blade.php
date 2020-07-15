@@ -59,7 +59,13 @@
                             <a href="{{ route('profile.edit') }}" class="nav-item dropdown-item">{{ __('Perfil') }}</a>
                         </li>
                         <li class="nav-link">
-                            <a href="{{ route('profile.edit')  }}" class="nav-item dropdown-item">{{ __('Configuraciones') }}</a>
+                            <!-- Rounded switch -->
+                            <a href="{{ route('profile.edit')  }}" class="nav-item dropdown-item d-inline">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                <span class="slider round"></span>
+                                </label>
+                            {{ __('Tema: Claro') }}</a>
                         </li>
                         <li class="dropdown-divider"></li>
                         <li class="nav-link">
