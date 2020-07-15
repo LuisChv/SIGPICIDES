@@ -37,7 +37,8 @@ class PermissionController extends Controller
             'permisos'=>$permisos,
             "permisos_usuario" => $permisos_usuario,
             "data" => $data,
-            "tablas" => $tablas]);
+            "tablas" => $tablas,
+            "user" => $user]);
     }
 
     public function store()
@@ -51,13 +52,12 @@ class PermissionController extends Controller
             WHERE user_id = ? AND permission_id = ?", [$user, $permission]);
 
         foreach($cantidad as $c){
-            if($c->count > 0){
+            if($c->count == 0){
                 DB::table('permission_user')->insert([
                     ['permission_id' => $permission, 'user_id' => $user]
                 ]);
             }
         }
-
-        return redirect("{{ route('permission.index', $user}}");
+        return redirect()->route('permission.index', $user);
     }
 }

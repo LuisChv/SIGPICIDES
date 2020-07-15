@@ -134,8 +134,9 @@
                                             <tr  id="{{$permiso->id}}" onMouseOver="ResaltarFila({{$permiso->id}});" onMouseOut="RestablecerFila({{$permiso->id}}, '')" onClick="añadirPermiso({{ $permiso->id }});" >
                                                 <td>
                                                     <form id="añadirPermiso{{$permiso->id}}" method="post" action="{{route('permission.store')}}">
+                                                        @csrf
                                                         <input hidden name="id_permiso" value="{{$permiso->id}}">
-                                                        <input hidden name="id_usuario" value="{{$use->id}}">
+                                                        <input hidden name="id_usuario" value="{{$user}}">
                                                         &nbsp;&nbsp;{{$permiso->name}}
                                                     </form>
                                                 </td>
@@ -165,7 +166,7 @@
     }
     //añadir permiso al usuario
     function añadirPermiso(valor){
-        console.log(valor);
-        //document.getElementById("añadirPermiso"+valor).submit();
+        //console.log(valor);
+        document.getElementById("añadirPermiso"+valor).submit();
     }
 </script>
