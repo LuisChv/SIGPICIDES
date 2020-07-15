@@ -72,7 +72,7 @@
                             @foreach ($permisos_usuario as $permiso)
                                 @if($permiso->id_tabla==$tb->id)
                                     <table class="table-sm"  width='100%'>
-                                        <tr class="list-group-flush" class="list-group-item list-group-flush" data-toggle="collapse" data-toggle="collapse" data-target="#listaB{{$tb->id}}" aria-expanded="false" aria-controls="listaB{{$tb->id}}" id="{{$tb->id}}">
+                                        <tr class="list-group-flush" data-toggle="collapse" data-toggle="collapse" data-target="#listaA{{$tb->id}}" aria-expanded="false" aria-controls="listaA{{$tb->id}}" id="{{$tb->id}}">
                                             <td>
                                                 {{$tb->nombre}}&nbsp;&nbsp;
                                             </td>
@@ -81,13 +81,12 @@
                                     @break
                                 @endif
                             @endforeach
-                                <div id="listaB{{$tb->id}}" class="collapse" aria-labelledby="rec{{$tb->id}}" data-parent="#accordion">
+                                <div id="listaA{{$tb->id}}" class="collapse" aria-labelledby="rec{{$tb->id}}" data-parent="#accordion">
                                     <table width='100%' class="table">
                                         @foreach ($permisos_usuario as $permiso)
                                             @if($permiso->id_tabla==$tb->id)  
                                                 <tr>                     
-                                                    <td id="$permiso->id"><i class="tim-icons icon-planet"></i>
-                                                        &nbsp;{{$permiso->name}}
+                                                    <td id="$permiso->id">{{$permiso->name}}<i class="tim-icons icon-key-25"></i>
                                                     </td>
                                                 </tr>
                                             @endif
@@ -112,7 +111,7 @@
                             @foreach ($permisos as $permiso)
                                 @if($permiso->id_tabla==$tb->id)
                                     <table class="table-sm"  width='100%'>
-                                        <tr class="list-group-flush" class="list-group-item list-group-flush" data-toggle="collapse" data-toggle="collapse" data-target="#listaB{{$tb->id}}" aria-expanded="false" aria-controls="listaB{{$tb->id}}" id="{{$tb->id}}">
+                                        <tr class=" list-group-flush" data-toggle="collapse" data-toggle="collapse" data-target="#listaB{{$tb->id}}" aria-expanded="false" aria-controls="listaB{{$tb->id}}" id="{{$tb->id}}">
                                             <td>
                                                 {{$tb->nombre}}&nbsp;&nbsp;
                                             </td>
