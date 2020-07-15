@@ -39,4 +39,25 @@ class PermissionController extends Controller
             "data" => $data,
             "tablas" => $tablas]);
     }
+
+    public function store()
+    {
+        $user = request('id_usuario');
+        $permission = request('id_permiso');
+
+        $cantidad = DB::select(
+            "SELECT COUNT(id) 
+            FROM public.permission_user 
+            WHERE user_id = ? AND permission_id = ?", [$user, $permission]);
+
+        foreach($cantidad as $c){
+            if($c->count > 0){
+                DB::table('permission_user')->insert([
+                    ['permission_id' => $permission, 'user_id' => $user]
+                ]);
+            }
+        }
+
+        return redirect("{{ route('permission.index', $user}}");
+    }
 }
