@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\RolUsuario;
 use Caffeinated\Shinobi\Models\Role;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
@@ -112,11 +113,14 @@ class UserController extends Controller
     
         //Buscar user y su respectivo rol
         $user= User::findOrFail($id);
+        $roleuser= RolUsuario::where('user_id', $id)->first();
+        //$roleuser=DB::select('SELECT * FROM role_user WHERE user_id = ?', [$id]);
        
         return view ('users.editar',[
             'user'=>$user, 
             'roles' => $roles, 
-            'data' => $data
+            'data' => $data,
+            'roleuser'=>$roleuser
             ]);
     }
 

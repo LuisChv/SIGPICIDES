@@ -147,9 +147,12 @@
                                 </div>
                             </div>
                             <select class="form-control selectorWapis" value="" id="rol" name="rol">
-                                <option>--Seleccionar Rol--</option>
+                                <option value="" selected disabled hidden >--Seleccionar Rol--</option>
                                 @foreach ($roles as $rol)
-                                <option>{{ $rol->name }}</option>
+                                    @if($roleuser->role_id==$rol->id)
+                                        <option selected>{{ $rol->name }}</option>
+                                    @endif
+                                    <option>{{ $rol->name }}</option>
                                 @endforeach
                             </select>                            
                         </div>
@@ -161,9 +164,14 @@
                                 </div>
                             </div>
                             <select class="form-control selectorWapis" value="{{$user->sexo}}" id="sexo" name="sexo">
-                            	<option>--Seleccionar género--</option>
-                                <option>Femenino</option>
-                                <option>Masculino</option>
+                            	<option value="" selected disabled hidden>Sexo</option>
+                                    @if($user->sexo)
+                                        <option selected>Masculino</option>
+                                        <option>Femenino</option>
+                                    @else
+                                        <option>Masculino</option>
+                                        <option selected>Femenino</option>
+                                    @endif
                             </select>                            
                         </div>
                     </div>
