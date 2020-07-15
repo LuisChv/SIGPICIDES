@@ -27,7 +27,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-<<<<<<< HEAD
+
                                 @foreach ($data as $use)                          
                                     <tr>                     
                                         <td id={{$use->id}} onMouseOver="ResaltarFila({{$use->id}});" onMouseOut="RestablecerFila({{$use->id}}, '')" onClick="CrearEnlace('{{ route('users.show', $use->id)}}');" >
@@ -35,11 +35,6 @@
                                         </td>
                                         
                                         <td>{{$use->email}}</td>
-=======
-                                @foreach ($data as $use) 
-                                <tr>                     
-                                    <td>{{$use->email}}</td>
->>>>>>> 3530c807ce5d88f3d44ead7cb3b7ed671f5e8e8f
 
                                     <td width='5%'>
                                         <a type="button" href="{{ route('permission.index', $use->id)}}" class="btn btn-default btn-sm btn-icon btn-round"><i class="tim-icons icon-key-25"></i></a>
