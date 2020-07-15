@@ -227,4 +227,10 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('subtipo_investigacion/{subtipo}', 'SubTipoInvestigacionController@destroy')->name('subtipo_investigacion.destroy')
     ->middleware('has.permission:sub_tipo_de_investigacion.destroy');
 
+    //Permisos
+    //index
+
+    Route::get('user/permissions/{user}', 'PermissionController@index')->name('permission.index')
+    ->middleware('has.permission:permission.index');
+
 });

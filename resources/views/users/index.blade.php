@@ -35,7 +35,7 @@
                                     <td>{{$use->email}}</td>
 
                                     <td width='10%' align="right">
-                                        <button type="button" class="btn btn-default btn-sm btn-icon btn-round"><i class="tim-icons icon-key-25"></i></button>
+                                        <a type="button" href="{{ route('permission.index', $use->id)}}" class="btn btn-default btn-sm btn-icon btn-round"><i class="tim-icons icon-key-25"></i></a>
                                     </td>
                                     <td width='10%' align="right">
                                         <a type="button" href="{{ route('users.edit', $use->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
