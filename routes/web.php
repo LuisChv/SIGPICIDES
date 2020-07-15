@@ -235,4 +235,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::post('user/permissions/', 'PermissionController@store')->name('permission.store')
     ->middleware('has.permission:permission_user.create');
+
+    Route::delete('user/permissions/', 'PermissionController@destroy')->name('permission.destroy')
+    ->middleware('has.permission:permission_user.destroy');
 });
