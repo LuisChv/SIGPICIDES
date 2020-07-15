@@ -114,9 +114,6 @@ class TablaSeeder extends Seeder
         	'nombre' => 'Tipo de recurso'
         ]);
         DB::table('tabla')->insert([
-        	'nombre' => ''
-        ]);
-        DB::table('tabla')->insert([
         	'nombre' => 'Recurso'
         ]);
         DB::table('tabla')->insert([
