@@ -233,4 +233,6 @@ Route::middleware(['auth'])->group(function(){
     Route::get('user/permissions/{user}', 'PermissionController@index')->name('permission.index')
     ->middleware('has.permission:permission.index');
 
+    Route::post('user/permissions/', 'PermissionController@store')->name('permission.store')
+    ->middleware('has.permission:permission_user.create');
 });
