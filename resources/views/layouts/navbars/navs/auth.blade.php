@@ -63,9 +63,15 @@
                             <form id="tema" method="POST" action="{{route('users.dark', [Auth::user()->id])}}">
                                 @csrf
                                 @method('PUT')
+                                @if(Auth::user()->dark)
+                                <a href="#" class="nav-item dropdown-item d-inline">
+                                {{ __('Tema: Oscuro') }}
+                                </a>
+                                @else
                                 <a href="#" class="nav-item dropdown-item d-inline">
                                 {{ __('Tema: Claro') }}
                                 </a>
+                                @endif
                             </form>
                         </li>
                         <li class="dropdown-divider"></li>
