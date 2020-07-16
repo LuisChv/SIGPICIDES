@@ -64,7 +64,7 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <td width='10%'>
-                                                                <button type="button" onClick="confirmar()" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
+                                                                <button type="button" onClick="confirmar({{$sub_tipo->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
                                                             </td>
                                                         </form>
                                                     </tr>
@@ -82,8 +82,10 @@
                 <div class="card-footer"></div>
         </div>
     </div>
+    @yield('opcion')
 </div>
 @endsection
+<script src="sweetalert2.all.min.js"></script>
 <script langiage="javascript" type="text/javascript">
     // RESALTAR LAS FILAS AL PASAR EL MOUSE
     function ResaltarFila(id_fila) {

@@ -109,6 +109,8 @@ class TipoInvestigacionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tipoinv= \App\TipoDeInvestigacion::findOrFail($id);
+        $tipoinv->delete();
+        return redirect(route('tipo_investigacion.index'));
     }
 }

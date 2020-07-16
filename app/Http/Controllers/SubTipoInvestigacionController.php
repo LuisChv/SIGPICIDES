@@ -111,6 +111,7 @@ class SubTipoInvestigacionController extends Controller
      */
     public function destroy(SubTipoDeInvestigacion $subtipo)
     {
-        dd($subtipo);
+        $subtipo->delete();
+        return redirect(route('tipo_investigacion.index'));
     }
 }
