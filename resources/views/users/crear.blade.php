@@ -133,31 +133,33 @@
                             <input type="date" max="2002-01-01" name="fecha_nac" class="form-control {{ $errors->has('fecha_nac') ? ' is-invalid' : '' }}" placeholder="{{ __('Fecha de nacimiento') }}">
                             @include('alerts.feedback', ['field' => 'fecha_nac'])
                         </div>
-                        <div class="input-group">
+                        <div class="input-group{{ $errors->has('rol') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-minimal-down"></i>
                                 </div>
                             </div>
                             <select class="form-control selectorWapis" id="rol" name="rol">
-                                <option>--Seleccionar Rol--</option>
+                                <option value="" selected disabled hidden>Seleccione un rol</option>
                                 @foreach ($roles as $rol)
                                 <option>{{ $rol->name }}</option>
                                 @endforeach
-                            </select>                            
+                            </select>    
+                            @include('alerts.feedback', ['field' => 'rol'])                        
                         </div>
 
-                        <div class="input-group">
+                        <div class="input-group{{ $errors->has('sexo') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-minimal-down"></i>
                                 </div>
                             </div>
                             <select class="form-control selectorWapis" id="sexo" name="sexo">
-                            	<option>--Seleccionar género--</option>
+                            	<option value="" selected disabled hidden>Sexo</option>
                                 <option>Femenino</option>
                                 <option>Masculino</option>
-                            </select>                            
+                            </select>
+                            @include('alerts.feedback', ['field' => 'sexo'])                            
                         </div>
                     </div>
                     <div class="card-footer">

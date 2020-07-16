@@ -45,10 +45,13 @@ class UserController extends Controller
          //Validacion de los datos      
         request()->validate([
             'name'=> 'required',
-            'email'=> 'required',
+            'email'=> ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'=> 'required',
             'fecha_nac'=> 'required',
-            'institucion'=> 'required'
+            'institucion'=> 'required',
+            'descripcion'=> 'required',
+            'sexo' => ['required'],
+            'rol' => 'required',
         ],
         [
             'name.required' => "El username es obligatorio.",
@@ -56,6 +59,9 @@ class UserController extends Controller
             'password.required' => "Establecer contraseña.",
             'fecha_nac.required' => "Seleccione su fecha de nacimiento.",
             'institucion.required' => "La Institucion es obligatoria.",
+            'descripcion.required' => "La descripción es obligatoria.",
+            'sexo.required' => "Seleccione el sexo.",
+            'rol.required' => "Seleccione el rol.",
         ]);
       
 
@@ -131,14 +137,20 @@ class UserController extends Controller
             'email'=> ['required', 'email', Rule::unique('users')->ignore($id)],
             'password'=> ['required', 'string', 'min:8', 'confirmed'],
             'fecha_nac'=> 'required',
-            'institucion'=> 'required'
+            'institucion'=> 'required',
+            'descripcion'=> 'required',
+            'sexo' => 'required',
+            'rol' => 'required',
         ],
         [
             'name.required' => "El username es obligatorio.",
             'email.required' => "El email es obligatoria.",
             'password.required' => "Establecer contraseña.",
             'fecha_nac.required' => "Seleccione su fecha de nacimiento.",
-            'institucion.required' => "La Institucion es obligatoria.",
+            'institucion.required' => "La Institución es obligatoria.",
+            'descripcion.required' => "La descripción es obligatoria.",
+            'sexo.required' => "Seleccione el sexo.",
+            'rol.required' => "Seleccione el rol.",
         ]);
       
 
