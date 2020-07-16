@@ -72,7 +72,7 @@
                                 </a>
                                 @else
                                 <a href="#" class="nav-item dropdown-item d-inline">
-                                {{ __('Tema: Claro') }}&nbsp;&nbsp;&nbsp;
+                                {{ __('Tema: Oscuro') }}&nbsp;&nbsp;&nbsp;
                                 <label class="switch">
                                     <input type="checkbox">
                                     <span class="slider round"></span>
