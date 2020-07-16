@@ -1,6 +1,6 @@
 @extends('layouts.app',['pageSlug' => 'dashboard'])
 @section('title')
-    Usuarios
+    Roles
 @endsection
 @section('content')
 <div class="row">
@@ -52,6 +52,7 @@
             </div>
         </div>
     </div>
+    @yield('opcion')
 </div>
 @endsection
 
