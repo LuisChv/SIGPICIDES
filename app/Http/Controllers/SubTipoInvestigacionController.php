@@ -47,7 +47,7 @@ class SubTipoInvestigacionController extends Controller
             'tipoRec'=> 'required'            
         ],
         [
-            'tipoRec.required' => "Seleccione un tipo de investigación2.",
+            'tipoRec.required' => "Seleccione un tipo de investigación.",
             'nombre.required' => "El nombre es obligatorio.",
         ]);
         $subtipo= new SubTipoDeInvestigacion();
@@ -101,7 +101,7 @@ class SubTipoInvestigacionController extends Controller
             'tipoRec'=> 'required'            
         ],
         [
-            'tipoRec.required' => "Seleccione un tipo de recurso.",
+            'tipoRec.required' => "Seleccione un tipo de investigación.",
             'nombre.required' => "El nombre es obligatorio.",
         ]);
         $subtipo->id_tipo=request('tipoRec');

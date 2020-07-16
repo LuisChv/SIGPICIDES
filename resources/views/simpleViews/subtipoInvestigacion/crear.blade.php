@@ -18,9 +18,14 @@
                             </div>
                         </div>
                         <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
-                            <option value="" selected disabled hidden>Seleccione un tipo de investigación</option>
+                        <option value="{{old('tipoRec')}}" selected disabled hidden>Seleccione un tipo de investigación</option>
                             @foreach ($tiposinv as $tipo)
-                                <option value="{{$tipo->id}}">{{ $tipo->nombre }}</option>
+                                @if (old('tipoRec')==$tipo->id)                                     
+                                    <option value="{{$tipo->id}}" selected>{{ $tipo->nombre }}</option>
+                                @else
+                                    <option value="{{$tipo->id}}">{{ $tipo->nombre }}</option>
+                                @endif   
+                                
                             @endforeach
                         </select>                    
                     </div>
@@ -31,7 +36,7 @@
                                 <i class="tim-icons icon-pencil"></i>
                             </div>
                         </div>
-                        <input type="text" name="nombre" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del recurso') }}">
+                    <input type="text" value="{{old('nombre')}}" name="nombre" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del recurso') }}">
                         @include('alerts.feedback', ['field' => 'nombre'])
                     </div>
                 <div class="card-footer">
