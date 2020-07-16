@@ -138,13 +138,17 @@
                                         @foreach ($permisos as $permiso)
                                             @if($permiso->id_tabla==$tb->id)  
                                             <tr  id="p{{$permiso->id}}" onMouseOver="ResaltarFila('p{{$permiso->id}}');" onMouseOut="RestablecerFila('p{{$permiso->id}}', '')" onClick="añadirPermiso({{ $permiso->id }});" >
+                                                <td></td>
                                                 <td>
                                                     <form id="añadirPermiso{{$permiso->id}}" method="post" action="{{route('permission.store')}}">
                                                         @csrf
                                                         <input hidden name="id_permiso" value="{{$permiso->id}}">
                                                         <input hidden name="id_usuario" value="{{$user}}">
-                                                        <i class="tim-icons icon-simple-add "></i>&nbsp;&nbsp;{{$permiso->name}}
+                                                        &nbsp;&nbsp;{{$permiso->name}}
                                                     </form>
+                                                </td>
+                                                <td>
+                                                    <i class="tim-icons icon-simple-add "></i>
                                                 </td>
                                             </tr>
                                             @endif

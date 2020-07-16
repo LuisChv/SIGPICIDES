@@ -68,6 +68,17 @@ Route::middleware(['auth'])->group(function(){
     Route::get('roles/{role}/edit', 'RoleController@edit')->name('roles.edit')
     ->middleware('has.permission:roles.edit');
 
+
+    //PermisoRol
+    Route::post('role_permissions/', 'PermissionRoleController@store')->name('role_permission.store')
+    ->middleware('has.permission:permission_role.create');
+
+    Route::get('role_permissions/{role}', 'PermissionRoleController@index')->name('roles.permissions')
+    ->middleware('has.permission:permission_role.index');
+
+    Route::delete('role_permissions/', 'PermissionRoleController@destroy')->name('role_permission.destroy')
+    ->middleware('has.permission:permission_role.destroy');
+
     //Users
     Route::post('users/store', 'UserController@store')->name('users.store')
     ->middleware('has.permission:users.create');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Caffeinated\Shinobi\Models\Role;
+use Caffeinated\Shinobi\Models\Permission;
 use DB;
 
 use Illuminate\Http\Request;
@@ -133,4 +134,6 @@ class RoleController extends Controller
         $role->delete();
         return redirect('/roles');
     }
+
+    
 }
