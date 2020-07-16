@@ -56,14 +56,17 @@
                     </a>
                     <ul class="dropdown-menu dropdown-navbar">
                         <li class="nav-link">
-                            <a href="{{ route('profile.edit') }}" class="nav-item dropdown-item">{{ __('Perfil') }}</a>
+                            <a href="#" class="nav-item dropdown-item">{{ __('Perfil') }}</a>
                         </li>
-                        <li class="nav-link" onClick="activarTema()">
+                        <li class="nav-link" onClick="activarTema();">
                             <!-- Rounded switch -->
-                                <a href="{{ route('users.dark',Auth::user()->id) }}" class="nav-item dropdown-item d-inline">
-                                    
+                            <form id="tema" method="POST" action="{{route('users.dark', [Auth::user()->id])}}">
+                                @csrf
+                                @method('PUT')
+                                <a href="#" class="nav-item dropdown-item d-inline">
                                 {{ __('Tema: Claro') }}
                                 </a>
+                            </form>
                         </li>
                         <li class="dropdown-divider"></li>
                         <li class="nav-link">
@@ -88,3 +91,8 @@
         </div>
     </div>
 </div>
+<script>
+    function activarTema(){
+        document.getElementById("tema").submit();
+    }
+</script>
