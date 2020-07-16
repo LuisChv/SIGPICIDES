@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Caffeinated\Shinobi\Models\Role;
+use DB;
 
 use Illuminate\Http\Request;
 
@@ -71,7 +72,19 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        $data= Role::all();
+       
+        //Buscar el usuario con el id de entrada
+        $role= Role::findOrFail($id);
+        
+        //Buscar nombre de rol y tipo de recurso
+       //S $role=Role::findOrFail($->id_tipo);
+        
+        //Retornar la vista
+        return view ('simpleViews.roles.show', [
+            'role'=>$role,
+            'data'=>$data,
+        ]);
     }
 
     /**
@@ -82,7 +95,15 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data= Role::all();
+    
+        //Buscar rol
+        $role= Role::findOrFail($id);
+      
+        return view ('simpleViews.roles.editar',[
+            'role' => $role, 
+            'data' => $data,
+            ]);
     }
 
     /**
@@ -105,6 +126,11 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role= Role::findOrFail($id);
+       
+        DB::table('permission_role')->where('role_id', $id)->delete();
+        DB::table('role_user')->where('role_id', $id)->delete();
+        $role->delete();
+        return redirect('/roles');
     }
 }
