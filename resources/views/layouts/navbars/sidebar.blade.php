@@ -131,7 +131,7 @@
                         @endcan
                         @canany(['permission_role.create', 'permission_role.destroy'])
                             <li @if ($pageSlug == 'permisos') class="active " @endif>
-                                <a href="#">
+                                <a href="{{ route('roles.index') }}">
                                     <i class="tim-icons icon-key-25"></i>
                                     <p>{{ __('Gestionar permisos') }}</p>
                                 </a>
