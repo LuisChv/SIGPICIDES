@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Caffeinated\Shinobi\Models\Role;
 
 use Illuminate\Http\Request;
 
@@ -13,7 +14,10 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $data = Role::all();
+        return view ('simpleViews.roles.index',[
+            'data' => $data
+        ]);
     }
 
     /**
@@ -23,7 +27,10 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $data = Role::all();
+        return view ('simpleViews.roles.crear', [
+            'data' => $data
+        ]);
     }
 
     /**
@@ -34,7 +41,26 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validacion de los datos      
+        request()->validate([
+            'name'=> 'required',
+            'slug'=> 'required',
+        ],
+        [
+            'name.required' => "El username es obligatorio.",
+            'slug.required' => "El slug es obligatoria.",
+        ]);
+        
+
+        //Se asignan las variables al nuevo role
+        $role = Role::create([
+            'name' => request('name'),
+            'slug' => request('slug'),
+        ]);
+
+
+        return redirect('/roles');
+   
     }
 
     /**

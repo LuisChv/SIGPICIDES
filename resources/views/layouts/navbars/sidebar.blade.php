@@ -131,7 +131,8 @@
                         @endcan
                         @can('roles.index')
                             <li @if ($pageSlug == 'permisos') class="active " @endif>
-                                <a href="#">
+
+                                <a href="{{ route('roles.index') }}">
                                     <i class="tim-icons icon-badge"></i>
                                     <p>{{ __('Roles') }}</p>
                                 </a>
