@@ -58,22 +58,29 @@
                         <li class="nav-link">
                             <a href="#" class="nav-item dropdown-item">{{ __('Perfil') }}</a>
                         </li>
-                        <li class="nav-link" onClick="activarTema();">
-                            <!-- Rounded switch -->
-                            <form id="tema" method="POST" action="{{route('users.dark', [Auth::user()->id])}}">
+                        <form id="tema" method="POST" action="{{route('users.dark', [Auth::user()->id])}}">
+                            <li class="nav-link" onClick="activarTema();">
                                 @csrf
                                 @method('PUT')
                                 @if(Auth::user()->dark)
                                 <a href="#" class="nav-item dropdown-item d-inline">
-                                {{ __('Tema: Oscuro') }}
+                                {{ __('Tema: Oscuro') }}&nbsp;&nbsp;&nbsp;
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
                                 </a>
                                 @else
                                 <a href="#" class="nav-item dropdown-item d-inline">
-                                {{ __('Tema: Claro') }}
+                                {{ __('Tema: Claro') }}&nbsp;&nbsp;&nbsp;
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
                                 </a>
                                 @endif
-                            </form>
-                        </li>
+                            </li>
+                        </form>
                         <li class="dropdown-divider"></li>
                         <li class="nav-link">
                             <a href="{{ route('logout') }}" class="nav-item dropdown-item" onclick="event.preventDefault();  document.getElementById('logout-form').submit();">{{ __('Cerrar sesión') }}</a>
