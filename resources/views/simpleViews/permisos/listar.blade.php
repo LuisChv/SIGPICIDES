@@ -80,7 +80,7 @@
                                     <table width='100%' class="table">
                                         @foreach ($permisos_usuario as $permiso)
                                             @if($permiso->id_tabla==$tb->id)  
-                                                <tr id="{{$permiso->id}}" onMouseOver="ResaltarFila({{$permiso->id}});" onMouseOut="RestablecerFila({{$permiso->id}}, '')" onClick="eliminarPermiso({{ $permiso->id }});" >   
+                                                <tr id="p{{$permiso->id}}" onMouseOver="ResaltarFila('p{{$permiso->id}}');" onMouseOut="RestablecerFila('p{{$permiso->id}}', '')" onClick="eliminarPermiso({{ $permiso->id }});" >   
                                                     <td>
                                                     </td>                  
                                                     <td id="$permiso->id">
@@ -137,7 +137,7 @@
                                     <table width='100%' class="table">
                                         @foreach ($permisos as $permiso)
                                             @if($permiso->id_tabla==$tb->id)  
-                                            <tr  id="{{$permiso->id}}" onMouseOver="ResaltarFila({{$permiso->id}});" onMouseOut="RestablecerFila({{$permiso->id}}, '')" onClick="añadirPermiso({{ $permiso->id }});" >
+                                            <tr  id="p{{$permiso->id}}" onMouseOver="ResaltarFila('p{{$permiso->id}}');" onMouseOut="RestablecerFila('p{{$permiso->id}}', '')" onClick="añadirPermiso({{ $permiso->id }});" >
                                                 <td>
                                                     <form id="añadirPermiso{{$permiso->id}}" method="post" action="{{route('permission.store')}}">
                                                         @csrf
@@ -164,7 +164,7 @@
 <script langiage="javascript" type="text/javascript">
     // RESALTAR LAS FILAS AL PASAR EL MOUSE
     function ResaltarFila(id_fila) {
-    document.getElementById(id_fila).style.font-color = '#C9EFFE';
+    document.getElementById(id_fila).style.backgroundColor = '#C9EFFE';
     }
     // RESTABLECER EL FONDO DE LAS FILAS AL QUITAR EL FOCO
     function RestablecerFila(id_fila, color) {
