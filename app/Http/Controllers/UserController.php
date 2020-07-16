@@ -189,7 +189,7 @@ class UserController extends Controller
       
         $dark = User::findOrFail($id)->dark;
 
-        DB::table('users')->where('user_id', $id)->update(['dark' => !$dark]);
+        DB::table('users')->where('id', $id)->update(['dark' => !$dark]);
         return redirect()->back();
     }
 }
