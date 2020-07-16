@@ -7,6 +7,7 @@ use App\RolUsuario;
 use Caffeinated\Shinobi\Models\Role;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use DB;
 
 class UserController extends Controller
@@ -126,9 +127,9 @@ class UserController extends Controller
 
     public function update($id){
         request()->validate([
-            'name'=> 'required',
-            'email'=> 'required',
-            'password'=> 'required',
+            'name'=> ['required', 'string', 'max:255'],
+            'email'=> ['required', 'email', Rule::unique('users')->ignore($id)],
+            'password'=> ['required', 'string', 'min:8', 'confirmed'],
             'fecha_nac'=> 'required',
             'institucion'=> 'required'
         ],
