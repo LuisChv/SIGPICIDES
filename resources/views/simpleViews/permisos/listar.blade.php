@@ -29,7 +29,7 @@
                             <tbody>
                                 @foreach ($data as $use) 
                                 <tr>                     
-                                    <td>{{$use->email}}</td>
+                                    <td id={{$use->id}} onMouseOver="ResaltarFila({{$use->id}});" onMouseOut="RestablecerFila({{$use->id}}, '')" onClick="CrearEnlace('{{ route('users.show', $use->id)}}');">{{$use->email}}</td>
 
                                     <td width='5%'>
                                         <a type="button" href="{{ route('permission.index', $use->id)}}" class="btn btn-default btn-sm btn-icon btn-round"><i class="tim-icons icon-key-25"></i></a>
@@ -177,5 +177,8 @@
     }
     function eliminarPermiso(valor){
         document.getElementById("eliminarPermiso"+valor).submit();   
+    }
+    function CrearEnlace(url) {
+        location.href=url;
     }
 </script>
