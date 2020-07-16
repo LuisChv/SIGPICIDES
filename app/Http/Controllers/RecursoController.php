@@ -56,9 +56,9 @@ class RecursoController extends Controller
         ],
         [
             'tipoRec.required' => "Seleccione un tipo de recurso.",
-            'nombre.required' => "El nombre es obligatoria.",
+            'nombre.required' => "El nombre es obligatorio.",
             'marca.required' => "Seleccione una marca.",
-            'modelo.required' => "Seleccione su sexo.",
+            'modelo.required' => "El modelo es obligatorio.",
             'descripcion.required' => "La descripcion es obligatoria.",
         ]);
         //Se asignan las variables al nuevo recurso
@@ -149,9 +149,9 @@ class RecursoController extends Controller
         ],
         [
             'tipoRec.required' => "Seleccione un tipo de recurso.",
-            'nombre.required' => "El nombre es obligatoria.",
+            'nombre.required' => "El nombre es obligatorio.",
             'marca.required' => "Seleccione una marca.",
-            'modelo.required' => "Seleccione su sexo.",
+            'modelo.required' => "El modelo es obligatorio.",
             'descripcion.required' => "La descripcion es obligatoria.",
         ]);
         //Se asignan las variables al nuevo recurso

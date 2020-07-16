@@ -45,6 +45,10 @@ class SubTipoInvestigacionController extends Controller
         request()->validate([
             'nombre'=> 'required',
             'tipoRec'=> 'required'            
+        ],
+        [
+            'tipoRec.required' => "Seleccione un tipo de investigación2.",
+            'nombre.required' => "El nombre es obligatorio.",
         ]);
         $subtipo= new SubTipoDeInvestigacion();
         $subtipo->id_tipo=request('tipoRec');
@@ -95,6 +99,10 @@ class SubTipoInvestigacionController extends Controller
         request()->validate([
             'nombre'=> 'required',
             'tipoRec'=> 'required'            
+        ],
+        [
+            'tipoRec.required' => "Seleccione un tipo de recurso.",
+            'nombre.required' => "El nombre es obligatorio.",
         ]);
         $subtipo->id_tipo=request('tipoRec');
         $subtipo->nombre=request('nombre');
