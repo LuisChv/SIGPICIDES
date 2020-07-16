@@ -92,7 +92,7 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')
     ->middleware('has.permission:users.destroy');
 
-    Route::put('users/{user}', 'UserController@dark')->name('users.dark')
+    Route::put('dark/{user}', 'UserController@dark')->name('users.dark')
     ->middleware('has.permission:users.edit');
 
 
