@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -226,5 +227,33 @@ Route::middleware(['auth'])->group(function(){
 
     Route::delete('subtipo_investigacion/{subtipo}', 'SubTipoInvestigacionController@destroy')->name('subtipo_investigacion.destroy')
     ->middleware('has.permission:sub_tipo_de_investigacion.destroy');
+
+
+    Route::get('email', function () {
+        return view ('Mail.mailprueba');
+    });
+    
+    Route::post('email', function () {
+        /*
+        Mail::raw('Correo enviado!', function ($message) {
+            $message->from('a@gmail.com','Hola');
+            $message->sender('alejandro.10martimez@gmail.com');
+            //$message->to('alejandro@mailinator.com', 'maili');
+            $message->to(request('email'));
+            $message->subject('Hello there');
+        }); */
+
+        $data = array('email'=> request('email'));
+
+        Mail::send('Mail.plantilla', $data, function ($message) {
+            $message->from('a@gmail.com','Hola');
+            $message->sender('alejandro.10martimez@gmail.com');
+            //$message->to('alejandro@mailinator.com', 'maili');
+            $message->to(request('email'));
+            $message->subject('Hello there');
+        });
+        return redirect('email');
+    });
+
 
 });
