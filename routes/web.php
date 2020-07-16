@@ -93,6 +93,9 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')
     ->middleware('has.permission:users.destroy');
 
+    Route::put('dark/{user}', 'UserController@dark')->name('users.dark')
+    ->middleware('has.permission:users.edit');
+
 
     //Proyectos
     Route::post('proyectos/store', 'ProyectoController@store')->name('proyectos.store')
@@ -228,7 +231,19 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('subtipo_investigacion/{subtipo}', 'SubTipoInvestigacionController@destroy')->name('subtipo_investigacion.destroy')
     ->middleware('has.permission:sub_tipo_de_investigacion.destroy');
 
+    //Permisos
+    //index
 
+    Route::get('user/permissions/{user}', 'PermissionController@index')->name('permission.index')
+    ->middleware('has.permission:permission.index');
+
+    Route::post('user/permissions/', 'PermissionController@store')->name('permission.store')
+    ->middleware('has.permission:permission_user.create');
+
+    Route::delete('user/permissions/', 'PermissionController@destroy')->name('permission.destroy')
+    ->middleware('has.permission:permission_user.destroy');
+
+    //enviar emails
     Route::get('email', function () {
         return view ('Mail.mailprueba');
     });
@@ -254,6 +269,4 @@ Route::middleware(['auth'])->group(function(){
         });
         return redirect('email');
     });
-
-
 });

@@ -29,22 +29,22 @@
                         @foreach ($tipos as $tipo)
                             <div>
                                 <table class="table-sm" width='100%'>
-                                        <tr class="list-group-item list-group-flush" data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false" aria-controls="lista{{ $tipo->id }}" id={{$tipo->id}} onMouseOver="ResaltarFila({{$tipo->id}});" onMouseOut="RestablecerFila({{$tipo->id}}, '')">
-                                            <td width='80%'>
-                                                {{ $tipo->nombre }}&nbsp;&nbsp;
-                                                <i class="tim-icons icon-minimal-down"></i>
+                                    <tr class="list-group-item py-1 list-group-flush"  aria-controls="lista{{ $tipo->id }}" id={{$tipo->id}} onMouseOver="ResaltarFila({{$tipo->id}});" onMouseOut="RestablecerFila({{$tipo->id}}, '')">
+                                        <td width='80%' data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false">
+                                            {{ $tipo->nombre }}&nbsp;&nbsp;
+                                            <i class="tim-icons icon-minimal-down"></i>
+                                        </td>
+                                        <td width='10%' align="right">
+                                            <a type="button" href="{{ route('tipo_investigacion.edit', $tipo->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;
+                                        </td>
+                                        <form method="POST" id="formularioTipo{{$tipo->id}}" action="{{ route('tipo_investigacion.destroy', $tipo->id)}}">
+                                            <td width='10%'>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" onClick="confirmarTipo({{$tipo->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button>
                                             </td>
-                                            <td width='10%' align="right">
-                                                <a type="button" href="{{ route('tipo_investigacion.edit', $tipo->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;
-                                            </td>
-                                            <form method="POST" id="formularioTipo{{$tipo->id}}" action="{{ route('tipo_investigacion.destroy', $tipo->id)}}">
-                                                <td width='10%'>
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button" onClick="confirmarTipo({{$tipo->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button>
-                                                </td>
-                                            </form>
-                                        </tr>
+                                        </form>
+                                    </tr>
                                 </table>
                                 <div id="lista{{ $tipo->id }}" class="collapse" aria-labelledby="rec{{ $tipo->id }}" data-parent="#accordion">
                                     <table width='100%' class="table">
@@ -74,6 +74,7 @@
                                 </div>                      
                             </div>
                         @endforeach
+                        <br>
                         <!--fin de dropdown-->
                     </div>                   
                 </div>                    

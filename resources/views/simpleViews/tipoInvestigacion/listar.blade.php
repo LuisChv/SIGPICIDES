@@ -29,8 +29,8 @@
                             @foreach ($tipos as $tipo)
                                 <div>
                                     <table class="table-sm" width='100%'>
-                                            <tr class="list-group-item list-group-flush" data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false" aria-controls="lista{{ $tipo->id }}" id={{$tipo->id}} onMouseOver="ResaltarFila({{$tipo->id}});" onMouseOut="RestablecerFila({{$tipo->id}}, '')">
-                                                <td width='80%'>
+                                            <tr class="list-group-item py-1 list-group-flush"  aria-controls="lista{{ $tipo->id }}" id={{$tipo->id}} onMouseOver="ResaltarFila({{$tipo->id}});" onMouseOut="RestablecerFila({{$tipo->id}}, '')">
+                                                <td width='80%' data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false">
                                                     {{ $tipo->nombre }}&nbsp;&nbsp;
                                                     <i class="tim-icons icon-minimal-down"></i>
                                                 </td>
@@ -75,6 +75,7 @@
                                 </div>
                             @endforeach
                         <!--fin de dropdown-->
+                        <br>
                         </div>                   
                     </div>                    
                 </div>

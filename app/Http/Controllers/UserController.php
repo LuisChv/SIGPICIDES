@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\RolUsuario;
 use Caffeinated\Shinobi\Models\Role;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
@@ -21,12 +22,15 @@ class UserController extends Controller
         //return view('users.index', ['users' => $model->paginate(15)]);
         return view ('users.usuariosDashboard');
     }
+
     public function index(){
         $data = User::all();
         return view ('users.index',[
             'data' => $data
         ]);
     }
+
+
     public function create(){
         $roles = Role::all();
         $data = User::all();
@@ -84,20 +88,39 @@ class UserController extends Controller
 
     }
 
+
+    public function show($id)
+    {
+        $data= User::all();
+       
+        //Buscar el usuario con el id de entrada
+        $user= User::findOrFail($id);
+        
+        //Buscar nombre de rol y tipo de recurso
+       //S $role=Role::findOrFail($->id_tipo);
+        
+        //Retornar la vista
+        return view ('users.show', [
+            'user'=>$user,
+            'data'=>$data,
+        ]);
+    }
+
     public function edit($id)
     {
         $data= User::all();
         $roles= Role::all();
-      
-      
+    
         //Buscar user y su respectivo rol
         $user= User::findOrFail($id);
+        $roleuser= RolUsuario::where('user_id', $id)->first();
+        //$roleuser=DB::select('SELECT * FROM role_user WHERE user_id = ?', [$id]);
        
         return view ('users.editar',[
             'user'=>$user, 
-           // 'role'=>$role, 
             'roles' => $roles, 
-            'data' => $data
+            'data' => $data,
+            'roleuser'=>$roleuser
             ]);
     }
 
@@ -118,7 +141,7 @@ class UserController extends Controller
         ]);
       
 
-        //Se asignan las variables al nuevo usuario
+        //Modificar datos de usuario
         $user = User::findOrFail($id);
 
         $user->name=request('name');
@@ -148,5 +171,25 @@ class UserController extends Controller
         }
 
         return redirect('/users');
+    }
+
+
+    public function destroy($id)
+    {
+        //dd($id);
+        $user= User::findOrFail($id);
+       
+        DB::table('permission_user')->where('user_id', $id)->delete();
+        DB::table('role_user')->where('user_id', $id)->delete();
+        $user->delete();
+        return redirect('/users');
+    }
+
+    public function dark($id){
+      
+        $dark = User::findOrFail($id)->dark;
+
+        DB::table('users')->where('id', $id)->update(['dark' => !$dark]);
+        return redirect()->back();
     }
 }
