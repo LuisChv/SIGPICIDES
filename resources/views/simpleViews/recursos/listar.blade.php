@@ -64,7 +64,9 @@
             <div class="card-footer"><br></div>
         </div>
     </div>
+    @yield('opcion')
 </div>
+
 @endsection
 <script src="sweetalert2.all.min.js"></script>
 <script langiage="javascript" type="text/javascript">
