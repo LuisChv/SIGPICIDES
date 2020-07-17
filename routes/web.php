@@ -20,6 +20,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//E-mail Verificaction
+Route::get('register/verify/{code}', 'Auth\VerificationController@verificar')->name('verificacion_email');
+
 Route::get('home/', 'HomeController@index')->name('home')->middleware('auth');
 //<a href="{{route('routename', párametros)}}"
 
@@ -261,24 +264,14 @@ Route::middleware(['auth'])->group(function(){
     });
     
     Route::post('email', function () {
-        /*
-        Mail::raw('Correo enviado!', function ($message) {
-            $message->from('a@gmail.com','Hola');
-            $message->sender('alejandro.10martimez@gmail.com');
-            //$message->to('alejandro@mailinator.com', 'maili');
-            $message->to(request('email'));
-            $message->subject('Hello there');
-        }); */
-
         $data = array('email'=> request('email'));
 
         Mail::send('Mail.plantilla', $data, function ($message) {
-            $message->from('a@gmail.com','Hola');
-            $message->sender('alejandro.10martimez@gmail.com');
+            //$message->from('a@gmail.com','Hola');
+            //$message->sender('alejandro.10martimez@gmail.com');
             //$message->to('alejandro@mailinator.com', 'maili');
             $message->to(request('email'));
             $message->subject('Hello there');
         });
-        return redirect('email');
     });
 });

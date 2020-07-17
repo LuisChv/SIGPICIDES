@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->boolean('sexo');
             $table->boolean('dark')->default(false);
             $table->timestamps();
+            $table->string('confirmation_code')->nullable();
         });
     }
 
