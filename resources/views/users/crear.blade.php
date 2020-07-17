@@ -142,7 +142,7 @@
                             <select class="form-control selectorWapis" id="rol" name="rol">
                                 <option value="" selected disabled hidden>Seleccione un rol</option>
                                 @foreach ($roles as $rol)
-                                <option>{{ $rol->name }}</option>
+                                <option style="color: black !important;">{{ $rol->name }}</option>
                                 @endforeach
                             </select>    
                             @include('alerts.feedback', ['field' => 'rol'])                        
@@ -155,9 +155,9 @@
                                 </div>
                             </div>
                             <select class="form-control selectorWapis" id="sexo" name="sexo">
-                            	<option value="" selected disabled hidden>Sexo</option>
-                                <option>Femenino</option>
-                                <option>Masculino</option>
+                            	<option style="color: black !important;" value="" selected disabled hidden>Sexo</option>
+                                <option style="color: black !important;">Femenino</option>
+                                <option style="color: black !important;">Masculino</option>
                             </select>
                             @include('alerts.feedback', ['field' => 'sexo'])                            
                         </div>

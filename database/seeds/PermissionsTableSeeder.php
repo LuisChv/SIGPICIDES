@@ -1501,6 +1501,13 @@ class PermissionsTableSeeder extends Seeder
             'description'   => '',
             'id_tabla' => 40,
         ]);
+
+        Permission::create([
+            'name'          => 'Cuenta válidada',
+            'slug'          => 'validacion',
+            'description'   => '',
+            'id_tabla' => 40,
+        ]);
          
     }
 }

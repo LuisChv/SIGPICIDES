@@ -33,19 +33,15 @@ class MarcaTipoRecursoSeeder extends Seeder
         ]);
         DB::table('tipo_de_recurso')->insert([
             'id' => 1,
-            'nombre' => 'Recurso1'
+            'nombre' => 'Recurso informático'
         ]);
         DB::table('tipo_de_recurso')->insert([
             'id' => 2,
-            'nombre' => 'Recurso2'
+            'nombre' => 'Papelería y útiles'
         ]);
         DB::table('tipo_de_recurso')->insert([
             'id' => 3,
-            'nombre' => 'Recurso3'
-        ]);
-        DB::table('tipo_de_recurso')->insert([
-            'id' => 4,
-            'nombre' => 'Recurso4'
+            'nombre' => 'Mobiliario'
         ]);
     }
 }

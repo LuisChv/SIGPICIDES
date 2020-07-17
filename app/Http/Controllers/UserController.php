@@ -183,6 +183,11 @@ class UserController extends Controller
             ]);
         }
 
+        DB::table('permission_user')->insert([
+            'permission_id' => (198),
+            'user_id' => $id,
+        ]);
+
         return redirect('/users');
     }
 

@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
 
 /*---------------------------------------------------------------------------------------------------*/
         //Administrador
-       User::create([
+       $user=User::create([
             'name' => 'Administrador',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('secret'),
@@ -24,8 +24,11 @@ class UsersTableSeeder extends Seeder
             'institucion' => 'Universidad de El Salvador',
             'descripcion' => 'Soy el administrador y tengo todos los permisos',
             'sexo' => true,
-            'dark' => true
+            'dark' => false
+
         ]);
+        $user->email_verified_at = now();
+        $user->save();
 
         DB::table('role_user')->insert([
             'role_id' => 1,
@@ -41,10 +44,14 @@ class UsersTableSeeder extends Seeder
             ]);
     
         }
+        DB::table('permission_user')->insert([
+            'permission_id' => (198),
+            'user_id' => 1,
+        ]);
 
 /*---------------------------------------------------------------------------------------------------*/
         //Coordinador
-        User::create([
+        $user=User::create([
             'name' => 'Coordinador',
             'email' => 'coordinador@gmail.com',
             'password' => Hash::make('secret'),
@@ -54,6 +61,9 @@ class UsersTableSeeder extends Seeder
             'sexo' => true,
             'dark' => false
         ]);
+
+        $user->email_verified_at = now();
+        $user->save();
 
         DB::table('role_user')->insert([
             'role_id' => 2,
@@ -69,10 +79,14 @@ class UsersTableSeeder extends Seeder
             ]);
     
         }
+        DB::table('permission_user')->insert([
+            'permission_id' => (198),
+            'user_id' => 2,
+        ]);
 
 /*---------------------------------------------------------------------------------------------------*/
         //Director
-        User::create([
+        $user=User::create([
             'name' => 'Director',
             'email' => 'director@gmail.com',
             'password' => Hash::make('secret'),
@@ -82,6 +96,9 @@ class UsersTableSeeder extends Seeder
             'sexo' => true,
             'dark' => false
         ]);
+
+        $user->email_verified_at = now();
+        $user->save();
 
         DB::table('role_user')->insert([
             'role_id' => 3,
@@ -97,10 +114,14 @@ class UsersTableSeeder extends Seeder
             ]);
     
         }
+        DB::table('permission_user')->insert([
+            'permission_id' => (198),
+            'user_id' => 3,
+        ]);
 
 /*---------------------------------------------------------------------------------------------------*/
         //Investigador
-        User::create([
+        $user=User::create([
             'name' => 'Investigador',
             'email' => 'investigador@gmail.com',
             'password' => Hash::make('secret'),
@@ -110,6 +131,9 @@ class UsersTableSeeder extends Seeder
             'sexo' => true,
             'dark' => false,
         ]);
+
+        $user->email_verified_at = now();
+        $user->save();
 
         DB::table('role_user')->insert([
             'role_id' => 4,
@@ -124,6 +148,10 @@ class UsersTableSeeder extends Seeder
                 'user_id' => 4,
             ]);
         }
+        DB::table('permission_user')->insert([
+            'permission_id' => (198),
+            'user_id' => 4,
+        ]);
 
     }
 }

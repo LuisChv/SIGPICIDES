@@ -20,11 +20,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('home/', 'HomeController@index')->name('home')->middleware('auth');
+//E-mail Verificaction
+Route::get('register/verify/{code}', 'Auth\VerificationController@verificar')->name('verificacion_email');
+
+Route::get('home/', 'HomeController@index')->name('home')->middleware(['auth', 'has.permission:validacion']);
 //<a href="{{route('routename', párametros)}}"
 
 //Routes de Icons, Maps, notificaciones ........
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'has.permission:validacion']], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
 		Route::get('maps', ['as' => 'pages.maps', 'uses' => 'PageController@maps']);
 		Route::get('notifications', ['as' => 'pages.notifications', 'uses' => 'PageController@notifications']);
@@ -37,7 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('cides', ['as' => 'cides', 'uses' => 'PageController@cides']);
 });
 //Routes de Perfil de usuario
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'has.permission:validacion']], function () {
 	//Route::resource('user', 'UserController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
@@ -45,7 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 //Routes 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     //Roles
     Route::post('roles/store', 'RoleController@store')->name('roles.store')
@@ -105,8 +108,7 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')
     ->middleware('has.permission:users.destroy');
 
-    Route::put('dark/{user}', 'UserController@dark')->name('users.dark')
-    ->middleware('has.permission:users.edit');
+    Route::put('dark/{user}', 'UserController@dark')->name('users.dark');
 
 
     //Proyectos
@@ -261,24 +263,15 @@ Route::middleware(['auth'])->group(function(){
     });
     
     Route::post('email', function () {
-        /*
-        Mail::raw('Correo enviado!', function ($message) {
-            $message->from('a@gmail.com','Hola');
-            $message->sender('alejandro.10martimez@gmail.com');
-            //$message->to('alejandro@mailinator.com', 'maili');
-            $message->to(request('email'));
-            $message->subject('Hello there');
-        }); */
-
+        dd(auth()->user());
         $data = array('email'=> request('email'));
 
         Mail::send('Mail.plantilla', $data, function ($message) {
-            $message->from('a@gmail.com','Hola');
-            $message->sender('alejandro.10martimez@gmail.com');
+            //$message->from('a@gmail.com','Hola');
+            //$message->sender('alejandro.10martimez@gmail.com');
             //$message->to('alejandro@mailinator.com', 'maili');
             $message->to(request('email'));
             $message->subject('Hello there');
         });
-        return redirect('email');
     });
 });

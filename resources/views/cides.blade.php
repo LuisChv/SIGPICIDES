@@ -7,6 +7,18 @@
 @section('content')
     <div class="row">
         <div class="col-3">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2 class="card-title"><b>Misión</b></h2>
+                </div>
+                <div class="card-body text-justify">
+                        <p>
+                            Ser un Centro de Investigación que genere soluciones y conocimiento en el área de la informática a través de proyectos de investigación, innovación y transferencia de tecnología, que permitan potenciar el desarrollo tecnológico de informática en El Salvador y Centro América.                        
+                        </p>
+                    <br/><br/><br/><br/>
+                </div>
+            </div> 
+            <img src="{{ asset('black') }}/img/mision.gif"/>
         </div>
         <div class="col-6">
             <div class="card">
@@ -27,6 +39,20 @@
                     <br/>
                 </div>
             </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2 class="card-title"><b>Visión</b></h2>
+                </div>
+                <div class="card-body text-justify">
+                        <p>
+                            Ser un centro de investigación y desarrollo de soluciones informáticas a problemas de la sociedad y las empresas, a través proyectos de investigación e innovación tanto de estudiantes como docentes de la Universidad de El Salvador, que permitan dar paso a la transferencia de nuevas tecnologías con empresas, brindando soluciones creativas, eficientes y eficaces con un fuerte componente de impacto social.                        
+                        </p>
+                    <br/>
+                </div>
+            </div> 
+            <img src="{{ asset('black') }}/img/vision.gif"/>
         </div>
         <div class="container menuF-container">
             <input type="checkbox" id="toggleF">

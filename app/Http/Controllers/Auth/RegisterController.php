@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -78,6 +80,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $data['confirmation_code']=Str::random(40);
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -86,8 +89,17 @@ class RegisterController extends Controller
             'institucion' => $data['institucion'],
             'descripcion' => $data['descripcion'],
             'sexo' => ($data['sexo'] == "Masculino"),
+            'confirmation_code'=> $data['confirmation_code']
         ]);
+        
+        //Para enviar correro
+        Mail::send('Mail.verificacion_email_plantilla', $data, function ($message) use ($data){
+            $message->to($data['email'], $data['name']);
+            $message->subject('Verificación de correo electrónico');
+        });
+    
 
+        //Para asignar rol a usuario
         DB::table('role_user')->insert(
             array('role_id' => 4, 'user_id' => $user->id)
         );

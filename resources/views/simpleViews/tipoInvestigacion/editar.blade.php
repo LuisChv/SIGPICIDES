@@ -1,6 +1,6 @@
 @extends('simpleViews.tipoInvestigacion.listar')
 @section('title')
-	Nuevo Tipo de investigación
+	Editar tipo de investigación
 @endsection
 @section('opcion')
 <div class="col-5">
@@ -8,7 +8,7 @@
         <div class="card-header ">
             <div class="row">
                 <div class="col-sm-12 text-left">
-                    <h2 class="card-title"><b>Nuevo Tipo de investigación</b></h2>
+                    <h2 class="card-title"><b>Editar tipo de investigación</b></h2>
                 </div> 
             </div>
         </div>
