@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block mb-3">{{ __('Send Password Reset Link') }}</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block mb-3">{{ __('Enviar enlace de restablecimiento de contraseña') }}</button>
                 </div>
             </div>
         </form>
