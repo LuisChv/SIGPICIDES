@@ -54,6 +54,11 @@ class VerificationController extends Controller
         $user->confirmation_code=null;
         $user->save();
 
+        DB::table('permission_user')->insert([
+            'permission_id' => (198),
+            'user_id' => $user->id,
+        ]);
+
         return redirect('/home');        
     }
 }
