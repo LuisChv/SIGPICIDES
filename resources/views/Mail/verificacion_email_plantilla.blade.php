@@ -11,6 +11,6 @@
         Clic para confirmar su correo electrónico
     </a>
     <br>
-    <p>Si no has creado una cuenta con nosotros, ignore este correo.</p>
+    <p>Si no has creado una cuenta con nosotros, ignora este correo.</p>
 </body>
 </html>
