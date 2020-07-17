@@ -37,12 +37,21 @@
                                     <td width='5%'>
                                         <a type="button" href="{{ route('roles.edit', $rol->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
                                     </td>
-                                    <form method="POST" id="formulario{{$rol->id}}" action="{{route('roles.destroy', $rol->id)}}" >
-                                    @csrf
-                                    @method('DELETE')
-                                    <td width='5%'>
-                                        <button type="button" onClick="confirmar({{$rol->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
-                                    </td></form>
+                                    @if ($rol->id < 5)
+                                        <form method="POST" id="formulario{{$rol->id}}" action="{{route('roles.destroy', $rol->id)}}" >
+                                        @csrf
+                                        @method('DELETE')
+                                        <td width='5%'>
+                                            <button type="button" onClick="" disabled class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
+                                        </td></form>
+                                    @else
+                                        <form method="POST" id="formulario{{$rol->id}}" action="{{route('roles.destroy', $rol->id)}}" >
+                                        @csrf
+                                        @method('DELETE')
+                                        <td width='5%'>
+                                            <button type="button" onClick="confirmar({{$rol->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
+                                        </td></form>                                   
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
