@@ -297,6 +297,8 @@ input {
 button,
 select {
   text-transform: none;
+  background: #9c9c9c;
+
 }
 
 button,
