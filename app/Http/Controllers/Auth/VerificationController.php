@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use DB;
 use App\User;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class VerificationController extends Controller
 {
@@ -64,8 +66,10 @@ class VerificationController extends Controller
 
     public function reenviar(){
         //dd(auth()->user()->email);
-        $data= User::findOrFail(auth()->user()->id);
-        dd($data);
+        $user= User::findOrFail(auth()->user()->id);
+        $user['confirmation_code']=Str::random(40);
+        $user->save();
+        $data = array('email'=> $user->email, 'name'=>$user->name, 'confirmation_code'=>$user->confirmation_code);
         //Para enviar correo de confirmacion de nuevo
         Mail::send('Mail.verificacion_email_plantilla', $data, function ($message) use ($data){
             $message->to($data['email'], $data['name']);
