@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
 
 /*---------------------------------------------------------------------------------------------------*/
         //Administrador
-       User::create([
+       $user=User::create([
             'name' => 'Administrador',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('secret'),
@@ -25,7 +25,10 @@ class UsersTableSeeder extends Seeder
             'descripcion' => 'Soy el administrador y tengo todos los permisos',
             'sexo' => true,
             'dark' => true
+
         ]);
+        $user->email_verified_at = now();
+        $user->save();
 
         DB::table('role_user')->insert([
             'role_id' => 1,
@@ -44,7 +47,7 @@ class UsersTableSeeder extends Seeder
 
 /*---------------------------------------------------------------------------------------------------*/
         //Coordinador
-        User::create([
+        $user=User::create([
             'name' => 'Coordinador',
             'email' => 'coordinador@gmail.com',
             'password' => Hash::make('secret'),
@@ -54,6 +57,9 @@ class UsersTableSeeder extends Seeder
             'sexo' => true,
             'dark' => false
         ]);
+
+        $user->email_verified_at = now();
+        $user->save();
 
         DB::table('role_user')->insert([
             'role_id' => 2,
@@ -72,7 +78,7 @@ class UsersTableSeeder extends Seeder
 
 /*---------------------------------------------------------------------------------------------------*/
         //Director
-        User::create([
+        $user=User::create([
             'name' => 'Director',
             'email' => 'director@gmail.com',
             'password' => Hash::make('secret'),
@@ -82,6 +88,9 @@ class UsersTableSeeder extends Seeder
             'sexo' => true,
             'dark' => false
         ]);
+
+        $user->email_verified_at = now();
+        $user->save();
 
         DB::table('role_user')->insert([
             'role_id' => 3,
@@ -100,7 +109,7 @@ class UsersTableSeeder extends Seeder
 
 /*---------------------------------------------------------------------------------------------------*/
         //Investigador
-        User::create([
+        $user=User::create([
             'name' => 'Investigador',
             'email' => 'investigador@gmail.com',
             'password' => Hash::make('secret'),
@@ -110,6 +119,9 @@ class UsersTableSeeder extends Seeder
             'sexo' => true,
             'dark' => false,
         ]);
+
+        $user->email_verified_at = now();
+        $user->save();
 
         DB::table('role_user')->insert([
             'role_id' => 4,
