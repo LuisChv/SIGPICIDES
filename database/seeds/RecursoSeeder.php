@@ -12,7 +12,6 @@ class RecursoSeeder extends Seeder
     public function run()
     {
         DB::table('recurso')->insert([
-            'id' => 1,
             'id_marca' => 1,
             'id_tipo' => 1,
             'nombre' => 'ProBook',
@@ -25,7 +24,6 @@ class RecursoSeeder extends Seeder
         ]);
         
         DB::table('recurso')->insert([
-            'id' => 2,
             'id_marca' => 2,
             'id_tipo' => 1,
             'nombre' => 'Inspiron',
@@ -38,7 +36,6 @@ class RecursoSeeder extends Seeder
         ]);
 
         DB::table('recurso')->insert([
-            'id' => 3,
             'id_marca' => 3,
             'id_tipo' => 1,
             'nombre' => 'VivoBook',
@@ -51,7 +48,6 @@ class RecursoSeeder extends Seeder
         ]);
         
         DB::table('recurso')->insert([
-            'id' => 4,
             'id_marca' => 4,
             'id_tipo' => 1,
             'nombre' => 'ThinkPad',
@@ -64,7 +60,6 @@ class RecursoSeeder extends Seeder
         ]);
 
         DB::table('recurso')->insert([
-            'id' => 5,
             'id_marca' => 1,
             'id_tipo' => 2,
             'nombre' => 'Papel bond',
@@ -77,7 +72,6 @@ class RecursoSeeder extends Seeder
         ]);
         
         DB::table('recurso')->insert([
-            'id' => 6,
             'id_marca' => 2,
             'id_tipo' => 2,
             'nombre' => 'Lapiz N3',
@@ -90,7 +84,6 @@ class RecursoSeeder extends Seeder
         ]);
 
         DB::table('recurso')->insert([
-            'id' => 7,
             'id_marca' => 3,
             'id_tipo' => 3,
             'nombre' => 'Escritorio',
@@ -103,7 +96,6 @@ class RecursoSeeder extends Seeder
         ]);
         
         DB::table('recurso')->insert([
-            'id' => 8,
             'id_marca' => 4,
             'id_tipo' => 3,
             'nombre' => 'Silla',
