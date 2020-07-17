@@ -33,7 +33,7 @@ class ForgotPasswordController extends Controller
 
     $user=User::where('email',request('email'))->first();
     if(!$user){
-        return redirect('/password/reset');
+        return redirect('/password/reset')->with('status','El correo electrónico introducido no esta registrado');
     }
     //$user['confirmation_code']=Str::random(40);
     //$user->save();
@@ -44,6 +44,6 @@ class ForgotPasswordController extends Controller
         $message->subject('Reestablecimiento de contraseña olvidada');
     });
 
-    return redirect('/password/reset');
+    return redirect('/password/reset')->with('status','Se envio un correo electrónico con un link para reestablecer su contraseña');
 }
 }
