@@ -42,7 +42,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <td width='5%'>
-                                            <button type="button" onClick="" disabled class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
+                                            <button type="button"onClick="" title="No se puede eliminar un rol primario" class="btn btn-warning btn-sm btn-icon btn-round "><i class="tim-icons icon-simple-remove"></i></button> 
                                         </td></form>
                                     @else
                                         <form method="POST" id="formulario{{$rol->id}}" action="{{route('roles.destroy', $rol->id)}}" >
