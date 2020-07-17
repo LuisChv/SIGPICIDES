@@ -2,15 +2,15 @@
     <div class="container-fluid">
         <ul class="nav">
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('cides') }}" class="nav-link">
                     {{ __('Acerca de nosotros') }}
                 </a>
             </li>
-            <li class="nav-item">
+            <!--li class="nav-item">
                 <a href="#" class="nav-link">
                     {{ __('Contáctanos') }}
                 </a>
-            </li>
+            </li!-->
         </ul>
         <div class="copyright">
             <h4>            

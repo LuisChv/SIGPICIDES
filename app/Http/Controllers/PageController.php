@@ -83,4 +83,9 @@ class PageController extends Controller
     {
         return view('solicitud.consultar');
     }
+
+    public function cides()
+    {
+        return view('cides');
+    }
 }

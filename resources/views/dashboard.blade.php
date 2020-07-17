@@ -31,8 +31,7 @@
 
             <nav class="navF">
                 <a href="#">Inicio</a>
-                <a href="#">Contactame</a>
-                <a href="#">Acerca de</a>
+                <a href="{{ route('cides') }}">Acerca de</a>
                 <a href="#">Acciones</a>
             </nav>
         </div>
