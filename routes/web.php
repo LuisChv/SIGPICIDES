@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'PageController@upgrade']);
         Route::get('registro', ['as' => 'solicitud.registro', 'uses' => 'PageController@registro']);
         Route::get('consultarSolicitudes', ['as' => 'solicitud.consultar', 'uses' => 'PageController@consultarSolicitudes']);
+        Route::get('cides', ['as' => 'cides', 'uses' => 'PageController@cides']);
 });
 //Routes de Perfil de usuario
 Route::group(['middleware' => 'auth'], function () {
