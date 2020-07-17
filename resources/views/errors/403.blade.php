@@ -17,6 +17,13 @@
 		width:100% !important;
 	}
 </style>
-<div id="fakebg">
-	<img id="fondo" src="/black/img/403.png">
-</div>
+
+@can('validacion')
+	<div id="fakebg">
+		<img id="fondo" src="/black/img/403.png">
+	</div>
+@else
+
+	
+
+@endcan
