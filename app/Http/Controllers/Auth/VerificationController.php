@@ -51,6 +51,7 @@ class VerificationController extends Controller
         if(!$user){
             return redirect('/email');
         }
+        
 
         $user->email_verified_at=now();
         $user->confirmation_code=null;
@@ -67,6 +68,9 @@ class VerificationController extends Controller
     public function reenviar(){
         //dd(auth()->user()->email);
         $user= User::findOrFail(auth()->user()->id);
+        if( $user->email_verified_at!=null){
+            return redirect('/home'); 
+        }
         $user['confirmation_code']=Str::random(40);
         $user->save();
         $data = array('email'=> $user->email, 'name'=>$user->name, 'confirmation_code'=>$user->confirmation_code);

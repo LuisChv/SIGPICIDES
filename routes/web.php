@@ -24,6 +24,8 @@ Auth::routes();
 Route::get('register/verify/{code}', 'Auth\VerificationController@verificar')->name('verificacion_email');
 //ReenviarEmail
 Route::get('resend/verify', 'Auth\VerificationController@reenviar')->name('reenviar_verificacion');
+//Email reestablecer correo
+Route::post('password/reestablecer', 'Auth\ForgotPasswordController@reestablecer')->name('password_reset.email');
 
 Route::get('home/', 'HomeController@index')->name('home')->middleware(['auth', 'has.permission:validacion']);
 //<a href="{{route('routename', párametros)}}"
