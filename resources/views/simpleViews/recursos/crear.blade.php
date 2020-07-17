@@ -25,9 +25,9 @@
                             <option value="" selected disabled hidden>Seleccione un tipo de recurso</option>
                             @foreach ($tiposrec as $tipo)
                                 @if (old('tipoRec')==$tipo->id)                                     
-                                    <option value="{{$tipo->id}}" selected>{{ $tipo->nombre }}</option>
+                                    <option style="color: black !important;" value="{{$tipo->id}}" selected>{{ $tipo->nombre }}</option>
                                 @else
-                                    <option value="{{$tipo->id}}">{{ $tipo->nombre }}</option>
+                                    <option style="color: black !important;" value="{{$tipo->id}}">{{ $tipo->nombre }}</option>
                                 @endif
                             @endforeach
                         </select>                            
@@ -43,9 +43,9 @@
                             <option value="" selected disabled hidden>Seleccione una marca</option>
                             @foreach ($marcas as $marca)
                                 @if (old('marca')==$marca->id)                                     
-                                    <option value="{{$marca->id}}" selected>{{ $marca->nombre }}</option>
+                                    <option style="color: black !important;" value="{{$marca->id}}" selected>{{ $marca->nombre }}</option>
                                 @else
-                                    <option value="{{$marca->id}}">{{ $marca->nombre }}</option>
+                                    <option style="color: black !important;" value="{{$marca->id}}">{{ $marca->nombre }}</option>
                                 @endif                                
                             @endforeach
                         </select>                             

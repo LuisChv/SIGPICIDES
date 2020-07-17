@@ -22,9 +22,9 @@
                             <option value="" selected disabled hidden>Seleccione un tipo de investigación</option>
                             @foreach ($tiposinv as $tipo)
                                 @if ($subtipo->id_tipo==$tipo->id)
-                                    <option value="{{$tipo->id}}" selected>{{ $tipo->nombre }}</option>
+                                    <option style="color: black !important;" value="{{$tipo->id}}" selected>{{ $tipo->nombre }}</option>
                                 @else
-                                    <option value="{{$tipo->id}}">{{ $tipo->nombre }}</option>
+                                    <option style="color: black !important;" value="{{$tipo->id}}">{{ $tipo->nombre }}</option>
                                 @endif
                             @endforeach
                         </select>
