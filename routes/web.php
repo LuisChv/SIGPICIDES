@@ -23,11 +23,11 @@ Auth::routes();
 //E-mail Verificaction
 Route::get('register/verify/{code}', 'Auth\VerificationController@verificar')->name('verificacion_email');
 
-Route::get('home/', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('home/', 'HomeController@index')->name('home')->middleware(['auth', 'has.permission:validacion']);
 //<a href="{{route('routename', párametros)}}"
 
 //Routes de Icons, Maps, notificaciones ........
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'has.permission:validacion']], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
 		Route::get('maps', ['as' => 'pages.maps', 'uses' => 'PageController@maps']);
 		Route::get('notifications', ['as' => 'pages.notifications', 'uses' => 'PageController@notifications']);
@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('cides', ['as' => 'cides', 'uses' => 'PageController@cides']);
 });
 //Routes de Perfil de usuario
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'has.permission:validacion']], function () {
 	//Route::resource('user', 'UserController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
@@ -48,7 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 //Routes 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     //Roles
     Route::post('roles/store', 'RoleController@store')->name('roles.store')

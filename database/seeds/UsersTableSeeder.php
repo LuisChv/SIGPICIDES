@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
             'institucion' => 'Universidad de El Salvador',
             'descripcion' => 'Soy el administrador y tengo todos los permisos',
             'sexo' => true,
-            'dark' => true
+            'dark' => false
 
         ]);
         $user->email_verified_at = now();
@@ -44,6 +44,10 @@ class UsersTableSeeder extends Seeder
             ]);
     
         }
+        DB::table('permission_user')->insert([
+            'permission_id' => (198),
+            'user_id' => 1,
+        ]);
 
 /*---------------------------------------------------------------------------------------------------*/
         //Coordinador
@@ -75,6 +79,10 @@ class UsersTableSeeder extends Seeder
             ]);
     
         }
+        DB::table('permission_user')->insert([
+            'permission_id' => (198),
+            'user_id' => 2,
+        ]);
 
 /*---------------------------------------------------------------------------------------------------*/
         //Director
@@ -106,6 +114,10 @@ class UsersTableSeeder extends Seeder
             ]);
     
         }
+        DB::table('permission_user')->insert([
+            'permission_id' => (198),
+            'user_id' => 3,
+        ]);
 
 /*---------------------------------------------------------------------------------------------------*/
         //Investigador
@@ -136,6 +148,10 @@ class UsersTableSeeder extends Seeder
                 'user_id' => 4,
             ]);
         }
+        DB::table('permission_user')->insert([
+            'permission_id' => (198),
+            'user_id' => 4,
+        ]);
 
     }
 }
