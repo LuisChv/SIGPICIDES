@@ -19,11 +19,19 @@
 </style>
 
 @can('validacion')
-	<div id="fakebg">
+	<div id="fakebg">		
 		<img id="fondo" src="/black/img/403.png">
 	</div>
 @else
-
-	
+	<div>
+		<p>Se ha enviado un mensaje a su correo electrónico para confirmar su cuenta.</p>
+	</div>
+	<br>
+	<div>
+		<p>Si no recibio el correo presione el boton para reenviarlo.</p>
+	</div>
+	<div>
+			<a href="{{url('resend/verify')}}"><button type="button">Enviar correo</button></a>
+	</div>
 
 @endcan

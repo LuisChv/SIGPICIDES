@@ -62,7 +62,16 @@ class VerificationController extends Controller
         return redirect('/home');        
     }
 
-    public function reenviar($code){
-        dd(auth()->user())
+    public function reenviar(){
+        //dd(auth()->user()->email);
+        $data= User::findOrFail(auth()->user()->id);
+        dd($data);
+        //Para enviar correo de confirmacion de nuevo
+        Mail::send('Mail.verificacion_email_plantilla', $data, function ($message) use ($data){
+            $message->to($data['email'], $data['name']);
+            $message->subject('Verificación de correo electrónico');
+        });
+
+        return redirect('/home');
     }
 }

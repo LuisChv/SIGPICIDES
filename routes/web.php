@@ -22,6 +22,8 @@ Auth::routes();
 
 //E-mail Verificaction
 Route::get('register/verify/{code}', 'Auth\VerificationController@verificar')->name('verificacion_email');
+//ReenviarEmail
+Route::get('resend/verify', 'Auth\VerificationController@reenviar')->name('reenviar_verificacion');
 
 Route::get('home/', 'HomeController@index')->name('home')->middleware(['auth', 'has.permission:validacion']);
 //<a href="{{route('routename', párametros)}}"
@@ -48,8 +50,7 @@ Route::group(['middleware' => ['auth', 'has.permission:validacion']], function (
 });
 
 //Routes 
-Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
-
+Route::middleware(['auth', 'has.permission:validacion'])->group(function(){    
     //Roles
     Route::post('roles/store', 'RoleController@store')->name('roles.store')
     ->middleware('has.permission:roles.create');
