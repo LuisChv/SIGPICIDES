@@ -263,6 +263,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     });
     
     Route::post('email', function () {
+        dd(auth()->user());
         $data = array('email'=> request('email'));
 
         Mail::send('Mail.plantilla', $data, function ($message) {

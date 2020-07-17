@@ -61,4 +61,8 @@ class VerificationController extends Controller
 
         return redirect('/home');        
     }
+
+    public function reenviar($code){
+        dd(auth()->user())
+    }
 }
