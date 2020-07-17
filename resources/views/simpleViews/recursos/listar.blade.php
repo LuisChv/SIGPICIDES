@@ -72,7 +72,7 @@
 <script langiage="javascript" type="text/javascript">
     // RESALTAR LAS FILAS AL PASAR EL MOUSE
     function ResaltarFila(id_fila) {
-    document.getElementById(id_fila).style.backgroundColor = '';
+    document.getElementById(id_fila).style.backgroundColor = '#9c9c9c';
     }
     // RESTABLECER EL FONDO DE LAS FILAS AL QUITAR EL FOCO
     function RestablecerFila(id_fila, color) {
