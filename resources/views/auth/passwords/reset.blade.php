@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="col-lg-5 col-md-7 ml-auto mr-auto">
-        <form class="form" method="post" action="">
+        <form class="form" method="POST" action="{{route('password_reset.update', $token)}}">
             @csrf
-
+            @method('PUT')
             <div class="card card-login card-white">
                 <div class="card-body">
                     @include('alerts.success')
@@ -17,7 +17,7 @@
                                 <i class="tim-icons icon-email-85"></i>
                             </div>
                         </div>
-                    <input type="email" value="{{$email}}" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}">
+                    <input type="email" disabled value="{{$email}}" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}">
                         @include('alerts.feedback', ['field' => 'email'])
                     </div>
                     <div class="input-group{{ $errors->has('password') ? ' has-danger' : '' }}">

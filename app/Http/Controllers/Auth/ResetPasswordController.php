@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use DB;
+use App\User;
+use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
@@ -31,5 +34,11 @@ class ResetPasswordController extends Controller
     public function formulario($token, $email){
         return view('auth.passwords.reset',['token' => $token, 
         'email' => $email,]);
+    }
+
+    public function update($token){
+        dd(request('email'));
+        $user= User::whereRaw("email = ? AND confirmation_token= ?" ,[request('email'),$token])->first();
+        dd($user);
     }
 }

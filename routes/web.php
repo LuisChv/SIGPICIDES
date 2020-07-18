@@ -30,11 +30,13 @@ Route::get('resend/verify', 'Auth\VerificationController@reenviar')->name('reenv
 //Email restablecer password
 Route::post('password/restablecer', 'Auth\ForgotPasswordController@enviar')->name('password_reset.email');
 
+//Guardar password
+Route::put('password/restablecer/{token}', 'Auth\ResetPasswordController@update')->name('password_reset.update');
+
 //formulario restablecer password
 Route::get('password/restablecer/{token}/{email}', 'Auth\ResetPasswordController@formulario')->name('password_reset.form');
 
-//Guardar password
-Route::post('password/restablecer', 'Auth\ForgotPasswordController@enviar')->name('password_reset.update');
+
 
 
 //---------fin

@@ -7,7 +7,7 @@
     <h2>Hola {{$name}}!</h2>
     <p>A continuación te ayudaremos a recuperar tu contraseña</p>
     <p>Para ello simplemente debes hacer click en el siguiente enlace:</p>
-    <a href="{{url('password/reset',array('token'=>$confirmation_code,'email'=>$email))}}" >
+    <a href="{{url('password/restablecer',array('token'=>$confirmation_code,'email'=>$email))}}" >
         Clic para recuperar tu contraseña
     </a>
     <br>
