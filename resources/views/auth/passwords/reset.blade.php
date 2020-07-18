@@ -6,10 +6,6 @@
             @csrf
 
             <div class="card card-login card-white">
-                <div class="card-header">
-                    <img src="{{ asset('black') }}/img/card-primary.png" alt="">
-                    <h1 class="card-title">{{ __('Restablecer la contraseña') }}</h1>
-                </div>
                 <div class="card-body">
                     @include('alerts.success')
 
