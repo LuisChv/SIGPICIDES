@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-lg-5 col-md-7 ml-auto mr-auto">
-        <form class="form" method="post" action="password/restablecer">
+        <form class="form" method="post" action="/password/restablecer">
             @csrf
 
             <div class="card card-login card-white">
