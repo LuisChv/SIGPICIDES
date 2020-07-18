@@ -17,7 +17,7 @@
                                 <i class="tim-icons icon-email-85"></i>
                             </div>
                         </div>
-                    <input type="email" disabled value="{{$email}}" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}">
+                    <input type="email"  value="{{$email}}" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}">
                         @include('alerts.feedback', ['field' => 'email'])
                     </div>
                     <div class="input-group{{ $errors->has('password') ? ' has-danger' : '' }}">

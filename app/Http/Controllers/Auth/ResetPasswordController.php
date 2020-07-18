@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use DB;
 use App\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class ResetPasswordController extends Controller
 {
@@ -37,8 +38,35 @@ class ResetPasswordController extends Controller
     }
 
     public function update($token){
-        dd(request('email'));
-        $user= User::whereRaw("email = ? AND confirmation_token= ?" ,[request('email'),$token])->first();
-        dd($user);
+        
+        request()->validate([
+            'email'=> 'required',
+            'password'=> 'required',
+            'password_confirmation'=> 'required'
+        ],
+        [
+            'email.required' => "El email es obligatorio",
+            'password.required' => "Escriba una contraseña",
+            'password_confirmation' => "Escriba la confirmación de su contraseña",
+        ]);
+        $user= User::whereRaw("email = ? AND confirmation_code= ?" ,[request('email'),$token])->first();
+        if(!$user){
+            return view('auth.passwords.reset',['token' => $token, 
+            'email' => request('email')]);   
+        }
+        if(request('password')==request('password_confirmation')){
+            $user->password= Hash::make(request('password'));
+            $user->confirmation_code=null;
+            $user->save();
+            return redirect('/home');
+        }
+        else{
+            return view('auth.passwords.reset',['token' => $token, 
+            'email' => request('email')]);  
+        }
+        
+
+
+        
     }
 }
