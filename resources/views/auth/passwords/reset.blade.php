@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-lg-5 col-md-7 ml-auto mr-auto">
-        <form class="form" method="post" action="{{ route('password.update') }}">
+        <form class="form" method="post" action="">
             @csrf
 
             <div class="card card-login card-white">
@@ -21,7 +21,7 @@
                                 <i class="tim-icons icon-email-85"></i>
                             </div>
                         </div>
-                        <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}">
+                    <input type="email" value="{{$email}}" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}">
                         @include('alerts.feedback', ['field' => 'email'])
                     </div>
                     <div class="input-group{{ $errors->has('password') ? ' has-danger' : '' }}">

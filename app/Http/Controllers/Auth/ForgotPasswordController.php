@@ -23,27 +23,27 @@ class ForgotPasswordController extends Controller
 
    use SendsPasswordResetEmails;
 
-   public function reestablecer(){
-    request()->validate([
-        'email'=> 'required',
-    ],
-    [
-        'email.required' => "Debe introducir un correo electrónico.",
-    ]);
+    public function enviar(){
+        request()->validate([
+            'email'=> 'required',
+        ],
+        [
+            'email.required' => "Debe introducir un correo electrónico.",
+        ]);
 
-    $user=User::where('email',request('email'))->first();
-    if(!$user){
-        return redirect('/password/reset')->with('status','El correo electrónico introducido no esta registrado');
+        $user=User::where('email',request('email'))->first();
+        if(!$user){
+            return redirect('/password/reset')->with('status','El correo electrónico introducido no esta registrado');
+        }
+        $user['confirmation_code']=Str::random(40);
+        $user->save();
+        $data = array('email'=> $user->email, 'name'=>$user->name, 'confirmation_code'=>$user->confirmation_code);
+           //Para enviar correo de confirmacion de nuevo
+         Mail::send('Mail.password', $data, function ($message) use ($data){
+          $message->to($data['email'], $data['name']);
+          $message->subject('Restablecimiento de contraseña olvidada');
+        });
+
+        return redirect('/password/reset')->with('status','Se envio un correo electrónico con un link para restablecer su contraseña');
     }
-    //$user['confirmation_code']=Str::random(40);
-    //$user->save();
-    $data = array('email'=> $user->email, 'name'=>$user->name, 'confirmation_code'=>$user->confirmation_code);
-    //Para enviar correo de confirmacion de nuevo
-    Mail::send('Mail.password', $data, function ($message) use ($data){
-        $message->to($data['email'], $data['name']);
-        $message->subject('Reestablecimiento de contraseña olvidada');
-    });
-
-    return redirect('/password/reset')->with('status','Se envio un correo electrónico con un link para reestablecer su contraseña');
-}
 }

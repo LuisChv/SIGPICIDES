@@ -11,7 +11,7 @@
                     <h1 class="card-title" align=center>{{ __('') }}</h1>
                 </div><hr><hr><br><br>
                 <div class="card-body">
-                <p color="blue" align=justify>Si el correo electrónico ingresado se encuentra en la base de datos, en un momento recibirá un enlace para reestablecer su contraseña.</p>
+                <p color="blue" align=justify>Si el correo electrónico ingresado se encuentra en la base de datos, en un momento recibirá un enlace para restablecer su contraseña.</p>
                 <br>
                     @include('alerts.success')
                     

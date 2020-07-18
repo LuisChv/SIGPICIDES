@@ -19,13 +19,25 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+//       Todo lo relacionado al usuario laravel (confirmacion de cuenta, reestablecer contraseña, ect)
 
 //E-mail Verificaction
 Route::get('register/verify/{code}', 'Auth\VerificationController@verificar')->name('verificacion_email');
+
 //ReenviarEmail
 Route::get('resend/verify', 'Auth\VerificationController@reenviar')->name('reenviar_verificacion');
-//Email reestablecer correo
-Route::post('password/reestablecer', 'Auth\ForgotPasswordController@reestablecer')->name('password_reset.email');
+
+//Email restablecer password
+Route::post('password/restablecer', 'Auth\ForgotPasswordController@enviar')->name('password_reset.email');
+
+//formulario restablecer password
+Route::get('password/restablecer/{token}/{email}', 'Auth\ResetPasswordController@formulario')->name('password_reset.form');
+
+//Guardar password
+Route::post('password/restablecer', 'Auth\ForgotPasswordController@enviar')->name('password_reset.update');
+
+
+//---------fin
 
 Route::get('home/', 'HomeController@index')->name('home')->middleware(['auth', 'has.permission:validacion']);
 //<a href="{{route('routename', párametros)}}"
