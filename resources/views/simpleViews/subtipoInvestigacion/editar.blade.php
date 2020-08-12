@@ -3,7 +3,7 @@
 	Editar Subtipo de investigación
 @endsection
 @section('opcion')
-<div class="col-5">
+<div class="col-md-5">
     <div class="card">
         <div class="card-header ">
             <h2 class="card-title"><b>Editar subtipo de investigación</b></h2>

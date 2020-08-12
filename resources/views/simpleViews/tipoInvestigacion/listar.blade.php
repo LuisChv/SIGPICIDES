@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
-	<div class="col-7">
+	<div class="col-md-7">
             <div class="card">
                 <div class="card-header ">
                     <div class="row">
@@ -30,41 +30,41 @@
                                 <div>
                                     <table class="table-sm" width='100%'>
                                             <tr class="list-group-item py-1 list-group-flush"  aria-controls="lista{{ $tipo->id }}" id={{$tipo->id}} onMouseOver="ResaltarFila({{$tipo->id}});" onMouseOut="RestablecerFila({{$tipo->id}}, '')">
-                                                <td width='80%' data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false">
+                                                <td width='90%' data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false">
                                                     {{ $tipo->nombre }}&nbsp;&nbsp;
                                                     <i class="tim-icons icon-minimal-down"></i>
                                                 </td>
-                                                <td width='10%' align="right">
-                                                    <a type="button" href="{{ route('tipo_investigacion.edit', $tipo->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>&nbsp;
-                                                </td>
                                                 <form method="POST" id="formularioTipo{{$tipo->id}}" action="{{ route('tipo_investigacion.destroy', $tipo->id)}}">
-                                                    <td width='10%'>
+                                                    <td width='10%' align="right">
+                                                        <div class="btn-group" role="group">
+                                                            <a type="button" href="{{ route('tipo_investigacion.edit', $tipo->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>                        
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="button" onClick="confirmarTipo({{$tipo->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button>
+                                                        </div>
                                                     </td>
                                                 </form>
                                             </tr>
                                     </table>
                                     <div id="lista{{ $tipo->id }}" class="collapse" aria-labelledby="rec{{ $tipo->id }}" data-parent="#accordion">
-                                        <table width='100%' class="table">
+                                        <table width='100%' class="table-sm">
                                             @foreach($sub_tipos as $sub_tipo)
                                                 @if($sub_tipo->id_tipo==$tipo->id)  
-                                                    <tr>                     
-                                                        <td>
-                                                        </td>
-                                                        <td>
+                                                    <tr class="list-group-item py-1 list-group-flush">  
+                                                        <td width='5%'>
+                                                        </td>                   
+                                                        <td width='85%'>
                                                             <i class="tim-icons icon-planet"></i>
                                                             &nbsp;{{ $sub_tipo->nombre }}
                                                         </td>
-                                                        <td width='10%' align="right">
-                                                            <a type="button" href="{{ route('subtipo_investigacion.edit', $sub_tipo->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
-                                                        </td>
                                                         <form method="POST" id="formulario{{$sub_tipo->id}}" action="{{ route('subtipo_investigacion.destroy', $sub_tipo->id)}}">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <td width='10%'>
-                                                                <button type="button" onClick="confirmar({{$sub_tipo->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
+                                                            <td width='10%' align="right">
+                                                                <div class="btn-group" role="group">
+                                                                    <a type="button" href="{{ route('subtipo_investigacion.edit', $sub_tipo->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="button" onClick="confirmar({{$sub_tipo->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
+                                                                </div>
                                                             </td>
                                                         </form>
                                                     </tr>

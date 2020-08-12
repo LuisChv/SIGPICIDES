@@ -52,7 +52,7 @@
                             <img src="{{ asset('black') }}/img/anime3.png" alt="{{ __('Profile Photo') }}">
                         </div>
                         <b class="caret d-none d-lg-block d-xl-block"></b>
-                        <p class="d-lg-none">{{ __('Cerrar sesión') }}</p>
+                        <p class="d-lg-none">{{ __('Usuario') }}</p>
                     </a>
                     <ul class="dropdown-menu dropdown-navbar">
                         <li class="nav-link">
