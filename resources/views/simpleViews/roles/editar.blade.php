@@ -15,6 +15,7 @@
         <div class="card-body">
             <form method="POST" action="{{route('roles.update', $role->id)}}">
             @csrf 
+            @method('PUT')  
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">

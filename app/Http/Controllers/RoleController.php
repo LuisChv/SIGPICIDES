@@ -116,7 +116,22 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Validacion de los datos      
+        request()->validate([
+            'name'=> 'required',
+            'slug'=> 'required',
+        ],
+        [
+            'name.required' => "El nombre es obligatorio.",
+            'slug.required' => "El slug es obligatoria.",
+        ]);      
+
+        $role = Role::findOrFail($id);
+        $role->name = request('name');
+        $role->slug = request('slug');
+        $role->save();
+
+        return redirect('/roles');
     }
 
     /**
