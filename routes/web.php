@@ -274,6 +274,14 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::delete('user/permissions/', 'PermissionController@destroy')->name('permission.destroy')
     ->middleware('has.permission:permission_user.destroy');
 
+    //solicitud de proyecto
+    Route::get('solicitud', 'SolicitudController@index')->name('solicitud.index')
+    ->middleware('has.permission:solicitudes.index');
+
+    Route::get('solicitud/create', 'SolicitudController@create')->name('solicitud.create')
+    ->middleware('has.permission:solicitudes.create');
+
+
     //enviar emails
     Route::get('email', function () {
         return view ('Mail.mailprueba');

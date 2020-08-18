@@ -25,7 +25,7 @@
                 <div class="card-body">
                         <a href="#">Encriptación de datos con BlockChain.</a>
                 </div>
-                <div class="card-footer"></div>
+                <div class="card-footer"><br></div>
             </div>
         </div>
 </div>

@@ -60,7 +60,7 @@
                     <ul class="nav pl-4">
                         @can('solicitudes.index')
                             <li @if ($pageSlug == 'solicitudes') class="active " @endif>
-                                <a href="{{ route('home') }}">
+                                <a href="{{ route('solicitud.index') }}">
                                     <i class="tim-icons icon-bullet-list-67"></i>
                                     <p>{{ __('Consultar solicitudes') }}</p>
                                 </a>
@@ -74,7 +74,7 @@
                         @endcan
                         @can('mis_solicitudes')
                             <li @if ($pageSlug == 'mis_solicitudes') class="active " @endif>
-                                <a href="{{ route('home')  }}">
+                                <a href="{{ route('solicitud.index')  }}">
                                     <i class="tim-icons icon-shape-star"></i>
                                     <p>{{ __('Mis solicitudes') }}</p>
                                 </a>
