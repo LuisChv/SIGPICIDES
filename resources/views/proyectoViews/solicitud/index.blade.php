@@ -13,8 +13,9 @@
                         </div>
                     </div>
                 </div>
+                @foreach($solicitudes as $soli)
                 <div class="card-body">
-                        <a href="#">Desarrollo de Sistema de Transacciones utilizando Minería de datos.</a>
+                        <a href="#">{{ $soli->noti_inv }}</a>
                 </div>
                 <div class="card-body">
                         <a href="#">Traductor LESSA-Español empleando sensores y Machine Learning.</a>

@@ -13,7 +13,23 @@ class SolicitudController extends Controller
      */
     public function index()
     {
-        return view('proyectoViews.solicitud.index');
+        //$solicitudes= \App\Solicitud::all();
+        /*$solicitudes = DB::select(
+            "SELECT * 
+            FROM solicitud s 
+            JOIN estado_de_solicitud es
+            ON s.idES = es.idES
+            WHERE estadoES=1"); //asumiendo que el estado 1 seria el de pendientes de aprobar */
+        $solicitud = DB::select(
+            "SELECT * 
+            FROM proyecto p 
+            JOIN (SELECT * 
+            FROM solicitud s 
+            JOIN estado_de_solicitud es
+            ON s.idES = es.idES
+            WHERE estadoES=1) solicitudes
+            ON p.idPR = solicitudes.idPR");
+        return view('proyectoViews.solicitud.index', ['solicitudes'=>$solicitudes]);
     }
 
     /**
