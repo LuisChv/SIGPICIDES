@@ -15,6 +15,7 @@ class RolesTableSeeder extends Seeder
         Role::create([
             'name'          => 'Administrador',
             'slug'          => 'admin',
+            'tipoRol'   => false,
             //'special'       => 'all-access',
 
         ]);
@@ -22,16 +23,19 @@ class RolesTableSeeder extends Seeder
         Role::create([
             'name'          => 'Coordinador',
             'slug'          => 'coordinador',
+            'tipoRol'   => false,
         ]);
 
         Role::create([
             'name'          => 'Director',
             'slug'          => 'director',
+            'tipoRol'   => false,
         ]);
 
         Role::create([
             'name'          => 'Investigador',
             'slug'          => 'investigador',
+            'tipoRol'   => false,
         ]);
     }
 }
