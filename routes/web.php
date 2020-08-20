@@ -173,6 +173,29 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::put('recursos/{proyecto}', 'RecursoController@update')->name('recursos.update')
     ->middleware('has.permission:recursos.edit');
 
+     //Equipo Investigacion
+
+     Route::get('equipos', 'EquipoController@index')->name('equipos.index')
+     ->middleware('has.permission:equipo_de_investigacion.index');
+ 
+     Route::post('equipos', 'EquipoController@store')->name('equipos.store')
+     ->middleware('has.permission:equipo_de_investigacion.create');  
+ 
+     Route::get('equipos/create', 'EquipoController@create')->name('equipos.create')
+     ->middleware('has.permission:equipo_de_investigacion.create');
+ 
+     Route::get('equipos/{equipo}', 'EquipoController@show')->name('equipos.show')
+     ->middleware('has.permission:equipo_de_investigacion.show');    
+ 
+     Route::delete('equipos/{equipo}', 'EquipoController@destroy')->name('equipos.destroy')
+     ->middleware('has.permission:equipo_de_investigacion.destroy');
+ 
+     Route::get('equipos/{equipo}/edit', 'EquipoController@edit')->name('equipos.edit')
+     ->middleware('has.permission:equipo_de_investigacion.edit');
+ 
+     Route::put('equipos/{equipo}', 'EquipoController@update')->name('equipos.update')
+     ->middleware('has.permission:equipo_de_investigacion.edit');
+
     //Solicitudes
     Route::post('solicitudes/store', 'SolicitudController@store')->name('solicitudes.store')
     ->middleware('has.permission:solicitudes.create');
