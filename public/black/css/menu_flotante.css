@@ -4,7 +4,7 @@
 .menuF-container{
     margin: auto;
     bottom: 12%;
-    left: 90%;
+    left: 88%;
 }
 
 #toggleF{
@@ -48,7 +48,7 @@
     left: -50px;
     transition: all 0.5s ease-in-out;
     background: white;
-    width: 150px;
+    width: 180px;
     border-radius: 5px;
     transform: translateY(0%);
     box-shadow: 2px 3px 10px 0 rgba(0,0,0,0.1);
@@ -57,7 +57,7 @@
 .navF a{
     text-align: center;
     display: block;
-    margin: 20px 0;
+    margin: 10px 0;
     color: #3490dc;
     text-decoration: none;
     font-family: sans-serif;

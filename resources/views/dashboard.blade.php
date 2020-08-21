@@ -29,7 +29,7 @@
             <input type="checkbox" id="toggleF">
             <label for="toggleF" class="buttonF"></label>
             <nav class="navF">
-                <a href="#">Inicio</a>
+                <a href="#">Nueva solicitud</a>
                 <a href="{{ route('cides') }}">Acerca de</a>
                 <a href="#">Acciones largaaaaaaaaas</a>
             </nav>
