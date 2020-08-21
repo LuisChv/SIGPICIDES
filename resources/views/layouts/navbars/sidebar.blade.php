@@ -81,7 +81,7 @@
                         @endcan
                         @can('solicitudes.create')
                             <li @if ($pageSlug == 'enviar_solicitud') class="active " @endif>
-                                <a href="#">
+                                <a href="{{ route('home')  }}">
                                     <i class="tim-icons icon-send"></i>
                                     <p>{{ __('Enviar solicitud') }}</p>
                                 </a>

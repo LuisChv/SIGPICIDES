@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class SolicitudController extends Controller
 {
@@ -11,9 +12,11 @@ class SolicitudController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //TODO 
     public function index()
     {
         //$solicitudes= \App\Solicitud::all();
+        /*
         $solicitudes = DB::select(
             "SELECT * 
             FROM solicitud s 
@@ -30,7 +33,7 @@ class SolicitudController extends Controller
             WHERE estadoES=1) solicitudes
             ON p.idPR = solicitudes.idPR");
             //este es en caso de que el nombre se almacene en la tabla proyectos*/
-        return view('proyectoViews.solicitud.index', ['solicitudes'=>$solicitudes]);
+        return view('proyectoViews.solicitud.index');
     }
 
     /**
