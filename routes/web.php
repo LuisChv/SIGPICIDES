@@ -280,7 +280,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::get('solicitud/create', 'SolicitudController@create')->name('solicitud.create')
     ->middleware('has.permission:solicitudes.create');
-
+    
 
     //enviar emails
     Route::get('email', function () {
