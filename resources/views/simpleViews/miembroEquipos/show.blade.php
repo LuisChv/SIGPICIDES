@@ -9,7 +9,7 @@
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-9 text-left">
-                        <h2 class="card-title"><b>EQUIPOS</b></h2>
+                        <h2 class="card-title"><b>Investigadores del sistema</b></h2>
                     </div>
                 </div>
                 <div class="card-body">
@@ -17,8 +17,8 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Nombre equipo</th>
-                                    <th class="text-center" colspan = "3">ID Proyecto</th>
+                                    <th>Nombre</th>
+                                    <th class="text-center" colspan = "3">Agregar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,7 +58,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($usuarios as $miembro) 
+                        @foreach ($miembros as $miembro) 
                         <tr>                     
                             <td> {{ $miembro->name }} </td>
                             <td> {{ $miembro->name}} </td>

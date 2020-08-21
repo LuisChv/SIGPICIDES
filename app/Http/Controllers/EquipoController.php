@@ -14,18 +14,9 @@ class EquipoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //Prueba de mostrar equipo 
     public function index()
     {
-         //Investigadores en el sistema
-         $data= DB::select('SELECT * FROM role_user WHERE role_id = ?', [4]);
        
-         //Buscar el usuario con el id de entrada
-         
-         //Retornar la vista
-         return view ('simpleViews.equipos.show', [
-             'data'=>$data,
-         ]);
     }
 
     /**
