@@ -585,7 +585,7 @@ class PermissionRoleSeeder extends Seeder
             'permission_id' => 193,
         ]);
 
-
+//TODO Modificar permisos de solicitud segun rol
 /*----------------------------------------------------------------------------------------*/
         //Investigador
         DB::table('rol_permiso')->insert([
@@ -608,6 +608,21 @@ class PermissionRoleSeeder extends Seeder
             'role_id' => 4,
             'permission_id' => 197,
         ]);
-        
+        DB::table('rol_permiso')->insert([
+            'role_id' => 4,
+            'permission_id' => 62,
+        ]);
+        DB::table('rol_permiso')->insert([
+            'role_id' => 4,
+            'permission_id' => 63,
+        ]);
+        DB::table('rol_permiso')->insert([
+            'role_id' => 4,
+            'permission_id' => 64,
+        ]);
+        DB::table('rol_permiso')->insert([
+            'role_id' => 4,
+            'permission_id' => 65,
+        ]);
     }
 }

@@ -321,14 +321,37 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::delete('user/permissions/', 'PermissionController@destroy')->name('permission.destroy')
     ->middleware('has.permission:permission_user.destroy');
 
-    //solicitud de proyecto
-    Route::get('solicitud', 'SolicitudController@index')->name('solicitud.index')
+    /**********************solicitud de proyecto Investigador******************/
+    Route::get('solicitudes', 'SolicitudController@index')->name('solicitud.index')
     ->middleware('has.permission:solicitudes.index');
 
     Route::get('solicitud/create', 'SolicitudController@create')->name('solicitud.create')
     ->middleware('has.permission:solicitudes.create');
-    
 
+    Route::post('solicitud', 'SolicitudController@store')->name('solicitud.store')
+    ->middleware('has.permission:solicitudes.create');
+
+    Route::post('solicitud/{solicitud}', 'SolicitudController@show')->name('solicitud.show')
+    ->middleware('has.permission:solicitudes.create');
+
+    Route::delete('solicitud/{solicitud}', 'SolicitudController@destroy')->name('solicitud.destroy')
+    ->middleware('has.permission:solicitud.destroy');
+
+    Route::get('solicitud/{solicitud}/edit', 'SolicitudController@edit')->name('solicitud.edit')
+    ->middleware('has.permission:solicitud.edit');
+
+    Route::put('solicitud/{solicitud}', 'SolicitudController@update')->name('solicitud.update')
+    ->middleware('has.permission:solicitud.edit');
+
+    /*********************Solicitude de proyecto Admin*******************/
+    
+    Route::get('solicitudes', 'SolicitudController@index')->name('solicitud.index')
+    ->middleware('has.permission:solicitudes.index');
+
+    Route::post('solicitud/{solicitud}', 'SolicitudController@show')->name('solicitud.show')
+    ->middleware('has.permission:solicitudes.create');
+    
+    //
     //enviar emails
     Route::get('email', function () {
         return view ('Mail.mailprueba');
