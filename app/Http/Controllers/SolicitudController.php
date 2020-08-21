@@ -38,7 +38,7 @@ class SolicitudController extends Controller
      */
     public function create()
     {
-        //
+        return view('proyectoViews.solicitud.Investigador.crear');
     }
 
     /**

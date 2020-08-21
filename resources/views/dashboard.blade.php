@@ -30,8 +30,8 @@
             <label for="toggleF" class="buttonF"></label>
             <nav class="navF">
                 <a href="#">Nueva solicitud</a>
-                <a href="{{ route('cides') }}">Acerca de</a>
-                <a href="#">Acciones largaaaaaaaaas</a>
+                <!--a href="{{ route('cides') }}">Acerca de</a>
+                <a href="#">Acciones largaaaaaaaaas</a-->
             </nav>
         </div>
     </div>
