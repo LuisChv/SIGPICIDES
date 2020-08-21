@@ -58,6 +58,7 @@ class RoleController extends Controller
         $role = Role::create([
             'name' => request('name'),
             'slug' => request('slug'),
+            'tipoRol' => false,
         ]);
 
 

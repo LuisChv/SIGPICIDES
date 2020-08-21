@@ -173,6 +173,53 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::put('recursos/{proyecto}', 'RecursoController@update')->name('recursos.update')
     ->middleware('has.permission:recursos.edit');
 
+     //Equipo Investigacion
+
+     Route::get('equipos', 'EquipoController@index')->name('equipos.index')
+     ->middleware('has.permission:equipo_de_investigacion.index');
+ 
+     Route::post('equipos/store', 'EquipoController@store')->name('equipos.store')
+     ->middleware('has.permission:equipo_de_investigacion.create');  
+ 
+     Route::get('equipos/create', 'EquipoController@create')->name('equipos.create')
+     ->middleware('has.permission:equipo_de_investigacion.create');
+ 
+     Route::get('equipos/{equipo}', 'EquipoController@show')->name('equipos.show')
+     ->middleware('has.permission:equipo_de_investigacion.show');    
+ 
+     Route::delete('equipos/{equipo}', 'EquipoController@destroy')->name('equipos.destroy')
+     ->middleware('has.permission:equipo_de_investigacion.destroy');
+ 
+     Route::get('equipos/{equipo}/edit', 'EquipoController@edit')->name('equipos.edit')
+     ->middleware('has.permission:equipo_de_investigacion.edit');
+ 
+     Route::put('equipos/{equipo}', 'EquipoController@update')->name('equipos.update')
+     ->middleware('has.permission:equipo_de_investigacion.edit');
+
+     //Usuario Equipo Rol
+
+     Route::get('miembros', 'UsuarioEquipoRolController@index')->name('miembros.index')
+     ->middleware('has.permission:usuario_equipo_rol.index');
+ 
+     Route::post('miembros', 'UsuarioEquipoRolController@store')->name('miembros.store')
+     ->middleware('has.permission:usuario_equipo_rol.create');  
+ 
+     Route::get('miembros/create', 'UsuarioEquipoRolController@create')->name('miembros.create')
+     ->middleware('has.permission:usuario_equipo_rol.create');
+ 
+     Route::get('miembros/{equipo}', 'UsuarioEquipoRolController@show')->name('miembros.show')
+     ->middleware('has.permission:usuario_equipo_rol.show');    
+ 
+     Route::delete('miembros/{equipo}', 'UsuarioEquipoRolController@destroy')->name('miembros.destroy')
+     ->middleware('has.permission:usuario_equipo_rol.destroy');
+ 
+     Route::get('miembros/{equipo}/edit', 'UsuarioEquipoRolController@edit')->name('miembros.edit')
+     ->middleware('has.permission:usuario_equipo_rol.edit');
+ 
+     Route::put('miembros/{equipo}', 'UsuarioEquipoRolController@update')->name('miembros.update')
+     ->middleware('has.permission:usuario_equipo_rol.edit');
+
+
     //Solicitudes
     Route::post('solicitudes/store', 'SolicitudController@store')->name('solicitudes.store')
     ->middleware('has.permission:solicitudes.create');
