@@ -55,12 +55,13 @@ class RoleController extends Controller
         
 
         //Se asignan las variables al nuevo role
-        $role = Role::create([
-            'name' => request('name'),
-            'slug' => request('slug'),
-            'tipoRol' => false,
-        ]);
+        
+        $rol = new Role();
+        $rol->name = request('name');
+        $rol->slug = request('slug');
+        $rol->tipoRol = false;
 
+        $rol->save();
 
         return redirect('/roles');
    
