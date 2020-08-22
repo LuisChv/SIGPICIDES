@@ -18,8 +18,9 @@ class UsuarioEquipoRolController extends Controller
     public function verEquipoInvestigacion(Request $request)
     {
         //Todos los usuarios
-        $noMiembros = DB::select("SELECT * FROM users");
         $miembros = DB::select("SELECT * FROM users");
+        $noMiembros = DB::select("SELECT * FROM users");
+      
 
         //Omitir usuario investigador lider(Usuario Logeado)
         $lider = auth()->user();
@@ -54,12 +55,15 @@ class UsuarioEquipoRolController extends Controller
 
           //Miembros del equipo 
           $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [1]);
+         
+         //Roles
+         $roles = DB::select("SELECT * FROM roles");
 
-          
          //Retornar la vista
          return view ('simpleViews.miembroEquipos.show', [
               'usuarios'=>$noMiembros,  
               'miembros'=>$miembros,
+              'roles'=>$roles,
          ]);
     }
 
@@ -85,9 +89,16 @@ class UsuarioEquipoRolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        //
+        DB::table('usuario_equipo_rol')->insert([
+            'id_equipo' => 1,
+            'id_usuario' => $id,
+            'id_rol'=> 6,
+        ]);
+
+
+        return redirect('/miembros/ver');
     }
 
     /**

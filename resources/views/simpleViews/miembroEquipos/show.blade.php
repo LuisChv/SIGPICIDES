@@ -27,7 +27,7 @@
                                     <td> {{ $use->name }} </td>
 
                                     <td width='5%'>
-                                        <a role="button" class="btn btn-primary" href="{{ route('miembros.store')  }}"><i class="tim-icons icon-simple-add"></i></a>
+                                        <a role="button" id="usuario" class="btn btn-primary" href="{{ route('miembros.store', $use->id ) }}"><i class="tim-icons icon-simple-add"></i></a>
                                     </td>
                                    
                                 </tr>
@@ -61,7 +61,17 @@
                         @foreach ($miembros as $miembro) 
                         <tr>                     
                             <td> {{ $miembro->name }} </td>
-                            <td> {{ $miembro->name}} </td>
+                            <td> 
+                                <select class="form-control selectorWapis" value="" id="rol" name="rol" disabled>
+                                    <option value="" selected disabled hidden >--Seleccionar Rol--</option>
+                                    @foreach ($roles as $rol)
+                                        @if($miembro->id_rol==$rol->id)
+                                            <option style="color: black !important;" selected>{{ $rol->name }}</option>
+                                        @endif
+                                        <option style="color: black !important;">{{ $rol->name }}</option>
+                                    @endforeach
+                                </select> 
+                            </td>
                             <td width='5%'>
                                 <a type="button" href="#" class="btn btn-default btn-sm btn-icon btn-round"><i class="tim-icons icon-key-25"></i></a>
                                 <a type="button" href="#" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></a>
