@@ -27,17 +27,23 @@
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
 
-                        		<div class="input-group">
+                        		 <div class="input-group{{ $errors->has('tipoRec') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
                                             <i class="tim-icons icon-minimal-down"></i>
                                         </div>
                                     </div>
-                                    <select class="form-control selectorWapis" id="sexo" name="sexo">
-                                        <option>--Seleccionar tipo de investigación--</option>
-                                        <option>Tipo 1</option>
-                                        <option>Tipo 2</option>
-                                    </select>                            
+                                    <select class="form-control selectorWapis" id="selector1" name="tipoRec">
+                                    <option value="-1" selected disabled hidden>Seleccione un tipo de investigación</option>
+                                        @foreach ($tiposinv as $tipo)
+                                            @if (old('tipoRec')==$tipo->id)                                     
+                                                <option style="color: black !important;" value="{{$tipo->id}}" selected>{{ $tipo->nombre }}</option>
+                                            @else
+                                                <option style="color: black !important;" value="{{$tipo->id}}">{{ $tipo->nombre }}</option>
+                                            @endif   
+                                            
+                                        @endforeach
+                                    </select>                    
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -45,10 +51,12 @@
                                             <i class="tim-icons icon-minimal-down"></i>
                                         </div>
                                     </div>
-                                    <select class="form-control selectorWapis" id="sexo" name="sexo">
-                                        <option>--Seleccionar Subtipo de investigación--</option>
-                                        <option>SubTipo 1</option>
-                                        <option>SubTipo 2</option>
+                                    <select class="form-control selectorWapis" id="selector2" name="subtipo">
+                                        <option value=-1>Seleccionar Subtipo de investigación</option>
+                                        @foreach($sub_tipos as $subtipo)
+                                        <option style="color: black !important;" value="{{$subtipo->id}}" 
+                                            class="{{$subtipo->id_tipo}}">{{$subtipo->nombre}}</option>
+                                        @endforeach
                                     </select>                            
                                 </div>
                                 <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
@@ -105,4 +113,24 @@
             </nav>
         </div>
 </div>
+
+<script>
+    $('#selector1').change(function(){
+        //$('#selector2').show();
+        $('#selector2').val(-1);
+        var idFiltro = $(this).val();
+        console.log(idFiltro);
+        if(idFiltro!=-1){
+        //$('.'+idFiltro).show();
+            $("#selector2 > option").each(function(){
+                if($(this).hasClass(idFiltro)){
+                    $(this).show();
+                    console.log(this);
+                }else{
+                    $(this).hide();
+                }
+            });
+        }
+    });
+</script>
 @endsection

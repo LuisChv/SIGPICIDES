@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\SubTipoDeInvestigacion;
+use App\TipoDeInvestigacion;
 use DB;
 
 class SolicitudController extends Controller
@@ -38,7 +40,12 @@ class SolicitudController extends Controller
      */
     public function create()
     {
-        return view('proyectoViews.solicitud.Investigador.crear');
+        $sub_tipos= SubTipoDeInvestigacion::all();
+        $tiposinv=TipoDeInvestigacion::all();
+        return view('proyectoViews.solicitud.Investigador.crear', [
+            'tiposinv' => $tiposinv,
+            'sub_tipos' => $sub_tipos
+        ]);
     }
 
     /**
