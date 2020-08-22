@@ -52,17 +52,17 @@
                                     </select>                            
                                 </div>
                                 <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                    <textarea class="form-control border border-light" rows="4" name="descripcion"placeholder="Describa su proyecto"></textarea>
+                                    <textarea class="form-control border border-light" rows="6" name="descripcion"placeholder="Describa su proyecto"></textarea>
                                     </textarea>
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>   
                                 <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                    <textarea class="form-control border border-light" rows="4" name="descripcion"placeholder="Describa los objetivos del proyecto"></textarea>
+                                    <textarea class="form-control border border-light" rows="4" name="objetivo"placeholder="Describa los objetivos del proyecto"></textarea>
                                     </textarea>
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
                                 <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                    <textarea class="form-control border border-light" rows="4" name="descripcion"placeholder="Describa los alcances del proyecto"></textarea>
+                                    <textarea class="form-control border border-light" rows="4" name="alcance"placeholder="Describa los alcances del proyecto"></textarea>
                                     </textarea>
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>                        
