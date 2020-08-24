@@ -60,7 +60,7 @@
                         <h2 class="card-title"><b>Nuevo usuario</b></h2>
                     </div> 
                     <div class="col-md-6 text-right">
-                        Datos requeridos: *
+                        <p style="color:red">Datos requeridos: *</p><br>
                     </div> 
                 </div>
             </div>
