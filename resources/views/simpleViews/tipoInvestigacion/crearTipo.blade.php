@@ -9,6 +9,7 @@
             <div class="row">
                 <div class="col-sm-12 text-left">
                     <h2 class="card-title"><b>Nuevo Tipo de investigación</b></h2>
+                    Datos requeridos: *
                 </div> 
             </div>
         </div>
@@ -22,7 +23,7 @@
                                 <i class="tim-icons icon-pencil"></i>
                             </div>
                         </div>
-                        <input type="text" name="nombre" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del recurso') }}">
+                        <input type="text" name="nombre" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del recurso *') }}">
                         @include('alerts.feedback', ['field' => 'nombre'])
                     </div>
                 </div>

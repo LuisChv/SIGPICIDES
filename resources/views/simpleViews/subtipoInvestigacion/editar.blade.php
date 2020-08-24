@@ -7,6 +7,7 @@
     <div class="card">
         <div class="card-header ">
             <h2 class="card-title"><b>Editar subtipo de investigación</b></h2>
+            Datos requeridos: *
         </div>
         <div class="card-body">
             <form method="POST" action="{{route('subtipo_investigacion.update', $subtipo->id)}}">
@@ -19,7 +20,7 @@
                             </div>
                         </div>
                         <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
-                            <option value="" selected disabled hidden>Seleccione un tipo de investigación</option>
+                            <option value="" selected disabled hidden>Seleccione un tipo de investigación *</option>
                             @foreach ($tiposinv as $tipo)
                                 @if ($subtipo->id_tipo==$tipo->id)
                                     <option style="color: black !important;" value="{{$tipo->id}}" selected>{{ $tipo->nombre }}</option>
@@ -36,7 +37,7 @@
                                 <i class="tim-icons icon-pencil"></i>
                             </div>
                         </div>
-                        <input type="text" value="{{$subtipo->nombre}}" name="nombre" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del recurso') }}">
+                        <input type="text" value="{{$subtipo->nombre}}" name="nombre" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del recurso *') }}">
                         @include('alerts.feedback', ['field' => 'nombre'])
                     </div>
                     <div class="card-footer">

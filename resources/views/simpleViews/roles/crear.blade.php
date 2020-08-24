@@ -7,8 +7,11 @@
     <div class="card">
         <div class="card-header ">
             <div class="row">
-                <div class="col-sm-8 text-left">
-                    <h2 class="card-title"><b>Nuevo Role</b></h2>
+                <div class="col-md-6 text-left">
+                    <h2 class="card-title"><b>Nuevo rol</b></h2>
+                </div> 
+                <div class="col-md-6 text-right">
+                    Datos requeridos: *
                 </div> 
             </div>
         </div>
@@ -21,7 +24,7 @@
                             <i class="tim-icons icon-pencil"></i>
                         </div>
                     </div>
-                    <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del Role') }}">
+                    <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del Role *') }}">
                     @include('alerts.feedback', ['field' => 'name'])
                 </div>
 
@@ -31,7 +34,7 @@
                             <i class="tim-icons icon-pencil"></i>
                         </div>
                     </div>
-                    <input type="text" name="slug" class="form-control{{ $errors->has('slug') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre de dominio slug') }}">
+                    <input type="text" name="slug" class="form-control{{ $errors->has('slug') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre de dominio slug *') }}">
                     @include('alerts.feedback', ['field' => 'modelo'])
                 </div>
                 <div class="card-footer">

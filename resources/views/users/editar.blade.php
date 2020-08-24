@@ -56,8 +56,11 @@
         <div class="card">
             <div class="card-header ">
                 <div class="row">
-                    <div class="col-sm-8 text-left">
-                        <h2 class="card-title"><b>Editar Usuario</b></h2>
+                    <div class="col-md-6 text-left">
+                        <h2 class="card-title"><b>Editar usuario</b></h2>
+                    </div> 
+                    <div class="col-md-6 text-right">
+                        Datos requeridos: *
                     </div> 
                 </div>
             </div>
@@ -72,7 +75,7 @@
                                     <i class="tim-icons icon-single-02"></i>
                                 </div>
                             </div>
-                            <input type="text" name="name" value="{{$user->name}}" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre completo') }}">
+                            <input type="text" name="name" value="{{$user->name}}" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre completo *') }}">
                             @include('alerts.feedback', ['field' => 'name'])
                         </div>
                         <div class="input-group{{ $errors->has('email') ? ' has-danger' : '' }}">
@@ -81,7 +84,7 @@
                                     <i class="tim-icons icon-email-85"></i>
                                 </div>
                             </div>
-                            <input type="email" name="email" value="{{$user->email}}" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Correo electrónico') }}">
+                            <input type="email" name="email" value="{{$user->email}}" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Correo electrónico *') }}">
                             @include('alerts.feedback', ['field' => 'email'])
                         </div>
                         <div class="row">
@@ -113,7 +116,7 @@
                                     <i class="tim-icons icon-bank"></i>
                                 </div>
                             </div>
-                            <input type="text" name="institucion" value="{{$user->institucion}}" class="form-control{{ $errors->has('institucion') ? ' is-invalid' : '' }}" placeholder="{{ __('Institución de procedencia') }}">
+                            <input type="text" name="institucion" value="{{$user->institucion}}" class="form-control{{ $errors->has('institucion') ? ' is-invalid' : '' }}" placeholder="{{ __('Institución de procedencia *') }}">
                             @include('alerts.feedback', ['field' => 'institucion'])
                         </div>
                         <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
@@ -122,16 +125,16 @@
                                     <i class="tim-icons icon-align-left-2"></i>
                                 </div>
                             </div>
-                            <input type="text" name="descripcion" value="{{$user->descripcion}}" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" placeholder="{{ __('Descripción personal') }}">
+                            <input type="text" name="descripcion" value="{{$user->descripcion}}" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" placeholder="{{ __('Descripción personal *') }}">
                             @include('alerts.feedback', ['field' => 'descripcion'])
                         </div>
                         <div class="input-group{{ $errors->has('fecha_nac') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                                    <i class="fa fa-birthday-cake" aria-hidden="true"> *</i>
                                 </div>
                             </div>
-                            <input type="date" max="2002-01-01" value="{{$user->fecha_nac}}" name="fecha_nac" class="form-control {{ $errors->has('fecha_nac') ? ' is-invalid' : '' }}" placeholder="{{ __('Fecha de nacimiento') }}">
+                            <input type="date" max="2002-01-01" value="{{$user->fecha_nac}}" name="fecha_nac" class="form-control {{ $errors->has('fecha_nac') ? ' is-invalid' : '' }}" placeholder="{{ __('Fecha de nacimiento *') }}">
                             @include('alerts.feedback', ['field' => 'fecha_nac'])
                         </div>
                         <div class="input-group">
@@ -141,7 +144,7 @@
                                 </div>
                             </div>
                             <select class="form-control selectorWapis" value="" id="rol" name="rol">
-                                <option value="" selected disabled hidden >--Seleccionar Rol--</option>
+                                <option value="" selected disabled hidden >Seleccione un rol *</option>
                                 @foreach ($roles as $rol)
                                     @if($roleuser->role_id==$rol->id)
                                         <option style="color: black !important;" selected>{{ $rol->name }}</option>
@@ -158,7 +161,7 @@
                                 </div>
                             </div>
                             <select class="form-control selectorWapis" value="{{$user->sexo}}" id="sexo" name="sexo">
-                            	<option value="" selected disabled hidden>Sexo</option>
+                            	<option value="" selected disabled hidden>Sexo *</option>
                                     @if($user->sexo)
                                         <option style="color: black !important;"selected>Masculino</option>
                                         <option style="color: black !important;">Femenino</option>

@@ -135,7 +135,6 @@ class UserController extends Controller
         request()->validate([
             'name'=> ['required', 'string', 'max:255'],
             'email'=> ['required', 'email', Rule::unique('users')->ignore($id)],
-            'password'=> ['required', 'string', 'min:8', 'confirmed'],
             'fecha_nac'=> 'required',
             'institucion'=> 'required',
             'descripcion'=> 'required',
@@ -159,7 +158,9 @@ class UserController extends Controller
 
         $user->name=request('name');
         $user->email=request('email');
-        $user->password=Hash::make(request('password'));
+        if(!empty(request('password'))){
+            $user->password=Hash::make(request('password'));
+        }
         $user->fecha_nac=request('fecha_nac');
         $user->institucion=request('institucion');
         $user->descripcion=request('descripcion');
