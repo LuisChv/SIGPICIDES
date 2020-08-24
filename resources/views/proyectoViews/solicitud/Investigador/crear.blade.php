@@ -107,6 +107,7 @@
                 <a href="{{ route('solicitud.create')}}">Recursos</a>
                 <a href="{{ route('solicitud.create')}}">Factibilidad</a>
                 <a href="{{ route('miembros.ver')}}">Miembros</a>
+                <!--a href="{{ route('equipo.index')}}">Miembros</a--> //Este seria el oficial
                 <a href="{{ route('solicitud.create')}}">Planificación</a>
                 <!--a href="{{ route('cides') }}">Acerca de</a>
                 <a href="#">Acciones largaaaaaaaaas</a-->

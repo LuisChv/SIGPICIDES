@@ -352,7 +352,10 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::post('solicitud/{solicitud}', 'SolicitudController@show')->name('solicitud.show')
     ->middleware('has.permission:solicitudes.create');
     
-    //
+    //proyecto-equipo
+    Route::get('equipo', 'EquipoController@index')->name('equipo.index')
+    ->middleware('has.permission:equipos.index');
+
     //enviar emails
     Route::get('email', function () {
         return view ('Mail.mailprueba');
