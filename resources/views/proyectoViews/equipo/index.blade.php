@@ -72,17 +72,54 @@
                                     @endforeach
                                 </select> 
                             </td>
-                            <td width='5%'>
-                                <a type="button" href="#" class="btn btn-default btn-sm btn-icon btn-round"><i class="tim-icons icon-key-25"></i></a>
-                                <a type="button" href="#" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></a>
-                            </td>
-                            <td width='5%'>
-                
-                            </td>
+
+
+                            <form method="POST" id="miembro" action="{{route('miembros.update', $miembro->id)}}" >
+                            @csrf
+                            @method('UPDATE')
+                                <td width='10%' align="right">
+                                    <a type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round" data-toggle="modal" data-target="#create"><i class="tim-icons icon-pencil"></i></a>
+                                </td>
+                            </form>
+                    
+                            <form method="POST" id="formulario{{$miembro->id}}" action="{{route('miembros.destroy', $miembro->id)}}" >
+                            @csrf
+                            @method('DELETE')
+                                <td width='10%'>
+                                    <button type="button" onClick="confirmar({{$miembro->id}})" class="btn btn-warning btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button> 
+                                </td>
+                            </form>
+                        
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+
+                <div class="modal fade" id="create">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                <span>×</span>
+                                </button>
+                                <h4>Agregar Miembro</h4>
+                            </div>
+                            <div class="modal-body">
+                                <label for="rol">ROL DE EQUIPO</label>
+                                <select class="form-control selectorWapis" value="" id="rolmiembro">
+                                    <option value="" selected disabled hidden >--Seleccionar Rol--</option>
+                                    @foreach ($roles as $rol)
+                                        <option style="color: black !important;">{{ $rol->name }}</option>
+                                    @endforeach
+                                </select> 
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-primary" value="Guardar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -92,7 +129,7 @@
                 <nav class="navF">
                     <a href="{{ route('solicitud.create')}}">Recursos</a>
                     <a href="{{ route('solicitud.create')}}">Factibilidad</a>
-                    <a href="{{ route('miembros.ver')}}">Miembros</a>
+                    <a href="{{ route('miembros.index')}}">Miembros</a>
                     <a href="{{ route('solicitud.create')}}">Planificación</a>
                     <!--a href="{{ route('cides') }}">Acerca de</a>
                     <a href="#">Acciones largaaaaaaaaas</a-->
@@ -101,3 +138,30 @@
 </div>
 @endsection
 
+<script src="sweetalert2.all.min.js"></script>
+<script langiage="javascript" type="text/javascript">
+   
+    
+   require("sweetalert");
+    function confirmar(valor){
+        //ruta.concat(variable,")}}");
+        swal({
+          title: "¿Eliminar registro?",
+          text: "Esta acción es irreversible.",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Registro eliminado", {
+              icon: "success",
+            });
+            document.getElementById("formulario"+valor).submit();
+          } else {
+            swal("Eliminación cancelada");
+          }
+        });
+    }
+    
+</script>

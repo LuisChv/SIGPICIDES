@@ -15,8 +15,6 @@ class UsuarioEquipoRolController extends Controller
      */
 
 
-
-
     public function index()
     {
          //Todos los usuarios
@@ -29,7 +27,7 @@ class UsuarioEquipoRolController extends Controller
  
          foreach ($noMiembros as $user){ 
              if($user->id == $lider->id){
-                 unset($noMiembros[$user->id - 1]);
+                // unset($noMiembros[$user->id - 1]);
              }
          }
  
@@ -59,7 +57,7 @@ class UsuarioEquipoRolController extends Controller
            $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [1]);
           
           //Roles
-          $roles = DB::select("SELECT * FROM roles");
+          $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [true]);
  
           //Retornar la vista
           return view ('proyectoViews.equipo.index', [
@@ -85,16 +83,27 @@ class UsuarioEquipoRolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id)
+    public function store(Request $request, $id)
     {
+        $equipo = DB::select('SELECT * FROM equipo_de_investigacion');
+
+        if($equipo==null){
+            DB::table('equipo_de_investigacion')->insert([
+                'idproy' => 1,
+                'iduer' => 'EQUIPO 1',
+                'haylider'=> false,
+            ]);
+    
+        }
+
         DB::table('usuario_equipo_rol')->insert([
-            'id_equipo' => 1,
+            'id_equipo' => 1 ,
             'id_usuario' => $id,
             'id_rol'=> 6,
         ]);
 
 
-        return redirect('/miembros/ver');
+        return redirect('/miembros');
     }
 
     /**

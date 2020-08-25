@@ -153,5 +153,38 @@ class UsersTableSeeder extends Seeder
             'user_id' => 4,
         ]);
 
+         //Investigador 2
+         $user=User::create([
+            'name' => 'Investigador 2',
+            'email' => 'investigador2@gmail.com',
+            'password' => Hash::make('secret'),
+            'fecha_nac' => date("1998-08-22"),
+            'institucion' => 'Universidad de El Salvador',
+            'descripcion' => 'Soy el investigador 2',
+            'sexo' => true,
+            'dark' => false,
+        ]);
+
+        $user->email_verified_at = now();
+        $user->save();
+
+        DB::table('role_user')->insert([
+            'role_id' => 4,
+            'user_id' => 5,
+        ]);
+
+        $objetos = DB::select('SELECT * FROM rol_permiso WHERE role_id = 4');
+
+        foreach ($objetos as $objeto) {
+            DB::table('permission_user')->insert([
+                'permission_id' => $objeto->permission_id,
+                'user_id' => 5,
+            ]);
+        }
+        DB::table('permission_user')->insert([
+            'permission_id' => (198),
+            'user_id' => 5,
+        ]);
+
     }
 }
