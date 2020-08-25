@@ -375,6 +375,10 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 });
 
 //recursos por proyecto
+Route::post('proyectos/recurso/store', 'ProyectoController@store')->name('proyecto.recursos.store');
+//    ->middleware('has.permission:proyectos.create');
+
 Route::get('proyecto/asignar_recursos/{id}', 'RecursoProyectoController@create')->name('proyecto.asignar_recursos');
 //->middleware('has.permission:solicitudes.create');
+
     

@@ -39,7 +39,7 @@
                                                     <td width='10%'>
                                                         <button type="button" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#modal{{$rec->id}}"><i class="tim-icons icon-simple-add"></i></button>
                                                         <!-- Modal -->
-                                                        <form method="POST" action="">
+                                                        <form method="POST" action="{{route('proyecto.recursos.store')}}">
                                                         @csrf
                                                             <div class="modal fade" id="modal{{$rec->id}}" tabindex="-1" role="dialog" aria-labelledby="label{{$rec->id}}" aria-hidden="true">
                                                               <div class="modal-dialog" role="document">
@@ -58,10 +58,10 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td class="font-weight-bold" style="color: #222a42 !important;">Detalle</td>
-                                                                            <td><textarea style="color: #222a42 !important;" class="form-control border border-light rounded"></textarea></td>
+                                                                            <td><textarea style="color: #222a42 !important;" class="form-control border border-light rounded" name=detalle_recurso></textarea></td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td style="color: #222a42 !important;" class="font-weight-bold">Cantidad</td>
+                                                                            <td style="color: #222a42 !important;" class="font-weight-bold" name="cantidad">Cantidad</td>
                                                                             <td><input style="color: #222a42 !important;" type="number" class=form-control></td>
                                                                         </tr>
                                                                     </table>
