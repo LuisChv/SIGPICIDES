@@ -8,8 +8,9 @@ use App\User;
 
 class PermissionController extends Controller
 {
-    public function index($user)
+    public function index($u)
     {
+        $user = User::findOrFail($u);
         $tablas = DB::select(
             "SELECT * FROM tabla");
 
@@ -21,7 +22,7 @@ class PermissionController extends Controller
             FROM permissions p 
             JOIN permission_user u 
             ON p.id = u.permission_id 
-            WHERE u.user_id = ?", [$user]);
+            WHERE u.user_id = ?", [$u]);
 
         foreach ($permisos as $permiso) { 
             foreach($permisos_usuario as $pu) { 

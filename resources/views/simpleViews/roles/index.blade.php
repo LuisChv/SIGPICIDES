@@ -23,36 +23,42 @@
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
-                                    <th class="text-center" colspan = "3">Acciones</th>
+                                    <th class="text-center">
+                                        Acciones
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $rol) 
                                 <tr>                     
-                                    <td id={{$rol->id}} onMouseOver="ResaltarFila({{$rol->id}});" onMouseOut="RestablecerFila({{$rol->id}}, '')" onClick="CrearEnlace('{{ route('roles.show', $rol->id)}}');">{{$rol->name}}</td>
-
-                                    <td width='5%'>
-                                        <a type="button" href="{{ route('roles.permissions', $rol->id)}}" class="btn btn-default btn-sm btn-icon btn-round"><i class="tim-icons icon-key-25"></i></a>
-                                    </td>
-                                    <td width='5%'>
-                                        <a type="button" href="{{ route('roles.edit', $rol->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
-                                    </td>
-                                    @if ($rol->id < 5)
+                                        <td width="80%" id={{$rol->id}} onMouseOver="ResaltarFila({{$rol->id}});" onMouseOut="RestablecerFila({{$rol->id}}, '')" onClick="CrearEnlace('{{ route('roles.show', $rol->id)}}');">
+                                            {{$rol->name}}
+                                        </td>
                                         <form method="POST" id="formulario{{$rol->id}}" action="{{route('roles.destroy', $rol->id)}}" >
-                                        @csrf
-                                        @method('DELETE')
-                                        <td width='5%'>
-                                            <button type="button"onClick="" disabled style="pointer-events: auto;" title="No se puede eliminar un rol primario" class="btn btn-warning btn-sm btn-icon btn-round "><i class="tim-icons icon-simple-remove"></i></button> 
-                                        </td></form>
-                                    @else
-                                        <form method="POST" id="formulario{{$rol->id}}" action="{{route('roles.destroy', $rol->id)}}" >
-                                        @csrf
-                                        @method('DELETE')
-                                        <td width='5%'>
-                                            <button type="button" onClick="confirmar({{$rol->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
-                                        </td></form>                                   
-                                    @endif
-                                </tr>
+                                            <td width="15%">
+                                                <div class="btn-group" role="group">
+                                                    <a title="Configurar permisos" type="button" href="{{ route('roles.permissions', $rol->id)}}" class="btn btn-default btn-sm btn-icon btn-round">
+                                                        <i class="tim-icons icon-key-25"></i>
+                                                    </a>
+                                                    <a type="button" href="{{ route('roles.edit', $rol->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round">
+                                                        <i class="tim-icons icon-pencil"></i>
+                                                    </a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button @if ($rol->id < 5) disabled @endif type="button" onClick="" style="pointer-events: auto;" title="No se puede eliminar un rol primario" class="btn btn-warning btn-sm btn-icon btn-round ">
+                                                        <i class="tim-icons icon-simple-remove"></i>
+                                                    </button> 
+                                                </div>
+                                            </td>
+                                        </form>
+                                        <td width="5%">
+                                            @isset($role)
+                                                @if ($role->id == $rol->id)
+                                                    <i class="tim-icons icon-double-right"></i>
+                                                @endif
+                                            @endisset
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>

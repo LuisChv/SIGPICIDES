@@ -39,7 +39,7 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <input hidden name="id_permiso" value="{{$permiso->id}}">
-                                                        <input hidden name="id_role" value="{{$role}}">
+                                                        <input hidden name="id_role" value="{{$role->id}}">
                                                         &nbsp;&nbsp;{{$permiso->name}}
                                                     </form>
                                                 </td>
@@ -94,7 +94,7 @@
                                                 <form id="añadirPermiso{{$permiso->id}}" method="post" action="{{route('role_permission.store')}}">
                                                     @csrf
                                                     <input hidden name="id_permiso" value="{{$permiso->id}}">
-                                                    <input hidden name="id_role" value="{{$role}}">
+                                                    <input hidden name="id_role" value="{{$role->id}}">
                                                     &nbsp;&nbsp;{{$permiso->name}}
                                                 </form>
                                             </td>

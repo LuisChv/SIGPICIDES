@@ -151,3 +151,20 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.rojo::-webkit-input-placeholder:after {
+  content:"*";
+  color:red;
+  font-size:1.15em;
+}
+
+.rojol::-moz-placeholder:after {
+    content:"*";
+    color:red;
+    font-size:1.15em;
+}
+.rojo::-ms-input-placeholder:after {     
+    content:"*";
+    color:red;
+    font-size:1.15em;
+}
