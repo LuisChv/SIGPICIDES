@@ -347,3 +347,8 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
         });
     });
 });
+
+//recursos por proyecto
+Route::get('proyecto/asignar_recursos/{id}', 'RecursoProyectoController@create')->name('proyecto.asignar_recursos');
+//->middleware('has.permission:solicitudes.create');
+    
