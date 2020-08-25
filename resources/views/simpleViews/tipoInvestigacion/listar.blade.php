@@ -30,20 +30,29 @@
                                 <div>
                                     <table class="table-sm" width='100%'>
                                             <tr class="list-group-item py-1 list-group-flush"  aria-controls="lista{{ $tipo->id }}" id={{$tipo->id}} onMouseOver="ResaltarFila({{$tipo->id}});" onMouseOut="RestablecerFila({{$tipo->id}}, '')">
-                                                <td width='90%' data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false">
+                                                <td width='85%' data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false">
                                                     {{ $tipo->nombre }}&nbsp;&nbsp;
                                                     <i class="tim-icons icon-minimal-down"></i>
                                                 </td>
                                                 <form method="POST" id="formularioTipo{{$tipo->id}}" action="{{ route('tipo_investigacion.destroy', $tipo->id)}}">
                                                     <td width='10%' align="right">
                                                         <div class="btn-group" role="group">
-                                                            <a type="button" href="{{ route('tipo_investigacion.edit', $tipo->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>                        
+                                                            <a type="button" href="{{ route('tipo_investigacion.edit', $tipo->id)}}" class="btn btn-primary btn-sm btn-sm btn-icon btn-round">
+                                                                <i class="tim-icons icon-pencil"></i>
+                                                            </a>               
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="button" onClick="confirmarTipo({{$tipo->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button>
                                                         </div>
                                                     </td>
                                                 </form>
+                                                <td width="5%">
+                                                    @isset($tipoInv)
+                                                        @if ($tipoInv->id == $tipo->id)
+                                                            <i class="tim-icons icon-double-right"></i>
+                                                        @endif
+                                                    @endisset
+                                                </td>
                                             </tr>
                                     </table>
                                     <div id="lista{{ $tipo->id }}" class="collapse" aria-labelledby="rec{{ $tipo->id }}" data-parent="#accordion">
@@ -53,7 +62,7 @@
                                                     <tr class="list-group-item py-1 list-group-flush">  
                                                         <td width='5%'>
                                                         </td>                   
-                                                        <td width='85%'>
+                                                        <td width='80%'>
                                                             <i class="tim-icons icon-planet"></i>
                                                             &nbsp;{{ $sub_tipo->nombre }}
                                                         </td>
@@ -65,6 +74,13 @@
                                                                     @method('DELETE')
                                                                     <button type="button" onClick="confirmar({{$sub_tipo->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
                                                                 </div>
+                                                            </td>
+                                                            <td width="5%">
+                                                                @isset($subtipo)
+                                                                    @if ($subtipo->id == $sub_tipo->id)
+                                                                        <i class="tim-icons icon-double-right"></i>
+                                                                    @endif
+                                                                @endisset
                                                             </td>
                                                         </form>
                                                     </tr>

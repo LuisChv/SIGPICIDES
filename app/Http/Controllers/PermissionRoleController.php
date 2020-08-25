@@ -9,8 +9,9 @@ use DB;
 
 class PermissionRoleController extends Controller
 {
-    public function index($role)
+    public function index($rol)
     {
+        $role = Role::findOrFail($rol);
         $tablas = DB::select(
             "SELECT * FROM tabla");
 
@@ -22,7 +23,7 @@ class PermissionRoleController extends Controller
             FROM permissions p 
             JOIN rol_permiso r 
             ON p.id = r.permission_id 
-            WHERE r.role_id = ?", [$role]);
+            WHERE r.role_id = ?", [$rol]);
 
         foreach ($permisos as $permiso) { 
             foreach($permisos_role as $pr) { 

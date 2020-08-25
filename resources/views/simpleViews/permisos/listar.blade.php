@@ -1,63 +1,8 @@
-@extends('layouts.app',['pageSlug' => 'dashboard'])
+@extends('users.index')  
 @section('title')
-    Administración de permisos
+    Permisos por usuario
 @endsection
-@section('content')
-<div class="row">
-    <div class="col-6">
-        <div class="card">
-            <div class="card-header ">
-                <div class="row">
-                    <div class="col-sm-9 text-left">
-                        <h2 class="card-title"><b>Administración de Usuarios</b></h2>
-                    </div>
-                    <div class="col-sm-3 text-right">
-                        <a role="button" class="btn btn-primary" href="{{ route('users.create')  }}">
-                            <i class="tim-icons icon-simple-add"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="container list-group">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Email</th>
-                                    <th class="text-center" colspan = "3">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($data as $use) 
-                                <tr>                     
-                                    <td id={{$use->id}} onMouseOver="ResaltarFila({{$use->id}});" onMouseOut="RestablecerFila({{$use->id}}, '')" onClick="CrearEnlace('{{ route('users.show', $use->id)}}');">
-                                        {{$use->email}}
-                                    </td>
-
-                                    <td width='5%'>
-                                        @if($use->id != $user)
-                                            <a type="button" href="{{ route('permission.index', $use->id)}}" class="btn btn-default btn-sm btn-icon btn-round"><i class="tim-icons icon-key-25"></i></a>
-                                        @else
-                                            <i class="tim-icons icon-double-right"></i>
-                                        @endif
-                                    </td>
-                                    <td width='5%'>
-                                        <a type="button" href="{{ route('users.edit', $use->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
-                                    </td>
-                                    <form method="POST" id="formulario{{$use->id}}" action="{{route('users.destroy', $use->id)}}" >
-                                    @csrf
-                                    @method('DELETE')
-                                    <td width='5%'>
-                                        <button type="button" onClick="confirmar({{$use->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
-                                    </td></form>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+@section('opcion')
     <div class="col-3">
         <div>
             <div class="card">
@@ -94,7 +39,7 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <input hidden name="id_permiso" value="{{$permiso->id}}">
-                                                            <input hidden name="id_usuario" value="{{$user}}">
+                                                            <input hidden name="id_usuario" value="{{$user->id}}">
                                                             &nbsp;&nbsp;{{$permiso->name}}
                                                         </form>
                                                     </td>
@@ -149,7 +94,7 @@
                                                     <form id="añadirPermiso{{$permiso->id}}" method="post" action="{{route('permission.store')}}">
                                                         @csrf
                                                         <input hidden name="id_permiso" value="{{$permiso->id}}">
-                                                        <input hidden name="id_usuario" value="{{$user}}">
+                                                        <input hidden name="id_usuario" value="{{$user->id}}">
                                                         &nbsp;&nbsp;{{$permiso->name}}
                                                     </form>
                                                 </td>
@@ -169,7 +114,6 @@
             </div>
         </div>
     </div>
-</div>
 @endsection
 <script langiage="javascript" type="text/javascript">
     // RESALTAR LAS FILAS AL PASAR EL MOUSE

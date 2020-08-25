@@ -23,12 +23,13 @@
                             <thead>
                                 <tr>
                                     <th>Email</th>
-                                    <th class="text-center" colspan = "3">Acciones</th>
+                                    <th class="text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $use) 
                                 <tr>                     
+<<<<<<< Updated upstream
                                     <td id={{$use->id}} onMouseOver="ResaltarFila({{$use->id}});" onMouseOut="RestablecerFila({{$use->id}}, '')" onClick="CrearEnlace('{{ route('users.show', $use->id)}}');">{{$use->email}}</td>
 
                                     <td width='5%'>
@@ -36,13 +37,37 @@
                                     </td>
                                     <td width='5%'>
                                         <a type="button" href="{{ route('users.edit', $use->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i title="Editar" class="tim-icons icon-pencil"></i></a>
+=======
+                                    <td width="80%" id={{$use->id}} onMouseOver="ResaltarFila({{$use->id}});" onMouseOut="RestablecerFila({{$use->id}}, '')" onClick="CrearEnlace('{{ route('users.show', $use->id)}}');">
+                                        {{$use->email}}
+>>>>>>> Stashed changes
                                     </td>
+
                                     <form method="POST" id="formulario{{$use->id}}" action="{{route('users.destroy', $use->id)}}" >
-                                    @csrf
-                                    @method('DELETE')
-                                    <td width='5%'>
-                                        <button type="button" onClick="confirmar({{$use->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
-                                    </td></form>
+                                        <td width="15%">
+                                            <div class="btn-group" role="group">
+                                                <a type="button" href="{{ route('permission.index', $use->id)}}" class="btn btn-default btn-sm btn-icon btn-round">
+                                                    <i class="tim-icons icon-key-25"></i>
+                                                </a>
+                                                <a type="button" href="{{ route('users.edit', $use->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round">
+                                                    <i class="tim-icons icon-pencil"></i>
+                                                </a>
+
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" onClick="confirmar({{$use->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
+                                                    <i class="tim-icons icon-simple-remove"></i>
+                                                </button> 
+                                            </div>
+                                        </td>
+                                    </form>
+                                    <td width="5%">
+                                        @isset($user)
+                                            @if ($user->id == $use->id)
+                                                <i class="tim-icons icon-double-right"></i>
+                                            @endif
+                                        @endisset
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -52,6 +77,7 @@
             </div>
         </div>
     </div>
+    @yield('opcion')
 </div>
 @endsection
 
