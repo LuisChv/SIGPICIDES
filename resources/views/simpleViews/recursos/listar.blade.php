@@ -37,19 +37,31 @@
                                         @foreach($recursos as $rec)
                                             @if($rec->id_tipo==$tipo->id)  
                                                 <tr>                     
-                                                    <td id={{$rec->id}} onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')" onClick="CrearEnlace('{{ route('recursos.show', $rec->id)}}');" >
+                                                    <td width='85%' id={{$rec->id}} onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')" onClick="CrearEnlace('{{ route('recursos.show', $rec->id)}}');" >
                                                         &nbsp;&nbsp;&nbsp;&nbsp;<i class="tim-icons icon-planet"></i>
                                                         &nbsp;{{ $rec->nombre }}
                                                     </td>
-                                                    <td width='10%' align="right">
-                                                        <a type="button" href="{{ route('recursos.edit', $rec->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
-                                                    </td>
                                                     <form method="POST" id="formulario{{$rec->id}}" action="{{route('recursos.destroy', $rec->id)}}" >
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <td width='10%'>
-                                                        <button type="button" onClick="confirmar({{$rec->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
-                                                    </td></form>
+                                                        <td width='10%' align="right">
+                                                            <div class="btn-group" role="group">
+                                                                <a type="button" href="{{ route('recursos.edit', $rec->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round">
+                                                                    <i class="tim-icons icon-pencil"></i>
+                                                                </a>
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="button" onClick="confirmar({{$rec->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
+                                                                    <i class="tim-icons icon-simple-remove"></i>
+                                                                </button> 
+                                                            </div>
+                                                        </td>
+                                                    </form>
+                                                    <td width="5%">
+                                                        @isset($recurso)
+                                                            @if ($recurso->id == $rec->id)
+                                                                <i class="tim-icons icon-double-right"></i>
+                                                            @endif
+                                                        @endisset
+                                                    </td>
                                                 </tr>
                                             @endif
                                         @endforeach

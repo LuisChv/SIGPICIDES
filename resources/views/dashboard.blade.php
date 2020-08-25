@@ -20,7 +20,7 @@
                         <div class="icon icon-warning">
                             <img src="{{ asset('black') }}/img/favicon.png" alt="" width="25%">
                         </div>
-                        <p style="font-size:800%;"><b>Próximamente</b></p>
+                        <p style="font-size:800%;"><b>Próximamente!!!</b></p>
                     </div>
                 </div>
             </div>
@@ -28,11 +28,10 @@
         <div class="container menuF-container">
             <input type="checkbox" id="toggleF">
             <label for="toggleF" class="buttonF"></label>
-
             <nav class="navF">
-                <a href="#">Inicio</a>
-                <a href="{{ route('cides') }}">Acerca de</a>
-                <a href="#">Acciones</a>
+                <a href="#">Nueva solicitud</a>
+                <!--a href="{{ route('cides') }}">Acerca de</a>
+                <a href="#">Acciones largaaaaaaaaas</a-->
             </nav>
         </div>
     </div>

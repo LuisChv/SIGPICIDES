@@ -8,7 +8,6 @@
             <br/>
         </div>
         <ul class="nav">
-
             @canany(['proyectos.index', 'tipo_de_investigacion.index', 'mis_proyectos'])
                 <li>
                     <a data-toggle="collapse" href="#proyectos" aria-expanded="false">
@@ -82,7 +81,7 @@
                         @endcan
                         @can('solicitudes.create')
                             <li @if ($pageSlug == 'enviar_solicitud') class="active " @endif>
-                                <a href="{{ route('home')  }}">
+                                <a href="{{ route('solicitud.create')  }}">
                                     <i class="tim-icons icon-send"></i>
                                     <p>{{ __('Enviar solicitud') }}</p>
                                 </a>

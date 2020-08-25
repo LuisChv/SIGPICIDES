@@ -7,8 +7,11 @@
     <div class="card">
         <div class="card-header ">
             <div class="row">
-                <div class="col-sm-8 text-left">
+                <div class="col-md-6 text-left">
                     <h2 class="card-title"><b>Editar recurso</b></h2>
+                </div> 
+                <div class="col-md-6 text-right">
+                    <p style="color:red">Datos requeridos: *</p><br>
                 </div> 
             </div>
         </div>
@@ -24,7 +27,7 @@
                             </div>
                         </div>
                         <select class="form-control selectorWapis" id="tipoRec" name="tipoRec">
-                            <option value="" selected disabled hidden>Seleccione un tipo de recurso</option>
+                            <option value="" selected disabled hidden>Seleccione un tipo de recurso *</option>
                                 @foreach ($tiposrec as $tipo)
                                     @if($recurso->id_tipo== $tipo->id)
                                         <option style="color: black !important;" selected value="{{$tipo->id}}">{{ $tipo->nombre }}</option>
@@ -43,7 +46,7 @@
                             </div>
                         </div>
                         <select class="form-control selectorWapis" id="marca" name="marca">
-                            <option value="" selected disabled hidden>Seleccione una marca</option>
+                            <option value="" selected disabled hidden>Seleccione una marca *</option>
                                 @foreach ($marcas as $marca)
                                     @if($recurso->id_marca== $marca->id)
                                         <option style="color: black !important;" selected value="{{$marca->id}}">{{ $marca->nombre }}</option>
@@ -60,7 +63,7 @@
                                 <i class="tim-icons icon-pencil"></i>
                             </div>
                         </div>
-                        <input type="text" name="nombre" value="{{$recurso->nombre}}" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del recurso') }}">
+                        <input type="text" name="nombre" value="{{$recurso->nombre}}" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del recurso *') }}">
                         @include('alerts.feedback', ['field' => 'nombre'])
                     </div>
 
@@ -70,7 +73,7 @@
                                 <i class="tim-icons icon-pencil"></i>
                             </div>
                         </div>
-                        <input type="text" name="modelo" value="{{$detalle->modelo}}" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" placeholder="{{ __('Modelo') }}">
+                        <input type="text" name="modelo" value="{{$detalle->modelo}}" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" placeholder="{{ __('Modelo *') }}">
                         @include('alerts.feedback', ['field' => 'modelo'])
                     </div>
 
@@ -80,7 +83,7 @@
                                 <i class="tim-icons icon-pencil"></i>
                             </div>
                         </div>
-                        <input rows="3" type="text" rows="3" name="descripcion" value="{{$detalle->descripcion}}" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" placeholder="{{ __('Descripción') }}">
+                        <input rows="3" type="text" rows="3" name="descripcion" value="{{$detalle->descripcion}}" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" placeholder="{{ __('Descripción *') }}">
                         @include('alerts.feedback', ['field' => 'descripcion'])
                     </div>
                 <div class="card-footer">

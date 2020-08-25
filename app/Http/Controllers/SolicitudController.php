@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\SubTipoDeInvestigacion;
+use App\TipoDeInvestigacion;
+use DB;
 
 class SolicitudController extends Controller
 {
@@ -11,26 +14,23 @@ class SolicitudController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //TODO 
     public function index()
     {
         //$solicitudes= \App\Solicitud::all();
         $solicitudes = DB::select(
             "SELECT * 
             FROM solicitud s 
-            JOIN estado_de_solicitud es
-            ON s.idES = es.idES
-            WHERE estadoES=1"); //asumiendo que el estado 1 seria el de pendientes de aprobar */
-        /*$solicitud = DB::select(
+            JOIN proyecto p 
+            ON s.id = p.id");
+        /*
+        $solicitudes = DB::select(
             "SELECT * 
-            FROM proyecto p 
-            JOIN (SELECT * 
             FROM solicitud s 
             JOIN estado_de_solicitud es
-            ON s.idES = es.idES
-            WHERE estadoES=1) solicitudes
-            ON p.idPR = solicitudes.idPR");
-            //este es en caso de que el nombre se almacene en la tabla proyectos*/
-        return view('proyectoViews.solicitud.index', ['solicitudes'=>$solicitudes]);
+            ON s.idS = es.idS
+            WHERE estadoES=1"); //asumiendo que el estado 1 seria el de pendientes de aprobar */
+        return view('proyectoViews.solicitud.Admin.index', ['solicitudes'=>$solicitudes]);
     }
 
     /**
@@ -40,7 +40,12 @@ class SolicitudController extends Controller
      */
     public function create()
     {
-        //
+        $sub_tipos= SubTipoDeInvestigacion::all();
+        $tiposinv=TipoDeInvestigacion::all();
+        return view('proyectoViews.solicitud.Investigador.crear', [
+            'tiposinv' => $tiposinv,
+            'sub_tipos' => $sub_tipos
+        ]);
     }
 
     /**

@@ -201,19 +201,19 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
      Route::get('miembros', 'UsuarioEquipoRolController@index')->name('miembros.index')
      ->middleware('has.permission:usuario_equipo_rol.index');
  
-     Route::post('miembros', 'UsuarioEquipoRolController@store')->name('miembros.store')
-     ->middleware('has.permission:usuario_equipo_rol.create');  
+     Route::get('miembros/store/{miembro}', 'UsuarioEquipoRolController@store')->name('miembros.store')
+     ->middleware('has.permission:usuario_equipo_rol.create'); 
  
      Route::get('miembros/create', 'UsuarioEquipoRolController@create')->name('miembros.create')
      ->middleware('has.permission:usuario_equipo_rol.create');
  
-     Route::get('miembros/{equipo}', 'UsuarioEquipoRolController@show')->name('miembros.show')
+     Route::get('miembros/{miembro}', 'UsuarioEquipoRolController@show')->name('miembros.show')
      ->middleware('has.permission:usuario_equipo_rol.show');    
  
-     Route::delete('miembros/{equipo}', 'UsuarioEquipoRolController@destroy')->name('miembros.destroy')
+     Route::delete('miembros/{miembro}', 'UsuarioEquipoRolController@destroy')->name('miembros.destroy')
      ->middleware('has.permission:usuario_equipo_rol.destroy');
  
-     Route::get('miembros/{equipo}/edit', 'UsuarioEquipoRolController@edit')->name('miembros.edit')
+     Route::get('miembros/{miembro}/edit', 'UsuarioEquipoRolController@edit')->name('miembros.edit')
      ->middleware('has.permission:usuario_equipo_rol.edit');
  
      Route::put('miembros/{equipo}', 'UsuarioEquipoRolController@update')->name('miembros.update')
@@ -321,13 +321,39 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::delete('user/permissions/', 'PermissionController@destroy')->name('permission.destroy')
     ->middleware('has.permission:permission_user.destroy');
 
-    //solicitud de proyecto
-    Route::get('solicitud', 'SolicitudController@index')->name('solicitud.index')
+    /**********************solicitud de proyecto Investigador******************/
+    Route::get('solicitudes', 'SolicitudController@index')->name('solicitud.index')
     ->middleware('has.permission:solicitudes.index');
 
     Route::get('solicitud/create', 'SolicitudController@create')->name('solicitud.create')
     ->middleware('has.permission:solicitudes.create');
 
+    Route::post('solicitud', 'SolicitudController@store')->name('solicitud.store')
+    ->middleware('has.permission:solicitudes.create');
+
+    Route::post('solicitud/{solicitud}', 'SolicitudController@show')->name('solicitud.show')
+    ->middleware('has.permission:solicitudes.create');
+
+    Route::delete('solicitud/{solicitud}', 'SolicitudController@destroy')->name('solicitud.destroy')
+    ->middleware('has.permission:solicitud.destroy');
+
+    Route::get('solicitud/{solicitud}/edit', 'SolicitudController@edit')->name('solicitud.edit')
+    ->middleware('has.permission:solicitud.edit');
+
+    Route::put('solicitud/{solicitud}', 'SolicitudController@update')->name('solicitud.update')
+    ->middleware('has.permission:solicitud.edit');
+
+    /*********************Solicitude de proyecto Admin*******************/
+    
+    Route::get('solicitudes', 'SolicitudController@index')->name('solicitud.index')
+    ->middleware('has.permission:solicitudes.index');
+
+    Route::post('solicitud/{solicitud}', 'SolicitudController@show')->name('solicitud.show')
+    ->middleware('has.permission:solicitudes.create');
+    
+    //proyecto-equipo
+    Route::get('equipo', 'EquipoController@index')->name('equipo.index')
+    ->middleware('has.permission:equipos.index');
 
     //enviar emails
     Route::get('email', function () {

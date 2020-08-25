@@ -9,6 +9,7 @@
             <div class="row">
                 <div class="col-sm-12 text-left">
                     <h2 class="card-title"><b>Editar tipo de investigación</b></h2>
+                    <p style="color:red">Datos requeridos: *</p><br>
                 </div> 
             </div>
         </div>
@@ -23,7 +24,7 @@
                                 <i class="tim-icons icon-pencil"></i>
                             </div>
                         </div>
-                    <input type="text" name="nombre" value="{{$tipoInv->nombre}}" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del recurso') }}">
+                    <input type="text" name="nombre" value="{{$tipoInv->nombre}}" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre del recurso *') }}">
                         @include('alerts.feedback', ['field' => 'nombre'])
                     </div>
                 </div>
