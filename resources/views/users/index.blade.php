@@ -29,24 +29,13 @@
                             <tbody>
                                 @foreach ($data as $use) 
                                 <tr>                     
-<<<<<<< Updated upstream
-                                    <td id={{$use->id}} onMouseOver="ResaltarFila({{$use->id}});" onMouseOut="RestablecerFila({{$use->id}}, '')" onClick="CrearEnlace('{{ route('users.show', $use->id)}}');">{{$use->email}}</td>
-
-                                    <td width='5%'>
-                                        <a type="button" href="{{ route('permission.index', $use->id)}}" class="btn btn-default btn-sm btn-icon btn-round"><i title="Configurar permisos" class="tim-icons icon-key-25"></i></a>
-                                    </td>
-                                    <td width='5%'>
-                                        <a type="button" href="{{ route('users.edit', $use->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i title="Editar" class="tim-icons icon-pencil"></i></a>
-=======
-                                    <td width="80%" id={{$use->id}} onMouseOver="ResaltarFila({{$use->id}});" onMouseOut="RestablecerFila({{$use->id}}, '')" onClick="CrearEnlace('{{ route('users.show', $use->id)}}');">
+                                    <td id={{$use->id}} onMouseOver="ResaltarFila({{$use->id}});" onMouseOut="RestablecerFila({{$use->id}}, '')" onClick="CrearEnlace('{{ route('users.show', $use->id)}}');">
                                         {{$use->email}}
->>>>>>> Stashed changes
                                     </td>
-
                                     <form method="POST" id="formulario{{$use->id}}" action="{{route('users.destroy', $use->id)}}" >
                                         <td width="15%">
                                             <div class="btn-group" role="group">
-                                                <a type="button" href="{{ route('permission.index', $use->id)}}" class="btn btn-default btn-sm btn-icon btn-round">
+                                                <a title="Configurar permisos" type="button" href="{{ route('permission.index', $use->id)}}" class="btn btn-default btn-sm btn-icon btn-round">
                                                     <i class="tim-icons icon-key-25"></i>
                                                 </a>
                                                 <a type="button" href="{{ route('users.edit', $use->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round">
