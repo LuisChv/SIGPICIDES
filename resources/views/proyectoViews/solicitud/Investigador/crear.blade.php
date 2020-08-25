@@ -73,50 +73,7 @@
                                     <textarea class="form-control border border-light" rows="4" name="alcance"placeholder="Describa los alcances del proyecto"></textarea>
                                     </textarea>
                                     @include('alerts.feedback', ['field' => 'name'])
-                                </div>
-
-                                <!--modal-->
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                  Apachurrame
-                                </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Nuevo recurso</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="false">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        <table class="table">
-                                            <tr>
-                                                <td class="font-weight-bold">Nombre</td>
-                                                <td>Soy un articulo</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-weight-bold">Detalle</td>
-                                                <td><textarea class="form-control border border-light rounded"></textarea></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-weight-bold">Cantidad</td>
-                                                <td><input type="number" class=form-control></td>
-                                            </tr>
-                                        </table>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary">Añadir</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-
-
+                                </div>                        
                         	</div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">

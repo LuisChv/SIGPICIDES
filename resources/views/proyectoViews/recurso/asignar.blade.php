@@ -35,12 +35,48 @@
                                                     <td id={{$rec->id}} onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')" onClick="CrearEnlace('{{ route('recursos.show', $rec->id)}}');" >
                                                         &nbsp;&nbsp;&nbsp;&nbsp;<i class="tim-icons icon-planet"></i>
                                                         &nbsp;{{ $rec->nombre }}
-                                                    </td>                                                   
-                                                    <form method="POST" id="formulario{{$rec->id}}" action="{{route('recursos.destroy', $rec->id)}}" >
-                                                    @csrf                                                    
+                                                    </td>
                                                     <td width='10%'>
-                                                        <button type="button" class="btn btn-success btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-add"></i></button> 
-                                                    </td></form>
+                                                        <button type="button" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#modal{{$rec->id}}"><i class="tim-icons icon-simple-add"></i></button>
+                                                        <!-- Modal -->
+                                                        <form method="POST" action="">
+                                                        @csrf
+                                                            <div class="modal fade" id="modal{{$rec->id}}" tabindex="-1" role="dialog" aria-labelledby="label{{$rec->id}}" aria-hidden="true">
+                                                              <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                  <div class="modal-header">
+                                                                    <h5 class="modal-title" id="label{{$rec->id}}">Nuevo recurso</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                      <span aria-hidden="false">&times;</span>
+                                                                    </button>
+                                                                  </div>
+                                                                  <div class="modal-body" >                     
+                                                                    <table class="table" style="background-color: white !important;" >
+                                                                        <tr>
+                                                                            <td class="font-weight-bold" style="color: #222a42 !important;">Nombre</td>
+                                                                            <td style="color: #222a42 !important;">{{$rec->nombre}}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="font-weight-bold" style="color: #222a42 !important;">Detalle</td>
+                                                                            <td><textarea style="color: #222a42 !important;" class="form-control border border-light rounded"></textarea></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="color: #222a42 !important;" class="font-weight-bold">Cantidad</td>
+                                                                            <td><input style="color: #222a42 !important;" type="number" class=form-control></td>
+                                                                        </tr>
+                                                                    </table>
+                                                                  </div>
+                                                                  <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                                    <button type="submit" class="btn btn-primary">Añadir</button>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                        </form>         
+
+                                                    </td>                                                   
+
                                                 </tr>
                                             @endif
                                         @endforeach
