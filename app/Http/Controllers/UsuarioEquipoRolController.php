@@ -15,62 +15,58 @@ class UsuarioEquipoRolController extends Controller
      */
 
 
-    public function verEquipoInvestigacion(Request $request)
-    {
-        //Todos los usuarios
-        $miembros = DB::select("SELECT * FROM users");
-        $noMiembros = DB::select("SELECT * FROM users");
-      
-
-        //Omitir usuario investigador lider(Usuario Logeado)
-        $lider = auth()->user();
-
-        foreach ($noMiembros as $user){ 
-            if($user->id == $lider->id){
-                unset($noMiembros[$user->id - 1]);
-            }
-        }
-
-        //Omitir Miembros del equipo 
-         $miembrosEquipo = DB::select('SELECT * FROM usuario_equipo_rol WHERE id_equipo = ?', [1]);
-
-        foreach ($miembrosEquipo as $miembro) { 
-            foreach($noMiembros as $user){ 
-                if($user->id == $miembro->id_usuario){
-                    unset($noMiembros[$user->id - 1]);
-                }
-            }
-        }
-
-         //Omitir Otros roles. No investigadores
-         $noInvestigadores= DB::select('SELECT * FROM role_user WHERE role_id != ?', [4]);
- 
-         foreach ($noInvestigadores as $inv) { 
-             foreach($noMiembros as $user){ 
-                 if($user->id == $inv->user_id){
-                     unset($noMiembros[$user->id - 1]);
-                 }
-             }
-         }
-
-          //Miembros del equipo 
-          $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [1]);
-         
-         //Roles
-         $roles = DB::select("SELECT * FROM roles");
-
-         //Retornar la vista
-         return view ('simpleViews.miembroEquipos.show', [
-              'usuarios'=>$noMiembros,  
-              'miembros'=>$miembros,
-              'roles'=>$roles,
-         ]);
-    }
 
 
     public function index()
     {
-        
+         //Todos los usuarios
+         $miembros = DB::select("SELECT * FROM users");
+         $noMiembros = DB::select("SELECT * FROM users");
+       
+ 
+         //Omitir usuario investigador lider(Usuario Logeado)
+         $lider = auth()->user();
+ 
+         foreach ($noMiembros as $user){ 
+             if($user->id == $lider->id){
+                 unset($noMiembros[$user->id - 1]);
+             }
+         }
+ 
+         //Omitir Miembros del equipo 
+          $miembrosEquipo = DB::select('SELECT * FROM usuario_equipo_rol WHERE id_equipo = ?', [1]);
+ 
+         foreach ($miembrosEquipo as $miembro) { 
+             foreach($noMiembros as $user){ 
+                 if($user->id == $miembro->id_usuario){
+                     unset($noMiembros[$user->id - 1]);
+                 }
+             }
+         }
+ 
+          //Omitir Otros roles. No investigadores
+          $noInvestigadores= DB::select('SELECT * FROM role_user WHERE role_id != ?', [4]);
+  
+          foreach ($noInvestigadores as $inv) { 
+              foreach($noMiembros as $user){ 
+                  if($user->id == $inv->user_id){
+                      unset($noMiembros[$user->id - 1]);
+                  }
+              }
+          }
+ 
+           //Miembros del equipo 
+           $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [1]);
+          
+          //Roles
+          $roles = DB::select("SELECT * FROM roles");
+ 
+          //Retornar la vista
+          return view ('proyectoViews.equipo.index', [
+               'usuarios'=>$noMiembros,  
+               'miembros'=>$miembros,
+               'roles'=>$roles,
+          ]);
     }
 
     /**

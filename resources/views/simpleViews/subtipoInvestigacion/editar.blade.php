@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-header ">
             <h2 class="card-title"><b>Editar subtipo de investigación</b></h2>
-            Datos requeridos: *
+            <p style="color:red">Datos requeridos: *</p><br>
         </div>
         <div class="card-body">
             <form method="POST" action="{{route('subtipo_investigacion.update', $subtipo->id)}}">

@@ -86,6 +86,18 @@
             </div>
         </div>
     </div>
+    <div class="container menuF-container">
+                <input type="checkbox" id="toggleF">
+                <label for="toggleF" class="buttonF"></label>
+                <nav class="navF">
+                    <a href="{{ route('solicitud.create')}}">Recursos</a>
+                    <a href="{{ route('solicitud.create')}}">Factibilidad</a>
+                    <a href="{{ route('miembros.ver')}}">Miembros</a>
+                    <a href="{{ route('solicitud.create')}}">Planificación</a>
+                    <!--a href="{{ route('cides') }}">Acerca de</a>
+                    <a href="#">Acciones largaaaaaaaaas</a-->
+                </nav>
+    </div>
 </div>
 @endsection
 

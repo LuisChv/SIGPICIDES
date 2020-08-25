@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-sm-12 text-left">
                     <h2 class="card-title"><b>Editar tipo de investigación</b></h2>
-                    Datos requeridos: *
+                    <p style="color:red">Datos requeridos: *</p><br>
                 </div> 
             </div>
         </div>
