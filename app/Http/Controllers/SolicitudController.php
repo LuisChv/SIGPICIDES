@@ -14,7 +14,7 @@ class SolicitudController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    //TODO 
+    //
     public function index()
     {
         //$solicitudes= \App\Solicitud::all();
@@ -56,7 +56,7 @@ class SolicitudController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd(request()->all());
     }
 
     /**

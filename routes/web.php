@@ -220,28 +220,6 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
      ->middleware('has.permission:usuario_equipo_rol.edit');
 
 
-    //Solicitudes
-    Route::post('solicitudes/store', 'SolicitudController@store')->name('solicitudes.store')
-    ->middleware('has.permission:solicitudes.create');
-
-    Route::get('solicitudes', 'SolicitudController@index')->name('solicitudes.index')
-    ->middleware('has.permission:solicitudes.index');
-
-    Route::get('solicitudes/create', 'SolicitudController@create')->name('solicitudes.create')
-    ->middleware('has.permission:solicitudes.create');
-
-    Route::put('solicitudes/{proyecto}', 'SolicitudController@update')->name('solicitudes.update')
-    ->middleware('has.permission:solicitudes.edit');
-
-    Route::get('solicitudes/{proyecto}', 'SolicitudController@show')->name('solicitudes.show')
-    ->middleware('has.permission:solicitudes.show');
-
-    Route::delete('solicitudes/{proyecto}', 'SolicitudController@destroy')->name('solicitudes.destroy')
-    ->middleware('has.permission:solicitudes.destroy');
-
-    Route::get('solicitudes/{proyecto}/edit', 'SolicitudController@edit')->name('solicitudes.edit')
-    ->middleware('has.permission:solicitudes.edit');
-
     //Indicadores
     Route::post('indicadores/store', 'IndicadorController@store')->name('indicadores.store')
     ->middleware('has.permission:indicadores.create');
@@ -322,14 +300,14 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     ->middleware('has.permission:permission_user.destroy');
 
     /**********************solicitud de proyecto Investigador******************/
+    Route::post('solicitud', 'SolicitudController@store')->name('solicitud.store')
+    ->middleware('has.permission:solicitudes.create');
+
     Route::get('solicitudes', 'SolicitudController@index')->name('solicitud.index')
     ->middleware('has.permission:solicitudes.index');
 
     Route::get('solicitud/create', 'SolicitudController@create')->name('solicitud.create')
-    ->middleware('has.permission:solicitudes.create');
-
-    Route::post('solicitud', 'SolicitudController@store')->name('solicitud.store')
-    ->middleware('has.permission:solicitudes.create');
+    ->middleware('has.permission:solicitudes.create');    
 
     Route::post('solicitud/{solicitud}', 'SolicitudController@show')->name('solicitud.show')
     ->middleware('has.permission:solicitudes.create');
