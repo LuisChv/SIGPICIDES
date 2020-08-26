@@ -7,6 +7,8 @@ use App\SubTipoDeInvestigacion;
 use App\TipoDeInvestigacion;
 use App\Proyecto;
 use App\Solicitud;
+use App\EquipoDeInvestigacion; 
+use App\UsuarioEquipoRol;
 use DB;
 
 class SolicitudController extends Controller
@@ -59,6 +61,7 @@ class SolicitudController extends Controller
     public function store(Request $request)
     {
         //dd(request()->all());
+        //dd(auth()->user()->id);
         //Validacion de los datos      
         request()->validate([
             'nombre'=> 'required',
@@ -74,10 +77,20 @@ class SolicitudController extends Controller
             'descripcion.required' => "La descripcion es obligatoria.",
             'costo.required' => "El costo es obligatorio.",
         ]);
-        //Se asignan las variables al nuevo recurso
+        //Equipo_investigacion
+        $equipo= new EquipoDeInvestigacion;
+        $equipo->haylider=true;
+        $equipo->save();
+        //Usuario_equipo_rol con el investigador como lider 
+        $lider= new UsuarioEquipoRol;       
+        $lider->id_equipo= $equipo->id;
+        $lider->id_usuario=auth()->user()->id;
+        $lider->id_rol=5;
+        $lider->save();
+        //Se asignan las variables al nuevo proyecto
         $proyecto= new Proyecto();
         $proyecto->id_subtipo=request('subtipo');
-        $proyecto->id_equipo=1;
+        $proyecto->id_equipo=$equipo->id;
         $proyecto->nombre=request('nombre');
         $proyecto->descripcion=request('descripcion');
         $proyecto->costo=request('costo');
