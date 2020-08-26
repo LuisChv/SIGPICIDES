@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Recursos;
 use App\Proyecto;
 use App\TipoDeRecursos;
+use App\RecursosPorProy;
+use DB;
 class RecursoProyectoController extends Controller
 {
     //
@@ -28,10 +30,12 @@ class RecursoProyectoController extends Controller
         $proyecto=Proyecto::findOrFail($id);
         $recursos=Recursos::all();
         $tiposrec=TipoDeRecursos::all();
+        $recursosProy=DB::select("SELECT * FROM recursos_por_proy RP JOIN recurso R ON R.id = RP.id_recurso WHERE RP.id_proy = ?", [$id]);
         return view ('proyectoViews.recurso.asignar', [
             'proyecto'=>$proyecto,
             'tiposrec'=>$tiposrec,
             'recursos'=>$recursos,
+            'recursosProy'=>$recursosProy,
         ]);
     }
 
@@ -44,37 +48,45 @@ class RecursoProyectoController extends Controller
 
     public function store()
     {
-        //dump(request()->all());  //trae todo lo del formulario
-        //dd($recurso);
+
         //Validacion de los datos      
         request()->validate([
-            'tipoRec'=> 'required',
-            'nombre'=> 'required',
-            'marca'=> 'required',
-            'modelo'=> 'required',
-            'descripcion'=> 'required'
+            'recurso'=> 'required',
+            'proyecto'=> 'required',
+            'detalle'=> 'required',
+            'cantidad'=> 'required',
         ],
         [
-            'tipoRec.required' => "Seleccione un tipo de recurso.",
-            'nombre.required' => "El nombre es obligatorio.",
-            'marca.required' => "Seleccione una marca.",
-            'modelo.required' => "El modelo es obligatorio.",
-            'descripcion.required' => "La descripcion es obligatoria.",
+            'recurso.required' => "Seleccione un recurso.",
+            'proyecto.required' => "Seleccione un proyecto.",
+            'detalle.required' => "Ingrese el detalle del recurso.",
+            'cantidad.required' => "Ingrese la cantidad.",
         ]);
-        //Se asignan las variables al nuevo recurso
-        $recurso= new \App\Recursos();
-        $recurso->id_marca=request('marca');
-        $recurso->id_tipo=request('tipoRec');
-        $recurso->nombre=request('nombre');
-        //Se crea el nuevo recurso
-        $recurso->save();
-        //Se asignan las variables al nuevo detalle recurso
-        $detalleRecurso=new \App\DetalleDeRecurso();
-        $detalleRecurso->id_recurso=$recurso->id;
-        $detalleRecurso->modelo= request('modelo');
-        $detalleRecurso->descripcion= request('descripcion');
-        //Se crea el nuevo detalle recurso
-        $detalleRecurso->save();
+
+        $r = new RecursosPorProy;
+        $r->id_proy = request('proyecto');
+        $r->id_recurso = request('recurso');
+        //$r->detalle = request('detalle');
+        $r->cantidad = request('cantidad');
+        $r->save();
+        
+        return redirect()->route('proyecto_recursos.create', [$r->id_proy]);
+    }
+
+    public function show($id)
+    {
+        $recurso=DB::select(
+            "SELECT * FROM recursos_por_proy RP JOIN recurso R ON R.id = RP.id_recurso WHERE RP.id = ?", [$id]);
+
+        //Retornar la vista
+        return view ('simpleViews.recursos.show', [
+            'recurso'=>$recurso]);
+    }
+
+    public function destroy($id)
+    {
+        $recursoProy= \App\RecursosPorProy::findOrFail($id);
+        $recursoPry->delete();
         return redirect('/recursos');
     }
 

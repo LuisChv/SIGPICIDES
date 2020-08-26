@@ -4,17 +4,12 @@
 @endsection
 @section('content')
 <div class="row">
-	<div class="col-5">
+    <div class="col-6">
         <div class="card">
             <div class="card-header ">
-                <div class="row">
-                    <div class="col-sm-8 text-left">
-                        <h3 class="card-title"><b>Recursos disponibles</b></h3>
-                    </div>                   
-                </div>
+                <h3 class="card-title"><b>Recursos asignados</b></h3>
             </div>
-            <div class="card-body">                
-                    <!--Dropdown para recurso-->
+            <div class="card-body">  
                 <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
                     <div class="list-group">
                         @foreach ($tiposrec as $tipo)
@@ -29,6 +24,52 @@
                                 </table>
                                 <div id="lista{{ $tipo->id }}" class="collapse" aria-labelledby="rec{{ $tipo->id }}" data-parent="#accordion">
                                     <table width='100%' class="table">
+                                        @foreach($recursosProy as $rec)
+                                            @if($rec->id_tipo==$tipo->id)  
+                                                <tr>                     
+                                                    <td id={{$rec->id}} onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')" onClick="CrearEnlace('{{ route('recursos.show', $rec->id)}}');" >
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;<i class="tim-icons icon-planet"></i>
+                                                        &nbsp;{{ $rec->nombre }}
+                                                    </td>
+                                                    <td width='10%'>
+                                                        <button type="button" class="btn btn-warning btn-sm btn-icon btn-round" data-toggle="modal" data-target="#modal{{$rec->id}}"><i class="tim-icons icon-simple-remove"></i></button>
+                                                    </td>                                                   
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    </table>
+                                </div>                      
+                            </div>
+                        @endforeach
+                        <!--fin de dropdown-->
+                    </div>                   
+                </div>
+                <br/>
+            </div>
+        </div>
+    </div>
+
+	<div class="col-6">
+        <div class="card">
+            <div class="card-header ">
+                    <h3 class="card-title"><b>Recursos disponibles</b></h3>              
+            </div>
+            <div class="card-body">                
+                    <!--Dropdown para recurso-->
+                <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                    <div class="list-group">
+                        @foreach ($tiposrec as $tipo)
+                            <div>
+                                <table width='100%'>
+                                    <tr class="list-group-item list-group-flush" data-toggle="collapse" data-toggle="collapse" data-target="#lista2{{ $tipo->id }}" aria-expanded="false" aria-controls="lista{{ $tipo->id }}">
+                                        <td>
+                                            {{ $tipo->nombre }}&nbsp;&nbsp;
+                                            <i class="tim-icons icon-minimal-down"></i>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div id="lista2{{ $tipo->id }}" class="collapse" aria-labelledby="rec{{ $tipo->id }}" data-parent="#accordion">
+                                    <table width='100%' class="table">
                                         @foreach($recursos as $rec)
                                             @if($rec->id_tipo==$tipo->id)  
                                                 <tr>                     
@@ -39,7 +80,7 @@
                                                     <td width='10%'>
                                                         <button type="button" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#modal{{$rec->id}}"><i class="tim-icons icon-simple-add"></i></button>
                                                         <!-- Modal -->
-                                                        <form method="POST" action="{{route('proyecto.recursos.store')}}">
+                                                        <form method="POST" action="{{route('proyecto_recursos.store')}}">
                                                         @csrf
                                                             <div class="modal fade" id="modal{{$rec->id}}" tabindex="-1" role="dialog" aria-labelledby="label{{$rec->id}}" aria-hidden="true">
                                                               <div class="modal-dialog" role="document">
@@ -57,13 +98,15 @@
                                                                             <td style="color: #222a42 !important;">{{$rec->nombre}}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td class="font-weight-bold" style="color: #222a42 !important;">Detalle</td>
-                                                                            <td><textarea style="color: #222a42 !important;" class="form-control border border-light rounded" name=detalle_recurso></textarea></td>
+                                                                            <td class="font-weight-bold" style="color: #222a42 !important;" >Detalle</td>
+                                                                            <td><textarea style="color: #222a42 !important;" class="form-control border border-light rounded" name="detalle"></textarea></td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td style="color: #222a42 !important;" class="font-weight-bold" name="cantidad">Cantidad</td>
-                                                                            <td><input style="color: #222a42 !important;" type="number" class=form-control></td>
+                                                                            <td style="color: #222a42 !important;" class="font-weight-bold">Cantidad</td>
+                                                                            <td><input style="color: #222a42 !important;" type="number" class=form-control name="cantidad"></td>
                                                                         </tr>
+                                                                    <input hidden name="recurso" value="{{$rec->id}}"/>
+                                                                    <input hidden name="proyecto" value="{{$proyecto->id}}"/>
                                                                     </table>
                                                                   </div>
                                                                   <div class="modal-footer">

@@ -353,10 +353,13 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 });
 
 //recursos por proyecto
-Route::post('proyectos/recurso/store', 'ProyectoController@store')->name('proyecto.recursos.store');
-//    ->middleware('has.permission:proyectos.create');
 
-Route::get('proyecto/asignar_recursos/{id}', 'RecursoProyectoController@create')->name('proyecto.asignar_recursos');
+Route::get('proyecto/recursos/{id}', 'RecursoProyectoController@create')->name('proyecto_recursos.create');
 //->middleware('has.permission:solicitudes.create');
 
-    
+Route::post('proyecto/recursos', 'RecursoProyectoController@store')->name('proyecto_recursos.store');
+//    ->middleware('has.permission:proyectos.create');
+
+Route::get('proyecto/recursos/show/{id}', 'RecursoProyectoController@show')->name('proyecto_recursos.show');
+
+Route::delete('proyecto/recursos/{id}', 'RecursoProyectoController@destroy')->name('proyecto_recursos.destroy');

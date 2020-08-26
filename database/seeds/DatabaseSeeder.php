@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call([SubTipoDeInvestigacionSeeder::class]);
         $this->call([MarcaTipoRecursoSeeder::class]);
         $this->call([RecursoSeeder::class]);
-        
-        
+        $this->call([EquipoInvestigacionSeeder::class]);
+        $this->call([ProyectoSeeder::class]);
     }
 }
