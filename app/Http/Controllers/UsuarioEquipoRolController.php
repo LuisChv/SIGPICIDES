@@ -97,8 +97,6 @@ class UsuarioEquipoRolController extends Controller
     
         if($equipo==null){
             DB::table('equipo_de_investigacion')->insert([
-                'idproy' => 1,
-                'iduer' => 'EQUIPO 1',
                 'haylider'=> false,
             ]);
     
