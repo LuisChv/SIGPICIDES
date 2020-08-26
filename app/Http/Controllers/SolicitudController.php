@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\SubTipoDeInvestigacion;
 use App\TipoDeInvestigacion;
+use App\Proyecto;
+use App\Solicitud;
 use DB;
 
 class SolicitudController extends Controller
@@ -56,7 +58,39 @@ class SolicitudController extends Controller
      */
     public function store(Request $request)
     {
-        dd(request()->all());
+        //dd(request()->all());
+        //Validacion de los datos      
+        request()->validate([
+            'nombre'=> 'required',
+            'tipoRec'=> 'required',
+            'subtipo'=> 'required',
+            'descripcion'=> 'required',     
+            'costo'=> 'required'
+        ],
+        [
+            'nombre.required' => "El nombre es obligatorio.",
+            'tipoRec.required'=>"Elija el tipo de investigación",
+            'subtipo.required' => "Elija el sutipo de investigación.",
+            'descripcion.required' => "La descripcion es obligatoria.",
+            'costo.required' => "El costo es obligatorio.",
+        ]);
+        //Se asignan las variables al nuevo recurso
+        $proyecto= new Proyecto();
+        $proyecto->id_subtipo=request('subtipo');
+        $proyecto->id_equipo=1;
+        $proyecto->nombre=request('nombre');
+        $proyecto->descripcion=request('descripcion');
+        $proyecto->costo=request('costo');
+        //Se crea el nuevo proyecto
+        $proyecto->save();
+        //Se asignan las variables al nuevo detalle recurso
+        $solicitudes=new Solicitud();
+        $solicitudes->id_recurso=$recurso->id;
+        $solicitudes->modelo= request('modelo');
+        $solicitudes->descripcion= request('descripcion');
+        //Se crea el nuevo detalle recurso
+        $solicitudes->save();
+        return redirect('/recursos');
     }
 
     /**
