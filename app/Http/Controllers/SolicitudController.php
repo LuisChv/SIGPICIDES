@@ -81,17 +81,19 @@ class SolicitudController extends Controller
         $proyecto->nombre=request('nombre');
         $proyecto->descripcion=request('descripcion');
         $proyecto->costo=request('costo');
+        //$proyecto->modificable=false;
         //Se crea el nuevo proyecto
         $proyecto->save();
-        //Se asignan las variables al nuevo detalle recurso
+        //Se crea la solicitud del proyecto
         $solicitud=new Solicitud();
         $solicitud->id_proy=$proyecto->id;
-        $solicitud->fecha= request('modelo');
-        $solicitud->noti_inv= request('descripcion');
-        $solicitud->noti_coo= request('descripcion');
+        $solicitud->fecha= now();
+        $solicitud->noti_inv= false;
+        $solicitud->noti_coo= false;
+        //$solicitud->modificable=false;
         //Se crea el nuevo detalle recurso
         $solicitud->save();
-        return redirect('/recursos');
+        return redirect('/');
     }
 
     /**
