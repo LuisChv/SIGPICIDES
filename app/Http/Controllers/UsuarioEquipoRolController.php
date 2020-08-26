@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\UsuarioEquipoRol;
+use Caffeinated\Shinobi\Models\Role;
 use DB;
 
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class UsuarioEquipoRolController extends Controller
     public function index()
     {
          //Todos los usuarios
-         $miembros = DB::select("SELECT * FROM users");
+         $users = DB::select("SELECT * FROM users");
          $noMiembros = DB::select("SELECT * FROM users");
        
  
@@ -83,10 +84,17 @@ class UsuarioEquipoRolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store()
     {
+        $id_investigador = request('investigador');
+        $role = Role::where('name', request('rolmiembro'))->first();;
+        $rol_miembro = Role::where('name', request('rolmiembro'))->first();
+
+
+        //Validacion temporal para id_equipo
         $equipo = DB::select('SELECT * FROM equipo_de_investigacion');
 
+    
         if($equipo==null){
             DB::table('equipo_de_investigacion')->insert([
                 'idproy' => 1,
@@ -98,8 +106,8 @@ class UsuarioEquipoRolController extends Controller
 
         DB::table('usuario_equipo_rol')->insert([
             'id_equipo' => 1 ,
-            'id_usuario' => $id,
-            'id_rol'=> 6,
+            'id_usuario' =>$id_investigador,
+            'id_rol'=>$role->id,
         ]);
 
 
@@ -148,6 +156,7 @@ class UsuarioEquipoRolController extends Controller
      */
     public function destroy($id)
     {
-        //
+         DB::table('usuario_equipo_rol')->where('id_usuario', $id)->delete();
+         return redirect('/miembros');
     }
 }

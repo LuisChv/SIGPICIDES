@@ -27,7 +27,7 @@
                                     <td> {{ $use->name }} </td>
 
                                     <td width='5%'>
-                                        <a role="button" id="usuario" class="btn btn-primary" href="{{ route('miembros.store', $use->id ) }}"><i class="tim-icons icon-simple-add"></i></a>
+                                        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#create" onClick="agregarMiembro({{ $use->id }})"><i class="tim-icons icon-simple-add"></i></a>
                                     </td>
                                    
                                 </tr>
@@ -74,19 +74,18 @@
                             </td>
 
 
-                            <form method="POST" id="miembro" action="{{route('miembros.update', $miembro->id)}}" >
-                            @csrf
-                            @method('UPDATE')
+                            <form method="POST" id="formulario{{$miembro->id_usuario}}" action="{{route('miembros.destroy', $miembro->id_usuario)}}" >
                                 <td width='10%' align="right">
-                                    <a type="button" class="btn btn-success btn-sm btn-sm btn-icon btn-round" data-toggle="modal" data-target="#create"><i class="tim-icons icon-pencil"></i></a>
-                                </td>
-                            </form>
-                    
-                            <form method="POST" id="formulario{{$miembro->id}}" action="{{route('miembros.destroy', $miembro->id)}}" >
-                            @csrf
-                            @method('DELETE')
-                                <td width='10%'>
-                                    <button type="button" onClick="confirmar({{$miembro->id}})" class="btn btn-warning btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button> 
+                                    <div class="btn-group" role="group">
+                                        <a type="button" href="{{ route('miembros.edit', $miembro->id_usuario)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round">
+                                            <i class="tim-icons icon-pencil"></i>
+                                        </a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" onClick="confirmar({{$miembro->id_usuario}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
+                                            <i class="tim-icons icon-simple-remove"></i>
+                                        </button> 
+                                    </div>
                                 </td>
                             </form>
                         
@@ -95,31 +94,37 @@
                     </tbody>
                 </table>
 
-                <div class="modal fade" id="create">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                <span>×</span>
-                                </button>
-                                <h4>Agregar Miembro</h4>
-                            </div>
-                            <div class="modal-body">
-                                <label for="rol">ROL DE EQUIPO</label>
-                                <select class="form-control selectorWapis" value="" id="rolmiembro">
-                                    <option value="" selected disabled hidden >--Seleccionar Rol--</option>
-                                    @foreach ($roles as $rol)
-                                        <option style="color: black !important;">{{ $rol->name }}</option>
-                                    @endforeach
-                                </select> 
-                            </div>
-                            <div class="modal-footer">
-                                <input type="submit" class="btn btn-primary" value="Guardar">
-                            </div>
+                
+               
+                    <div class="modal fade" id="create">
+                        <div class="modal-dialog modal-lg">
+                            <form method="POST"  action="{{ route('miembros.store')}}">
+                            @csrf
+                                <div class="modal-content">
+                                    <div class="modal-header bg-primary">
+                                        <button type="button" class="close" data-dismiss="modal">
+                                        <span>×</span>
+                                        </button>
+                                        <h4>Agregar Miembro</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label for="rol">ROL DE EQUIPO</label>
+                                        <select class="form-control selectorWapis" name="rolmiembro" id="rolmiembro">
+                                            <option  selected disabled hidden >--Seleccionar Rol--</option>
+                                            @foreach ($roles as $rol)
+                                                <option style="color: black !important;">{{ $rol->name }}</option>
+                                            @endforeach
+                                        </select> 
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="hidden" name="investigador" id="investigador">
+                                        <button type="submit" class="btn btn-primary" >Guardar</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </div>
-
+               
             </div>
         </div>
     </div>
@@ -162,6 +167,10 @@
             swal("Eliminación cancelada");
           }
         });
+    }
+
+    function agregarMiembro(id){
+        $('#investigador').val(id);
     }
     
 </script>

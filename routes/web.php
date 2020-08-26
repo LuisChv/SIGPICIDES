@@ -201,7 +201,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
      Route::get('miembros', 'UsuarioEquipoRolController@index')->name('miembros.index')
      ->middleware('has.permission:usuario_equipo_rol.index');
  
-     Route::get('miembros/store/{miembro}', 'UsuarioEquipoRolController@store')->name('miembros.store')
+     Route::post('miembros/store', 'UsuarioEquipoRolController@store')->name('miembros.store')
      ->middleware('has.permission:usuario_equipo_rol.create'); 
  
      Route::get('miembros/create', 'UsuarioEquipoRolController@create')->name('miembros.create')
