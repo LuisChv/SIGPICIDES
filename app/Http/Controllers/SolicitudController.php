@@ -106,7 +106,8 @@ class SolicitudController extends Controller
         //$solicitud->modificable=false;
         //Se crea el nuevo detalle recurso
         $solicitud->save();
-        return redirect('/');
+        //TODO redireccionamiento provisional
+        return view('proyectoViews.objetivo_alcance.create');
     }
 
     /**
@@ -152,5 +153,9 @@ class SolicitudController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function factibilidad(){
+        return view('proyectoViews.factibilidad.create');
     }
 }

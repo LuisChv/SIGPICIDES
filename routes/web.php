@@ -363,3 +363,10 @@ Route::post('proyecto/recursos', 'RecursoProyectoController@store')->name('proye
 Route::get('proyecto/recursos/show/{id}', 'RecursoProyectoController@show')->name('proyecto_recursos.show');
 
 Route::delete('proyecto/recursos/{id}', 'RecursoProyectoController@destroy')->name('proyecto_recursos.destroy');
+
+// [PROVISIONAL]
+//objetivos & alcances
+//Route::get('proyecto/detalles/{id}', 'RecursoProyectoController@crear_objetivo')->name('proyecto_detalle.create');
+// factibilidad
+Route::get('proyecto/factibilidad', 'SolicitudController@factibilidad')->name('factibilidad.create');
+//planificacion

@@ -78,7 +78,12 @@
                         <!--fin de dropdown-->
                     </div>                   
                 </div>
-                <br/>
+                <div class="card-footer">
+                    <br>
+                    <a class="btn btn-primary" href="#">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a> 
+                    <br>
+                    <br>
+                </div>
             </div>
         </div>
     </div>
@@ -165,7 +170,9 @@
                     </div>                   
                 </div>
             </div>
-            <div class="card-footer"><br></div>
+            <div class="card-footer">
+                <br>
+            </div>
         </div>
     </div>
     @yield('opcion')

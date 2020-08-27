@@ -78,7 +78,10 @@
                             </div>
                         </div>                            
                     </div>
-                    <button class="btn btn-primary" type="submit">Submit</button>        	
+                    <div class="card-footer">
+                        <button class="btn btn-primary" type="submit">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></button>
+                        <br><br>
+                    </div>     	
                 </form>
             </div>
         </div>
