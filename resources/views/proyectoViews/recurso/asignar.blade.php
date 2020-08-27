@@ -27,13 +27,47 @@
                                         @foreach($recursosProy as $rec)
                                             @if($rec->id_tipo==$tipo->id)  
                                                 <tr>                     
-                                                    <td id={{$rec->id}} onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')" onClick="CrearEnlace('{{ route('recursos.show', $rec->id)}}');" >
+                                                    <td id="{{$rec->id}}" data-toggle="modal" data-target="#modalDetalle{{$rec->id}}" onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')" onClick="CrearEnlace('{{ route('recursos.show', $rec->id)}}');" >
                                                         &nbsp;&nbsp;&nbsp;&nbsp;<i class="tim-icons icon-planet"></i>
                                                         &nbsp;{{ $rec->nombre }}
+
+                                                        <div class="modal fade" id="modalDetalle{{$rec->id}}" tabindex="-1" role="dialog" aria-labelledby="label2{{$rec->id}}" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="label2{{$rec->id}}">Detalles del recurso</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="false">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body" >                     
+                                                                        <table class="table" style="background-color: white !important;" >
+                                                                            <tr>
+                                                                                <td class="font-weight-bold" style="color: #222a42 !important;">Nombre</td>
+                                                                                <td style="color: #222a42 !important;">{{$rec->nombre}}</td>
+                                                                            </tr>
+                                                                            
+                                                                            <tr>
+                                                                                <td style="color: #222a42 !important;" class="font-weight-bold">Cantidad</td>
+                                                                                <td style="color: #222a42 !important;">{{ $rec->cantidad }}</td>
+                                                                            </tr>
+                                                                        <input hidden name="recurso" value="{{$rec->id}}"/>
+                                                                        <input hidden name="proyecto" value="{{$proyecto->id}}"/>
+                                                                        </table>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </td>
-                                                    <td width='10%'>
-                                                        <button type="button" class="btn btn-warning btn-sm btn-icon btn-round" data-toggle="modal" data-target="#modal{{$rec->id}}"><i class="tim-icons icon-simple-remove"></i></button>
-                                                    </td>                                                   
+                                                    <form method="POST" action="{{route('proyecto_recursos.destroy',$rec->id)}}">
+                                                        <td width='10%'>
+                                                        <button type="button" onClick="confirmar({{$rec->id}})" class="btn btn-warning btn-sm btn-icon btn-round" data-toggle="modal" data-target="#modal{{$rec->id}}"><i class="tim-icons icon-simple-remove"></i></button>
+                                                    </td> 
+                                                    </form>                                
                                                 </tr>
                                             @endif
                                         @endforeach
