@@ -164,4 +164,9 @@ class SolicitudController extends Controller
     public function indicador(){
         return view('proyectoViews.planificacion.indicadores_index');
     }
+    public function show2()
+    {
+        //
+        return view('proyectoViews.solicitud.Investigador.show');
+    }
 }

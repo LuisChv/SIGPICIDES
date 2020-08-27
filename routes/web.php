@@ -372,3 +372,4 @@ Route::get('proyecto/factibilidad', 'SolicitudController@factibilidad')->name('f
 //planificacion
 Route::get('proyecto/planificacion', 'SolicitudController@planificacion')->name('planificacion.index');
 Route::get('proyecto/indicadores', 'SolicitudController@indicador')->name('indicadores.index');
+Route::get('proyecto/solicitud', 'SolicitudController@show2')->name('solicitud.show2');

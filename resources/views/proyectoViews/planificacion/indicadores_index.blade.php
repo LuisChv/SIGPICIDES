@@ -50,7 +50,7 @@
                                 <td class="text-center">
                                     <div class="progress">
                                       <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                    </div>50%
                                 </td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-success btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
@@ -73,7 +73,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <a class="btn btn-primary" href="{{route('solicitud.index')}}">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a> <br><br>     
+                        <a class="btn btn-primary" href="{{route('solicitud.show2')}}">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a> <br><br>     
                     </div>                    
                 </form>
             </div>

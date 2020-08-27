@@ -80,7 +80,7 @@
                 </div>
                 <div class="card-footer">
                     <br>
-                    <a class="btn btn-primary" href="{{route('planificacion.index')}}">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a> 
+                    <a class="btn btn-primary" href="{{route('miembros.index')}}">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a> 
                     <br>
                     <br>
                 </div>
@@ -188,10 +188,6 @@
     // RESTABLECER EL FONDO DE LAS FILAS AL QUITAR EL FOCO
     function RestablecerFila(id_fila, color) {
     document.getElementById(id_fila).style.backgroundColor = color;
-    }
-    // CONVERTIR LAS FILAS EN LINKS
-    function CrearEnlace(url) {
-    location.href=url;
     }
     require("sweetalert");
     function confirmar(valor){

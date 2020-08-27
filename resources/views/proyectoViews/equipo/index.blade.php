@@ -36,6 +36,10 @@
                         </table>
                     </div>
                 </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary" href="{{route('planificacion.index')}}">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a>
+                    <br><br> 
+                </div>
             </div>
         </div>
     </div>
