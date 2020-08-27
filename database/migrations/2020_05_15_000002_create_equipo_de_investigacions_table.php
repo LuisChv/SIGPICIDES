@@ -15,6 +15,7 @@ class CreateEquipoDeInvestigacionsTable extends Migration
     {
         Schema::create('equipo_de_investigacion', function (Blueprint $table) {
             $table->id();
+            $table->boolean('modificable')->default(true);
             $table->boolean('haylider');
             $table->timestamps();
         });

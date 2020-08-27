@@ -15,9 +15,10 @@ class CreateValorEjesTable extends Migration
     {
         Schema::create('valor_eje', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_variable');
-            $table->decimal('valor_x');
-            $table->decimal('valor_y');
+            $table->integer('id_variable')->nullable();
+            $table->boolean('modificable')->default(true);
+            $table->decimal('valor_x')->nullable();
+            $table->decimal('valor_y')->nullable();
             $table->foreign('id_variable')->references('id')->on('variable')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

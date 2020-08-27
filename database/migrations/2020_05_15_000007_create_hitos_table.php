@@ -18,8 +18,6 @@ class CreateHitosTable extends Migration
             $table->integer('id_plan');
             $table->date('fecha_hito');
             $table->string('nombre',20);
-            $table->date('ultima_modificacion');
-            $table->boolean('actualizado');
             $table->foreign('id_plan')->references('id')->on('planificacion')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

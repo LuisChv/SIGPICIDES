@@ -16,8 +16,9 @@ class CreateTareasTable extends Migration
         Schema::create('tarea', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',100);
-            $table->integer('id_plan');
-            $table->foreign('id_plan')->references('id')->on('planificacion')->onUpdate('cascade')->onDelete('cascade');
+            $table->boolean('completada')->default(false);
+            $table->integer('id_indicador');
+            $table->foreign('id_indicador')->references('id')->on('indicador')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

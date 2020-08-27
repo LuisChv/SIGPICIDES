@@ -17,10 +17,11 @@ class CreateEvaluacionsTable extends Migration
             $table->id();
             $table->integer('id_comite');
             $table->integer('id_solicitud');
-            $table->integer('id_hito');
-            $table->integer('cant_eva');
-            $table->string('comentario',200);
-            $table->date('fecha');
+            $table->integer('id_hito')->nullable();
+            $table->integer('cant_eva')->nullable();
+            $table->string('comentario',200)->nullable();
+            $table->boolean('aprobacion')->default('false');
+            $table->boolean('visible')->default('true');
             $table->foreign('id_comite')->references('id')->on('comite_de_evaluacion')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_solicitud')->references('id')->on('solicitud')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_hito')->references('id')->on('hito')->onUpdate('cascade')->onDelete('cascade');

@@ -16,8 +16,9 @@ class CreateSolicitudsTable extends Migration
         Schema::create('solicitud', function (Blueprint $table) {
             $table->id();
             $table->integer('id_proy');
-            $table->date('fecha');
+            $table->boolean('enviada')->default(false);
             $table->boolean('noti_inv');
+            $table->boolean('modificable')->default(true);
             $table->boolean('noti_coo');
             $table->foreign('id_proy')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

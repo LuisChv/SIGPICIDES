@@ -16,6 +16,7 @@ class CreateAlcancesTable extends Migration
         Schema::create('alcance', function (Blueprint $table) {
             $table->id();
             $table->string("descripcion");
+            $table->boolean('modificable')->default(true);
             $table->integer("id_proyecto");
             $table->foreign('id_proyecto')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

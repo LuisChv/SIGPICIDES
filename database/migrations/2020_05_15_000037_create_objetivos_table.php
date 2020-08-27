@@ -16,6 +16,8 @@ class CreateObjetivosTable extends Migration
         Schema::create('objetivo', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion', 1000);
+            $table->integer("id_proyecto");
+            $table->foreign('id_proyecto')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

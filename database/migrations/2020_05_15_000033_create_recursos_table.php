@@ -15,7 +15,7 @@ class CreateRecursosTable extends Migration
     {
         Schema::create('recurso', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_marca');
+            $table->integer('id_marca')->nullable();
             $table->integer('id_tipo');
             $table->string('nombre',30);
             $table->foreign('id_marca')->references('id')->on('marca')->onUpdate('cascade')->onDelete('cascade');

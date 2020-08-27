@@ -16,9 +16,9 @@ class CreatePlanificacionsTable extends Migration
         Schema::create('planificacion', function (Blueprint $table) {
             $table->id();
             $table->integer('id_proyecto');
-            $table->string('descripcion',1000);
-            $table->date('fecha_inicio');
-            $table->date('fecha_fin');
+            $table->boolean('modificable')->default(true);
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_fin')->nullable();
             $table->foreign('id_proyecto')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

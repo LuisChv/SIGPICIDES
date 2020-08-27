@@ -17,6 +17,8 @@ class CreateRecursosPorProysTable extends Migration
             $table->id();
             $table->integer('id_proy');
             $table->integer('id_recurso');
+            $table->string('detalle');
+            $table->boolean('modificable')->default(true);
             $table->integer('cantidad');
             $table->foreign('id_recurso')->references('id')->on('recurso')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_proy')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');

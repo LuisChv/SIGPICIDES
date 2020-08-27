@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEstadoDeSoliProysTable extends Migration
+class SoliUserEva extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateEstadoDeSoliProysTable extends Migration
      */
     public function up()
     {
-        Schema::create('estado_de_solicitud', function (Blueprint $table) {
+        Schema::create('soli_user_eva', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_solicitud');
-            $table->boolean('modificable')->default(true);
-            $table->string('estado',25);
+            $table->integer("id_user");
+            $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer("id_evaluacion");
+            $table->foreign('id_evaluacion')->references('id')->on('evaluacion')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer("id_solicitud");
             $table->foreign('id_solicitud')->references('id')->on('solicitud')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
@@ -30,6 +32,6 @@ class CreateEstadoDeSoliProysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estado_de_solicitud');
+        Schema::dropIfExists('soli_user_eva');
     }
 }

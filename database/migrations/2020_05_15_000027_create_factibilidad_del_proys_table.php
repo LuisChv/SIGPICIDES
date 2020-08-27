@@ -16,11 +16,12 @@ class CreateFactibilidadDelProysTable extends Migration
         Schema::create('factibilidad', function (Blueprint $table) {
             $table->id();
             $table->integer('id_proy');
-            $table->string('tecnica',1500);
-            $table->string('economia',1500);
-            $table->string('financiera',1500);
-            $table->string('operativa',1500);
-            $table->string('fac_extra',1500);
+            $table->boolean('modificable')->default(true);
+            $table->string('tecnica',1500)->nullable();
+            $table->string('economia',1500)->nullable();
+            $table->string('financiera',1500)->nullable();
+            $table->string('operativa',1500)->nullable();
+            $table->string('fac_extra',1500)->nullable();
             $table->foreign('id_proy')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
