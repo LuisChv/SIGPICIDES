@@ -13,10 +13,11 @@
                         </div>
                     </div>
                 </div>
-                <form class="form" method="post" action="#">
+                <form class="form" method="POST" action="{{route('solicitud.store')}}">
+                    @csrf                                    
                     <div class="card-body">
                         <div class="row">                        
-                        	<div class="col-sm-12 col-md-8">
+                            <div class="col-sm-12 col-md-8">
                                 <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -26,8 +27,7 @@
                                     <input type="text" name="nombre" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre de la investigación') }}">
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
-
-                        		 <div class="input-group{{ $errors->has('tipoRec') ? ' has-danger' : '' }}">
+                                <div class="input-group{{ $errors->has('tipoRec') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
                                             <i class="tim-icons icon-minimal-down"></i>
@@ -63,18 +63,8 @@
                                     <textarea class="form-control border border-light" rows="6" name="descripcion"placeholder="Describa su proyecto"></textarea>
                                     </textarea>
                                     @include('alerts.feedback', ['field' => 'name'])
-                                </div>   
-                                <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                    <textarea class="form-control border border-light" rows="4" name="objetivo"placeholder="Describa los objetivos del proyecto"></textarea>
-                                    </textarea>
-                                    @include('alerts.feedback', ['field' => 'name'])
-                                </div>
-                                <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                    <textarea class="form-control border border-light" rows="4" name="alcance"placeholder="Describa los alcances del proyecto"></textarea>
-                                    </textarea>
-                                    @include('alerts.feedback', ['field' => 'name'])
-                                </div>                        
-                        	</div>
+                                </div>                                 
+                            </div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
@@ -84,19 +74,11 @@
                                     </div>
                                     <input type="number" step="0.01" name="costo" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Costo (US$)') }}">
                                     @include('alerts.feedback', ['field' => 'name'])
-                                </div>
-                                <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="tim-icons icon-watch-time"></i>
-                                        </div>
-                                    </div>
-                                    <input type="number"  name="duracion" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Duración (meses)') }}">
-                                    @include('alerts.feedback', ['field' => 'name'])
-                                </div>
+                                </div>                                
                             </div>
                         </div>                            
-                    </div>        	
+                    </div>
+                    <button class="btn btn-primary" type="submit">Submit</button>        	
                 </form>
             </div>
         </div>
