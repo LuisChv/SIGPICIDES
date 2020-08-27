@@ -21,61 +21,49 @@
                         <br>
                         <ul class="nav nav-tabs border-primary">
                           <li class="nav-item">
-                            <a class="nav-link" href="#">Hitos</a>
+                            <a class="nav-link" href="{{route('planificacion.index')}}">Hitos</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="{{route('indicadores.index')}}">Indicadores</a>
+                            <a class="nav-link" href="#">Indicadores</a>
                           </li>
                         </ul>
                         <table class="table">
                             <tr class="text-center">
-                                <th class="text-left">Título</th>
-                                <th>Fecha límite</th>
+                                <th class="text-left">Nombre</th>
+                                <th>Progreso</th>
                                 <th>Acciones</th>
                             </tr>
                             <tr>
-                                <td>Planteamiento del problema</td>
-                                <td class="text-center">30/8/2020</td>
+                                <td>Indicador 1</td>
+                                <td class="text-center">
+                                    <div class="progress">
+                                      <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                    </div>
+                                </td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-success btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
                                     <a href="#" class="btn btn-warning btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></a>
                                     </td>
                             </tr>
                             <tr>
-                                <td>Visualización del alcance de estudio</td>
-                                <td class="text-center">16/9/2020</td>
+                                <td>Indicador 2</td>
+                                <td class="text-center">
+                                    <div class="progress">
+                                      <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-success btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
                                     <a href="#" class="btn btn-warning btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></a>
                                     </td>
                             </tr>
                             <tr>
-                                <td>Elaboración de hipótesis de estudio</td>
-                                <td class="text-center">18/9/2020</td>
+                                <td>Indicador 3</td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-success btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
-                                    <a href="#" class="btn btn-warning btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></a>
-                                    </td>
-                            </tr>
-                            <tr>
-                                <td>Definición de la muestra</td>
-                                <td class="text-center">20/9/2020</td>
-                                <td class="text-center">
-                                    <a href="#" class="btn btn-success btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
-                                    <a href="#" class="btn btn-warning btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></a>
-                                    </td>
-                            </tr>
-                            <tr>
-                                <td>Recolección de los datos</td>
-                                <td class="text-center">25/9/2020</td>
-                                <td class="text-center">
-                                    <a href="#" class="btn btn-success btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
-                                    <a href="#" class="btn btn-warning btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></a>
-                                    </td>
-                            </tr>
-                            <tr>
-                                <td>Análisis de los datos</td>
-                                <td class="text-center">10/10/2020</td>
+                                    <div class="progress">
+                                      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                                    </div>
+                                </td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-success btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
                                     <a href="#" class="btn btn-warning btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></a>

@@ -370,3 +370,5 @@ Route::delete('proyecto/recursos/{id}', 'RecursoProyectoController@destroy')->na
 // factibilidad
 Route::get('proyecto/factibilidad', 'SolicitudController@factibilidad')->name('factibilidad.create');
 //planificacion
+Route::get('proyecto/planificacion', 'SolicitudController@planificacion')->name('planificacion.index');
+Route::get('proyecto/indicadores', 'SolicitudController@indicador')->name('indicadores.index');

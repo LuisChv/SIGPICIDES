@@ -158,4 +158,10 @@ class SolicitudController extends Controller
     public function factibilidad(){
         return view('proyectoViews.factibilidad.create');
     }
+    public function planificacion(){
+        return view('proyectoViews.planificacion.index');
+    }
+    public function indicador(){
+        return view('proyectoViews.planificacion.indicadores_index');
+    }
 }
