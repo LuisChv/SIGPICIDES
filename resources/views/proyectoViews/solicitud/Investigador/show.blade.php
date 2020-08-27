@@ -46,20 +46,24 @@
                                 <td>
                                     <table width="100%">
                                         <tr>
+                                            <th>Nombre de recurso 1</th>
+                                            <th>Cantidad</th>
+                                            <th>Detalle</th>
+                                        </tr>
+                                        <tr>
                                             <td>Nombre de recurso 1</td>
-                                            <td>Cantidad: 1</td>
+                                            <td>1</td>
+                                            <td>>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates</td>
                                         </tr>
                                         <tr>
                                             <td>Nombre de recurso 3</td>
-                                            <td>Cantidad: 3</td>
+                                            <td>3</td>
+                                            <td>Voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus</td>
                                         </tr>
                                         <tr>
                                             <td>Nombre de recurso 4</td>
-                                            <td>Cantidad: 3</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Nombre de recurso 5</td>
-                                            <td>Cantidad: 2</td>
+                                            <td>3</td>
+                                            <td>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt</td>
                                         </tr>
                                     </table>
                                 </td>
