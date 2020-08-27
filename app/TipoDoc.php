@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoDoc extends Model
 {
-    //
+    protected $table = 'tipo_doc';
 }
