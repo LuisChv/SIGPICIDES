@@ -352,8 +352,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     });
 });
 
-//recursos por proyecto
-
+/**********************recursos por solicitud de proyecto Investigador******************/
 Route::get('proyecto/recursos/{id}', 'RecursoProyectoController@create')->name('proyecto_recursos.create');
 //->middleware('has.permission:solicitudes.create');
 
