@@ -23,7 +23,6 @@ class CreateIndicadorsTable extends Migration
             $table->boolean('finalizado');
             $table->string('descrip_avance', 1000);
             $table->boolean('tipo_de_grafico');
-            $table->date('fecha_fin');
             $table->foreign('id_proy')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

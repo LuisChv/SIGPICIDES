@@ -20,6 +20,8 @@ class CreateSolicitudsTable extends Migration
             $table->boolean('noti_inv');
             $table->boolean('modificable')->default(true);
             $table->boolean('noti_coo');
+            $table->integer('id_estado');
+            $table->foreign('id_estado')->references('id')->on('estado_de_solicitud')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_proy')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

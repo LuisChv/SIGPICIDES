@@ -15,9 +15,7 @@ class CreateEstadoDeProysTable extends Migration
     {
         Schema::create('estado_de_proy', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_proy');
             $table->string('estado',15);
-            $table->foreign('id_proy')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
