@@ -35,7 +35,8 @@
                                                 <option style="color: black !important;" value="{{$tipo->id}}" selected>{{ $tipo->nombre }}</option>
                                             @else
                                                 <option style="color: black !important;" value="{{$tipo->id}}">{{ $tipo->nombre }}</option>
-                                            @endif                                                
+                                            @endif   
+                                             
                                         @endforeach
                                     </select>                    
                                 </div>

@@ -372,8 +372,3 @@ Route::get('proyecto/factibilidad', 'SolicitudController@factibilidad')->name('f
 Route::get('proyecto/planificacion', 'SolicitudController@planificacion')->name('planificacion.index');
 Route::get('proyecto/indicadores', 'SolicitudController@indicador')->name('indicadores.index');
 Route::get('proyecto/solicitud', 'SolicitudController@show2')->name('solicitud.show2');
-
-
-/***********************planificacion de tareas gantt****************************/
-
-Route::get('proyecto/tareas', 'TaskController@index')->name('proyecto_tareas.index');
