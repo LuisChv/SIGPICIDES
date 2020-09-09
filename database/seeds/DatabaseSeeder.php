@@ -22,5 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call([RecursoSeeder::class]);
         $this->call([EquipoInvestigacionSeeder::class]);
         $this->call([ProyectoSeeder::class]);
+        $this->call(TasksTableSeeder::class);
+        $this->call(LinksTableSeeder::class);
     }
 }
