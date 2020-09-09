@@ -17,7 +17,7 @@ class TaskController extends Controller
         $task = new Task();
  
         $task->text = $request->text;
-        $task->rrhh = $request->rrhh;
+       // $task->rrhh = $request->rrhh;
         $task->start_date = $request->start_date;
         $task->duration = $request->duration;
         $task->progress = $request->has("progress") ? $request->progress : 0;
