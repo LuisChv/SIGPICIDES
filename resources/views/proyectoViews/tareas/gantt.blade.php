@@ -34,7 +34,7 @@
    gantt.config.columns = [
         { name:"text", tree:true, width:"*",map_to:"text",  resize:true },
         { name:"start_date", align:"center"},
-         { name:"rrhh", align:"center"},
+       // { name:"rrhh", align:"center"},
         { name:"duration", align:"center", width:40 },
         { name:"add", width:44 }
     ];
@@ -47,7 +47,7 @@
 
     gantt.config.lightbox.sections=[
         {name:"description", height:70, map_to:"text", type:"textarea", focus:true},
-        {name:"rrhh", height:50, map_to:"rrhh", type:"textarea"},
+       // {name:"rrhh", height:50, map_to:"rrhh", type:"textarea"},
         {name:"time", height:40, map_to:"auto", type:"duration"},
         {name: "split", type:"checkbox", height:40, map_to: "render", options:[    
             @php
