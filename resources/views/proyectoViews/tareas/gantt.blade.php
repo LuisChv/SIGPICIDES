@@ -39,7 +39,7 @@
         { name:"add", width:44 }
     ];
 
-    gantt.locale.labels.section_rrhh = "Nueva";
+    gantt.locale.labels.section_avance = "Avance de la tarea detallado";
     gantt.locale.labels.section_time = "Tiempo";
     gantt.locale.labels.section_description = "Descripción";
     gantt.locale.labels.section_split = "Asignación de miembros";
@@ -47,12 +47,12 @@
 
     gantt.config.lightbox.sections=[
         {name:"description", height:70, map_to:"text", type:"textarea", focus:true},
-       // {name:"rrhh", height:50, map_to:"rrhh", type:"textarea"},
         {name:"time", height:40, map_to:"auto", type:"duration"},
+        {name:"avance", height:70, map_to:"avance", type:"textarea"},
         {name: "split", type:"checkbox", height:40, map_to: "render", options:[    
             @php
                 for ($i = 0; $i < 5; $i++)
-                    echo '{key:"op'. $i .'", label:" Split' . $i . ' "},'
+                    echo '{key:"op'. $i .'", label:" Split' . $i . '&nbsp;&nbsp; "},'
             @endphp
         ]},
     ];
