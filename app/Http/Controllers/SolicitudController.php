@@ -10,6 +10,7 @@ use App\Solicitud;
 use App\EquipoDeInvestigacion; 
 use App\UsuarioEquipoRol;
 use DB;
+use Auth;
 
 class SolicitudController extends Controller
 {
@@ -68,7 +69,12 @@ class SolicitudController extends Controller
             'tipoRec'=> 'required',
             'subtipo'=> 'required',
             'descripcion'=> 'required',     
-            'costo'=> 'required'
+            'costo'=> 'required',
+            'tema'=> 'required',
+            'justificacion'=> 'required',
+            'resultados'=> 'required',
+            'miembros'=> 'required',
+            'duracion'=> 'required',
         ],
         [
             'nombre.required' => "El nombre es obligatorio.",
@@ -76,33 +82,44 @@ class SolicitudController extends Controller
             'subtipo.required' => "Elija el sutipo de investigación.",
             'descripcion.required' => "La descripcion es obligatoria.",
             'costo.required' => "El costo es obligatorio.",
+            'tema.required'=>"El tema es obligatorio",
+            'justificacion.required' => "Justifique su proyecto",
+            'resultados.required' => "Defina los resultados esperados.",
+            'miembros.required' => "Ingrese la cantidad de miembros para el equipo de investigación.",
+            'duracion.required' => "Estime la duración del proyecto en días.",
         ]);
         //Equipo_investigacion
         $equipo= new EquipoDeInvestigacion;
-        $equipo->haylider=true;
+        $equipo->miembros = request('miembros');
         $equipo->save();
+
         //Usuario_equipo_rol con el investigador como lider 
         $lider= new UsuarioEquipoRol;       
         $lider->id_equipo= $equipo->id;
         $lider->id_usuario=auth()->user()->id;
         $lider->id_rol=5;
         $lider->save();
+
         //Se asignan las variables al nuevo proyecto
         $proyecto= new Proyecto();
-        $proyecto->id_subtipo=request('subtipo');
-        $proyecto->id_equipo=$equipo->id;
-        $proyecto->nombre=request('nombre');
-        $proyecto->descripcion=request('descripcion');
-        $proyecto->costo=request('costo');
-        //$proyecto->modificable=false;
+        $proyecto->id_subtipo = request('subtipo');
+        $proyecto->id_equipo = $equipo->id;
+        $proyecto->nombre = request('nombre');
+        $proyecto->descripcion = request('descripcion');
+        $proyecto->costo = request('costo');
+        $proyecto->tema = request('tema');
+        $proyecto->justificacion = request('justificacion');
+        $proyecto->resultados = request('resultados');
+        $proyecto->duracion = request('duracion');
         //Se crea el nuevo proyecto
         $proyecto->save();
+
         //Se crea la solicitud del proyecto
         $solicitud=new Solicitud();
         $solicitud->id_proy=$proyecto->id;
-        $solicitud->fecha= now();
         $solicitud->noti_inv= false;
         $solicitud->noti_coo= false;
+        $solicitud->id_estado = 1;
         //$solicitud->modificable=false;
         //Se crea el nuevo detalle recurso
         $solicitud->save();
@@ -153,6 +170,19 @@ class SolicitudController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function mis_solicitudes(){
+        $solicitudes = DB::select(
+            "SELECT S.id, P.nombre FROM usuario_equipo_rol UER 
+            JOIN equipo_de_investigacion EDI ON uer.id_equipo = EDI.id
+            JOIN proyecto P ON EDI.id = P.id_equipo
+            JOIN solicitud S ON S.id_proy = P.id
+            WHERE uer.id_usuario = ?", [Auth::user()->id]);
+        
+        return view('proyectoViews.solicitud.Investigador.misSolicitudes', [
+            'solicitudes'=>$solicitudes,
+        ]);
     }
 
     public function factibilidad(){

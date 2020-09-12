@@ -321,6 +321,9 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::put('solicitud/{solicitud}', 'SolicitudController@update')->name('solicitud.update')
     ->middleware('has.permission:solicitud.edit');
 
+    Route::get('mis_solicitudes', 'SolicitudController@mis_solicitudes')->name('solicitud.mis_solicitudes')
+    ->middleware('has.permission:mis_solicitudes');
+
     /*********************Solicitude de proyecto Admin*******************/
     
     Route::get('solicitudes', 'SolicitudController@index')->name('solicitud.index')

@@ -73,7 +73,7 @@
                         @endcan
                         @can('mis_solicitudes')
                             <li @if ($pageSlug == 'mis_solicitudes') class="active " @endif>
-                                <a href="{{ route('solicitud.index')  }}">
+                                <a href="{{ route('solicitud.mis_solicitudes')  }}">
                                     <i class="tim-icons icon-shape-star"></i>
                                     <p>{{ __('Mis solicitudes') }}</p>
                                 </a>

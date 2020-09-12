@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTareasTable extends Migration
+class Modificacion extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateTareasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tarea', function (Blueprint $table) {
+        Schema::create('modificacion', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',100);
-            $table->boolean('completada')->default(false);
-            $table->integer('id_indicador');
-            $table->foreign('id_indicador')->references('id')->on('indicador')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('nombre');
+            $table->boolean('solicitar')->default(false);
+            $table->string('razon');
+            $table->string('comentario')->nullable();
+            $table->boolean('respuesta');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateTareasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tarea');
+        Schema::dropIfExists('modificacion');
     }
 }

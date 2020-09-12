@@ -1,6 +1,6 @@
 @extends('layouts.app',['pageSlug' => 'dashboard'])
 @section('title')
-    Roles
+Roles
 @endsection
 @section('content')
 <div class="row">
@@ -30,35 +30,37 @@
                             </thead>
                             <tbody>
                                 @foreach ($data as $rol) 
+                                @if($rol->tipo_rol)
                                 <tr>                     
-                                        <td width="80%" id={{$rol->id}} onMouseOver="ResaltarFila({{$rol->id}});" onMouseOut="RestablecerFila({{$rol->id}}, '')" onClick="CrearEnlace('{{ route('roles.show', $rol->id)}}');">
-                                            {{$rol->name}}
+                                    <td width="80%" id={{$rol->id}} onMouseOver="ResaltarFila({{$rol->id}});" onMouseOut="RestablecerFila({{$rol->id}}, '')" onClick="CrearEnlace('{{ route('roles.show', $rol->id)}}');">
+                                        {{$rol->name}}
+                                    </td>
+                                    <form method="POST" id="formulario{{$rol->id}}" action="{{route('roles.destroy', $rol->id)}}" >
+                                        <td width="15%">
+                                            <div class="btn-group" role="group">
+                                                <a title="Configurar permisos" type="button" href="{{ route('roles.permissions', $rol->id)}}" class="btn btn-default btn-sm btn-icon btn-round">
+                                                    <i class="tim-icons icon-key-25"></i>
+                                                </a>
+                                                <a type="button" href="{{ route('roles.edit', $rol->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round">
+                                                    <i class="tim-icons icon-pencil"></i>
+                                                </a>
+                                                @csrf
+                                                @method('DELETE')
+                                                <button @if ($rol->id < 5) disabled @endif type="button" onClick="" style="pointer-events: auto;" title="No se puede eliminar un rol primario" class="btn btn-warning btn-sm btn-icon btn-round ">
+                                                    <i class="tim-icons icon-simple-remove"></i>
+                                                </button> 
+                                            </div>
                                         </td>
-                                        <form method="POST" id="formulario{{$rol->id}}" action="{{route('roles.destroy', $rol->id)}}" >
-                                            <td width="15%">
-                                                <div class="btn-group" role="group">
-                                                    <a title="Configurar permisos" type="button" href="{{ route('roles.permissions', $rol->id)}}" class="btn btn-default btn-sm btn-icon btn-round">
-                                                        <i class="tim-icons icon-key-25"></i>
-                                                    </a>
-                                                    <a type="button" href="{{ route('roles.edit', $rol->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round">
-                                                        <i class="tim-icons icon-pencil"></i>
-                                                    </a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button @if ($rol->id < 5) disabled @endif type="button" onClick="" style="pointer-events: auto;" title="No se puede eliminar un rol primario" class="btn btn-warning btn-sm btn-icon btn-round ">
-                                                        <i class="tim-icons icon-simple-remove"></i>
-                                                    </button> 
-                                                </div>
-                                            </td>
-                                        </form>
-                                        <td width="5%">
-                                            @isset($role)
-                                                @if ($role->id == $rol->id)
-                                                    <i class="tim-icons icon-double-right"></i>
-                                                @endif
-                                            @endisset
-                                        </td>
-                                    </tr>
+                                    </form>
+                                    <td width="5%">
+                                        @isset($role)
+                                        @if ($role->id == $rol->id)
+                                        <i class="tim-icons icon-double-right"></i>
+                                        @endif
+                                        @endisset
+                                    </td>
+                                </tr>
+                                @endif
                                 @endforeach
                             </tbody>
                         </table>
@@ -75,37 +77,37 @@
 <script langiage="javascript" type="text/javascript">
     // RESALTAR LAS FILAS AL PASAR EL MOUSE
     function ResaltarFila(id_fila) {
-    document.getElementById(id_fila).style.backgroundColor = '#9c9c9c';
+        document.getElementById(id_fila).style.backgroundColor = '#9c9c9c';
     }
     // RESTABLECER EL FONDO DE LAS FILAS AL QUITAR EL FOCO
     function RestablecerFila(id_fila, color) {
-    document.getElementById(id_fila).style.backgroundColor = color;
+        document.getElementById(id_fila).style.backgroundColor = color;
     }
     // CONVERTIR LAS FILAS EN LINKS
     function CrearEnlace(url) {
-    location.href=url;
+        location.href=url;
     }
     require("sweetalert");
     function confirmar(valor){
         //ruta.concat(variable,")}}");
         swal({
-          title: "¿Eliminar registro?",
-          text: "Esta acción es irreversible.",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
+            title: "¿Eliminar registro?",
+            text: "Esta acción es irreversible.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
         })
         .then((willDelete) => {
-          if (willDelete) {
-            swal("Registro eliminado", {
-              icon: "success",
-            });
-            document.getElementById("formulario"+valor).submit();
-          } else {
-            swal("Eliminación cancelada");
-          }
+            if (willDelete) {
+                swal("Registro eliminado", {
+                    icon: "success",
+                });
+                document.getElementById("formulario"+valor).submit();
+            } else {
+                swal("Eliminación cancelada");
+            }
         });
     }
-
+    
     
 </script>

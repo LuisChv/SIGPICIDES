@@ -16,9 +16,9 @@ class TareaUsuario extends Migration
         Schema::create('tarea_usuario', function (Blueprint $table) {
             $table->id();
             $table->integer("id_usuario");
-            $table->integer("id_tarea");
+            $table->integer("id_task");
             $table->foreign('id_usuario')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('id_tarea')->references('id')->on('tarea')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_task')->references('id')->on('tasks')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

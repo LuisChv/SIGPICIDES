@@ -16,10 +16,15 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table){
             $table->id();
             $table->string('text');
-            $table->integer('duration');
-            $table->float('progress');
+            $table->integer('duration')->default(1);
+            $table->float('progress')->default(0);
             $table->dateTime('start_date');
             $table->integer('parent');
+            $table->integer("id_proyecto")->nullable();;
+            $table->foreign('id_proyecto')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('type');
+            $table->boolean('readonly');
+            $table->boolean('modificable');
             $table->timestamps();
         });
     }

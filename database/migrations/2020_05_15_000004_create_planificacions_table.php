@@ -19,6 +19,7 @@ class CreatePlanificacionsTable extends Migration
             $table->boolean('modificable')->default(true);
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
+            $table->float('progreso');
             $table->foreign('id_proyecto')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

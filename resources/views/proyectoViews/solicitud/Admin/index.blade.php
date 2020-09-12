@@ -28,38 +28,6 @@
                             </td>
                         </tr>                        
                         @endforeach
-                        <tr>
-                            <td>
-                                <p>default 1 laaaaaaaarrrrrrrrrrrrrrrrrrrrrrrgo</p> 
-                            </td>
-                            <td width="5%" align="right">
-                                <a type="button" href="#" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
-                            </td>
-                            <td width="5%" align="right">
-                                <a type="button" href="#" class="btn btn-warning btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>default 2</p>
-                            </td>
-                            <td width="5%" align="right">
-                                <a type="button" href="#" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
-                            </td>
-                            <td width="5%" align="right">
-                                <a type="button" href="#" class="btn btn-warning btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></a>
-                            </td>
-                        </tr>
-                            <td>
-                                <p>default 4</p>
-                            </td>
-                            <td width="5%" align="right">
-                                <a type="button" href="#" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
-                            </td>
-                            <td width="5%" align="right">
-                                <a type="button" href="#" class="btn btn-warning btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></a>
-                            </td>
-                        </tr>
                     </table>
                 </div>
                 <div class="card-footer"><br></div>

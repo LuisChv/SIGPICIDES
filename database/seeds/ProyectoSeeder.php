@@ -17,6 +17,9 @@ class ProyectoSeeder extends Seeder
         $proyecto->id_equipo = 1;
         $proyecto->nombre = "Proyecto 1";
         $proyecto->descripcion = " ";
+        $proyecto->tema = "tema";
+        $proyecto->resultados = " ";
+        $proyecto->justificacion = " ";
         $proyecto->costo = 5;
         $proyecto->duracion = 5;
         $proyecto->save();

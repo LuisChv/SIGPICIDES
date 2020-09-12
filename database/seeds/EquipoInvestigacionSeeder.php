@@ -13,7 +13,7 @@ class EquipoInvestigacionSeeder extends Seeder
     public function run()
     {
         $equipo = new EquipoDeInvestigacion;
-        $equipo->haylider = true;
+        $equipo->miembros = 5;
         $equipo->save();
     }
 }
