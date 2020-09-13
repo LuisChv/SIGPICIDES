@@ -191,6 +191,14 @@
                                                     <td width="60%"><input type="number" style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_meta"></td>
                                                 </tr>
                                                 <tr>
+                                                    <td width="40%" class="font-weight-bold" style="color: #222a42 !important;">Cantidad de variables:</td>
+                                                    <td width="60%"><input type="number" style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_cant"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="40%" class="font-weight-bold" style="color: #222a42 !important;">Descripcion avance (?):</td>
+                                                    <td width="60%"><input type="number" style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_avance"></td>
+                                                </tr>                                                
+                                                <tr>
                                                     <td width="40%" class="font-weight-bold" style="color: #222a42 !important;">Descripción del indicador:</td>
                                                     <td width="60%"><textarea rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_indicador"></textarea></td>
                                                 </tr>
