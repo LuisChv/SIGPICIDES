@@ -11,6 +11,9 @@ use App\EquipoDeInvestigacion;
 use App\UsuarioEquipoRol;
 use DB;
 use Auth;
+use App\Objetivo;
+use App\Alcance;
+use App\Indicador;
 
 class SolicitudController extends Controller
 {
@@ -174,7 +177,7 @@ class SolicitudController extends Controller
 
     public function mis_solicitudes(){
         $solicitudes = DB::select(
-            "SELECT S.id, P.nombre FROM usuario_equipo_rol UER 
+            "SELECT S.id, P.nombre, S.id_proy FROM usuario_equipo_rol UER 
             JOIN equipo_de_investigacion EDI ON uer.id_equipo = EDI.id
             JOIN proyecto P ON EDI.id = P.id_equipo
             JOIN solicitud S ON S.id_proy = P.id
@@ -182,6 +185,18 @@ class SolicitudController extends Controller
         
         return view('proyectoViews.solicitud.Investigador.misSolicitudes', [
             'solicitudes'=>$solicitudes,
+        ]);
+    }
+
+    public function oai($id){
+        $objetivos = Objetivo::where('id_proy', 'like', $id);
+        $alcances = Alcance::where('id_proy', 'like', $id);
+        $indicadores = Indicador::where('id_proy', 'like', $id);
+
+        return view('proyectoViews.solicitud.Investigador.oai', [
+            'objetivos'=> $objetivos,
+            'alcances'=> $alcances,
+            'indicadores'=> $indicadores,
         ]);
     }
 

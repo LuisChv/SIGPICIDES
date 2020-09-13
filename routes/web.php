@@ -324,6 +324,60 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::get('mis_solicitudes', 'SolicitudController@mis_solicitudes')->name('solicitud.mis_solicitudes')
     ->middleware('has.permission:mis_solicitudes');
 
+    Route::get('proyecto/oai/{id}', 'SolicitudController@oai')->name('proyecto.oai');
+
+
+    /**********************Recursos por solicitud de proyecto Investigador******************/
+
+    Route::get('proyecto/recursos/{id}', 'RecursoProyectoController@create')->name('proyecto_recursos.create');
+    //->middleware('has.permission:solicitudes.create');
+
+    Route::post('proyecto/recursos', 'RecursoProyectoController@store')->name('proyecto_recursos.store');
+    //->middleware('has.permission:proyectos.create');
+
+    Route::get('proyecto/recursos/show/{id}', 'RecursoProyectoController@show')->name('proyecto_recursos.show');
+
+    Route::delete('proyecto/recursos/{id}', 'RecursoProyectoController@destroy')->name('proyecto_recursos.destroy');
+
+    
+    /**********************Objetivos******************/
+
+    Route::get('proyecto/objetivos/{id}', 'ObjetivoProyectoController@create')->name('proyecto_objetivos.create');
+    //->middleware('has.permission:solicitudes.create');
+
+    Route::post('proyecto/objetivos', 'ObjetivoProyectoController@store')->name('proyecto_objetivos.store');
+    //->middleware('has.permission:proyectos.create');
+
+    Route::get('proyecto/objetivos/show/{id}', 'ObjetivoProyectoController@show')->name('proyecto_objetivos.show');
+
+    Route::delete('proyecto/objetivos/{id}', 'ObjetivoProyectoController@destroy')->name('proyecto_objetivos.destroy');
+
+
+    /**********************Alcances******************/
+
+    Route::get('proyecto/alcances/{id}', 'AlcanceProyectoController@create')->name('proyecto_alcances.create');
+    //->middleware('has.permission:solicitudes.create');
+
+    Route::post('proyecto/alcances', 'AlcanceProyectoController@store')->name('proyecto_alcances.store');
+    //->middleware('has.permission:proyectos.create');
+
+    Route::get('proyecto/alcances/show/{id}', 'AlcanceProyectoController@show')->name('proyecto_alcances.show');
+
+    Route::delete('proyecto/alcances/{id}', 'AlcanceProyectoController@destroy')->name('proyecto_alcances.destroy');
+
+
+    /**********************Indicador******************/
+
+    Route::get('proyecto/indicadores/{id}', 'IndicadorProyectoController@create')->name('proyecto_indicadores.create');
+    //->middleware('has.permission:solicitudes.create');
+
+    Route::post('proyecto/indicadores', 'IndicadorProyectoController@store')->name('proyecto_indicadores.store');
+    //->middleware('has.permission:proyectos.create');
+
+    Route::get('proyecto/indicadores/show/{id}', 'IndicadorProyectoController@show')->name('proyecto_indicadores.show');
+
+    Route::delete('proyecto/indicadores/{id}', 'IndicadorProyectoController@destroy')->name('proyecto_indicadores.destroy');
+
     /*********************Solicitude de proyecto Admin*******************/
     
     Route::get('solicitudes', 'SolicitudController@index')->name('solicitud.index')
@@ -355,16 +409,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     });
 });
 
-/**********************recursos por solicitud de proyecto Investigador******************/
-Route::get('proyecto/recursos/{id}', 'RecursoProyectoController@create')->name('proyecto_recursos.create');
-//->middleware('has.permission:solicitudes.create');
 
-Route::post('proyecto/recursos', 'RecursoProyectoController@store')->name('proyecto_recursos.store');
-//    ->middleware('has.permission:proyectos.create');
-
-Route::get('proyecto/recursos/show/{id}', 'RecursoProyectoController@show')->name('proyecto_recursos.show');
-
-Route::delete('proyecto/recursos/{id}', 'RecursoProyectoController@destroy')->name('proyecto_recursos.destroy');
 
 // [PROVISIONAL]
 //objetivos & alcances

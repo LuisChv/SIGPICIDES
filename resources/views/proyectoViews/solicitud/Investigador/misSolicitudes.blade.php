@@ -25,10 +25,10 @@
                                     <a title="Información principal" type="button" class="btn btn-primary btn-sm btn-round" href="">
                                         <i class="tim-icons icon-notes"></i>
                                     </a>
-                                    <a title="Objetivos, alcances e indicadores" type="button" class="btn btn-info btn-sm btn-icon btn-round" href="">
+                                    <a title="Objetivos, alcances e indicadores" type="button" class="btn btn-info btn-sm btn-icon btn-round" href="{{ route('proyecto.oai', [$soli->id_proy])}}">
                                         <i class="tim-icons icon-spaceship"></i>
                                     </a>
-                                    <a title="Recursos" type="button" class="btn btn-info btn-sm btn-icon btn-round" href="">
+                                <a title="Recursos" type="button" class="btn btn-info btn-sm btn-icon btn-round" href="{{ route('proyecto_recursos.create', [$soli->id_proy])}}">
                                         <i class="tim-icons icon-laptop"></i>
                                     </a>
                                     <a title="Eliminar" type="button" class="btn btn-warning btn-sm btn-icon btn-round" href="">
