@@ -342,41 +342,26 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     
     /**********************Objetivos******************/
 
-    Route::get('proyecto/objetivos/{id}', 'ObjetivoProyectoController@create')->name('proyecto_objetivos.create');
-    //->middleware('has.permission:solicitudes.create');
-
-    Route::post('proyecto/objetivos', 'ObjetivoProyectoController@store')->name('proyecto_objetivos.store');
+    Route::post('proyecto/objetivos', 'ObjetivoController@store')->name('proyecto_objetivos.store');
     //->middleware('has.permission:proyectos.create');
 
-    Route::get('proyecto/objetivos/show/{id}', 'ObjetivoProyectoController@show')->name('proyecto_objetivos.show');
-
-    Route::delete('proyecto/objetivos/{id}', 'ObjetivoProyectoController@destroy')->name('proyecto_objetivos.destroy');
+    Route::delete('proyecto/objetivos/{id}', 'ObjetivoController@destroy')->name('proyecto_objetivos.destroy');
 
 
     /**********************Alcances******************/
 
-    Route::get('proyecto/alcances/{id}', 'AlcanceProyectoController@create')->name('proyecto_alcances.create');
-    //->middleware('has.permission:solicitudes.create');
-
-    Route::post('proyecto/alcances', 'AlcanceProyectoController@store')->name('proyecto_alcances.store');
+    Route::post('proyecto/alcances', 'AlcanceController@store')->name('proyecto_alcances.store');
     //->middleware('has.permission:proyectos.create');
 
-    Route::get('proyecto/alcances/show/{id}', 'AlcanceProyectoController@show')->name('proyecto_alcances.show');
-
-    Route::delete('proyecto/alcances/{id}', 'AlcanceProyectoController@destroy')->name('proyecto_alcances.destroy');
+    Route::delete('proyecto/alcances/{id}', 'AlcanceController@destroy')->name('proyecto_alcances.destroy');
 
 
     /**********************Indicador******************/
 
-    Route::get('proyecto/indicadores/{id}', 'IndicadorProyectoController@create')->name('proyecto_indicadores.create');
-    //->middleware('has.permission:solicitudes.create');
-
-    Route::post('proyecto/indicadores', 'IndicadorProyectoController@store')->name('proyecto_indicadores.store');
+    Route::post('proyecto/indicadores', 'IndicadorController@store')->name('proyecto_indicadores.store');
     //->middleware('has.permission:proyectos.create');
 
-    Route::get('proyecto/indicadores/show/{id}', 'IndicadorProyectoController@show')->name('proyecto_indicadores.show');
-
-    Route::delete('proyecto/indicadores/{id}', 'IndicadorProyectoController@destroy')->name('proyecto_indicadores.destroy');
+    Route::delete('proyecto/indicadores/{id}', 'IndicadorController@destroy')->name('proyecto_indicadores.destroy');
 
     /*********************Solicitude de proyecto Admin*******************/
     

@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-sm-3 text-left">
                         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalObjetivo">+</button>
-                        <form method="POST" action="#">
+                        <form method="POST" action="{{route('proyecto_objetivos.store')}}">
                             @csrf
                             <div class="modal fade" id="modalObjetivo" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -30,6 +30,7 @@
                                                     <td width="40%" class="font-weight-bold" style="color: #222a42 !important;">Descripción del objetivo:</td>
                                                     <td width="60%"><textarea rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_objetivo"></textarea></td>
                                                 </tr>
+                                                <input hidden name="id_proy" value="{{$id}}"/>
                                             </table>
                                         </div>
                                         <div class="modal-footer">
@@ -93,7 +94,7 @@
                     </div>
                     <div class="col-sm-3 text-left">
                         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalAlcance">+</button>
-                        <form method="POST" action="#">
+                        <form method="POST" action="{{route('proyecto_alcances.store')}}">
                             @csrf
                             <div class="modal fade" id="modalAlcance" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -110,6 +111,7 @@
                                                     <td width="40%" class="font-weight-bold" style="color: #222a42 !important;">Descripción del alcance:</td>
                                                     <td width="60%"><textarea rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_alcance"></textarea></td>
                                                 </tr>
+                                                <input hidden name="id_proy" value="{{$id}}"/>
                                             </table>
                                         </div>
                                         <div class="modal-footer">
@@ -163,7 +165,7 @@
                     </div>
                     <div class="col-sm-3 text-left">
                         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalIndicador">+</button>
-                        <form method="POST" action="#">
+                        <form method="POST" action="{{route('proyecto_indicadores.store')}}">
                             @csrf
                             <div class="modal fade" id="modalIndicador" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -180,7 +182,7 @@
                                                     <td width="40%" class="font-weight-bold" style="color: #222a42 !important;">Tipo:</td>
                                                     <td width="60%">
                                                         <select style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_tipo">
-                                                            <option>Seleccionar tipo de indicador</option>
+                                                            <option value="true">Seleccionar tipo de indicador</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -189,9 +191,10 @@
                                                     <td width="60%"><input type="number" style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_meta"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="40%" class="font-weight-bold" style="color: #222a42 !important;">Descripción del alcance:</td>
-                                                    <td width="60%"><textarea rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_alcance"></textarea></td>
+                                                    <td width="40%" class="font-weight-bold" style="color: #222a42 !important;">Descripción del indicador:</td>
+                                                    <td width="60%"><textarea rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_indicador"></textarea></td>
                                                 </tr>
+                                                <input hidden name="id_proy" value="{{$id}}"/>
                                             </table>
                                         </div>
                                         <div class="modal-footer">

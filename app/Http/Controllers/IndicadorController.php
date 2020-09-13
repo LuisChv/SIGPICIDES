@@ -3,82 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Indicador;
 
 class IndicadorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function store(){
+        request()->validate([
+            'id_proy'=> 'required',
+            'descripcion_indicador'=> 'required',
+            'indicador_tipo'=> 'required',
+        ],
+        [
+            'id_proy.required' => "Error, no hay un proyecto seleccionado",
+            'descripcion_indicador.required' => "Describa el objetivo.",
+            'indicador_tipo.required'=> "Seleccione un tipo de indicador",
+        ]);
+
+        $indicador = new Indicador();
+        $indicador->id_proy = request('id_proy');
+        $indicador->detalle = request('descripcion_indicador');
+        $indicador->tipo = true;
+        $indicador->save();
+
+        return redirect()->route('proyecto.oai', [$indicador->id_proy]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function destroy(){
+        $indicador = Indicador::findOrFail(request('id'));
+        $indicador->delete();
+        return redirect()->route('proyecto.oai', [$indicador->id_proy]);
     }
 }
