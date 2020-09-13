@@ -345,7 +345,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::post('proyecto/objetivos', 'ObjetivoController@store')->name('proyecto_objetivos.store');
     //->middleware('has.permission:proyectos.create');
 
-    Route::delete('proyecto/objetivos/{id}', 'ObjetivoController@destroy')->name('proyecto_objetivos.destroy');
+    Route::delete('proyecto/objetivos', 'ObjetivoController@destroy')->name('proyecto_objetivos.destroy');
 
 
     /**********************Alcances******************/
@@ -353,7 +353,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::post('proyecto/alcances', 'AlcanceController@store')->name('proyecto_alcances.store');
     //->middleware('has.permission:proyectos.create');
 
-    Route::delete('proyecto/alcances/{id}', 'AlcanceController@destroy')->name('proyecto_alcances.destroy');
+    Route::delete('proyecto/alcances', 'AlcanceController@destroy')->name('proyecto_alcances.destroy');
 
 
     /**********************Indicador******************/
@@ -361,7 +361,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::post('proyecto/indicadores', 'IndicadorController@store')->name('proyecto_indicadores.store');
     //->middleware('has.permission:proyectos.create');
 
-    Route::delete('proyecto/indicadores/{id}', 'IndicadorController@destroy')->name('proyecto_indicadores.destroy');
+    Route::delete('proyecto/indicadores', 'IndicadorController@destroy')->name('proyecto_indicadores.destroy');
 
     /*********************Solicitude de proyecto Admin*******************/
     

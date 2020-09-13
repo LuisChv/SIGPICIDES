@@ -26,8 +26,8 @@ class AlcanceController extends Controller
     }
 
     public function destroy(){
-        $alcance = Alcance::findOrFail(request('id'));
+        $alcance = Alcance::findOrFail(request('alcance'));
         $alcance->delete();
-        return redirect()->route('proyecto.oai', [$alcance->id_proy]);
+        return redirect()->route('proyecto.oai', [$alcance->id_proyecto]);
     }
 }

@@ -26,8 +26,8 @@ class ObjetivoController extends Controller
     }
 
     public function destroy(){
-        $objetivo = Objetivo::findOrFail(request('id'));
+        $objetivo = Objetivo::findOrFail(request('objetivo'));
         $objetivo->delete();
-        return redirect()->route('proyecto.oai', [$objetivo->id_proy]);
+        return redirect()->route('proyecto.oai', [$objetivo->id_proyecto]);
     }
 }

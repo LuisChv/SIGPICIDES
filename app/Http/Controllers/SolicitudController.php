@@ -189,9 +189,9 @@ class SolicitudController extends Controller
     }
 
     public function oai($id){
-        $objetivos = Objetivo::where('id_proyecto', 'like', $id);
-        $alcances = Alcance::where('id_proyecto', 'like', $id);
-        $indicadores = Indicador::where('id_proy', 'like', $id);
+        $objetivos = DB::select("SELECT * FROM objetivo WHERE id_proyecto = ?", [$id]);
+        $alcances = DB::select("SELECT * FROM alcance WHERE id_proyecto = ?", [$id]);
+        $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ?", [$id]);
 
         return view('proyectoViews.solicitud.Investigador.oai', [
             'objetivos'=> $objetivos,
