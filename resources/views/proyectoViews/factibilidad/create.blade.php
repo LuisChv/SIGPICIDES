@@ -31,7 +31,7 @@
                         </table>
                     </div>
                     <div class="card-footer">
-                        <a class="btn btn-primary" href="{{route('proyecto_recursos.create', 1)}}">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a> <br><br>     
+                        <a class="btn btn-primary" href="{{route('proyecto_recursos.create', $proyecto->id)}}">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a> <br><br>     
                     </div>                    
                 </form>
             </div>
@@ -42,7 +42,7 @@
             <nav class="navF">
                 <a href="{{ route('solicitud.create')}}">Recursos</a>
                 <a href="{{ route('solicitud.create')}}">Factibilidad</a>
-                <a href="{{ route('miembros.index')}}">Miembros</a>
+
                 <a href="{{ route('solicitud.create')}}">Planificación</a>
                 <!--a href="{{ route('cides') }}">Acerca de</a>
                 <a href="#">Acciones largaaaaaaaaas</a-->

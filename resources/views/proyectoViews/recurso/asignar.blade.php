@@ -80,7 +80,7 @@
                 </div>
                 <div class="card-footer">
                     <br>
-                    <a class="btn btn-primary" href="{{route('miembros.index')}}">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a> 
+                    <a class="btn btn-primary" href="{{route('miembros_proyecto.index', $proyecto->id)}}">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a> 
                     <br>
                     <br>
                 </div>

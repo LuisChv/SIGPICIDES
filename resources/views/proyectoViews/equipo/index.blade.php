@@ -8,45 +8,6 @@
         <div class="card">
             <div class="card-header ">
                 <div class="row">
-                    <div class="col-sm-9 text-left">
-                        <h2 class="card-title"><b>Investigadores del sistema</b></h2>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="container list-group">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th class="text-center" colspan = "3">Agregar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($usuarios as $use) 
-                                <tr>                     
-                                    <td> {{ $use->name }} </td>
-
-                                    <td width='5%'>
-                                        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#create" onClick="agregarMiembro({{ $use->id }})"><i class="tim-icons icon-simple-add"></i></a>
-                                    </td>
-                                   
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <a class="btn btn-primary" href="{{route('planificacion.index')}}">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a>
-                    <br><br> 
-                </div>
-            </div>
-        </div>
-    </div>
-	<div class="col-6">
-        <div class="card">
-            <div class="card-header ">
-                <div class="row">
                     <div class="col-sm-8 text-left">
                         <h2 class="card-title"><b> Miembros de equipo </b></h2>
                     </div> 
@@ -98,51 +59,80 @@
                     </tbody>
                 </table>
 
+                <div class="card-footer">
+                    <a class="btn btn-primary" href="{{route('planificacion.index')}}">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a>
+                    <br><br> 
+                </div>
                 
-               
-                    <div class="modal fade" id="create">
-                        <div class="modal-dialog modal-lg">
-                            <form method="POST"  action="{{ route('miembros.store')}}">
-                            @csrf
-                                <div class="modal-content">
-                                    <div class="modal-header bg-primary">
-                                        <button type="button" class="close" data-dismiss="modal">
-                                        <span>×</span>
-                                        </button>
-                                        <h4>Agregar Miembro</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <label for="rol">ROL DE EQUIPO</label>
-                                        <select class="form-control selectorWapis" name="rolmiembro" id="rolmiembro">
-                                            <option  selected disabled hidden >--Seleccionar Rol--</option>
-                                            @foreach ($roles as $rol)
-                                                <option style="color: black !important;">{{ $rol->name }}</option>
-                                            @endforeach
-                                        </select> 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <input type="hidden" name="investigador" id="investigador">
-                                        <button type="submit" class="btn btn-primary" >Guardar</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-               
             </div>
         </div>
     </div>
-    <div class="container menuF-container">
-                <input type="checkbox" id="toggleF">
-                <label for="toggleF" class="buttonF"></label>
-                <nav class="navF">
-                    <a href="{{ route('solicitud.create')}}">Recursos</a>
-                    <a href="{{ route('solicitud.create')}}">Factibilidad</a>
-                    <a href="{{ route('miembros.index')}}">Miembros</a>
-                    <a href="{{ route('solicitud.create')}}">Planificación</a>
-                    <!--a href="{{ route('cides') }}">Acerca de</a>
-                    <a href="#">Acciones largaaaaaaaaas</a-->
-                </nav>
+
+	<div class="col-6">
+        <div class="card">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-9 text-left">
+                        <h2 class="card-title"><b>Investigadores del sistema</b></h2>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container list-group">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th class="text-center" colspan = "3">Agregar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($usuarios as $use) 
+                                <tr>                     
+                                    <td> {{ $use->name }} </td>
+
+                                    <td width='5%'>
+                                        <button type="button" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#create" onClick="agregarMiembro({{ $use->id }})"><i class="tim-icons icon-simple-add"></i></button>
+                                    </td>
+                                   
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form method="POST"  action="{{ route('miembros.store', $proyecto->id   )}}">
+                @csrf
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="label">Nuevo Miembro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="false">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="rol">ROL DE EQUIPO</label>
+                            <select class="form-control selectorWapis" name="rolmiembro" id="rolmiembro">
+                                <option  selected disabled hidden >--Seleccionar Rol--</option>
+                                @foreach ($roles as $rol)
+                                    <option style="color: black !important;">{{ $rol->name }}</option>
+                                @endforeach
+                            </select> 
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="investigador" id="investigador">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Añadir</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
     </div>
 </div>
 @endsection

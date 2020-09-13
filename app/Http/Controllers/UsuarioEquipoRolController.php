@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\UsuarioEquipoRol;
+use App\Proyecto;
 use Caffeinated\Shinobi\Models\Role;
 use DB;
 
@@ -16,24 +17,18 @@ class UsuarioEquipoRolController extends Controller
      */
 
 
-    public function index()
+    public function index($id)
     {
+        
+        $proyecto = Proyecto::where('id', $id)->first();
+
          //Todos los usuarios
          $users = DB::select("SELECT * FROM users");
          $noMiembros = DB::select("SELECT * FROM users");
        
  
-         //Omitir usuario investigador lider(Usuario Logeado)
-         $lider = auth()->user();
- 
-         foreach ($noMiembros as $user){ 
-             if($user->id == $lider->id){
-                // unset($noMiembros[$user->id - 1]);
-             }
-         }
- 
          //Omitir Miembros del equipo 
-          $miembrosEquipo = DB::select('SELECT * FROM usuario_equipo_rol WHERE id_equipo = ?', [1]);
+          $miembrosEquipo = DB::select('SELECT * FROM usuario_equipo_rol WHERE id_equipo = ?', [$id]);
  
          foreach ($miembrosEquipo as $miembro) { 
              foreach($noMiembros as $user){ 
@@ -55,7 +50,7 @@ class UsuarioEquipoRolController extends Controller
           }
  
            //Miembros del equipo 
-           $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [1]);
+           $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$id]);
           
           //Roles
           $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [true]);
@@ -65,6 +60,7 @@ class UsuarioEquipoRolController extends Controller
                'usuarios'=>$noMiembros,  
                'miembros'=>$miembros,
                'roles'=>$roles,
+               'proyecto'=>$proyecto,
           ]);
     }
 
@@ -84,7 +80,7 @@ class UsuarioEquipoRolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store($id)
     {
         $id_investigador = request('investigador');
         $role = Role::where('name', request('rolmiembro'))->first();;
@@ -103,13 +99,13 @@ class UsuarioEquipoRolController extends Controller
         }
 
         DB::table('usuario_equipo_rol')->insert([
-            'id_equipo' => 1 ,
+            'id_equipo' => $id,
             'id_usuario' =>$id_investigador,
             'id_rol'=>$role->id,
         ]);
 
 
-        return redirect('/miembros');
+        return view('proyectoViews.equipo.index');
     }
 
     /**

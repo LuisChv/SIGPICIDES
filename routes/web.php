@@ -201,7 +201,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
      Route::get('miembros', 'UsuarioEquipoRolController@index')->name('miembros.index')
      ->middleware('has.permission:usuario_equipo_rol.index');
  
-     Route::post('miembros/store', 'UsuarioEquipoRolController@store')->name('miembros.store')
+     Route::post('miembros/store/{id}', 'UsuarioEquipoRolController@store')->name('miembros.store')
      ->middleware('has.permission:usuario_equipo_rol.create'); 
  
      Route::get('miembros/create', 'UsuarioEquipoRolController@create')->name('miembros.create')
@@ -400,13 +400,17 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 //objetivos & alcances
 //Route::get('proyecto/detalles/{id}', 'RecursoProyectoController@crear_objetivo')->name('proyecto_detalle.create');
 // factibilidad
-Route::get('proyecto/factibilidad', 'SolicitudController@factibilidad')->name('factibilidad.create');
+Route::get('proyecto/factibilidad/{id}', 'SolicitudController@factibilidad')->name('factibilidad.create');
 //planificacion
 Route::get('proyecto/planificacion', 'SolicitudController@planificacion')->name('planificacion.index');
 Route::get('proyecto/indicadores', 'SolicitudController@indicador')->name('indicadores.index');
 Route::get('proyecto/solicitud', 'SolicitudController@show2')->name('solicitud.show2');
 
 
+/***********************Equipo por Proyecto ***************************/
+
+Route::get('proyecto/miembros/{id}', 'UsuarioEquipoRolController@index')->name('miembros_proyecto.index');
+  
 /***********************planificacion de tareas gantt****************************/
 
 Route::get('proyecto/tareas', 'TaskController@index')->name('proyecto_tareas.index');

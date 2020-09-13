@@ -127,7 +127,11 @@ class SolicitudController extends Controller
         //Se crea el nuevo detalle recurso
         $solicitud->save();
         //TODO redireccionamiento provisional
-        return view('proyectoViews.objetivo_alcance.create');
+        
+
+        return view('proyectoViews.objetivo_alcance.create', [
+            'proyecto'=> $proyecto,
+        ]);
     }
 
     /**
@@ -201,9 +205,13 @@ class SolicitudController extends Controller
         ]);
     }
 
-    public function factibilidad(){
-        return view('proyectoViews.factibilidad.create');
+    public function factibilidad($id){
+        $proyecto = Proyecto::where('id', $id)->first();
+        return view('proyectoViews.factibilidad.create', [
+            'proyecto' => $proyecto,
+        ]);
     }
+
     public function planificacion(){
         return view('proyectoViews.planificacion.index');
     }
