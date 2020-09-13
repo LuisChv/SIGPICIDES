@@ -182,7 +182,9 @@
                                                     <td width="40%" class="font-weight-bold" style="color: #222a42 !important;">Tipo:</td>
                                                     <td width="60%">
                                                         <select style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_tipo">
-                                                            <option value="true">Seleccionar tipo de indicador</option>
+                                                            <option >Seleccionar tipo de indicador</option>
+                                                            <option value="true">True-number</option>
+                                                            <option value="false">False-NaN</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -196,7 +198,16 @@
                                                 </tr>
                                                 <tr>
                                                     <td width="40%" class="font-weight-bold" style="color: #222a42 !important;">Descripcion avance (?):</td>
-                                                    <td width="60%"><input type="number" style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_avance"></td>
+                                                    <td width="60%"><textarea rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_avance"></textarea></td>
+                                                </tr> 
+                                                <tr>
+                                                    <td width="40%" class="font-weight-bold" style="color: #222a42 !important;">Tipo de gráfico:</td>
+                                                    <td width="60%"><select style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_tipo_grafico">
+                                                            <option>Seleccionar tipo de gráfico</option>
+                                                            <option value="true">True-tipo1</option>
+                                                            <option value="false">False-tipo2</option>
+                                                        </select>
+                                                    </td>
                                                 </tr>                                                
                                                 <tr>
                                                     <td width="40%" class="font-weight-bold" style="color: #222a42 !important;">Descripción del indicador:</td>
