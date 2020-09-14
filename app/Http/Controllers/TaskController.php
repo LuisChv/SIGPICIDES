@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
  
 use Illuminate\Http\Request;
 use App\Task;
+use App\Proyecto;
+use DB;
  
 class TaskController extends Controller
 {
@@ -24,9 +26,9 @@ class TaskController extends Controller
         $task->parent = $request->parent;
         $task->sortorder = Task::max("sortorder") + 1;
         $task->id_proyecto = 1;
-        $task->type = "";
-        $task->readonly = false;
-        $task->modificable = true;
+        $task->type;
+        $task->readonly;
+        $task->modificable;
 
 
         $task->save();

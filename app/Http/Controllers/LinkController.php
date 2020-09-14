@@ -12,6 +12,9 @@ class LinkController extends Controller
         $link->type = $request->type;
         $link->source = $request->source;
         $link->target = $request->target;
+        $link->lag;
+        $link->readonly;
+        $link->modificable;
  
         $link->save();
  
