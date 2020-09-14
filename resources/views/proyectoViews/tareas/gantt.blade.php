@@ -48,7 +48,7 @@
     gantt.config.lightbox.sections=[
         {name:"description", height:70, map_to:"text", type:"textarea", focus:true},
         {name:"time", height:40, map_to:"auto", type:"duration"},
-        {name:"avance", height:70, map_to:"avance", type:"textarea"},
+      //  {name:"avance", height:70, map_to:"avance", type:"textarea"},
         {name: "split", type:"checkbox", height:40, map_to: "render", options:[    
             @php
                 for ($i = 0; $i < 5; $i++)

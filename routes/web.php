@@ -410,7 +410,7 @@ Route::get('proyecto/solicitud', 'SolicitudController@show2')->name('solicitud.s
 /***********************Equipo por Proyecto ***************************/
 
 Route::get('proyecto/miembros/{id}', 'UsuarioEquipoRolController@index')->name('miembros_proyecto.index');
-  
+
 /***********************planificacion de tareas gantt****************************/
 
 Route::get('proyecto/tareas', 'TaskController@index')->name('proyecto_tareas.index');
