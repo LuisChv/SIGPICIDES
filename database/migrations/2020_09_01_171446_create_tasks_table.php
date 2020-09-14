@@ -24,8 +24,8 @@ class CreateTasksTable extends Migration
             $table->dateTime('start_date');
             $table->integer('parent');
             $table->string('type')->nullable();
-            $table->boolean('readonly')->nullable();
-            $table->boolean('modificable')->nullable();
+            $table->boolean('readonly')->default(false);
+            $table->boolean('modificable')->default(true);
             $table->timestamps();
         });
     }

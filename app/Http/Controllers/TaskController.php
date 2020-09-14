@@ -23,7 +23,12 @@ class TaskController extends Controller
         $task->progress = $request->has("progress") ? $request->progress : 0;
         $task->parent = $request->parent;
         $task->sortorder = Task::max("sortorder") + 1;
- 
+        $task->id_proyecto = 1;
+        $task->type = "";
+        $task->readonly = false;
+        $task->modificable = true;
+
+
         $task->save();
  
         return response()->json([

@@ -18,9 +18,9 @@ class CreateLinksTable extends Migration
             $table->string('type');
             $table->integer('source');
             $table->integer('target');
-            $table->integer('lag')->nullable();
-            $table->boolean('readonly')->nullable();
-            $table->boolean('modificable')->nullable();
+            $table->integer('lag')->default(0);
+            $table->boolean('readonly')->default(false);
+            $table->boolean('modificable')->default(true);
             $table->timestamps();
         });
     }
