@@ -39,7 +39,7 @@
                             </td>
 
 
-                            <form method="POST" id="formulario{{$miembro->id_usuario}}" action="{{route('miembros.destroy', $miembro->id_usuario)}}" >
+                            <form method="POST" id="formulario{{$miembro->id_usuario}}" action="{{ route('miembros.destroy', [$miembro->id_usuario, $proyecto->id] )}}" >
                                 <td width='10%' align="right">
                                     <div class="btn-group" role="group">
                                         <a type="button" href="{{ route('miembros.edit', $miembro->id_usuario)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round">
@@ -105,7 +105,7 @@
 
         <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <form method="POST"  action="{{ route('miembros.store', $proyecto->id   )}}">
+                <form method="POST"  action="{{ route('miembros.store', $proyecto->id )}}">
                 @csrf
                     <div class="modal-content">
                         <div class="modal-header">

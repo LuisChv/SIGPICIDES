@@ -198,7 +198,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
      //Usuario Equipo Rol
 
-     Route::get('miembros', 'UsuarioEquipoRolController@index')->name('miembros.index')
+     Route::get('miembros/{id}', 'UsuarioEquipoRolController@index')->name('miembros.index')
      ->middleware('has.permission:usuario_equipo_rol.index');
  
      Route::post('miembros/store/{id}', 'UsuarioEquipoRolController@store')->name('miembros.store')
@@ -210,7 +210,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
      Route::get('miembros/{miembro}', 'UsuarioEquipoRolController@show')->name('miembros.show')
      ->middleware('has.permission:usuario_equipo_rol.show');    
  
-     Route::delete('miembros/{miembro}', 'UsuarioEquipoRolController@destroy')->name('miembros.destroy')
+     Route::delete('miembros/{miembro}/{id}', 'UsuarioEquipoRolController@destroy')->name('miembros.destroy')
      ->middleware('has.permission:usuario_equipo_rol.destroy');
  
      Route::get('miembros/{miembro}/edit', 'UsuarioEquipoRolController@edit')->name('miembros.edit')

@@ -50,7 +50,7 @@ class UsuarioEquipoRolController extends Controller
           }
  
            //Miembros del equipo 
-           $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$id]);
+            $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$id]);
           
           //Roles
           $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [true]);
@@ -100,12 +100,12 @@ class UsuarioEquipoRolController extends Controller
 
         DB::table('usuario_equipo_rol')->insert([
             'id_equipo' => $id,
-            'id_usuario' =>$id_investigador,
+            'id_usuario' =>$id_investigador,    
             'id_rol'=>$role->id,
         ]);
 
 
-        return view('proyectoViews.equipo.index');
+        return redirect()->route('miembros.index',[$id]);
     }
 
     /**
@@ -148,9 +148,9 @@ class UsuarioEquipoRolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_usuario,$id_proyecto)
     {
-         DB::table('usuario_equipo_rol')->where('id_usuario', $id)->delete();
-         return redirect('/miembros');
+         DB::table('usuario_equipo_rol')->where('id_usuario', $id_usuario)->where('id_equipo', $id_proyecto)->delete();
+         return redirect()->route('miembros.index',[$id_proyecto]);
     }
 }
