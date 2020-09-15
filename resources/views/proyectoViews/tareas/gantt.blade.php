@@ -25,7 +25,9 @@
 <body>
 <div id="gantt_here" style='width:100%; height:510px;'></div>
 <script type="text/javascript">
+    //Formato de fecha para el gantt
     gantt.config.date_format = "%Y-%m-%d %H:%i:%s";
+    //Permitir reordenar las tareas con interfaz grafica
     gantt.config.order_branch = true;
     gantt.config.order_branch_free = true;
     
@@ -52,15 +54,15 @@
         {name: "split", type:"checkbox", height:40, map_to: "render", options:[    
             @php
                 for ($i = 0; $i < 5; $i++)
-                    echo '{key:"op'. $i .'", label:" Split' . $i . '&nbsp;&nbsp; "},'
+                    echo '{key:"op'. $i .'", label:" Integrante' . $i . '&nbsp;&nbsp; "},'
             @endphp
         ]},
     ];
-
+    //Inicializa el gant
     gantt.init("gantt_here");
-    
-    gantt.load("/api/data");
-    
+    //Llamar al controlador para llenar los datos, aca paso por parametro el id del proyecto seleccionado
+    gantt.load("/api/data/{{$idProyecto}}");
+    //Sirve para habilitar guardar informacion en la base
     var dp = new gantt.dataProcessor("/api");
     dp.init(gantt);
     dp.setTransactionMode("REST");
