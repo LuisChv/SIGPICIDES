@@ -129,9 +129,7 @@ class SolicitudController extends Controller
         //TODO redireccionamiento provisional
         
 
-        return view('proyectoViews.objetivo_alcance.create', [
-            'proyecto'=> $proyecto,
-        ]);
+        return redirect()->route('proyecto.oai', $proyecto->id);
     }
 
     /**
@@ -153,7 +151,19 @@ class SolicitudController extends Controller
      */
     public function edit($id)
     {
-        //
+        $proyecto = Proyecto::findOrFail($id);
+        $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
+        $subtipo = SubTipoDeInvestigacion::findOrFail($proyecto->id_subtipo);
+        $tipo = TipoDeInvestigacion::findOrFail($subtipo->id_tipo);
+        $sub_tipos= SubTipoDeInvestigacion::all();
+        $tiposinv=TipoDeInvestigacion::all();
+        return view('proyectoViews.solicitud.Investigador.editar', [
+            'tiposinv' => $tiposinv,
+            'sub_tipos' => $sub_tipos,
+            'proyecto' => $proyecto,
+            'equipo' => $equipo,
+            't' => $tipo,
+        ]);
     }
 
     /**
@@ -165,7 +175,7 @@ class SolicitudController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return redirect()->route('proyecto.oai', $id);
     }
 
     /**

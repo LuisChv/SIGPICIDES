@@ -159,15 +159,15 @@
                                                     <td width="50%">
                                                         <select required style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_tipo">
                                                             <option value="" selected disabled hidden>Tipo de indicador</option>
-                                                            <option value="true">True-number</option>
-                                                            <option value="false">False-NaN</option>
+                                                            <option value="true">Cuantitativo</option>
+                                                            <option value="false">Cualitativo</option>
                                                         </select>
                                                     </td>
                                                     <td width="50%">
                                                         <select required style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_tipo_grafico">
                                                             <option value="" selected disabled hidden>Tipo de gráfico</option>
-                                                            <option value="true">True-tipo1</option>
-                                                            <option value="false">False-tipo2</option>
+                                                            <option value="true">Barras</option>
+                                                            <option value="false">Linea</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -216,6 +216,18 @@
                 </table>
             </div>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <a class="btn btn-primary" href="">
+            General
+        </a>
+    </div>
+    <div class="col-md-6 text-right">
+        <a class="btn btn-primary" href="{{ route('proyecto_recursos.create', [$id])}}">
+            Recursos
+        </a>
     </div>
 </div>
 <script language="javascript" type="text/javascript">

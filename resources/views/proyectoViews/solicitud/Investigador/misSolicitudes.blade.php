@@ -22,7 +22,7 @@
                             </td>
                             <td width="15%">
                                 <div class="btn-group" role="group">
-                                    <a title="Información principal" type="button" class="btn btn-primary btn-sm btn-round" href="">
+                                    <a title="Información principal" type="button" class="btn btn-primary btn-sm btn-round" href="{{ route('solicitud.edit', [$soli->id_proy])}}">
                                         <i class="tim-icons icon-notes"></i>
                                     </a>
                                     <a title="Objetivos, alcances e indicadores" type="button" class="btn btn-info btn-sm btn-icon btn-round" href="{{ route('proyecto.oai', [$soli->id_proy])}}">
