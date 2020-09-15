@@ -4,14 +4,34 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Task;
 use App\Proyecto;
+use App\UsuarioEquipoRol;
 use DB;
  
 class TaskController extends Controller
 {
 
-    public function index()
-    {
-        return view('proyectoViews.tareas.gantt');      
+    public function index($idProyecto)
+    {   
+        //hay que verificar si el proyecto que se esta llamando es uno en el que la persona logeada sea parte del equipo
+        //Trayendo el id del equipo del proyecto de la base de datos
+        //Si el equipo existe sigue el flujo, sino se muestra un not found
+        if ($idEquipo= Proyecto::select('id_equipo')->where('id',$idProyecto)->first()) {
+            //Obteniendo datos del usuario logeado
+            $idUsuarioLogeado=auth()->user()->id;
+            //dd($idUsuarioLogeado);            
+            //dd($idEquipo);
+            //Comprobando si el usuario equipo rol existe (id del equipo y id del usuario logeado)
+            $usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $idEquipo->id_equipo)->where('id_usuario', $idUsuarioLogeado)->firstOr(function(){
+                abort(403);
+            });
+
+            return view('proyectoViews.tareas.gantt');
+        }
+        else {
+            abort(404);
+        }
+        
+
     }
 
     public function store(Request $request){

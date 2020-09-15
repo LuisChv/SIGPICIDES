@@ -9,8 +9,7 @@ class GanttController extends Controller
     public function get(){
         $tasks = new Task();
         $links = new Link();
-        //$empleados = new Empleado();
- 
+        //$empleados = new Empleado(); 
         return response()->json([
             "data" => $tasks->orderBy('sortorder')->get(),
             "links" => $links->all()
