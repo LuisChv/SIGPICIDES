@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-6">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header ">
                 <h3 class="card-title"><b>Recursos asignados</b></h3>
@@ -172,18 +172,20 @@
     </div>
     @yield('opcion')
 </div>
-<div class="row">
-    <div class="col-md-6 text-left">
-    <a class="btn btn-primary" href="{{ route('proyecto.oai', [$proyecto->id]) }}">
-            Objetivos, alcances e indicadores.
-        </a>
-    </div>
-    <div class="col-md-6 text-right">
-        <a class="btn btn-primary" href="{{ route('miembros.index', [$proyecto->id])}}">
-            Equipo de investigación
-        </a>
-    </div>
-</div>
+<table class="col-md-12">
+    <tr>
+        <td width="50%">
+            <a class="btn btn-primary" href="{{ route('proyecto.oai', [$proyecto->id]) }}">
+                Objetivos, alcances e indicadores.
+            </a>
+        </td>
+        <td width="50%" align="right">
+            <a class="btn btn-primary" href="{{ route('solicitud.pre', [$proyecto->id])}}">
+                Enviar solicitud
+            </a>
+        </td>
+    </tr>
+</table>
 
 @endsection
 <script src="sweetalert2.all.min.js"></script>

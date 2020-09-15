@@ -326,6 +326,10 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::get('proyecto/oai/{id}', 'SolicitudController@oai')->name('proyecto.oai');
 
+    Route::get('solicitud/{solicitud}/pre', 'SolicitudController@pre')->name('solicitud.pre');
+
+    Route::get('solicitud/{solicitud}/enviar', 'SolicitudController@enviar')->name('solicitud.enviar');
+
 
     /**********************Recursos por solicitud de proyecto Investigador******************/
 

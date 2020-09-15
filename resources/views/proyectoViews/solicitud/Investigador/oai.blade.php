@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
@@ -133,7 +133,7 @@
         </div>
     </div>
 
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
@@ -197,18 +197,20 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6 text-left">
-        <a class="btn btn-primary" href="">
-            General
-        </a>
-    </div>
-    <div class="col-md-6 text-right">
-        <a class="btn btn-primary" href="{{ route('proyecto_recursos.create', [$id])}}">
-            Recursos
-        </a>
-    </div>
-</div>
+<table class="col-md-12">
+    <tr>
+        <td width="50%">
+            <a class="btn btn-primary" href="">
+                General
+            </a>
+        </td>
+        <td width="50%" align="right">
+            <a class="btn btn-primary" href="{{ route('proyecto_recursos.create', [$id])}}">
+                Recursos
+            </a>
+        </td>
+    </tr>
+</table>
 <script language="javascript" type="text/javascript">
     require("sweetalert");
     function confirmar(valor){
