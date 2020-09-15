@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Task;
 use App\Proyecto;
 use App\UsuarioEquipoRol;
+use App\Indicador;
+use App\User;
 use DB;
  
 class TaskController extends Controller
@@ -24,8 +26,14 @@ class TaskController extends Controller
             $usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $idEquipo->id_equipo)->where('id_usuario', $idUsuarioLogeado)->firstOr(function(){
                 abort(403);
             });
+            //Traer los indicadores del proyecto seleccionado
+            $indicadores= Indicador::where('id_proy',$idProyecto)->get();
+            //Traer los miembros del equipo del proyecto seleccionado
+            $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$idEquipo->id_equipo])->get();
+            //dd($indicadores);
+            //Retornar vista
+            return view('proyectoViews.tareas.gantt',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
 
-            return view('proyectoViews.tareas.gantt',['idProyecto'=>$idProyecto]);
         }
         else {
             abort(404);

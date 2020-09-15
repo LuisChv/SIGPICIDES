@@ -18,8 +18,7 @@
     Para solo leer https://docs.dhtmlx.com/gantt/desktop__readonly_mode.html
 
 
-    para los estilos del gantt
-     -->
+    para los estilos del gantt-->
     <link rel="stylesheet" href="https://files.dhtmlx.com/30d/0801b74b161df383f7de350535901db6/dhtmlxgantt_contrast_black.css">
     <link href="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.css" rel="stylesheet">
     <script src="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.js"></script>
@@ -101,17 +100,18 @@
         {name:"avance", height:70, map_to:"avance", type:"textarea"},*/
 
         //Para usar checkbox https://docs.dhtmlx.com/gantt/desktop__checkbox.html
-        {name: "indicador", type:"checkbox", height:40, map_to: "render", options:[    
+        {name: "indicador", type:"checkbox", height:40, map_to: "render", options:[                
             @php
-                for ($i = 0; $i < 5; $i++)
-                    echo '{key:"op'. $i .'", label:" indicador ' . $i . '&nbsp;&nbsp; "},'
+                    for ($i = 0; $i < sizeof($indicadores); $i++)
+                    echo '{key:"op'. $i .'", label:"' . $indicadores[$i]->detalle . '&nbsp;&nbsp; "},'
             @endphp
         ]},
         //Para agrega a los miembros del equipo
         {name: "equipo", type:"checkbox", height:40, map_to: "render", options:[    
             @php
-                for ($i = 0; $i < 5; $i++)
-                    echo '{key:"op'. $i .'", label:" integrante ' . $i . '&nbsp;&nbsp; "},'
+                for ($i = 0; $i < sizeof($miembrosEquipo); $i++)
+                    echo '{key:"op'. $i .'", label:"' . $miembrosEquipo[$i]->name . '&nbsp;&nbsp; "},' 
+                    
             @endphp
         ]},
     ];
