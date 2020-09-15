@@ -16,37 +16,8 @@ class RecursoProyectoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)//
-    {
-        /**
-            *id
-            *id_recurso
-            *id_proyecto
-            *detalle
-            *modificable
-            *cantidad
-            *timestamp
-         */
-        $proyecto=Proyecto::findOrFail($id);
-        $recursos=Recursos::all();
-        $tiposrec=TipoDeRecursos::all();
-        $recursosProy=DB::select("SELECT * FROM recursos_por_proy RP JOIN recurso R ON R.id = RP.id_recurso WHERE RP.id_proy = ?", [$id]);
-        return view ('proyectoViews.recurso.asignar', [
-            'proyecto'=>$proyecto,
-            'tiposrec'=>$tiposrec,
-            'recursos'=>$recursos,
-            'recursosProy'=>$recursosProy,
-        ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-    public function store()
+    
+     public function store()
     {
 
         //Validacion de los datos      
@@ -82,6 +53,37 @@ class RecursoProyectoController extends Controller
         return view ('simpleViews.recursos.show', [
             'recurso'=>$recurso]);
     }
+    public function create($id)//
+    {
+        /**
+            *id
+            *id_recurso
+            *id_proyecto
+            *detalle
+            *modificable
+            *cantidad
+            *timestamp
+         */
+        $proyecto=Proyecto::findOrFail($id);
+        $recursos=Recursos::all();
+        $tiposrec=TipoDeRecursos::all();
+        $recursosProy=DB::select("SELECT * FROM recursos_por_proy RP JOIN recurso R ON R.id = RP.id_recurso WHERE RP.id_proy = ?", [$id]);
+        return view ('proyectoViews.recurso.asignar', [
+            'proyecto'=>$proyecto,
+            'tiposrec'=>$tiposrec,
+            'recursos'=>$recursos,
+            'recursosProy'=>$recursosProy,
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    
 
     public function destroy($id)
     {

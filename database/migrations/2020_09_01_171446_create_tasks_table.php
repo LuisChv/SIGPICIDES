@@ -14,17 +14,18 @@ class CreateTasksTable extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table){
-            $table->id();
+            $table->increments('id');
+            $table->integer("id_proyecto")->nullable();
+            $table->foreign('id_proyecto')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('sortorder')->default(0);
             $table->string('text');
             $table->integer('duration')->default(1);
             $table->float('progress')->default(0);
             $table->dateTime('start_date');
             $table->integer('parent');
-            $table->integer("id_proyecto")->nullable();;
-            $table->foreign('id_proyecto')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('type');
-            $table->boolean('readonly');
-            $table->boolean('modificable');
+            $table->string('type')->nullable();
+            $table->boolean('readonly')->default(false);
+            $table->boolean('modificable')->default(true);
             $table->timestamps();
         });
     }
