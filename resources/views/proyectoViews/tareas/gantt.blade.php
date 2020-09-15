@@ -39,8 +39,10 @@
 <body>
 <div id="gantt_here" style='width:100%; height:510px;'></div>
 <script type="text/javascript">
-    
+    //Formato de fecha para el gantt
     gantt.config.date_format = "%Y/%m/%d %H:%i:%s";
+    
+    //Permitir reordenar las tareas con interfaz grafica
     gantt.config.order_branch = true;
     gantt.config.order_branch_free = true;
     
@@ -103,27 +105,29 @@
             @php
                 for ($i = 0; $i < 5; $i++)
                     echo '{key:"op'. $i .'", label:" indicador ' . $i . '&nbsp;&nbsp; "},'
-                    
             @endphp
         ]},
         //Para agrega a los miembros del equipo
         {name: "equipo", type:"checkbox", height:40, map_to: "render", options:[    
             @php
                 for ($i = 0; $i < 5; $i++)
-                    echo '{key:"op'. $i .'", label:" miembro ' . $i . '&nbsp;&nbsp; "},'
+                    echo '{key:"op'. $i .'", label:" integrante ' . $i . '&nbsp;&nbsp; "},'
             @endphp
         ]},
     ];
-    /*las siguientes 3 lineas son para que la escala del gantt sea en meses, por defecto es de días, o se puede poner en años con "year" en la 1ra y "%Y" en la 3ra linea
+    
+    /*las siguientes 3 lineas son para que la escala del gantt sea en meses, por defecto es de días, o se puede poner en años con "year" o semanas "week" en la 1ra y "%Y" o "%w" en la 3ra linea
     gantt.config.scale_unit = "month"; //display by year
     gantt.config.step = 1; //Set the step size of the time scale (X axis)
     gantt.config.date_scale = "%m"; //date scale by year */
     
     //para agregar, modificar y eliminar tareas https://docs.dhtmlx.com/gantt/desktop__custom_edit_form.html
     
+    //Inicializa el gant
     gantt.init("gantt_here");
-    gantt.load("/api/data");
-    
+    //Llamar al controlador para llenar los datos, aca paso por parametro el id del proyecto seleccionado
+    gantt.load("/api/data/{{$idProyecto}}");
+    //Sirve para habilitar guardar informacion en la base
     var dp = new gantt.dataProcessor("/api");
     dp.init(gantt);
     dp.setTransactionMode("REST");

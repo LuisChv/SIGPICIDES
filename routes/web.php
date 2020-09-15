@@ -175,49 +175,49 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
      //Equipo Investigacion
 
-     Route::get('equipos', 'EquipoController@index')->name('equipos.index')
-     ->middleware('has.permission:equipo_de_investigacion.index');
- 
-     Route::post('equipos/store', 'EquipoController@store')->name('equipos.store')
-     ->middleware('has.permission:equipo_de_investigacion.create');  
- 
-     Route::get('equipos/create', 'EquipoController@create')->name('equipos.create')
-     ->middleware('has.permission:equipo_de_investigacion.create');
- 
-     Route::get('equipos/{equipo}', 'EquipoController@show')->name('equipos.show')
-     ->middleware('has.permission:equipo_de_investigacion.show');    
- 
-     Route::delete('equipos/{equipo}', 'EquipoController@destroy')->name('equipos.destroy')
-     ->middleware('has.permission:equipo_de_investigacion.destroy');
- 
-     Route::get('equipos/{equipo}/edit', 'EquipoController@edit')->name('equipos.edit')
-     ->middleware('has.permission:equipo_de_investigacion.edit');
- 
-     Route::put('equipos/{equipo}', 'EquipoController@update')->name('equipos.update')
-     ->middleware('has.permission:equipo_de_investigacion.edit');
+    Route::get('equipos', 'EquipoController@index')->name('equipos.index')
+    ->middleware('has.permission:equipo_de_investigacion.index');
+
+    Route::post('equipos/store', 'EquipoController@store')->name('equipos.store')
+    ->middleware('has.permission:equipo_de_investigacion.create');  
+
+    Route::get('equipos/create', 'EquipoController@create')->name('equipos.create')
+    ->middleware('has.permission:equipo_de_investigacion.create');
+
+    Route::get('equipos/{equipo}', 'EquipoController@show')->name('equipos.show')
+    ->middleware('has.permission:equipo_de_investigacion.show');    
+
+    Route::delete('equipos/{equipo}', 'EquipoController@destroy')->name('equipos.destroy')
+    ->middleware('has.permission:equipo_de_investigacion.destroy');
+
+    Route::get('equipos/{equipo}/edit', 'EquipoController@edit')->name('equipos.edit')
+    ->middleware('has.permission:equipo_de_investigacion.edit');
+
+    Route::put('equipos/{equipo}', 'EquipoController@update')->name('equipos.update')
+    ->middleware('has.permission:equipo_de_investigacion.edit');
 
      //Usuario Equipo Rol
 
-     Route::get('miembros/{id}', 'UsuarioEquipoRolController@index')->name('miembros.index')
-     ->middleware('has.permission:usuario_equipo_rol.index');
- 
-     Route::post('miembros/store/{id}', 'UsuarioEquipoRolController@store')->name('miembros.store')
-     ->middleware('has.permission:usuario_equipo_rol.create'); 
- 
-     Route::get('miembros/create', 'UsuarioEquipoRolController@create')->name('miembros.create')
-     ->middleware('has.permission:usuario_equipo_rol.create');
- 
-     Route::get('miembros/{miembro}', 'UsuarioEquipoRolController@show')->name('miembros.show')
-     ->middleware('has.permission:usuario_equipo_rol.show');    
- 
-     Route::delete('miembros/{miembro}/{id}', 'UsuarioEquipoRolController@destroy')->name('miembros.destroy')
-     ->middleware('has.permission:usuario_equipo_rol.destroy');
- 
-     Route::get('miembros/{miembro}/edit', 'UsuarioEquipoRolController@edit')->name('miembros.edit')
-     ->middleware('has.permission:usuario_equipo_rol.edit');
- 
-     Route::put('miembros/{equipo}', 'UsuarioEquipoRolController@update')->name('miembros.update')
-     ->middleware('has.permission:usuario_equipo_rol.edit');
+    Route::get('miembros/{id}', 'UsuarioEquipoRolController@index')->name('miembros.index')
+    ->middleware('has.permission:usuario_equipo_rol.index');
+
+    Route::post('miembros/store/{id}', 'UsuarioEquipoRolController@store')->name('miembros.store')
+    ->middleware('has.permission:usuario_equipo_rol.create'); 
+
+    Route::get('miembros/create', 'UsuarioEquipoRolController@create')->name('miembros.create')
+    ->middleware('has.permission:usuario_equipo_rol.create');
+
+    Route::get('miembros/{miembro}', 'UsuarioEquipoRolController@show')->name('miembros.show')
+    ->middleware('has.permission:usuario_equipo_rol.show');    
+
+    Route::delete('miembros/{miembro}/{id}', 'UsuarioEquipoRolController@destroy')->name('miembros.destroy')
+    ->middleware('has.permission:usuario_equipo_rol.destroy');
+
+    Route::get('miembros/{miembro}/edit', 'UsuarioEquipoRolController@edit')->name('miembros.edit')
+    ->middleware('has.permission:usuario_equipo_rol.edit');
+
+    Route::put('miembros/{equipo}', 'UsuarioEquipoRolController@update')->name('miembros.update')
+    ->middleware('has.permission:usuario_equipo_rol.edit');
 
 
     //Indicadores
@@ -413,4 +413,4 @@ Route::get('proyecto/miembros/{id}', 'UsuarioEquipoRolController@index')->name('
 
 /***********************planificacion de tareas gantt****************************/
 
-Route::get('proyecto/tareas', 'TaskController@index')->name('proyecto_tareas.index');
+Route::get('proyecto/tareas/{id_proyecto}', 'TaskController@index')->name('proyecto_tareas.index');
