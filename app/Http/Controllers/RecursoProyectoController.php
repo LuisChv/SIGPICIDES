@@ -37,7 +37,7 @@ class RecursoProyectoController extends Controller
         $r = new RecursosPorProy;
         $r->id_proy = request('proyecto');
         $r->id_recurso = request('recurso');
-        //$r->detalle = request('detalle');
+        $r->detalle = request('detalle');
         $r->cantidad = request('cantidad');
         $r->save();
         
@@ -67,7 +67,7 @@ class RecursoProyectoController extends Controller
         $proyecto=Proyecto::findOrFail($id);
         $recursos=Recursos::all();
         $tiposrec=TipoDeRecursos::all();
-        $recursosProy=DB::select("SELECT * FROM recursos_por_proy RP JOIN recurso R ON R.id = RP.id_recurso WHERE RP.id_proy = ?", [$id]);
+        $recursosProy=DB::select("SELECT RP.id, RP.cantidad, R.nombre, R.id_tipo FROM recursos_por_proy RP JOIN recurso R ON R.id = RP.id_recurso WHERE RP.id_proy = ?", [$id]);
         return view ('proyectoViews.recurso.asignar', [
             'proyecto'=>$proyecto,
             'tiposrec'=>$tiposrec,
@@ -89,7 +89,7 @@ class RecursoProyectoController extends Controller
     {
         $recursoProy= \App\RecursosPorProy::findOrFail($id);
         $recursoPry->delete();
-        return redirect('/recursos');
+        return redirect()->route('proyecto_recursos.destroy', $id);
     }
 
 }

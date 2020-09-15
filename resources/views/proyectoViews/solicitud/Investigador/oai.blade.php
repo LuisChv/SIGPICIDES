@@ -155,30 +155,9 @@
                                         </div>
                                         <div class="modal-body" >                     
                                             <table class="table" style="background-color: white !important;" >
-                                                <tr>
-                                                    <td width="50%">
-                                                        <select required style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_tipo">
-                                                            <option value="" selected disabled hidden>Tipo de indicador</option>
-                                                            <option value="true">Cuantitativo</option>
-                                                            <option value="false">Cualitativo</option>
-                                                        </select>
-                                                    </td>
-                                                    <td width="50%">
-                                                        <select required style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_tipo_grafico">
-                                                            <option value="" selected disabled hidden>Tipo de gráfico</option>
-                                                            <option value="true">Barras</option>
-                                                            <option value="false">Linea</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%"><input required placeholder="Meta" type="number" style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_meta"></td>
-                                                    <td width="50%"><input required placeholder="Cantidad de variables" type="number" style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_cant"></td>
-                                                </tr>
                                                                                                
                                                 <tr>
-                                                    <td width="50%"><textarea required placeholder=" Descripción del indicador" rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="indicador_avance"></textarea></td>
-                                                    <td width="50%"><textarea required placeholder=" Descripción del avance" rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_indicador"></textarea></td>
+                                                    <td><textarea required placeholder=" Descripción del indicador" rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_indicador"></textarea></td>
                                                 </tr>
                                                 <input hidden name="id_proy" value="{{$id}}"/>
                                             </table>

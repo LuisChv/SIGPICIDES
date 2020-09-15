@@ -72,28 +72,21 @@ class SolicitudController extends Controller
             'tipoRec'=> 'required',
             'subtipo'=> 'required',
             'descripcion'=> 'required',     
-            'costo'=> 'required',
             'tema'=> 'required',
             'justificacion'=> 'required',
             'resultados'=> 'required',
-            'miembros'=> 'required',
-            'duracion'=> 'required',
         ],
         [
             'nombre.required' => "El nombre es obligatorio.",
             'tipoRec.required'=>"Elija el tipo de investigación",
             'subtipo.required' => "Elija el sutipo de investigación.",
             'descripcion.required' => "La descripcion es obligatoria.",
-            'costo.required' => "El costo es obligatorio.",
             'tema.required'=>"El tema es obligatorio",
             'justificacion.required' => "Justifique su proyecto",
             'resultados.required' => "Defina los resultados esperados.",
-            'miembros.required' => "Ingrese la cantidad de miembros para el equipo de investigación.",
-            'duracion.required' => "Estime la duración del proyecto en días.",
         ]);
         //Equipo_investigacion
         $equipo= new EquipoDeInvestigacion;
-        $equipo->miembros = request('miembros');
         $equipo->save();
 
         //Usuario_equipo_rol con el investigador como lider 
@@ -109,11 +102,9 @@ class SolicitudController extends Controller
         $proyecto->id_equipo = $equipo->id;
         $proyecto->nombre = request('nombre');
         $proyecto->descripcion = request('descripcion');
-        $proyecto->costo = request('costo');
         $proyecto->tema = request('tema');
         $proyecto->justificacion = request('justificacion');
         $proyecto->resultados = request('resultados');
-        $proyecto->duracion = request('duracion');
         //Se crea el nuevo proyecto
         $proyecto->save();
 
@@ -203,6 +194,7 @@ class SolicitudController extends Controller
     }
 
     public function oai($id){
+        $proyecto = Proyecto::findOrFail($id);
         $objetivos = DB::select("SELECT * FROM objetivo WHERE id_proyecto = ?", [$id]);
         $alcances = DB::select("SELECT * FROM alcance WHERE id_proyecto = ?", [$id]);
         $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ?", [$id]);

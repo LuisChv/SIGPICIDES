@@ -76,13 +76,8 @@
                             </div>
                         @endforeach
                         <!--fin de dropdown-->
+                        </br>
                     </div>                   
-                </div>
-                <div class="card-footer">
-                    <br>
-                    <a class="btn btn-primary" href="{{route('miembros.index', $proyecto->id)}}">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a> 
-                    <br>
-                    <br>
                 </div>
             </div>
         </div>
@@ -176,6 +171,18 @@
         </div>
     </div>
     @yield('opcion')
+</div>
+<div class="row">
+    <div class="col-md-6 text-left">
+    <a class="btn btn-primary" href="{{ route('proyecto.oai', [$proyecto->id]) }}">
+            Objetivos, alcances e indicadores.
+        </a>
+    </div>
+    <div class="col-md-6 text-right">
+        <a class="btn btn-primary" href="{{ route('miembros.index', [$proyecto->id])}}">
+            Equipo de investigación
+        </a>
+    </div>
 </div>
 
 @endsection

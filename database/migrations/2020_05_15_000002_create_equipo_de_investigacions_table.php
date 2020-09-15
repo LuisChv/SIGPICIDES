@@ -16,7 +16,7 @@ class CreateEquipoDeInvestigacionsTable extends Migration
         Schema::create('equipo_de_investigacion', function (Blueprint $table) {
             $table->id();
             $table->boolean('modificable')->default(true);
-            $table->integer('miembros');
+            $table->integer('miembros')->nullable();
             $table->timestamps();
         });
     }

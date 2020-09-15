@@ -19,10 +19,10 @@ class CreateProyectosTable extends Migration
             $table->integer('id_equipo');
             $table->string('nombre', 64);
             $table->integer('id_comite')->nullable();
-            $table->integer('duracion');
+            $table->integer('duracion')->nullable();
             $table->boolean('modificable')->default(true);
-            $table->string('descripcion', 64);
-            $table->decimal('costo', 7);
+            $table->string('descripcion', 512);
+            $table->decimal('costo', 7)->nullable();
             $table->integer('id_estado')->nullable();
             $table->foreign('id_estado')->references('id')->on('estado_de_proy')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_subtipo')->references('id')->on('subtipo_de_investigacion')->onUpdate('cascade')->onDelete('cascade');
