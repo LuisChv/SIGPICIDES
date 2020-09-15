@@ -5,7 +5,7 @@
 @section('content')
 <div class="row">
     <div class="col-4">
-        <div class="card">
+        <div class="card"  id="objetivosCard">
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-9 text-left">
@@ -48,7 +48,7 @@
                 <table class="table">
                     @foreach ($objetivos as $objetivo)
                         <tr>
-                            <td class="align-text-top"><i class="tim-icons icon-compass-05"></i></td>
+                            <td class="align-content-xl-between"><i class="tim-icons icon-compass-05"></i></td>
                             <td>
                                 {{$objetivo->descripcion}}
                             </td>
@@ -70,7 +70,7 @@
     </div>
 
     <div class="col-4">
-        <div class="card">
+        <div class="card" id="alcancesCard">
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-9 text-left">
@@ -134,7 +134,7 @@
     </div>
 
     <div class="col-4">
-        <div class="card">
+        <div class="card" id="indicadoresCard">
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-9 text-left">
@@ -210,6 +210,38 @@
     </div>
 </div>
 <script language="javascript" type="text/javascript">
+    var cartitas1=document.querySelector('#objetivosCard');
+    var cartitas2=document.querySelector('#alcancesCard');        
+    var cartitas3=document.querySelector('#indicadoresCard');
+    var ancho1=cartitas1.offsetHeight;
+    var ancho2=cartitas2.offsetHeight;       
+    var ancho3=cartitas3.offsetHeight;
+    console.log(ancho1);       
+
+    if(ancho1>=ancho2){
+        console.log('1 mayor');
+        if(ancho1>=ancho3){
+            console.log('TRUE2');
+            document.getElementById("alcancesCard").setAttribute("style","height:"+ancho1+"px"); 
+            document.getElementById("indicadoresCard").setAttribute("style","height:"+ancho1+"px");
+        }
+    } else if(ancho2>=ancho1){
+        console.log('2 mayor');
+        if(ancho2>=ancho3){
+            console.log('TRUE2');
+            document.getElementById("objetivosCard").setAttribute("style","height:"+ancho2+"px"); 
+            document.getElementById("indicadoresCard").setAttribute("style","height:"+ancho2+"px");
+        }
+    } else if(ancho3>=ancho1){
+        console.log('3 mayor');
+        if(ancho3>=ancho2){
+            console.log('TRUE2');
+            document.getElementById("objetivosCard").setAttribute("style","height:"+ancho3+"px"); 
+            document.getElementById("alcancesCard").setAttribute("style","height:"+ancho3+"px");
+        }
+    }
+
+
     require("sweetalert");
     function confirmar(valor){
         //ruta.concat(variable,")}}");
@@ -230,7 +262,6 @@
             swal("Eliminación cancelada");
           }
         });
-    }
-    
+    }    
 </script>
 @endsection
