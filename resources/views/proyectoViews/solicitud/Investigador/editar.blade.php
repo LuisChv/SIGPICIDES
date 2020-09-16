@@ -125,25 +125,5 @@ Nueva investigación
         </nav>
     </div>
 </div>
-        
-<script type="text/javascript">
-    $('#selector1').change(function () {
-        $('#selector2').show();
-        $('#prepend').show();
-        $('#selector2').val("");
-        var idFiltro = $(this).val();
-        if (idFiltro !="") {
-            $("#selector2 > option").each(function () {
-                if ($(this).hasClass(idFiltro)) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-        }
-    });
-</script>
-
-
 @endsection
         

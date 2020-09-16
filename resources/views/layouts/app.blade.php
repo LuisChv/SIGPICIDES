@@ -107,6 +107,8 @@
 
         <script src="{{ asset('black') }}/js/black-dashboard.min.js?v=1.0.0"></script>
         <script src="{{ asset('black') }}/js/theme.js"></script>
+        <script src="{{ asset('black') }}/js/sweet.js"> </script>
+        <script src="{{ asset('black') }}/js/sigpi.js"></script>
 
         @stack('js')
 
