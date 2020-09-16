@@ -14,6 +14,11 @@ use Auth;
 use App\Objetivo;
 use App\Alcance;
 use App\Indicador;
+use App\Recursos;
+use App\TipoDeRecursos;
+use App\RolUsuario;
+use App\ComiteDeEvaluacion;
+use App\ComiteUsuario;
 
 class SolicitudController extends Controller
 {
@@ -205,6 +210,63 @@ class SolicitudController extends Controller
             'indicadores'=> $indicadores,
             'id'=> $id,
         ]);
+    }
+
+    public function pre($id){
+        $proyecto = Proyecto::findOrFail($id);
+        $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
+        $subtipo = SubTipoDeInvestigacion::findOrFail($proyecto->id_subtipo);
+        $tipo = TipoDeInvestigacion::findOrFail($subtipo->id_tipo);
+        $objetivos = DB::select("SELECT * FROM objetivo WHERE id_proyecto = ?", [$id]);
+        $alcances = DB::select("SELECT * FROM alcance WHERE id_proyecto = ?", [$id]);
+        $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ?", [$id]);
+        $recursos=Recursos::all();
+        $tiposrec=TipoDeRecursos::all();
+        $recursosProy=DB::select("SELECT RP.id, RP.cantidad, R.nombre, R.id_tipo, RP.detalle FROM recursos_por_proy RP JOIN recurso R ON R.id = RP.id_recurso WHERE RP.id_proy = ?", [$id]);
+
+        return view('proyectoViews.solicitud.Investigador.previsualizacion', [
+            'objetivos'=> $objetivos,
+            'alcances'=> $alcances,
+            'indicadores'=> $indicadores,
+            'proyecto' => $proyecto,
+            'equipo' => $equipo,
+            't' => $tipo,
+            'st' => $subtipo,
+            'tiposrec'=>$tiposrec,
+            'recursos'=>$recursos,
+            'recursosProy'=>$recursosProy,
+        ]);
+    }
+
+    public function enviar($id){
+        $director = RolUsuario::where('role_id', 3)->first();
+        $coordinador = RolUsuario::where('role_id', 2)->first();
+        $proyecto = Proyecto::findOrFail($id);
+
+        $solicitud = Solicitud::where('id_proy', $id)->first();
+        $solicitud->enviada = true;
+        $solicitud->id_estado = 3;
+        $solicitud->noti_inv = true;
+        $solicitud->modificable = false;
+        $solicitud->save();
+
+        $comite = new ComiteDeEvaluacion();
+        $comite->save();
+
+        $proyecto->id_comite = $comite->id;
+        $proyecto->save();
+
+        $comite_usuario = new ComiteUsuario();
+        $comite_usuario->id_comite = $comite->id;
+        $comite_usuario->id_usuario = $director->user_id;
+        $comite_usuario->save();
+
+        $comite_usuario = new ComiteUsuario();
+        $comite_usuario->id_comite = $comite->id;
+        $comite_usuario->id_usuario = $coordinador->user_id;
+        $comite_usuario->save();
+
+        return redirect()->route('solicitud.mis_solicitudes');
     }
 
     public function factibilidad($id){

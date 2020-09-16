@@ -132,9 +132,9 @@
             </div>
         </div>
     </div>
-
     <div class="col-4">
         <div class="card" id="indicadoresCard">
+
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-9 text-left">
@@ -209,5 +209,20 @@
         </a>
     </div>
 </div>
+
+<table class="col-md-12">
+    <tr>
+        <td width="50%">
+            <a class="btn btn-primary" href="">
+                General
+            </a>
+        </td>
+        <td width="50%" align="right">
+            <a class="btn btn-primary" href="{{ route('proyecto_recursos.create', [$id])}}">
+                Recursos
+            </a>
+        </td>
+    </tr>
+</table>
 <script src="{{ asset('black') }}/js/oai.js"></script>
 @endsection

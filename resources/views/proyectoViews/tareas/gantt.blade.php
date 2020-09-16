@@ -18,14 +18,13 @@
     Para solo leer https://docs.dhtmlx.com/gantt/desktop__readonly_mode.html
 
 
-    para los estilos del gantt
-     -->
+    para los estilos del gantt-->
     <link rel="stylesheet" href="https://files.dhtmlx.com/30d/0801b74b161df383f7de350535901db6/dhtmlxgantt_contrast_black.css">
     <link href="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.css" rel="stylesheet">
     <script src="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.js"></script>
     
     <style type="text/css">
-        html, body{
+    html, body{
             height:100%;
             padding:0px;
             margin:0px;
@@ -34,10 +33,9 @@
     </style>
     
 </head>
-
-
 <body>
-<div id="gantt_here" style='width:100%; height:510px;'></div>
+<input type="hidden" name="idProyecto" value="{{$idProyecto}}">
+    <div id="gantt_here" style='width:100%; height:510px;'></div>
 <script type="text/javascript">
     //Formato de fecha para el gantt
     gantt.config.date_format = "%Y/%m/%d %H:%i:%s";
@@ -59,6 +57,12 @@
     gantt.locale.labels.section_indicador = "Indicador que requerirá esta tarea";
     gantt.locale.labels.section_equipo = "Asignación de miembros";
     
+    //Forma de acceder a la tarea que este abierte o esta sienda creada
+    gantt.attachEvent("onBeforeLightbox", function(id) {
+        var task = gantt.getTask(id);
+        task.idProyecto ="{{$idProyecto}}";
+        return true;
+    });
     
     /*https://docs.dhtmlx.com/gantt/snippet/1c3e1c28
     Para que le asigne color a la tarea en específico
@@ -101,17 +105,18 @@
         {name:"avance", height:70, map_to:"avance", type:"textarea"},*/
 
         //Para usar checkbox https://docs.dhtmlx.com/gantt/desktop__checkbox.html
-        {name: "indicador", type:"checkbox", height:40, map_to: "render", options:[    
+        {name: "indicador", type:"checkbox", height:40, map_to: "render", options:[                
             @php
-                for ($i = 0; $i < 5; $i++)
-                    echo '{key:"op'. $i .'", label:" indicador ' . $i . '&nbsp;&nbsp; "},'
+                    for ($i = 0; $i < sizeof($indicadores); $i++)
+                    echo '{key:"op'. $i .'", label:"' . $indicadores[$i]->detalle . '&nbsp;&nbsp; "},'
             @endphp
         ]},
         //Para agrega a los miembros del equipo
         {name: "equipo", type:"checkbox", height:40, map_to: "render", options:[    
             @php
-                for ($i = 0; $i < 5; $i++)
-                    echo '{key:"op'. $i .'", label:" integrante ' . $i . '&nbsp;&nbsp; "},'
+                for ($i = 0; $i < sizeof($miembrosEquipo); $i++)
+                    echo '{key:"op'. $i .'", label:"' . $miembrosEquipo[$i]->name . '&nbsp;&nbsp; "},' 
+                    
             @endphp
         ]},
     ];

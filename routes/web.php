@@ -326,6 +326,10 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::get('proyecto/oai/{id}', 'SolicitudController@oai')->name('proyecto.oai');
 
+    Route::get('solicitud/{solicitud}/pre', 'SolicitudController@pre')->name('solicitud.pre');
+
+    Route::get('solicitud/{solicitud}/enviar', 'SolicitudController@enviar')->name('solicitud.enviar');
+
 
     /**********************Recursos por solicitud de proyecto Investigador******************/
 
@@ -392,25 +396,27 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
             $message->subject('Hello there');
         });
     });
+
+        // [PROVISIONAL]
+    //objetivos & alcances
+    //Route::get('proyecto/detalles/{id}', 'RecursoProyectoController@crear_objetivo')->name('proyecto_detalle.create');
+    // factibilidad
+    Route::get('proyecto/factibilidad/{id}', 'SolicitudController@factibilidad')->name('factibilidad.create');
+    //planificacion
+    Route::get('proyecto/planificacion', 'SolicitudController@planificacion')->name('planificacion.index');
+    Route::get('proyecto/indicadores', 'SolicitudController@indicador')->name('indicadores.index');
+    Route::get('proyecto/solicitud', 'SolicitudController@show2')->name('solicitud.show2');
+
+
+    /***********************Equipo por Proyecto ***************************/
+
+    Route::get('proyecto/miembros/{id}', 'UsuarioEquipoRolController@index')->name('miembros_proyecto.index');
+
+    /***********************planificacion de tareas gantt****************************/
+
+    Route::get('proyecto/tareas/{id_proyecto}', 'TaskController@index')->name('proyecto_tareas.index');
+
 });
 
 
 
-// [PROVISIONAL]
-//objetivos & alcances
-//Route::get('proyecto/detalles/{id}', 'RecursoProyectoController@crear_objetivo')->name('proyecto_detalle.create');
-// factibilidad
-Route::get('proyecto/factibilidad/{id}', 'SolicitudController@factibilidad')->name('factibilidad.create');
-//planificacion
-Route::get('proyecto/planificacion', 'SolicitudController@planificacion')->name('planificacion.index');
-Route::get('proyecto/indicadores', 'SolicitudController@indicador')->name('indicadores.index');
-Route::get('proyecto/solicitud', 'SolicitudController@show2')->name('solicitud.show2');
-
-
-/***********************Equipo por Proyecto ***************************/
-
-Route::get('proyecto/miembros/{id}', 'UsuarioEquipoRolController@index')->name('miembros_proyecto.index');
-
-/***********************planificacion de tareas gantt****************************/
-
-Route::get('proyecto/tareas/{id_proyecto}', 'TaskController@index')->name('proyecto_tareas.index');

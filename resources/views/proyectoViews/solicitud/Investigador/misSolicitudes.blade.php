@@ -37,7 +37,7 @@
                                 </div>
                             </td>
                             <td width="15%">
-                                <a href="" type="button" class="btn btn-primary btn-sm btn-round">
+                                <a href="{{ route('solicitud.enviar', [$soli->id_proy]) }}" type="button" class="btn btn-primary btn-sm btn-round">
                                     <i class="tim-icons icon-send"></i> Enviar solicitud
                                 </a>
                             </td>

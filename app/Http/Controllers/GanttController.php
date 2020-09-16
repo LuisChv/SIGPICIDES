@@ -8,7 +8,7 @@ class GanttController extends Controller
 {
     public function get($id_proyecto){
         $tasks = new Task();
-        $links = new Link();
+        $links = new Link(); 
         //$empleados = new Empleado(); 
         //Aqui es donde se mandan los datos de las tareas al gantt
         return response()->json([
