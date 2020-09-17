@@ -18,8 +18,11 @@
                     @foreach ($solicitudes as $soli)
                     @if($soli->enviada==false)
                     <tr>
-                        <td width="70%">
+                        <td width="40%">
                             <p>{{ $soli->nombre }}</p> 
+                        </td>
+                        <td width="30%">
+                            <p>{{ $soli->estado }}</p> 
                         </td>
                         <td width="15%">
                             <div class="btn-group" role="group">
@@ -63,10 +66,12 @@
                     @foreach ($solicitudes as $soli)
                     @if ($soli->enviada)
                     <tr>
-                        <td width="85%">
+                        <td width="40%">
                             <p>{{ $soli->nombre }}</p> 
                         </td>
-
+                        <td width="45%">
+                            <p>{{ $soli->estado }}</p> 
+                        </td>
                         </td>
                         <td width="15%" class="text-right">
                             <a  href="{{ route('solicitud.pre', [$soli->id_proy])}}" type="button" class="btn btn-primary btn-sm btn-round">

@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-6">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
@@ -53,7 +53,7 @@
         </div>
     </div>
 
-	<div class="col-6">
+	<div class="col-md-6">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3 right">
+                    <div class="col-md-3 right">
                         <a role="button" class="btn btn-primary" href="{{ route('users.create') }}">
                             Registrar Nuevo Experto
                         </a>
