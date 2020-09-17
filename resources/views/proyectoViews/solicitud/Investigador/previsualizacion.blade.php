@@ -195,8 +195,8 @@
                     Enviar
                 </a>
             @else
-                <a disabled class="btn btn-primary" href="{{ route('solicitud.enviar', [$proyecto->id]) }}">
-                    Enviar
+                <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
+                    Mis solicitudes
                 </a>
             @endif
         </td>

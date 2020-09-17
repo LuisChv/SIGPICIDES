@@ -199,10 +199,11 @@ class SolicitudController extends Controller
 
     public function mis_solicitudes(){
         $solicitudes = DB::select(
-            "SELECT S.id, P.nombre, S.id_proy, S.id_estado, S.enviada FROM usuario_equipo_rol UER 
+            "SELECT S.id, P.nombre, S.id_proy, S.id_estado, S.enviada, EDS.estado FROM usuario_equipo_rol UER 
             JOIN equipo_de_investigacion EDI ON uer.id_equipo = EDI.id
             JOIN proyecto P ON EDI.id = P.id_equipo
             JOIN solicitud S ON S.id_proy = P.id
+            JOIN estado_de_solicitud EDS ON EDS.id = S.id_estado
             WHERE uer.id_usuario = ?", [Auth::user()->id]);
         
         return view('proyectoViews.solicitud.Investigador.misSolicitudes', [
