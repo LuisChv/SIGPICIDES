@@ -87,17 +87,6 @@ class UsuarioEquipoRolController extends Controller
         $rol_miembro = Role::where('name', request('rolmiembro'))->first();
 
 
-        //Validacion temporal para id_equipo
-        $equipo = DB::select('SELECT * FROM equipo_de_investigacion');
-
-    
-        if($equipo==null){
-            DB::table('equipo_de_investigacion')->insert([
-                'haylider'=> false,
-            ]);
-    
-        }
-
         DB::table('usuario_equipo_rol')->insert([
             'id_equipo' => $id,
             'id_usuario' =>$id_investigador,    

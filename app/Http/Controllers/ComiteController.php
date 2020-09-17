@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Proyecto;
+use App\ComiteUsuario;
 use DB;
 
 class ComiteController extends Controller
@@ -46,11 +47,14 @@ class ComiteController extends Controller
          //Roles
          $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [false]);
 
+         $cantidad_miembros = ComiteUsuario::count();
+
          //Retornar la vista
          return view ('evaluacion.comite.index', [
               'usuarios'=>$noMiembros,  
               'miembros'=>$miembros,
               'roles'=>$roles,
+              'cantidad_miembros'=>$cantidad_miembros,
               'proyecto'=>$proyecto,
          ]);
     }
@@ -71,9 +75,26 @@ class ComiteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        //
+        $id_miembro = request('investigador');
+
+        $cantidad_miembros = ComiteUsuario::count();
+
+        if($cantidad_miembros < 3 ){
+
+            DB::table('comite_usuario')->insert([
+                'id_comite' => $id,
+                'id_usuario' =>$id_miembro,     
+            ]);
+    
+            return redirect()->route('comite.index',[$id]);
+
+        }else{
+
+            return redirect()->route('comite.index',[$id]);
+        }
+
     }
 
     /**
@@ -116,8 +137,9 @@ class ComiteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_usuario, $id_proyecto)
     {
-        //
+        DB::table('comite_usuario')->where('id_usuario', $id_usuario)->where('id_comite', $id_proyecto)->delete();
+        return redirect()->route('comite.index',[$id_proyecto]);
     }
 }
