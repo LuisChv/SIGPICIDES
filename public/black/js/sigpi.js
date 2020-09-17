@@ -19,12 +19,26 @@ function eliminarPermiso(valor){
 }
 //editar indicador vista OAI
 function editarIndicador(id_indicador, descripcion){
-    console.log(id_indicador);
-    console.log(descripcion);
+    //console.log(id_indicador);
+    //console.log(descripcion);
     var detalle=$('#editarDetalleIndicador');
     var id=$('#editarIdIndicador');    
     detalle.text(descripcion);
     id.val(id_indicador);
+}
+//editar alcance vista OAI
+function editarAlcance(id_alcance, descripcion){
+    var detalle=$('#editarDetalleAlcance');
+    var id=$('#editarIdAlcance');    
+    detalle.text(descripcion);
+    id.val(id_alcance);
+}
+//editar objetivo vista OAI
+function editarObjetivo(id_objetivo, descripcion){
+    var detalle=$('#editarDetalleObjetivo');
+    var id=$('#editarIdObjetivo');    
+    detalle.text(descripcion);
+    id.val(id_objetivo);
 }
 //Dentro de aquí se pueden cargar funciones que necesitan que el html se carguen primero
 $(document).ready(function(){//lo que este dentro de aquí se cargara hasta que la pagina este totalmente cargada

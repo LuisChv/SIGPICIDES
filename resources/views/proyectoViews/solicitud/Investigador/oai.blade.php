@@ -57,9 +57,15 @@
                                 @method('DELETE')
                                 <td class="text-right">
                                     <input hidden name="objetivo" value="{{$objetivo->id}}"/>
-                                    <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('_objetivo{{$objetivo->id}}')">
-                                        <i class="tim-icons icon-simple-remove"></i>
-                                    </button>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#modalEditarObjetivo" onclick="editarObjetivo({{$objetivo->id}},'{{$objetivo->descripcion}}')">
+                                            <i class="tim-icons icon-pencil"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('_objetivo{{$objetivo->id}}')">
+                                            <i class="tim-icons icon-simple-remove"></i>
+                                        </button>
+                                    </div>
+                                    
                                 </td>
                             </form>
                         </tr>
@@ -122,8 +128,14 @@
                                 @method('DELETE')
                                 <td class="text-right">
                                     <input hidden name="alcance" value="{{$alcance->id}}"/>
-                                    <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('_alcance{{$alcance->id}}')">
-                                        <i class="tim-icons icon-simple-remove"></i></button>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#modalEditarAlcance" onclick="editarAlcance({{$alcance->id}},'{{$alcance->descripcion}}')">
+                                            <i class="tim-icons icon-pencil"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('_alcance{{$alcance->id}}')">
+                                            <i class="tim-icons icon-simple-remove"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </form>
                         </tr>
@@ -204,9 +216,70 @@
         </div>
     </div>
 </div>
+<!--formularios de edicion-->
+<form method="POST" action="{{route('proyecto_objetivos.update')}}">
+    @csrf
+    @method('PUT')
+    <div class="modal fade" id="modalEditarObjetivo" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar objetivo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="false">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body" >                     
+                    <table class="table" style="background-color: white !important;" >
+                                                                                               
+                        <tr>
+                            <td><textarea required placeholder="Descripción del objetivo" rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_objetivo" id="editarDetalleObjetivo"></textarea>
+                            </td>
+                        </tr>
+                        <input hidden name="id_objetivo" id="editarIdObjetivo"/>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
+<form method="POST" action="{{route('proyecto_alcances.update')}}">
+    @csrf
+    @method('PUT')
+    <div class="modal fade" id="modalEditarAlcance" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar alcance</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="false">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body" >                     
+                    <table class="table" style="background-color: white !important;" >
+                                                                                               
+                        <tr>
+                            <td><textarea required placeholder="Descripción del alcance" rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_alcance" id="editarDetalleAlcance"></textarea>
+                            </td>
+                        </tr>
+                        <input hidden name="id_alcance" id="editarIdAlcance"/>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
-<form method="POST" id="formEditarIndicador" action="{{route('proyecto_indicadores.update')}}">
+<form method="POST" action="{{route('proyecto_indicadores.update')}}">
     @csrf
     @method('PUT')
     <div class="modal fade" id="modalEditarIndicador" tabindex="-1" role="dialog" aria-hidden="true">
@@ -229,7 +302,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Añadir</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
                 </div>
             </div>
         </div>
