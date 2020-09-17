@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card"  id="objetivosCard">
             <div class="card-header ">
                 <div class="row">
@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card" id="alcancesCard">
             <div class="card-header ">
                 <div class="row">
@@ -132,7 +132,7 @@
             </div>
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card" id="indicadoresCard">
 
             <div class="card-header ">
@@ -186,8 +186,15 @@
                                 @method('DELETE')
                                 <td class="text-right">
                                     <input hidden name="indicador" value="{{$indicador->id}}"/>
-                                    <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('_indicador{{$indicador->id}}')">
-                                        <i class="tim-icons icon-simple-remove"></i></button>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-success btn-sm btn-round btn-icon" onclick="confirmar('_indicador{{$indicador->id}}')">
+                                            <i class="tim-icons icon-pencil"></i>
+                                        </button>
+                                        
+                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('_indicador{{$indicador->id}}')">
+                                            <i class="tim-icons icon-simple-remove"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </form>
                         </tr>
@@ -195,18 +202,6 @@
                 </table>
             </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 text-left">
-        <a class="btn btn-primary" href="">
-            General
-        </a>
-    </div>
-    <div class="col-md-6 text-right">
-        <a class="btn btn-primary" href="{{ route('proyecto_recursos.create', [$id])}}">
-            Recursos
-        </a>
     </div>
 </div>
 
@@ -225,4 +220,5 @@
     </tr>
 </table>
 <script src="{{ asset('black') }}/js/oai.js"></script>
+
 @endsection

@@ -386,6 +386,8 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     /**********************Indicador******************/
 
     Route::post('proyecto/indicadores', 'IndicadorController@store')->name('proyecto_indicadores.store');
+
+    Route::put('proyecto/update/{id}', 'IndicadorController@update')->name('proyecto_indicadores.update');
     //->middleware('has.permission:proyectos.create');
 
     Route::delete('proyecto/indicadores', 'IndicadorController@destroy')->name('proyecto_indicadores.destroy');
