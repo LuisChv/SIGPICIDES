@@ -188,15 +188,17 @@
                 Recursos
             </a>
         </td>
+
         <td width="50%" align="right">
-        <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
-                Guardar
-        </a>
-        </td>
-        <td width="50%" align="right">
-        <a class="btn btn-primary" href="{{ route('solicitud.enviar', [$proyecto->id]) }}">
-                Enviar
-        </a>
+            @if ($solicitud->id_estado == 2)
+                <a class="btn btn-primary" href="{{ route('solicitud.enviar', [$proyecto->id]) }}">
+                    Enviar
+                </a>
+            @else
+                <a disabled class="btn btn-primary" href="{{ route('solicitud.enviar', [$proyecto->id]) }}">
+                    Enviar
+                </a>
+            @endif
         </td>
     </tr>
 </table>

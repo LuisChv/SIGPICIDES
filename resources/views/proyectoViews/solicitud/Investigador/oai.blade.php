@@ -224,7 +224,7 @@
                         <tr>
                             <td><textarea required placeholder=" Descripción del indicador" rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_indicador" id="editarDetalleIndicador"></textarea></td>
                         </tr>
-                        <input hidden name="id_proy" id="editarIdIndicador"/>
+                        <input hidden name="id_indicador" id="editarIdIndicador"/>
                     </table>
                 </div>
                 <div class="modal-footer">

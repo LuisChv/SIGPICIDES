@@ -116,6 +116,7 @@ class SolicitudController extends Controller
         //Se crea la solicitud del proyecto
         $solicitud=new Solicitud();
         $solicitud->id_proy=$proyecto->id;
+        $solicitud->id_estado = 1;
         $solicitud->noti_inv= false;
         $solicitud->noti_coo= false;
         $solicitud->id_estado = 1;
@@ -182,12 +183,23 @@ class SolicitudController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $solicitud = Solicitud::where('id_proy', $proyecto->id);
+        $miembros = UsuarioEquipoRol::where('id_equipo', $equipo->id);
+        $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
+        $proyecto = Proyecto::findOrFail($id);
+        
+        $solicitud->delete();
+        foreach($miembros as $miembro){
+            $miembro->delete();
+        }
+        $equipo->delete();
+        $proyecto->delete();
+        return redirect()->route('proyecto.oai', $id);
     }
 
     public function mis_solicitudes(){
         $solicitudes = DB::select(
-            "SELECT S.id, P.nombre, S.id_proy, S.id_estado FROM usuario_equipo_rol UER 
+            "SELECT S.id, P.nombre, S.id_proy, S.id_estado, S.enviada FROM usuario_equipo_rol UER 
             JOIN equipo_de_investigacion EDI ON uer.id_equipo = EDI.id
             JOIN proyecto P ON EDI.id = P.id_equipo
             JOIN solicitud S ON S.id_proy = P.id
@@ -203,6 +215,12 @@ class SolicitudController extends Controller
         $objetivos = DB::select("SELECT * FROM objetivo WHERE id_proyecto = ?", [$id]);
         $alcances = DB::select("SELECT * FROM alcance WHERE id_proyecto = ?", [$id]);
         $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ?", [$id]);
+        $solicitud = Solicitud::where('id_proy', $id)->first();
+
+        if(count($objetivos) > 0 && count($alcances) > 0 && count($indicadores) > 0){
+            $solicitud->id_estado = 2;
+            $solicitud->save();
+        }
 
         return view('proyectoViews.solicitud.Investigador.oai', [
             'objetivos'=> $objetivos,
@@ -214,6 +232,7 @@ class SolicitudController extends Controller
 
     public function pre($id){
         $proyecto = Proyecto::findOrFail($id);
+        $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
         $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
         $subtipo = SubTipoDeInvestigacion::findOrFail($proyecto->id_subtipo);
         $tipo = TipoDeInvestigacion::findOrFail($subtipo->id_tipo);
@@ -235,6 +254,7 @@ class SolicitudController extends Controller
             'tiposrec'=>$tiposrec,
             'recursos'=>$recursos,
             'recursosProy'=>$recursosProy,
+            'solicitud'=>$solicitud,
         ]);
     }
 
