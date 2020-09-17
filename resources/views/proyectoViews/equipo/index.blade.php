@@ -42,9 +42,9 @@
                             <form method="POST" id="formulario{{$miembro->id_usuario}}" action="{{ route('miembros.destroy', [$miembro->id_usuario, $proyecto->id] )}}" >
                                 <td width='10%' align="right">
                                     <div class="btn-group" role="group">
-                                        <a type="button" href="{{ route('miembros.edit', $miembro->id_usuario)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round">
+                                        <button type="button" data-toggle=modal data-target="#update" class="btn btn-success btn-sm btn-sm btn-icon btn-round" onclick="editarRolMiembro({{$miembro->id}},{{$miembro->id_rol}})">
                                             <i class="tim-icons icon-pencil"></i>
-                                        </a>
+                                        </button>
                                         @csrf
                                         @method('DELETE')
                                         <button @if ( $miembro->id_rol == 5  ) disabled @endif type="button" onClick="confirmar({{$miembro->id_usuario}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
@@ -120,7 +120,7 @@
                                 <option  selected disabled hidden >--Seleccionar Rol--</option>
                                 @foreach ($roles as $rol)
                                     @if ($rol->id == 5)
-                                        <option style="color: black !important;"></option>
+                                        <option style="display:none;"></option>
                                     @else
                                         <option style="color: black !important;">{{ $rol->name }}</option>
                                     @endif
@@ -131,6 +131,43 @@
                             <input type="hidden" name="investigador" id="investigador">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary">Añadir</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--modal de edicion-->
+        <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form method="POST"  action="{{ route('miembros.update', $proyecto->id )}}">
+                @csrf
+                @method('PUT')
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="label">Editar rol de miembro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="false">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="rol">ROL DE EQUIPO</label>
+                            <select class="form-control selectorWapis" name="rolmiembro" id="rolmiembroEditar">
+                                <option disabled >--Seleccionar Rol--</option>
+                                @foreach ($roles as $rol)
+                                    @if ($rol->id == 5)
+                                        <option val="{{$rol->id}}" style="display:none;"></option>
+                                    @else
+                                        <option val="{{$rol->id}}" style="color: black !important;">{{ $rol->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select> 
+                            <input hidden id="id_proy" val={{$proyecto->id}}>
+                            <input hidden id="id_miembro">
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="investigador" id="investigador">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
                         </div>
                     </div>
                 </form>

@@ -40,6 +40,21 @@ function editarObjetivo(id_objetivo, descripcion){
     detalle.text(descripcion);
     id.val(id_objetivo);
 }
+//editar rol de miembro vista Index controlador: UsuarioEquipoRol
+function editarRolMiembro(id_miembro, id_rol){
+    var rol=$('#rolMiembroEditar');
+    var miembro=$('#id_miembro');
+    miembro.val(id_miembro);
+    console.log(miembro);
+    //rol.removeAttr('selected').filter(['value='+id_rol+']']).attr('selected', true);
+    //rol.val(id_rol)
+    rol.each(function() {
+        if($(this).val() == '2') {
+            $(this).attr('selected', 'selected');
+        }
+    });
+    console.log(rol);
+}
 //Dentro de aquí se pueden cargar funciones que necesitan que el html se carguen primero
 $(document).ready(function(){//lo que este dentro de aquí se cargara hasta que la pagina este totalmente cargada
     $('#selector1').change(function () {

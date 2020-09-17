@@ -61,6 +61,7 @@ class UsuarioEquipoRolController extends Controller
                'miembros'=>$miembros,
                'roles'=>$roles,
                'proyecto'=>$proyecto,
+               'id_proyecto'=>$id,
           ]);
     }
 
@@ -116,7 +117,6 @@ class UsuarioEquipoRolController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -126,9 +126,22 @@ class UsuarioEquipoRolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    //public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        /*
+        $id=request('id_proy');
+        $id_investigador = request('investigador');
+        $role = Role::where('name', request('rolmiembro'))->first();;
+        $rol_miembro = Role::where('name', request('rolmiembro'))->first();
+
+
+        DB::table('usuario_equipo_rol')->where('id_investigador', $id_investigador)->update([    
+            'id_rol'=>$role->id,
+        ]);
+
+
+        return redirect()->route('miembros.index',[$id]);*/
     }
 
     /**
