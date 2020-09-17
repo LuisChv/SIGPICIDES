@@ -372,7 +372,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::post('proyecto/objetivos', 'ObjetivoController@store')->name('proyecto_objetivos.store');
     //->middleware('has.permission:proyectos.create');
 
-    Route::update('proyecto/objetivos/{id}', 'ObjetivoController@update')->name('proyecto_objetivos.update');
+    Route::put('proyecto/objetivos/{id}', 'ObjetivoController@update')->name('proyecto_objetivos.update');
 
     Route::delete('proyecto/objetivos', 'ObjetivoController@destroy')->name('proyecto_objetivos.destroy');
 

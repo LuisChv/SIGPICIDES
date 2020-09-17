@@ -17,6 +17,10 @@ function añadirPermiso(valor){
 function eliminarPermiso(valor){
     document.getElementById("eliminarPermiso"+valor).submit();   
 }
+//editar indicador vista OAI
+function editarIndicador(id_indicador, descripcion){
+    $('#editarIndicador').submit();
+}
 //Dentro de aquí se pueden cargar funciones que necesitan que el html se carguen primero
 $(document).ready(function(){//lo que este dentro de aquí se cargara hasta que la pagina este totalmente cargada
     $('#selector1').change(function () {
