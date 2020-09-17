@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 /*
@@ -375,7 +376,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::post('proyecto/objetivos', 'ObjetivoController@store')->name('proyecto_objetivos.store');
     //->middleware('has.permission:proyectos.create');
 
-    Route::put('proyecto/objetivos/{id}', 'ObjetivoController@update')->name('proyecto_objetivos.update');
+    Route::put('proyecto/objetivos_update', 'ObjetivoController@update')->name('proyecto_objetivos.update');
 
     Route::delete('proyecto/objetivos', 'ObjetivoController@destroy')->name('proyecto_objetivos.destroy');
 
@@ -385,7 +386,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::post('proyecto/alcances', 'AlcanceController@store')->name('proyecto_alcances.store');
     //->middleware('has.permission:proyectos.create');
 
-    Route::put('proyecto/alcances/{id}', 'AlcanceController@update')->name('proyecto_alcances.update');
+    Route::put('proyecto/alcances_update', 'AlcanceController@update')->name('proyecto_alcances.update');
 
     Route::delete('proyecto/alcances', 'AlcanceController@destroy')->name('proyecto_alcances.destroy');
 
@@ -394,7 +395,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::post('proyecto/indicadores', 'IndicadorController@store')->name('proyecto_indicadores.store');
 
-    Route::put('proyecto/indicadores/{id}', 'IndicadorController@update')->name('proyecto_indicadores.update');
+    Route::put('proyecto/indicadores_update', 'IndicadorController@update')->name('proyecto_indicadores.update');
     //->middleware('has.permission:proyectos.create');
 
     Route::delete('proyecto/indicadores', 'IndicadorController@destroy')->name('proyecto_indicadores.destroy');
@@ -416,7 +417,17 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
         return view ('Mail.mailprueba');
     });
     
-    Route::post('email', function () {
+    Route::post('email', function (Request $request) {
+        dd($request->request);
+        $valorV=0;
+        if(request()->valor1){
+            foreach(request()->valor1 as $valor){
+                $valorV +=$valor;  
+            }
+            dd($valorV);
+        }
+        
+        //dd(request()->valor1);
         dd(auth()->user());
         $data = array('email'=> request('email'));
 

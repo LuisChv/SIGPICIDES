@@ -1,14 +1,15 @@
 <?php
 namespace App\Http\Controllers;
- 
+
 use Illuminate\Http\Request;
 use App\Task;
 use App\Proyecto;
 use App\UsuarioEquipoRol;
 use App\Indicador;
 use App\User;
+use App\tareaUsuario;
 use DB;
- 
+
 class TaskController extends Controller
 {
 
@@ -43,28 +44,83 @@ class TaskController extends Controller
     }
 
     public function store(Request $request){
- 
-        $task = new Task();
- 
-        $task->text = $request->text;
-       // $task->rrhh = $request->rrhh;
-        $task->start_date = $request->start_date;
-        $task->duration = $request->duration;
-        $task->progress = $request->has("progress") ? $request->progress : 0;
-        $task->parent = $request->parent;
-        $task->sortorder = Task::max("sortorder") + 1;
-        $task->id_proyecto = $request->idProyecto;
-        $task->type;
-        $task->readonly;
-        $task->modificable;
-        $task->save();
- 
-        return response()->json([
-            "action"=> "inserted",
-            "tid" => $task->id
-        ]);
-    }
- 
+        //Se verifica si existe el idProyecto recibido y si pertenece al usuario logeado
+        //Se verifica que el proyecto exista en base
+        if ($idEquipo= Proyecto::select('id_equipo')->where('id', $request->idProyecto)->first()) {
+            //Obteniendo el id del usuario que guardo la tarea
+            $idUsuarioLogeado=$request->idUser;
+            //$usa=auth()->user()->id;
+            //Entrara en el proceso si el usuario logeado pertenece al equipo del proyecto seleccionado
+            if($usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $idEquipo->id_equipo)->where('id_usuario', $idUsuarioLogeado)->first()){
+                $task = new Task(); 
+                $task->text = $request->text;
+                // $task->rrhh = $request->rrhh;
+                $task->start_date = $request->start_date;
+                $task->duration = $request->duration;
+                $task->progress = $request->has("progress") ? $request->progress : 0;
+                $task->parent = $request->parent;
+                $task->sortorder = Task::max("sortorder") + 1;
+                $task->id_proyecto = $request->idProyecto;
+                $task->type;
+                $task->readonly;
+                $task->modificable;
+                //$task->save();
+                
+                /**********Guardar asignacion de tareas a miembros del equipo***************/
+                //Hacer el proceso en caso haya seleccionado al menos un miembro
+                
+                if($request->miembros){      
+                    //$usa=auth()->user()->id;
+                    $miembros= $request->miembros;
+                    //$resultado = str_replace ( "[", '', $miembros);
+                    //$resultado= str_replace ( "]", '', $resultado);
+                    $resultado= str_replace ( '"', '', $miembros);
+                    //$resultado = explode(',', $resultado);
+                    //$resultado[1]= str_replace('"','', $resultado[1] );
+                    //$miembros_ar = explode(",", $miembros);   
+                    // foreach ($miembro as $idMiembro) {
+                    //     //Verificar que los valores de los id's recibidos sean de Usuarios que pertenencen al equipo del proyecto
+                    //     if($usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $idEquipo->id_equipo)->where('id_usuario', $idMiembro*1)->first()){
+                    //         $tareaDeUsuario= new tareaUsuario();
+                    //         $tareaDeUsuario->id_usuario=$idMiembro;
+                    //         $tareaDeUsuario->id_task=$task->id;
+                    //         $tareaDeUsuario->save();                            
+                    //     }
+                    // }
+                }
+                /**********Guardar asignacion de tareas a indicadores***************/
+                //Hacer el proceso en caso haya seleccionado al menos un inidicador
+                // if(request()->indicador){
+                //     foreach (request()->indicador as $idIndicador) {
+                //         //Verificar que los indicadores recibidos pertenezcan al proyecto seleccionado
+                //         if($indicador= Indicador::where('id_proy',$idProyecto)->where('id', $idIndicador)->first()){
+                //             $indicadorTarea= new DB::table('task_indicador');                            
+                //             $indicadorTarea->id_indicador=$idIndicador;
+                //             $indicadorTarea->id_task=$task->id;
+                //             $indicadorTarea->save();                            
+                //         }
+                //     }
+                // }
+                return response()->json([
+                "action"=> "inserted",
+                "tid" => $task->id,
+                "String recibido"=> $miembros,
+                "tipo del String recibido"=>gettype($miembros),
+                "miembros1"=>gettype($resultado),
+                "array generado"=>$resultado,
+                "valor [1] array"=>$resultado[1],
+                "tipo del valor [1]"=>gettype($resultado[1]),
+                "valor [1] parsed Int"=>(int)$resultado[1],
+                "valor [0] array"=>$resultado[0],
+                "tipo del valor [0]"=>gettype($resultado[0]),
+                "valor [0] parsed Int"=>(int)$resultado[0],
+                "indicadors"=>$request->indicadores,
+                //"miembros"=>$miembros_ar[1],
+                ]);
+            }
+        } 
+    }       
+
     public function update($id, Request $request){
         $task = Task::find($id);
  

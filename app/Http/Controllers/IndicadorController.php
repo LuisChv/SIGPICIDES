@@ -25,17 +25,15 @@ class IndicadorController extends Controller
         return redirect()->route('proyecto.oai', [$indicador->id_proy]);
     }
 
-    public function update($id){
+    public function update(){
         request()->validate([
-            'id_proy'=> 'required',
             'descripcion_indicador'=> 'required',
         ],
         [
-            'id_proy.required' => "Error, no hay un proyecto seleccionado",
             'descripcion_indicador.required' => "Describa el objetivo.",
         ]);
 
-        $indicador = Indicador::findOrFail($id);
+        $indicador = Indicador::findOrFail(request('id_indicador'));
         $indicador->detalle = request('descripcion_indicador');
         $indicador->save();
 

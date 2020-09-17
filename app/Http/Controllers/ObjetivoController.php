@@ -25,17 +25,15 @@ class ObjetivoController extends Controller
         return redirect()->route('proyecto.oai', [$objetivo->id_proyecto]);
     }
 
-    public function update($id){
+    public function update(){
         request()->validate([
-            'id_proy'=> 'required',
             'descripcion_objetivo'=> 'required',
         ],
         [
-            'id_proy.required' => "Error, no hay un proyecto seleccionado",
             'descripcion_objetivo.required' => "Describa el objetivo.",
         ]);
 
-        $objetivo = Objetivo::findOrFail($id);
+        $objetivo = Objetivo::findOrFail(request('id_objetivo'));
         $objetivo->descripcion = request('descripcion_objetivo');
         $objetivo->save();
 

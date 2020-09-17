@@ -62,8 +62,9 @@
     
     //Forma de acceder a la tarea que este abierte o esta sienda creada
     gantt.attachEvent("onBeforeLightbox", function(id) {
-        var task = gantt.getTask(id);
+        var task = gantt.getTask(id);        
         task.idProyecto ="{{$idProyecto}}";
+        task.idUser="{{auth()->user()->id}}";
         return true;
     });
     
@@ -80,18 +81,17 @@
         {name:"avance", height:70, map_to:"avance", type:"textarea"},*/
 
         //Para usar checkbox https://docs.dhtmlx.com/gantt/desktop__checkbox.html
-        {name: "indicador", type:"checkbox", height:150, map_to: "render", options:[                
+        {name: "indicador", type:"checkbox", height:150, map_to: "indicadores", options:[                
             @php
                     for ($i = 0; $i < sizeof($indicadores); $i++)
                     echo '{key:"op'. $i .'", label:"' . $indicadores[$i]->detalle . '&nbsp;&nbsp; "},'
             @endphp
         ]},
         //Para agrega a los miembros del equipo
-        {name: "equipo", type:"checkbox", height:60, map_to: "render", options:[    
+        {name: "equipo", type:"checkbox", height:60, map_to: "miembros", options:[    
             @php
                 for ($i = 0; $i < sizeof($miembrosEquipo); $i++)
-                    echo '{key:"op'. $i .'", label:"' . $miembrosEquipo[$i]->name . '&nbsp;&nbsp; "},' 
-                    
+                    echo '{key:'. $miembrosEquipo[$i]->id .', label:"' . $miembrosEquipo[$i]->name . '&nbsp;&nbsp; "},'                
             @endphp
         ]},
     ];
