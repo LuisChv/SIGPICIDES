@@ -187,7 +187,7 @@
                                 <td class="text-right">
                                     <input hidden name="indicador" value="{{$indicador->id}}"/>
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-success btn-sm btn-round btn-icon" onclick="confirmar('_indicador{{$indicador->id}}')">
+                                        <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#modalEditarIndicador" onclick="editarIndicador({{$indicador->id}},'{{$indicador->detalle}}')">
                                             <i class="tim-icons icon-pencil"></i>
                                         </button>
                                         
@@ -204,6 +204,37 @@
         </div>
     </div>
 </div>
+
+
+<form method="POST" id="formEditarIndicador" action="{{route('proyecto_indicadores.update')}}">
+    @csrf
+    @method('PUT')
+    <div class="modal fade" id="modalEditarIndicador" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar indicador</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="false">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body" >                     
+                    <table class="table" style="background-color: white !important;" >
+                                                                                               
+                        <tr>
+                            <td><textarea required placeholder=" Descripción del indicador" rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_indicador" id="editarDetalleIndicador"></textarea></td>
+                        </tr>
+                        <input hidden name="id_proy" id="editarIdIndicador"/>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Añadir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <table class="col-md-12">
     <tr>
