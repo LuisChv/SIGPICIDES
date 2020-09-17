@@ -9,7 +9,7 @@
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-8 text-left">
-                        <h2 class="card-title"><b> Comite de Evalucion </b></h2>
+                        <h2 class="card-title"><b> Comite de Evaluacion </b></h2>
                     </div> 
                 </div>
             </div>
@@ -34,17 +34,12 @@
 
 
                             <form method="POST" id="formulario{{$miembro->id_usuario}}" action="{{ route('comite.destroy', [$miembro->id_usuario, $proyecto->id] )}}" >
-                                <td width='10%' align="right">
-                                    <div class="btn-group" role="group">
-                                        <a type="button" href="{{ route('comite.edit', $miembro->id_usuario)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round">
-                                            <i class="tim-icons icon-pencil"></i>
-                                        </a>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button" onClick="confirmar({{$miembro->id_usuario}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
-                                            <i class="tim-icons icon-simple-remove"></i>
-                                        </button> 
-                                    </div>
+                                <td width='10%' align="center">  
+                                    @csrf
+                                    @method('DELETE')
+                                    <button @if ($miembro->role_id == 2 | $miembro->role_id == 3  ) disabled @endif type="button" onClick="confirmar({{$miembro->id_usuario}})" style="pointer-events: auto;" title="No se puede eliminar" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
+                                        <i class="tim-icons icon-simple-remove"></i>
+                                    </button>         
                                 </td>
                             </form>
                         
@@ -63,35 +58,47 @@
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-9 text-left">
-                        <h2 class="card-title"><b>Personal Experto disponible</b></h2>
+                        <h2 class="card-title"><b>Personal Experto Disponible</b></h2>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="container list-group">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th class="text-center" colspan = "3">Agregar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($usuarios as $use) 
-                                <tr>                     
-                                    <td> {{ $use->name }} </td>
-
-                                    <td width='5%'>
-                                        <button type="button" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#create" onClick="agregarMiembro({{ $use->id }})"><i class="tim-icons icon-simple-add"></i></button>
-                                    </td>
-                                   
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                <div class="row">
+                    <div class="col-sm-3 right">
+                        <a role="button" class="btn btn-primary" href="{{ route('users.create') }}">
+                            Registrar Nuevo Experto
+                        </a>
                     </div>
                 </div>
             </div>
+            <div class="card-body">
+                <div class="container list-group">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th class="text-center" colspan = "3">Agregar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($usuarios as $use) 
+                            <tr>                     
+                                <td> {{ $use->name }} </td>
+                                @if ( $cantidad_miembros < 3 )
+                                <td width='5%'>
+                                    <button type="button" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#create" onClick="agregarMiembro({{ $use->id }})"><i class="tim-icons icon-simple-add"></i></button>
+                                </td>
+                                @else 
+                                <td width='5%'>
+                                    <button type="button" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#nuevo"><i class="tim-icons icon-simple-add"></i></button>
+                                </td>
+                                @endif
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+        
 
         <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -106,8 +113,8 @@
                         </div>
                         <div class="modal-body">
                             <label for="rol">ROL DE COMITE</label>
-                            <select class="form-control selectorWapis" name="rolmiembro" id="rolmiembro">
-                            
+                            <select class="form-control selectorWapis" name="rolmiembro" id="rolmiembro" disabled>
+                                <option value=""> Experto </option>
                             </select> 
                         </div>
                         <div class="modal-footer">
@@ -117,6 +124,19 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <div class="modal fade" id="nuevo" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
+            <div class="modal-dialog" role="document">    
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <label aling = "center">Maximo de miembros es de 3</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
             </div>
         </div>
         

@@ -47,7 +47,7 @@
                                         </a>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" onClick="confirmar({{$miembro->id_usuario}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
+                                        <button @if ( $miembro->id_rol == 5  ) disabled @endif type="button" onClick="confirmar({{$miembro->id_usuario}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
                                             <i class="tim-icons icon-simple-remove"></i>
                                         </button> 
                                     </div>
@@ -119,7 +119,11 @@
                             <select class="form-control selectorWapis" name="rolmiembro" id="rolmiembro">
                                 <option  selected disabled hidden >--Seleccionar Rol--</option>
                                 @foreach ($roles as $rol)
-                                    <option style="color: black !important;">{{ $rol->name }}</option>
+                                    @if ($rol->id == 5)
+                                        <option style="color: black !important;"></option>
+                                    @else
+                                        <option style="color: black !important;">{{ $rol->name }}</option>
+                                    @endif
                                 @endforeach
                             </select> 
                         </div>

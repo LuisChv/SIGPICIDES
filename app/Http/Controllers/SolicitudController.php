@@ -35,7 +35,7 @@ class SolicitudController extends Controller
             "SELECT * 
             FROM solicitud s 
             JOIN proyecto p 
-            ON s.id = p.id");
+            ON s.id = p.id WHERE s.id_estado = ?", [3]);
         /*
         $solicitudes = DB::select(
             "SELECT * 
