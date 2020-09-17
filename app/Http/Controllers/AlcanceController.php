@@ -25,6 +25,21 @@ class AlcanceController extends Controller
         return redirect()->route('proyecto.oai', [$alcance->id_proyecto]);
     }
 
+    public function update(){
+        request()->validate([
+            'descripcion_alcance'=> 'required',
+        ],
+        [
+            'descripcion_alcance.required' => "Describa el objetivo.",
+        ]);
+
+        $alcance = Alcance::findOrFail(request('id_alcance'));
+        $alcance->descripcion = request('descripcion_alcance');
+        $alcance->save();
+
+        return redirect()->route('proyecto.oai', [$alcance->id_proyecto]);
+    }
+
     public function destroy(){
         $alcance = Alcance::findOrFail(request('alcance'));
         $alcance->delete();

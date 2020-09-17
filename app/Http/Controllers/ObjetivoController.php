@@ -25,6 +25,21 @@ class ObjetivoController extends Controller
         return redirect()->route('proyecto.oai', [$objetivo->id_proyecto]);
     }
 
+    public function update(){
+        request()->validate([
+            'descripcion_objetivo'=> 'required',
+        ],
+        [
+            'descripcion_objetivo.required' => "Describa el objetivo.",
+        ]);
+
+        $objetivo = Objetivo::findOrFail(request('id_objetivo'));
+        $objetivo->descripcion = request('descripcion_objetivo');
+        $objetivo->save();
+
+        return redirect()->route('proyecto.oai', [$objetivo->id_proyecto]);
+    }
+
     public function destroy(){
         $objetivo = Objetivo::findOrFail(request('objetivo'));
         $objetivo->delete();

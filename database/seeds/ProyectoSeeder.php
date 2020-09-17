@@ -22,6 +22,6 @@ class ProyectoSeeder extends Seeder
         $proyecto->justificacion = " ";
         $proyecto->costo = 5;
         $proyecto->duracion = 5;
-        $proyecto->save();
+       //S $proyecto->save();
     }
 }

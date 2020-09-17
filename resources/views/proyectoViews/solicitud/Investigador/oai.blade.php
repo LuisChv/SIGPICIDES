@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card"  id="objetivosCard">
             <div class="card-header ">
                 <div class="row">
@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card" id="alcancesCard">
             <div class="card-header ">
                 <div class="row">
@@ -132,7 +132,7 @@
             </div>
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card" id="indicadoresCard">
 
             <div class="card-header ">
@@ -186,8 +186,15 @@
                                 @method('DELETE')
                                 <td class="text-right">
                                     <input hidden name="indicador" value="{{$indicador->id}}"/>
-                                    <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('_indicador{{$indicador->id}}')">
-                                        <i class="tim-icons icon-simple-remove"></i></button>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#modalEditarIndicador" onclick="editarIndicador({{$indicador->id}},'{{$indicador->detalle}}')">
+                                            <i class="tim-icons icon-pencil"></i>
+                                        </button>
+                                        
+                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('_indicador{{$indicador->id}}')">
+                                            <i class="tim-icons icon-simple-remove"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </form>
                         </tr>
@@ -197,6 +204,38 @@
         </div>
     </div>
 </div>
+
+
+<form method="POST" id="formEditarIndicador" action="{{route('proyecto_indicadores.update')}}">
+    @csrf
+    @method('PUT')
+    <div class="modal fade" id="modalEditarIndicador" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar indicador</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="false">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body" >                     
+                    <table class="table" style="background-color: white !important;" >
+                                                                                               
+                        <tr>
+                            <td><textarea required placeholder=" Descripción del indicador" rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_indicador" id="editarDetalleIndicador"></textarea></td>
+                        </tr>
+                        <input hidden name="id_indicador" id="editarIdIndicador"/>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Añadir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 <table class="col-md-12">
     <tr>
         <td width="50%">
@@ -211,59 +250,6 @@
         </td>
     </tr>
 </table>
-<script language="javascript" type="text/javascript">
-    var cartitas1=document.querySelector('#objetivosCard');
-    var cartitas2=document.querySelector('#alcancesCard');        
-    var cartitas3=document.querySelector('#indicadoresCard');
-    var ancho1=cartitas1.offsetHeight;
-    var ancho2=cartitas2.offsetHeight;       
-    var ancho3=cartitas3.offsetHeight;
-    console.log(ancho1);       
+<script src="{{ asset('black') }}/js/oai.js"></script>
 
-    if(ancho1>=ancho2){
-        console.log('1 mayor');
-        if(ancho1>=ancho3){
-            console.log('TRUE2');
-            document.getElementById("alcancesCard").setAttribute("style","height:"+ancho1+"px"); 
-            document.getElementById("indicadoresCard").setAttribute("style","height:"+ancho1+"px");
-        }
-    } else if(ancho2>=ancho1){
-        console.log('2 mayor');
-        if(ancho2>=ancho3){
-            console.log('TRUE2');
-            document.getElementById("objetivosCard").setAttribute("style","height:"+ancho2+"px"); 
-            document.getElementById("indicadoresCard").setAttribute("style","height:"+ancho2+"px");
-        }
-    } else if(ancho3>=ancho1){
-        console.log('3 mayor');
-        if(ancho3>=ancho2){
-            console.log('TRUE2');
-            document.getElementById("objetivosCard").setAttribute("style","height:"+ancho3+"px"); 
-            document.getElementById("alcancesCard").setAttribute("style","height:"+ancho3+"px");
-        }
-    }
-
-
-    require("sweetalert");
-    function confirmar(valor){
-        //ruta.concat(variable,")}}");
-        swal({
-          title: "¿Eliminar registro?",
-          text: "Esta acción es irreversible.",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-        })
-        .then((willDelete) => {
-          if (willDelete) {
-            swal("Registro eliminado", {
-              icon: "success",
-            });
-            document.getElementById("formulario"+valor).submit();
-          } else {
-            swal("Eliminación cancelada");
-          }
-        });
-    }    
-</script>
 @endsection

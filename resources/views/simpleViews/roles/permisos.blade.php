@@ -116,17 +116,3 @@
 </div>
 
 @endsection
-
-<script>
-    //añadir permiso al usuario
-    function añadirPermiso(valor){
-        //console.log(valor);
-        document.getElementById("añadirPermiso"+valor).submit();
-    }
-    function eliminarPermiso(valor){
-        document.getElementById("eliminarPermiso"+valor).submit();   
-    }
-    function CrearEnlace(url) {
-        location.href=url;
-    }
-</script>
