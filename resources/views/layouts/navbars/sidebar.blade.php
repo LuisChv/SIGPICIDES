@@ -65,7 +65,7 @@
                                 </a>
                             </li>
                             <li @if ($pageSlug == 'solicitudes_a_evaluar') class="active " @endif>
-                                <a href="{{ route('home')  }}">
+                                <a href="{{ route('solicitud.mis_solicitudes_comite')  }}">
                                     <i class="tim-icons icon-check-2"></i>
                                     <p>{{ __('Solicitudes a evaluar') }}</p>
                                 </a>

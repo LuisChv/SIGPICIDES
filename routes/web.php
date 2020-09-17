@@ -347,6 +347,9 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::get('mis_solicitudes', 'SolicitudController@mis_solicitudes')->name('solicitud.mis_solicitudes')
     ->middleware('has.permission:mis_solicitudes');
 
+    Route::get('mis_solicitudes_comite', 'SolicitudController@mis_solicitudes_comite')->name('solicitud.mis_solicitudes_comite');
+    //->middleware('has.permission:solicitudes.show');
+
     Route::get('proyecto/oai/{id}', 'SolicitudController@oai')->name('proyecto.oai');
 
     Route::get('solicitud/{solicitud}/pre', 'SolicitudController@pre')->name('solicitud.pre');

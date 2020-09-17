@@ -198,6 +198,19 @@ class SolicitudController extends Controller
         ]);
     }
 
+    public function mis_solicitudes_comite(){
+        $solicitudes = DB::select(
+            "SELECT S.id, P.nombre, S.id_proy, S.id_estado FROM comite_usuario CU 
+            JOIN comite_de_evaluacion C ON CU.id_comite = C.id
+            JOIN proyecto P ON C.id = P.id_comite
+            JOIN solicitud S ON S.id_proy = P.id
+            WHERE CU.id_usuario = ?", [Auth::user()->id]);
+        
+        return view('proyectoViews.solicitud.Admin.misSolicitudesComite', [
+            'solicitudes'=>$solicitudes,
+        ]);
+    }
+
     public function oai($id){
         $proyecto = Proyecto::findOrFail($id);
         $objetivos = DB::select("SELECT * FROM objetivo WHERE id_proyecto = ?", [$id]);
