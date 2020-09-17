@@ -183,18 +183,18 @@ class SolicitudController extends Controller
      */
     public function destroy($id)
     {
-        $solicitud = Solicitud::where('id_proy', $proyecto->id);
-        $miembros = UsuarioEquipoRol::where('id_equipo', $equipo->id);
-        $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
         $proyecto = Proyecto::findOrFail($id);
+        $solicitud = Solicitud::where('id_proy', $id)->first();
+        $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
+        $miembros = UsuarioEquipoRol::where('id_equipo', $equipo->id);
         
         $solicitud->delete();
+        $proyecto->delete();
         foreach($miembros as $miembro){
             $miembro->delete();
         }
         $equipo->delete();
-        $proyecto->delete();
-        return redirect()->route('proyecto.oai', $id);
+        return redirect()->route('solicitud.mis_solicitudes');
     }
 
     public function mis_solicitudes(){
@@ -233,8 +233,11 @@ class SolicitudController extends Controller
 
         if(count($objetivos) > 0 && count($alcances) > 0 && count($indicadores) > 0){
             $solicitud->id_estado = 2;
-            $solicitud->save();
+            
+        } else{
+            $solicitud->id_estado = 1;
         }
+        $solicitud->save();
 
         return view('proyectoViews.solicitud.Investigador.oai', [
             'objetivos'=> $objetivos,

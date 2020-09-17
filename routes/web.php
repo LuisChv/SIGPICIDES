@@ -336,8 +336,8 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::post('solicitud/{solicitud}', 'SolicitudController@show')->name('solicitud.show')
     ->middleware('has.permission:solicitudes.create');
 
-    Route::delete('solicitud/{solicitud}', 'SolicitudController@destroy')->name('solicitud.destroy')
-    ->middleware('has.permission:solicitud.destroy');
+    Route::delete('solicitud/{solicitud}', 'SolicitudController@destroy')->name('solicitud.destroy');
+    //->middleware('has.permission:solicitud.destroy');
 
     Route::get('solicitud/{solicitud}/edit', 'SolicitudController@edit')->name('solicitud.edit');
     //->middleware('has.permission:solicitud.edit');
@@ -355,7 +355,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::get('solicitud/{solicitud}/pre', 'SolicitudController@pre')->name('solicitud.pre');
 
-    Route::get('solicitud/{solicitud}/enviar', 'SolicitudController@enviar')->name('solicitud.enviar');
+    Route::post('solicitud/{id}/enviar', 'SolicitudController@enviar')->name('solicitud.enviar');
 
 
     /**********************Recursos por solicitud de proyecto Investigador******************/

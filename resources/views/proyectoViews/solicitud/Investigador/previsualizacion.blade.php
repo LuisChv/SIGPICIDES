@@ -169,18 +169,20 @@ Asignar recursos
                 Recursos
             </a>
         </td>
-        
-        <td width="50%" align="right">
-            @if ($solicitud->id_estado == 2)
-            <a class="btn btn-primary" href="{{ route('solicitud.enviar', [$proyecto->id]) }}">
-                Enviar
-            </a>
-            @else
-            <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
-                Mis solicitudes
-            </a>
-            @endif
-        </td>
+        <form method="POST" id="formulario{{$solicitud->id}}" action="{{route('solicitud.enviar', [$solicitud->id_proy])}}" >
+            @csrf
+            <td width="50%" align="right">
+                @if ($solicitud->id_estado == 2)
+                <button type="button" class="btn btn-primary" onClick="confirmarEnvio({{$solicitud->id}})">
+                    Enviar
+                </button>
+                @else
+                <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
+                    Mis solicitudes
+                </a>
+                @endif
+            </td>
+        </form>
     </tr>
 </table>
 @endsection

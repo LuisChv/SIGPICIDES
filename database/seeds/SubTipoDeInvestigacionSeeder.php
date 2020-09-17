@@ -12,71 +12,49 @@ class SubTipoDeInvestigacionSeeder extends Seeder
     public function run()
     {
         DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 1',
+            'nombre' => 'Estudios comparativos sobre tecnología de desarrollo de software',
             'id_tipo' => 1,
         ]);
         DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 2',
-            'id_tipo' => 1,
-        ]);
-        DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 3',
-            'id_tipo' => 1,
-        ]);
-        DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 4',
+            'nombre' => 'Desarrollo de nuevas tecnologías para el desarrollo de software',
             'id_tipo' => 1,
         ]);
 
         DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 11',
+            'nombre' => 'Estudios comparativos sobre tecnología de almacenamiento',
             'id_tipo' => 2,
         ]);
         DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 12',
-            'id_tipo' => 2,
-        ]);
-        DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 13',
-            'id_tipo' => 2,
-        ]);
-        DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 14',
+            'nombre' => 'Diseño de nuevas tecnologías para el almacenamiento de datos',
             'id_tipo' => 2,
         ]);
 
         DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 21',
+            'nombre' => 'Transferencia de tecnología en el ámbito de infraestructura',
             'id_tipo' => 3,
         ]);
         DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 22',
+            'nombre' => 'Transferencia de tecnología en el ámbito de Sistemas Embebidos',
             'id_tipo' => 3,
         ]);
         DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 23',
+            'nombre' => 'Diseño e implementación de componentes embebidos de hardware',
             'id_tipo' => 3,
         ]);
-        DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 24',
-            'id_tipo' => 3,
-        ]);
+
         
         DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 31',
+            'nombre' => 'Inteligencia artificial',
             'id_tipo' => 4,
         ]);
         DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 32',
+            'nombre' => 'Ciencia de datos',
             'id_tipo' => 4,
         ]);
         DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 33',
+            'nombre' => 'Big data',
             'id_tipo' => 4,
         ]);
-        DB::table('subtipo_de_investigacion')->insert([
-            'nombre' => 'Subtipo de investigación 34',
-            'id_tipo' => 4,
-        ]);
+
     }
 }

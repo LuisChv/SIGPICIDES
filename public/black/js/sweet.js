@@ -43,3 +43,22 @@ tomar en cuenta que es la versión 1 de la librería, no la 2
           }
         });
     }
+    function confirmarEnvio(valor){
+      swal({
+        title: "¿Está seguro de enviar la solicitud?",
+        text: "Esta acción es irreversible.",
+        icon: "warning",
+        buttons: true,
+        dangerMode: false,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("Solicitud enviada", {
+            icon: "success",
+          });
+          document.getElementById("formulario"+valor).submit();
+        } else {
+          swal("Envío cancelado");
+        }
+      });
+  }

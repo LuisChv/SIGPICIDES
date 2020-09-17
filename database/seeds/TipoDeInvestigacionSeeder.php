@@ -12,16 +12,16 @@ class TipoDeInvestigacionSeeder extends Seeder
     public function run()
     {
         DB::table('tipo_de_investigacion')->insert([
-            'nombre' => 'Tipo de investigación 1'
+            'nombre' => 'Desarrollo de software'
         ]);
         DB::table('tipo_de_investigacion')->insert([
-            'nombre' => 'Tipo de investigación 2'
+            'nombre' => 'Bases de datos'
         ]);
         DB::table('tipo_de_investigacion')->insert([
-            'nombre' => 'Tipo de investigación 3'
+            'nombre' => 'Infraestructura y sistemas embebidos'
         ]);
         DB::table('tipo_de_investigacion')->insert([
-            'nombre' => 'Tipo de investigación 4'
+            'nombre' => 'Ciencias de la computación'
         ]);
     }
 }
