@@ -189,9 +189,14 @@
             </a>
         </td>
         <td width="50%" align="right">
+        <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
+                Guardar
+        </a>
+        </td>
+        <td width="50%" align="right">
         <a class="btn btn-primary" href="{{ route('solicitud.enviar', [$proyecto->id]) }}">
                 Enviar
-            </a>
+        </a>
         </td>
     </tr>
 </table>

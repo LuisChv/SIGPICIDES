@@ -21,10 +21,17 @@
                                 <p>{{ $soli->nombre }}</p> 
                             </td>
                             <td width="5%" align="right">
-                                <a type="button" href="#" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
-                            </td>
-                            <td width="5%" align="right">
-                                <a type="button" href="#" class="btn btn-warning btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></a>
+                                <div class="btn-group" role="group">
+                                    <a title="Detalle Solicitud" type="button" class="btn btn-primary btn-sm btn-round" href="{{ route('solicitud.edit', [$soli->id_proy])}}">
+                                        <i class="tim-icons icon-notes"></i>
+                                    </a>
+                                    <a title="Comite de Evaluacion" type="button" class="btn btn-info btn-sm btn-icon btn-round" href="{{ route('comite.index', [$soli->id_proy])}}">
+                                    <i class="tim-icons icon-single-02"></i>
+                                    </a>
+                                    <a title="Eliminar" type="button" class="btn btn-warning btn-sm btn-icon btn-round" href="">
+                                        <i class="tim-icons icon-simple-remove"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>                        
                         @endforeach
@@ -33,14 +40,6 @@
                 <div class="card-footer"><br></div>
             </div>
         </div>
-        <div class="container menuF-container">
-            <input type="checkbox" id="toggleF">
-            <label for="toggleF" class="buttonF"></label>
-            <nav class="navF">
-                <a href="{{ route('solicitud.create')}}">Nueva solicitud</a>
-                <!--a href="{{ route('cides') }}">Acerca de</a>
-                <a href="#">Acciones largaaaaaaaaas</a-->
-            </nav>
-        </div>
+        
 </div>
 @endsection

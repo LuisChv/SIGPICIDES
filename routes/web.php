@@ -196,7 +196,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::put('equipos/{equipo}', 'EquipoController@update')->name('equipos.update')
     ->middleware('has.permission:equipo_de_investigacion.edit');
 
-     //Usuario Equipo Rol
+     //UMiembros de equipo de investigacion
 
     Route::get('miembros/{id}', 'UsuarioEquipoRolController@index')->name('miembros.index')
     ->middleware('has.permission:usuario_equipo_rol.index');
@@ -218,6 +218,29 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::put('miembros/{equipo}', 'UsuarioEquipoRolController@update')->name('miembros.update')
     ->middleware('has.permission:usuario_equipo_rol.edit');
+
+    //Miembros de Comite de evaluacion
+
+    Route::get('comite/{id}', 'ComiteController@index')->name('comite.index')
+    ->middleware('has.permission:comite_de_evaluacion.index');
+
+    Route::post('comite/store/{id}', 'ComiteController@store')->name('comite.store')
+    ->middleware('has.permission:comite_de_evaluacion.create'); 
+
+    Route::get('comite/create', 'ComiteController@create')->name('comite.create')
+    ->middleware('has.permission:comite_de_evaluacion..create');
+
+    Route::get('comite/{miembro}', 'ComiteController@show')->name('comite.show')
+    ->middleware('has.permission:comite_de_evaluacion.show');    
+
+    Route::delete('comite/{miembro}/{id}', 'ComiteController@destroy')->name('comite.destroy')
+    ->middleware('has.permission:comite_de_evaluacion.destroy');
+
+    Route::get('comite/{miembro}/edit', 'ComiteController@edit')->name('comite.edit')
+    ->middleware('has.permission:comite_de_evaluacion.edit');
+
+    Route::put('comite/{miembro}', 'ComiteController@update')->name('comite.update')
+    ->middleware('has.permission:comite_de_evaluacion.edit');
 
 
     //Indicadores
