@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 /*
@@ -384,7 +385,17 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
         return view ('Mail.mailprueba');
     });
     
-    Route::post('email', function () {
+    Route::post('email', function (Request $request) {
+        dd($request->request);
+        $valorV=0;
+        if(request()->valor1){
+            foreach(request()->valor1 as $valor){
+                $valorV +=$valor;  
+            }
+            dd($valorV);
+        }
+        
+        //dd(request()->valor1);
         dd(auth()->user());
         $data = array('email'=> request('email'));
 
