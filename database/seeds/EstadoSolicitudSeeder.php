@@ -21,10 +21,16 @@ class EstadoSolicitudSeeder extends Seeder
             'estado'=>'Enviada para revisar',
         ]);
         DB::table('estado_de_solicitud')->insert([
-            'estado'=>'Aprobada',
+            'estado'=>'Perfil aceptado con condición',
         ]);
         DB::table('estado_de_solicitud')->insert([
-            'estado'=>'Aprobada parcialmente',
+            'estado'=>'Perfil aprobado',
+        ]);
+        DB::table('estado_de_solicitud')->insert([
+            'estado'=>'Planificación aceptada con condición',
+        ]);
+        DB::table('estado_de_solicitud')->insert([
+            'estado'=>'Planificación aprobada',
         ]);
         DB::table('estado_de_solicitud')->insert([
             'estado'=>'Denegada',
