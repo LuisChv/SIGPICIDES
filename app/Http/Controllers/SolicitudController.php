@@ -220,6 +220,14 @@ class SolicitudController extends Controller
             WHERE CU.id_usuario = ?", [Auth::user()->id]);
         
         $evaluadas = DB::select("SELECT * FROM evaluacion WHERE id_user = ?", [Auth::user()->id]);
+
+        foreach ($evaluadas as $eva) { 
+            foreach($solicitudes as $soli){ 
+                if($soli->id == $eva->id_solicitud){
+                    unset($solicitudes[$eva->id_solicitud - 1]);
+                }
+            }
+        }
         
         return view('proyectoViews.solicitud.Admin.misSolicitudesComite', [
             'solicitudes'=>$solicitudes,
