@@ -36,14 +36,32 @@ class SolicitudController extends Controller
             FROM solicitud s 
             JOIN proyecto p 
             ON s.id = p.id WHERE s.id_estado = ?", [3]);
-        /*
-        $solicitudes = DB::select(
-            "SELECT * 
-            FROM solicitud s 
-            JOIN estado_de_solicitud es
-            ON s.idS = es.idS
-            WHERE estadoES=1"); //asumiendo que el estado 1 seria el de pendientes de aprobar */
-        return view('proyectoViews.solicitud.Admin.index', ['solicitudes'=>$solicitudes]);
+        $solicitudes_A= DB::select("SELECT * 
+        FROM solicitud s 
+        JOIN proyecto p 
+        ON s.id = p.id WHERE s.id_estado = ?", [4]);
+        
+ 
+
+        $solicitudes_R= DB::select("SELECT * 
+        FROM solicitud s 
+        JOIN proyecto p 
+        ON s.id = p.id WHERE s.id_estado = ?", [8]);
+        
+
+        $solicitudes_AP= DB::select("SELECT * 
+        FROM solicitud s 
+        JOIN proyecto p 
+        ON s.id = p.id WHERE s.id_estado = ?", [5]);
+        
+
+        return view('proyectoViews.solicitud.Admin.index', [
+            'solicitudes'=>$solicitudes,
+            'solicitudes_A'=>$solicitudes_A,
+            'solicitudes_AP'=>$solicitudes_AP,
+            'solicitudes_R'=>$solicitudes_R,
+            
+            ]);
     }
 
     /**

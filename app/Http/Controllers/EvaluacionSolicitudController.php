@@ -131,7 +131,7 @@ class EvaluacionSolicitudController extends Controller
 
         $solicitud->save();
 
-        return redirect()->route('solicitud.revisadas');
+        return redirect()->route('solicitud.index');
         
         
     }
