@@ -9,7 +9,7 @@
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-8 text-left">
-                        <h2 class="card-title"><b>Solicitudes Pendientes</b></h2>
+                        <h2 class="card-title"><b>Solicitudes Pendientes de Evaluar</b></h2>
                     </div>
                 </div>
             </div>
@@ -34,36 +34,6 @@
             <div class="card-footer"><br></div>
         </div>
 
-        <div class="card">
-            <div class="card-header ">
-                <div class="row">
-                    <div class="col-sm-8 text-left">
-                        <h2 class="card-title"><b>Solicitudes Evaluadas</b></h2>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <table class="table">
-                    @foreach ($solicitudes as $soli)
-                    @if ($soli->id_estado == 1 )
-                    <tr>
-                        <td width="70%">
-                            <p>{{ $soli->nombre }}</p> 
-                        </td>
-
-                        </td>
-                        <td width="15%">
-                            <a  href="{{ route('solicitud.pre', [$soli->id_proy])}}" type="button" class="btn btn-primary btn-sm btn-round">
-                                <i class="tim-icons icon-send"></i> Ver solicitud
-                            </a>
-                        </td>
-                    </tr>    
-                    @endif                    
-                    @endforeach
-                </table>
-            </div>
-            <div class="card-footer"><br></div>
-        </div>
     </div>
 </div>
 @endsection

@@ -180,21 +180,14 @@ Evaluar Solicitud
             </div>
             <div class="card-body">
                 <div class="col-12">
-                    <div style="border-right: 20 px; text-align: right;">
-                        <button id="comentario" type="button" class="btn btn-primary btn-sm btn-round" data-toggle="modal" data-target="#modalAgregarComentario">
+                    <div style="border-right: 20 px; text-align: left;">
+                        <button id="" type="button" class="btn btn-primary btn-sm btn-round" data-toggle="modal" data-target="#">
                             + Agregar Comentario 
                         </button>                                     
                     </div>
                 </div>
                     
-                <p id=nombreUsuarioComentario>Fulano de tal</p>
-                <textarea disabled min-row="3" name="" id="" disabled class="form-control">soy un comentario lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad quis nostrud exercitation.</textarea>
-                <br>
-                <p id=nombreUsuarioComentario>Sultano de tal</p>
-                <textarea disabled name="" id="" disabled class="form-control">soy un comentario</textarea>
-                <br>
-                <p id=nombreUsuarioComentario>Mengano de tal</p>
-                <textarea disabled name="" id="" disabled class="form-control">soy un comentario</textarea>
+                <textarea min-row="3" name="" id="comentario" class="form-control"> </textarea>
                 <br>
             </div>
             <div class="card-footer"><br></div>
@@ -202,43 +195,33 @@ Evaluar Solicitud
     </div>
     <div class="col-md-4">
         <div class="card">
+        <form method="POST" action=" {{ route( 'evaluacion.store', $proyecto->id)}}">
+            @csrf  
             <div class="card-header" align="center">
                 <h3 style="margin-bottom: 0px;">Resultado de evaluación</h3>
             </div>
-            <div class="card-body">  
+            <div class="card-body">
                 <table class="table border-sm">
                     <tbody class="form-group">
+                        @foreach ($estados as $estado) 
                         <tr>
                             <td>
-                                <input type="radio" class="" id="aprobado">
+                                <input type="radio" class="" name="rad" id="{{ $estado->id }}" value = "{{ $estado->id }}">
                             </td>
                             <td>
-                                <p for="#aprobado">Aprobado</p>
+                                <p for="#{{ $estado->id }}">{{ $estado->estado }}</p>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="radio" class="" id="parcial">
-                            </td>
-                            <td>
-                                <p for="#parcial">Aprobado con Observaciones</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="radio" class="" id="rechazado">
-                            </td>
-                            <td>
-                                <p for="#rechazado">Rechazado</p>
-                            </td>
-                        </tr>
+                        </tr> 
+                        @endforeach          
+                        <tr><input type="hidden" id="resultado"></tr>
                     </tbody>
-                </table>              
+                </table>            
             </div>
             <div class="card-footer" align="center">
                 <button type=submit class="btn btn-primary">Enviar evaluación</button>
                 <br><br>
             </div>
+        </form>  
         </div>
     </div>
 </div>
@@ -257,14 +240,14 @@ Evaluar Solicitud
                 <div class="modal-body">                     
                     <table class="table" style="background-color: white !important;" >
                         <tr>
-                            <td><textarea required rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_objetivo"></textarea></td>
+                            <td><textarea id= "coment" required rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_objetivo"></textarea></td>
                         </tr>
                         <input hidden name="id_proy" value=""/>
                     </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Añadir</button>
+                    <button type="submit" class="btn btn-primary" id = "agregar">Añadir</button>
                 </div>
             </div>
         </div>
@@ -273,3 +256,20 @@ Evaluar Solicitud
 
 
 @endsection
+
+<script langiage="javascript" type="text/javascript">
+
+    function agregarComentario(){
+            $('#comentario').val(id);
+        }
+
+    function displayRadioValue() { 
+            var ele = document.getElementsByName('rad'); 
+              
+            for(i = 0; i < ele.length; i++) { 
+                if(ele[i].checked) 
+                    document.getElementById("resultado").val(ele[i].val());
+            } 
+        } 
+
+</script>

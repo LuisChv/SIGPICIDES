@@ -462,6 +462,9 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     /***********************planificacion de tareas gantt****************************/
     Route::get('evaluacion/{id}', 'EvaluacionSolicitudController@index')->name('evaluacion.index')
     ->middleware('has.permission:evaluacion.index');
+
+    Route::post('evaluacion/store/{id}', 'EvaluacionSolicitudController@store')->name('evaluacion.store')
+    ->middleware('has.permission:evaluacion.create');
 });
 
 

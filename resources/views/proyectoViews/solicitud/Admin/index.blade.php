@@ -22,9 +22,6 @@
                             </td>
                             <td width="5%" align="right">
                                 <div class="btn-group" role="group">
-                                    <a title="Responder Solicitud" type="button" class="btn btn-primary btn-sm btn-round" href="#">
-                                        <i class="tim-icons icon-notes"></i>
-                                    </a>
                                     <a title="Comite de Evaluacion" type="button" class="btn btn-info btn-sm btn-icon btn-round" href="{{ route('comite.index', [$soli->id_proy])}}">
                                     <i class="tim-icons icon-single-02"></i>
                                     </a>

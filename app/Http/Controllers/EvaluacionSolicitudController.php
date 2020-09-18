@@ -20,6 +20,8 @@ use App\TipoDeRecursos;
 use App\RolUsuario;
 use App\ComiteDeEvaluacion;
 use App\ComiteUsuario;
+use App\Evaluacion;
+use App\EstadoDeSoliProy;
 
 class EvaluacionSolicitudController extends Controller
 {
@@ -45,6 +47,8 @@ class EvaluacionSolicitudController extends Controller
         $tiposrec=TipoDeRecursos::all();
         $recursosProy=DB::select("SELECT RP.id, RP.cantidad, R.nombre, R.id_tipo, RP.detalle FROM recursos_por_proy RP JOIN recurso R ON R.id = RP.id_recurso WHERE RP.id_proy = ?", [$id]);
 
+        $estados_soli = DB::select("SELECT * FROM estado_de_solicitud WHERE id > ?", [3]);
+
         return view('evaluacion.evaluacion', [
             'objetivos'=> $objetivos,
             'alcances'=> $alcances,
@@ -57,6 +61,7 @@ class EvaluacionSolicitudController extends Controller
             'recursos'=>$recursos,
             'recursosProy'=>$recursosProy,
             'solicitud'=>$solicitud,
+            'estados'=>$estados_soli,
         ]);
     }
 
@@ -76,9 +81,30 @@ class EvaluacionSolicitudController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        //
+        $proyecto = Proyecto::findOrFail($id);
+
+        $resultado = request('resultado');
+        $respuesta = true;
+
+        if($resultado == 6){
+            $respuesta = false;
+        }
+
+
+
+        $evaluacion = new Evaluacion;
+        $evaluacion->etapa = 1;
+        $evaluacion->id_usuario = Auth::user()->id;
+        $evaluacion->id_solicitud = $proyecto->id_solicitud;
+        $evaluacion->comentario = request('comentario');
+        $evaluacion->aprobado = $respuesta;
+        $evaluacion->save();
+
+        return redirect()->route('solicitud.mis_solicitudes_comite');
+        
+        
     }
 
     /**
