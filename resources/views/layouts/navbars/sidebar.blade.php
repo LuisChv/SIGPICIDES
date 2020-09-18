@@ -58,19 +58,23 @@
                 <div class="collapse" id="solicitudes">
                     <ul class="nav pl-4">
                         @can('evaluacion.create')
-                            <li @if ($pageSlug == 'solicitudes') class="active " @endif>
+                            <li @if ($pageSlug == 'solicitudes_nuevas') class="active " @endif>
                                 <a href="{{ route('solicitud.index') }}">
                                     <i class="tim-icons icon-bullet-list-67"></i>
                                     <p>{{ __('Solicitudes Nuevas') }}</p>
                                 </a>
                             </li>
+                        @endcan
+                        @can('comite_usuario.create')
                             <li @if ($pageSlug == 'solicitudes_a_evaluar') class="active " @endif>
                                 <a href="{{ route('solicitud.mis_solicitudes_comite')  }}">
                                     <i class="tim-icons icon-notes"></i>
                                     <p>{{ __('Solicitudes a Evaluar') }}</p>
                                 </a>
                             </li>
-                            <li @if ($pageSlug == 'solicitudes_a_evaluar') class="active " @endif>
+                        @endcan
+                        @can('evaluacion.final')
+                            <li @if ($pageSlug == 'solicitudes_evaluadas') class="active " @endif>
                                 <a href="{{ route('solicitud.mis_solicitudes_comite')  }}">
                                     <i class="tim-icons icon-check-2"></i>
                                     <p>{{ __('Solicitudes Evaluadas') }}</p>
