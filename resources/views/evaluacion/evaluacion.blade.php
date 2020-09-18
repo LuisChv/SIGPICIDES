@@ -9,7 +9,7 @@ Evaluar Solicitud
             
             <div class="card-body">
                 <h3>
-                    Información general
+                    Perfil de la solicitud
                 </h3>
                 <table class="table">
                     <tr>
@@ -163,54 +163,113 @@ Evaluar Solicitud
             </div>
         </div> 
     </div>
+</div>
+<div class="row">
 
     <div class="col-md-12">
         <div class="card">
             <div class="card-header" align="center">
-                <h1>EVALUACION</h1>
+                <h1>EVALUACI&Oacute;N</h1>
             </div>
-            <div align="right">
-                <button id="comentario" type="button" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#" onClick=""><i class="tim-icons icon-simple-add"></i></button>
-                 <label for="#comentario"><h4>Agregar Comentario</h2></label>               
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header" align="center">
+                <h3 style="margin-bottom: 0px;">Comentarios</h3>
             </div>
             <div class="card-body">
-                <table>
-                    <tbody>
+                <div class="col-12">
+                    <div style="border-right: 20 px; text-align: right;">
+                        <button id="comentario" type="button" class="btn btn-primary btn-sm btn-round" data-toggle="modal" data-target="#modalAgregarComentario">
+                            + Agregar Comentario 
+                        </button>                                     
+                    </div>
+                </div>
+                    
+                <p id=nombreUsuarioComentario>Fulano de tal</p>
+                <textarea disabled min-row="3" name="" id="" disabled class="form-control">soy un comentario lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad quis nostrud exercitation.</textarea>
+                <br>
+                <p id=nombreUsuarioComentario>Sultano de tal</p>
+                <textarea disabled name="" id="" disabled class="form-control">soy un comentario</textarea>
+                <br>
+                <p id=nombreUsuarioComentario>Mengano de tal</p>
+                <textarea disabled name="" id="" disabled class="form-control">soy un comentario</textarea>
+                <br>
+            </div>
+            <div class="card-footer"><br></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header" align="center">
+                <h3 style="margin-bottom: 0px;">Resultado de evaluación</h3>
+            </div>
+            <div class="card-body">  
+                <table class="table border-sm">
+                    <tbody class="form-group">
                         <tr>
-                            <td width="10%">
-                                Usuario
+                            <td>
+                                <input type="radio" class="" id="aprobado">
                             </td>
-                            <td width="70%">
-                                <textarea name="" id="" rows="3" cols="50%" disabled></textarea>
+                            <td>
+                                <p for="#aprobado">Aprobado</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio" class="" id="parcial">
+                            </td>
+                            <td>
+                                <p for="#parcial">Aprobado con Observaciones</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio" class="" id="rechazado">
+                            </td>
+                            <td>
+                                <p for="#rechazado">Rechazado</p>
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table>              
             </div>
-
-            <div class="card-footer">
-                <table>
-                    <tbody>
-                    <tr>
-                        <input type="checkbox" id="aprobado">
-                        <label for="#aprobado"><h3>Aprobado</h3></label>
-                    </tr>
-                    <tr>
-                        <input type="checkbox" id="parcial">
-                        <label for="#parcial"><h3>Aprobado con Observaciones</h3></label>
-                    </tr>
-                    <tr>
-                        <input type="checkbox" id="rechazado">
-                        <label for="#rechazado"><h3>Rechazado</h3></label>
-                    </tr>
-                    </tbody>
-                </table>
-               
+            <div class="card-footer" align="center">
+                <button type=submit class="btn btn-primary">Enviar evaluación</button>
+                <br><br>
             </div>
-
         </div>
     </div>
 </div>
+
+<form method="POST" action="#">
+    @csrf
+    <div class="modal fade" id="modalAgregarComentario" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nuevo comentario</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="false">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">                     
+                    <table class="table" style="background-color: white !important;" >
+                        <tr>
+                            <td><textarea required rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_objetivo"></textarea></td>
+                        </tr>
+                        <input hidden name="id_proy" value=""/>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Añadir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 
 @endsection
