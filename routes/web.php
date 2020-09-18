@@ -412,6 +412,8 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::get('solicitudes_evaluadas', 'SolicitudController@solicitudes_evaluadas')->name('solicitud.evaluadas');
     
+    Route::get('solicitudes_revisadas', 'SolicitudController@solicitudes_revisadas')->name('solicitud.revisadas');
+    
     //proyecto-equipo
     Route::get('equipo', 'EquipoController@index')->name('equipo.index')
     ->middleware('has.permission:equipos.index');
@@ -469,6 +471,12 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::post('evaluacion/store/{id}', 'EvaluacionSolicitudController@store')->name('evaluacion.store')
     ->middleware('has.permission:evaluacion.create');
+    
+    Route::get('evaluacion/final/{id}', 'EvaluacionSolicitudController@evaluacion_final')->name('evaluacion.final')
+    ->middleware('has.permission:evaluacion.final');
+
+    Route::post('evaluacion/responder/{id}', 'EvaluacionSolicitudController@respuesta_evaluacion')->name('solicitud.responder')
+    ->middleware('has.permission:solicitudes.index');
 });
 
 

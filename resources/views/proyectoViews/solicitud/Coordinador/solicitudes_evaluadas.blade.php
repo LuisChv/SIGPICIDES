@@ -20,7 +20,7 @@
                             <tr>
                                 <td><i class="tim-icons icon-check-2"></i> {{$solicitud->nombre}}</td>
                                 <td width="15%" class="text-right">
-                                    <a href="" type="button" class="btn btn-primary btn-sm btn-round">
+                                    <a href="{{ route('evaluacion.final', [$solicitud->id])     }}" type="button" class="btn btn-primary btn-sm btn-round">
                                         <i class="tim-icons icon-book-bookmark"></i> Ver evaluaciones
                                     </a>
                                 </td>

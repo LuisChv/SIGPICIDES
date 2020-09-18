@@ -49,7 +49,7 @@ class EvaluacionSolicitudController extends Controller
 
         $estados_soli = DB::select("SELECT * FROM estado_de_solicitud WHERE id = ? OR id = ? OR id = ?", [4,5,8]);
 
-        return view('evaluacion.evaluacion', [
+        return view('evaluacion.evaluacionMiembro', [
             'objetivos'=> $objetivos,
             'alcances'=> $alcances,
             'indicadores'=> $indicadores,
@@ -83,23 +83,55 @@ class EvaluacionSolicitudController extends Controller
      */
     public function store($id)
     {
-        $resultado = request('resultado');
-        $respuesta = true;
-
-        if($resultado == 8){
-            $respuesta = false;
-        }
-
+        $respuesta = request('resultado');
+      
         $evaluacion = new Evaluacion;
         $evaluacion->etapa = 1;
         $evaluacion->id_user = Auth::user()->id;
         $evaluacion->id_solicitud = $id;
         $evaluacion->comentario = request('comentario');
-        $evaluacion->aprobacion = $respuesta;
+        $evaluacion->respuesta = $respuesta;
         $evaluacion->visible = false;
         $evaluacion->save();
 
         return redirect()->route('solicitud.mis_solicitudes_comite');
+        
+        
+    }
+
+    public function evaluacion_final($id)
+    {
+        $proyecto = Proyecto::findOrFail($id);
+        $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
+
+        $id_comite = $proyecto->id_comite;
+        $estados_soli = DB::select("SELECT * FROM estado_de_solicitud WHERE id = ? OR id = ? OR id = ?", [4,5,8]);
+
+        $miembros_comite = DB::select("SELECT CU.id_usuario, U.name FROM comite_usuario CU JOIN users U ON CU.id_usuario = U.id WHERE id_comite = ?", [$id_comite]);
+
+        $evaluaciones = DB::select("SELECT * FROM evaluacion WHERE id_solicitud = ? ", [$id]);
+
+        return view('evaluacion.evaluacionFinal', [
+            'proyecto' => $proyecto,
+            'solicitud'=>$solicitud,
+            'evaluaciones'=>$evaluaciones,
+            'estados'=>$estados_soli,
+            'miembros_comite'=>$miembros_comite,
+        ]);
+
+    }
+
+    public function respuesta_evaluacion($id)
+    {
+        $respuesta = request('resultado');
+        
+        $solicitud = Solicitud::findOrFail($id);
+
+        $solicitud->id_estado = $respuesta;
+
+        $solicitud->save();
+
+        return redirect()->route('solicitud.revisadas');
         
         
     }

@@ -17,7 +17,7 @@ class CreateEvaluacionsTable extends Migration
             $table->id();
             $table->integer('etapa');
             $table->string('comentario',200)->nullable();
-            $table->boolean('aprobacion')->nullable();
+            $table->integer('respuesta')->nullable();
             $table->boolean('visible')->default('true');
             $table->integer("id_user");
             $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
