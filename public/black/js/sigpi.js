@@ -49,7 +49,7 @@ function editarRolMiembro(id_miembro, id_rol){
     //rol.removeAttr('selected').filter(['value='+id_rol+']']).attr('selected', true);
     //rol.val(id_rol)
     rol.each(function() {
-        if($(this).val() == '2') {
+        if($(this).val() == id_rol) {
             $(this).attr('selected', 'selected');
         }
     });
