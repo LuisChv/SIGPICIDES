@@ -219,8 +219,11 @@ class SolicitudController extends Controller
             JOIN solicitud S ON S.id_proy = P.id
             WHERE CU.id_usuario = ?", [Auth::user()->id]);
         
+        $evaluadas = DB::select("SELECT * FROM evaluacion WHERE id_user = ?", [Auth::user()->id]);
+        
         return view('proyectoViews.solicitud.Admin.misSolicitudesComite', [
             'solicitudes'=>$solicitudes,
+            'evaluadas'=>$evaluadas,
         ]);
     }
 

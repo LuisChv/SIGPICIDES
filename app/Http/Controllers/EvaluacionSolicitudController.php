@@ -47,7 +47,7 @@ class EvaluacionSolicitudController extends Controller
         $tiposrec=TipoDeRecursos::all();
         $recursosProy=DB::select("SELECT RP.id, RP.cantidad, R.nombre, R.id_tipo, RP.detalle FROM recursos_por_proy RP JOIN recurso R ON R.id = RP.id_recurso WHERE RP.id_proy = ?", [$id]);
 
-        $estados_soli = DB::select("SELECT * FROM estado_de_solicitud WHERE id > ?", [3]);
+        $estados_soli = DB::select("SELECT * FROM estado_de_solicitud WHERE id = ? OR id = ? OR id = ?", [4,5,8]);
 
         return view('evaluacion.evaluacion', [
             'objetivos'=> $objetivos,
@@ -83,23 +83,20 @@ class EvaluacionSolicitudController extends Controller
      */
     public function store($id)
     {
-        $proyecto = Proyecto::findOrFail($id);
-
         $resultado = request('resultado');
         $respuesta = true;
 
-        if($resultado == 6){
+        if($resultado == 8){
             $respuesta = false;
         }
 
-
-
         $evaluacion = new Evaluacion;
         $evaluacion->etapa = 1;
-        $evaluacion->id_usuario = Auth::user()->id;
-        $evaluacion->id_solicitud = $proyecto->id_solicitud;
+        $evaluacion->id_user = Auth::user()->id;
+        $evaluacion->id_solicitud = $id;
         $evaluacion->comentario = request('comentario');
-        $evaluacion->aprobado = $respuesta;
+        $evaluacion->aprobacion = $respuesta;
+        $evaluacion->visible = false;
         $evaluacion->save();
 
         return redirect()->route('solicitud.mis_solicitudes_comite');

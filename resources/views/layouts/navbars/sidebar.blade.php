@@ -57,7 +57,7 @@
 
                 <div class="collapse" id="solicitudes">
                     <ul class="nav pl-4">
-                        @can('evaluacion.create')
+                        @can('comite_usuario.create')
                             <li @if ($pageSlug == 'solicitudes_nuevas') class="active " @endif>
                                 <a href="{{ route('solicitud.index') }}">
                                     <i class="tim-icons icon-bullet-list-67"></i>
@@ -65,7 +65,7 @@
                                 </a>
                             </li>
                         @endcan
-                        @can('comite_usuario.create')
+                        @can('evaluacion.create')
                             <li @if ($pageSlug == 'solicitudes_a_evaluar') class="active " @endif>
                                 <a href="{{ route('solicitud.mis_solicitudes_comite')  }}">
                                     <i class="tim-icons icon-notes"></i>

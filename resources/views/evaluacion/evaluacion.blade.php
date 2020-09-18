@@ -180,14 +180,14 @@ Evaluar Solicitud
             </div>
             <div class="card-body">
                 <div class="col-12">
-                    <div style="border-right: 20 px; text-align: left;">
-                        <button id="" type="button" class="btn btn-primary btn-sm btn-round" data-toggle="modal" data-target="#">
+                    <div style="border-right: 20 px; text-align: right;">
+                        <button id="" type="button" class="btn btn-primary btn-sm btn-round" data-toggle="modal" data-target="#modalAgregarComentario">
                             + Agregar Comentario 
                         </button>                                     
                     </div>
                 </div>
-                    
-                <textarea min-row="3" name="" id="comentario" class="form-control"> </textarea>
+                <br>
+                <textarea disabled min-row="5"  id="comentario1" class="form-control"> </textarea>
                 <br>
             </div>
             <div class="card-footer"><br></div>
@@ -195,7 +195,7 @@ Evaluar Solicitud
     </div>
     <div class="col-md-4">
         <div class="card">
-        <form method="POST" action=" {{ route( 'evaluacion.store', $proyecto->id)}}">
+        <form method="POST" action=" {{ route( 'evaluacion.store', $solicitud->id)}}">
             @csrf  
             <div class="card-header" align="center">
                 <h3 style="margin-bottom: 0px;">Resultado de evaluación</h3>
@@ -206,14 +206,15 @@ Evaluar Solicitud
                         @foreach ($estados as $estado) 
                         <tr>
                             <td>
-                                <input type="radio" class="" name="rad" id="{{ $estado->id }}" value = "{{ $estado->id }}">
+                                <input type="radio" name="rad" id="{{ $estado->id }}" value = "{{ $estado->id }}" onClick = "displayRadioValue()">
                             </td>
                             <td>
                                 <p for="#{{ $estado->id }}">{{ $estado->estado }}</p>
                             </td>
                         </tr> 
                         @endforeach          
-                        <tr><input type="hidden" id="resultado"></tr>
+                        <tr><input type="hidden" name="resultado" id="resultado" ></tr>
+                        <tr><input type="hidden" name="comentario" id="comentario"></tr>
                     </tbody>
                 </table>            
             </div>
@@ -226,8 +227,6 @@ Evaluar Solicitud
     </div>
 </div>
 
-<form method="POST" action="#">
-    @csrf
     <div class="modal fade" id="modalAgregarComentario" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -247,12 +246,11 @@ Evaluar Solicitud
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" id = "agregar">Añadir</button>
+                    <button type="button" class="btn btn-primary" onClick = "agregarComentario()" id = "agregar" data-dismiss="modal">Añadir</button>
                 </div>
             </div>
         </div>
     </div>
-</form>
 
 
 @endsection
@@ -260,7 +258,8 @@ Evaluar Solicitud
 <script langiage="javascript" type="text/javascript">
 
     function agregarComentario(){
-            $('#comentario').val(id);
+            $('#comentario').val($('#coment').val());
+            $('#comentario1').val($('#coment').val());
         }
 
     function displayRadioValue() { 
@@ -268,7 +267,7 @@ Evaluar Solicitud
               
             for(i = 0; i < ele.length; i++) { 
                 if(ele[i].checked) 
-                    document.getElementById("resultado").val(ele[i].val());
+                $('#resultado').val(ele[i].value);
             } 
         } 
 
