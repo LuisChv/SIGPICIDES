@@ -36,10 +36,18 @@ class ComiteController extends Controller
             }
         }
 
-          //Miembros del equipo 
-           $miembros1= DB::select('SELECT * FROM users INNER JOIN comite_usuario 
-           ON users.id = comite_usuario.id_usuario AND id_comite = ?', [$id_comite]);
+        //Omitir Otros roles. No Expertos
+        $noInvestigadores= DB::select('SELECT * FROM role_user WHERE role_id != ?', [8]);
+  
+        foreach ($noInvestigadores as $inv) { 
+            foreach($noMiembros as $user){ 
+                if($user->id == $inv->user_id){
+                    unset($noMiembros[$user->id - 1]);
+                }
+            }
+        }
 
+          //Miembros del equipo 
             $miembros= DB::select("SELECT CU.id_usuario, U.name, RU.role_id, R.name as name1 FROM users U 
             JOIN comite_usuario CU ON U.id = CU.id_usuario
             JOIN role_user RU ON U.id = RU.user_id 

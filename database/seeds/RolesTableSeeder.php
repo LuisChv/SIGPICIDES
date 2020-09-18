@@ -55,5 +55,11 @@ class RolesTableSeeder extends Seeder
             'slug'          => 'colaborador',
             'tipo_rol'   => true,
         ]);
+
+        Role::create([
+            'name'          => 'Experto',
+            'slug'          => 'experto',
+            'tipo_rol'   => false,
+        ]);
     }
 }
