@@ -17,6 +17,8 @@ class ComiteController extends Controller
     public function index($id)
     {
         $proyecto = Proyecto::findOrFail($id);
+
+        $id_comite = $proyecto->id_comite;
         
         //Todos los usuarios
         $users = DB::select("SELECT * FROM users");
@@ -24,7 +26,7 @@ class ComiteController extends Controller
       
 
         //Omitir Miembros del comite 
-         $miembrosComite = DB::select('SELECT * FROM comite_usuario WHERE id_comite = ?', [$id]);
+         $miembrosComite = DB::select('SELECT * FROM comite_usuario WHERE id_comite = ?', [$id_comite]);
 
         foreach ($miembrosComite as $miembro) { 
             foreach($noMiembros as $user){ 
@@ -36,21 +38,21 @@ class ComiteController extends Controller
 
           //Miembros del equipo 
            $miembros1= DB::select('SELECT * FROM users INNER JOIN comite_usuario 
-           ON users.id = comite_usuario.id_usuario AND id_comite = ?', [$id]);
+           ON users.id = comite_usuario.id_usuario AND id_comite = ?', [$id_comite]);
 
             $miembros= DB::select("SELECT CU.id_usuario, U.name, RU.role_id, R.name as name1 FROM users U 
             JOIN comite_usuario CU ON U.id = CU.id_usuario
             JOIN role_user RU ON U.id = RU.user_id 
             JOIN roles R ON R.id = RU.role_id
-            WHERE CU.id_comite = ?", [$id]);
+            WHERE CU.id_comite = ?", [$id_comite]);
          
          //Roles
          $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [false]);
 
-         $cantidad_miembros = ComiteUsuario::count();
+         $cantidad_miembros = DB::table('comite_usuario')->where('id_comite',[$id_comite])->count();
 
          //Retornar la vista
-         return view ('evaluacion.comite.index', [
+         return view ('evaluacion.comite', [
               'usuarios'=>$noMiembros,  
               'miembros'=>$miembros,
               'roles'=>$roles,
@@ -79,12 +81,16 @@ class ComiteController extends Controller
     {
         $id_miembro = request('investigador');
 
-        $cantidad_miembros = ComiteUsuario::count();
+        $proyecto = Proyecto::findOrFail($id);
+
+        $id_comite = $proyecto->id_comite;
+
+        $cantidad_miembros = DB::table('comite_usuario')->where('id_comite',[$id_comite])->count();
 
         if($cantidad_miembros < 3 ){
 
             DB::table('comite_usuario')->insert([
-                'id_comite' => $id,
+                'id_comite' => $id_comite,
                 'id_usuario' =>$id_miembro,     
             ]);
     
@@ -139,7 +145,11 @@ class ComiteController extends Controller
      */
     public function destroy($id_usuario, $id_proyecto)
     {
-        DB::table('comite_usuario')->where('id_usuario', $id_usuario)->where('id_comite', $id_proyecto)->delete();
+        $proyecto = Proyecto::findOrFail($id);
+
+        $id_comite = $proyecto->id_comite;
+
+        DB::table('comite_usuario')->where('id_usuario', $id_usuario)->where('id_comite', $id_comite)->delete();
         return redirect()->route('comite.index',[$id_proyecto]);
     }
 }

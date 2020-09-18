@@ -57,7 +57,7 @@
 
                 <div class="collapse" id="solicitudes">
                     <ul class="nav pl-4">
-                        @can('solicitudes.index')
+                        @can('evaluacion.create')
                             <li @if ($pageSlug == 'solicitudes') class="active " @endif>
                                 <a href="{{ route('solicitud.index') }}">
                                     <i class="tim-icons icon-bullet-list-67"></i>

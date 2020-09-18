@@ -22,7 +22,7 @@
                             <p>{{ $soli->nombre }}</p> 
                         </td>
                         <td width="15%">
-                            <a href="{{ route('solicitud.pre', [$soli->id_proy])     }}" type="button" class="btn btn-primary btn-sm btn-round">
+                            <a href="{{ route('evaluacion.index', [$soli->id_proy])     }}" type="button" class="btn btn-primary btn-sm btn-round">
                                 <i class="tim-icons icon-send"></i> Evaluar solicitud
                             </a>
                         </td>

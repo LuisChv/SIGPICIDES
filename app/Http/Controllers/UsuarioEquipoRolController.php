@@ -22,6 +22,8 @@ class UsuarioEquipoRolController extends Controller
         
         $proyecto = Proyecto::where('id', $id)->first();
 
+        $id_equipo = $proyecto->id_equipo;
+
          //Todos los usuarios
          $users = DB::select("SELECT * FROM users");
          $noMiembros = DB::select("SELECT * FROM users");

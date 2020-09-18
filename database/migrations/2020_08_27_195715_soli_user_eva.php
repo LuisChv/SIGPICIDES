@@ -15,6 +15,8 @@ class SoliUserEva extends Migration
     {
         Schema::create('soli_user_eva', function (Blueprint $table) {
             $table->id();
+            $table->string('comentario',200)->nullable();
+            $table->boolean('aprobacion')->default('false');
             $table->integer("id_user");
             $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->integer("id_evaluacion");
