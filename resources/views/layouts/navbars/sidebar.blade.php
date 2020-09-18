@@ -47,7 +47,7 @@
                 </li>
             @endcanany 
 
-            @canany(['solicitudes.index', 'mis_solicitudes', 'solicitudes.create'])
+            @canany(['solicitudes.index', 'mis_solicitudes', 'solicitudes.create', 'evaluacion.create'])
             <li>
                 <a data-toggle="collapse" href="#solicitudes" aria-expanded="false">
                     <i class="tim-icons icon-email-85" ></i>
