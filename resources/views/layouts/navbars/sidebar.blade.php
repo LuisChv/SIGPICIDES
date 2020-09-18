@@ -61,13 +61,19 @@
                             <li @if ($pageSlug == 'solicitudes') class="active " @endif>
                                 <a href="{{ route('solicitud.index') }}">
                                     <i class="tim-icons icon-bullet-list-67"></i>
-                                    <p>{{ __('Consultar solicitudes') }}</p>
+                                    <p>{{ __('Solicitudes Nuevas') }}</p>
+                                </a>
+                            </li>
+                            <li @if ($pageSlug == 'solicitudes_a_evaluar') class="active " @endif>
+                                <a href="{{ route('solicitud.mis_solicitudes_comite')  }}">
+                                    <i class="tim-icons icon-notes"></i>
+                                    <p>{{ __('Solicitudes a Evaluar') }}</p>
                                 </a>
                             </li>
                             <li @if ($pageSlug == 'solicitudes_a_evaluar') class="active " @endif>
                                 <a href="{{ route('solicitud.mis_solicitudes_comite')  }}">
                                     <i class="tim-icons icon-check-2"></i>
-                                    <p>{{ __('Solicitudes a evaluar') }}</p>
+                                    <p>{{ __('Solicitudes Evaluadas') }}</p>
                                 </a>
                             </li>
                         @endcan

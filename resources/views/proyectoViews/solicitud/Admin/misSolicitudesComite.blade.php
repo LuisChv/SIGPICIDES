@@ -9,7 +9,7 @@
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-8 text-left">
-                        <h2 class="card-title"><b>Solicitudes sin Evaluar</b></h2>
+                        <h2 class="card-title"><b>Solicitudes Pendientes</b></h2>
                     </div>
                 </div>
             </div>
