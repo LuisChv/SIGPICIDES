@@ -407,6 +407,10 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::post('solicitud/{solicitud}', 'SolicitudController@show')->name('solicitud.show')
     ->middleware('has.permission:solicitudes.create');
+
+    /**********************Solicitud de proyecto Coordinador******************/
+
+    Route::get('solicitudes_evaluadas', 'SolicitudController@solicitudes_evaluadas')->name('solicitud.evaluadas');
     
     //proyecto-equipo
     Route::get('equipo', 'EquipoController@index')->name('equipo.index')

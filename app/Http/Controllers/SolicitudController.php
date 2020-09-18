@@ -306,6 +306,20 @@ class SolicitudController extends Controller
         return redirect()->route('solicitud.mis_solicitudes');
     }
 
+    public function solicitudes_evaluadas(){
+        
+        $solicitudes = DB::select(
+            "SELECT S.id, P.nombre, COUNT(E.id), E.etapa FROM proyecto P 
+            INNER JOIN solicitud S ON P.id = S.id_proy
+            LEFT JOIN evaluacion E ON S.id = E.id_solicitud
+            GROUP BY S.id, P.nombre, E.etapa"
+        );
+
+        return view('proyectoViews.solicitud.Coordinador.solicitudes_evaluadas', [
+            'solicitudes' => $solicitudes
+        ]);
+    }
+
     public function factibilidad($id){
         $proyecto = Proyecto::where('id', $id)->first();
         return view('proyectoViews.factibilidad.create', [

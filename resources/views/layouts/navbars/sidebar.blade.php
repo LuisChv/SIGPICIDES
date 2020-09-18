@@ -75,7 +75,7 @@
                         @endcan
                         @can('evaluacion.final')
                             <li @if ($pageSlug == 'solicitudes_evaluadas') class="active " @endif>
-                                <a href="{{ route('solicitud.mis_solicitudes_comite')  }}">
+                                <a href="{{ route('solicitud.evaluadas')  }}">
                                     <i class="tim-icons icon-check-2"></i>
                                     <p>{{ __('Solicitudes Evaluadas') }}</p>
                                 </a>
