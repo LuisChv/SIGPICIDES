@@ -1,6 +1,6 @@
 @extends('layouts.app',['pageSlug' => 'dashboard'])
 @section('title')
-Asignar recursos
+Vista previa
 @endsection
 @section('content')
 <div class="row">
@@ -111,9 +111,8 @@ Asignar recursos
                 <table class="table">
                     @foreach ($objetivos as $objetivo)
                     <tr>
-                        <td class="align-text-top"><i class="tim-icons icon-compass-05"></i></td>
                         <td>
-                            {{$objetivo->descripcion}}
+                            <i class="tim-icons icon-compass-05"></i> {{$objetivo->descripcion}}
                         </td>
                     </tr>
                     @endforeach
@@ -178,7 +177,7 @@ Asignar recursos
                         @foreach($recursosProy as $rec)
                         <tr>                     
                             <td>
-                                &nbsp;&nbsp;&nbsp;&nbsp;<i class="tim-icons icon-planet"></i>
+                                <i class="tim-icons icon-planet"></i>
                                 &nbsp;{{ $rec->nombre }}
                             </td> 
                             <td>

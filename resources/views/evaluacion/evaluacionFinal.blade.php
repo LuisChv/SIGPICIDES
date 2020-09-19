@@ -17,40 +17,20 @@ Evaluar Solicitud
         @foreach ($miembros_comite as $miembro) 
             @if ( $eva->id_user == $miembro->id_usuario) 
 
-    <div class="col-md-4">
-        <div class="card" id="coordinador">
-            <div class="card-header ">
-                <div class="row">
-                    <div class="col-sm-9 text-left">
-                        <h2 class="card-title"><b>{{ $miembro->name }}</b></h2>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center"><b>{{ $miembro->name }}</b></h2>
+                        @foreach ($estados as $estado) 
+                            @if ( $eva->respuesta == $estado->id )              
+                                <h4 class="text-center"><b>{{ $estado->estado }}</b></h4>
+                            @endif
+                        @endforeach
+                        <p class="text-justify"><b>Comentario: </b> {{ $eva->comentario }} </p>
+                        <br>
                     </div>
                 </div>
             </div>
-            
-            <div class="card-body">
-                <table class="table">
-                    <tr>
-                        <td class="align-content-xl-between"><i class="tim-icons icon-compass-05">Comentario</i></td>
-                        <td>
-                            <tr>              
-                                <td> {{ $eva->comentario }} </td>
-                            </tr>
-                        </td>
-                        <td class="align-content-xl-between"><i class="tim-icons icon-compass-05">Respuesta</i></td>
-                        <td>
-                            <tr> 
-                            @foreach ($estados as $estado) 
-                                @if ( $eva->respuesta == $estado->id )              
-                                <td> {{ $estado->estado }} </td>
-                                @endif
-                            @endforeach
-                            </tr>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
 
             @endif
         @endforeach

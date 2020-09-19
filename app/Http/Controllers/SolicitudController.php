@@ -288,12 +288,13 @@ class SolicitudController extends Controller
 
     public function mis_solicitudes(){
         $solicitudes = DB::select(
-            "SELECT S.id, P.nombre, S.id_proy, S.id_estado, S.enviada, EDS.estado FROM usuario_equipo_rol UER 
+            "SELECT S.id, P.nombre, S.id_proy, S.id_estado, S.enviada, EDS.estado, S.etapa FROM usuario_equipo_rol UER 
             JOIN equipo_de_investigacion EDI ON uer.id_equipo = EDI.id
             JOIN proyecto P ON EDI.id = P.id_equipo
             JOIN solicitud S ON S.id_proy = P.id
             JOIN estado_de_solicitud EDS ON EDS.id = S.id_estado
-            WHERE uer.id_usuario = ?", [Auth::user()->id]);
+            WHERE uer.id_usuario = ?
+            ORDER BY EDS.estado", [Auth::user()->id]);
         
         return view('proyectoViews.solicitud.Investigador.misSolicitudes', [
             'solicitudes'=>$solicitudes,
@@ -449,6 +450,44 @@ class SolicitudController extends Controller
         ]);
     }
 
+    /*------------------------------------------------
+                        SEGUNDA ETAPA
+    ------------------------------------------------*/
+
+    public function resumen($id){
+        $proyecto = Proyecto::findOrFail($id);
+        $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
+        $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
+        $subtipo = SubTipoDeInvestigacion::findOrFail($proyecto->id_subtipo);
+        $tipo = TipoDeInvestigacion::findOrFail($subtipo->id_tipo);
+        $objetivos = DB::select("SELECT * FROM objetivo WHERE id_proyecto = ?", [$id]);
+        $alcances = DB::select("SELECT * FROM alcance WHERE id_proyecto = ?", [$id]);
+        $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ?", [$id]);
+        $recursos=Recursos::all();
+        $tiposrec=TipoDeRecursos::all();
+        $recursosProy=DB::select("SELECT RP.id, RP.cantidad, R.nombre, R.id_tipo, RP.detalle FROM recursos_por_proy RP JOIN recurso R ON R.id = RP.id_recurso WHERE RP.id_proy = ?", [$id]);
+        $id_comite = $proyecto->id_comite;
+        $estados_soli = DB::select("SELECT * FROM estado_de_solicitud WHERE id = ? OR id = ? OR id = ?", [4,5,8]);
+        $miembros_comite = DB::select("SELECT CU.id_usuario, U.name FROM comite_usuario CU JOIN users U ON CU.id_usuario = U.id WHERE id_comite = ?", [$id_comite]);
+        $evaluaciones = DB::select("SELECT * FROM evaluacion WHERE id_solicitud = ? ", [$id]);
+
+        return view('proyectoViews.solicitud.Investigador.resumen', [
+            'objetivos'=> $objetivos,
+            'alcances'=> $alcances,
+            'indicadores'=> $indicadores,
+            'proyecto' => $proyecto,
+            'equipo' => $equipo,
+            't' => $tipo,
+            'st' => $subtipo,
+            'tiposrec'=>$tiposrec,
+            'recursos'=>$recursos,
+            'recursosProy'=>$recursosProy,
+            'solicitud'=>$solicitud,
+            'evaluaciones'=>$evaluaciones,
+            'estados'=>$estados_soli,
+            'miembros_comite'=>$miembros_comite,
+            ]);
+    }
 
     public function factibilidad($id){
         $proyecto = Proyecto::where('id', $id)->first();
