@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Proyecto;
+use App\Solicitud;
 use App\ComiteUsuario;
 use DB;
 
@@ -17,7 +18,7 @@ class ComiteController extends Controller
     public function index($id)
     {
         $proyecto = Proyecto::findOrFail($id);
-
+        $solicitud = Solicitud::where('id_proy', $id)->first();
         $id_comite = $proyecto->id_comite;
         
         //Todos los usuarios
@@ -52,12 +53,15 @@ class ComiteController extends Controller
             JOIN comite_usuario CU ON U.id = CU.id_usuario
             JOIN role_user RU ON U.id = RU.user_id 
             JOIN roles R ON R.id = RU.role_id
+            
             WHERE CU.id_comite = ?", [$id_comite]);
+            
          
          //Roles
          $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [false]);
 
          $cantidad_miembros = DB::table('comite_usuario')->where('id_comite',[$id_comite])->count();
+         $evaluaciones = DB::table('evaluacion')->where('id_solicitud',[$solicitud->id]);
 
          //Retornar la vista
          return view ('evaluacion.comite', [
@@ -66,6 +70,8 @@ class ComiteController extends Controller
               'roles'=>$roles,
               'cantidad_miembros'=>$cantidad_miembros,
               'proyecto'=>$proyecto,
+              'solicitud'=>$solicitud,
+              'evaluaciones'=>$evaluaciones,
          ]);
     }
 
