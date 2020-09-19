@@ -36,14 +36,32 @@ class SolicitudController extends Controller
             FROM solicitud s 
             JOIN proyecto p 
             ON s.id = p.id WHERE s.id_estado = ?", [3]);
-        /*
-        $solicitudes = DB::select(
-            "SELECT * 
-            FROM solicitud s 
-            JOIN estado_de_solicitud es
-            ON s.idS = es.idS
-            WHERE estadoES=1"); //asumiendo que el estado 1 seria el de pendientes de aprobar */
-        return view('proyectoViews.solicitud.Admin.index', ['solicitudes'=>$solicitudes]);
+        $solicitudes_A= DB::select("SELECT * 
+        FROM solicitud s 
+        JOIN proyecto p 
+        ON s.id = p.id WHERE s.id_estado = ?", [4]);
+        
+ 
+
+        $solicitudes_R= DB::select("SELECT * 
+        FROM solicitud s 
+        JOIN proyecto p 
+        ON s.id = p.id WHERE s.id_estado = ?", [8]);
+        
+
+        $solicitudes_AP= DB::select("SELECT * 
+        FROM solicitud s 
+        JOIN proyecto p 
+        ON s.id = p.id WHERE s.id_estado = ?", [5]);
+        
+
+        return view('proyectoViews.solicitud.Admin.index', [
+            'solicitudes'=>$solicitudes,
+            'solicitudes_A'=>$solicitudes_A,
+            'solicitudes_AP'=>$solicitudes_AP,
+            'solicitudes_R'=>$solicitudes_R,
+            
+            ]);
     }
 
     /**
@@ -219,8 +237,19 @@ class SolicitudController extends Controller
             JOIN solicitud S ON S.id_proy = P.id
             WHERE CU.id_usuario = ?", [Auth::user()->id]);
         
+        $evaluadas = DB::select("SELECT * FROM evaluacion WHERE id_user = ?", [Auth::user()->id]);
+
+        foreach ($evaluadas as $eva) { 
+            foreach($solicitudes as $soli){ 
+                if($soli->id == $eva->id_solicitud){
+                    unset($solicitudes[$eva->id_solicitud - 1]);
+                }
+            }
+        }
+        
         return view('proyectoViews.solicitud.Admin.misSolicitudesComite', [
             'solicitudes'=>$solicitudes,
+            'evaluadas'=>$evaluadas,
         ]);
     }
 
@@ -305,6 +334,50 @@ class SolicitudController extends Controller
 
         return redirect()->route('solicitud.mis_solicitudes');
     }
+
+    public function solicitudes_evaluadas(){
+        
+        $solicitudes = DB::select(
+            "SELECT S.id, P.nombre, COUNT(E.id), E.etapa FROM proyecto P 
+            INNER JOIN solicitud S ON P.id = S.id_proy
+            LEFT JOIN evaluacion E ON S.id = E.id_solicitud
+            GROUP BY S.id, P.nombre, E.etapa"
+        );
+
+        return view('proyectoViews.solicitud.Coordinador.solicitudes_evaluadas', [
+            'solicitudes' => $solicitudes
+        ]);
+    }
+
+    public function solicitudes_revisadas(){
+        
+        $solicitudes_A= DB::select("SELECT * 
+            FROM solicitud s 
+            JOIN proyecto p 
+            ON s.id = p.id WHERE s.id_estado = ?", [4]);
+            
+     
+
+        $solicitudes_R= DB::select("SELECT * 
+            FROM solicitud s 
+            JOIN proyecto p 
+            ON s.id = p.id WHERE s.id_estado = ?", [8]);
+            
+
+        $solicitudes_AP= DB::select("SELECT * 
+            FROM solicitud s 
+            JOIN proyecto p 
+            ON s.id = p.id WHERE s.id_estado = ?", [5]);
+            
+       
+
+        return view('proyectoViews.solicitud.Admin.solicitudes_revisadas', [
+            'solicitudes_A' => $solicitudes_A,
+            'solicitudes_AP' => $solicitudes_AP,
+            'solicitudes_R' => $solicitudes_R,
+        ]);
+    }
+
 
     public function factibilidad($id){
         $proyecto = Proyecto::where('id', $id)->first();

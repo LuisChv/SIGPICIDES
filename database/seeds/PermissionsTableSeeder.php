@@ -1508,6 +1508,13 @@ class PermissionsTableSeeder extends Seeder
             'description'   => '',
             'id_tabla' => 40,
         ]);
+
+        Permission::create([
+            'name'          => 'Evaluación final',
+            'slug'          => 'evaluacion.final',
+            'description'   => '',
+            'id_tabla' => 40,
+        ]);
          
     }
 }

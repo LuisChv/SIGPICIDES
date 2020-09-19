@@ -1,6 +1,6 @@
-@extends('layouts.app',['pageSlug' => 'dashboard'])
+@extends('layouts.app',['pageSlug' => 'mis_solicitudes'])
 @section('title')
-	Consultar solicitudes 
+	Mis solicitudes 
 @endsection
 @section('content')
 <div class="row">

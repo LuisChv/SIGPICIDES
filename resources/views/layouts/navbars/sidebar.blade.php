@@ -47,7 +47,7 @@
                 </li>
             @endcanany 
 
-            @canany(['solicitudes.index', 'mis_solicitudes', 'solicitudes.create'])
+            @canany(['solicitudes.index', 'mis_solicitudes', 'solicitudes.create', 'evaluacion.create'])
             <li>
                 <a data-toggle="collapse" href="#solicitudes" aria-expanded="false">
                     <i class="tim-icons icon-email-85" ></i>
@@ -57,17 +57,27 @@
 
                 <div class="collapse" id="solicitudes">
                     <ul class="nav pl-4">
-                        @can('solicitudes.index')
-                            <li @if ($pageSlug == 'solicitudes') class="active " @endif>
+                        @can('comite_usuario.create')
+                            <li @if ($pageSlug == 'solicitudes_nuevas') class="active " @endif>
                                 <a href="{{ route('solicitud.index') }}">
                                     <i class="tim-icons icon-bullet-list-67"></i>
-                                    <p>{{ __('Consultar solicitudes') }}</p>
+                                    <p>{{ __('Solicitudes por Estado') }}</p>
                                 </a>
                             </li>
+                        @endcan
+                        @can('evaluacion.create')
                             <li @if ($pageSlug == 'solicitudes_a_evaluar') class="active " @endif>
                                 <a href="{{ route('solicitud.mis_solicitudes_comite')  }}">
+                                    <i class="tim-icons icon-notes"></i>
+                                    <p>{{ __('Solicitudes a Evaluar') }}</p>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('evaluacion.final')
+                            <li @if ($pageSlug == 'solicitudes_evaluadas') class="active " @endif>
+                                <a href="{{ route('solicitud.evaluadas')  }}">
                                     <i class="tim-icons icon-check-2"></i>
-                                    <p>{{ __('Solicitudes a evaluar') }}</p>
+                                    <p>{{ __('Solicitudes Evaluadas') }}</p>
                                 </a>
                             </li>
                         @endcan

@@ -16,7 +16,7 @@ class CreateEstadoDeSoliProysTable extends Migration
         Schema::create('estado_de_solicitud', function (Blueprint $table) {
             $table->id();
             $table->boolean('modificable')->default(true);
-            $table->string('estado',25);
+            $table->string('estado',64);
             $table->timestamps();
         });
     }

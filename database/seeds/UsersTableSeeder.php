@@ -384,5 +384,105 @@ class UsersTableSeeder extends Seeder
             'user_id' => 11,
         ]);
 
+
+        //Experto 1
+        $user=User::create([
+            'name' => 'Experto 1',
+            'email' => 'experto1@gmail.com',
+            'password' => Hash::make('secret'),
+            'fecha_nac' => date("1998-08-22"),
+            'institucion' => 'Universidad de El Salvador',
+            'descripcion' => 'Soy el investigador 8',
+            'sexo' => true,
+            'dark' => false,
+        ]);
+
+        $user->email_verified_at = now();
+        $user->save();
+
+        DB::table('role_user')->insert([
+            'role_id' => 8,
+            'user_id' => 12,
+        ]);
+
+        $objetos = DB::select('SELECT * FROM rol_permiso WHERE role_id = 8');
+
+        foreach ($objetos as $objeto) {
+            DB::table('permission_user')->insert([
+                'permission_id' => $objeto->permission_id,
+                'user_id' => 12,
+            ]);
+        }
+        DB::table('permission_user')->insert([
+            'permission_id' => (198),
+            'user_id' => 12,
+        ]);
+
+        //Experto 2
+        $user=User::create([
+            'name' => 'Experto 2',
+            'email' => 'experto2@gmail.com',
+            'password' => Hash::make('secret'),
+            'fecha_nac' => date("1998-08-22"),
+            'institucion' => 'Universidad de El Salvador',
+            'descripcion' => 'Soy el investigador 8',
+            'sexo' => true,
+            'dark' => false,
+        ]);
+
+        $user->email_verified_at = now();
+        $user->save();
+
+        DB::table('role_user')->insert([
+            'role_id' => 8,
+            'user_id' => 13,
+        ]);
+
+        $objetos = DB::select('SELECT * FROM rol_permiso WHERE role_id = 8');
+
+        foreach ($objetos as $objeto) {
+            DB::table('permission_user')->insert([
+                'permission_id' => $objeto->permission_id,
+                'user_id' => 13,
+            ]);
+        }
+        DB::table('permission_user')->insert([
+            'permission_id' => (198),
+            'user_id' => 13,
+        ]);
+
+        //Experto 2
+        $user=User::create([
+            'name' => 'Experto 3',
+            'email' => 'experto3@gmail.com',
+            'password' => Hash::make('secret'),
+            'fecha_nac' => date("1998-08-22"),
+            'institucion' => 'Universidad de El Salvador',
+            'descripcion' => 'Soy el investigador 8',
+            'sexo' => true,
+            'dark' => false,
+        ]);
+
+        $user->email_verified_at = now();
+        $user->save();
+
+        DB::table('role_user')->insert([
+            'role_id' => 8,
+            'user_id' => 14,
+        ]);
+
+        $objetos = DB::select('SELECT * FROM rol_permiso WHERE role_id = 8');
+
+        foreach ($objetos as $objeto) {
+            DB::table('permission_user')->insert([
+                'permission_id' => $objeto->permission_id,
+                'user_id' => 14,
+            ]);
+        }
+        DB::table('permission_user')->insert([
+            'permission_id' => (198),
+            'user_id' => 14,
+        ]);
+
     }
 }

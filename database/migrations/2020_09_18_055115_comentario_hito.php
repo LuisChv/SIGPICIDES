@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SoliUserEva extends Migration
+class ComentarioHito extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class SoliUserEva extends Migration
      */
     public function up()
     {
-        Schema::create('soli_user_eva', function (Blueprint $table) {
+        Schema::create('comentario_hito', function (Blueprint $table) {
             $table->id();
+            $table->string('comentario');
             $table->integer("id_user");
             $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer("id_evaluacion");
-            $table->foreign('id_evaluacion')->references('id')->on('evaluacion')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer("id_solicitud");
-            $table->foreign('id_solicitud')->references('id')->on('solicitud')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer("id_hito");
+            $table->foreign('id_hito')->references('id')->on('hito')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class SoliUserEva extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('soli_user_eva');
+        Schema::dropIfExists('comentario_hito');
     }
 }

@@ -407,6 +407,12 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::post('solicitud/{solicitud}', 'SolicitudController@show')->name('solicitud.show')
     ->middleware('has.permission:solicitudes.create');
+
+    /**********************Solicitud de proyecto Coordinador******************/
+
+    Route::get('solicitudes_evaluadas', 'SolicitudController@solicitudes_evaluadas')->name('solicitud.evaluadas');
+    
+    Route::get('solicitudes_revisadas', 'SolicitudController@solicitudes_revisadas')->name('solicitud.revisadas');
     
     //proyecto-equipo
     Route::get('equipo', 'EquipoController@index')->name('equipo.index')
@@ -459,6 +465,18 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::get('proyecto/tareas/{id_proyecto}', 'TaskController@index')->name('proyecto_tareas.index');
 
+    /***********************planificacion de tareas gantt****************************/
+    Route::get('evaluacion/{id}', 'EvaluacionSolicitudController@index')->name('evaluacion.index')
+    ->middleware('has.permission:evaluacion.index');
+
+    Route::post('evaluacion/store/{id}', 'EvaluacionSolicitudController@store')->name('evaluacion.store')
+    ->middleware('has.permission:evaluacion.create');
+    
+    Route::get('evaluacion/final/{id}', 'EvaluacionSolicitudController@evaluacion_final')->name('evaluacion.final')
+    ->middleware('has.permission:evaluacion.final');
+
+    Route::post('evaluacion/responder/{id}', 'EvaluacionSolicitudController@respuesta_evaluacion')->name('solicitud.responder')
+    ->middleware('has.permission:solicitudes.index');
 });
 
 

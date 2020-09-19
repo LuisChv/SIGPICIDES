@@ -15,10 +15,14 @@ class CreateEvaluacionsTable extends Migration
     {
         Schema::create('evaluacion', function (Blueprint $table) {
             $table->id();
-            $table->integer('cant_eva')->nullable();
+            $table->integer('etapa');
             $table->string('comentario',200)->nullable();
-            $table->boolean('aprobacion')->default('false');
+            $table->integer('respuesta')->nullable();
             $table->boolean('visible')->default('true');
+            $table->integer("id_user");
+            $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer("id_solicitud");
+            $table->foreign('id_solicitud')->references('id')->on('solicitud')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
