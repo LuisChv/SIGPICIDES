@@ -129,6 +129,10 @@ class EvaluacionSolicitudController extends Controller
 
         $solicitud->id_estado = $respuesta;
 
+        if($respuesta == 5){
+            $solicitud->etapa = 2;
+        }
+
         $solicitud->save();
 
         return redirect()->route('solicitud.index');

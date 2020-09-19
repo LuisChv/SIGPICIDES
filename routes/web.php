@@ -357,6 +357,8 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::post('solicitud/{id}/enviar', 'SolicitudController@enviar')->name('solicitud.enviar');
 
+    Route::get('solicitud/{solicitud}/resumen', 'SolicitudController@resumen')->name('solicitud.resumen');
+
 
     /**********************Recursos por solicitud de proyecto Investigador******************/
 
