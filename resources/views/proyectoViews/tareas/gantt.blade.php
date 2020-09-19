@@ -65,8 +65,15 @@
         var task = gantt.getTask(id);        
         task.idProyecto ="{{$idProyecto}}";
         task.idUser="{{auth()->user()->id}}";
+        
         return true;
     });
+
+    gantt.attachEvent("onLightbox", function (task_id){
+        //document.getElementsByName("indicador")[0].checked= true;
+        console.log(task_id);
+    });
+
     
     gantt.config.lightbox.sections=[
         {name:"description", height:70, map_to:"text", type:"textarea", focus:true},
@@ -84,7 +91,7 @@
         {name: "indicador", type:"checkbox", height:150, map_to: "indicadores", options:[                
             @php
                     for ($i = 0; $i < sizeof($indicadores); $i++)
-                    echo '{key:"op'. $i .'", label:"' . $indicadores[$i]->detalle . '&nbsp;&nbsp; "},'
+                    echo '{key:'. $indicadores[$i]->id .', label:"' . $indicadores[$i]->detalle . '&nbsp;&nbsp; "},'
             @endphp
         ]},
         //Para agrega a los miembros del equipo
@@ -103,6 +110,8 @@
     var dp = new gantt.dataProcessor("/api");
     dp.init(gantt);
     dp.setTransactionMode("REST");
+
+    
     
     /*https://docs.dhtmlx.com/gantt/snippet/1c3e1c28
     Para que le asigne color a la tarea en específico
