@@ -176,12 +176,12 @@
     <tr>
         <td width="50%">
             <a class="btn btn-primary" href="{{ route('proyecto.oai', [$proyecto->id]) }}">
-                Objetivos, alcances e indicadores.
+                Anterior
             </a>
         </td>
         <td width="50%" align="right">
             <a class="btn btn-primary" href="{{ route('solicitud.pre', [$proyecto->id])}}">
-                Enviar solicitud
+                SiguienteS
             </a>
         </td>
     </tr>

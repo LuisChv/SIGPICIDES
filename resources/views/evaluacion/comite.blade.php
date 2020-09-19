@@ -9,7 +9,7 @@
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-8 text-left">
-                        <h2 class="card-title"><b> Comite de Evaluacion </b></h2>
+                        <h2 class="card-title"><b> Comite de evaluacion </b></h2>
                     </div> 
                 </div>
             </div>
@@ -18,7 +18,7 @@
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Rol de Comite</th>
+                            <th>Rol en el comité</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -58,13 +58,11 @@
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-9 text-left">
-                        <h2 class="card-title"><b>Personal Experto Disponible</b></h2>
+                        <h2 class="card-title"><b>Personal experto disponible</b></h2>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 right">
-                        <a role="button" class="btn btn-primary" href="{{ route('users.create') }}">
-                            Registrar Nuevo Experto
+                    <div class="col-md-3 text-right">
+                        <a role="button" class="btn btn-sm btn-primary" href="{{ route('users.create') }}">
+                            +
                         </a>
                     </div>
                 </div>
@@ -75,7 +73,7 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th class="text-center" colspan = "3">Agregar</th>
+                                <th class="text-center">Agregar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,11 +81,11 @@
                             <tr>                     
                                 <td> {{ $use->name }} </td>
                                 @if ( $cantidad_miembros < 3 )
-                                <td width='5%'>
+                                <td width='5%' class="text-center">
                                     <button type="button" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#create" onClick="agregarMiembro({{ $use->id }})"><i class="tim-icons icon-simple-add"></i></button>
                                 </td>
                                 @else 
-                                <td width='5%'>
+                                <td width='5%' class="text-center">
                                     <button type="button" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#nuevo"><i class="tim-icons icon-simple-add"></i></button>
                                 </td>
                                 @endif

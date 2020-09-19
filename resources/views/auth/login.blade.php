@@ -1,5 +1,9 @@
 @extends('layouts.app', ['class' => 'login-page', 'page' => __('Login Page')])
 
+@section('title')
+    Inicio de sesión
+@endsection
+
 @section('content')
 
     <div class="col-lg-4 col-md-6 ml-auto mr-auto">

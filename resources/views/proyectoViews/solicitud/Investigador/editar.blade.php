@@ -103,10 +103,45 @@ Nueva investigación
                             @include('alerts.feedback', ['field' => 'resultados'])
                         </div> 
 
-                        <div class="col-md-6 text-right">
-                            <br>
-                            <button class="btn btn-primary" type="submit">Siguiente</button>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12 input-group{{ $errors->has('duracion') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="tim-icons icon-calendar-60"></i>
+                                        </div>
+                                    </div>
+                                <input value="{{$proyecto->duracion}}" type="number" required type="text" name="duracion" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Duración en semanas') }}">
+                                    @include('alerts.feedback', ['field' => 'duracion'])
+                                </div>
+
+                                <div class="col-md-12 input-group{{ $errors->has('miembros') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="tim-icons icon-single-02"></i>
+                                        </div>
+                                    </div>
+                                    <input value="{{$equipo->miembros}}" type="number" required type="text" name="miembros" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Cantidad de miembros') }}">
+                                    @include('alerts.feedback', ['field' => 'miembros'])
+                                </div>
+                            </div>
                         </div>
+                    </div>  
+                    <div class="row">
+                        <div class="col-md-6 input-group{{ $errors->has('costo') ? ' has-danger' : '' }}">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="tim-icons icon-coins"></i>
+                                </div>
+                            </div>
+                            <input value="{{$proyecto->costo}}" type="number" step="0.01" required type="text" name="costo" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Costo estimado') }}">
+                            @include('alerts.feedback', ['field' => 'costo'])
+                        </div>
+                        <div class="col-md-6" align="right">
+                            <button class="btn  btn-primary" type="submit">Siguiente</button>
+                        </div>
+                    </div>     
+                    <br>
                     </div>                            
                 </div>
             </form>

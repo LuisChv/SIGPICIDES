@@ -39,7 +39,7 @@ class SolicitudController extends Controller
         $solicitudes_A= DB::select("SELECT * 
         FROM solicitud s 
         JOIN proyecto p 
-        ON s.id = p.id WHERE s.id_estado = ?", [4]);
+        ON s.id = p.id WHERE s.id_estado = ?", [5]);
         
  
 
@@ -52,7 +52,7 @@ class SolicitudController extends Controller
         $solicitudes_AP= DB::select("SELECT * 
         FROM solicitud s 
         JOIN proyecto p 
-        ON s.id = p.id WHERE s.id_estado = ?", [5]);
+        ON s.id = p.id WHERE s.id_estado = ?", [4]);
         
 
         return view('proyectoViews.solicitud.Admin.index', [
@@ -98,6 +98,9 @@ class SolicitudController extends Controller
             'tema'=> 'required',
             'justificacion'=> 'required',
             'resultados'=> 'required',
+            'duracion'=> ['required', 'numeric'],
+            'miembros'=> ['required', 'numeric'],
+            'costo'=> ['required', 'numeric']
         ],
         [
             'nombre.required' => "El nombre es obligatorio.",
@@ -107,9 +110,16 @@ class SolicitudController extends Controller
             'tema.required'=>"El tema es obligatorio",
             'justificacion.required' => "Justifique su proyecto",
             'resultados.required' => "Defina los resultados esperados.",
+            'duracion.required' => "Estime la duración del proyecto.",
+            'duracion.numeric' => "Debe ingresar el numero de semanas.",
+            'miembros.required' => "Ingrese la cantidad de miembros.",
+            'miembros.numeric' => "Debe ingresar el numero de miembros.",
+            'costo.required' => "Estime el costo del proyecto.",
+            'costo.numeric' => "USD ($)",
         ]);
         //Equipo_investigacion
         $equipo= new EquipoDeInvestigacion;
+        $equipo->miembros = request('miembros');
         $equipo->save();
 
         //Usuario_equipo_rol con el investigador como lider 
@@ -128,6 +138,8 @@ class SolicitudController extends Controller
         $proyecto->tema = request('tema');
         $proyecto->justificacion = request('justificacion');
         $proyecto->resultados = request('resultados');
+        $proyecto->duracion = request('duracion');
+        $proyecto->costo = request('costo');
         //Se crea el nuevo proyecto
         $proyecto->save();
 
@@ -190,7 +202,66 @@ class SolicitudController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return redirect()->route('proyecto.oai', $id);
+        request()->validate([
+            'nombre'=> 'required',
+            'tipoRec'=> 'required',
+            'subtipo'=> 'required',
+            'descripcion'=> 'required',     
+            'tema'=> 'required',
+            'justificacion'=> 'required',
+            'resultados'=> 'required',
+            'duracion'=> ['required', 'numeric'],
+            'miembros'=> ['required', 'numeric'],
+            'costo'=> ['required', 'numeric']
+        ],
+        [
+            'nombre.required' => "El nombre es obligatorio.",
+            'tipoRec.required'=>"Elija el tipo de investigación",
+            'subtipo.required' => "Elija el sutipo de investigación.",
+            'descripcion.required' => "La descripcion es obligatoria.",
+            'tema.required'=>"El tema es obligatorio",
+            'justificacion.required' => "Justifique su proyecto",
+            'resultados.required' => "Defina los resultados esperados.",
+            'duracion.required' => "Estime la duración del proyecto.",
+            'duracion.numeric' => "Debe ingresar el numero de semanas.",
+            'miembros.required' => "Ingrese la cantidad de miembros.",
+            'miembros.numeric' => "Debe ingresar el numero de miembros.",
+            'costo.required' => "Estime el costo del proyecto.",
+            'costo.numeric' => "USD ($)",
+        ]);
+
+        //Se asignan las variables al nuevo proyecto
+        $proyecto = Proyecto::findOrFail($id);
+        $proyecto->id_subtipo = request('subtipo');
+        $proyecto->nombre = request('nombre');
+        $proyecto->descripcion = request('descripcion');
+        $proyecto->tema = request('tema');
+        $proyecto->justificacion = request('justificacion');
+        $proyecto->resultados = request('resultados');
+        $proyecto->duracion = request('duracion');
+        $proyecto->costo = request('costo');
+        //Se crea el nuevo proyecto
+        $proyecto->save();
+
+        //Equipo_investigacion
+        $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
+        $equipo->miembros = request('miembros');
+        $equipo->save();
+
+        //Se crea la solicitud del proyecto
+        $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
+        $solicitud->id_proy=$proyecto->id;
+        $solicitud->id_estado = 1;
+        $solicitud->noti_inv= false;
+        $solicitud->noti_coo= false;
+        $solicitud->id_estado = 1;
+        //$solicitud->modificable=false;
+        //Se crea el nuevo detalle recurso
+        $solicitud->save();
+        //TODO redireccionamiento provisional
+        
+
+        return redirect()->route('proyecto.oai', $proyecto->id);
     }
 
     /**

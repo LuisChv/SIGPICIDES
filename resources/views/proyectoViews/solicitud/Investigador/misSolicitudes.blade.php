@@ -40,7 +40,7 @@
                                     <a title="Equipo" type="button" class="btn btn-primary btn-sm btn-icon btn-round" href="{{ route('miembros.index',[$soli->id_proy])}}">
                                         <i class="tim-icons icon-single-02"></i>
                                     </a>
-                                    <a title="Planificación" type="button" class="btn btn-primary btn-sm btn-icon btn-round" href="{{ route('proyecto_recursos.create', [$soli->id_proy])}}">
+                                    <a title="Planificación" type="button" class="btn btn-primary btn-sm btn-icon btn-round" href="{{ route('proyecto_tareas.index', [$soli->id_proy])}}">
                                         <i class="tim-icons icon-map-big"></i>
                                     </a>
                                     @csrf

@@ -11,56 +11,91 @@ Asignar recursos
                 <h3>
                     Información general
                 </h3>
-                <table class="table">
-                    <tr>
-                        <th>
-                            Tipo:
-                        </th>
-                        <td>
-                            {{$t->nombre}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Subtipo:
-                        </th>
-                        <td>
-                            {{$st->nombre}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Tema:
-                        </th>
-                        <td>
-                            {{$proyecto->tema}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Nombre:
-                        </th>
-                        <td>
-                            {{$proyecto->nombre}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Descripción:
-                        </th>
-                        <td>
-                            {{$proyecto->descripcion}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Justificación:
-                        </th>
-                        <td>
-                            {{$proyecto->justificacion}}
-                        </td>
-                    </tr>
-                </table>
+                <div class="row">
+                    <div class="col-md-8">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Tipo:
+                                </th>
+                                <td colspan="5">
+                                    {{$t->nombre}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Subtipo:
+                                </th>
+                                <td colspan="5">
+                                    {{$st->nombre}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Tema:
+                                </th>
+                                <td colspan="5">
+                                    {{$proyecto->tema}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Nombre:
+                                </th>
+                                <td colspan="5">
+                                    {{$proyecto->nombre}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Descripción:
+                                </th>
+                                <td colspan="5">
+                                    {{$proyecto->descripcion}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Justificación:
+                                </th>
+                                <td colspan="5">
+                                    {{$proyecto->justificacion}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-4">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Cantidad de miembros:
+                                </th>
+                                <td class="text-right">
+                                    {{$equipo->miembros}}
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Duración:
+                                </th>
+                                <td class="text-right">
+                                    {{$proyecto->duracion}}
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Costo:
+                                </th>
+                                <td class="text-right">
+                                    $ {{$proyecto->costo}}
+                                </td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
                 <br>
             </div>
         </div>
