@@ -39,7 +39,7 @@ class SolicitudController extends Controller
         $solicitudes_A= DB::select("SELECT * 
         FROM solicitud s 
         JOIN proyecto p 
-        ON s.id = p.id WHERE s.id_estado = ?", [4]);
+        ON s.id = p.id WHERE s.id_estado = ?", [5]);
         
  
 
@@ -52,7 +52,7 @@ class SolicitudController extends Controller
         $solicitudes_AP= DB::select("SELECT * 
         FROM solicitud s 
         JOIN proyecto p 
-        ON s.id = p.id WHERE s.id_estado = ?", [5]);
+        ON s.id = p.id WHERE s.id_estado = ?", [4]);
         
 
         return view('proyectoViews.solicitud.Admin.index', [
