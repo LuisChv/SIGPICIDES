@@ -16,6 +16,7 @@ class CreateSolicitudsTable extends Migration
         Schema::create('solicitud', function (Blueprint $table) {
             $table->id();
             $table->integer('id_proy');
+            $table->integer('etapa')->default(1);
             $table->boolean('enviada')->default(false);
             $table->boolean('noti_inv');
             $table->boolean('modificable')->default(true);
