@@ -153,7 +153,7 @@ class ComiteController extends Controller
      */
     public function destroy($id_usuario, $id_proyecto)
     {
-        $proyecto = Proyecto::findOrFail($id);
+        $proyecto = Proyecto::findOrFail($id_proyecto);
 
         $id_comite = $proyecto->id_comite;
 

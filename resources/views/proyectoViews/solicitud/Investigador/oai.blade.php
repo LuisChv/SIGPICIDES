@@ -312,13 +312,13 @@
 <table class="col-md-12">
     <tr>
         <td width="50%">
-            <a class="btn btn-primary" href="">
-                General
+            <a class="btn btn-primary" href="{{ route('solicitud.edit', [$id])}}">
+                Anterior
             </a>
         </td>
         <td width="50%" align="right">
             <a class="btn btn-primary" href="{{ route('proyecto_recursos.create', [$id])}}">
-                Recursos
+                Siguiente
             </a>
         </td>
     </tr>
