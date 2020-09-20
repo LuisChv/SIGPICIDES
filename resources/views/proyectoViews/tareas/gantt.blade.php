@@ -39,6 +39,22 @@
 <body>
 <input type="hidden" name="idProyecto" value="{{$idProyecto}}">
     <div id="gantt_here" style='width:100%; height:510px;'></div>
+    <br>
+        <table width="100%">
+            <tr>
+                <td width="50%">
+                    <a class="btn btn-primary" href="{{ route('miembros.index', [$idProyecto]) }}">
+                        Anterior
+                    </a>
+                </td>
+                <td width="50%" align="right">
+                    <a class="btn btn-primary" href="{{ route('solicitud.pre2', [$idProyecto]) }}">
+                        Siguiente
+                    </a>
+                </td>
+            </tr>
+        </table>
+
 <script type="text/javascript">
     //Formato de fecha para el gantt
     gantt.config.date_format = "%Y/%m/%d %H:%i:%s";

@@ -5,33 +5,33 @@ Factibilidad
 @section('content')
 <div class="row">
     <div class="col-12">
-        <form method="POST" action="{{route('factibilidad.store')}}">
+        <form method="POST" action="{{route('factibilidad.update')}}">
             <div class="card">
                 <div class="card-header ">
                     <h2 class="card-title"><b>Factibilidad</b></h2>
                 </div>
                 <div class="card-body">
-                    
+                    @method('PUT')
                     @csrf 
                     <div class="row">
                         <div class="col-md-6">
-                            <textarea class="form-control border border-light" rows="6" name="economica" placeholder="Factibilidad económica"></textarea>
+                            <textarea class="form-control border border-light" rows="6" name="economica" placeholder="Factibilidad económica">{{$factibilidad->economia}}</textarea>
                         </div>
                         <div class="col-md-6">
-                            <textarea class="form-control border border-light" rows="6" name="financiera" placeholder="Factibilidad financiera"></textarea>
-                        </div>
-                    </div><br>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <textarea class="form-control border border-light" rows="6" name="operativa" placeholder="Factibilidad operativa"></textarea>
-                        </div>
-                        <div class="col-md-6">
-                            <textarea class="form-control border border-light" rows="6" name="tecnica" placeholder="Factibilidad técnica"></textarea>
+                            <textarea class="form-control border border-light" rows="6" name="financiera" placeholder="Factibilidad financiera">{{$factibilidad->financiera}}</textarea>
                         </div>
                     </div><br>
                     <div class="row">
                         <div class="col-md-6">
-                            <textarea class="form-control border border-light" rows="6" name="extra" placeholder="Factibilidad extra"></textarea>
+                            <textarea class="form-control border border-light" rows="6" name="operativa" placeholder="Factibilidad operativa">{{$factibilidad->operativa}}</textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea class="form-control border border-light" rows="6" name="tecnica" placeholder="Factibilidad técnica">{{$factibilidad->tecnica}}</textarea>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <textarea class="form-control border border-light" rows="6" name="extra" placeholder="Factibilidad extra">{{$factibilidad->fac_extra}}</textarea>
                         </div>
                     </div>
                     <br>

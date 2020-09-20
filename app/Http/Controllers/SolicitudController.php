@@ -19,6 +19,7 @@ use App\TipoDeRecursos;
 use App\RolUsuario;
 use App\ComiteDeEvaluacion;
 use App\ComiteUsuario;
+use App\Factibilidad;
 
 class SolicitudController extends Controller
 {
@@ -39,7 +40,7 @@ class SolicitudController extends Controller
         $solicitudes_A= DB::select("SELECT * 
         FROM solicitud s 
         JOIN proyecto p 
-        ON s.id = p.id WHERE s.id_estado = ?", [5]);
+        ON s.id = p.id WHERE s.id_estado = ?", [4]);
         
  
 
@@ -52,7 +53,7 @@ class SolicitudController extends Controller
         $solicitudes_AP= DB::select("SELECT * 
         FROM solicitud s 
         JOIN proyecto p 
-        ON s.id = p.id WHERE s.id_estado = ?", [4]);
+        ON s.id = p.id WHERE s.id_estado = ?", [5]);
         
 
         return view('proyectoViews.solicitud.Admin.index', [
@@ -490,9 +491,89 @@ class SolicitudController extends Controller
     }
 
     public function factibilidad($id){
-        $proyecto = Proyecto::where('id', $id)->first();
-        return view('proyectoViews.factibilidad.create', [
+        $factibilidad = Factibilidad::where('id_proy', $id)->count();
+        if($factibilidad == 0){
+            return view('proyectoViews.factibilidad.create', [
+                'id' => $id,
+            ]);
+        } else{
+            return redirect()->route('factibilidad.edit', request('id'));
+        }
+        
+    }
+
+    public function factibilidad_store(){
+        request()->validate([
+            'id'=> 'required'
+        ],
+        [
+            'id.required' => "El proyecto es obligatorio"
+        ]);
+
+        $factibilidad = new Factibilidad();
+        $factibilidad->id_proy = request('id');
+        $factibilidad->tecnica = request('tecnica');
+        $factibilidad->economia = request('economica');
+        $factibilidad->financiera = request('financiera');
+        $factibilidad->operativa = request('operativa');
+        $factibilidad->fac_extra = request('extra');
+        $factibilidad->save();
+
+        return redirect()->route('miembros.index', request('id'));
+    }
+
+    public function factibilidad_edit($id){
+        $factibilidad = Factibilidad::where('id_proy', $id)->first();
+        return view('proyectoViews.factibilidad.edit', [
+            'id' => $id,
+            'factibilidad' => $factibilidad
+        ]);
+    }
+
+    public function factibilidad_update(){
+        request()->validate([
+            'id'=> 'required'
+        ],
+        [
+            'id.required' => "El proyecto es obligatorio"
+        ]);
+
+        $factibilidad = Factibilidad::where('id_proy', request('id'))->first();
+        $factibilidad->tecnica = request('tecnica');
+        $factibilidad->economia = request('economica');
+        $factibilidad->financiera = request('financiera');
+        $factibilidad->operativa = request('operativa');
+        $factibilidad->fac_extra = request('extra');
+        $factibilidad->save();
+
+        return redirect()->route('miembros.index', request('id'));
+    }
+
+    public function pre2($id){
+        $proyecto = Proyecto::findOrFail($id);
+        $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
+        $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
+        $subtipo = SubTipoDeInvestigacion::findOrFail($proyecto->id_subtipo);
+        $tipo = TipoDeInvestigacion::findOrFail($subtipo->id_tipo);
+        $objetivos = DB::select("SELECT * FROM objetivo WHERE id_proyecto = ?", [$id]);
+        $alcances = DB::select("SELECT * FROM alcance WHERE id_proyecto = ?", [$id]);
+        $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ?", [$id]);
+        $recursos=Recursos::all();
+        $tiposrec=TipoDeRecursos::all();
+        $recursosProy=DB::select("SELECT RP.id, RP.cantidad, R.nombre, R.id_tipo, RP.detalle FROM recursos_por_proy RP JOIN recurso R ON R.id = RP.id_recurso WHERE RP.id_proy = ?", [$id]);
+
+        return view('proyectoViews.solicitud.Investigador.previsualizacion', [
+            'objetivos'=> $objetivos,
+            'alcances'=> $alcances,
+            'indicadores'=> $indicadores,
             'proyecto' => $proyecto,
+            'equipo' => $equipo,
+            't' => $tipo,
+            'st' => $subtipo,
+            'tiposrec'=>$tiposrec,
+            'recursos'=>$recursos,
+            'recursosProy'=>$recursosProy,
+            'solicitud'=>$solicitud,
         ]);
     }
 

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FactibilidadDelProy extends Model
+class Factibilidad extends Model
 {
     protected $table = 'factibilidad';
 }

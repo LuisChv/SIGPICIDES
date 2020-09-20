@@ -27,13 +27,14 @@
                         <tr>                     
                             <td> {{ $miembro->name }} </td>
                             <td> 
-                                <select class="form-control selectorWapis" value="" id="rol" name="rol" disabled>
-                                    <option value="" selected disabled hidden >--Seleccionar Rol--</option>
+                                <select required class="form-control selectorWapis" value="" id="rol" name="rol" disabled>
+                                    <option value="" selected disabled hidden >Seleccionar rol</option>
                                     @foreach ($roles as $rol)
-                                        @if($miembro->id_rol==$rol->id)
+                                        @if($miembro->id_rol == $rol->id)
                                             <option style="color: black !important;" selected>{{ $rol->name }}</option>
+                                        @else
+                                            <option style="color: black !important;">{{ $rol->name }}</option>
                                         @endif
-                                        <option style="color: black !important;">{{ $rol->name }}</option>
                                     @endforeach
                                 </select> 
                             </td>
@@ -58,12 +59,6 @@
                         @endforeach
                     </tbody>
                 </table>
-
-                <div class="card-footer">
-                    <a class="btn btn-primary" href="{{route('planificacion.index')}}">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a>
-                    <br><br> 
-                </div>
-                
             </div>
         </div>
     </div>
@@ -90,7 +85,7 @@
                                 <tr>                     
                                     <td> {{ $use->name }} </td>
 
-                                    <td width='5%'>
+                                    <td width='5%' class="text-center">
                                         <button type="button" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#create" onClick="agregarMiembro({{ $use->id }})"><i class="tim-icons icon-simple-add"></i></button>
                                     </td>
                                    
@@ -116,8 +111,8 @@
                         </div>
                         <div class="modal-body">
                             <label for="rol">ROL DE EQUIPO</label>
-                            <select class="form-control selectorWapis" name="rolmiembro" id="rolmiembro">
-                                <option  selected disabled hidden >--Seleccionar Rol--</option>
+                            <select required class="form-control selectorWapis" name="rolmiembro" id="rolmiembro">
+                                <option value=""  selected disabled hidden >Seleccionar rol</option>
                                 @foreach ($roles as $rol)
                                     @if ($rol->id == 5)
                                         <option style="display:none;"></option>
@@ -152,11 +147,9 @@
                         <div class="modal-body">
                             <label for="rol">ROL DE EQUIPO</label>
                             <select class="form-control selectorWapis" name="rolmiembro" id="rolmiembroEditar">
-                                <option disabled >--Seleccionar Rol--</option>
+                                <option selected disabled hidden >Seleccionar rol</option>
                                 @foreach ($roles as $rol)
-                                    @if ($rol->id == 5)
-                                        <option val="{{$rol->id}}" style="display:none;"></option>
-                                    @else
+                                    @if ($rol->id != 5)
                                         <option val="{{$rol->id}}" style="color: black !important;">{{ $rol->name }}</option>
                                     @endif
                                 @endforeach
@@ -175,6 +168,23 @@
         </div>
         
     </div>
+    <div class="col-md-12">
+        <table width="100%">
+            <tr>
+                <td width="50%">
+                    <a class="btn btn-primary" href="{{ route('factibilidad.edit', [$proyecto->id]) }}">
+                        Anterior
+                    </a>
+                </td>
+                <td width="50%" align="right">
+                    <a class="btn btn-primary" href="{{ route('proyecto_tareas.index', [$proyecto->id]) }}">
+                        Siguiente
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
 </div>
 @endsection
 

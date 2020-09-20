@@ -359,6 +359,8 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::get('solicitud/{solicitud}/resumen', 'SolicitudController@resumen')->name('solicitud.resumen');
 
+    Route::get('solicitud/{solicitud}/pre2', 'SolicitudController@pre2')->name('solicitud.pre2');
+
 
     /**********************Recursos por solicitud de proyecto Investigador******************/
 
@@ -453,6 +455,13 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     //Route::get('proyecto/detalles/{id}', 'RecursoProyectoController@crear_objetivo')->name('proyecto_detalle.create');
     // factibilidad
     Route::get('proyecto/factibilidad/{id}', 'SolicitudController@factibilidad')->name('factibilidad.create');
+
+    Route::post('proyecto/factibilidad', 'SolicitudController@factibilidad_store')->name('factibilidad.store');
+
+    Route::get('proyecto/factibilidad_edit/{id}', 'SolicitudController@factibilidad_edit')->name('factibilidad.edit');
+
+    Route::put('proyecto/factibilidad_update', 'SolicitudController@factibilidad_update')->name('factibilidad.update');
+
     //planificacion
     Route::get('proyecto/planificacion', 'SolicitudController@planificacion')->name('planificacion.index');
     Route::get('proyecto/indicadores', 'SolicitudController@indicador')->name('indicadores.index');
