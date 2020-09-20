@@ -17,7 +17,7 @@ class CreateProyectosTable extends Migration
             $table->id();
             $table->integer('id_subtipo');
             $table->integer('id_equipo');
-            $table->string('nombre', 64);
+            $table->string('nombre', 256);
             $table->integer('id_comite')->nullable();
             $table->integer('duracion')->nullable();
             $table->boolean('modificable')->default(true);
@@ -28,9 +28,9 @@ class CreateProyectosTable extends Migration
             $table->foreign('id_subtipo')->references('id')->on('subtipo_de_investigacion')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_equipo')->references('id')->on('equipo_de_investigacion')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_comite')->references('id')->on('comite_de_evaluacion')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('tema', 64);
-            $table->string('resultados', 64);
-            $table->string('justificacion', 64);
+            $table->string('tema', 256);
+            $table->string('resultados', 256);
+            $table->string('justificacion', 256);
             $table->timestamps();
         });
     }

@@ -357,6 +357,8 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::post('solicitud/{id}/enviar', 'SolicitudController@enviar')->name('solicitud.enviar');
 
+    Route::post('solicitud/{id}/enviar2', 'SolicitudController@enviar2')->name('solicitud.enviar2');
+
     Route::get('solicitud/{solicitud}/resumen', 'SolicitudController@resumen')->name('solicitud.resumen');
 
     Route::get('solicitud/{solicitud}/pre2', 'SolicitudController@pre2')->name('solicitud.pre2');

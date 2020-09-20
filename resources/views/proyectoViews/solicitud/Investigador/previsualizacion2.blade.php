@@ -108,7 +108,7 @@ Vista previa
                         </a>
                     </td>
                     <td width="50%" align="right">
-                        <a class="btn btn-primary" href="">
+                        <a class="btn btn-primary" href="{{ route('solicitud.enviar2', [$idProyecto]) }}">
                             Enviar
                         </a>
                     </td>

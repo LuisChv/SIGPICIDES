@@ -103,7 +103,9 @@ class EvaluacionSolicitudController extends Controller
     {
         $proyecto = Proyecto::findOrFail($id);
         $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
-
+        $solicitud->enviada = false;
+        $solicitud->noti_inv = false;
+        $solicitud->save();
         $id_comite = $proyecto->id_comite;
         $estados_soli = DB::select("SELECT * FROM estado_de_solicitud WHERE id = ? OR id = ? OR id = ?", [4,5,8]);
 
