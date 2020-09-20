@@ -109,7 +109,7 @@ Vista previa
                     </td>
                     <td width="50%" align="right">
                         <a class="btn btn-primary" href="">
-                            Siguiente
+                            Enviar
                         </a>
                     </td>
                 </tr>
