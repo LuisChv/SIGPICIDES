@@ -20,6 +20,7 @@ use App\RolUsuario;
 use App\ComiteDeEvaluacion;
 use App\ComiteUsuario;
 use App\Factibilidad;
+use App\User;
 
 class SolicitudController extends Controller
 {
@@ -550,30 +551,26 @@ class SolicitudController extends Controller
     }
 
     public function pre2($id){
-        $proyecto = Proyecto::findOrFail($id);
-        $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
-        $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
-        $subtipo = SubTipoDeInvestigacion::findOrFail($proyecto->id_subtipo);
-        $tipo = TipoDeInvestigacion::findOrFail($subtipo->id_tipo);
-        $objetivos = DB::select("SELECT * FROM objetivo WHERE id_proyecto = ?", [$id]);
-        $alcances = DB::select("SELECT * FROM alcance WHERE id_proyecto = ?", [$id]);
-        $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ?", [$id]);
-        $recursos=Recursos::all();
-        $tiposrec=TipoDeRecursos::all();
-        $recursosProy=DB::select("SELECT RP.id, RP.cantidad, R.nombre, R.id_tipo, RP.detalle FROM recursos_por_proy RP JOIN recurso R ON R.id = RP.id_recurso WHERE RP.id_proy = ?", [$id]);
 
-        return view('proyectoViews.solicitud.Investigador.previsualizacion', [
-            'objetivos'=> $objetivos,
-            'alcances'=> $alcances,
-            'indicadores'=> $indicadores,
-            'proyecto' => $proyecto,
-            'equipo' => $equipo,
-            't' => $tipo,
-            'st' => $subtipo,
-            'tiposrec'=>$tiposrec,
-            'recursos'=>$recursos,
-            'recursosProy'=>$recursosProy,
-            'solicitud'=>$solicitud,
+        $idEquipo= Proyecto::select('id_equipo')->where('id',$id)->first();
+        $factibilidad = Factibilidad::where('id_proy', $id)->first();
+        $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$id]);
+        $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [true]);
+        $idUsuarioLogeado=auth()->user()->id;
+        $usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $idEquipo->id_equipo)->where('id_usuario', $idUsuarioLogeado)->firstOr(function(){
+            abort(403);
+        });
+        $indicadores= Indicador::where('id_proy',$id)->get();
+        $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$idEquipo->id_equipo])->get();
+
+        return view('proyectoViews.solicitud.Investigador.previsualizacion2', [
+            'factibilidad' => $factibilidad,
+            'miembros' => $miembros,
+            'roles'=>$roles,
+            'idProyecto'=>$id, 
+            'indicadores'=>$indicadores, 
+            'miembrosEquipo'=>$miembrosEquipo,
+            
         ]);
     }
 
