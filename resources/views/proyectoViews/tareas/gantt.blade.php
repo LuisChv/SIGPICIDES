@@ -21,8 +21,9 @@
     para los estilos del gantt-->
     <link rel="stylesheet" href="https://files.dhtmlx.com/30d/0801b74b161df383f7de350535901db6/dhtmlxgantt_contrast_black.css">
     <link href="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.css" rel="stylesheet">
+    <!--Agregando libreria de ajax-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
     <script src="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.js"></script>
-    
     <style type="text/css">
     html, body{
             height:100%;
@@ -84,12 +85,33 @@
         
         return true;
     });
-
+    //Evento lanzado al abrir una tarea
     gantt.attachEvent("onLightbox", function (task_id){
         //document.getElementsByName("indicador")[0].checked= true;
         console.log(task_id);
+        $.ajax({
+            url: '/tareasAsignaciones/'+ task_id,
+            type: 'get',
+            dataType: 'json',
+            success: function(response){
+                let miembros= @json($miembrosEquipo);
+                let indicadoresT=@json($indicadores);
+                for(let i=0; i<response.encargados.length; i++){
+                    var indice=miembros.findIndex(x => x.id === response.encargados[i].id_usuario);
+                    if(indice>=0){
+                        document.getElementsByName("equipo")[indice].checked= true;
+                    }
+                }
+                for(let i=0; i<response.indicadores.length; i++){
+                    var indice=indicadoresT.findIndex(x => x.id === response.indicadores[i].id_indicador);
+                    if(indice>=0){
+                        document.getElementsByName("indicador")[indice].checked= true;
+                    }
+                }
+            }
+        });
     });
-
+    
     
     gantt.config.lightbox.sections=[
         {name:"description", height:70, map_to:"text", type:"textarea", focus:true},

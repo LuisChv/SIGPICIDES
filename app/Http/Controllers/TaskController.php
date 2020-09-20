@@ -138,11 +138,10 @@ class TaskController extends Controller
                 
                 /**********Guardar asignacion de tareas a miembros del equipo***************/
                 //Hacer el proceso en caso haya seleccionado al menos un miembro
-                
+                tareaUsuario::where('id_task',$task->id)->delete();
                 if(strlen($request->miembros)>2){  
                     //Convertir el string recibido a un array con la funcion "StringToArray"                  
-                    $miembros= $this->stringToArray($request->miembros);
-                    tareaUsuario::where('id_task',$task->id)->delete();
+                    $miembros= $this->stringToArray($request->miembros);                    
                     foreach ($miembros as $idMiembro) {
                         //Verificar que los valores de los id's recibidos sean de Usuarios que pertenencen al equipo del proyecto
                         if($usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $idEquipo->id_equipo)->where('id_usuario', $idMiembro*1)->first()){
@@ -159,9 +158,9 @@ class TaskController extends Controller
                 }
                 /**********Guardar asignacion de tareas a indicadores***************/
                 //Hacer el proceso en caso haya seleccionado al menos un inidicador
+                TareaIndicador::where('id_task', $task->id)->delete();
                 if(strlen($request->indicadores)>2){
-                    $indicadores= $this->stringToArray($request->indicadores);
-                    TareaIndicador::where('id_task', $task->id)->delete();
+                    $indicadores= $this->stringToArray($request->indicadores);                    
                     foreach ($indicadores as $idIndicador) {
                         //Verificar que los indicadores recibidos pertenezcan al proyecto seleccionado
                         if($indicador= Indicador::where('id_proy',$request->idProyecto)->where('id', $idIndicador)->first()){
@@ -218,5 +217,18 @@ class TaskController extends Controller
         $array= str_replace ( '"', '', $array);
         $array = explode(',', $array);
         return $array;
+    }
+
+    //Controlador para traer los miembros asignados a una tarea
+    public function tareaAsignacionesFetch($id_task){
+        $encargados=0;
+        $indicadoresT=0;
+        $encargados= tareaUsuario::select('id', 'id_usuario')->where('id_task', $id_task*1 )->get();
+        $indicadoresT= TareaIndicador::select('id', 'id_indicador')->where('id_task', $id_task*1)->get();         
+        return response()->json([
+            "encargados"=> $encargados,
+            "indicadores"=> $indicadoresT,
+            "id_task"=>$id_task,
+        ]);
     }
 }

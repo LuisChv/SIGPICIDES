@@ -475,6 +475,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     /***********************planificacion de tareas gantt****************************/
 
     Route::get('proyecto/tareas/{id_proyecto}', 'TaskController@index')->name('proyecto_tareas.index');
+    Route::get('tareasAsignaciones/{id_tarea}','TaskController@tareaAsignacionesFetch')->name('proyecto_tareas.asignaciones');
 
     /***********************planificacion de tareas gantt****************************/
     Route::get('evaluacion/{id}', 'EvaluacionSolicitudController@index')->name('evaluacion.index')
