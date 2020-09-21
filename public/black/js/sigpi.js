@@ -55,6 +55,11 @@ function editarRolMiembro(id_miembro, id_rol){
     });
     console.log(rol);
 }
+function bloquearRecurso(valor){
+    var btnrecurso=$('btnAñadirRec'+valor);
+    btnrecurso.disabled=true;
+    console.log="llega aqui";
+}
 //Dentro de aquí se pueden cargar funciones que necesitan que el html se carguen primero
 $(document).ready(function(){//lo que este dentro de aquí se cargara hasta que la pagina este totalmente cargada
     $('#selector1').change(function () {

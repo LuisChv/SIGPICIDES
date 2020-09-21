@@ -116,7 +116,7 @@
                                                         &nbsp;{{ $rec->nombre }}
                                                     </td>
                                                     <td width='10%'>
-                                                        <button type="button" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#modal{{$rec->id}}"><i class="tim-icons icon-simple-add"></i></button>
+                                                        <button type="button" id="btnAñadirRec{{$rec->id}}" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#modal{{$rec->id}}"><i class="tim-icons icon-simple-add"></i></button>
                                                         <!-- Modal -->
                                                         <form method="POST" action="{{route('proyecto_recursos.store')}}">
                                                         @csrf
@@ -149,7 +149,7 @@
                                                                   </div>
                                                                   <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                                    <button type="submit" class="btn btn-primary">Añadir</button>
+                                                                    <button type="submit" onclick="bloquearRecurso({{$rec->id}})" class="btn btn-primary">Añadir</button>
                                                                   </div>
                                                                 </div>
                                                               </div>

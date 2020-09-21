@@ -17,13 +17,13 @@ Nueva investigación
                 @csrf                                    
                 <div class="card-body">
                     <div class="row">                        
-                        <div class="col-md-12 input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                        <div class="col-md-12 input-group{{ $errors->has('nombre') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-atom"></i>
                                 </div>
                             </div>
-                            <input required type="text" name="nombre" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre de la investigación') }}">
+                            <input required type="text" name="nombre" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre de la investigación') }}">
                             @include('alerts.feedback', ['field' => 'name'])
                         </div>
                         
@@ -33,7 +33,7 @@ Nueva investigación
                                     <i class="tim-icons icon-atom"></i>
                                 </div>
                             </div>
-                            <input required type="text" name="tema" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Tema de la investigación') }}">
+                            <input required type="text" name="tema" class="form-control{{ $errors->has('tema') ? ' is-invalid' : '' }}" placeholder="{{ __('Tema de la investigación') }}">
                             @include('alerts.feedback', ['field' => 'name'])
                         </div>
                         
@@ -147,7 +147,7 @@ Nueva investigación
     </div>
 </div>
         
-<script type="text/javascript">
+<!--script type="text/javascript">
     $('#selector1').change(function () {
         $('#selector2').show();
         $('#prepend').show();
@@ -163,7 +163,7 @@ Nueva investigación
             });
         }
     });
-</script>
+</script-->
 
 
 @endsection
