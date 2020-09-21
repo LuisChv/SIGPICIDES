@@ -63,13 +63,13 @@
                                                         </div>
 
                                                     </td>
-                                                    <form method="POST" id="formulario{{$rec->id}}" action="{{route('proyecto_recursos.destroy',[$rec->id])}}">
+                                                    <form method="POST" id="formulario{{$rec->id}}" action="{{route('proyecto_recursos.destroy',$proyecto->id)}}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <td width='10%'>
 
-                                                            <input hidden name="id_proy" val={{$proyecto->id}}>
-                                                            <button type="button" onClick="confirmar('{{$rec->id}}')" class="btn btn-warning btn-sm btn-icon btn-round" data-toggle="modal" data-target="#modal{{$rec->id}}"><i class="tim-icons icon-simple-remove"></i></button>
+                                                            <input hidden name="id_rec" value={{$rec->id}}>
+                                                            <button type="button" onClick="confirmar('{{$rec->id}}')" class="btn btn-warning btn-sm btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
                                                         </td> 
                                                     </form>                                
                                                 </tr>
