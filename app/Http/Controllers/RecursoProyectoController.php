@@ -88,8 +88,8 @@ class RecursoProyectoController extends Controller
     public function destroy($id)
     {
         $recursoProy= \App\RecursosPorProy::findOrFail($id);
-        $recursoPry->delete();
-        return redirect()->route('proyecto_recursos.destroy', $id);
+        $recursoProy->delete();
+        return redirect()->route('proyecto_recursos.destroy', 'id_proy');
     }
 
 }

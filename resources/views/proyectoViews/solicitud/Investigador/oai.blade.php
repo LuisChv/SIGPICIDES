@@ -16,7 +16,7 @@
                         <form method="POST" action="{{route('proyecto_objetivos.store')}}">
                             @csrf
                             <div class="modal fade" id="modalObjetivo" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Nuevo objetivo</h5>
@@ -27,8 +27,7 @@
                                         <div class="modal-body">                     
                                             <table class="table" style="background-color: white !important;" >
                                                 <tr>
-                                                    <td width="40%" class="font-weight-bold" style="color: #222a42 !important;">Descripción del objetivo:</td>
-                                                    <td width="60%"><textarea required rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_objetivo"></textarea></td>
+                                                    <td width="60%"><textarea required rows="3" style="color: #222a42 !important;" placeholder="Descripción del objetivo" class="form-control border border-light rounded" name="descripcion_objetivo"></textarea></td>
                                                 </tr>
                                                 <input hidden name="id_proy" value="{{$id}}"/>
                                             </table>
@@ -87,7 +86,7 @@
                         <form method="POST" action="{{route('proyecto_alcances.store')}}">
                             @csrf
                             <div class="modal fade" id="modalAlcance" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Nuevo alcance</h5>
@@ -98,7 +97,6 @@
                                         <div class="modal-body" >                     
                                             <table class="table" style="background-color: white !important;" >
                                                 <tr>
-                                                    <td width="40%" class="font-weight-bold" style="color: #222a42 !important;">Descripción del alcance:</td>
                                                     <td width="60%"><textarea required rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_alcance"></textarea></td>
                                                 </tr>
                                                 <input hidden name="id_proy" value="{{$id}}"/>
@@ -157,7 +155,7 @@
                         <form method="POST" action="{{route('proyecto_indicadores.store')}}">
                             @csrf
                             <div class="modal fade" id="modalIndicador" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Nuevo indicador</h5>
@@ -221,7 +219,7 @@
     @csrf
     @method('PUT')
     <div class="modal fade" id="modalEditarObjetivo" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Editar objetivo</h5>
@@ -252,7 +250,7 @@
     @csrf
     @method('PUT')
     <div class="modal fade" id="modalEditarAlcance" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Editar alcance</h5>
@@ -283,7 +281,7 @@
     @csrf
     @method('PUT')
     <div class="modal fade" id="modalEditarIndicador" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Editar indicador</h5>

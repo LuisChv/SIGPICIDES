@@ -27,11 +27,11 @@
                                         @foreach($recursosProy as $rec)
                                             @if($rec->id_tipo==$tipo->id)  
                                                 <tr>                     
-                                                    <td id="{{$rec->id}}" data-toggle="modal" data-target="#modalDetalle{{$rec->id}}" onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')" onClick="CrearEnlace('{{ route('recursos.show', $rec->id)}}');" >
+                                                    <td id="{{$rec->id}}" data-toggle="modal" data-target="#modalDetalleAsignado{{$rec->id}}" onMouseOver="ResaltarFila({{$rec->id}});" onMouseOut="RestablecerFila({{$rec->id}}, '')">
                                                         &nbsp;&nbsp;&nbsp;&nbsp;<i class="tim-icons icon-planet"></i>
                                                         &nbsp;{{ $rec->nombre }}
 
-                                                        <div class="modal fade" id="modalDetalle{{$rec->id}}" tabindex="-1" role="dialog" aria-labelledby="label2{{$rec->id}}" aria-hidden="true">
+                                                        <div class="modal fade" id="modalDetalleAsignado{{$rec->id}}" tabindex="-1" role="dialog" aria-labelledby="label2{{$rec->id}}" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -63,10 +63,14 @@
                                                         </div>
 
                                                     </td>
-                                                    <form method="POST" action="{{route('proyecto_recursos.destroy',$rec->id)}}">
+                                                    <form method="POST" id="formulario{{$rec->id}}" action="{{route('proyecto_recursos.destroy',[$rec->id])}}">
+                                                        @csrf
+                                                        @method('DELETE')
                                                         <td width='10%'>
-                                                        <button type="button" onClick="confirmar({{$rec->id}})" class="btn btn-warning btn-sm btn-icon btn-round" data-toggle="modal" data-target="#modal{{$rec->id}}"><i class="tim-icons icon-simple-remove"></i></button>
-                                                    </td> 
+
+                                                            <input hidden name="id_proy" val={{$proyecto->id}}>
+                                                            <button type="button" onClick="confirmar('{{$rec->id}}')" class="btn btn-warning btn-sm btn-icon btn-round" data-toggle="modal" data-target="#modal{{$rec->id}}"><i class="tim-icons icon-simple-remove"></i></button>
+                                                        </td> 
                                                     </form>                                
                                                 </tr>
                                             @endif
