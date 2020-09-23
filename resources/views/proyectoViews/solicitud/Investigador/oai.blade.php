@@ -231,7 +231,7 @@
                     <table class="table" style="background-color: white !important;" >
                                                                                                
                         <tr>
-                            <td><textarea required placeholder="Descripción del objetivo" rows="3" style="color: #222a42 !important;" class="inputArea" name="descripcion_objetivo" id="editarDetalleObjetivo"></textarea>
+                            <td><textarea required placeholder="Descripción del objetivo" rows="3" style="color: #222a42 !important;" class="inputArea" maxlength="1000" name="descripcion_objetivo" id="editarDetalleObjetivo"></textarea>
                             </td>
                         </tr>
                         <input hidden name="id_objetivo" id="editarIdObjetivo"/>
@@ -262,7 +262,7 @@
                     <table class="table" style="background-color: white !important;" >
                                                                                                
                         <tr>
-                            <td><textarea required placeholder="Descripción del alcance" rows="3" style="color: #222a42 !important;" class="inputArea" name="descripcion_alcance" id="editarDetalleAlcance"></textarea>
+                            <td><textarea required placeholder="Descripción del alcance" rows="3" style="color: #222a42 !important;" class="inputArea" maxlength="120" name="descripcion_alcance" id="editarDetalleAlcance"></textarea>
                             </td>
                         </tr>
                         <input hidden name="id_alcance" id="editarIdAlcance"/>
@@ -293,7 +293,7 @@
                     <table class="table" style="background-color: white !important;" >
                                                                                                
                         <tr>
-                            <td><textarea required placeholder=" Descripción del indicador" rows="3" style="color: #222a42 !important;" class="inputArea" name="descripcion_indicador" id="editarDetalleIndicador"></textarea></td>
+                            <td><textarea required placeholder=" Descripción del indicador" rows="3" style="color: #222a42 !important;" class="inputArea" maxlength="1000" name="descripcion_indicador" id="editarDetalleIndicador"></textarea></td>
                         </tr>
                         <input hidden name="id_indicador" id="editarIdIndicador"/>
                     </table>
