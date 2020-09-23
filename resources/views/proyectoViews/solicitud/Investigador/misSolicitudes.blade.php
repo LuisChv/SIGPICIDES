@@ -26,6 +26,18 @@
                                 </td>
                                 <form method="POST" id="formulario{{$soli->id}}" action="{{route('solicitud.destroy', $soli->id_proy)}}" >
                                     <td width="15%">
+                                        @if($soli->estado=="Enviada para revisar")
+                                        <div class="btn-group" role="group">
+                                            <a title="Información principal" type="button" class="btn btn-primary btn-sm btn-round" href="{{ route('solicitud.resumen', [$soli->id_proy])}}">
+                                                <i class="tim-icons icon-notes"></i>
+                                            </a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button title="Eliminar" type="button" class="btn btn-warning btn-sm btn-icon btn-round" onClick="confirmar({{$soli->id}})">
+                                                <i class="tim-icons icon-simple-remove"></i>
+                                            </button>
+                                        </div>
+                                        @else
                                         <div class="btn-group" role="group">
                                             <a title="Información principal" type="button" class="btn btn-primary btn-sm btn-round" href="{{ route('solicitud.edit', [$soli->id_proy])}}">
                                                 <i class="tim-icons icon-notes"></i>
@@ -42,12 +54,20 @@
                                                 <i class="tim-icons icon-simple-remove"></i>
                                             </button>
                                         </div>
+                                        @endif
                                     </td>
                                 </form>
                                 <td width="15%" class="text-right">
+                                    @if($soli->estado=="Enviada para revisar")
+                                    <a href="#" disabled type="button" class="btn btn-primary btn-sm btn-round">
+                                        <i class="tim-icons icon-zoom-split"></i> Vista previa
+                                    </a>
+                                    @else
                                     <a href="{{ route('solicitud.pre', [$soli->id_proy])}}" type="button" class="btn btn-primary btn-sm btn-round">
                                         <i class="tim-icons icon-zoom-split"></i> Vista previa
                                     </a>
+                                    @endif
+                                    
                                 </td>
                             </tr>   
                         @endif            

@@ -75,17 +75,17 @@ Nueva investigación
                         </div>
 
                         <div class="col-md-12 input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
-                            <textarea required class="inputArea" rows="6" name="descripcion" placeholder="Describa su proyecto"></textarea>
+                            <textarea required class="inputArea" maxlength="1024" rows="6" name="descripcion" placeholder="Describa su proyecto"></textarea>
                             @include('alerts.feedback', ['field' => 'descripcion'])
                         </div>    
 
                         <div class="col-md-12 input-group{{ $errors->has('justificacion') ? ' has-danger' : '' }}">
-                            <textarea required class="inputArea" rows="6" name="justificacion" placeholder="Justificación del proyecto"></textarea>
+                            <textarea required class="inputArea" maxlength="1024" rows="6" name="justificacion" placeholder="Justificación del proyecto"></textarea>
                             @include('alerts.feedback', ['field' => 'justificacion'])
                         </div> 
 
                         <div class="col-md-12 input-group{{ $errors->has('resultados') ? ' has-danger' : '' }}">
-                            <textarea rows="6" required class="inputArea" name="resultados" placeholder="Resultados esperados del proyecto"></textarea>
+                            <textarea rows="6" required class="inputArea" maxlength="1024" name="resultados" placeholder="Resultados esperados del proyecto"></textarea>
                             @include('alerts.feedback', ['field' => 'resultados'])
                         </div> 
 
