@@ -27,7 +27,7 @@
                                         <div class="modal-body">                     
                                             <table class="table" style="background-color: white !important;" >
                                                 <tr>
-                                                    <td width="60%"><textarea required rows="3" style="color: #222a42 !important;" placeholder="Descripción del objetivo" class="inputArea" name="descripcion_objetivo"></textarea></td>
+                                                    <td width="60%"><textarea required rows="3" style="color: #222a42 !important;" maxlength="1000" placeholder="Descripción del objetivo" class="inputArea" name="descripcion_objetivo"></textarea></td>
                                                 </tr>
                                                 <input hidden name="id_proy" value="{{$id}}"/>
                                             </table>
@@ -97,7 +97,7 @@
                                         <div class="modal-body" >                     
                                             <table class="table" style="background-color: white !important;" >
                                                 <tr>
-                                                    <td width="60%"><textarea required rows="3" style="color: #222a42 !important;" class="inputArea" name="descripcion_alcance"></textarea></td>
+                                                    <td width="60%"><textarea required rows="3" style="color: #222a42 !important;" maxlength="120" class="inputArea" name="descripcion_alcance"></textarea></td>
                                                 </tr>
                                                 <input hidden name="id_proy" value="{{$id}}"/>
                                             </table>
@@ -167,7 +167,7 @@
                                             <table class="table" style="background-color: white !important;" >
                                                                                                
                                                 <tr>
-                                                    <td><textarea required placeholder=" Descripción del indicador" rows="3" style="color: #222a42 !important;" class="inputArea" name="descripcion_indicador"></textarea></td>
+                                                    <td><textarea required placeholder=" Descripción del indicador" rows="3" style="color: #222a42 !important;" maxlength="1000" class="inputArea" name="descripcion_indicador"></textarea></td>
                                                 </tr>
                                                 <input hidden name="id_proy" value="{{$id}}"/>
                                             </table>
