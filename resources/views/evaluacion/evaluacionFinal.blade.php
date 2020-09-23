@@ -123,7 +123,7 @@ Evaluar Solicitud
 
 @endsection
 
-<script langiage="javascript" type="text/javascript">
+<!--script langiage="javascript" type="text/javascript">
 
     function agregarComentario(){
             $('#comentario').val($('#coment').val());
@@ -139,4 +139,4 @@ Evaluar Solicitud
             } 
         } 
 
-</script>
+</script-->
