@@ -24,17 +24,17 @@ Nueva investigación
                                 </div>
                             </div>
                             <input required type="text" name="nombre" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre de la investigación') }}">
-                            @include('alerts.feedback', ['field' => 'name'])
+                            @include('alerts.feedback', ['field' => 'nombre'])
                         </div>
                         
-                        <div class="col-md-12 input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                        <div class="col-md-12 input-group{{ $errors->has('tema') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-atom"></i>
                                 </div>
                             </div>
                             <input required type="text" name="tema" class="form-control{{ $errors->has('tema') ? ' is-invalid' : '' }}" placeholder="{{ __('Tema de la investigación') }}">
-                            @include('alerts.feedback', ['field' => 'name'])
+                            @include('alerts.feedback', ['field' => 'tema'])
                         </div>
                         
                         <div class="col-md-12 input-group{{ $errors->has('tipoRec') ? ' has-danger' : '' }}">
@@ -107,7 +107,7 @@ Nueva investigación
                                             <i class="tim-icons icon-single-02"></i>
                                         </div>
                                     </div>
-                                    <input type="number" required type="text" name="miembros" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Cantidad de miembros') }}">
+                                    <input type="number" required type="text" name="miembros" class="form-control{{ $errors->has('miembros') ? ' is-invalid' : '' }}" placeholder="{{ __('Cantidad de miembros') }}">
                                     @include('alerts.feedback', ['field' => 'miembros'])
                                 </div>
                             </div>
@@ -120,7 +120,7 @@ Nueva investigación
                                     <i class="tim-icons icon-coins"></i>
                                 </div>
                             </div>
-                            <input type="number" required type="text" name="costo" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Costo estimado') }}">
+                            <input type="number" required type="text" name="costo" class="form-control{{ $errors->has('costo') ? ' is-invalid' : '' }}" placeholder="{{ __('Costo estimado') }}">
                             @include('alerts.feedback', ['field' => 'costo'])
                         </div>
                         <div class="col-md-12" align="right">

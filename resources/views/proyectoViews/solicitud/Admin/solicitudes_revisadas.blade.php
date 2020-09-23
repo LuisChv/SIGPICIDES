@@ -9,7 +9,7 @@
                 <div class="card-header ">
                     <div class="row">
                         <div class="col-sm-8 text-left">
-                            <h2 class="card-title"><b>Solicitudes Aprobadas</b></h2>
+                            <h2 class="card-title"><b>Solicitudes Aprobadas Parcialmente</b></h2>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                 <div class="card-header ">
                     <div class="row">
                         <div class="col-sm-8 text-left">
-                            <h2 class="card-title"><b>Solicitudes Aprobadas Parcialmente</b></h2>
+                            <h2 class="card-title"><b>Solicitudes Aprobadas </b></h2>
                         </div>
                     </div>
                 </div>
