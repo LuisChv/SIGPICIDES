@@ -73,9 +73,11 @@
 
     //
     gantt.locale.labels.section_time = "Fecha de inicio y la duración";
-    gantt.locale.labels.section_description = "Nombre descriptivo de la tarea";
+    gantt.locale.labels.section_description = "Nombre descriptivo de la tarea";    gantt.locale.labels.section_equipo = "Asignación de miembros";
     gantt.locale.labels.section_indicador = "Indicador que requerirá esta tarea";
-    gantt.locale.labels.section_equipo = "Asignación de miembros";
+    gantt.locale.labels.section_type = "Tipo de tarea"
+    //gantt.locale.labels.section_split = "Es un hito";
+    
     
     //Forma de acceder a la tarea que este abierte o esta sienda creada
     gantt.attachEvent("onBeforeLightbox", function(id) {
@@ -111,10 +113,21 @@
             }
         });
     });
-    
+    gantt.templates.rightside_text = function(start, end, task){
+        if(task.type == gantt.config.types.milestone){
+            return task.text;
+        }
+        return "";
+    };
+
+    gantt.config.order_branch = true;
     
     gantt.config.lightbox.sections=[
         {name:"description", height:70, map_to:"text", type:"textarea", focus:true},
+        {name: "type", type: "typeselect", map_to: "type",   options: [ 
+            {key:"milestone", label: "Hito"},                                               
+            {key:"task", label: "Tarea"}                                                 
+        ]},
         {name:"time", height:40, map_to:"auto", type:"duration"},
         
         //Para mostrar el porcentaje de avance y a quienes se les asigno la tarea
@@ -126,17 +139,22 @@
         {name:"avance", height:70, map_to:"avance", type:"textarea"},*/
 
         //Para usar checkbox https://docs.dhtmlx.com/gantt/desktop__checkbox.html
-        {name: "indicador", type:"checkbox", height:150, map_to: "indicadores", options:[                
-            @php
-                    for ($i = 0; $i < sizeof($indicadores); $i++)
-                    echo '{key:'. $indicadores[$i]->id .', label:"' . $indicadores[$i]->detalle . '&nbsp;&nbsp; "},'
-            @endphp
-        ]},
+        
+        // {name: "type", type:"checkbox", map_to: "type", options:[    
+        //     {key:"milestone", label:"Hito"}                                                  
+        // ]},  
+        
         //Para agrega a los miembros del equipo
         {name: "equipo", type:"checkbox", height:60, map_to: "miembros", options:[    
             @php
                 for ($i = 0; $i < sizeof($miembrosEquipo); $i++)
                     echo '{key:'. $miembrosEquipo[$i]->id .', label:"' . $miembrosEquipo[$i]->name . '&nbsp;&nbsp; "},'                
+            @endphp
+        ]},
+        {name: "indicador", type:"checkbox", height:150, map_to: "indicadores", options:[                
+            @php
+                    for ($i = 0; $i < sizeof($indicadores); $i++)
+                    echo '{key:'. $indicadores[$i]->id .', label:"' . $indicadores[$i]->detalle . '&nbsp;&nbsp; "},'
             @endphp
         ]},
     ];
