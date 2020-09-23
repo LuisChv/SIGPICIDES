@@ -30,7 +30,7 @@ class UsuarioEquipoRolController extends Controller
        
  
          //Omitir Miembros del equipo 
-          $miembrosEquipo = DB::select('SELECT * FROM usuario_equipo_rol WHERE id_equipo = ?', [$id]);
+          $miembrosEquipo = DB::select('SELECT * FROM usuario_equipo_rol WHERE id_equipo = ?', [$id_equipo]);
  
          foreach ($miembrosEquipo as $miembro) { 
              foreach($noMiembros as $user){ 

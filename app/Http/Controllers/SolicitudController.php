@@ -305,18 +305,19 @@ class SolicitudController extends Controller
 
     public function mis_solicitudes_comite(){
         $solicitudes = DB::select(
-            "SELECT S.id, P.nombre, S.id_proy, S.id_estado FROM comite_usuario CU 
+            "SELECT ROW_NUMBER() OVER(ORDER BY S.id ASC) AS row, P.nombre, S.id_proy, S.id_estado, S.id as id_soli FROM comite_usuario CU 
             JOIN comite_de_evaluacion C ON CU.id_comite = C.id
             JOIN proyecto P ON C.id = P.id_comite
             JOIN solicitud S ON S.id_proy = P.id
             WHERE CU.id_usuario = ?", [Auth::user()->id]);
         
-        $evaluadas = DB::select("SELECT * FROM evaluacion WHERE id_user = ?", [Auth::user()->id]);
+        
+        $evaluadas = DB::select("SELECT id_solicitud FROM evaluacion WHERE id_user = ?", [Auth::user()->id]);
 
-        foreach ($evaluadas as $eva) { 
-            foreach($solicitudes as $soli){ 
-                if($soli->id == $eva->id_solicitud){
-                    unset($solicitudes[$eva->id_solicitud - 1]);
+        foreach ($solicitudes as $soli) { 
+            foreach($evaluadas as $eva){ 
+                if($soli->id_soli == $eva->id_solicitud){
+                   unset($solicitudes[$soli->row - 1 ]);
                 }
             }
         }

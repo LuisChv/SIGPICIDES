@@ -14,6 +14,6 @@ class EquipoInvestigacionSeeder extends Seeder
     {
         $equipo = new EquipoDeInvestigacion;
         $equipo->miembros = 5;
-        $equipo->save();
+       // $equipo->save();
     }
 }
