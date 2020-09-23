@@ -101,7 +101,7 @@ Vista previa
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
+        <div class="card" id="objetivosCard">
             <div class="card-header ">
                 <h4>
                     Objetivos
@@ -121,7 +121,7 @@ Vista previa
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
+        <div class="card" id="alcancesCard">
             <div class="card-header ">
                 <h4>
                     Alcances
@@ -141,7 +141,7 @@ Vista previa
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
+        <div class="card" id="indicadoresCard">
             <div class="card-header ">
                 <h4>
                     Indicadores
@@ -220,3 +220,4 @@ Vista previa
     </tr>
 </table>
 @endsection
+<script src="{{ asset('black') }}/js/oai.js"></script>

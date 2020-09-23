@@ -18,7 +18,7 @@ Nueva investigación
                 @method('PUT')                               
                 <div class="card-body">
                     <div class="row">                        
-                        <div class="col-md-6 input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                        <div class="col-md-12 input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-atom"></i>
@@ -28,7 +28,7 @@ Nueva investigación
                             @include('alerts.feedback', ['field' => 'name'])
                         </div>
                         
-                        <div class="col-md-6 input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                        <div class="col-md-12 input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-atom"></i>
@@ -38,7 +38,7 @@ Nueva investigación
                             @include('alerts.feedback', ['field' => 'name'])
                         </div>
                         
-                        <div class="col-md-6 input-group{{ $errors->has('tipoRec') ? ' has-danger' : '' }}">
+                        <div class="col-md-12 input-group{{ $errors->has('tipoRec') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-minimal-down"></i>
@@ -57,7 +57,7 @@ Nueva investigación
                             @include('alerts.feedback', ['field' => 'tipoRec'])                    
                         </div>
                         
-                        <div class="col-md-6 input-group {{ $errors->has('subtipo') ? ' has-danger' : '' }}">
+                        <div class="col-md-12 input-group {{ $errors->has('subtipo') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend" id="prepend">
                                 <div class="input-group-text">
                                     <i class="tim-icons icon-minimal-down"></i>
@@ -88,24 +88,24 @@ Nueva investigación
                             @include('alerts.feedback', ['field' => 'subtipo'])                       
                         </div>
 
-                        <div class="col-md-6 input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
-                            <textarea required class="form-control border border-light" rows="6" name="descripcion" placeholder="Describa su proyecto">{{ $proyecto->descripcion }}</textarea>
+                        <div class="col-md-12 input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
+                            <textarea required class="inputArea" rows="5" maxlength="1024" name="descripcion" placeholder="Describa su proyecto">{{ $proyecto->descripcion }}</textarea>
                             @include('alerts.feedback', ['field' => 'descripcion'])
                         </div>    
 
-                        <div class="col-md-6 input-group{{ $errors->has('justificacion') ? ' has-danger' : '' }}">
-                            <textarea required class="form-control border border-light" rows="6" name="justificacion" placeholder="Justificación del proyecto">{{ $proyecto->justificacion }}</textarea>
+                        <div class="col-md-12 input-group{{ $errors->has('justificacion') ? ' has-danger' : '' }}">
+                            <textarea required class="inputArea" rows="5" maxlength="1024" name="justificacion" placeholder="Justificación del proyecto">{{ $proyecto->justificacion }}</textarea>
                             @include('alerts.feedback', ['field' => 'justificacion'])
                         </div> 
 
-                        <div class="col-md-6 input-group{{ $errors->has('resultados') ? ' has-danger' : '' }}">
-                            <textarea required class="form-control border border-light" name="resultados" placeholder="Resultados esperados del proyecto">{{ $proyecto->resultados }}</textarea>
+                        <div class="col-md-12 input-group{{ $errors->has('resultados') ? ' has-danger' : '' }}">
+                            <textarea required class="inputArea" rows="4" maxlength="1024" name="resultados" placeholder="Resultados esperados del proyecto">{{ $proyecto->resultados }}</textarea>
                             @include('alerts.feedback', ['field' => 'resultados'])
                         </div> 
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-12 input-group{{ $errors->has('duracion') ? ' has-danger' : '' }}">
+                                <div class="col-md-4 input-group{{ $errors->has('duracion') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
                                             <i class="tim-icons icon-calendar-60"></i>
@@ -115,7 +115,7 @@ Nueva investigación
                                     @include('alerts.feedback', ['field' => 'duracion'])
                                 </div>
 
-                                <div class="col-md-12 input-group{{ $errors->has('miembros') ? ' has-danger' : '' }}">
+                                <div class="col-md-4 input-group{{ $errors->has('miembros') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
                                             <i class="tim-icons icon-single-02"></i>
@@ -124,19 +124,19 @@ Nueva investigación
                                     <input value="{{$equipo->miembros}}" type="number" required type="text" name="miembros" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Cantidad de miembros') }}">
                                     @include('alerts.feedback', ['field' => 'miembros'])
                                 </div>
+                                <div class="col-md-4 input-group{{ $errors->has('costo') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="tim-icons icon-coins"></i>
+                                        </div>
+                                    </div>
+                                    <input value="{{$proyecto->costo}}" type="number" step="0.01" required type="text" name="costo" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Costo estimado') }}">
+                                    @include('alerts.feedback', ['field' => 'costo'])
+                                </div>
                             </div>
                         </div>
                     </div>  
                     <div class="row">
-                        <div class="col-md-6 input-group{{ $errors->has('costo') ? ' has-danger' : '' }}">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="tim-icons icon-coins"></i>
-                                </div>
-                            </div>
-                            <input value="{{$proyecto->costo}}" type="number" step="0.01" required type="text" name="costo" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Costo estimado') }}">
-                            @include('alerts.feedback', ['field' => 'costo'])
-                        </div>
                         <div class="col-md-6" align="right">
                             <button class="btn  btn-primary" type="submit">Siguiente</button>
                         </div>
@@ -147,7 +147,7 @@ Nueva investigación
             </form>
         </div>
     </div>
-    <div class="container menuF-container">
+    <!--div class="container menuF-container">
         <input type="checkbox" id="toggleF">
         <label for="toggleF" class="buttonF"></label>
         <nav class="navF">
@@ -155,10 +155,10 @@ Nueva investigación
             <a href="{{ route('solicitud.create')}}">Factibilidad</a>
            
             <a href="{{ route('solicitud.create')}}">Planificación</a>
-            <!--a href="{{ route('cides') }}">Acerca de</a>
-                <a href="#">Acciones largaaaaaaaaas</a-->
+            <a href="{{ route('cides') }}">Acerca de</a>
+                <a href="#">Acciones largaaaaaaaaas</a>
         </nav>
-    </div>
+    </div-->
 </div>
 @endsection
         
