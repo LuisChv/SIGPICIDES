@@ -107,7 +107,7 @@ Evaluar Solicitud
                 <div class="modal-body">                     
                     <table class="table" style="background-color: white !important;" >
                         <tr>
-                            <td><textarea id= "coment" required rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_objetivo"></textarea></td>
+                            <td><textarea id= "coment" required rows="3" style="color: #222a42 !important;" class="inputArea" name="descripcion_objetivo"></textarea></td>
                         </tr>
                         <input hidden name="id_proy" value=""/>
                     </table>
