@@ -15,6 +15,7 @@ use Auth;
 use App\Objetivo;
 use App\Alcance;
 use App\Indicador;
+use App\Factibilidad;
 use App\Recursos;
 use App\TipoDeRecursos;
 use App\RolUsuario;
@@ -62,6 +63,32 @@ class EvaluacionSolicitudController extends Controller
             'recursosProy'=>$recursosProy,
             'solicitud'=>$solicitud,
             'estados'=>$estados_soli,
+        ]);
+    }
+
+    public function index2($id){
+        $proyecto = Proyecto::findOrFail($id);
+        $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
+        $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
+        $factibilidad = Factibilidad::where('id_proy', $id)->first();
+        $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$equipo->id]);
+        $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [true]);
+        $idUsuarioLogeado=auth()->user()->id;
+        $usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $equipo->id_equipo)->where('id_usuario', $idUsuarioLogeado)->firstOr(function(){
+            abort(403);
+        });
+        $indicadores= Indicador::where('id_proy',$id)->get();
+        $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$idEquipo->id_equipo])->get();
+
+        return view('evaluacion.evaluacionMiembro2', [
+            'factibilidad' => $factibilidad,
+            'miembros' => $miembros,
+            'roles'=>$roles,
+            'idProyecto'=>$id, 
+            'indicadores'=>$indicadores, 
+            'miembrosEquipo'=>$miembrosEquipo,
+            'solicitud'=>$solicitud,
+            
         ]);
     }
 

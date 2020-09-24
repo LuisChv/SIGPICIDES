@@ -123,7 +123,9 @@ Evaluar Solicitud
 
 @endsection
 
-<!--script langiage="javascript" type="text/javascript">
+<script src="{{ asset('black') }}/js/sigpi.js"></script>
+
+<script langiage="javascript" type="text/javascript">
 
     function agregarComentario(){
             $('#comentario').val($('#coment').val());
@@ -139,4 +141,4 @@ Evaluar Solicitud
             } 
         } 
 
-</script-->
+</script>

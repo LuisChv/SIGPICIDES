@@ -483,6 +483,9 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::get('evaluacion/{id}', 'EvaluacionSolicitudController@index')->name('evaluacion.index')
     ->middleware('has.permission:evaluacion.index');
 
+    Route::get('evaluacion2/{id}', 'EvaluacionSolicitudController@index2')->name('evaluacion2.index')
+    ->middleware('has.permission:evaluacion.index');
+
     Route::post('evaluacion/store/{id}', 'EvaluacionSolicitudController@store')->name('evaluacion.store')
     ->middleware('has.permission:evaluacion.create');
     

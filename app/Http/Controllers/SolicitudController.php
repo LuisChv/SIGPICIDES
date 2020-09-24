@@ -38,10 +38,11 @@ class SolicitudController extends Controller
             FROM solicitud s 
             JOIN proyecto p 
             ON s.id = p.id WHERE s.id_estado = ?", [3]);
-        $solicitudes_A= DB::select("SELECT * 
+       
+       $solicitudes_A= DB::select("SELECT * 
         FROM solicitud s 
         JOIN proyecto p 
-        ON s.id = p.id WHERE s.id_estado = ?", [4]);
+        ON s.id = p.id WHERE s.id_estado = ?", [5]);
         
  
 
@@ -54,7 +55,7 @@ class SolicitudController extends Controller
         $solicitudes_AP= DB::select("SELECT * 
         FROM solicitud s 
         JOIN proyecto p 
-        ON s.id = p.id WHERE s.id_estado = ?", [5]);
+        ON s.id = p.id WHERE s.id_estado = ?", [4]);
         
 
         return view('proyectoViews.solicitud.Admin.index', [
@@ -304,27 +305,48 @@ class SolicitudController extends Controller
     }
 
     public function mis_solicitudes_comite(){
-        $solicitudes = DB::select(
-            "SELECT ROW_NUMBER() OVER(ORDER BY S.id ASC) AS row, P.nombre, S.id_proy, S.id_estado, S.id as id_soli FROM comite_usuario CU 
+        $solicitudes1 = DB::select(
+            "SELECT ROW_NUMBER() OVER(ORDER BY S.id ASC) AS row, P.nombre, S.id_proy, S.etapa, S.id as id_soli FROM comite_usuario CU 
             JOIN comite_de_evaluacion C ON CU.id_comite = C.id
             JOIN proyecto P ON C.id = P.id_comite
             JOIN solicitud S ON S.id_proy = P.id
-            WHERE CU.id_usuario = ?", [Auth::user()->id]);
-        
-        
-        $evaluadas = DB::select("SELECT id_solicitud FROM evaluacion WHERE id_user = ?", [Auth::user()->id]);
+            WHERE CU.id_usuario = ? AND S.id_estado = ?", [Auth::user()->id, 3]);
 
-        foreach ($solicitudes as $soli) { 
-            foreach($evaluadas as $eva){ 
+        $solicitudes2 = DB::select(
+            "SELECT ROW_NUMBER() OVER(ORDER BY S.id ASC) AS row, P.nombre, S.id_proy, S.etapa, S.id as id_soli FROM comite_usuario CU 
+            JOIN comite_de_evaluacion C ON CU.id_comite = C.id
+            JOIN proyecto P ON C.id = P.id_comite
+            JOIN solicitud S ON S.id_proy = P.id
+            WHERE CU.id_usuario = ? AND S.id_estado = ?", [Auth::user()->id, 3]);
+        
+        
+        $evaluadas1 = DB::select("SELECT id_solicitud FROM evaluacion 
+        WHERE id_user = ? AND etapa = ?", [Auth::user()->id, 1]);
+
+        $evaluadas2 = DB::select("SELECT id_solicitud FROM evaluacion 
+        WHERE id_user = ? AND etapa = ?", [Auth::user()->id, 2]);
+
+        foreach ($solicitudes1 as $soli) { 
+            foreach($evaluadas1 as $eva){ 
                 if($soli->id_soli == $eva->id_solicitud){
-                   unset($solicitudes[$soli->row - 1 ]);
+                   unset($solicitudes1[$soli->row - 1 ]);
+                }
+            }
+        }
+
+        foreach ($solicitudes2 as $soli) { 
+            foreach($evaluadas2 as $eva){ 
+                if($soli->id_soli == $eva->id_solicitud){
+                   unset($solicitudes2[$soli->row - 1 ]);
                 }
             }
         }
         
         return view('proyectoViews.solicitud.Admin.misSolicitudesComite', [
-            'solicitudes'=>$solicitudes,
-            'evaluadas'=>$evaluadas,
+            'solicitudes1'=>$solicitudes1,
+            'evaluadas1'=>$evaluadas1,
+            'solicitudes2'=>$solicitudes2,
+            'evaluadas2'=>$evaluadas2,
         ]);
     }
 
@@ -553,6 +575,8 @@ class SolicitudController extends Controller
 
     public function pre2($id){
 
+        $proyecto = Proyecto::findOrFail($id);
+        $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
         $idEquipo= Proyecto::select('id_equipo')->where('id',$id)->first();
         $factibilidad = Factibilidad::where('id_proy', $id)->first();
         $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$id]);
@@ -571,6 +595,7 @@ class SolicitudController extends Controller
             'idProyecto'=>$id, 
             'indicadores'=>$indicadores, 
             'miembrosEquipo'=>$miembrosEquipo,
+            'solicitud'=>$solicitud,
             
         ]);
     }

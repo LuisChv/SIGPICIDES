@@ -289,9 +289,9 @@ Evaluar Solicitud
 
 @endsection
 
-<script src="{{ asset('black') }}/js/oai.js"></script>
+<script src="{{ asset('black') }}/js/sigpi.js"></script>
 
-<!--script langiage="javascript" type="text/javascript">
+<script langiage="javascript" type="text/javascript">
 
     function agregarComentario(){
             $('#comentario').val($('#coment').val());
@@ -306,5 +306,4 @@ Evaluar Solicitud
                 $('#resultado').val(ele[i].value);
             } 
         } 
-
-</script-->
+</script>
