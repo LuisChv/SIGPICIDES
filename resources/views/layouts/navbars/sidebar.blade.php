@@ -77,7 +77,7 @@
                             <li @if ($pageSlug == 'solicitudes_evaluadas') class="active " @endif>
                                 <a href="{{ route('solicitud.evaluadas')  }}">
                                     <i class="tim-icons icon-check-2"></i>
-                                    <p>{{ __('Solicitudes Evaluadas') }}</p>
+                                    <p>{{ __('Solicitudes a Responder') }}</p>
                                 </a>
                             </li>
                         @endcan

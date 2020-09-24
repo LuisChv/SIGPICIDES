@@ -39,30 +39,17 @@ class SolicitudController extends Controller
             JOIN proyecto p 
             ON s.id = p.id WHERE s.id_estado = ?", [3]);
        
-       $solicitudes_A= DB::select("SELECT * 
+       $solicitudes_E= DB::select("SELECT s.id_estado, s.etapa, E.estado, p.nombre 
         FROM solicitud s 
-        JOIN proyecto p 
-        ON s.id = p.id WHERE s.id_estado = ?", [5]);
-        
- 
-
-        $solicitudes_R= DB::select("SELECT * 
-        FROM solicitud s 
-        JOIN proyecto p 
-        ON s.id = p.id WHERE s.id_estado = ?", [8]);
-        
-
-        $solicitudes_AP= DB::select("SELECT * 
-        FROM solicitud s 
-        JOIN proyecto p 
-        ON s.id = p.id WHERE s.id_estado = ?", [4]);
+        JOIN proyecto p ON s.id = p.id 
+        JOIN estado_de_solicitud E ON s.id_estado = E.id"
+        );
         
 
         return view('proyectoViews.solicitud.Admin.index', [
             'solicitudes'=>$solicitudes,
-            'solicitudes_A'=>$solicitudes_A,
-            'solicitudes_AP'=>$solicitudes_AP,
-            'solicitudes_R'=>$solicitudes_R,
+            'solicitudes_E'=>$solicitudes_E,
+           
             
             ]);
     }
@@ -434,46 +421,28 @@ class SolicitudController extends Controller
 
     public function solicitudes_evaluadas(){
         
-        $solicitudes = DB::select(
-            "SELECT S.id, P.nombre, COUNT(E.id), E.etapa FROM proyecto P 
+        $solicitudes1 = DB::select(
+            "SELECT S.id, P.nombre, COUNT(E.id), S.etapa FROM proyecto P 
             INNER JOIN solicitud S ON P.id = S.id_proy
             LEFT JOIN evaluacion E ON S.id = E.id_solicitud
-            GROUP BY S.id, P.nombre, E.etapa"
+            WHERE E.etapa = ?
+            GROUP BY S.id, P.nombre, E.etapa", [1]
+        );
+
+        $solicitudes2 = DB::select(
+            "SELECT S.id, P.nombre, COUNT(E.id), S.etapa FROM proyecto P 
+            INNER JOIN solicitud S ON P.id = S.id_proy
+            LEFT JOIN evaluacion E ON S.id = E.id_solicitud
+            WHERE E.etapa = ?
+            GROUP BY S.id, P.nombre, E.etapa", [2]
         );
 
         return view('proyectoViews.solicitud.Coordinador.solicitudes_evaluadas', [
-            'solicitudes' => $solicitudes
+            'solicitudes1' => $solicitudes1,
+            'solicitudes2' => $solicitudes2,
         ]);
     }
 
-    public function solicitudes_revisadas(){
-        
-        $solicitudes_A= DB::select("SELECT * 
-            FROM solicitud s 
-            JOIN proyecto p 
-            ON s.id = p.id WHERE s.id_estado = ?", [4]);
-            
-     
-
-        $solicitudes_R= DB::select("SELECT * 
-            FROM solicitud s 
-            JOIN proyecto p 
-            ON s.id = p.id WHERE s.id_estado = ?", [8]);
-            
-
-        $solicitudes_AP= DB::select("SELECT * 
-            FROM solicitud s 
-            JOIN proyecto p 
-            ON s.id = p.id WHERE s.id_estado = ?", [5]);
-            
-       
-
-        return view('proyectoViews.solicitud.Admin.solicitudes_revisadas', [
-            'solicitudes_A' => $solicitudes_A,
-            'solicitudes_AP' => $solicitudes_AP,
-            'solicitudes_R' => $solicitudes_R,
-        ]);
-    }
 
     /*------------------------------------------------
                         SEGUNDA ETAPA
@@ -577,16 +546,16 @@ class SolicitudController extends Controller
 
         $proyecto = Proyecto::findOrFail($id);
         $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
-        $idEquipo= Proyecto::select('id_equipo')->where('id',$id)->first();
+        $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
         $factibilidad = Factibilidad::where('id_proy', $id)->first();
-        $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$id]);
+        $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$equipo->id]);
         $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [true]);
         $idUsuarioLogeado=auth()->user()->id;
-        $usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $idEquipo->id_equipo)->where('id_usuario', $idUsuarioLogeado)->firstOr(function(){
+        $usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $equipo->id)->where('id_usuario', $idUsuarioLogeado)->firstOr(function(){
             abort(403);
         });
         $indicadores= Indicador::where('id_proy',$id)->get();
-        $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$idEquipo->id_equipo])->get();
+        $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$equipo->id])->get();
 
         return view('proyectoViews.solicitud.Investigador.previsualizacion2', [
             'factibilidad' => $factibilidad,
