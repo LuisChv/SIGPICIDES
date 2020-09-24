@@ -10,6 +10,7 @@ use App\User;
 use App\tareaUsuario;
 use App\TareaIndicador;
 use App\Solicitud;
+use App\ComiteUsuario;
 use DB;
 
 class TaskController extends Controller
