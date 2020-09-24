@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\UsuarioEquipoRol;
 use App\Proyecto;
+use App\EquipoDeInvestigacion;
 use Caffeinated\Shinobi\Models\Role;
 use DB;
 
@@ -21,6 +22,7 @@ class UsuarioEquipoRolController extends Controller
     {
         
         $proyecto = Proyecto::where('id', $id)->first();
+        $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
 
         $id_equipo = $proyecto->id_equipo;
 
@@ -56,6 +58,9 @@ class UsuarioEquipoRolController extends Controller
           
           //Roles
           $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [true]);
+
+          $cantidad_miembros = DB::table('usuario_equipo_rol')->where('id_equipo',[$equipo->id])->count();
+
  
           //Retornar la vista
           return view ('proyectoViews.equipo.index', [
@@ -64,6 +69,8 @@ class UsuarioEquipoRolController extends Controller
                'roles'=>$roles,
                'proyecto'=>$proyecto,
                'id_proyecto'=>$id,
+               'equipo'=>$equipo,
+               'cantidad_miembros'=>$cantidad_miembros,
           ]);
     }
 

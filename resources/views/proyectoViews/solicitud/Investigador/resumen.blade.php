@@ -101,7 +101,7 @@ Primera etapa
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
+        <div class="card" id="objetivosCard">
             <div class="card-header ">
                 <h4>
                     Objetivos
@@ -121,7 +121,7 @@ Primera etapa
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
+        <div class="card" id="alcancesCard">
             <div class="card-header ">
                 <h4>
                     Alcances
@@ -141,7 +141,7 @@ Primera etapa
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
+        <div class="card" id="indicadoresCard">
             <div class="card-header ">
                 <h4>
                     Indicadores
@@ -227,8 +227,15 @@ Primera etapa
     @endforeach
 </div>
 <div class="col-md-12 text-right">
-    <a class="btn btn-primary" href="{{ route('factibilidad.create', [$proyecto->id]) }}">
-        Siguiente
-    </a>
+    @if($solicitud->id_estado == 8)
+        <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
+            Regresar
+        </a>
+    @else
+        <a class="btn btn-primary" href="{{ route('factibilidad.create', [$proyecto->id]) }}">
+            Siguiente
+        </a>
+    @endif
 </div>
+<script src="{{ asset('black') }}/js/oai.js"></script>
 @endsection

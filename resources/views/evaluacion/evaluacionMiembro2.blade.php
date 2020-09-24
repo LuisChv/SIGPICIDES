@@ -79,8 +79,21 @@ Vista previa
             </div>
         </div>
     </div>
+
+    <div class="col-md-12">
+        <table width="100%">
+            <tr>
+                <td width="50%" align="left">
+                    <a class="btn btn-primary" href="{{ route('proyecto_tareas.index', $solicitud->id)  }}">
+                        Ver planificacion
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 
+<br>
 <div class="row">
     <div class="col-md-12">
         <div class="card">

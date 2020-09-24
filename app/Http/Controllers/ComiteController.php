@@ -63,6 +63,13 @@ class ComiteController extends Controller
          $cantidad_miembros = DB::table('comite_usuario')->where('id_comite',[$id_comite])->count();
          $evaluaciones = DB::table('evaluacion')->where('id_solicitud',[$solicitud->id]);
 
+         $evaluadores = DB::select("SELECT E.id_user, S.id, E.id FROM solicitud S
+         JOIN proyecto P ON S.id_proy = P.id
+         JOIN evaluacion E ON S.id = E.id_solicitud
+         JOIN comite_de_evaluacion C ON P.id_comite = C.id
+         WHERE C.id = ? AND E.id_user != ? AND E.id_user != ? ",[$id_comite, 2, 3]
+         );
+
          //Retornar la vista
          return view ('evaluacion.comite', [
               'usuarios'=>$noMiembros,  
@@ -72,6 +79,7 @@ class ComiteController extends Controller
               'proyecto'=>$proyecto,
               'solicitud'=>$solicitud,
               'evaluaciones'=>$evaluaciones,
+              'evaluadores'=>$evaluadores,
          ]);
     }
 

@@ -292,20 +292,26 @@ class SolicitudController extends Controller
     }
 
     public function mis_solicitudes_comite(){
-        $solicitudes1 = DB::select(
+        $solicitudes_etapa1 = DB::select(
             "SELECT ROW_NUMBER() OVER(ORDER BY S.id ASC) AS row, P.nombre, S.id_proy, S.etapa, S.id as id_soli FROM comite_usuario CU 
             JOIN comite_de_evaluacion C ON CU.id_comite = C.id
             JOIN proyecto P ON C.id = P.id_comite
             JOIN solicitud S ON S.id_proy = P.id
             WHERE CU.id_usuario = ? AND S.id_estado = ?", [Auth::user()->id, 3]);
 
-        $solicitudes2 = DB::select(
+        $solicitudes_etapa2 = DB::select(
             "SELECT ROW_NUMBER() OVER(ORDER BY S.id ASC) AS row, P.nombre, S.id_proy, S.etapa, S.id as id_soli FROM comite_usuario CU 
             JOIN comite_de_evaluacion C ON CU.id_comite = C.id
             JOIN proyecto P ON C.id = P.id_comite
             JOIN solicitud S ON S.id_proy = P.id
             WHERE CU.id_usuario = ? AND S.id_estado = ?", [Auth::user()->id, 3]);
         
+        $solicitudes_con_comite = DB::select(
+                "SELECT S.id as id_solicitud, P.nombre, COUNT(C.id) FROM proyecto P 
+                JOIN solicitud S ON P.id = S.id_proy
+                JOIN comite_de_evaluacion C ON S.id_proy = C.id
+                JOIN comite_usuario CU ON CU.id_comite = C.id
+                GROUP BY S.id, P.nombre, C.id, CU.id_comite");
         
         $evaluadas1 = DB::select("SELECT id_solicitud FROM evaluacion 
         WHERE id_user = ? AND etapa = ?", [Auth::user()->id, 1]);
@@ -313,26 +319,37 @@ class SolicitudController extends Controller
         $evaluadas2 = DB::select("SELECT id_solicitud FROM evaluacion 
         WHERE id_user = ? AND etapa = ?", [Auth::user()->id, 2]);
 
-        foreach ($solicitudes1 as $soli) { 
+        //Filtro de solicitudes sin evaluar        
+        foreach ($solicitudes_etapa1 as $soli) { 
             foreach($evaluadas1 as $eva){ 
                 if($soli->id_soli == $eva->id_solicitud){
-                   unset($solicitudes1[$soli->row - 1 ]);
+                   unset($solicitudes_etapa1[$soli->row- 1 ]);
                 }
             }
         }
 
-        foreach ($solicitudes2 as $soli) { 
+        //Filtro de solicitudes con comite asignado
+        foreach ($solicitudes_etapa1 as $soli) { 
+            foreach($solicitudes_con_comite as $scc){ 
+                if($soli->id_soli == $scc->id_solicitud && $scc->count == 2){
+                   unset($solicitudes_etapa1[$soli->row - 1 ]);
+                }
+            }
+        }
+
+        //Filtro de solicitudes sin evaluar etapa 2
+        foreach ($solicitudes_etapa2 as $soli) { 
             foreach($evaluadas2 as $eva){ 
                 if($soli->id_soli == $eva->id_solicitud){
-                   unset($solicitudes2[$soli->row - 1 ]);
+                   unset($solicitudes_etapa2[$soli->row - 1 ]);
                 }
             }
         }
         
         return view('proyectoViews.solicitud.Admin.misSolicitudesComite', [
-            'solicitudes1'=>$solicitudes1,
+            'solicitudes1'=>$solicitudes_etapa1,
             'evaluadas1'=>$evaluadas1,
-            'solicitudes2'=>$solicitudes2,
+            'solicitudes2'=>$solicitudes_etapa2,
             'evaluadas2'=>$evaluadas2,
         ]);
     }
@@ -400,7 +417,7 @@ class SolicitudController extends Controller
         $solicitud->modificable = false;
         $solicitud->save();
 
-        if($solicitud->id_estado == 2){
+        if($solicitud->id_estado == 3){
             $comite = new ComiteDeEvaluacion();
             $comite->save();
 
@@ -427,16 +444,16 @@ class SolicitudController extends Controller
             "SELECT S.id, P.nombre, COUNT(E.id), S.etapa FROM proyecto P 
             INNER JOIN solicitud S ON P.id = S.id_proy
             LEFT JOIN evaluacion E ON S.id = E.id_solicitud
-            WHERE E.etapa = ?
-            GROUP BY S.id, P.nombre, E.etapa", [1]
+            WHERE E.etapa = ? AND S.id_estado = ?
+            GROUP BY S.id, P.nombre, E.etapa", [1, 3]
         );
 
         $solicitudes2 = DB::select(
             "SELECT S.id, P.nombre, COUNT(E.id), S.etapa FROM proyecto P 
             INNER JOIN solicitud S ON P.id = S.id_proy
             LEFT JOIN evaluacion E ON S.id = E.id_solicitud
-            WHERE E.etapa = ?
-            GROUP BY S.id, P.nombre, E.etapa", [2]
+            WHERE E.etapa = ? AND S.id_estado = ?
+            GROUP BY S.id, P.nombre, E.etapa", [2, 3]
         );
 
         return view('proyectoViews.solicitud.Coordinador.solicitudes_evaluadas', [

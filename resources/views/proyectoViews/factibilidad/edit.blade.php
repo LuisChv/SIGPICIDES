@@ -15,7 +15,7 @@ Factibilidad
                     @csrf 
                     <div class="row">
                         <div class="col-md-6">
-                            <textarea maxlength="1500" class="form-control border border-light" rows="6" name="economica" placeholder="Factibilidad económica">{{$factibilidad->economia}}</textarea>
+                            <textarea maxlength="1500" class="inputArea" rows="5" name="economica" placeholder="Factibilidad económica">{{$factibilidad->economia}}</textarea>
                         </div>
                         <div class="col-md-6">
                             <textarea maxlength="1500" class="form-control border border-light" rows="6" name="financiera" placeholder="Factibilidad financiera">{{$factibilidad->financiera}}</textarea>
@@ -23,15 +23,15 @@ Factibilidad
                     </div><br>
                     <div class="row">
                         <div class="col-md-6">
-                            <textarea maxlength="1500" class="form-control border border-light" rows="6" name="operativa" placeholder="Factibilidad operativa">{{$factibilidad->operativa}}</textarea>
+                            <textarea maxlength="1500" class="inputArea" rows="5" name="operativa" placeholder="Factibilidad operativa">{{$factibilidad->operativa}}</textarea>
                         </div>
                         <div class="col-md-6">
-                            <textarea maxlength="1500" class="form-control border border-light" rows="6" name="tecnica" placeholder="Factibilidad técnica">{{$factibilidad->tecnica}}</textarea>
+                            <textarea maxlength="1500" class="inputArea" rows="5" name="tecnica" placeholder="Factibilidad técnica">{{$factibilidad->tecnica}}</textarea>
                         </div>
                     </div><br>
                     <div class="row">
                         <div class="col-md-6">
-                            <textarea maxlength="1500" class="form-control border border-light" rows="6" name="extra" placeholder="Factibilidad extra">{{$factibilidad->fac_extra}}</textarea>
+                            <textarea maxlength="1500" class="inputArea" rows="5" name="extra" placeholder="Factibilidad extra">{{$factibilidad->fac_extra}}</textarea>
                         </div>
                     </div>
                     <br>

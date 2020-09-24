@@ -43,13 +43,8 @@
         <table width="100%">
             <tr>
                 <td width="50%">
-                    <a class="btn btn-primary" href="{{ route('miembros.index', [$idProyecto]) }}">
-                        Anterior
-                    </a>
-                </td>
-                <td width="50%" align="right">
-                    <a class="btn btn-primary" href="{{ route('solicitud.pre2', [$idProyecto]) }}">
-                        Siguiente
+                    <a class="btn btn-primary" href="{{ route('evaluacion2.index', [$idProyecto]) }}">
+                        Regresar 
                     </a>
                 </td>
             </tr>

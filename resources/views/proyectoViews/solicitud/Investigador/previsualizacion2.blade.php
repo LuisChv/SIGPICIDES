@@ -101,7 +101,7 @@ Vista previa
             <table width="100%">
                 <tr>
                     <td width="50%">
-                        
+                        @if($solicitud->id_estado != 7 && $solicitud->id_estado != 3)
                             <a class="btn btn-primary" href="{{ route('proyecto_tareas.index', [$idProyecto]) }}">
                                 @if ($solicitud->id_estado != 3)    
                                     Anterior
@@ -109,9 +109,15 @@ Vista previa
                                     Planificación
                                 @endif
                             </a>
+                        @else
+                            <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
+                               Regresar
+                            </a>
+                        @endif
                     </td>
                     <form method="POST" id="formulario{{$solicitud->id}}" action="{{route('solicitud.enviar2', [$solicitud->id])}}" >
                         @csrf
+                        @if($solicitud->id_estado != 7)
                         <td width="50%" align="right">
                             @if ($solicitud->id_estado == 5)
                             <button type="button" class="btn btn-primary" onClick="confirmarEnvio({{$solicitud->id}})">
@@ -123,6 +129,9 @@ Vista previa
                             </a>
                             @endif
                         </td>
+                        @else
+
+                        @endif
                     </form>
                 </tr>
             </table>
