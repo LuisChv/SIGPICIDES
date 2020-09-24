@@ -16,7 +16,7 @@ class CreateEvaluacionsTable extends Migration
         Schema::create('evaluacion', function (Blueprint $table) {
             $table->id();
             $table->integer('etapa');
-            $table->string('comentario',200)->nullable();
+            $table->string('comentario',2048)->nullable();
             $table->integer('respuesta')->nullable();
             $table->boolean('visible')->default('true');
             $table->integer("id_user");
