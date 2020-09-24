@@ -15,23 +15,23 @@ Factibilidad
                     @csrf 
                     <div class="row">
                         <div class="col-md-6">
-                            <textarea maxlength="1500" class="form-control border border-light" rows="6" name="economica" placeholder="Factibilidad económica"></textarea>
+                            <textarea maxlength="1500" class="inputArea" rows="5" name="economica" placeholder="Factibilidad económica"></textarea>
                         </div>
                         <div class="col-md-6">
-                            <textarea maxlength="1500" class="form-control border border-light" rows="6" name="financiera" placeholder="Factibilidad financiera"></textarea>
-                        </div>
-                    </div><br>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <textarea maxlength="1500" class="form-control border border-light" rows="6" name="operativa" placeholder="Factibilidad operativa"></textarea>
-                        </div>
-                        <div class="col-md-6">
-                            <textarea maxlength="1500" class="form-control border border-light" rows="6" name="tecnica" placeholder="Factibilidad técnica"></textarea>
+                            <textarea maxlength="1500" class="inputArea" rows="5" name="financiera" placeholder="Factibilidad financiera"></textarea>
                         </div>
                     </div><br>
                     <div class="row">
                         <div class="col-md-6">
-                            <textarea maxlength="1500" class="form-control border border-light" rows="6" name="extra" placeholder="Factibilidad extra"></textarea>
+                            <textarea maxlength="1500" class="inputArea" rows="5" name="operativa" placeholder="Factibilidad operativa"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea maxlength="1500" class="inputArea" rows="5" name="tecnica" placeholder="Factibilidad técnica"></textarea>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <textarea maxlength="1500" class="inputArea" rows="5" name="extra" placeholder="Factibilidad extra"></textarea>
                         </div>
                     </div>
                     <br>
