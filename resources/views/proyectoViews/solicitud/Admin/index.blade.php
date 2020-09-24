@@ -38,9 +38,6 @@
                                                     <a title="Comite de Evaluacion" type="button" class="btn btn-info btn-sm btn-icon btn-round" href="{{ route('comite.index', [$soli->id_proy])}}">
                                                     <i class="tim-icons icon-single-02"></i>
                                                     </a>
-                                                    <a title="Eliminar" type="button" class="btn btn-warning btn-sm btn-icon btn-round" href="">
-                                                        <i class="tim-icons icon-simple-remove"></i>
-                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>  

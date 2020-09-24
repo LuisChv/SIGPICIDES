@@ -199,14 +199,16 @@ Vista previa
 <table class="col-md-12">
     <tr>
         <td width="50%">
+            @if ($solicitud->id_estado != 3)
             <a class="btn btn-primary" href="{{ route('proyecto_recursos.create', [$proyecto->id])}}">
                 Recursos
             </a>
+            @endif
         </td>
         <form method="POST" id="formulario{{$solicitud->id}}" action="{{route('solicitud.enviar', [$solicitud->id_proy])}}" >
             @csrf
             <td width="50%" align="right">
-                @if ($solicitud->id_estado == 2)
+                @if ($solicitud->id_estado == 2 || $solicitud->id_estado == 4)
                 <button type="button" class="btn btn-primary" onClick="confirmarEnvio({{$solicitud->id}})">
                     Enviar
                 </button>

@@ -25,7 +25,7 @@ class TaskController extends Controller
             $solicitud= Solicitud::select('id_estado')->where('id_proy', $idProyecto)->first();
             //Validacion para que solo permita modificar perfiles aprobados
             if($solicitud->id_estado==5){}
-            //else{ abort(404);}
+            else{ abort(403);}
             $idUsuarioLogeado=auth()->user()->id;
             //En caso sea miembro del comite se mostrara el gant pero no se podra modificar
             //Comprobando si el usuario equipo rol existe (id del equipo y id del usuario logeado)

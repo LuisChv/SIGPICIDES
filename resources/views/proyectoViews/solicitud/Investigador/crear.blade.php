@@ -97,7 +97,7 @@ Nueva investigación
                                             <i class="tim-icons icon-calendar-60"></i>
                                         </div>
                                     </div>
-                                    <input type="number" required type="text" name="duracion" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Duración en semanas') }}">
+                                    <input min="0" type="number" required type="text" name="duracion" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Duración en semanas') }}">
                                     @include('alerts.feedback', ['field' => 'duracion'])
                                 </div>
 
@@ -107,7 +107,7 @@ Nueva investigación
                                             <i class="tim-icons icon-single-02"></i>
                                         </div>
                                     </div>
-                                    <input type="number" required type="text" name="miembros" class="form-control{{ $errors->has('miembros') ? ' is-invalid' : '' }}" placeholder="{{ __('Cantidad de miembros') }}">
+                                    <input min="0" type="number" required type="text" name="miembros" class="form-control{{ $errors->has('miembros') ? ' is-invalid' : '' }}" placeholder="{{ __('Cantidad de miembros') }}">
                                     @include('alerts.feedback', ['field' => 'miembros'])
                                 </div>
                                 <div class="col-md-4 input-group{{ $errors->has('costo') ? ' has-danger' : '' }}">
@@ -116,7 +116,7 @@ Nueva investigación
                                             <i class="tim-icons icon-coins"></i>
                                         </div>
                                     </div>
-                                    <input type="number" required type="text" name="costo" class="form-control{{ $errors->has('costo') ? ' is-invalid' : '' }}" placeholder="{{ __('Costo estimado') }}">
+                                    <input min="0" type="number" required type="text" name="costo" class="form-control{{ $errors->has('costo') ? ' is-invalid' : '' }}" placeholder="{{ __('Costo estimado') }}" step="0.01">
                                     @include('alerts.feedback', ['field' => 'costo'])
                                 </div>
                             </div>

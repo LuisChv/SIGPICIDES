@@ -400,21 +400,23 @@ class SolicitudController extends Controller
         $solicitud->modificable = false;
         $solicitud->save();
 
-        $comite = new ComiteDeEvaluacion();
-        $comite->save();
+        if($solicitud->id_estado == 2){
+            $comite = new ComiteDeEvaluacion();
+            $comite->save();
 
-        $proyecto->id_comite = $comite->id;
-        $proyecto->save();
+            $proyecto->id_comite = $comite->id;
+            $proyecto->save();
 
-        $comite_usuario = new ComiteUsuario();
-        $comite_usuario->id_comite = $comite->id;
-        $comite_usuario->id_usuario = $director->user_id;
-        $comite_usuario->save();
+            $comite_usuario = new ComiteUsuario();
+            $comite_usuario->id_comite = $comite->id;
+            $comite_usuario->id_usuario = $director->user_id;
+            $comite_usuario->save();
 
-        $comite_usuario = new ComiteUsuario();
-        $comite_usuario->id_comite = $comite->id;
-        $comite_usuario->id_usuario = $coordinador->user_id;
-        $comite_usuario->save();
+            $comite_usuario = new ComiteUsuario();
+            $comite_usuario->id_comite = $comite->id;
+            $comite_usuario->id_usuario = $coordinador->user_id;
+            $comite_usuario->save();
+        }
 
         return redirect()->route('solicitud.mis_solicitudes');
     }

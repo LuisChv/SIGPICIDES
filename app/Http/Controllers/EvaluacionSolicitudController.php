@@ -113,6 +113,15 @@ class EvaluacionSolicitudController extends Controller
      */
     public function store($id)
     {
+        request()->validate([
+            'comentario'=> ['max:2048'],
+            'resultado' => 'required'
+        ],
+        [
+            'resultado.required' => "Seleccione una respuesta.",
+            'comentario.max' => "El comentario no debe exceder los 2048 caracteres."
+        ]);
+
         $respuesta = request('resultado');
       
         $evaluacion = new Evaluacion;
