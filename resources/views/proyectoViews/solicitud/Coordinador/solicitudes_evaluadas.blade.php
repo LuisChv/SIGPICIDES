@@ -15,7 +15,7 @@
             </div>
             <div class="card-body">
                 <table class="table">
-                    @foreach ($solicitudes as $solicitud)
+                    @foreach ($solicitudes1 as $solicitud)
                         @if ($solicitud->count == 3 && $solicitud->etapa == 1)
                             <tr>
                                 <td><i class="tim-icons icon-check-2"></i> {{$solicitud->nombre}}</td>
@@ -42,8 +42,8 @@
             </div>
             <div class="card-body">
                 <table class="table">
-                    @foreach ($solicitudes as $solicitud)
-                        @if ($solicitud->count == 6 && $solicitud->etapa == 2)
+                    @foreach ($solicitudes2 as $solicitud)
+                        @if ($solicitud->count == 3 && $solicitud->etapa == 2)
                             <tr>
                                 <td>{{$solicitud->nombre}}</td>
                             </tr>
