@@ -79,7 +79,7 @@ class EvaluacionSolicitudController extends Controller
         $indicadores= Indicador::where('id_proy',$id)->get();
         $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$equipo->id])->get();
 
-        $estados_soli = DB::select("SELECT * FROM estado_de_solicitud WHERE id = ? OR id = ? OR id = ?", [4,5,8]);
+        $estados_soli = DB::select("SELECT * FROM estado_de_solicitud WHERE id = ? OR id = ? OR id = ?", [6,7,8]);
 
 
         return view('evaluacion.evaluacionMiembro2', [
@@ -113,6 +113,9 @@ class EvaluacionSolicitudController extends Controller
      */
     public function store($id)
     {
+        $proyecto = Proyecto::findOrFail($id);
+        $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
+
         request()->validate([
             'comentario'=> ['max:2048'],
             'resultado' => 'required'
@@ -125,7 +128,7 @@ class EvaluacionSolicitudController extends Controller
         $respuesta = request('resultado');
       
         $evaluacion = new Evaluacion;
-        $evaluacion->etapa = 1;
+        $evaluacion->etapa = $solicitud->etapa;
         $evaluacion->id_user = Auth::user()->id;
         $evaluacion->id_solicitud = $id;
         $evaluacion->comentario = request('comentario');
@@ -138,7 +141,7 @@ class EvaluacionSolicitudController extends Controller
         
     }
 
-    public function evaluacion_final($id)
+    public function evaluacion_final2($id)
     {
         $proyecto = Proyecto::findOrFail($id);
         $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
@@ -162,6 +165,36 @@ class EvaluacionSolicitudController extends Controller
 
     }
 
+    public function evaluacion_final($id)
+    {
+        $proyecto = Proyecto::findOrFail($id);
+        $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
+        $solicitud->enviada = false;
+        $solicitud->noti_inv = false;
+        $solicitud->save();
+        $id_comite = $proyecto->id_comite;
+
+        $miembros_comite = DB::select("SELECT CU.id_usuario, U.name FROM comite_usuario CU JOIN users U ON CU.id_usuario = U.id WHERE id_comite = ?", [$id_comite]);
+
+        if($solicitud->etapa == 1){
+            $estados_soli = DB::select("SELECT * FROM estado_de_solicitud WHERE id = ? OR id = ? OR id = ?", [4,5,8]);
+            $evaluaciones = DB::select("SELECT * FROM evaluacion WHERE id_solicitud = ? AND etapa = ?", [$id, 1]);
+        }else{
+            $estados_soli = DB::select("SELECT * FROM estado_de_solicitud WHERE id = ? OR id = ? OR id = ?", [6,7,8]);
+            $evaluaciones = DB::select("SELECT * FROM evaluacion WHERE id_solicitud = ? AND etapa = ?", [$id, 2]);
+        }
+       
+
+        return view('evaluacion.evaluacionFinal', [
+            'proyecto' => $proyecto,
+            'solicitud'=>$solicitud,
+            'evaluaciones'=>$evaluaciones,
+            'estados'=>$estados_soli,
+            'miembros_comite'=>$miembros_comite,
+        ]);
+
+    }
+
     public function respuesta_evaluacion($id)
     {
         $respuesta = request('resultado');
@@ -170,9 +203,6 @@ class EvaluacionSolicitudController extends Controller
 
         $solicitud->id_estado = $respuesta;
 
-        if($respuesta == 5){
-            $solicitud->etapa = 2;
-        }
 
         $solicitud->save();
 

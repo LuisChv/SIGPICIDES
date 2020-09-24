@@ -24,26 +24,25 @@
                     </thead>
                     <tbody>
                         @foreach ($miembros as $miembro) 
-                        <tr>                     
-                            <td> {{ $miembro->name }} </td>
-                            <td> 
-                                <select class="form-control selectorWapis" value="" id="rol" name="rol" disabled>
-                                    <option value="">{{ $miembro->name1 }}</option>
-                                </select> 
-                            </td>
-
-
-                            <form method="POST" id="formulario{{$miembro->id_usuario}}" action="{{ route('comite.destroy', [$miembro->id_usuario, $proyecto->id] )}}" >
-                                <td width='10%' align="center">  
-                                    @csrf
-                                    @method('DELETE')
-                                    <button @if ($miembro->role_id == 2 | $miembro->role_id == 3  ) disabled @endif type="button" onClick="confirmar({{$miembro->id_usuario}})" style="pointer-events: auto;" title="No se puede eliminar" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
-                                        <i class="tim-icons icon-simple-remove"></i>
-                                    </button>         
+                            <tr>                     
+                                <td> {{ $miembro->name }} </td>
+                                <td> 
+                                    <select class="form-control selectorWapis" value="" id="rol" name="rol" disabled>
+                                        <option value="">{{ $miembro->name1 }}</option>
+                                    </select> 
                                 </td>
-                            </form>
-                        
-                        </tr>
+                                <form method="POST" id="formulario{{$miembro->id_usuario}}" action="{{ route('comite.destroy', [$miembro->id_usuario, $proyecto->id] )}}" >
+                                @if ($miembro->role_id != 2  && $miembro->role_id != 3 )    
+                                    <td width='10%' align="center">  
+                                        @csrf
+                                        @method('DELETE')
+                                        <button @foreach ($evaluadores as $eva) @if($eva->id_user == $miembro->id_usuario ) disabled @endif @endforeach type="button" id="boton" onClick="confirmar({{$miembro->id_usuario}})" style="pointer-events: auto;" title="No se puede eliminar" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
+                                            <i class="tim-icons icon-simple-remove"></i>
+                                        </button>      
+                                    </td>
+                                @endif
+                                </form>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -134,6 +133,19 @@
         </div>
         
     </div>
+    @if($cantidad_miembros==3)
+    <div class="col-md-12">
+        <table width="100%">
+            <tr>
+                <td width="50%" align="right">
+                    <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes_comite')  }}">
+                        Solicitudes Evaluar
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    @endif
 </div>
 @endsection
 

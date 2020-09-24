@@ -61,7 +61,7 @@
                             <li @if ($pageSlug == 'solicitudes_nuevas') class="active " @endif>
                                 <a href="{{ route('solicitud.index') }}">
                                     <i class="tim-icons icon-bullet-list-67"></i>
-                                    <p>{{ __('Solicitudes por Estado') }}</p>
+                                    <p>{{ __('Solicitudes Nuevas') }}</p>
                                 </a>
                             </li>
                         @endcan
