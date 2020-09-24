@@ -168,3 +168,21 @@ input:checked + .slider:before {
     color:red;
     font-size:1.15em;
 }
+
+/*Textareas personalizados*/
+.inputArea{
+  font-size: 12px;
+  width: 100%;
+  border-radius: 8px;
+  resize: vertical;
+  border: 1px solid rgba(29, 37, 59, 0.5);
+  padding: 10px;
+}
+.inputArea:focus{
+  outline: none;
+  border: 1px solid #1d8cf8;
+  border-radius: 8px;
+}
+.inputArea::placeholder{
+  color: #bbb;
+}

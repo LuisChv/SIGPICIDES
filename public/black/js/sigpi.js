@@ -60,6 +60,22 @@ function bloquearRecurso(valor){
     btnrecurso.disabled=true;
     console.log="llega aqui";
 }
+
+//vista evaluacion
+function agregarComentario(){
+    $('#comentario').val($('#coment').val());
+    $('#comentario1').val($('#coment').val());
+}
+
+function displayRadioValue() { 
+    var ele = document.getElementsByName('rad'); 
+              
+    for(i = 0; i < ele.length; i++) { 
+        if(ele[i].checked) 
+            $('#resultado').val(ele[i].value);
+    } 
+} 
+
 //Dentro de aquí se pueden cargar funciones que necesitan que el html se carguen primero
 $(document).ready(function(){//lo que este dentro de aquí se cargara hasta que la pagina este totalmente cargada
     $('#selector1').change(function () {

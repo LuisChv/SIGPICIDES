@@ -30,7 +30,7 @@ class UsuarioEquipoRolController extends Controller
        
  
          //Omitir Miembros del equipo 
-          $miembrosEquipo = DB::select('SELECT * FROM usuario_equipo_rol WHERE id_equipo = ?', [$id]);
+          $miembrosEquipo = DB::select('SELECT * FROM usuario_equipo_rol WHERE id_equipo = ?', [$id_equipo]);
  
          foreach ($miembrosEquipo as $miembro) { 
              foreach($noMiembros as $user){ 
@@ -52,7 +52,7 @@ class UsuarioEquipoRolController extends Controller
           }
  
            //Miembros del equipo 
-            $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$id]);
+            $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$id_equipo]);
           
           //Roles
           $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [true]);
@@ -85,13 +85,16 @@ class UsuarioEquipoRolController extends Controller
      */
     public function store($id)
     {
+        $proyecto = Proyecto::where('id', $id)->first();
+
+        $id_equipo = $proyecto->id_equipo;
         $id_investigador = request('investigador');
         $role = Role::where('name', request('rolmiembro'))->first();;
         $rol_miembro = Role::where('name', request('rolmiembro'))->first();
 
 
         DB::table('usuario_equipo_rol')->insert([
-            'id_equipo' => $id,
+            'id_equipo' => $id_equipo,
             'id_usuario' =>$id_investigador,    
             'id_rol'=>$role->id,
         ]);

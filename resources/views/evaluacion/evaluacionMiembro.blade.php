@@ -102,7 +102,7 @@ Evaluar Solicitud
     </div>
 
     <div class="col-md-4">
-        <div class="card">
+        <div class="card" id="objetivosCard">
             <div class="card-header ">
                 <h4>
                     Objetivos
@@ -122,7 +122,7 @@ Evaluar Solicitud
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
+        <div class="card" id="alcancesCard">
             <div class="card-header ">
                 <h4>
                     Alcances
@@ -142,7 +142,7 @@ Evaluar Solicitud
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
+        <div class="card" id="indicadoresCard">
             <div class="card-header ">
                 <h4>
                     Indicadores
@@ -273,7 +273,7 @@ Evaluar Solicitud
                 <div class="modal-body">                     
                     <table class="table" style="background-color: white !important;" >
                         <tr>
-                            <td><textarea id= "coment" required rows="3" style="color: #222a42 !important;" class="form-control border border-light rounded" name="descripcion_objetivo"></textarea></td>
+                            <td><textarea id= "coment" required rows="3" style="color: #222a42 !important;" class="inputArea" maxlength="200" name="descripcion_objetivo"></textarea></td>
                         </tr>
                         <input hidden name="id_proy" value=""/>
                     </table>
@@ -288,6 +288,8 @@ Evaluar Solicitud
 
 
 @endsection
+
+<script src="{{ asset('black') }}/js/sigpi.js"></script>
 
 <script langiage="javascript" type="text/javascript">
 
@@ -304,5 +306,4 @@ Evaluar Solicitud
                 $('#resultado').val(ele[i].value);
             } 
         } 
-
 </script>
