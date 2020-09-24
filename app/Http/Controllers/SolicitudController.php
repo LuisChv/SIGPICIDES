@@ -94,16 +94,16 @@ class SolicitudController extends Controller
         //dd(auth()->user()->id);
         //Validacion de los datos      
         request()->validate([
-            'nombre'=> 'required',
+            'nombre'=> ['required', 'max:1024', 'string'],
             'tipoRec'=> 'required',
             'subtipo'=> 'required',
-            'descripcion'=> 'required',     
-            'tema'=> 'required',
-            'justificacion'=> 'required',
-            'resultados'=> 'required',
-            'duracion'=> ['required', 'numeric'],
-            'miembros'=> ['required', 'numeric'],
-            'costo'=> ['required', 'numeric']
+            'descripcion'=> ['required', 'max:1024', 'string'], 
+            'tema'=> ['required', 'max:1024', 'string'],
+            'justificacion'=> ['required', 'max:1024', 'string'],
+            'resultados'=> ['required', 'max:1024', 'string'],
+            'duracion'=> ['required', 'numeric', 'max:300', 'min:1'],
+            'miembros'=> ['required','numeric', 'max:20', 'min:0'],
+            'costo'=> ['required','numeric', 'min:0']
         ],
         [
             'nombre.required' => "El nombre es obligatorio.",
