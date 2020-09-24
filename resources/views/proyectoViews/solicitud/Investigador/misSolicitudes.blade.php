@@ -26,7 +26,7 @@
                                 </td>
                                 
                                 <td width="15%">
-                                    @if($soli->estado=="Enviada para revisar")
+                                    @if($soli->estado=="Enviada para revisar" || $soli->estado=="Corregida" )
                                     <td width="15%" class="text-right">
                                         <a href="{{ route('solicitud.pre', [$soli->id_proy])}}" type="button" class="btn btn-primary btn-sm btn-round">
                                             <i class="tim-icons icon-zoom-split"></i> Vista previa
@@ -107,7 +107,7 @@
                                     <p>{{ $soli->estado }}</p> 
                                 </td>
                                 <td width="15%">
-                                    @if($soli->estado=="Enviada para revisar")
+                                    @if($soli->estado=="Enviada para revisar" || $soli->estado=="Corregida")
                                     <td width="15%" class="text-right">
                                         <a href="{{ route('solicitud.pre2', [$soli->id_proy])}}" type="button" class="btn btn-primary btn-sm btn-round">
                                             <i class="tim-icons icon-zoom-split"></i> Vista previa

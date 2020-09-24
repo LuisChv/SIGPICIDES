@@ -314,6 +314,13 @@ class SolicitudController extends Controller
             JOIN proyecto P ON C.id = P.id_comite
             JOIN solicitud S ON S.id_proy = P.id
             WHERE CU.id_usuario = ? AND S.id_estado = ?", [Auth::user()->id, 3]);
+
+        $solicitudes_corregidas2 = DB::select(
+        "SELECT P.nombre, S.id, S.etapa, S.id_proy FROM solicitud S
+        LEFT JOIN evaluacion E ON S.id = E.id_solicitud
+        JOIN proyecto P ON S.id_proy = P.id
+        WHERE E.id_user = ? AND E.etapa = ? AND S.id_estado = ? AND E.visible = ? ", [Auth::user()->id,2,9,false]);
+
         
         $solicitudes_con_comite = DB::select(
                 "SELECT S.id as id_solicitud, P.nombre, COUNT(C.id) FROM proyecto P 
@@ -360,6 +367,7 @@ class SolicitudController extends Controller
             'solicitudes_corregidas1'=>$solicitudes_corregidas1,
             'evaluadas1'=>$evaluadas1,
             'solicitudes2'=>$solicitudes_etapa2,
+            'solicitudes_corregidas2'=>$solicitudes_corregidas2,
             'evaluadas2'=>$evaluadas2,
         ]);
     }
@@ -473,25 +481,28 @@ class SolicitudController extends Controller
             GROUP BY S.id, P.nombre, E.etapa", [2, 3]
         );
 
-        $solicitudes1 = DB::select(
+        $solicitudes_corregidas1 = DB::select(
             "SELECT S.id, P.nombre, COUNT(E.id), S.etapa FROM proyecto P 
             INNER JOIN solicitud S ON P.id = S.id_proy
             LEFT JOIN evaluacion E ON S.id = E.id_solicitud
-            WHERE E.etapa = ? AND S.id_estado = ?
-            GROUP BY S.id, P.nombre, E.etapa", [1, 3]
+            WHERE E.etapa = ? AND S.id_estado = ? AND E.visible=?
+            GROUP BY S.id, P.nombre, E.etapa", [1, 9, true]
         );
 
-        $solicitudes2 = DB::select(
+        $solicitudes_corregidas2 = DB::select(
             "SELECT S.id, P.nombre, COUNT(E.id), S.etapa FROM proyecto P 
             INNER JOIN solicitud S ON P.id = S.id_proy
             LEFT JOIN evaluacion E ON S.id = E.id_solicitud
-            WHERE E.etapa = ? AND S.id_estado = ?
-            GROUP BY S.id, P.nombre, E.etapa", [2, 3]
+            WHERE E.etapa = ? AND S.id_estado = ? AND E.visible=?
+            GROUP BY S.id, P.nombre, E.etapa", [2, 9, true]
         );
-        
+
         return view('proyectoViews.solicitud.Coordinador.solicitudes_evaluadas', [
             'solicitudes1' => $solicitudes1,
             'solicitudes2' => $solicitudes2,
+            'solicitudes_corregidas1' => $solicitudes_corregidas1,
+            'solicitudes_corregidas2' => $solicitudes_corregidas2,
+            
         ]);
     }
 
@@ -644,7 +655,7 @@ class SolicitudController extends Controller
     public function enviar2($id){
         $solicitud = Solicitud::where('id_proy', $id)->first();
         $solicitud->enviada = true;
-        $solicitud->id_estado = 3;
+        $solicitud->id_estado = 9;
         $solicitud->noti_inv = true;
         $solicitud->modificable = false;
         $solicitud->save();

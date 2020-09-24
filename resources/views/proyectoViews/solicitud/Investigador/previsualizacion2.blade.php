@@ -119,7 +119,7 @@ Vista previa
                         @csrf
                         @if($solicitud->id_estado != 7)
                         <td width="50%" align="right">
-                            @if ($solicitud->id_estado == 5)
+                            @if ($solicitud->id_estado == 5 || $solicitud->id_estado == 6)
                             <button type="button" class="btn btn-primary" onClick="confirmarEnvio({{$solicitud->id}})">
                                 Enviar
                             </button>
