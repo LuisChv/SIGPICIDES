@@ -50,7 +50,6 @@ class SolicitudController extends Controller
             'solicitudes'=>$solicitudes,
             'solicitudes_E'=>$solicitudes_E,
            
-            
             ]);
     }
 
@@ -241,10 +240,14 @@ class SolicitudController extends Controller
         //Se crea la solicitud del proyecto
         $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
         $solicitud->id_proy=$proyecto->id;
-        $solicitud->id_estado = 1;
+        
+        if($solicitud->id_estado == 4){
+
+        }else{
+            $solicitud->id_estado = 1;
+        }
         $solicitud->noti_inv= false;
         $solicitud->noti_coo= false;
-        $solicitud->id_estado = 1;
         //$solicitud->modificable=false;
         //Se crea el nuevo detalle recurso
         $solicitud->save();
@@ -298,6 +301,12 @@ class SolicitudController extends Controller
             JOIN proyecto P ON C.id = P.id_comite
             JOIN solicitud S ON S.id_proy = P.id
             WHERE CU.id_usuario = ? AND S.id_estado = ?", [Auth::user()->id, 3]);
+        
+        $solicitudes_corregidas1 = DB::select(
+            "SELECT P.nombre, S.id, S.etapa, S.id_proy FROM solicitud S
+            LEFT JOIN evaluacion E ON S.id = E.id_solicitud
+			JOIN proyecto P ON S.id_proy = P.id
+            WHERE E.id_user = ? AND E.etapa = ? AND S.id_estado = ? AND E.visible = ? ", [Auth::user()->id,1,9,false]);
 
         $solicitudes_etapa2 = DB::select(
             "SELECT ROW_NUMBER() OVER(ORDER BY S.id ASC) AS row, P.nombre, S.id_proy, S.etapa, S.id as id_soli FROM comite_usuario CU 
@@ -348,6 +357,7 @@ class SolicitudController extends Controller
         
         return view('proyectoViews.solicitud.Admin.misSolicitudesComite', [
             'solicitudes1'=>$solicitudes_etapa1,
+            'solicitudes_corregidas1'=>$solicitudes_corregidas1,
             'evaluadas1'=>$evaluadas1,
             'solicitudes2'=>$solicitudes_etapa2,
             'evaluadas2'=>$evaluadas2,
@@ -360,13 +370,17 @@ class SolicitudController extends Controller
         $alcances = DB::select("SELECT * FROM alcance WHERE id_proyecto = ?", [$id]);
         $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ?", [$id]);
         $solicitud = Solicitud::where('id_proy', $id)->first();
+        if($solicitud->id_estado == 4){
 
-        if(count($objetivos) > 0 && count($alcances) > 0 && count($indicadores) > 0){
-            $solicitud->id_estado = 2;
-            
-        } else{
-            $solicitud->id_estado = 1;
+        }else{
+            if(count($objetivos) > 0 && count($alcances) > 0 && count($indicadores) > 0){
+                $solicitud->id_estado = 2;
+                
+            } else{
+                $solicitud->id_estado = 1;
+            }
         }
+    
         $solicitud->save();
 
         return view('proyectoViews.solicitud.Investigador.oai', [
@@ -412,12 +426,12 @@ class SolicitudController extends Controller
 
         $solicitud = Solicitud::where('id_proy', $id)->first();
         $solicitud->enviada = true;
-        $solicitud->id_estado = 3;
         $solicitud->noti_inv = true;
         $solicitud->modificable = false;
-        $solicitud->save();
 
-        if($solicitud->id_estado == 3){
+        if($solicitud->id_estado == 4){
+            $solicitud->id_estado = 9;
+        }else{
             $comite = new ComiteDeEvaluacion();
             $comite->save();
 
@@ -433,7 +447,10 @@ class SolicitudController extends Controller
             $comite_usuario->id_comite = $comite->id;
             $comite_usuario->id_usuario = $coordinador->user_id;
             $comite_usuario->save();
+            $solicitud->id_estado = 3;
         }
+
+        $solicitud->save();
 
         return redirect()->route('solicitud.mis_solicitudes');
     }
@@ -456,6 +473,22 @@ class SolicitudController extends Controller
             GROUP BY S.id, P.nombre, E.etapa", [2, 3]
         );
 
+        $solicitudes1 = DB::select(
+            "SELECT S.id, P.nombre, COUNT(E.id), S.etapa FROM proyecto P 
+            INNER JOIN solicitud S ON P.id = S.id_proy
+            LEFT JOIN evaluacion E ON S.id = E.id_solicitud
+            WHERE E.etapa = ? AND S.id_estado = ?
+            GROUP BY S.id, P.nombre, E.etapa", [1, 3]
+        );
+
+        $solicitudes2 = DB::select(
+            "SELECT S.id, P.nombre, COUNT(E.id), S.etapa FROM proyecto P 
+            INNER JOIN solicitud S ON P.id = S.id_proy
+            LEFT JOIN evaluacion E ON S.id = E.id_solicitud
+            WHERE E.etapa = ? AND S.id_estado = ?
+            GROUP BY S.id, P.nombre, E.etapa", [2, 3]
+        );
+        
         return view('proyectoViews.solicitud.Coordinador.solicitudes_evaluadas', [
             'solicitudes1' => $solicitudes1,
             'solicitudes2' => $solicitudes2,

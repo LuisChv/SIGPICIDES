@@ -205,7 +205,7 @@ Vista previa
             </a>
             @endif
         </td>
-        <form method="POST" id="formulario{{$solicitud->id}}" action="{{route('solicitud.enviar', [$solicitud->id_proy])}}" >
+        <form method="POST" id="formulario{{$solicitud->id}}" action="{{route('solicitud.enviar', [$solicitud->id])}}" >
             @csrf
             <td width="50%" align="right">
                 @if ($solicitud->id_estado == 2 || $solicitud->id_estado == 4)

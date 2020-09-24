@@ -127,14 +127,26 @@ class EvaluacionSolicitudController extends Controller
 
         $respuesta = request('resultado');
       
-        $evaluacion = new Evaluacion;
-        $evaluacion->etapa = $solicitud->etapa;
-        $evaluacion->id_user = Auth::user()->id;
-        $evaluacion->id_solicitud = $id;
-        $evaluacion->comentario = request('comentario');
-        $evaluacion->respuesta = $respuesta;
-        $evaluacion->visible = false;
-        $evaluacion->save();
+        if($solicitud->id_estado == 9){
+            $evaluacion = Evaluacion::where('id_solicitud', $solicitud->id)->where('id_user', Auth::user()->id)->first();;
+            $evaluacion->etapa = $solicitud->etapa;
+            $evaluacion->id_user = Auth::user()->id;
+            $evaluacion->id_solicitud = $id;
+            $evaluacion->comentario = request('comentario');
+            $evaluacion->respuesta = $respuesta;
+            $evaluacion->visible = true;
+            $evaluacion->save();
+        }
+        else{
+            $evaluacion = new Evaluacion;
+            $evaluacion->etapa = $solicitud->etapa;
+            $evaluacion->id_user = Auth::user()->id;
+            $evaluacion->id_solicitud = $id;
+            $evaluacion->comentario = request('comentario');
+            $evaluacion->respuesta = $respuesta;
+            $evaluacion->visible = false;
+            $evaluacion->save();
+        }
 
         return redirect()->route('solicitud.mis_solicitudes_comite');
         

@@ -55,17 +55,19 @@
                                     </td>
                                     
                                     @elseif($soli->estado=="Perfil aceptado con condición")
-                                    <div class="btn-group" role="group">
-                                        <a title="Información principal" type="button" class="btn btn-primary btn-sm btn-round" href="{{ route('solicitud.edit', [$soli->id_proy])}}">
-                                            <i class="tim-icons icon-notes"></i>
-                                        </a>
-                                        <a title="Objetivos, alcances e indicadores" type="button" class="btn btn-primary btn-sm btn-icon btn-round" href="{{ route('proyecto.oai', [$soli->id_proy])}}">
-                                            <i class="tim-icons icon-spaceship"></i>
-                                        </a>
-                                        <a title="Recursos" type="button" class="btn btn-primary btn-sm btn-icon btn-round" href="{{ route('proyecto_recursos.create', [$soli->id_proy])}}">
-                                            <i class="tim-icons icon-laptop"></i>
-                                        </a>
-                                    </div>
+                                    <td width="15%" class="text-right">
+                                        <div class="btn-group" role="group">
+                                            <a title="Información principal" type="button" class="btn btn-primary btn-sm btn-round" href="{{ route('solicitud.edit', [$soli->id_proy])}}">
+                                                <i class="tim-icons icon-notes"></i>
+                                            </a>
+                                            <a title="Objetivos, alcances e indicadores" type="button" class="btn btn-primary btn-sm btn-icon btn-round" href="{{ route('proyecto.oai', [$soli->id_proy])}}">
+                                                <i class="tim-icons icon-spaceship"></i>
+                                            </a>
+                                            <a title="Recursos" type="button" class="btn btn-primary btn-sm btn-icon btn-round" href="{{ route('proyecto_recursos.create', [$soli->id_proy])}}">
+                                                <i class="tim-icons icon-laptop"></i>
+                                            </a>
+                                        </div>
+                                    </td>
                                     @elseif($soli->estado=="Denegada")
                                         <td width="15%" class="text-right">
                                             <a href="{{ route('solicitud.resumen', [$soli->id_proy])}}" type="button" class="btn btn-primary btn-sm btn-round">

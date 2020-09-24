@@ -41,7 +41,22 @@
                                             </td>
                                         </tr>
                                         @endif                      
-                                    @endforeach
+                                        @endforeach
+                                        @foreach ($solicitudes_corregidas1 as $soli)
+                                            @if ($soli->etapa == 1)
+                                            <tr>
+                                            
+                                                <td width="70%">
+                                                    <p>{{ $soli->nombre }}</p> 
+                                                </td>
+                                                <td width="15%">
+                                                    <a href="{{ route('evaluacion.index', [$soli->id_proy])     }}" type="button" class="btn btn-primary btn-sm btn-round">
+                                                        <i class="tim-icons icon-send"></i> Evaluar solicitud
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            @endif                      
+                                        @endforeach
                                 </table>
                             </div>
                         </div>
