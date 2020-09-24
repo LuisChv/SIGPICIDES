@@ -124,7 +124,7 @@ Vista previa
     </div>
     <div class="col-md-4">
         <div class="card">
-        <form method="POST" action=" {{ route( 'evaluacion.store', $solicitud->id)}}">
+        <form method="POST" action=" {{ route( 'evaluacion.store2', $solicitud->id)}}">
             @csrf  
             <div class="card-header" align="center">
                 <h3 style="margin-bottom: 0px;">Resultado de evaluación</h3>

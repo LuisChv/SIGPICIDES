@@ -128,7 +128,49 @@ class EvaluacionSolicitudController extends Controller
         $respuesta = request('resultado');
       
         if($solicitud->id_estado == 9){
-            $evaluacion = Evaluacion::where('id_solicitud', $solicitud->id)->where('id_user', Auth::user()->id)->first();;
+            $evaluacion = Evaluacion::where('id_solicitud', $solicitud->id)->where('id_user', Auth::user()->id)->where('etapa', 1)->first();;
+            $evaluacion->etapa = $solicitud->etapa;
+            $evaluacion->id_user = Auth::user()->id;
+            $evaluacion->id_solicitud = $id;
+            $evaluacion->comentario = request('comentario');
+            $evaluacion->respuesta = $respuesta;
+            $evaluacion->visible = true;
+            $evaluacion->save();
+        }
+        else{
+            $evaluacion = new Evaluacion;
+            $evaluacion->etapa = $solicitud->etapa;
+            $evaluacion->id_user = Auth::user()->id;
+            $evaluacion->id_solicitud = $id;
+            $evaluacion->comentario = request('comentario');
+            $evaluacion->respuesta = $respuesta;
+            $evaluacion->visible = false;
+            $evaluacion->save();
+        }
+
+        return redirect()->route('solicitud.mis_solicitudes_comite');
+        
+        
+    }
+
+    public function store2($id)
+    {
+        $proyecto = Proyecto::findOrFail($id);
+        $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
+
+        request()->validate([
+            'comentario'=> ['max:2048'],
+            'resultado' => 'required'
+        ],
+        [
+            'resultado.required' => "Seleccione una respuesta.",
+            'comentario.max' => "El comentario no debe exceder los 2048 caracteres."
+        ]);
+
+        $respuesta = request('resultado');
+      
+        if($solicitud->id_estado == 9){
+            $evaluacion = Evaluacion::where('id_solicitud', $solicitud->id)->where('id_user', Auth::user()->id)->where('etapa', 2)->first();;
             $evaluacion->etapa = $solicitud->etapa;
             $evaluacion->id_user = Auth::user()->id;
             $evaluacion->id_solicitud = $id;
@@ -210,13 +252,26 @@ class EvaluacionSolicitudController extends Controller
     public function respuesta_evaluacion($id)
     {
         $respuesta = request('resultado');
-        
+        $proyecto = Proyecto::findOrFail($id);
         $solicitud = Solicitud::findOrFail($id);
+
+        $evaluaciones = DB::select("SELECT * FROM evaluacion WHERE id_solicitud = ? AND etapa = ?", [$id,1]);
+
+        foreach($evaluaciones as $eva){
+            $evaluacion = Evaluacion::findOrFail($eva->id);
+            $evaluacion->visible = false;
+            $evaluacion->save();
+        }
 
         $solicitud->id_estado = $respuesta;
 
         if($respuesta == 5){
             $solicitud->etapa = 2;
+        }
+
+        if($respuesta == 7){
+            $proyecto->id_estado = 1;
+            $proyecto->save();
         }
         
         $solicitud->save();

@@ -655,7 +655,13 @@ class SolicitudController extends Controller
     public function enviar2($id){
         $solicitud = Solicitud::where('id_proy', $id)->first();
         $solicitud->enviada = true;
-        $solicitud->id_estado = 9;
+
+        if($solicitud->id_estado == 6){
+            $solicitud->id_estado = 9;
+        }else{
+            $solicitud->id_estado = 3;
+        }
+        
         $solicitud->noti_inv = true;
         $solicitud->modificable = false;
         $solicitud->save();
