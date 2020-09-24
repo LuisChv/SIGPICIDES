@@ -81,16 +81,16 @@ class SolicitudController extends Controller
         //dd(auth()->user()->id);
         //Validacion de los datos      
         request()->validate([
-            'nombre'=> 'required',
+            'nombre'=> ['required', 'max:1024', 'string'],
             'tipoRec'=> 'required',
             'subtipo'=> 'required',
-            'descripcion'=> 'required',     
-            'tema'=> 'required',
-            'justificacion'=> 'required',
-            'resultados'=> 'required',
-            'duracion'=> ['required', 'numeric'],
-            'miembros'=> ['required', 'numeric'],
-            'costo'=> ['required', 'numeric']
+            'descripcion'=> ['required', 'max:1024', 'string'], 
+            'tema'=> ['required', 'max:1024', 'string'],
+            'justificacion'=> ['required', 'max:1024', 'string'],
+            'resultados'=> ['required', 'max:1024', 'string'],
+            'duracion'=> ['required', 'numeric', 'max:300', 'min:1'],
+            'miembros'=> ['required','numeric', 'max:20', 'min:0'],
+            'costo'=> ['required','numeric', 'min:0']
         ],
         [
             'nombre.required' => "El nombre es obligatorio.",
@@ -400,21 +400,23 @@ class SolicitudController extends Controller
         $solicitud->modificable = false;
         $solicitud->save();
 
-        $comite = new ComiteDeEvaluacion();
-        $comite->save();
+        if($solicitud->id_estado == 2){
+            $comite = new ComiteDeEvaluacion();
+            $comite->save();
 
-        $proyecto->id_comite = $comite->id;
-        $proyecto->save();
+            $proyecto->id_comite = $comite->id;
+            $proyecto->save();
 
-        $comite_usuario = new ComiteUsuario();
-        $comite_usuario->id_comite = $comite->id;
-        $comite_usuario->id_usuario = $director->user_id;
-        $comite_usuario->save();
+            $comite_usuario = new ComiteUsuario();
+            $comite_usuario->id_comite = $comite->id;
+            $comite_usuario->id_usuario = $director->user_id;
+            $comite_usuario->save();
 
-        $comite_usuario = new ComiteUsuario();
-        $comite_usuario->id_comite = $comite->id;
-        $comite_usuario->id_usuario = $coordinador->user_id;
-        $comite_usuario->save();
+            $comite_usuario = new ComiteUsuario();
+            $comite_usuario->id_comite = $comite->id;
+            $comite_usuario->id_usuario = $coordinador->user_id;
+            $comite_usuario->save();
+        }
 
         return redirect()->route('solicitud.mis_solicitudes');
     }
@@ -497,10 +499,20 @@ class SolicitudController extends Controller
 
     public function factibilidad_store(){
         request()->validate([
-            'id'=> 'required'
+            'id'=> 'required',
+            'tecnica' => 'max:1500',
+            'economica' => 'max:1500',
+            'financiera' => 'max:1500',
+            'operativa' => 'max:1500',
+            'extra' => 'max:1500'
         ],
         [
-            'id.required' => "El proyecto es obligatorio"
+            'id.required' => "El proyecto es obligatorio",
+            'tecnica.max' => "No debe exceder los 1500 carateres.",
+            'economica.max' => "No debe exceder los 1500 carateres.",
+            'financiera.max' => "No debe exceder los 1500 carateres.",
+            'operativa.max' => "No debe exceder los 1500 carateres.",
+            'extra.max' => "No debe exceder los 1500 carateres."
         ]);
 
         $factibilidad = new Factibilidad();
@@ -525,10 +537,20 @@ class SolicitudController extends Controller
 
     public function factibilidad_update(){
         request()->validate([
-            'id'=> 'required'
+            'id'=> 'required',
+            'tecnica' => 'max:1500',
+            'economica' => 'max:1500',
+            'financiera' => 'max:1500',
+            'operativa' => 'max:1500',
+            'extra' => 'max:1500'
         ],
         [
-            'id.required' => "El proyecto es obligatorio"
+            'id.required' => "El proyecto es obligatorio",
+            'tecnica.max' => "No debe exceder los 1500 carateres.",
+            'economica.max' => "No debe exceder los 1500 carateres.",
+            'financiera.max' => "No debe exceder los 1500 carateres.",
+            'operativa.max' => "No debe exceder los 1500 carateres.",
+            'extra.max' => "No debe exceder los 1500 carateres.",
         ]);
 
         $factibilidad = Factibilidad::where('id_proy', request('id'))->first();

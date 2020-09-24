@@ -24,8 +24,8 @@ class RecursoProyectoController extends Controller
         request()->validate([
             'recurso'=> 'required',
             'proyecto'=> 'required',
-            'detalle'=> 'required',
-            'cantidad'=> 'required',
+            'detalle'=> ['required', 'max:120', 'string'],
+            'cantidad'=> ['required','numeric', 'max:10', 'min:1'],
         ],
         [
             'recurso.required' => "Seleccione un recurso.",

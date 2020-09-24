@@ -137,11 +137,11 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td class="font-weight-bold" style="color: #222a42 !important;" >Detalle</td>
-                                                                            <td><textarea style="color: #222a42 !important;" class="form-control border border-light rounded" name="detalle"></textarea></td>
+                                                                            <td><textarea maxlength="120" style="color: #222a42 !important;" class="form-control border border-light rounded" name="detalle"></textarea></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td style="color: #222a42 !important;" class="font-weight-bold">Cantidad</td>
-                                                                            <td><input style="color: #222a42 !important;" type="number" class=form-control name="cantidad"></td>
+                                                                            <td><input required min="0" max="10" style="color: #222a42 !important;" type="number" class=form-control name="cantidad"></td>
                                                                         </tr>
                                                                     <input hidden name="recurso" value="{{$rec->id}}"/>
                                                                     <input hidden name="proyecto" value="{{$proyecto->id}}"/>
@@ -185,7 +185,7 @@
         </td>
         <td width="50%" align="right">
             <a class="btn btn-primary" href="{{ route('solicitud.pre', [$proyecto->id])}}">
-                SiguienteS
+                Siguiente
             </a>
         </td>
     </tr>

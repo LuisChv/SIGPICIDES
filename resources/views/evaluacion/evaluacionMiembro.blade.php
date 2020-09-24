@@ -221,7 +221,7 @@ Evaluar Solicitud
                     </div>
                 </div>
                 <br>
-                <textarea disabled min-row="5"  id="comentario1" class="form-control"> </textarea>
+                <textarea maxlength="2048" disabled min-row="5"  id="comentario1" class="form-control"> </textarea>
                 <br>
             </div>
             <div class="card-footer"><br></div>
@@ -273,7 +273,7 @@ Evaluar Solicitud
                 <div class="modal-body">                     
                     <table class="table" style="background-color: white !important;" >
                         <tr>
-                            <td><textarea id= "coment" required rows="3" style="color: #222a42 !important;" class="inputArea" maxlength="200" name="descripcion_objetivo"></textarea></td>
+                            <td><textarea maxlength="2048" id= "coment" required rows="3" style="color: #222a42 !important;" class="inputArea" maxlength="200" name="descripcion_objetivo"></textarea></td>
                         </tr>
                         <input hidden name="id_proy" value=""/>
                     </table>

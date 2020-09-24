@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-header ">
                 <div class="row">
-                    <div class="col-sm-8 text-left">
+                    <div class="col-sm-12 text-left">
                         <h2 class="card-title"><b> Comite de evaluacion </b></h2>
                     </div> 
                 </div>
@@ -57,13 +57,8 @@
         <div class="card">
             <div class="card-header ">
                 <div class="row">
-                    <div class="col-sm-9 text-left">
+                    <div class="col-sm-12 text-left">
                         <h2 class="card-title"><b>Personal experto disponible</b></h2>
-                    </div>
-                    <div class="col-md-3 text-right">
-                        <a role="button" class="btn btn-sm btn-primary" href="{{ route('users.create') }}">
-                            +
-                        </a>
                     </div>
                 </div>
             </div>

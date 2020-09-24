@@ -10,11 +10,12 @@ class ObjetivoController extends Controller
     public function store(){
         request()->validate([
             'id_proy'=> 'required',
-            'descripcion_objetivo'=> 'required',
+            'descripcion_objetivo'=> ['required', 'max:1000'],
         ],
         [
             'id_proy.required' => "Error, no hay un proyecto seleccionado",
             'descripcion_objetivo.required' => "Describa el objetivo.",
+            'descripcion_objetivo.max' => "No se permiten mas de 1000 caractéres.",
         ]);
 
         $objetivo = new Objetivo();
@@ -27,7 +28,7 @@ class ObjetivoController extends Controller
 
     public function update(){
         request()->validate([
-            'descripcion_objetivo'=> 'required',
+            'descripcion_objetivo'=> ['required', 'max:1000'],
         ],
         [
             'descripcion_objetivo.required' => "Describa el objetivo.",
