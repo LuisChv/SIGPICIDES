@@ -19,7 +19,7 @@
 
 
     para los estilos del gantt-->
-    <link rel="stylesheet" href="https://files.dhtmlx.com/30d/0801b74b161df383f7de350535901db6/dhtmlxgantt_contrast_black.css">
+    <!--<link rel="stylesheet" href="https://files.dhtmlx.com/30d/0801b74b161df383f7de350535901db6/dhtmlxgantt_contrast_black.css">-->
     <link href="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.css" rel="stylesheet">
     <!--Agregando libreria de ajax-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
@@ -38,7 +38,6 @@
     
 </head>
 <body>
-<input type="hidden" name="idProyecto" value="{{$idProyecto}}">
     <div id="gantt_here" style='width:100%; height:510px;'></div>
     <br>
         <table width="100%">
@@ -71,13 +70,14 @@
         { name:"add", width:25 },
     ];
 
-    //
+    //Nombre de las secciones en lightbox
     gantt.locale.labels.section_time = "Fecha de inicio y la duración";
     gantt.locale.labels.section_description = "Nombre descriptivo de la tarea";    gantt.locale.labels.section_equipo = "Asignación de miembros";
     gantt.locale.labels.section_indicador = "Indicador que requerirá esta tarea";
-    gantt.locale.labels.section_type = "Tipo de tarea"
+    gantt.locale.labels.section_tipo = "Tipo de tarea";
     //gantt.locale.labels.section_split = "Es un hito";
-    
+
+    gantt.locale.labels.section_timeH = "Fecha de inicio y la duración";
     
     //Forma de acceder a la tarea que este abierte o esta sienda creada
     gantt.attachEvent("onBeforeLightbox", function(id) {
@@ -112,6 +112,27 @@
                 }
             }
         });
+        
+    });
+    //Evento lanzado cuando se apreta el boton de guardar
+    gantt.attachEvent("onLightboxSave", function(id, task, is_new){
+    //any custom logic here
+        if(task.type!="milestone"){
+            if(document.getElementsByName("tipo")[0].checked){
+                task.type="milestone";
+                //console.log("true");
+            }
+        }
+        
+        return true;
+    })
+    //Evento lanzado despues de que se mueve una tarea pero antes 
+    // gantt.attachEvent("onBeforeTaskChanged", function(id, mode, task){
+    //     //any custom logic here
+    //     return true;
+    // });
+    gantt.attachEvent("onBeforeTaskDrag", function(id, mode, e){
+        return false;           //allows dragging if the global task index is even
     });
     gantt.templates.rightside_text = function(start, end, task){
         if(task.type == gantt.config.types.milestone){
@@ -124,26 +145,16 @@
     
     gantt.config.lightbox.sections=[
         {name:"description", height:70, map_to:"text", type:"textarea", focus:true},
-        {name: "type", type: "typeselect", map_to: "type",   options: [ 
-            {key:"milestone", label: "Hito"},                                               
-            {key:"task", label: "Tarea"}                                                 
+        {name: "tipo", type: "checkbox", map_to: "tipo",   options: [ 
+            {key:"milestone", label: "Hito"},                                                                                                            
         ]},
-        {name:"time", height:40, map_to:"auto", type:"duration"},
-        
+        {name:"time", height:40, map_to:"auto", type:"duration"},        
         //Para mostrar el porcentaje de avance y a quienes se les asigno la tarea
         //{name:"template", height:16, type:"template", map_to:"my_template"}, 
-    
         /*Para asignarle un color a la tarea
         {default_value:"#32CD32", name: "taskColor", height: 22, map_to: "color", type: "select", options:colors},  
         Para ingresar el avance textual de la tarea
         {name:"avance", height:70, map_to:"avance", type:"textarea"},*/
-
-        //Para usar checkbox https://docs.dhtmlx.com/gantt/desktop__checkbox.html
-        
-        // {name: "type", type:"checkbox", map_to: "type", options:[    
-        //     {key:"milestone", label:"Hito"}                                                  
-        // ]},  
-        
         //Para agrega a los miembros del equipo
         {name: "equipo", type:"checkbox", height:60, map_to: "miembros", options:[    
             @php
@@ -158,17 +169,32 @@
             @endphp
         ]},
     ];
+    //Configuracion lightbox para milestones
+    gantt.config.lightbox.milestone_sections= [
+        {name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
+        {name: "timeH", type: "duration", single_date: true, map_to: "auto"}
+    ];
+
+    //Deshabilitar boton de guardar y eliminar
+    gantt.config.buttons_left = ["dhx_cancel_btn"];
+    gantt.config.buttons_right = [];
+    //Scroll
+    gantt.config.autoscroll = true;
+    gantt.config.autoscroll_speed = 50;
+    //Readonly
+    //gantt.config.readonly = true;
      //Inicializa el gant
     gantt.init("gantt_here");
     //Llamar al controlador para llenar los datos, aca paso por parametro el id del proyecto seleccionado
     gantt.load("/api/data/{{$idProyecto}}");
+    gantt.config.scale_unit = "week"; //display by year
+    gantt.config.step = 1; //Set the step size of the time scale (X axis)
+    gantt.config.date_scale = "%w"; //date scale by year */
     //Sirve para habilitar guardar informacion en la base
     var dp = new gantt.dataProcessor("/api");
     dp.init(gantt);
     dp.setTransactionMode("REST");
-
-    
-    
+        
     /*https://docs.dhtmlx.com/gantt/snippet/1c3e1c28
     Para que le asigne color a la tarea en específico
     gantt.locale.labels.section_taskColor = "Color";
