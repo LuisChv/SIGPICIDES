@@ -83,6 +83,9 @@
                                 </td>
                                 <form method="POST" id="formulario{{$soli->id}}" action="{{route('solicitud.destroy', $soli->id_proy)}}" >
                                     <td width="15%">
+                                        @if($soli->estado=="Enviada para revisar")
+
+                                        @else
                                         <div class="btn-group" role="group">
                                             <!--en lugar de ver los primeros 3 en forma de edicion, que lo mande a un show-->
                                             <a title="Primera etapa" type="button" class="btn btn-primary btn-sm btn-round" href="{{ route('solicitud.resumen', [$soli->id_proy])}}">
@@ -103,10 +106,11 @@
                                                 <i class="tim-icons icon-simple-remove"></i>
                                             </button>
                                         </div>
+                                        @endif
                                     </td>
                                 </form>
                                 <td width="15%" class="text-right">
-                                    <a href="{{ route('solicitud.pre', [$soli->id_proy])}}" type="button" class="btn btn-primary btn-sm btn-round">
+                                    <a href="{{ route('solicitud.pre2', [$soli->id_proy])}}" type="button" class="btn btn-primary btn-sm btn-round">
                                         <i class="tim-icons icon-zoom-split"></i> Vista previa
                                     </a>
                                 </td>
