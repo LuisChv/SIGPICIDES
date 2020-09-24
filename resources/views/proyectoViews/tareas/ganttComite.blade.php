@@ -1,6 +1,6 @@
 @extends('layouts.app',['pageSlug' => 'dashboard'])
 @section('title')
-    Nueva investigación
+    Planificación
 @endsection
 @section('content')
 
@@ -133,6 +133,9 @@
     // });
     gantt.attachEvent("onBeforeTaskDrag", function(id, mode, e){
         return false;           //allows dragging if the global task index is even
+    });
+    gantt.attachEvent("onBeforeRowDragEnd", function(id, parent, tindex){    
+        return false;
     });
     gantt.templates.rightside_text = function(start, end, task){
         if(task.type == gantt.config.types.milestone){

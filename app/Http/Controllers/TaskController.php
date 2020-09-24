@@ -24,7 +24,7 @@ class TaskController extends Controller
             //Obteniendo datos del usuario logeado
             $solicitud= Solicitud::select('id_estado')->where('id_proy', $idProyecto)->first();
             //Validacion para que solo permita modificar perfiles aprobados
-            if($solicitud->id_estado==5){}
+            if($solicitud->id_estado==5 || $solicitud->id_estado==3){}
             else{ abort(403);}
             $idUsuarioLogeado=auth()->user()->id;
             //En caso sea miembro del comite se mostrara el gant pero no se podra modificar
@@ -33,7 +33,7 @@ class TaskController extends Controller
             if($usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $proyecto->id_equipo)->where('id_usuario', $idUsuarioLogeado)->first()){
                 $opcion=1;
             }
-            elseif($usuarioComite= ComiteUsuario::where('id_comito',$proyecto->id_comite)->where('id_usuario', $idUsuarioLogeado)){
+            elseif($usuarioComite= ComiteUsuario::where('id_comite',$proyecto->id_comite)->where('id_usuario', $idUsuarioLogeado)->first()){
                 $opcion=2;
             }
             else{abort(403);}
