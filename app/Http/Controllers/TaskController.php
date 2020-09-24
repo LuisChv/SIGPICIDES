@@ -25,8 +25,14 @@ class TaskController extends Controller
             //Obteniendo datos del usuario logeado
             $solicitud= Solicitud::select('id_estado')->where('id_proy', $idProyecto)->first();
             //Validacion para que solo permita modificar perfiles aprobados
-            if($solicitud->id_estado==5 || $solicitud->id_estado==3){}
-            else{ abort(403);}
+            $fase=1;
+            // if($solicitud->id_estado==5 || $solicitud->id_estado==3){
+            //     $fase=1;
+            // }
+            // elseif($solicitud->id_estado=8){
+            //     $fase=2;
+            // }
+            // else{ abort(403);}
             $idUsuarioLogeado=auth()->user()->id;
             //En caso sea miembro del comite se mostrara el gant pero no se podra modificar
             //Comprobando si el usuario equipo rol existe (id del equipo y id del usuario logeado)
@@ -44,12 +50,22 @@ class TaskController extends Controller
             $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$proyecto->id_equipo])->get();
             //dd($indicadores);
             //Retornar vista
-            if($opcion==1){
-                return view('proyectoViews.tareas.gantt',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
+            if($fase==1){
+                if($opcion==1){
+                    return view('proyectoViews.tareas.gantt',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
+                }
+                elseif($opcion==2){
+                    return view('proyectoViews.tareas.ganttComite',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
+                }
             }
-            elseif($opcion==2){
-                return view('proyectoViews.tareas.ganttComite',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
-            }           
+            elseif($fase==2){
+                if($opcion==1){
+                    return view('proyectoViews.tareas.ganttComite',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
+                }
+                elseif($opcion==2){
+                    return view('proyectoViews.tareas.ganttComite',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
+                }
+            }
         }
         else {
             abort(404);
@@ -132,8 +148,7 @@ class TaskController extends Controller
     }       
 
     public function update($id, Request $request){
-        $task = Task::find($id);
- 
+        $task = Task::find($id); 
         $task->text = $request->text;
         $task->start_date = $request->start_date;
         $task->duration = $request->duration;
@@ -144,7 +159,7 @@ class TaskController extends Controller
         if($request->has("target")){
             $this->updateOrder($id, $request->target);
         }
-        
+        $idEquipo= Proyecto::select('id_equipo')->where('id', $request->idProyecto)->first();
         /**********Guardar asignacion de tareas a miembros del equipo***************/
         //Hacer el proceso en caso haya seleccionado al menos un miembro
         tareaUsuario::where('id_task',$task->id)->delete();

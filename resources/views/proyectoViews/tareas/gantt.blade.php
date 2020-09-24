@@ -69,15 +69,18 @@
         { name:"duration", label: "Duración", align:"center", width:50 },
         { name:"add", width:25 },
     ];
-
+    //Idioma
+    gantt.i18n.setLocale("es");
     //Nombre de las secciones en lightbox
+    //Tareas normales
     gantt.locale.labels.section_time = "Fecha de inicio y la duración";
-    gantt.locale.labels.section_description = "Nombre descriptivo de la tarea";    gantt.locale.labels.section_equipo = "Asignación de miembros";
+    gantt.locale.labels.section_description = "Nombre descriptivo de la tarea";    
+    gantt.locale.labels.section_equipo = "Asignación de miembros";
     gantt.locale.labels.section_indicador = "Indicador que requerirá esta tarea";
     gantt.locale.labels.section_tipo = "Tipo de tarea";
-    //gantt.locale.labels.section_split = "Es un hito";
-
-    gantt.locale.labels.section_timeH = "Fecha de inicio y la duración";
+    //Hitos
+    gantt.locale.labels.section_timeH = "Fecha";
+    gantt.locale.labels.section_descriptionH = "Nombre descriptivo del hito";    
     
     //Forma de acceder a la tarea que este abierte o esta sienda creada
     gantt.attachEvent("onBeforeLightbox", function(id) {
@@ -131,8 +134,7 @@
             return task.text;
         }
         return "";
-    };
-
+    };    
     gantt.config.order_branch = true;
     
     gantt.config.lightbox.sections=[
@@ -163,19 +165,32 @@
     ];
     //Configuracion lightbox para milestones
     gantt.config.lightbox.milestone_sections= [
-        {name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
+        {name: "descriptionH", height: 70, map_to: "text", type: "textarea", focus: true},
         {name: "timeH", type: "duration", single_date: true, map_to: "auto"}
     ];
     //Scroll
     gantt.config.autoscroll = true;
     gantt.config.autoscroll_speed = 50;
-     //Inicializa el gant
+    //Inicializa el gant
     gantt.init("gantt_here");
     //Llamar al controlador para llenar los datos, aca paso por parametro el id del proyecto seleccionado
     gantt.load("/api/data/{{$idProyecto}}");
-    gantt.config.scale_unit = "week"; //display by year
-    gantt.config.step = 1; //Set the step size of the time scale (X axis)
-    gantt.config.date_scale = "%w"; //date scale by year */
+    // gantt.config.scale_unit = "week"; //display by year
+    // gantt.config.step = 1; //Set the step size of the time scale (X axis)
+    // gantt.config.date_scale = "%w"; //date scale by year */
+
+    gantt.config.scales = [
+        {unit: "month", step: 1, format: "%F, %Y"},
+        {unit: "week", step: 1, format: function (date) {
+            return "Semana #" + gantt.date.getWeek(date);
+        }},
+        {unit: "day", step: 1, format: "%j %D", css: function(date) {
+            if(!gantt.isWorkTime({ date: date, unit: "day"})){
+                return "weekend"
+            }
+        }}
+    ];
+    gantt.config.scale_height=54;
     //Sirve para habilitar guardar informacion en la base
     var dp = new gantt.dataProcessor("/api");
     dp.init(gantt);

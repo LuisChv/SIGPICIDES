@@ -122,19 +122,21 @@
                 task.type="milestone";
                 //console.log("true");
             }
-        }
-        
+        }        
         return true;
     })
-    //Evento lanzado despues de que se mueve una tarea pero antes 
-    // gantt.attachEvent("onBeforeTaskChanged", function(id, mode, task){
-    //     //any custom logic here
-    //     return true;
-    // });
     gantt.attachEvent("onBeforeTaskDrag", function(id, mode, e){
         return false;           //allows dragging if the global task index is even
     });
     gantt.attachEvent("onBeforeRowDragEnd", function(id, parent, tindex){    
+        return false;
+    });
+    gantt.attachEvent("onBeforeLinkAdd", function(id,link){
+    //any custom logic here
+        return false;
+    });
+    gantt.attachEvent("onBeforeLinkDelete", function(id,item){
+    //any custom logic here
         return false;
     });
     gantt.templates.rightside_text = function(start, end, task){
@@ -143,6 +145,7 @@
         }
         return "";
     };
+    
 
     gantt.config.order_branch = true;
     
@@ -184,10 +187,15 @@
     //Scroll
     gantt.config.autoscroll = true;
     gantt.config.autoscroll_speed = 50;
-    //Readonly
-    //gantt.config.readonly = true;
+    //Fecha de inicio y fin en gantt
+    // gantt.config.start_date = new Date(2020, 09, 20);
+    // gantt.config.end_date = new Date(2020, 10, 5);
      //Inicializa el gant
     gantt.init("gantt_here");
+    //horizontal scrollbar:
+    {view: "scrollbar", id: "scrollHor"}
+    //vertical scrollbar:
+    {view: "scrollbar", id: "scrollVer"}
     //Llamar al controlador para llenar los datos, aca paso por parametro el id del proyecto seleccionado
     gantt.load("/api/data/{{$idProyecto}}");
     gantt.config.scale_unit = "week"; //display by year
