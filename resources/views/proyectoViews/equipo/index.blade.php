@@ -86,10 +86,15 @@
                                 @foreach ($usuarios as $use) 
                                 <tr>                     
                                     <td> {{ $use->name }} </td>
-
+                                    @if ( $cantidad_miembros < $equipo->miembros )
                                     <td width='5%' class="text-center">
                                         <button type="button" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#create" onClick="agregarMiembro({{ $use->id }})"><i class="tim-icons icon-simple-add"></i></button>
                                     </td>
+                                    @else 
+                                    <td width='5%' class="text-center">
+                                        <button type="button" class="btn btn-success btn-sm btn-icon btn-round" data-toggle="modal" data-target="#nuevo"><i class="tim-icons icon-simple-add"></i></button>
+                                    </td>
+                                    @endif
                                    
                                 </tr>
                                 @endforeach
@@ -166,6 +171,19 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <div class="modal fade" id="nuevo" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
+            <div class="modal-dialog" role="document">    
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <label aling = "center">Maximo de miembros es de {{ $equipo->miembros }}</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
             </div>
         </div>
         

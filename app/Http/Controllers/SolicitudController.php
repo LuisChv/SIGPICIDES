@@ -331,8 +331,8 @@ class SolicitudController extends Controller
         //Filtro de solicitudes con comite asignado
         foreach ($solicitudes_etapa1 as $soli) { 
             foreach($solicitudes_con_comite as $scc){ 
-                if($scc->count == 2){
-                   unset($solicitudes_etapa1[$scc->id_solicitud - 1 ]);
+                if($soli->id_soli == $scc->id_solicitud && $scc->count == 2){
+                   unset($solicitudes_etapa1[$soli->row - 1 ]);
                 }
             }
         }
@@ -444,16 +444,16 @@ class SolicitudController extends Controller
             "SELECT S.id, P.nombre, COUNT(E.id), S.etapa FROM proyecto P 
             INNER JOIN solicitud S ON P.id = S.id_proy
             LEFT JOIN evaluacion E ON S.id = E.id_solicitud
-            WHERE E.etapa = ?
-            GROUP BY S.id, P.nombre, E.etapa", [1]
+            WHERE E.etapa = ? AND S.id_estado = ?
+            GROUP BY S.id, P.nombre, E.etapa", [1, 3]
         );
 
         $solicitudes2 = DB::select(
             "SELECT S.id, P.nombre, COUNT(E.id), S.etapa FROM proyecto P 
             INNER JOIN solicitud S ON P.id = S.id_proy
             LEFT JOIN evaluacion E ON S.id = E.id_solicitud
-            WHERE E.etapa = ?
-            GROUP BY S.id, P.nombre, E.etapa", [2]
+            WHERE E.etapa = ? AND S.id_estado = ?
+            GROUP BY S.id, P.nombre, E.etapa", [2, 3]
         );
 
         return view('proyectoViews.solicitud.Coordinador.solicitudes_evaluadas', [
