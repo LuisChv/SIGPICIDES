@@ -10,7 +10,7 @@ class IndicadorController extends Controller
     public function store(){
         request()->validate([
             'id_proy'=> 'required',
-            'descripcion_indicador'=> 'required',
+            'descripcion_indicador'=> ['required', 'max:1000'],
         ],
         [
             'id_proy.required' => "Error, no hay un proyecto seleccionado",
@@ -27,7 +27,7 @@ class IndicadorController extends Controller
 
     public function update(){
         request()->validate([
-            'descripcion_indicador'=> 'required',
+            'descripcion_indicador'=> ['required', 'max:1000'],
         ],
         [
             'descripcion_indicador.required' => "Describa el objetivo.",
