@@ -29,10 +29,13 @@ class TaskController extends Controller
             $idUsuarioLogeado=auth()->user()->id;
             //En caso sea miembro del comite se mostrara el gant pero no se podra modificar
             //Comprobando si el usuario equipo rol existe (id del equipo y id del usuario logeado)
-            if($usuarioEquipool= UsuarioEquipoRol::where('id_equipo', $proyecto->id_equipo)->where('id_usuario', $idUsuarioLogeado)->first()){
+            $opcion;
+            if($usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $proyecto->id_equipo)->where('id_usuario', $idUsuarioLogeado)->first()){
+                $opcion=1;
             }
-            // elseif(){    
-            // }
+            elseif($usuarioComite= ComiteUsuario::where('id_comito',$proyecto->id_comite)->where('id_usuario', $idUsuarioLogeado)){
+                $opcion=2;
+            }
             else{abort(403);}
             //Traer los indicadores del proyecto seleccionado
             $indicadores= Indicador::where('id_proy',$idProyecto)->get();
@@ -40,8 +43,12 @@ class TaskController extends Controller
             $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$proyecto->id_equipo])->get();
             //dd($indicadores);
             //Retornar vista
-            return view('proyectoViews.tareas.gantt',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
-
+            if($opcion==1){
+                return view('proyectoViews.tareas.gantt',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
+            }
+            elseif($opcion==2){
+                return view('proyectoViews.tareas.ganttComite',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
+            }           
         }
         else {
             abort(404);
