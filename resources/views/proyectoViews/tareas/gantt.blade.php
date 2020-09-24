@@ -1,6 +1,6 @@
 @extends('layouts.app',['pageSlug' => 'dashboard'])
 @section('title')
-    Nueva investigación
+    Planificación
 @endsection
 @section('content')
 
@@ -126,14 +126,6 @@
         
         return true;
     })
-    //Evento lanzado despues de que se mueve una tarea pero antes 
-    // gantt.attachEvent("onBeforeTaskChanged", function(id, mode, task){
-    //     //any custom logic here
-    //     return true;
-    // });
-    gantt.attachEvent("onBeforeTaskDrag", function(id, mode, e){
-        return false;           //allows dragging if the global task index is even
-    });
     gantt.templates.rightside_text = function(start, end, task){
         if(task.type == gantt.config.types.milestone){
             return task.text;
@@ -174,15 +166,9 @@
         {name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
         {name: "timeH", type: "duration", single_date: true, map_to: "auto"}
     ];
-
-    //Deshabilitar boton de guardar y eliminar
-    gantt.config.buttons_left = ["dhx_cancel_btn"];
-    gantt.config.buttons_right = [];
     //Scroll
     gantt.config.autoscroll = true;
     gantt.config.autoscroll_speed = 50;
-    //Readonly
-    //gantt.config.readonly = true;
      //Inicializa el gant
     gantt.init("gantt_here");
     //Llamar al controlador para llenar los datos, aca paso por parametro el id del proyecto seleccionado
