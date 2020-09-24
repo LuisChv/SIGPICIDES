@@ -289,7 +289,7 @@ Evaluar Solicitud
 
 @endsection
 
-<script src="{{ asset('black') }}/js/sigpi.js"></script>
+
 
 <script langiage="javascript" type="text/javascript">
 
@@ -307,3 +307,5 @@ Evaluar Solicitud
             } 
         } 
 </script>
+
+<script src="{{ asset('black') }}/js/oai.js"></script>

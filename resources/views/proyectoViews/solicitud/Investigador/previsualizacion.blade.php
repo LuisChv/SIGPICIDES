@@ -219,5 +219,5 @@ Vista previa
         </form>
     </tr>
 </table>
-@endsection
 <script src="{{ asset('black') }}/js/oai.js"></script>
+@endsection
