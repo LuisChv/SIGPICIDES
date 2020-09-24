@@ -103,9 +103,11 @@ Vista previa
             <table width="100%">
                 <tr>
                     <td width="50%">
-                        <a class="btn btn-primary" href="{{ route('proyecto_tareas.index', [$idProyecto]) }}">
-                            Anterior
-                        </a>
+                        @if ($solicitud->id_estado != 3)
+                            <a class="btn btn-primary" href="{{ route('proyecto_tareas.index', [$idProyecto]) }}">
+                                Anterior
+                            </a>
+                        @endif
                     </td>
                     <form method="POST" id="formulario{{$solicitud->id}}" action="{{route('solicitud.enviar2', [$solicitud->id])}}" >
                         @csrf

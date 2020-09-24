@@ -43,14 +43,16 @@
                             <form method="POST" id="formulario{{$miembro->id_usuario}}" action="{{ route('miembros.destroy', [$miembro->id_usuario, $proyecto->id] )}}" >
                                 <td width='10%' align="right">
                                     <div class="btn-group" role="group">
-                                        <button type="button" data-toggle=modal data-target="#update" class="btn btn-success btn-sm btn-sm btn-icon btn-round" onclick="editarRolMiembro({{$miembro->id}},{{$miembro->id_rol}})">
-                                            <i class="tim-icons icon-pencil"></i>
-                                        </button>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button @if ( $miembro->id_rol == 5  ) disabled @endif type="button" onClick="confirmar({{$miembro->id_usuario}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
-                                            <i class="tim-icons icon-simple-remove"></i>
-                                        </button> 
+                                        @if ( $miembro->id_rol != 5  )
+                                            <button type="button" data-toggle=modal data-target="#update" class="btn btn-success btn-sm btn-sm btn-icon btn-round" onclick="editarRolMiembro({{$miembro->id}},{{$miembro->id_rol}})">
+                                                <i class="tim-icons icon-pencil"></i>
+                                            </button>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button  type="button" onClick="confirmar({{$miembro->id_usuario}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
+                                                <i class="tim-icons icon-simple-remove"></i>
+                                            </button> 
+                                        @endif
                                     </div>
                                 </td>
                             </form>

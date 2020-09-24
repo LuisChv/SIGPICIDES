@@ -499,10 +499,20 @@ class SolicitudController extends Controller
 
     public function factibilidad_store(){
         request()->validate([
-            'id'=> 'required'
+            'id'=> 'required',
+            'tecnica' => 'max:1500',
+            'economica' => 'max:1500',
+            'financiera' => 'max:1500',
+            'operativa' => 'max:1500',
+            'extra' => 'max:1500'
         ],
         [
-            'id.required' => "El proyecto es obligatorio"
+            'id.required' => "El proyecto es obligatorio",
+            'tecnica.max' => "No debe exceder los 1500 carateres.",
+            'economica.max' => "No debe exceder los 1500 carateres.",
+            'financiera.max' => "No debe exceder los 1500 carateres.",
+            'operativa.max' => "No debe exceder los 1500 carateres.",
+            'extra.max' => "No debe exceder los 1500 carateres."
         ]);
 
         $factibilidad = new Factibilidad();
@@ -527,10 +537,20 @@ class SolicitudController extends Controller
 
     public function factibilidad_update(){
         request()->validate([
-            'id'=> 'required'
+            'id'=> 'required',
+            'tecnica' => 'max:1500',
+            'economica' => 'max:1500',
+            'financiera' => 'max:1500',
+            'operativa' => 'max:1500',
+            'extra' => 'max:1500'
         ],
         [
-            'id.required' => "El proyecto es obligatorio"
+            'id.required' => "El proyecto es obligatorio",
+            'tecnica.max' => "No debe exceder los 1500 carateres.",
+            'economica.max' => "No debe exceder los 1500 carateres.",
+            'financiera.max' => "No debe exceder los 1500 carateres.",
+            'operativa.max' => "No debe exceder los 1500 carateres.",
+            'extra.max' => "No debe exceder los 1500 carateres.",
         ]);
 
         $factibilidad = Factibilidad::where('id_proy', request('id'))->first();
