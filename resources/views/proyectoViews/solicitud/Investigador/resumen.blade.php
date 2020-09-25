@@ -233,7 +233,7 @@ Primera etapa
         </a>
     @else
         @if ($solicitud->etapa == 1)
-        <a class="btn btn-primary" href="{{ route('solicitud.edit', [$proyecto->id])}}>
+        <a class="btn btn-primary" href="{{ route('solicitud.edit', [$proyecto->id])}}">
             Siguiente
         </a>
         @else
