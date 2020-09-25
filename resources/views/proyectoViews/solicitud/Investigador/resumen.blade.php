@@ -333,11 +333,14 @@ Primera etapa
 </div>
 <table class="col-md-12">
     <tr>
-        <td width="50%">
-            <a class="btn btn-primary" target="_blank" href="{{ route('proyecto_tareas.index', $proyecto->id)  }}">
-                Ver planificacion
-            </a>
-        </td>
+        @if ($solicitud->etapa==2)
+            <td width="50%">
+                <a class="btn btn-primary" target="_blank" href="{{ route('proyecto_tareas.index', $proyecto->id)  }}">
+                    Ver planificacion
+                </a>
+            </td>    
+        @endif
+        
         <td width="50%" align="right">
         @if($solicitud->id_estado == 8)
             <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">

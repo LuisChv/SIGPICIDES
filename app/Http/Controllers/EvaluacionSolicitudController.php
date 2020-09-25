@@ -256,24 +256,7 @@ class EvaluacionSolicitudController extends Controller
         $solicitud = Solicitud::findOrFail($id);
         //$etapa;
         $user = User::whereRaw('id = (select id_usuario from usuario_equipo_rol where id_equipo=? and id_rol=5)',[$proyecto->id_equipo])->first();        
-        // if($solicitud->etapa==1){
-        //     $etapa=1;
-        // }
-        // elseif($solicitud->etapa==2){
-        //     $etapa=2;
-        // }
-        //$data = array('email'=>$user->email, 'name'=>$user->name, 'nombreProyecto'=>$proyecto->nombre, 'etapa'=>$etapa);
-        //Para enviar correo de confirmacion de nuevo
-        // Mail::send('Mail.evaluacionFase1', $data, function ($message) use ($data){
-        //     $message->to($user->email, $data['name']);
-        //     if($etapa==1){
-        //         $message->subject('Evaluación de solicitud Fase 1 completada');
-        //     }
-        //     elseif($etapa==2){
-        //         $message->subject('Evaluación de solicitud Fase 2 completada');
-        //     }
-        // });
-
+        
         $data = array('email'=> $user->email, 'name'=>$user->name, 'nombreProyecto'=>$proyecto->nombre, 'etapa'=>$solicitud->etapa);
         //Para enviar correo de confirmacion de nuevo
         Mail::send('Mail.evaluacionFase1', $data, function ($message) use ($data){

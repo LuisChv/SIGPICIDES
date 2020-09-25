@@ -6,6 +6,7 @@ use App\Proyecto;
 use App\EquipoDeInvestigacion;
 use Caffeinated\Shinobi\Models\Role;
 use DB;
+use App\Solicitud;
 
 use Illuminate\Http\Request;
 
@@ -20,7 +21,10 @@ class UsuarioEquipoRolController extends Controller
 
     public function index($id)
     {
-        
+        $solicitud= Solicitud::where('id_proy', $id)->first();
+        if(!($solicitud->id_estado==5 || ($solicitud->id_estado==6 && $solicitud->etapa==2))){
+            abort(403);
+        }
         $proyecto = Proyecto::where('id', $id)->first();
         $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
 

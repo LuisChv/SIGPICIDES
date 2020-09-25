@@ -144,10 +144,7 @@ class SolicitudController extends Controller
         $solicitud->id_estado = 1;
         //$solicitud->modificable=false;
         //Se crea el nuevo detalle recurso
-        $solicitud->save();
-        //TODO redireccionamiento provisional
-        
-
+        $solicitud->save();        
         return redirect()->route('proyecto.oai', $proyecto->id);
     }
 
@@ -168,15 +165,20 @@ class SolicitudController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //TODO validar
+
     public function edit($id)
     {
+        $solicitud= Solicitud::where('id_proy', $id)->first();
+        if(!($solicitud->id_estado==1 || $solicitud->id_estado==2 || $solicitud->id_estado==4)){
+            abort(403);
+        }
         $proyecto = Proyecto::findOrFail($id);
         $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
         $subtipo = SubTipoDeInvestigacion::findOrFail($proyecto->id_subtipo);
         $tipo = TipoDeInvestigacion::findOrFail($subtipo->id_tipo);
         $sub_tipos= SubTipoDeInvestigacion::all();
         $tiposinv=TipoDeInvestigacion::all();
+        
         return view('proyectoViews.solicitud.Investigador.editar', [
             'tiposinv' => $tiposinv,
             'sub_tipos' => $sub_tipos,
@@ -193,7 +195,6 @@ class SolicitudController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //TODO validar
     public function update(Request $request, $id)
     {
         request()->validate([
@@ -258,9 +259,7 @@ class SolicitudController extends Controller
         $solicitud->noti_coo= false;
         //$solicitud->modificable=false;
         //Se crea el nuevo detalle recurso
-        $solicitud->save();
-        //TODO redireccionamiento provisional
-        
+        $solicitud->save();       
 
         return redirect()->route('proyecto.oai', $proyecto->id);
     }
@@ -379,13 +378,15 @@ class SolicitudController extends Controller
             'evaluadas2'=>$evaluadas2,
         ]);
     }
-    //TODO validar
     public function oai($id){
+        $solicitud= Solicitud::where('id_proy', $id)->first();
+        if(!($solicitud->id_estado==1 || $solicitud->id_estado==2 || $solicitud->id_estado==4)){
+            abort(403);
+        }
         $proyecto = Proyecto::findOrFail($id);
         $objetivos = DB::select("SELECT * FROM objetivo WHERE id_proyecto = ?", [$id]);
         $alcances = DB::select("SELECT * FROM alcance WHERE id_proyecto = ?", [$id]);
         $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ?", [$id]);
-        $solicitud = Solicitud::where('id_proy', $id)->first();
         if($solicitud->id_estado == 4){
 
         }else{
@@ -434,9 +435,8 @@ class SolicitudController extends Controller
             'solicitud'=>$solicitud,
         ]);
     }
-
-    //TODO validar
-    public function enviar($id){
+    
+    public function enviar($id){        
         $director = RolUsuario::where('role_id', 3)->first();
         $coordinador = RolUsuario::where('role_id', 2)->first();
         $proyecto = Proyecto::findOrFail($id);
@@ -566,8 +566,12 @@ class SolicitudController extends Controller
             'miembrosEquipo'=>$miembrosEquipo,
             ]);
     }
-    //TODO validar diferente
+
     public function factibilidad($id){
+        $solicitud= Solicitud::where('id_proy', $id)->first();
+        if(!($solicitud->id_estado==5 || ($solicitud->id_estado==6 && $solicitud->etapa==2))){
+            abort(403);
+        }
         $factibilidad = Factibilidad::where('id_proy', $id)->count();
         if($factibilidad == 0){
             return view('proyectoViews.factibilidad.create', [
@@ -578,7 +582,7 @@ class SolicitudController extends Controller
         }
         
     }
-    //TODO validar diferente
+
     public function factibilidad_store(){
         request()->validate([
             'id'=> 'required',
@@ -610,6 +614,10 @@ class SolicitudController extends Controller
     }
 
     public function factibilidad_edit($id){
+        $solicitud= Solicitud::where('id_proy', $id)->first();
+        if(!($solicitud->id_estado==5 || ($solicitud->id_estado==6 && $solicitud->etapa==2))){
+            abort(403);
+        }
         $factibilidad = Factibilidad::where('id_proy', $id)->first();
         return view('proyectoViews.factibilidad.edit', [
             'id' => $id,

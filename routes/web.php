@@ -446,23 +446,30 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     
     Route::post('email', function (Request $request) {        
         //dd(request()->valor1);
-        dd(auth()->user());
-        $data = array('email'=> request('email'));
+        //dd(auth()->user());
+        //$data = array('email'=> request('email'));
 
-        Mail::send('Mail.plantilla', $data, function ($message) {
-            //$message->from('a@gmail.com','Hola');
-            //$message->sender('alejandro.10martimez@gmail.com');
-            //$message->to('alejandro@mailinator.com', 'maili');
-            $message->to(request('email'));
-            $message->subject('Hello there');
-        });
-
-        $data = array('email'=> $user->email, 'name'=>$user->name, 'confirmation_code'=>$user->confirmation_code);
+        // Mail::send('Mail.plantilla', $data, function ($message) {
+        //     //$message->from('a@gmail.com','Hola');
+        //     //$message->sender('alejandro.10martimez@gmail.com');
+        //     //$message->to('alejandro@mailinator.com', 'maili');
+        //     $message->to(request('email'));
+        //     $message->subject('Hello there');
+        // });
+        $user=auth()->user();
+        $data = array('email'=> $user->email, 'name'=>$user->name, 'nombreProyecto'=>"Proyecto nombre", 'etapa'=>2);
         //Para enviar correo de confirmacion de nuevo
-        Mail::send('Mail.verificacion_email_plantilla', $data, function ($message) use ($data){
+        Mail::send('Mail.evaluacionFase1', $data, function ($message) use ($data){
             $message->to($data['email'], $data['name']);
-            $message->subject('Verificación de correo electrónico');
+            $message->subject('Evaluación de solicitud Fase 1 completada');
+            if($data['etapa']==1){
+                $message->subject('Evaluación de solicitud Fase 1 completada');
+            }
+            elseif($data['etapa']==2){
+                $message->subject('Evaluación de solicitud Fase 2 completada');
+            }
         });
+        return redirect('/email');
     });
 
         // [PROVISIONAL]
