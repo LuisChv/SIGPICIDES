@@ -41,11 +41,13 @@ Evaluar Solicitud
     
 
     <br>
+    <!--
     <div class="col-md-8">
         <div class="card">
             <div class="card-header" align="center">
                 <h3 style="margin-bottom: 0px;">Comentario Final</h3>
             </div>
+            
             <div class="card-body">
                 <div class="col-12">
                     <div style="border-right: 20 px; text-align: right;">
@@ -58,9 +60,12 @@ Evaluar Solicitud
                 <textarea disabled min-row="5"  id="comentario1" class="form-control"> </textarea>
                 <br>
             </div>
+            
             <div class="card-footer"><br></div>
         </div>
     </div>
+    -->
+    <div class="col-md-4"></div>
     <div class="col-md-4">
         <div class="card">
         <form method="POST" action=" {{ route( 'solicitud.responder', $solicitud->id)}}">

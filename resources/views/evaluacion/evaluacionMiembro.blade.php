@@ -263,7 +263,7 @@ Evaluar Solicitud
 
     <div class="modal fade" id="modalAgregarComentario" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <div class="modal-content modal-lg">
                 <div class="modal-header">
                     <h5 class="modal-title">Nuevo comentario</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -273,7 +273,7 @@ Evaluar Solicitud
                 <div class="modal-body">                     
                     <table class="table" style="background-color: white !important;" >
                         <tr>
-                            <td><textarea maxlength="2048" id= "coment" required rows="3" style="color: #222a42 !important;" class="inputArea" maxlength="200" name="descripcion_objetivo"></textarea></td>
+                            <td><textarea maxlength="1900" id= "coment" required rows="3" style="color: #222a42 !important;" class="inputArea" name="descripcion_objetivo"></textarea></td>
                         </tr>
                         <input hidden name="id_proy" value=""/>
                     </table>
