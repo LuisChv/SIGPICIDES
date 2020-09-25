@@ -78,7 +78,7 @@
                                         @endif
                                     @endforeach
                                     @foreach ($solicitudes_corregidas2 as $solicitud)
-                                        @if ($solicitud->count == 6 && $solicitud->etapa == 2)
+                                        @if ($solicitud->count == 3 && $solicitud->etapa == 2)
                                             <tr>
                                                 <td><i class="tim-icons icon-check-2"></i> {{$solicitud->nombre}}</td>
                                                 <td width="15%" class="text-right">

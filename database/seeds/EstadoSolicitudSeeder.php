@@ -35,5 +35,14 @@ class EstadoSolicitudSeeder extends Seeder
         DB::table('estado_de_solicitud')->insert([
             'estado'=>'Denegada',
         ]);
+        DB::table('estado_de_solicitud')->insert([
+            'estado'=>'Corregida',
+        ]);
+
+
+        //Estado para proyecto aprobado
+        DB::table('estado_de_proyecto')->insert([
+            'estado'=>'Aprobado',
+        ]);
     }
 }

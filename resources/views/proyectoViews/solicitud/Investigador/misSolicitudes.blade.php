@@ -57,6 +57,9 @@
                                     @elseif($soli->estado=="Perfil aceptado con condición")
                                     <td width="15%" class="text-right">
                                         <div class="btn-group" role="group">
+                                            <a title="Resumen" type="button" class="btn btn-primary btn-sm btn-round" href="{{ route('solicitud.resumen', [$soli->id_proy])}}">
+                                                <i class="tim-icons icon-notes"></i>
+                                            </a>
                                             <a title="Información principal" type="button" class="btn btn-primary btn-sm btn-round" href="{{ route('solicitud.edit', [$soli->id_proy])}}">
                                                 <i class="tim-icons icon-notes"></i>
                                             </a>
@@ -113,7 +116,7 @@
                                             <i class="tim-icons icon-zoom-split"></i> Vista previa
                                         </a>
                                     </td>
-                                    @elseif($soli->estado=="Planificación aceptada con condición")
+                                    @elseif($soli->estado=="Planificación aceptada con condición" || $soli->estado=="Perfil aprobado")
                                     <td width="15%" class="text-right">
                                         <div class="btn-group" role="group">
                                         <!--en lugar de ver los primeros 3 en forma de edicion, que lo mande a un show-->
@@ -131,30 +134,12 @@
                                             </a>
                                         </div>
                                     </td>
-                                    @elseif($soli->estado=="Planificación aprobada")
+                                    @elseif($soli->estado=="Planificación aprobada" || $soli->estado=="Denegada")
                                     <td width="15%" class="text-right">
                                         <a href="{{ route('solicitud.pre2', [$soli->id_proy])}}" type="button" class="btn btn-primary btn-sm btn-round">
                                             <i class="tim-icons icon-zoom-split"></i> Vista previa
                                         </a>
-                                    </td>
-                                    @else
-                                    <td width="15%" class="text-right">
-                                        <div class="btn-group" role="group">
-                                        <!--en lugar de ver los primeros 3 en forma de edicion, que lo mande a un show-->
-                                            <a title="Primera etapa" type="button" class="btn btn-primary btn-sm btn-round" href="{{ route('solicitud.resumen', [$soli->id_proy])}}">
-                                            <i class="tim-icons icon-notes"></i>
-                                            </a>
-                                            <a title="Factibilidad" type="button" class="btn btn-primary btn-sm btn-icon btn-round" href="{{ route('factibilidad.create', [$soli->id_proy])}}">
-                                            <i class="tim-icons icon-chart-bar-32"></i>
-                                            </a>
-                                            <a title="Equipo" type="button" class="btn btn-primary btn-sm btn-icon btn-round" href="{{ route('miembros.index',[$soli->id_proy])}}">
-                                            <i class="tim-icons icon-single-02"></i>
-                                            </a>
-                                            <a title="Planificación" type="button" class="btn btn-primary btn-sm btn-icon btn-round" href="{{ route('proyecto_tareas.index', [$soli->id_proy])}}">
-                                            <i class="tim-icons icon-map-big"></i>
-                                            </a>
-                                        </div>
-                                    </td>
+                                    </td>   
 
                                     @endif
                                 </td>
