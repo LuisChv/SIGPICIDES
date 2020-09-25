@@ -199,7 +199,7 @@ Vista previa
 <table class="col-md-12">
     <tr>
         <td width="50%">
-            @if ($solicitud->id_estado != 3)
+            @if ($solicitud->id_estado != 3 || $solicitud->id_estado != 9)
             <a class="btn btn-primary" href="{{ route('proyecto_recursos.create', [$proyecto->id])}}">
                 Recursos
             </a>
