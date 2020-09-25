@@ -84,7 +84,7 @@ Vista previa
         <table width="100%">
             <tr>
                 <td width="50%" align="left">
-                    <a class="btn btn-primary" target="_blank" href="{{ route('proyecto_tareas.index', $solicitud->id)  }}">
+                    <a class="btn btn-primary" target="_blank" href="{{ route('proyecto_tareas.index', $solicitud->id_proy)  }}">
                         Ver planificacion
                     </a>
                 </td>
