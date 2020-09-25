@@ -535,7 +535,15 @@ class SolicitudController extends Controller
         $id_comite = $proyecto->id_comite;
         $estados_soli = DB::select("SELECT * FROM estado_de_solicitud WHERE id = ? OR id = ? OR id = ?", [4,5,8]);
         $miembros_comite = DB::select("SELECT CU.id_usuario, U.name FROM comite_usuario CU JOIN users U ON CU.id_usuario = U.id WHERE id_comite = ?", [$id_comite]);
-        $evaluaciones = DB::select("SELECT * FROM evaluacion E JOIN estado_de_solicitud EDS WHERE E.id_solicitud = ? AND EDS.id = E.respuesta", [$id]);
+        $evaluaciones = DB::select("SELECT * FROM evaluacion E JOIN estado_de_solicitud EDS on EDS.id = E.respuesta WHERE E.id_solicitud = ? order by E.etapa, E.id_user", [$id]);
+        $factibilidad = Factibilidad::where('id_proy', $id)->first();
+        $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$equipo->id]);
+        $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [true]);
+        $idUsuarioLogeado=auth()->user()->id;
+        $usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $equipo->id)->where('id_usuario', $idUsuarioLogeado)->firstOr(function(){
+            abort(403);
+        });
+        $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$equipo->id])->get();
 
         return view('proyectoViews.solicitud.Investigador.resumen', [
             'objetivos'=> $objetivos,
@@ -552,6 +560,10 @@ class SolicitudController extends Controller
             'evaluaciones'=>$evaluaciones,
             'estados'=>$estados_soli,
             'miembros_comite'=>$miembros_comite,
+            'factibilidad' => $factibilidad,
+            'miembros' => $miembros,
+            'roles'=>$roles,
+            'miembrosEquipo'=>$miembrosEquipo,
             ]);
     }
     //TODO validar diferente

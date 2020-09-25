@@ -133,14 +133,13 @@
                                             <i class="tim-icons icon-map-big"></i>
                                             </a>
                                         </div>
-                                    </td>
-                                    @elseif($soli->estado=="Planificación aprobada" || $soli->estado=="Denegada")
+                                    </td>  
+                                    @elseif($soli->estado=="Denegada" || $soli->estado=="Planificación aprobada")
                                     <td width="15%" class="text-right">
-                                        <a href="{{ route('solicitud.pre2', [$soli->id_proy])}}" type="button" class="btn btn-primary btn-sm btn-round">
+                                        <a href="{{ route('solicitud.resumen', [$soli->id_proy])}}" type="button" class="btn btn-primary btn-sm btn-round">
                                             <i class="tim-icons icon-zoom-split"></i> Vista previa
                                         </a>
-                                    </td>   
-
+                                    </td>
                                     @endif
                                 </td>
         
