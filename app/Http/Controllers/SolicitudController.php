@@ -168,6 +168,7 @@ class SolicitudController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //TODO validar
     public function edit($id)
     {
         $proyecto = Proyecto::findOrFail($id);
@@ -192,6 +193,7 @@ class SolicitudController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //TODO validar
     public function update(Request $request, $id)
     {
         request()->validate([
@@ -377,7 +379,7 @@ class SolicitudController extends Controller
             'evaluadas2'=>$evaluadas2,
         ]);
     }
-
+    //TODO validar
     public function oai($id){
         $proyecto = Proyecto::findOrFail($id);
         $objetivos = DB::select("SELECT * FROM objetivo WHERE id_proyecto = ?", [$id]);
@@ -433,6 +435,7 @@ class SolicitudController extends Controller
         ]);
     }
 
+    //TODO validar
     public function enviar($id){
         $director = RolUsuario::where('role_id', 3)->first();
         $coordinador = RolUsuario::where('role_id', 2)->first();
@@ -551,7 +554,7 @@ class SolicitudController extends Controller
             'miembros_comite'=>$miembros_comite,
             ]);
     }
-
+    //TODO validar diferente
     public function factibilidad($id){
         $factibilidad = Factibilidad::where('id_proy', $id)->count();
         if($factibilidad == 0){
@@ -563,7 +566,7 @@ class SolicitudController extends Controller
         }
         
     }
-
+    //TODO validar diferente
     public function factibilidad_store(){
         request()->validate([
             'id'=> 'required',
