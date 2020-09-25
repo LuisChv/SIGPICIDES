@@ -535,7 +535,7 @@ class SolicitudController extends Controller
         $id_comite = $proyecto->id_comite;
         $estados_soli = DB::select("SELECT * FROM estado_de_solicitud WHERE id = ? OR id = ? OR id = ?", [4,5,8]);
         $miembros_comite = DB::select("SELECT CU.id_usuario, U.name FROM comite_usuario CU JOIN users U ON CU.id_usuario = U.id WHERE id_comite = ?", [$id_comite]);
-        $evaluaciones = DB::select("SELECT * FROM evaluacion WHERE id_solicitud = ? ", [$id]);
+        $evaluaciones = DB::select("SELECT * FROM evaluacion E JOIN estado_de_solicitud EDS WHERE E.id_solicitud = ? AND EDS.id = E.respuesta", [$id]);
 
         return view('proyectoViews.solicitud.Investigador.resumen', [
             'objetivos'=> $objetivos,
