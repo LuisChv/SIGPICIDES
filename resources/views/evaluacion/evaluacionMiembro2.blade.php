@@ -116,7 +116,7 @@ Vista previa
                     </div>
                 </div>
                 <br>
-                <textarea disabled min-row="5"  id="comentario1" class="form-control"> </textarea>
+                <textarea disabled min-row="5"  id="comentario1" class="inputArea" rows="4"> </textarea>
                 <br>
             </div>
             <div class="card-footer"><br></div>
