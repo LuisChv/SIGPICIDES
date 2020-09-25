@@ -232,9 +232,15 @@ Primera etapa
             Regresar
         </a>
     @else
+        @if ($solicitud->etapa == 1)
+        <a class="btn btn-primary" href="{{ route('solicitud.edit', [$proyecto->id])}}>
+            Siguiente
+        </a>
+        @else
         <a class="btn btn-primary" href="{{ route('factibilidad.create', [$proyecto->id]) }}">
             Siguiente
         </a>
+        @endif
     @endif
 </div>
 <script src="{{ asset('black') }}/js/oai.js"></script>
