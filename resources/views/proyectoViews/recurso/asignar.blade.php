@@ -136,12 +136,12 @@
                                                                             <td style="color: #222a42 !important;">{{$rec->nombre}}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td class="font-weight-bold" style="color: #222a42 !important;" >Detalle</td>
-                                                                            <td><textarea maxlength="120" style="color: #222a42 !important;" class="form-control border border-light rounded" name="detalle"></textarea></td>
+                                                                            <td class="font-weight-bold" style="color: #222a42 !important;" >Detalle *</td>
+                                                                            <td><textarea required maxlength="120" style="color: #222a42 !important;" class="form-control border border-light rounded" name="detalle"></textarea></td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td style="color: #222a42 !important;" class="font-weight-bold">Cantidad</td>
-                                                                            <td><input required min="0" max="10" style="color: #222a42 !important;" type="number" class=form-control name="cantidad"></td>
+                                                                            <td style="color: #222a42 !important;" class="font-weight-bold">Cantidad *</td>
+                                                                            <td><input required min="1" max="10" style="color: #222a42 !important;" type="number" class=form-control name="cantidad"></td>
                                                                         </tr>
                                                                     <input hidden name="recurso" value="{{$rec->id}}"/>
                                                                     <input hidden name="proyecto" value="{{$proyecto->id}}"/>

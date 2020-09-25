@@ -111,8 +111,8 @@ Vista previa
                 <table class="table">
                     @foreach ($objetivos as $objetivo)
                     <tr>
-                        <td>
-                            <i class="tim-icons icon-compass-05"></i> {{$objetivo->descripcion}}
+                        <td class="text-justify">
+                            <i class="tim-icons icon-icon-wifi"></i> {{$objetivo->descripcion}}
                         </td>
                     </tr>
                     @endforeach
@@ -131,8 +131,8 @@ Vista previa
                 <table class="table">
                     @foreach ($alcances as $alcance)
                     <tr>
-                        <td>
-                            <i class="tim-icons icon-compass-05"></i> {{$alcance->descripcion}}
+                        <td class="text-justify">
+                            <i class="tim-icons icon-wifi"></i> {{$alcance->descripcion}}
                         </td>
                     </tr>
                     @endforeach
@@ -151,7 +151,7 @@ Vista previa
                 <table class="table">
                     @foreach ($indicadores as $indicador)
                     <tr>
-                        <td>
+                        <td class="text-justify">
                             <i class="tim-icons icon-sound-wave"></i> {{$indicador->detalle}}
                         </td>
                     </tr>

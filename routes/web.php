@@ -336,75 +336,88 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::post('solicitud/{solicitud}', 'SolicitudController@show')->name('solicitud.show')
     ->middleware('has.permission:solicitudes.create');
 
-    Route::delete('solicitud/{solicitud}', 'SolicitudController@destroy')->name('solicitud.destroy');
-    //->middleware('has.permission:solicitud.destroy');
+    Route::delete('solicitud/{solicitud}', 'SolicitudController@destroy')->name('solicitud.destroy')
+    ->middleware('has.permission:solicitudes.destroy');
 
-    Route::get('solicitud/{solicitud}/edit', 'SolicitudController@edit')->name('solicitud.edit');
-    //->middleware('has.permission:solicitud.edit');
+    Route::get('solicitud/{solicitud}/edit', 'SolicitudController@edit')->name('solicitud.edit')
+    ->middleware('has.permission:solicitudes.create');
 
-    Route::put('solicitud/{solicitud}', 'SolicitudController@update')->name('solicitud.update');
-    //->middleware('has.permission:solicitud.edit');
+    Route::put('solicitud/{solicitud}', 'SolicitudController@update')->name('solicitud.update')
+    ->middleware('has.permission:solicitudes.create');
 
     Route::get('mis_solicitudes', 'SolicitudController@mis_solicitudes')->name('solicitud.mis_solicitudes')
     ->middleware('has.permission:mis_solicitudes');
 
     Route::get('mis_solicitudes_comite', 'SolicitudController@mis_solicitudes_comite')->name('solicitud.mis_solicitudes_comite');
-    //->middleware('has.permission:solicitudes.show');
 
-    Route::get('proyecto/oai/{id}', 'SolicitudController@oai')->name('proyecto.oai');
+    Route::get('proyecto/oai/{id}', 'SolicitudController@oai')->name('proyecto.oai')
+    ->middleware('has.permission:solicitudes.create');
 
-    Route::get('solicitud/{solicitud}/pre', 'SolicitudController@pre')->name('solicitud.pre');
+    Route::get('solicitud/{solicitud}/pre', 'SolicitudController@pre')->name('solicitud.pre')
+    ->middleware('has.permission:solicitudes.create');
 
-    Route::post('solicitud/{id}/enviar', 'SolicitudController@enviar')->name('solicitud.enviar');
+    Route::post('solicitud/{id}/enviar', 'SolicitudController@enviar')->name('solicitud.enviar')
+    ->middleware('has.permission:solicitudes.create');
 
-    Route::post('solicitud/{id}/enviar2', 'SolicitudController@enviar2')->name('solicitud.enviar2');
+    Route::post('solicitud/{id}/enviar2', 'SolicitudController@enviar2')->name('solicitud.enviar2')
+    ->middleware('has.permission:solicitudes.create');
 
-    Route::get('solicitud/{solicitud}/resumen', 'SolicitudController@resumen')->name('solicitud.resumen');
+    Route::get('solicitud/{solicitud}/resumen', 'SolicitudController@resumen')->name('solicitud.resumen')
+    ->middleware('has.permission:solicitudes.create');
 
-    Route::get('solicitud/{solicitud}/pre2', 'SolicitudController@pre2')->name('solicitud.pre2');
+    Route::get('solicitud/{solicitud}/pre2', 'SolicitudController@pre2')->name('solicitud.pre2')
+    ->middleware('has.permission:solicitudes.create');
 
 
     /**********************Recursos por solicitud de proyecto Investigador******************/
 
-    Route::get('proyecto/recursos/{id}', 'RecursoProyectoController@create')->name('proyecto_recursos.create');
-    //->middleware('has.permission:solicitudes.create');
+    Route::get('proyecto/recursos/{id}', 'RecursoProyectoController@create')->name('proyecto_recursos.create')
+    ->middleware('has.permission:solicitudes.create');
 
-    Route::post('proyecto/recursos', 'RecursoProyectoController@store')->name('proyecto_recursos.store');
-    //->middleware('has.permission:proyectos.create');
+    Route::post('proyecto/recursos', 'RecursoProyectoController@store')->name('proyecto_recursos.store')
+    ->middleware('has.permission:proyectos.create');
 
-    Route::get('proyecto/recursos/show/{id}', 'RecursoProyectoController@show')->name('proyecto_recursos.show');
+    Route::get('proyecto/recursos/show/{id}', 'RecursoProyectoController@show')->name('proyecto_recursos.show')
+    ->middleware('has.permission:proyectos.create');
 
-    Route::delete('proyecto/recursos/{id}', 'RecursoProyectoController@destroy')->name('proyecto_recursos.destroy');
+    Route::delete('proyecto/recursos/{id}', 'RecursoProyectoController@destroy')->name('proyecto_recursos.destroy')
+    ->middleware('has.permission:proyectos.create');
 
     
     /**********************Objetivos******************/
 
-    Route::post('proyecto/objetivos', 'ObjetivoController@store')->name('proyecto_objetivos.store');
-    //->middleware('has.permission:proyectos.create');
+    Route::post('proyecto/objetivos', 'ObjetivoController@store')->name('proyecto_objetivos.store')
+    ->middleware('has.permission:proyectos.create');
 
-    Route::put('proyecto/objetivos_update', 'ObjetivoController@update')->name('proyecto_objetivos.update');
+    Route::put('proyecto/objetivos_update', 'ObjetivoController@update')->name('proyecto_objetivos.update')
+    ->middleware('has.permission:proyectos.create');
 
-    Route::delete('proyecto/objetivos', 'ObjetivoController@destroy')->name('proyecto_objetivos.destroy');
+    Route::delete('proyecto/objetivos', 'ObjetivoController@destroy')->name('proyecto_objetivos.destroy')
+    ->middleware('has.permission:proyectos.create');
 
 
     /**********************Alcances******************/
 
-    Route::post('proyecto/alcances', 'AlcanceController@store')->name('proyecto_alcances.store');
-    //->middleware('has.permission:proyectos.create');
+    Route::post('proyecto/alcances', 'AlcanceController@store')->name('proyecto_alcances.store')
+    ->middleware('has.permission:proyectos.create');
 
-    Route::put('proyecto/alcances_update', 'AlcanceController@update')->name('proyecto_alcances.update');
+    Route::put('proyecto/alcances_update', 'AlcanceController@update')->name('proyecto_alcances.update')
+    ->middleware('has.permission:proyectos.create');
 
-    Route::delete('proyecto/alcances', 'AlcanceController@destroy')->name('proyecto_alcances.destroy');
+    Route::delete('proyecto/alcances', 'AlcanceController@destroy')->name('proyecto_alcances.destroy')
+    ->middleware('has.permission:proyectos.create');
 
 
     /**********************Indicador******************/
 
-    Route::post('proyecto/indicadores', 'IndicadorController@store')->name('proyecto_indicadores.store');
+    Route::post('proyecto/indicadores', 'IndicadorController@store')->name('proyecto_indicadores.store')
+    ->middleware('has.permission:proyectos.create');
 
-    Route::put('proyecto/indicadores_update', 'IndicadorController@update')->name('proyecto_indicadores.update');
-    //->middleware('has.permission:proyectos.create');
+    Route::put('proyecto/indicadores_update', 'IndicadorController@update')->name('proyecto_indicadores.update')
+    ->middleware('has.permission:proyectos.create');
 
-    Route::delete('proyecto/indicadores', 'IndicadorController@destroy')->name('proyecto_indicadores.destroy');
+    Route::delete('proyecto/indicadores', 'IndicadorController@destroy')->name('proyecto_indicadores.destroy')
+    ->middleware('has.permission:proyectos.create');
 
     /*********************Solicitude de proyecto Admin*******************/
     
@@ -416,9 +429,11 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     /**********************Solicitud de proyecto Coordinador******************/
 
-    Route::get('solicitudes_evaluadas', 'SolicitudController@solicitudes_evaluadas')->name('solicitud.evaluadas');
+    Route::get('solicitudes_evaluadas', 'SolicitudController@solicitudes_evaluadas')->name('solicitud.evaluadas')
+    ->middleware('has.permission:solicitudes.index');
     
-    Route::get('solicitudes_revisadas', 'SolicitudController@solicitudes_revisadas')->name('solicitud.revisadas');
+    Route::get('solicitudes_revisadas', 'SolicitudController@solicitudes_revisadas')->name('solicitud.revisadas')
+    ->middleware('has.permission:solicitudes.index');
     
     //proyecto-equipo
     Route::get('equipo', 'EquipoController@index')->name('equipo.index')
@@ -454,27 +469,36 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     //objetivos & alcances
     //Route::get('proyecto/detalles/{id}', 'RecursoProyectoController@crear_objetivo')->name('proyecto_detalle.create');
     // factibilidad
-    Route::get('proyecto/factibilidad/{id}', 'SolicitudController@factibilidad')->name('factibilidad.create');
+    Route::get('proyecto/factibilidad/{id}', 'SolicitudController@factibilidad')->name('factibilidad.create')
+    ->middleware('has.permission:solicitudes.create');
 
-    Route::post('proyecto/factibilidad', 'SolicitudController@factibilidad_store')->name('factibilidad.store');
+    Route::post('proyecto/factibilidad', 'SolicitudController@factibilidad_store')->name('factibilidad.store')
+    ->middleware('has.permission:solicitudes.create');
 
-    Route::get('proyecto/factibilidad_edit/{id}', 'SolicitudController@factibilidad_edit')->name('factibilidad.edit');
+    Route::get('proyecto/factibilidad_edit/{id}', 'SolicitudController@factibilidad_edit')->name('factibilidad.edit')
+    ->middleware('has.permission:solicitudes.create');
 
-    Route::put('proyecto/factibilidad_update', 'SolicitudController@factibilidad_update')->name('factibilidad.update');
+    Route::put('proyecto/factibilidad_update', 'SolicitudController@factibilidad_update')->name('factibilidad.update') 
+    ->middleware('has.permission:solicitudes.create');
 
     //planificacion
-    Route::get('proyecto/planificacion', 'SolicitudController@planificacion')->name('planificacion.index');
-    Route::get('proyecto/indicadores', 'SolicitudController@indicador')->name('indicadores.index');
-    Route::get('proyecto/solicitud', 'SolicitudController@show2')->name('solicitud.show2');
+    Route::get('proyecto/planificacion', 'SolicitudController@planificacion')->name('planificacion.index')
+    ->middleware('has.permission:solicitudes.create');
+    Route::get('proyecto/indicadores', 'SolicitudController@indicador')->name('indicadores.index')
+    ->middleware('has.permission:solicitudes.create');
+    Route::get('proyecto/solicitud', 'SolicitudController@show2')->name('solicitud.show2')
+    ->middleware('has.permission:solicitudes.create');
 
 
     /***********************Equipo por Proyecto ***************************/
 
-    Route::get('proyecto/miembros/{id}', 'UsuarioEquipoRolController@index')->name('miembros_proyecto.index');
+    Route::get('proyecto/miembros/{id}', 'UsuarioEquipoRolController@index')->name('miembros_proyecto.index')
+    ->middleware('has.permission:solicitudes.create');
 
     /***********************planificacion de tareas gantt****************************/
 
     Route::get('proyecto/tareas/{id_proyecto}', 'TaskController@index')->name('proyecto_tareas.index');
+
     Route::get('tareasAsignaciones/{id_tarea}','TaskController@tareaAsignacionesFetch')->name('proyecto_tareas.asignaciones');
 
     /***********************planificacion de tareas gantt****************************/
