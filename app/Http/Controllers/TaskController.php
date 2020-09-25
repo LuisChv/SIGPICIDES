@@ -27,7 +27,7 @@ class TaskController extends Controller
             //Validacion para que solo permita modificar perfiles aprobados
             $modificable=true;
             //Si el perfil ha sido aprobado, o si hay observaciones en la fase 2 se puede seguir modificando
-            if($solicitud->id_estado==5 || $solicitud->id_estado==9){
+            if($solicitud->id_estado==5 || ($solicitud->id_estado==9 && $solicitud->etapa==2)){
                 $modificable=true;
             }
             //Si se ha enviado a evaluacion de fase 2 o es del comite
