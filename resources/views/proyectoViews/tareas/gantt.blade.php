@@ -222,16 +222,7 @@
     task.my_template = "<span id='title1'>Asignada: </span>"+ task.users
     +"<span id='title2'>Progreso: </span>"+ task.progress*100 +" %";
     return true;
-});*/
-
-    /*las siguientes 3 lineas son para que la escala del gantt sea en meses, por defecto es de días, o se puede poner en años con "year" o semanas "week" en la 1ra y "%Y" o "%w" en la 3ra linea
-    gantt.config.scale_unit = "month"; //display by year
-    gantt.config.step = 1; //Set the step size of the time scale (X axis)
-    gantt.config.date_scale = "%m"; //date scale by year */
-    
-    //para agregar, modificar y eliminar tareas https://docs.dhtmlx.com/gantt/desktop__custom_edit_form.html
-    
-   
+});*/  
 </script>
 
 </body>
