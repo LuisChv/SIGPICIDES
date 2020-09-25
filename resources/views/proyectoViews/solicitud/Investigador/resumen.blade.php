@@ -210,12 +210,8 @@ Primera etapa
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title text-center"><b>{{ $miembro->name }}</b></h3>
-                        @foreach ($estados as $estado) 
-                            @if ( $eva->respuesta == $estado->id )              
-                                <h4 class="text-center"><b>{{ $estado->estado }}</b></h4>
-                            @endif
-                        @endforeach
+                        <h3 class="card-title text-center"><b>{{ $miembro->name }}</b></h3>           
+                                <h4 class="text-center"><b>{{ $eva->estado }}</b></h4>
                         <p class="text-justify"><b>Comentario: </b> {{ $eva->comentario }} </p>
                         <br>
                     </div>
