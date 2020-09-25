@@ -25,21 +25,24 @@ class TaskController extends Controller
             //Obteniendo datos del usuario logeado
             $solicitud= Solicitud::select('id_estado')->where('id_proy', $idProyecto)->first();
             //Validacion para que solo permita modificar perfiles aprobados
-            $fase=1;
-            // if($solicitud->id_estado==5 || $solicitud->id_estado==3){
-            //     $fase=1;
-            // }
-            // elseif($solicitud->id_estado=8){
-            //     $fase=2;
-            // }
-            // else{ abort(403);}
+            $modificable=true;
+            //Si el perfil ha sido aprobado, o si hay observaciones en la fase 2 se puede seguir modificando
+            if($solicitud->id_estado==5 || $solicitud->id_estado==9){
+                $modificable=true;
+            }
+            //Si se ha enviado a evaluacion de fase 2 o es del comite
+            elseif($solicitud->id_estado=3){
+                $modificable=false;
+            }
+            else{ abort(403);}
             $idUsuarioLogeado=auth()->user()->id;
-            //En caso sea miembro del comite se mostrara el gant pero no se podra modificar
             //Comprobando si el usuario equipo rol existe (id del equipo y id del usuario logeado)
             $opcion;
+            //Si es miembro del equipo sera opcion 1
             if($usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $proyecto->id_equipo)->where('id_usuario', $idUsuarioLogeado)->first()){
                 $opcion=1;
             }
+            //En caso sea miembro del comite se mostrara el gant pero no se podra modificar y sera opcion 2
             elseif($usuarioComite= ComiteUsuario::where('id_comite',$proyecto->id_comite)->where('id_usuario', $idUsuarioLogeado)->first()){
                 $opcion=2;
             }
@@ -50,28 +53,16 @@ class TaskController extends Controller
             $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$proyecto->id_equipo])->get();
             //dd($indicadores);
             //Retornar vista
-            if($fase==1){
-                if($opcion==1){
-                    return view('proyectoViews.tareas.gantt',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
-                }
-                elseif($opcion==2){
-                    return view('proyectoViews.tareas.ganttComite',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
-                }
+            if($opcion==2 || !$modificable){
+                return view('proyectoViews.tareas.ganttComite',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
             }
-            elseif($fase==2){
-                if($opcion==1){
-                    return view('proyectoViews.tareas.ganttComite',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
-                }
-                elseif($opcion==2){
-                    return view('proyectoViews.tareas.ganttComite',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
-                }
+            elseif($opcion==1 && $modificable){
+                return view('proyectoViews.tareas.gantt',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
             }
         }
         else {
             abort(404);
-        }
-        
-
+        }  
     }
 
     public function store(Request $request){

@@ -431,25 +431,23 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     
     Route::post('email', function (Request $request) {        
         //dd(request()->valor1);
-        // dd(auth()->user());
-        // $data = array('email'=> request('email'));
+        dd(auth()->user());
+        $data = array('email'=> request('email'));
 
-        // Mail::send('Mail.plantilla', $data, function ($message) {
-        //     //$message->from('a@gmail.com','Hola');
-        //     //$message->sender('alejandro.10martimez@gmail.com');
-        //     //$message->to('alejandro@mailinator.com', 'maili');
-        //     $message->to(request('email'));
-        //     $message->subject('Hello there');
-        // });
-        $user= auth()->user();
-        //dd($user->email);
-        $data = array('email'=> "$user->email", 'name'=>"Alejandro Martínez", 'nombreProyecto'=>"Benchmarking de gestores de bases de datos libres");
-        //Para enviar correo de confirmacion de nuevo
-        Mail::send('Mail.evaluacionFase1', $data, function ($message) use ($data){
-            $message->to("ml16007@ues.edu.sv", $data['name']);
-            $message->subject('Evaluación de solicitud Fase 1 completada');
+        Mail::send('Mail.plantilla', $data, function ($message) {
+            //$message->from('a@gmail.com','Hola');
+            //$message->sender('alejandro.10martimez@gmail.com');
+            //$message->to('alejandro@mailinator.com', 'maili');
+            $message->to(request('email'));
+            $message->subject('Hello there');
         });
-        return redirect('email');
+
+        $data = array('email'=> $user->email, 'name'=>$user->name, 'confirmation_code'=>$user->confirmation_code);
+        //Para enviar correo de confirmacion de nuevo
+        Mail::send('Mail.verificacion_email_plantilla', $data, function ($message) use ($data){
+            $message->to($data['email'], $data['name']);
+            $message->subject('Verificación de correo electrónico');
+        });
     });
 
         // [PROVISIONAL]
@@ -487,9 +485,6 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     ->middleware('has.permission:evaluacion.index');
 
     Route::post('evaluacion/store/{id}', 'EvaluacionSolicitudController@store')->name('evaluacion.store')
-    ->middleware('has.permission:evaluacion.create');
-
-    Route::post('evaluacion/store2/{id}', 'EvaluacionSolicitudController@store2')->name('evaluacion.store2')
     ->middleware('has.permission:evaluacion.create');
     
     Route::get('evaluacion/final/{id}', 'EvaluacionSolicitudController@evaluacion_final')->name('evaluacion.final')
