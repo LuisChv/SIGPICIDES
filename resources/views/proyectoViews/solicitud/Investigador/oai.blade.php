@@ -10,6 +10,7 @@
                 <div class="row">
                     <div class="col-sm-9 text-left">
                         <h2 class="card-title"><b>Objetivos</b></h2>
+                        <p style="color:red">Mínimo: 1</p>
                     </div>
                     <div class="col-sm-3 text-right">
                         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalObjetivo">+</button>
@@ -80,6 +81,7 @@
                 <div class="row">
                     <div class="col-sm-9 text-left">
                         <h2 class="card-title"><b>Alcances</b></h2>
+                        <p style="color:red">Mínimo: 1</p>
                     </div>
                     <div class="col-sm-3 text-right">
                         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalAlcance">+</button>
@@ -149,6 +151,7 @@
                 <div class="row">
                     <div class="col-sm-9 text-left">
                         <h2 class="card-title"><b>Indicadores</b></h2>
+                        <p style="color:red">Mínimo: 1</p>
                     </div>
                     <div class="col-sm-3 text-right">
                         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalIndicador">+</button>

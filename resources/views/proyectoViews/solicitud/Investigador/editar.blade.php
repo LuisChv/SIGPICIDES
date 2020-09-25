@@ -8,8 +8,11 @@ Nueva investigación
         <div class="card">
             <div class="card-header ">
                 <div class="row">
-                    <div class="col-sm-12 text-left">
+                    <div class="col-sm-8 text-left">
                         <h2 class="card-title"><b>Registrar solicitud de investigación</b></h2>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <p style="color:red">Datos requeridos: *</p><br>
                     </div>
                 </div>
             </div>
@@ -24,7 +27,7 @@ Nueva investigación
                                     <i class="tim-icons icon-atom"></i>
                                 </div>
                             </div>
-                        <input required type="text" name="nombre" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre de la investigación') }}" value="{{ $proyecto->nombre }}" >
+                        <input required type="text" name="nombre" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nombre de la investigación *') }}" value="{{ $proyecto->nombre }}" >
                             @include('alerts.feedback', ['field' => 'name'])
                         </div>
                         
@@ -34,7 +37,7 @@ Nueva investigación
                                     <i class="tim-icons icon-atom"></i>
                                 </div>
                             </div>
-                            <input value="{{ $proyecto->tema }}" required type="text" name="tema" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Tema de la investigación') }}">
+                            <input value="{{ $proyecto->tema }}" required type="text" name="tema" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Tema de la investigación *') }}">
                             @include('alerts.feedback', ['field' => 'name'])
                         </div>
                         
@@ -45,7 +48,7 @@ Nueva investigación
                                 </div>
                             </div>
                             <select required class="form-control selectorWapis" id="selector1" name="tipoRec">
-                                <option value="" selected disabled hidden>Tipo de investigación</option>
+                                <option value="" selected disabled hidden>Tipo de investigación *</option>
                                 @foreach ($tiposinv as $tipo)
                                     @if ($t->id==$tipo->id)                                     
                                         <option style="color: black !important;" value="{{$tipo->id}}" selected>{{ $tipo->nombre }}</option>
@@ -64,11 +67,11 @@ Nueva investigación
                                 </div>
                             </div>
                             <select required class="form-control selectorWapis" id="selector2" name="subtipo">
-                                <option value="">Subtipo de investigación</option>
+                                <option value="" hidden>Subtipo de investigación *</option>
                                 @foreach($sub_tipos as $subtipo)
                                     @if ($t->id == $subtipo->id_tipo)
                                         @if ($proyecto->id_subtipo==$subtipo->id)
-                                            <option selected style="color: black !important;" value="{{$subtipo->id}}" 
+                                            <option selected  style="color: black !important;" value="{{$subtipo->id}}" 
                                                 class="{{$subtipo->id_tipo}}">{{$subtipo->nombre}}
                                             </option>
                                         @else
@@ -89,17 +92,17 @@ Nueva investigación
                         </div>
 
                         <div class="col-md-12 input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
-                            <textarea required class="inputArea" rows="5" maxlength="1024" name="descripcion" placeholder="Describa su proyecto">{{ $proyecto->descripcion }}</textarea>
+                            <textarea required class="inputArea" rows="5" maxlength="900" name="descripcion" placeholder="Describa su proyecto *">{{ $proyecto->descripcion }}</textarea>
                             @include('alerts.feedback', ['field' => 'descripcion'])
                         </div>    
 
                         <div class="col-md-12 input-group{{ $errors->has('justificacion') ? ' has-danger' : '' }}">
-                            <textarea required class="inputArea" rows="5" maxlength="1024" name="justificacion" placeholder="Justificación del proyecto">{{ $proyecto->justificacion }}</textarea>
+                            <textarea required class="inputArea" rows="5" maxlength="900" name="justificacion" placeholder="Justificación del proyecto *">{{ $proyecto->justificacion }}</textarea>
                             @include('alerts.feedback', ['field' => 'justificacion'])
                         </div> 
 
                         <div class="col-md-12 input-group{{ $errors->has('resultados') ? ' has-danger' : '' }}">
-                            <textarea required class="inputArea" rows="4" maxlength="1024" name="resultados" placeholder="Resultados esperados del proyecto">{{ $proyecto->resultados }}</textarea>
+                            <textarea required class="inputArea" rows="4" maxlength="900" name="resultados" placeholder="Resultados esperados del proyecto *">{{ $proyecto->resultados }}</textarea>
                             @include('alerts.feedback', ['field' => 'resultados'])
                         </div> 
 
@@ -111,7 +114,7 @@ Nueva investigación
                                             <i class="tim-icons icon-calendar-60"></i>
                                         </div>
                                     </div>
-                                <input value="{{$proyecto->duracion}}" type="number" required type="text" name="duracion" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Duración en semanas') }}">
+                                <input min="0" type="number" value="{{$proyecto->duracion}}" type="number" required type="text" name="duracion" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Duración en semanas *') }}">
                                     @include('alerts.feedback', ['field' => 'duracion'])
                                 </div>
 
@@ -121,7 +124,7 @@ Nueva investigación
                                             <i class="tim-icons icon-single-02"></i>
                                         </div>
                                     </div>
-                                    <input value="{{$equipo->miembros}}" type="number" required type="text" name="miembros" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Cantidad de miembros') }}">
+                                    <input min="0" type="number" value="{{$equipo->miembros}}" type="number" required type="text" name="miembros" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Cantidad de miembros *') }}">
                                     @include('alerts.feedback', ['field' => 'miembros'])
                                 </div>
                                 <div class="col-md-4 input-group{{ $errors->has('costo') ? ' has-danger' : '' }}">
@@ -130,14 +133,14 @@ Nueva investigación
                                             <i class="tim-icons icon-coins"></i>
                                         </div>
                                     </div>
-                                    <input value="{{$proyecto->costo}}" type="number" step="0.01" required type="text" name="costo" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Costo estimado') }}">
+                                    <input step="0.01" min="0" type="number" value="{{$proyecto->costo}}" type="number" step="0.01" required type="text" name="costo" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Costo estimado *') }}">
                                     @include('alerts.feedback', ['field' => 'costo'])
                                 </div>
                             </div>
                         </div>
                     </div>  
                     <div class="row">
-                        <div class="col-md-6" align="right">
+                        <div class="col-md-12" align="right">
                             <button class="btn  btn-primary" type="submit">Siguiente</button>
                         </div>
                     </div>     
