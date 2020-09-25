@@ -23,11 +23,11 @@ class TaskController extends Controller
         //Si el equipo existe sigue el flujo, sino se muestra un not found
         if ($proyecto= Proyecto::select('id_equipo', 'id_comite')->where('id',$idProyecto)->first()) {
             //Obteniendo datos del usuario logeado
-            $solicitud= Solicitud::select('id_estado')->where('id_proy', $idProyecto)->first();
+            $solicitud= Solicitud::where('id_proy', $idProyecto)->first();
             //Validacion para que solo permita modificar perfiles aprobados
             $modificable=true;
             //Si el perfil ha sido aprobado, o si hay observaciones en la fase 2 se puede seguir modificando
-            if($solicitud->id_estado==5 || ($solicitud->id_estado==9 && $solicitud->etapa==2)){
+            if($solicitud->id_estado==5 || ($solicitud->id_estado==6 && $solicitud->etapa==2)){
                 $modificable=true;
             }
             //Si se ha enviado a evaluacion de fase 2 o es del comite
