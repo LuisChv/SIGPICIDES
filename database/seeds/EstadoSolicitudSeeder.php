@@ -41,7 +41,7 @@ class EstadoSolicitudSeeder extends Seeder
 
 
         //Estado para proyecto aprobado
-        DB::table('estado_de_proyecto')->insert([
+        DB::table('estado_de_proy')->insert([
             'estado'=>'Aprobado',
         ]);
     }
