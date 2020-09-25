@@ -375,49 +375,49 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     ->middleware('has.permission:solicitudes.create');
 
     Route::post('proyecto/recursos', 'RecursoProyectoController@store')->name('proyecto_recursos.store')
-    ->middleware('has.permission:proyectos.create');
+    ->middleware('has.permission:solicitudes.create');
 
     Route::get('proyecto/recursos/show/{id}', 'RecursoProyectoController@show')->name('proyecto_recursos.show')
-    ->middleware('has.permission:proyectos.create');
+    ->middleware('has.permission:solicitudes.create');
 
     Route::delete('proyecto/recursos/{id}', 'RecursoProyectoController@destroy')->name('proyecto_recursos.destroy')
-    ->middleware('has.permission:proyectos.create');
+    ->middleware('has.permission:solicitudes.create');
 
     
     /**********************Objetivos******************/
 
     Route::post('proyecto/objetivos', 'ObjetivoController@store')->name('proyecto_objetivos.store')
-    ->middleware('has.permission:proyectos.create');
+    ->middleware('has.permission:solicitudes.create');
 
     Route::put('proyecto/objetivos_update', 'ObjetivoController@update')->name('proyecto_objetivos.update')
-    ->middleware('has.permission:proyectos.create');
+    ->middleware('has.permission:solicitudes.create');
 
     Route::delete('proyecto/objetivos', 'ObjetivoController@destroy')->name('proyecto_objetivos.destroy')
-    ->middleware('has.permission:proyectos.create');
+    ->middleware('has.permission:solicitudes.create');
 
 
     /**********************Alcances******************/
 
     Route::post('proyecto/alcances', 'AlcanceController@store')->name('proyecto_alcances.store')
-    ->middleware('has.permission:proyectos.create');
+    ->middleware('has.permission:solicitudes.index');
 
     Route::put('proyecto/alcances_update', 'AlcanceController@update')->name('proyecto_alcances.update')
-    ->middleware('has.permission:proyectos.create');
+    ->middleware('has.permission:solicitudes.index');
 
     Route::delete('proyecto/alcances', 'AlcanceController@destroy')->name('proyecto_alcances.destroy')
-    ->middleware('has.permission:proyectos.create');
+    ->middleware('has.permission:solicitudes.index');
 
 
     /**********************Indicador******************/
 
     Route::post('proyecto/indicadores', 'IndicadorController@store')->name('proyecto_indicadores.store')
-    ->middleware('has.permission:proyectos.create');
+    ->middleware('has.permission:solicitudes.index');
 
     Route::put('proyecto/indicadores_update', 'IndicadorController@update')->name('proyecto_indicadores.update')
-    ->middleware('has.permission:proyectos.create');
+    ->middleware('has.permission:solicitudes.index');
 
     Route::delete('proyecto/indicadores', 'IndicadorController@destroy')->name('proyecto_indicadores.destroy')
-    ->middleware('has.permission:proyectos.create');
+    ->middleware('has.permission:solicitudes.index');
 
     /*********************Solicitude de proyecto Admin*******************/
     
