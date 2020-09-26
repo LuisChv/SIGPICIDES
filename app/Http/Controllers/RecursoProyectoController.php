@@ -8,6 +8,7 @@ use App\Proyecto;
 use App\TipoDeRecursos;
 use App\RecursosPorProy;
 use DB;
+use App\Solicitud;
 class RecursoProyectoController extends Controller
 {
     //
@@ -64,6 +65,10 @@ class RecursoProyectoController extends Controller
             *cantidad
             *timestamp
          */
+        $solicitud= Solicitud::where('id_proy', $id)->first();
+        if(!($solicitud->id_estado==1 || $solicitud->id_estado==2 || $solicitud->id_estado==4)){
+            abort(403);
+        }
         $proyecto=Proyecto::findOrFail($id);
         $recursos=Recursos::all();
         $tiposrec=TipoDeRecursos::all();
