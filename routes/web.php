@@ -489,7 +489,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     ->middleware('has.permission:solicitudes.create');
 
     //planificacion
-    Route::get('proyecto/planificacion', 'SolicitudController@planificacion')->name('planificacion.index')
+    Route::get('proyecto/archivos', 'SolicitudController@archivos')->name('archivos.index')
     ->middleware('has.permission:solicitudes.create');
     Route::get('proyecto/indicadores', 'SolicitudController@indicador')->name('indicadores.index')
     ->middleware('has.permission:solicitudes.create');

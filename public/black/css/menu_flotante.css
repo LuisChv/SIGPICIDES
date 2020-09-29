@@ -186,3 +186,34 @@ input:checked + .slider:before {
 .inputArea::placeholder{
   color: #bbb;
 }
+
+
+.archivo{
+  display: flex;
+}
+
+.archivo img {
+  justify-content: flex-start;
+  background-color: #ccc;
+  width: 25px;
+  height: 25px;
+}
+
+.archivo p{
+  font-style: italic;
+  width: 100%;
+
+}
+
+p .archivo_doc{
+  color: blue;
+}
+p .arcvhivo_pdf{
+  color: red;
+}
+p .archivo_xls{
+  color: green;
+}
+p .archivo_ppt{
+  color: orange;
+}
