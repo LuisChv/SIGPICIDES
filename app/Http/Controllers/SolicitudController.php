@@ -701,8 +701,8 @@ class SolicitudController extends Controller
     public function archivos(){
         return view('proyectoViews.indicador.archivos');
     }
-    public function indicador(){
-        return view('proyectoViews.planificacion.indicadores_index');
+    public function archivos2(){
+        return view('proyectoViews.indicador.index');
     }
     public function show2()
     {
