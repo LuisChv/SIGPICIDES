@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -456,7 +457,10 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
         //     $message->to(request('email'));
         //     $message->subject('Hello there');
         // });
+        $consula= DB::table('solicitud')->get();
+        dd($consula);
         $user=auth()->user();
+
         $data = array('email'=> $user->email, 'name'=>$user->name, 'nombreProyecto'=>"Proyecto nombre", 'etapa'=>2);
         //Para enviar correo de confirmacion de nuevo
         Mail::send('Mail.evaluacionFase1', $data, function ($message) use ($data){
@@ -508,7 +512,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::get('tareasAsignaciones/{id_tarea}','TaskController@tareaAsignacionesFetch')->name('proyecto_tareas.asignaciones');
 
-    /***********************planificacion de tareas gantt****************************/
+    /***********************Evaluacion ****************************/
     Route::get('evaluacion/{id}', 'EvaluacionSolicitudController@index')->name('evaluacion.index')
     ->middleware('has.permission:evaluacion.index');
 
