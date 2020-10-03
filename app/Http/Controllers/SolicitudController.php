@@ -698,11 +698,11 @@ class SolicitudController extends Controller
         return redirect()->route('solicitud.mis_solicitudes');
     }
 
-    public function planificacion(){
-        return view('proyectoViews.planificacion.index');
+    public function archivos(){
+        return view('proyectoViews.indicador.archivos');
     }
-    public function indicador(){
-        return view('proyectoViews.planificacion.indicadores_index');
+    public function archivos2(){
+        return view('proyectoViews.indicador.index');
     }
     public function show2()
     {

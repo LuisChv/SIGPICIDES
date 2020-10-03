@@ -1,6 +1,6 @@
 @extends('layouts.app',['pageSlug' => 'dashboard'])
 @section('title')
-    Nueva investigación
+    archivos
 @endsection
 @section('content')
 <div class="row">
@@ -9,7 +9,7 @@
                 <div class="card-header ">
                     <div class="row">
                         <div class="col-sm-12 text-left">
-                            <h2 class="card-title"><b>Objetivos & alcances</b></h2>
+                            <h2 class="card-title"><b>Prueba de archivos</b></h2>
                         </div>
                     </div>
                 </div>
@@ -19,38 +19,43 @@
                         <table class="table">
                             <tr>
                                 <td>
-                                    <textarea class="form-control border" rows="3" placeholder="Escriba un objetivo de su proyecto"></textarea>
+                                    <input name="archivo" class="form-control border" type="file">
                                 </td>
                                 <td>
                                     <button class="btn btn-success btn-sm btn-icon btn-round"> <i class="tim-icons icon-simple-add"></i></button>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="archivo">
+                                <td><img src="#"></td>
                                 <td>
-                                    <textarea class="form-control border" rows="3" placeholder="Escriba un alcance de su proyecto"></textarea>
+                                    <p class="archivo_doc">archivo.docx</p>
                                 </td>
+                            </tr>
+                            <tr class="archivo">
+                                <td><img src="#"></td>
                                 <td>
-                                    <button class="btn btn-success btn-sm btn-icon btn-round"> <i class="tim-icons icon-simple-add"></i></button>
+                                    <p class="archivo_ppt">archivo.ppt</p>
+                                </td>
+                            </tr>
+                            <tr class="archivo">
+                                <td><img src="#"></td>
+                                <td>
+                                    <p class="archivo_xls">archivo.xls</p>
+                                </td>
+                            </tr>
+                            <tr class="archivo">
+                                <td><img src="#"></td>
+                                <td>
+                                    <p class="archivo_pdf">archivo.pdf</p>
                                 </td>
                             </tr>
                         </table>
                     </div>
                     <div class="card-footer">
-                        <a class="btn btn-primary" href="{{route('factibilidad.create', $proyecto->id)}}">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a> <br><br>              
+                        <a class="btn btn-primary" href="#">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a> <br><br>              
                     </div>                    
                 </form>
             </div>
-        </div>
-        <div class="container menuF-container">
-            <input type="checkbox" id="toggleF">
-            <label for="toggleF" class="buttonF"></label>
-            <nav class="navF">
-                <a href="{{ route('solicitud.create')}}">Recursos</a>
-                <a href="{{ route('solicitud.create')}}">Factibilidad</a>
-                <a href="{{ route('solicitud.create')}}">Planificación</a>
-                <!--a href="{{ route('cides') }}">Acerca de</a>
-                <a href="#">Acciones largaaaaaaaaas</a-->
-            </nav>
         </div>
 </div>
 @endsection

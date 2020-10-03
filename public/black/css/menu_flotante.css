@@ -186,3 +186,57 @@ input:checked + .slider:before {
 .inputArea::placeholder{
   color: #bbb;
 }
+
+
+.archivo{
+  display: flex;
+}
+
+.archivo img {
+  justify-content: flex-start;
+  background-color: #ccc;
+  width: 25px;
+  height: 25px;
+}
+
+.archivo p{
+  font-style: italic;
+  width: 100%;
+
+}
+
+p .archivo_doc{
+  color: blue;
+}
+p .arcvhivo_pdf{
+  color: red;
+}
+p .archivo_xls{
+  color: green;
+}
+p .archivo_ppt{
+  color: orange;
+}
+
+.indicador{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  width: 100%;
+  height: 450px;
+  background-color: #ccc;
+}
+
+.indicador__grafica{
+  margin: 10px 0px;
+  height: 70%;
+  width: 95%;
+  background-color: #3cc;
+}
+
+.indicador p{
+  text-align: left;
+  padding-left:10px;
+  padding-right:10px;
+}
