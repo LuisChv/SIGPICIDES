@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Indicador;
+use App\Proyecto;
+use DB;
 
 class IndicadorController extends Controller
 {
@@ -44,5 +46,13 @@ class IndicadorController extends Controller
         $indicador = Indicador::findOrFail(request('indicador'));
         $indicador->delete();
         return redirect()->route('proyecto.oai', [$indicador->id_proy]);
+    }
+
+    public function index($id){
+        $proyecto= Proyecto::where('id', $id)->first();
+        $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ?", [$id]);
+        return view('proyectoViews.indicador.index', [
+           'indicadores' => $indicadores,
+        ]);
     }
 }
