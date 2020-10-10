@@ -702,11 +702,11 @@ class SolicitudController extends Controller
         return view('proyectoViews.indicador.archivos');
     }
     public function archivos2(){
-        return view('proyectoViews.indicador.index');
+        return view('proyectoViews.avance.index');
     }
     public function show2()
     {
         //
-        return view('proyectoViews.solicitud.Investigador.show');
+        return view('proyectoViews.indicador.show');
     }
 }

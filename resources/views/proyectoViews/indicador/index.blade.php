@@ -1,6 +1,6 @@
 @extends('layouts.app',['pageSlug' => 'dashboard'])
 @section('title')
-    archivos
+    Indicadores
 @endsection
 @section('content')
 <div class="row">
@@ -22,6 +22,8 @@
             </div>
         </div>
     </div>
+    @foreach ($indicadores as $indicador) 
+    <!--cajita indicador-->
     <div class="col-md-6">
         <div class="card">
             <div class="card-header ">
@@ -32,12 +34,33 @@
                     <div class="indicador">
                         <div class="indicador__grafica">[Gráfica]</div>
                         <div><p><b>Descripción:</b></p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. </p></div>
+                            <p>{{$indicador->detalle}}</p></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @endforeach
+    <!--fin cajita-->
+    <!--plantilla para indicador cuantitativo-->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-12 text-left">
+                        <h2 class="card-title">[Nombre indicador]</h2>
+                    </div>
+                    <div class="indicador">
+                        <div class="indicador__grafica">[Gráfica]</div>
+                        <div><p><b>Descripción:</b></p>
+                            <p>Descripcion de prueba</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--fin plantilla indicador cuantitativo-->
+    <!--plantilla indicador cualitativo-->
     <div class="col-md-6">
         <div class="card">
             <div class="card-header ">
@@ -69,6 +92,7 @@
             </div>
         </div>
     </div>
+    <!--fin plantilla indicador cualitativo-->
     <div class="col-md-6">
         <div class="card">
             <div class="card-header ">
