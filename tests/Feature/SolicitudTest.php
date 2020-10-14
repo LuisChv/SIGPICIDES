@@ -70,10 +70,6 @@ class SolicitudTest extends TestCase
             'costo'=> 550
         ]);
 
-        $solicitud = Solicitud::first();
-        $proyecto = Proyecto::first();
-        $equipo = EquipoDeInvestigacion::first();
-
         $this->assertCount(1, Proyecto::all());
 
         $solicitud = Solicitud::first();
