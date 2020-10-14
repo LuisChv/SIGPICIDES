@@ -709,4 +709,9 @@ class SolicitudController extends Controller
         //
         return view('proyectoViews.indicador.show');
     }
+    public function stats2()
+    {
+        //
+        return view('statsViews.index');
+    }
 }

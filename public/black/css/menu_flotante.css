@@ -243,7 +243,7 @@ p .archivo_ppt{
 }
 
 /* Customize the label (the container) */
-.container {
+.container2 {
   display: block;
   position: relative;
   padding-left: 35px;
@@ -257,7 +257,7 @@ p .archivo_ppt{
 }
 
 /* Hide the browser's default checkbox */
-.container input {
+.container2 input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -276,12 +276,12 @@ p .archivo_ppt{
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.container2:hover input ~ .checkmark {
   background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.container2 input:checked ~ .checkmark {
   background-color: #2196F3;
 }
 
@@ -293,12 +293,12 @@ p .archivo_ppt{
 }
 
 /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
+.container2 input:checked ~ .checkmark:after {
   display: block;
 }
 
 /* Style the checkmark/indicator */
-.container .checkmark:after {
+.container2 .checkmark:after {
   left: 9px;
   top: 5px;
   width: 5px;

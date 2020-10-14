@@ -19,7 +19,7 @@
 			  		<div class="row">
 			  			<h2 class="col-md-10 card-title">[Nombre indicador ]</h2>
 			  			<div class="col-md-2">
-			  				<label class="container">
+			  				<label class="container2">
 			  					<input type="checkbox" checked disabled title="Completado">
 			  					<span class="checkmark"></span>
 			  				</label>
