@@ -57,7 +57,7 @@ class SolicitudTest extends TestCase
         $session->assertStatus(302);
 
         /* Http request */
-        $response = $this->post('/solicitud/store', [
+        $response = $this->post('/solicitud', [
             'nombre'=> "Proyecto TEST",
             'tipoRec'=> 1,
             'subtipo'=> 1,
@@ -69,17 +69,19 @@ class SolicitudTest extends TestCase
             'miembros'=> 1,
             'costo'=> 550
         ]);
-        $response->assertStatus(200);
 
-        /*$this->assertCount(1, Proyecto::all());
+        $solicitud = Solicitud::first();
+        $proyecto = Proyecto::first();
+        $equipo = EquipoDeInvestigacion::first();
+
+        $this->assertCount(1, Proyecto::all());
 
         $solicitud = Solicitud::first();
         $proyecto = Proyecto::first();
         $equipo = EquipoDeInvestigacion::first();
 
         $this->assertEquals($proyecto->nombre, "Proyecto TEST");
-        $this->assertEquals($proyecto->tipo, 1);
-        $this->assertEquals($proyecto->subtipo, 1);
+        $this->assertEquals($proyecto->id_subtipo, 1);
         $this->assertEquals($proyecto->descripcion, "Descripción TEST");
         $this->assertEquals($proyecto->tema, "Tema TEST");
         $this->assertEquals($proyecto->justificacion, "Justificación TEST");
@@ -87,7 +89,8 @@ class SolicitudTest extends TestCase
         $this->assertEquals($proyecto->duracion, 1);
         $this->assertEquals($proyecto->costo, 550);
         $this->assertEquals($equipo->miembros, 1);
-        $this->assertEquals($solicitud->id_proy, $proyecto->id);*/
+        $this->assertEquals($solicitud->id_proy, $proyecto->id);
 
+        $response->assertRedirect('proyecto/oai/1');
     }
 }
