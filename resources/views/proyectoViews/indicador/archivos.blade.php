@@ -13,42 +13,29 @@
                         </div>
                     </div>
                 </div>
-                <form class="form" method="POST" action="">
+                <form class="form" method="POST" action="{{ route('archivos.store')}}" enctype="multipart/form-data">
                     @csrf                                    
                     <div class="card-body">
                         <table class="table">
                             <tr>
                                 <td>
-                                    <input name="archivo" class="form-control border" type="file">
+                                    <input type="file" name="files[]" class="form-control border" multiple required>
                                 </td>
                                 <td>
                                     <button class="btn btn-success btn-sm btn-icon btn-round"> <i class="tim-icons icon-simple-add"></i></button>
                                 </td>
                             </tr>
+
+                            @foreach($files as $file)
                             <tr class="archivo">
-                                <td><img src="#"></td>
+                                <td>{{$file->id}}</td>
+                                <td><i class="icon icon-file"></i></td>
                                 <td>
-                                    <p class="archivo_doc">archivo.docx</p>
+                                    <p class="archivo_doc">{{$file->nombre}}</p>
                                 </td>
+                                <td><a href="{{ route('archivos.download', $file->id) }}">Descargar</a></td>
                             </tr>
-                            <tr class="archivo">
-                                <td><img src="#"></td>
-                                <td>
-                                    <p class="archivo_ppt">archivo.ppt</p>
-                                </td>
-                            </tr>
-                            <tr class="archivo">
-                                <td><img src="#"></td>
-                                <td>
-                                    <p class="archivo_xls">archivo.xls</p>
-                                </td>
-                            </tr>
-                            <tr class="archivo">
-                                <td><img src="#"></td>
-                                <td>
-                                    <p class="archivo_pdf">archivo.pdf</p>
-                                </td>
-                            </tr>
+                            @endforeach
                         </table>
                     </div>
                     <div class="card-footer">

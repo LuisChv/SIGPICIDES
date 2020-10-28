@@ -492,8 +492,6 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     ->middleware('has.permission:solicitudes.create');
 
     //planificacion
-    Route::get('proyecto/archivos', 'SolicitudController@archivos')->name('archivos.index')
-    ->middleware('has.permission:solicitudes.create');
     Route::get('proyecto/avances', 'SolicitudController@archivos2')->name('avance.index')
     ->middleware('has.permission:solicitudes.create');
     Route::get('proyecto/{id}/indicadores', 'IndicadorController@index')->name('indicadores.index');
@@ -534,6 +532,14 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::post('evaluacion/responder/{id}', 'EvaluacionSolicitudController@respuesta_evaluacion')->name('solicitud.responder')
     ->middleware('has.permission:solicitudes.index');
+
+    /*********************Documentos************************************** */
+    Route::get('proyecto/archivos', 'DocumentoController@archivos')->name('archivos.index')
+    ->middleware('has.permission:solicitudes.create');
+    Route::post('proyecto/archivos/store', 'DocumentoController@archivos_store')->name('archivos.store')
+    ->middleware('has.permission:solicitudes.create');
+    Route::get('proyecto/archivos/download/{id}', 'DocumentoController@archivos_download')->name('archivos.download')
+    ->middleware('has.permission:solicitudes.create');
 });
 
 

@@ -16,7 +16,7 @@ class CreateDocumentosTable extends Migration
         Schema::create('documento', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',1000);
-            $table->string('doc',1000);
+            $table->string('doc',1000)->nullable();;
             $table->integer('id_tipo_doc');
             $table->integer('id_hito')->nullable();
             $table->integer('id_indicador')->nullable();
