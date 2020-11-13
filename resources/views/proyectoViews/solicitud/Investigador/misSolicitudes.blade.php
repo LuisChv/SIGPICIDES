@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-12">
+    <div class="col-6">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
@@ -89,7 +89,7 @@
         </div>
     </div>
 
-	<div class="col-12">
+	<div class="col-6">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
