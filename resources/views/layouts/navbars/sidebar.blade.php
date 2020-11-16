@@ -26,6 +26,14 @@
                                     </a>
                                 </li>
                             @endcan
+                            @can('mis_proyectos')<!--TODO Comprobar Permiso con Daris o Luis-->
+                                <li @if ($pageSlug == 'mis_proyectos') class="active " @endif>
+                                    <a href="{{ route('proyectos.colaboracion')  }}">
+                                        <i class="tim-icons icon-shape-star"></i>
+                                        <p>{{ __('Mis colaboraciones') }}</p>
+                                    </a>
+                                </li>
+                            @endcan
                             @can('proyectos.index')
                                 <li @if ($pageSlug == 'proyectos') class="active " @endif>
                                     <a href="{{ route('home')  }}">
@@ -33,7 +41,7 @@
                                         <p>{{ __('Consultar proyectos') }}</p>
                                     </a>
                                 </li>
-                            @endcan
+                            @endcan    
                             @can('tipo_de_investigacion.index')
                                 <li @if ($pageSlug == 'tipos_de_investigacion') class="active " @endif>
                                     <a href="{{ route('tipo_investigacion.index')  }}">

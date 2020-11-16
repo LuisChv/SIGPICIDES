@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class ProyectoController extends Controller
 {
@@ -16,6 +17,15 @@ class ProyectoController extends Controller
         //
     }
 
+    //Lista de proyectos donde el usuario ha colaborado
+    public function indexColaboracion()
+    {
+        return DB::table('permissions')->paginate(3);
+        //$permisos->setPageName('permisos');
+        //$proyectos=DB::table('permissions')->paginate(3);
+        //$proyectos->setPageName('proyectos');
+        
+    }
     /**
      * Show the form for creating a new resource.
      *
