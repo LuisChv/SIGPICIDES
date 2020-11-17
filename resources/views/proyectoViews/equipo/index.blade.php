@@ -74,6 +74,12 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <div class="mr-auto col-md-12">
+                        <input autocomplete="off" id="buscador" class="form-control" name="investigador" 
+                                    placeholder="Buscar nombre del investigador" onclick="ejecutarBuscador({{json_encode($usuarios)}},'name' ,'buscador')">
+                    </div>
+                    <p><br></p>
+
                     <div class="container list-group">
                         <table class="table">
                             <thead>
