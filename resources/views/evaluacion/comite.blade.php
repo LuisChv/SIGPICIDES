@@ -14,6 +14,11 @@
                 </div>
             </div>
             <div class="card-body">
+                <div class="mr-auto col-md-12">
+                    <input autocomplete="off" id="buscador" class="form-control" name="experto" 
+                                placeholder="Buscar nombre del experto" onclick="ejecutarBuscador({{json_encode($usuarios)}},'name' ,'buscador')">
+                </div>
+                <p><br></p>
                 <table class="table">
                     <thead>
                         <tr>
@@ -23,6 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                            
                         @foreach ($miembros as $miembro) 
                             <tr>                     
                                 <td> {{ $miembro->name }} </td>
@@ -53,7 +59,7 @@
     </div>
 
 	<div class="col-md-6">
-        <div class="card">
+        <!--div class="card">
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-12 text-left">
@@ -71,8 +77,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                                
                             @foreach ($usuarios as $use) 
-                            <tr>                     
+                            <tr>                                                     
                                 <td> {{ $use->name }} </td>
                                 @if ( $cantidad_miembros < 3 )
                                 <td width='5%' class="text-center">
@@ -89,7 +96,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div-->
         
 
         <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
