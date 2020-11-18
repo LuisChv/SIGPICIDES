@@ -33,7 +33,7 @@ class UserController extends Controller
 
 
     public function create(){
-        $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [false]);
+        $roles = DB::select('SELECT * FROM roles');
         $data = User::all();
         return view ('users.crear', [
             'roles'=> $roles, 
@@ -116,7 +116,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $data= User::all();
-        $roles= DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [false]);
+        $roles= DB::select('SELECT * FROM roles');
     
         //Buscar user y su respectivo rol
         $user= User::findOrFail($id);

@@ -58,7 +58,7 @@ class ComiteController extends Controller
             
          
          //Roles
-         $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [false]);
+         $roles = DB::select('SELECT * FROM roles');
 
          $cantidad_miembros = DB::table('comite_usuario')->where('id_comite',[$id_comite])->count();
          $evaluaciones = DB::table('evaluacion')->where('id_solicitud',[$solicitud->id]);

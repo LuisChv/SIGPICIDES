@@ -73,7 +73,7 @@ class EvaluacionSolicitudController extends Controller
         $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
         $factibilidad = Factibilidad::where('id_proy', $id)->first();
         $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$equipo->id]);
-        $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [true]);
+        $roles = DB::select('SELECT * FROM roles');
         $idUsuarioLogeado=auth()->user()->id;
         
         $indicadores= Indicador::where('id_proy',$id)->get();
