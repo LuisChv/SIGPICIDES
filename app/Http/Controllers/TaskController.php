@@ -30,7 +30,7 @@ class TaskController extends Controller
             if($solicitud->id_estado==5 || ($solicitud->id_estado==6 && $solicitud->etapa==2)){
                 $modificable=true;
             }
-            //Si se ha enviado a evaluacion de fase 2 o es del comite
+            //Si se ha enviado a evaluacion de fase 2 o es del comite puede verlo pero sin modificar
             elseif($solicitud->id_estado=3){
                 $modificable=false;
             }
@@ -40,7 +40,7 @@ class TaskController extends Controller
             $opcion;
             //Si es miembro del equipo sera opcion 1
             if($usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $proyecto->id_equipo)->where('id_usuario', $idUsuarioLogeado)->first()){
-                $opcion=3; //TODO aqui era 1 pero estoy probando cuando ya inicio el proyecto y añadira avance
+                $opcion=1; //TODO aqui era 1 pero estoy probando cuando ya inicio el proyecto y añadira avance
             }
             //En caso sea miembro del comite se mostrara el gant pero no se podra modificar y sera opcion 2
             elseif($usuarioComite= ComiteUsuario::where('id_comite',$proyecto->id_comite)->where('id_usuario', $idUsuarioLogeado)->first()){
@@ -51,14 +51,16 @@ class TaskController extends Controller
             $indicadores= Indicador::where('id_proy',$idProyecto)->get();
             //Traer los miembros del equipo del proyecto seleccionado
             $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$proyecto->id_equipo])->get();
-            //dd($indicadores);
             //Retornar vista
+            //Gantt para modificar avances cuando ya se haya aprobado fase 2
             if($opcion==3 || !$modificable){
                 return view('proyectoViews.tareas.ganttAvance',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
             }
+            //Gantt de vista (no se puede modificar)
             elseif($opcion==2 || !$modificable){
                 return view('proyectoViews.tareas.ganttComite',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
             }
+            //Gantt para crear tareas y asignar responsables
             elseif($opcion==1 && $modificable){
                 return view('proyectoViews.tareas.gantt',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
             }
