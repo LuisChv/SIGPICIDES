@@ -20,11 +20,17 @@ class ProyectoController extends Controller
     //Lista de proyectos donde el usuario ha colaborado
     public function indexColaboracion()
     {
-        return DB::table('permissions')->paginate(3);
-        //$permisos->setPageName('permisos');
-        //$proyectos=DB::table('permissions')->paginate(3);
-        //$proyectos->setPageName('proyectos');
-        
+        $idUsuarioLogeado=auth()->user()->id;
+        //return DB::table('permissions')->paginate(3);
+        $colaboraciones=DB::table('proyecto')
+                ->join('equipo_de_investigacion', 'proyecto.id_equipo','equipo_de_investigacion.id')
+                ->join('usuario_equipo_rol', 'equipo_de_investigacion.id','usuario_equipo_rol.id_equipo')                
+                ->select('proyecto.nombre','usuario_equipo_rol.id_rol', 'proyecto.id')                
+                ->where([['id_usuario',$idUsuarioLogeado],
+                ['id_rol','!=',5]])
+                ->paginate(3);           
+                
+        return view ('proyectoViews.Colaboraciones.index', ['colaboraciones'=>$colaboraciones]);                
     }
     /**
      * Show the form for creating a new resource.
