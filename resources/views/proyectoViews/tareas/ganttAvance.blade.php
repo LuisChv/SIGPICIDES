@@ -243,27 +243,57 @@
 });*/
 </script>
 
-//TODO Aqui debe ir tu modal daris 
+//TODO MODAL en proceso
 <div class="modal fade" id="modalAgregarComentario" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content modal-lg">
+        <div class="modal-dialog modal-top" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Nuevo comentario</h5>
+                    <h5 class="modal-title">Registrar avance de la tarea</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="false">&times;</span>
                         </button>
                 </div>
-                <div class="modal-body">                     
-                    <table class="table" style="background-color: white !important;" >
-                        <tr>
-                            <td><textarea maxlength="1200" id= "coment" required rows="3" style="color: #222a42 !important;" class="inputArea" maxlength="200" name="descripcion_objetivo"></textarea></td>
-                        </tr>
-                        <input hidden name="id_proy" value=""/>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onClick = "agregarComentario()" id = "agregar" data-dismiss="modal">Añadir</button>
+                <div class="modal-body">
+                    <div class="normal-box">                        
+                        <input class="form-control" maxlength="50" style="margin-bottom:7px;" placeholder="Descripción del avance">
+                        <input type="file" class="form-control">
+                        <p>Archivox disponibles</></p>
+                        <!--Listar los archivos que ya estan subidos-->
+                        <ul style="font-size:12px;">
+                            <li>archivo.docx</li>
+                            <li>archivo.docx</li>
+                            <li>archivo.docx</li>
+                            <li>archivo.docx</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm" onClick = "agregarComentario()" id = "agregar" data-dismiss="modal">Añadir</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                    <hr>
+                    <p><b>Comentarios</b></p>
+                    <!--lista de comentarios-->
+                    <div class="comment-box">
+                        <p><b>Pirulo:</b></p>
+                        <p>Comentario de Pirulo</p>
+                        <p><b>Milaneso:</b></p>
+                        <p>Comentario de Milaneso</p>
+                        <p><b>Anvorgueso:</b></p>
+                        <p>Comentario de Anvorgueso</p>
+                        <p><b>Milaneso:</b></p>
+                        <p>Comentario de Milaneso</p>
+                        <p><b>Anvorgueso:</b></p>
+                        <p>Comentario de Anvorgueso</p>
+                        <p><b>Milaneso:</b></p>
+                        <p>Comentario de Milaneso</p>
+                        <p><b>Anvorgueso:</b></p>
+                        <p>Comentario de Anvorgueso</p>
+                        <p><b>Milaneso:</b></p>
+                        <p>CLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        <p><b>Anvorgueso:</b></p>
+                        <p>Comentario de Anvorgueso</p>
+                    </div>
+                    <br>
+                    <textarea class="inputArea" row="2" placeholder="Escribir un comentario..."></textarea>
+                    <button class="btn btn-primary btn-sm">Agregar comentario</button>
                 </div>
             </div>
         </div>

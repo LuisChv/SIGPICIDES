@@ -30,7 +30,6 @@ Roles
                             </thead>
                             <tbody>
                                 @foreach ($data as $rol) 
-                                @if($rol->tipo_rol)
                                 <tr>                     
                                     <td width="80%" id={{$rol->id}} onMouseOver="ResaltarFila({{$rol->id}});" onMouseOut="RestablecerFila({{$rol->id}}, '')" onClick="CrearEnlace('{{ route('roles.show', $rol->id)}}');">
                                         {{$rol->name}}
@@ -60,7 +59,6 @@ Roles
                                         @endisset
                                     </td>
                                 </tr>
-                                @endif
                                 @endforeach
                             </tbody>
                         </table>

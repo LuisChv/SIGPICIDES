@@ -17,6 +17,12 @@ function añadirPermiso(valor){
 function eliminarPermiso(valor){
     document.getElementById("eliminarPermiso"+valor).submit();   
 }
+
+
+function agregarMiembro(id){
+    $('#investigador').val(id);
+}
+
 //editar indicador vista OAI
 function editarIndicador(id_indicador, descripcion){
     //console.log(id_indicador);

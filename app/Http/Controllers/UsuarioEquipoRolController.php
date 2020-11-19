@@ -61,7 +61,7 @@ class UsuarioEquipoRolController extends Controller
             $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$id_equipo]);
           
           //Roles
-          $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [true]);
+          $roles = DB::select('SELECT * FROM roles');
 
           $cantidad_miembros = DB::table('usuario_equipo_rol')->where('id_equipo',[$equipo->id])->count();
 
