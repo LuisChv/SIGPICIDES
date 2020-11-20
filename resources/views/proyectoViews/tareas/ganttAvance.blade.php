@@ -55,14 +55,14 @@
         { name:"duration", label: "Duración", align:"center", width:50 },
         {name: "buttons", label: "Actions", width: 90,
     template: function(task){
-               var buttons = 
-               '<input type=button value="Avance" class="btn btn-primary btn-sm btn-round" data-toggle="modal" data-target="#modalAgregarComentario">'
-               +'<input type=button value="Avance" class="btn btn-primary btn-sm btn-round" onclick=task_operations('+task.id+',"avanceAsignado")>'
-               +'<input type=button value="Avance" class="btn btn-primary btn-sm btn-round" onclick=task_operations('+task.id+',"avanceConsulta")>'
-               +'<input type=button value="Avance" class="btn btn-primary btn-sm btn-round" onclick=task_operations('+task.id+',"avanceComite")>';
-               return buttons; 
-               }
-  },
+            var buttons = 
+            '<input type=button value="Avance" class="btn btn-primary btn-sm btn-round" data-toggle="modal" data-target="#modalAgregarComentario">'
+            +'<input type=button value="Avance" class="btn btn-primary btn-sm btn-round" onclick=task_operations('+task.id+',"avanceAsignado")>'
+            +'<input type=button value="Avance" class="btn btn-primary btn-sm btn-round" onclick=task_operations('+task.id+',"avanceConsulta")>'
+            +'<input type=button value="Avance" class="btn btn-primary btn-sm btn-round" onclick=task_operations('+task.id+',"avanceComite")>';
+            return buttons; 
+            }
+        },
     ];
     //Idioma
     gantt.i18n.setLocale("es");
@@ -88,7 +88,13 @@
     //Evento lanzado al abrir una tarea
     gantt.attachEvent("onLightbox", function (task_id){
         //document.getElementsByName("indicador")[0].checked= true;
-        console.log(task_id);
+        //console.log(task_id);
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            for (var checkbox of checkboxes) {
+            checkbox.disabled=true;
+        }
+        var textarea = document.querySelectorAll('textarea');
+        textarea[0].disabled=true;
         $.ajax({
             url: '/tareasAsignaciones/'+ task_id,
             type: 'get',
@@ -99,8 +105,8 @@
                 for(let i=0; i<response.encargados.length; i++){
                     var indice=miembros.findIndex(x => x.id === response.encargados[i].id_usuario);
                     if(indice>=0){
-                        document.getElementsByName("equipo")[indice].checked= true;
-                    }
+                        document.getElementsByName("equipo")[indice].checked= true;                        
+                    }                    
                 }
                 for(let i=0; i<response.indicadores.length; i++){
                     var indice=indicadoresT.findIndex(x => x.id === response.indicadores[i].id_indicador);
@@ -109,11 +115,18 @@
                     }
                 }
             }
-        });
-        
+        });        
     });
+    //Evento lanzado cuando se apreta el boton de guardar
+    gantt.attachEvent("onLightboxSave", function(id, task, is_new){    
+        return false;
+    })
+    //Evento lanzado antes de que un usuario arrastre algo (tarea, progreso, link, etc)
     gantt.attachEvent("onBeforeTaskDrag", function(id, mode, e){
-        return false;           //allows dragging if the global task index is even
+        if(mode=="progress"){
+            return true;
+        }
+        return false;
     });
     gantt.attachEvent("onBeforeRowDragEnd", function(id, parent, tindex){    
         return false;
@@ -172,6 +185,8 @@
     gantt.config.autoscroll = true;
     gantt.config.autoscroll_speed = 50;
     //Inicializa el gant
+    //Permitir o no mover la barra de progreso
+    gantt.config.drag_progress = true;
     gantt.init("gantt_here");
     //Llamar al controlador para llenar los datos, aca paso por parametro el id del proyecto seleccionado
     gantt.load("/api/data/{{$idProyecto}}");

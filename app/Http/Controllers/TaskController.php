@@ -54,6 +54,7 @@ class TaskController extends Controller
             //Retornar vista
             //Gantt para modificar avances cuando ya se haya aprobado fase 2
             if($opcion==3 || !$modificable){
+                //return view('proyectoViews.tareas.gantt',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
                 return view('proyectoViews.tareas.ganttAvance',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
             }
             //Gantt de vista (no se puede modificar)
