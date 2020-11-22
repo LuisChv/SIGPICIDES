@@ -26,7 +26,6 @@
                             <td>
                                 <div class="btn-group">
                                     <a class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
-                                    <button onclick="confirmar()" class="btn btn-primary btn-sm btn-round btn-icon" title="Este boton es solo para un CPU luego lo quitan"><i class="tim-icons icon-check-2"></i></button>
                                     <a href="{{route('tareas_avance.index', 1)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
                                     <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
                                 </div>

@@ -269,8 +269,8 @@
                         </button>
                 </div>
                 <div class="modal-body">
-                    <div class="normal-box">                        
-                        <input class="form-control" maxlength="50" style="margin-bottom:7px;" placeholder="Descripción del avance">
+                    <div class="normal-box">
+                        <textarea class="inputArea" rows="1" placeholder="Descripción del avance" maxlength="64"></textarea>                        
                         <input type="file" class="form-control">
                         <p>Archivox disponibles</></p>
                         <!--Listar los archivos que ya estan subidos-->
@@ -302,7 +302,7 @@
                         <p><b>Anvorgueso:</b></p>
                         <p>Comentario de Anvorgueso</p>
                         <p><b>Milaneso:</b></p>
-                        <p>CLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        <p>CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam, quis nostrud exercitation ullamco pariatur</p>
                         <p><b>Anvorgueso:</b></p>
                         <p>Comentario de Anvorgueso</p>
                     </div>

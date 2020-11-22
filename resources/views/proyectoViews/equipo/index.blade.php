@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-6">
+    <div class="col-12">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
@@ -14,6 +14,11 @@
                 </div>
             </div>
             <div class="card-body">
+                    <div class="mr-auto col-md-12">
+                        <input autocomplete="off" id="buscador" class="form-control" name="investigador" 
+                                    placeholder="Buscar nombre del investigador" onclick="ejecutarBuscador({{json_encode($usuarios)}},'name' ,'buscador')">
+                    </div>
+                    <p><br></p>
                 <table class="table">
                     <thead>
                         <tr>
@@ -65,7 +70,7 @@
         </div>
     </div>
 
-	<div class="col-6">
+	<!--div class="col-6">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
@@ -73,12 +78,7 @@
                         <h2 class="card-title"><b>Investigadores del sistema</b></h2>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="mr-auto col-md-12">
-                        <input autocomplete="off" id="buscador" class="form-control" name="investigador" 
-                                    placeholder="Buscar nombre del investigador" onclick="ejecutarBuscador({{json_encode($usuarios)}},'name' ,'buscador')">
-                    </div>
-                    <p><br></p>
+                <div class="card-body">                   
 
                     <div class="container list-group">
                         <table class="table">
@@ -111,7 +111,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
+        <div-- class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <form method="POST"  action="{{ route('miembros.store', $proyecto->id )}}">
                 @csrf
@@ -143,7 +143,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div-->
         <!--modal de edicion-->
         <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -193,7 +193,7 @@
             </div>
         </div>
         
-    </div>
+    </div-->
     <div class="col-md-12">
         <table width="100%">
             <tr>
