@@ -495,11 +495,9 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     ->middleware('has.permission:solicitudes.create');
 
     //planificacion
-    Route::get('proyecto/avances', 'SolicitudController@archivos2')->name('avance.index')
-    ->middleware('has.permission:solicitudes.create');
+    Route::get('proyecto/avances', 'SolicitudController@archivos2')->name('avance.index');
     Route::get('proyecto/{id}/indicadores', 'IndicadorController@index')->name('indicadores.index');
-    Route::get('proyecto/indicador', 'SolicitudController@show2')->name('solicitud.show2')
-    ->middleware('has.permission:solicitudes.create');
+    Route::get('proyecto/indicador', 'SolicitudController@show2')->name('solicitud.show2');
     Route::get('stats/index', 'SolicitudController@stats2')->name('stats.index');
 
     /***********************Equipo por Proyecto ***************************/
