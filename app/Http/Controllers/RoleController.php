@@ -29,7 +29,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $data = Role::all();
+        $data = Role::paginate(5);
         return view ('simpleViews.roles.crear', [
             'data' => $data
         ]);
@@ -75,7 +75,7 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        $data= Role::all();
+        $data= Role::paginate(5);
        
         //Buscar el usuario con el id de entrada
         $role= Role::findOrFail($id);
@@ -98,7 +98,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $data= Role::all();
+        $data= Role::paginate(5);
     
         //Buscar rol
         $role= Role::findOrFail($id);

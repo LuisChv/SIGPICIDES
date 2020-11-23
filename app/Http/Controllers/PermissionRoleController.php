@@ -14,7 +14,7 @@ class PermissionRoleController extends Controller
     public function index($rol)
     {
         $role = Role::findOrFail($rol);
-        $tablas = Tabla::simplePaginate(5);
+        $tablas = Tabla::paginate(10);
 
         $permisos = Permission::paginate(5);
 

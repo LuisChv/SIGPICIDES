@@ -109,9 +109,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div-->
 
-        <div-- class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
+        <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <form method="POST"  action="{{ route('miembros.store', $proyecto->id )}}">
                 @csrf
@@ -143,7 +143,7 @@
                     </div>
                 </form>
             </div>
-        </div-->
+        </div>
         <!--modal de edicion-->
         <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
             <div class="modal-dialog" role="document">

@@ -20,6 +20,7 @@ class ComiteController extends Controller
         $proyecto = Proyecto::findOrFail($id);
         $solicitud = Solicitud::where('id_proy', $id)->first();
         $id_comite = $proyecto->id_comite;
+        $id_equipo = $proyecto->id_equipo;
         
         //Todos los usuarios
         $users = DB::select("SELECT * FROM users");
@@ -27,7 +28,7 @@ class ComiteController extends Controller
       
 
         //Omitir Miembros del comite 
-         $miembrosComite = DB::select('SELECT * FROM comite_usuario WHERE id_comite = ?', [$id_comite]);
+        $miembrosComite = DB::select('SELECT * FROM comite_usuario WHERE id_comite = ?', [$id_comite]);
 
         foreach ($miembrosComite as $miembro) { 
             foreach($noMiembros as $user){ 
@@ -37,8 +38,18 @@ class ComiteController extends Controller
             }
         }
 
-        //Omitir Otros roles. No Expertos
-        $noInvestigadores= DB::select('SELECT * FROM role_user WHERE role_id != ?', [8]);
+        //Omitir Miembros del equipo
+        $miembrosEquipo = DB::select('SELECT * FROM usuario_equipo_rol WHERE id_equipo = ?', [$id_equipo]);
+
+        foreach ($miembrosEquipo as $miembro) { 
+            foreach($noMiembros as $user){ 
+                if($user->id == $miembro->id_usuario){
+                    unset($noMiembros[$user->id - 1]);
+                }
+            }
+        }
+        //Omitir Otros roles. No Investigadores
+        $noInvestigadores= DB::select('SELECT * FROM role_user WHERE role_id != ?', [4]);
   
         foreach ($noInvestigadores as $inv) { 
             foreach($noMiembros as $user){ 
@@ -53,7 +64,6 @@ class ComiteController extends Controller
             JOIN comite_usuario CU ON U.id = CU.id_usuario
             JOIN role_user RU ON U.id = RU.user_id 
             JOIN roles R ON R.id = RU.role_id
-            
             WHERE CU.id_comite = ?", [$id_comite]);
             
          
@@ -63,6 +73,7 @@ class ComiteController extends Controller
          $cantidad_miembros = DB::table('comite_usuario')->where('id_comite',[$id_comite])->count();
          $evaluaciones = DB::table('evaluacion')->where('id_solicitud',[$solicitud->id]);
 
+         //Los que ya evaluaron la solicitud
          $evaluadores = DB::select("SELECT E.id_user, S.id, E.id FROM solicitud S
          JOIN proyecto P ON S.id_proy = P.id
          JOIN evaluacion E ON S.id = E.id_solicitud
