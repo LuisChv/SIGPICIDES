@@ -17,6 +17,22 @@ class ProyectoController extends Controller
         //
     }
 
+    public function misProyectos(){
+        $user = auth()->user()->id;
+        //return DB::table('permissions')->paginate(3);
+        $proyectos = DB::table('proyecto')
+                ->join('equipo_de_investigacion', 'proyecto.id_equipo','equipo_de_investigacion.id')
+                ->join('usuario_equipo_rol', 'equipo_de_investigacion.id','usuario_equipo_rol.id_equipo')                
+                ->select('proyecto.nombre','usuario_equipo_rol.id_rol', 'proyecto.id')                
+                ->where([['id_usuario',$user],
+                ['id_rol','=',5]])
+                ->paginate(3);           
+                
+        return view ('proyectoViews.mis_proyectos.index', [
+            'proyectos' => $proyectos
+        ]);  
+    }
+
     //Lista de proyectos donde el usuario ha colaborado
     public function indexColaboracion()
     {

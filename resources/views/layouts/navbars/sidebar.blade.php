@@ -20,7 +20,7 @@
                         <ul class="nav pl-4">
                             @can('mis_proyectos')
                                 <li @if ($pageSlug == 'mis_proyectos') class="active " @endif>
-                                    <a href="{{ route('home')  }}">
+                                    <a href="{{ route('mis_proyectos.index')  }}">
                                         <i class="tim-icons icon-shape-star"></i>
                                         <p>{{ __('Mis proyectos') }}</p>
                                     </a>

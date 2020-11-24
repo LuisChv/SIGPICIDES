@@ -135,6 +135,9 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::get('proyectos', 'ProyectoController@index')->name('proyectos.index')
     ->middleware('has.permission:proyectos.index');
+
+    Route::get('mis_proyectos', 'ProyectoController@misProyectos')->name('mis_proyectos.index');
+
     //Lista de colaboraciones
     Route::get('proyectos/colaboraciones', 'ProyectoController@indexColaboracion')->name('proyectos.colaboracion');
     
