@@ -34,5 +34,24 @@ class RolesTableSeeder extends Seeder
             'slug'          => 'investigador',
         ]);
 
+        Role::create([
+            'name'          => 'Investigador Principal',
+            'slug'          => 'lider',
+        ]);
+
+        Role::create([
+            'name'          => 'Investigador Adjunto',
+            'slug'          => 'adjunto',
+        ]);
+
+        Role::create([
+            'name'          => 'Colaborador',
+            'slug'          => 'colaborador',
+        ]);
+
+        Role::create([
+            'name'          => 'Experto',
+            'slug'          => 'experto',
+        ]);
     }
 }
