@@ -27,7 +27,7 @@
                                 </li>
                             @endcan
                             @can('mis_proyectos')<!--TODO Comprobar Permiso con Daris o Luis-->
-                                <li @if ($pageSlug == 'mis_proyectos') class="active " @endif>
+                                <li @if ($pageSlug == 'colaboraciones') class="active " @endif>
                                     <a href="{{ route('proyectos.colaboracion')  }}">
                                         <i class="tim-icons icon-shape-star"></i>
                                         <p>{{ __('Mis colaboraciones') }}</p>

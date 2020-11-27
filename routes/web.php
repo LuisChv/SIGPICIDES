@@ -254,7 +254,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::post('indicadores/store', 'IndicadorController@store')->name('indicadores.store')
     ->middleware('has.permission:indicadores.create');
 
-    Route::get('indicadores', 'IndicadorController@index')->name('indicadores.index')
+    Route::get('indicadores/{id}', 'IndicadorController@index')->name('indicadores.index')
     ->middleware('has.permission:indicadores.index');
 
     Route::get('indicadores/create', 'IndicadorController@create')->name('indicadores.create')
@@ -269,8 +269,11 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::delete('indicadores/{proyecto}', 'IndicadorController@destroy')->name('indicadores.destroy')
     ->middleware('has.permission:indicadores.destroy');
 
-    Route::get('indicadores/{proyecto}/edit', 'IndicadorController@edit')->name('indicadores.edit')
-    ->middleware('has.permission:indicadores.edit');
+    Route::get('indicador/tipo/{id}', 'IndicadorController@cambiar_tipo')->name('indicador.tipo');
+
+    Route::get('indicador/tipo_grafico/{id}', 'IndicadorController@cambiar_tipo_grafico')->name('indicador.tipo_grafico');
+
+    Route::post('indicador/variable', 'IndicadorController@variable')->name('indicador.variable');
 
     //Tipo de investigacion
     Route::get('tipo_investigacion', 'TipoInvestigacionController@index')->name('tipo_investigacion.index')

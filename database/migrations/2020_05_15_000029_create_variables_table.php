@@ -18,7 +18,7 @@ class CreateVariablesTable extends Migration
             $table->integer('id_indicador')->nullable();
             $table->boolean('modificable')->default(true);
             $table->string('nombre',50)->nullable();
-            $table->string('color',20)->nullable();
+            $table->string('color',20)->default('2395FC');
             $table->foreign('id_indicador')->references('id')->on('indicador')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

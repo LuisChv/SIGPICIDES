@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Indicador;
 use App\Proyecto;
+use App\Variable;
 use DB;
 
 class IndicadorController extends Controller
@@ -51,8 +52,33 @@ class IndicadorController extends Controller
     public function index($id){
         $proyecto= Proyecto::where('id', $id)->first();
         $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ?", [$id]);
+        $variables = DB::select("SELECT * FROM variable WHERE id_indicador IN (SELECT id FROM indicador WHERE id_proy = ?)", [$id]);
         return view('proyectoViews.indicador.index', [
            'indicadores' => $indicadores,
+           'variables' => $variables
         ]);
+    }
+
+    public function cambiar_tipo($id){
+        $indicador = Indicador::findOrFail($id);
+        $indicador->tipo = !$indicador->tipo;
+        $indicador->save();
+        return redirect()->back();
+    }
+
+    public function cambiar_tipo_grafico($id){
+        $indicador = Indicador::findOrFail($id);
+        $indicador->tipo_de_grafico = !$indicador->tipo_de_grafico;
+        $indicador->save();
+        return redirect()->back();
+    }
+
+    public function variable(){
+        $variable = new Variable();
+        $variable->id_indicador = request('id_indicador');
+        $variable->color = request('color');
+        $variable->nombre = request('nombre');
+        $variable->save();
+        return redirect()->back();
     }
 }

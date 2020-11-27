@@ -24,8 +24,11 @@ class ProyectoController extends Controller
                 ->join('equipo_de_investigacion', 'proyecto.id_equipo','equipo_de_investigacion.id')
                 ->join('usuario_equipo_rol', 'equipo_de_investigacion.id','usuario_equipo_rol.id_equipo')                
                 ->select('proyecto.nombre','usuario_equipo_rol.id_rol', 'proyecto.id')                
-                ->where([['id_usuario',$user],
-                ['id_rol','=',5]])
+                ->where([
+                    ['id_usuario',$user],
+                    ['id_rol','=',5],
+                    ['id_estado','=',1]
+                ])
                 ->paginate(3);           
                 
         return view ('proyectoViews.mis_proyectos.index', [
@@ -42,8 +45,11 @@ class ProyectoController extends Controller
                 ->join('equipo_de_investigacion', 'proyecto.id_equipo','equipo_de_investigacion.id')
                 ->join('usuario_equipo_rol', 'equipo_de_investigacion.id','usuario_equipo_rol.id_equipo')                
                 ->select('proyecto.nombre','usuario_equipo_rol.id_rol', 'proyecto.id')                
-                ->where([['id_usuario',$idUsuarioLogeado],
-                ['id_rol','!=',5]])
+                ->where([
+                    ['id_usuario',$idUsuarioLogeado],
+                    ['id_rol','!=',5],
+                    ['id_estado','=',1]
+                ])
                 ->paginate(3);           
                 
         return view ('proyectoViews.Colaboraciones.index', ['colaboraciones'=>$colaboraciones]);                
