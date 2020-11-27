@@ -81,4 +81,10 @@ class IndicadorController extends Controller
         $variable->save();
         return redirect()->back();
     }
+
+    public function destroy_variable(){
+        $variable = Variable::findOrFail(request('variable'));
+        $variable->delete();
+        return redirect()->back();
+    }
 }

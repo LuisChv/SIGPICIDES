@@ -111,9 +111,16 @@ Indicadores
                                 <td class="text-right">
                                     <a disabled href="#" class="btn btn-sm btn-round btn-icon" style="background:#{{$variable->color}}"><i class="fas fa-tint"></i></a>
                                 </td>
-                                <td class="text-right">
-                                    <a href="#" class="btn btn-danger btn-sm btn-round btn-icon"><i class="tim-icons icon-simple-remove"></i></a>
-                                </td>
+                                <form id="formulario_variable{{$variable->id}}" method="POST" action="{{route('variable.destroy')}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <td class="text-right">
+                                        <input hidden name="variable" value="{{$variable->id}}"/>
+                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('_variable{{$variable->id}}')">
+                                            <i class="tim-icons icon-simple-remove"></i>
+                                        </button>
+                                    </td>
+                                </form>
                             </tr>
                             @endif
                             @endforeach
