@@ -87,4 +87,11 @@ class IndicadorController extends Controller
         $variable->delete();
         return redirect()->back();
     }
+
+    public function confirmar($id){
+        $indicador = Indicador::findOrFail($id);
+        $indicador->modificable = false;
+        $indicador->save();
+        return redirect()->back();
+    }
 }

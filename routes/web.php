@@ -277,6 +277,9 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::delete('variable', 'IndicadorController@destroy_variable')->name('variable.destroy');
 
+    Route::get('indicador/confirmar/{id}', 'IndicadorController@confirmar')->name('indicador.confirmar');
+
+
     //Tipo de investigacion
     Route::get('tipo_investigacion', 'TipoInvestigacionController@index')->name('tipo_investigacion.index')
     ->middleware('has.permission:tipo_de_investigacion.index');

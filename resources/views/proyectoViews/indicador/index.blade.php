@@ -38,8 +38,8 @@ Indicadores
                     </div>
                     <div class="col-md-6 text-right">
                         <div class="btn-group">
-                            <a href="{{ route('indicador.tipo', $indicador->id) }}" class="btn btn-primary btn-sm" title="Editar">Cualitativo</a>
-                            <a disabled href="{{ route('indicador.tipo', $indicador->id) }}" class="btn btn-primary btn-sm" title="Editar">Cuantitativo</a>
+                            <a href="{{ route('indicador.tipo', $indicador->id) }}" class="btn btn-primary btn-sm">Cualitativo</a>
+                            <a disabled href="{{ route('indicador.tipo', $indicador->id) }}" class="btn btn-primary btn-sm">Cuantitativo</a>
                         </div>
                     </div>
                     @if($indicador->tipo_de_grafico)
@@ -48,8 +48,8 @@ Indicadores
                     </div>
                     <div class="col-md-6 text-right">
                         <div class="btn-group">
-                            <a href="{{ route('indicador.tipo_grafico', $indicador->id) }}" class="btn btn-primary btn-sm" title="Editar">Líneas</a>
-                            <a disabled href="{{ route('indicador.tipo_grafico', $indicador->id) }}" class="btn btn-primary btn-sm" title="Editar">Barras</a>
+                            <a href="{{ route('indicador.tipo_grafico', $indicador->id) }}" class="btn btn-primary btn-sm">Líneas</a>
+                            <a disabled href="{{ route('indicador.tipo_grafico', $indicador->id) }}" class="btn btn-primary btn-sm">Barras</a>
                         </div>
                     </div>
                     @else
@@ -58,8 +58,8 @@ Indicadores
                     </div>
                     <div class="col-md-6 text-right">
                         <div class="btn-group">
-                            <a disabled href="{{ route('indicador.tipo_grafico', $indicador->id) }}" class="btn btn-primary btn-sm" title="Editar">Líneas</a>
-                            <a href="{{ route('indicador.tipo_grafico', $indicador->id) }}" class="btn btn-primary btn-sm" title="Editar">Barras</a>
+                            <a disabled href="{{ route('indicador.tipo_grafico', $indicador->id) }}" class="btn btn-primary btn-sm">Líneas</a>
+                            <a href="{{ route('indicador.tipo_grafico', $indicador->id) }}" class="btn btn-primary btn-sm">Barras</a>
                         </div>
                     </div>
                     @endif
@@ -132,15 +132,17 @@ Indicadores
                     </div>
                     <div class="col-md-6 text-right">
                         <div class="btn-group">
-                            <a disabled href="{{ route('indicador.tipo', $indicador->id) }}" class="btn btn-primary btn-sm" title="Editar">Cualitativo</a>
-                            <a href="{{ route('indicador.tipo', $indicador->id) }}" class="btn btn-primary btn-sm" title="Editar">Cuantitativo</a>
+                            <a disabled href="{{ route('indicador.tipo', $indicador->id) }}" class="btn btn-primary btn-sm">Cualitativo</a>
+                            <a href="{{ route('indicador.tipo', $indicador->id) }}" class="btn btn-primary btn-sm">Cuantitativo</a>
                         </div>
                     </div>
                     @endif
-                    
                 </div>
-                <br>
             </div>
+            <div class="card-footer text-center">
+                <a href="{{ route('indicador.confirmar', $indicador->id) }}" class="btn btn-primary">Confirmar</a>
+            </div>
+            <br>
         </div>
     </div>
     @else
