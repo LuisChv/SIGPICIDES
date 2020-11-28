@@ -52,7 +52,12 @@ class IndicadorController extends Controller
     public function index($id){
         $proyecto= Proyecto::where('id', $id)->first();
         $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ?", [$id]);
-        $variables = DB::select("SELECT * FROM variable WHERE id_indicador IN (SELECT id FROM indicador WHERE id_proy = ?)", [$id]);
+        $variables = DB::select(
+            "SELECT V.id, V.id_indicador, V.modificable, V.nombre, V.color, VE.valor_y FROM variable V
+            LEFT JOIN valor_eje VE ON V.id = VE.id_variable
+            WHERE id_indicador IN (SELECT id FROM indicador WHERE id_proy = ?)
+            ORDER BY V.id", [$id]);
+
         return view('proyectoViews.indicador.index', [
            'indicadores' => $indicadores,
            'variables' => $variables

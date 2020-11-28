@@ -279,6 +279,8 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::get('indicador/confirmar/{id}', 'IndicadorController@confirmar')->name('indicador.confirmar');
 
+    Route::post('datos/barra', 'DatosController@barra')->name('datos.barra');
+
 
     //Tipo de investigacion
     Route::get('tipo_investigacion', 'TipoInvestigacionController@index')->name('tipo_investigacion.index')

@@ -100,3 +100,8 @@ $(document).ready(function(){//lo que este dentro de aquí se cargara hasta que 
         }
     });
 });
+
+function modalLinea(id_variable){
+    var id=$('#modalLinea');    
+    id.val(id_variable);
+}
