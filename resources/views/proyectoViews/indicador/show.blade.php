@@ -7,9 +7,9 @@
 		<div class="col-12">
 			<nav>
 				<div class="nav nav-tabs" id="nav-tab" role="tablist">
-				    <a style="color:primary; !important font-style: bold; !important"class="nav-item nav-link active" id="nav-general-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-general" aria-selected="true">General</a>
-				    <a style="color:primary; !important font-style: bold; !important"class="nav-item nav-link" id="nav-stats-tab" data-toggle="tab" href="#nav-stats" role="tab" aria-controls="nav-stats" aria-selected="false">Estadísticas</a>
-				    <a style="color:primary; !important font-style: bold; !important"class="nav-item nav-link" id="nav-tareas-tab" data-toggle="tab" href="#nav-tareas" role="tab" aria-controls="nav-tareas" aria-selected="false">Tareas</a>
+				    <a href="{{route('indicador.general', $indicador->id)}}" style="color:primary; !important font-style: bold; !important" @if($pageSlug == 'general') class="nav-item nav-link active" @else class="nav-item nav-link" @endif>General</a>
+				    <a href="{{route('indicador.estadistica', $indicador->id)}}" style="color:primary; !important font-style: bold; !important" @if($pageSlug == 'estadistica') class="nav-item nav-link active" @else class="nav-item nav-link" @endif>Estadísticas</a>
+				    <a href="{{route('indicador.task', $indicador->id)}}" style="color:primary; !important font-style: bold; !important" @if($pageSlug == 'task') class="nav-item nav-link active" @else class="nav-item nav-link" @endif>Tareas</a>
 				</div>
 			</nav>
 			<br>

@@ -111,6 +111,7 @@ class IndicadorController extends Controller
 
     public function task($id)
     {
+        $indicador = Indicador::findOrFail($id);
         $tareas = DB::select(
             "SELECT T.id, T.text, T.progress FROM tasks T
             JOIN task_indicador TI ON TI.id_task = T.id
@@ -126,6 +127,7 @@ class IndicadorController extends Controller
             )", [$id]);
         
         return view('proyectoViews.indicador.show.task',[
+            'indicador' => $indicador,
             'tareas' => $tareas,
             'usuarios' => $usuarios
         ]);

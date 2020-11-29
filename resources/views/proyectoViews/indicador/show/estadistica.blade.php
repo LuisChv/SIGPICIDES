@@ -1,4 +1,4 @@
-@extends('proyectoViews.indicador.show',['pageSlug' => 'mis_proyectos'])
+@extends('proyectoViews.indicador.show',['pageSlug' => 'estadistica'])
 @section('title')
     Indicador | Estadística
 @endsection
