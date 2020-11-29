@@ -99,4 +99,56 @@ class IndicadorController extends Controller
         $indicador->save();
         return redirect()->back();
     }
+
+    public function general($id)
+    {
+        $indicador = Indicador::findOrFail($id);
+        
+        return view('proyectoViews.indicador.show.general', [
+            'indicador' => $indicador,
+        ]);
+    }
+
+    public function task($id)
+    {
+        $tareas = DB::select(
+            "SELECT T.id, T.text, T.progress FROM tasks T
+            JOIN task_indicador TI ON TI.id_task = T.id
+            WHERE TI.id_indicador = ?", [$id]);
+
+        $usuarios = DB::select(
+            "SELECT U.name, TU.id_task FROM users U
+            JOIN tarea_usuario TU ON U.id = TU.id_usuario
+            WHERE TU.id_task IN (
+                SELECT T.id FROM tasks T
+                JOIN task_indicador TI ON TI.id_task = T.id
+                WHERE TI.id_indicador = ?
+            )", [$id]);
+        
+        return view('proyectoViews.indicador.show.task',[
+            'tareas' => $tareas,
+            'usuarios' => $usuarios
+        ]);
+    }
+
+    public function estadistica($id){
+        $indicador = Indicador::findOrFail($id);
+        $variables = DB::select(
+            "SELECT V.id, V.id_indicador, V.modificable, V.nombre, V.color, VE.valor_y FROM variable V
+            LEFT JOIN valor_eje VE ON V.id = VE.id_variable
+            WHERE id_indicador = ?
+            ORDER BY V.id", [$id]);
+            
+        return view('proyectoViews.indicador.show.estadistica', [
+            'indicador' => $indicador,
+            'variables' => $variables
+        ]);
+    }
+
+    public function descripcion(){
+        $indicador = Indicador::findOrFail(request('id_indicador'));
+        $indicador->descrip_avance = request('descripcion');
+        $indicador->save();
+        return redirect()->back();
+    }
 }

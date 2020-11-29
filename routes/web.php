@@ -281,6 +281,14 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::post('datos/barra', 'DatosController@barra')->name('datos.barra');
 
+    Route::get('indicador/general/{id}', 'IndicadorController@general')->name('indicador.general');
+
+    Route::get('indicador/estadistica/{id}', 'IndicadorController@estadistica')->name('indicador.estadistica');
+
+    Route::get('indicador/task/{id}', 'IndicadorController@task')->name('indicador.task');
+
+    Route::post('indicador/descripcion', 'IndicadorController@descripcion')->name('indicador.descripcion');
+
 
     //Tipo de investigacion
     Route::get('tipo_investigacion', 'TipoInvestigacionController@index')->name('tipo_investigacion.index')
@@ -510,7 +518,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     //planificacion
     Route::get('proyecto/avances', 'SolicitudController@archivos2')->name('avance.index');
     Route::get('proyecto/{id}/indicadores', 'IndicadorController@index')->name('indicadores.index');
-    Route::get('proyecto/indicador', 'SolicitudController@show2')->name('solicitud.show2');
+    
     Route::get('stats/index', 'SolicitudController@stats2')->name('stats.index');
 
     /***********************Equipo por Proyecto ***************************/
