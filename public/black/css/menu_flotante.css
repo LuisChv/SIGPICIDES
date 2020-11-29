@@ -337,3 +337,9 @@ p .archivo_ppt{
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+/* reemplazo clase active de navbar indicadores*/
+.navbarCustom{
+  background-color:  #2196F3;
+  color: white;
+}
