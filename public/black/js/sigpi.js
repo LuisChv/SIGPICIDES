@@ -105,3 +105,8 @@ function modalLinea(id_variable){
     var id=$('#modalLinea');    
     id.val(id_variable);
 }
+
+
+function avanceGantt(this) {
+    console.log(this.parentNode.parentNode.parentNode.parentNode.attributes.task_id.value);
+}

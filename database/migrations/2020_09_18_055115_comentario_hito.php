@@ -15,7 +15,7 @@ class ComentarioHito extends Migration
     {
         Schema::create('comentario_hito', function (Blueprint $table) {
             $table->id();
-            $table->string('comentario');
+            $table->string('comentario',1000);
             $table->integer("id_user");
             $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->integer("id_hito");

@@ -55,6 +55,7 @@
             </tr>
         </table>
 
+       
 <script type="text/javascript">
     //Formato de fecha para el gantt
     gantt.config.date_format = "%Y/%m/%d %H:%i:%s";
@@ -70,11 +71,12 @@
         {name: "buttons", label: "Avance", width: 50,
     template: function(task){
             var buttons =
-            '<center><input type=button value="✔" class="btn btn-sm btn-primary btn-round btn-icon align-text-center" data-toggle="modal" data-target="#modalAgregarComentario"></center>';
+            '<center><input onclick="avanceGantt(this)" type=button value="✔" class="btn btn-sm btn-primary btn-round btn-icon align-text-center" data-toggle="modal" data-target="#modalAgregarComentario"></center>';
             return buttons; 
             }
         },
     ];
+    
     //Idioma
     gantt.i18n.setLocale("es");
     //Nombre de las secciones en lightbox
@@ -86,20 +88,12 @@
     gantt.locale.labels.section_tipo = "Tipo de tarea";
     //Hitos
     gantt.locale.labels.section_timeH = "Fecha";
-    gantt.locale.labels.section_descriptionH = "Nombre descriptivo del hito";    
+    gantt.locale.labels.section_descriptionH = "Nombre descriptivo del hito";        
     
-    //Forma de acceder a la tarea que este abierte o esta sienda creada
-    gantt.attachEvent("onBeforeLightbox", function(id) {
-        var task = gantt.getTask(id);        
-        task.idProyecto ="{{$idProyecto}}";
-        task.idUser="{{auth()->user()->id}}";
-        
-        return true;
-    });
     //Evento lanzado al abrir una tarea
     gantt.attachEvent("onLightbox", function (task_id){
         //document.getElementsByName("indicador")[0].checked= true;
-        //console.log(task_id);
+        console.log(task_id);
         var checkboxes = document.querySelectorAll('input[type="checkbox"]');
             for (var checkbox of checkboxes) {
             checkbox.disabled=true;
@@ -138,6 +132,10 @@
             return true;
         }
         return false;
+    });
+    //Evento lanzado antes de actualizar una tarea
+    gantt.attachEvent("onBeforeTaskUpdate", function(id,new_item){
+        new_item.progreso=true;
     });
     gantt.attachEvent("onBeforeRowDragEnd", function(id, parent, tindex){    
         return false;
@@ -267,6 +265,10 @@
     +"<span id='title2'>Progreso: </span>"+ task.progress*100 +" %";
     return true;
 });*/
+//fUNCION PARA TRAER AL MODAL DEL AVANCE EL ID_TASK CORRESPONDIENTE PARA UTILIZARLO EN LOGICA
+function avanceGantt(NODE) {
+    console.log(NODE.parentNode.parentNode.parentNode.parentNode.attributes.task_id.value);
+    } 
 </script>
 
 <!--//TODO MODAL en proceso-->
