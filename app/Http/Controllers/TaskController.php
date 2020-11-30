@@ -21,7 +21,7 @@ class TaskController extends Controller
         //hay que verificar si el proyecto que se esta llamando es uno en el que la persona logeada sea parte del equipo
         //Trayendo el id del equipo del proyecto de la base de datos
         //Si el equipo existe sigue el flujo, sino se muestra un not found
-        if ($proyecto= Proyecto::select('id_equipo', 'id_comite')->where('id',$idProyecto)->first()) {
+        if ($proyecto= Proyecto::select('id_equipo', 'id_comite', 'id_estado')->where('id',$idProyecto)->first()) {
             //Obteniendo datos del usuario logeado
             $solicitud= Solicitud::where('id_proy', $idProyecto)->first();
             //Validacion para que solo permita modificar perfiles aprobados
@@ -40,7 +40,11 @@ class TaskController extends Controller
             $opcion;
             //Si es miembro del equipo sera opcion 1
             if($usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $proyecto->id_equipo)->where('id_usuario', $idUsuarioLogeado)->first()){
-                $opcion=1; //TODO aqui era 1 pero estoy probando cuando ya inicio el proyecto y añadira avance
+                if($usuarioEquipoRol->id_rol==5){
+                    $opcion=1;
+                }else{
+                    $opcion=3;
+                }                
             }
             //En caso sea miembro del comite se mostrara el gant pero no se podra modificar y sera opcion 2
             elseif($usuarioComite= ComiteUsuario::where('id_comite',$proyecto->id_comite)->where('id_usuario', $idUsuarioLogeado)->first()){
@@ -52,19 +56,19 @@ class TaskController extends Controller
             //Traer los miembros del equipo del proyecto seleccionado
             $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$proyecto->id_equipo])->get();
             //Retornar vista
-            //Gantt para modificar avances cuando ya se haya aprobado fase 2
-            if($opcion==3 || !$modificable){
-                //return view('proyectoViews.tareas.gantt',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
+            
+            //Gantt para cuando el proyecto este en marcha y se quieran agregar avances
+            if($proyecto->id_estado==1 && ($opcion==3 || $opcion==1)){
                 return view('proyectoViews.tareas.ganttAvance',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
             }
-            //Gantt de vista (no se puede modificar)
+            //Gantt de vista (no se puede modificar) (Para miembros del comite y cuando el se este evaluando la planificacion)
             elseif($opcion==2 || !$modificable){
                 return view('proyectoViews.tareas.ganttComite',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
             }
-            //Gantt para crear tareas y asignar responsables
+            //Gantt para crear tareas y asignar responsables (Para el lider del proyecto)
             elseif($opcion==1 && $modificable){
                 return view('proyectoViews.tareas.gantt',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
-            }
+            }            
         }
         else {
             abort(404);

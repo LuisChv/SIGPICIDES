@@ -83,6 +83,11 @@
             for (var checkbox of checkboxes) {
             checkbox.disabled=true;
         }
+        textarea[0].disabled=true;
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            for (var checkbox of checkboxes) {
+            checkbox.disabled=true;
+        }
         var textarea = document.querySelectorAll('textarea');
         $.ajax({
             url: '/tareasAsignaciones/'+ task_id,
@@ -174,7 +179,9 @@
     gantt.config.buttons_right = [];
     //Scroll
     gantt.config.autoscroll = true;
-    gantt.config.autoscroll_speed = 50;
+    gantt.config.autoscroll_speed = 50;    
+    //Permitir o no mover la barra de progreso
+    gantt.config.drag_progress = false;
     //Inicializa el gant
     gantt.init("gantt_here");
     //Llamar al controlador para llenar los datos, aca paso por parametro el id del proyecto seleccionado
