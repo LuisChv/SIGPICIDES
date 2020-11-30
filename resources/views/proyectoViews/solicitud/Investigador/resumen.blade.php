@@ -352,7 +352,7 @@ Primera etapa
                 Siguiente
             </a>
             @else
-            <a class="btn btn-primary" href="{{ route('tareas_avance.index', [$proyecto->id]) }}">
+            <a class="btn btn-primary" href="{{ route('factibilidad.create', [$proyecto->id]) }}">
                 Siguiente
             </a>
             @endif
