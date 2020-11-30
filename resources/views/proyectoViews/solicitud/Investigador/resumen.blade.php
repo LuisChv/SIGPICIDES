@@ -333,30 +333,34 @@ Primera etapa
 </div>
 <table class="col-md-12">
     <tr>
-        @if ($solicitud->etapa==2)
-            <td width="50%">
-                <a class="btn btn-primary" target="_blank" href="{{ route('proyecto_tareas.index', $proyecto->id)  }}">
-                    Ver planificacion
-                </a>
-            </td>    
-        @endif
-        
         <td width="50%" align="right">
-        @if($solicitud->id_estado == 8)
-            <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
-                Regresar
-            </a>
-        @else
-            @if ($solicitud->etapa == 1)
-            <a class="btn btn-primary" href="{{ route('solicitud.edit', [$proyecto->id])}}">
-                Siguiente
-            </a>
+            @if ($solicitud->id_estado==5)
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
+                                Regresar
+                            </a>
+                        </td>
+                        <td width="50%" align="right">
+                            <a class="btn btn-primary" href="{{ route('solicitud.edit', [$proyecto->id])}}">
+                                Siguiente
+                            </a>
+                        </td>
+                    </tr>
+                </table> 
             @else
-            <a class="btn btn-primary" href="{{ route('factibilidad.create', [$proyecto->id]) }}">
-                Siguiente
-            </a>
-            @endif
-        @endif
+                @if ($solicitud->etapa==2 && $proyecto->id_estado!=1)    
+                    <a class="btn btn-primary" href="{{ route('factibilidad.create', [$proyecto->id]) }}">
+                        Siguiente
+                    </a>
+                @else        
+                
+                    <a class="btn btn-primary"  href="{{ route('tareas_avance.index', $proyecto->id)  }}">
+                        Ver planificacion
+                    </a>
+                @endif                
+            @endif    
         </td>
     </tr>
 </table>
