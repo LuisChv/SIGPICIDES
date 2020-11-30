@@ -31,7 +31,7 @@ class TaskController extends Controller
                 $modificable=true;
             }
             //Si se ha enviado a evaluacion de fase 2 o es del comite puede verlo pero sin modificar
-            elseif($solicitud->id_estado=3){
+            elseif($solicitud->id_estado==3 || ($solicitud->id_estado==7 && $solicitud->etapa==2)){
                 $modificable=false;
             }
             else{ abort(403);}
@@ -49,7 +49,7 @@ class TaskController extends Controller
             //En caso sea miembro del comite se mostrara el gant pero no se podra modificar y sera opcion 2
             elseif($usuarioComite= ComiteUsuario::where('id_comite',$proyecto->id_comite)->where('id_usuario', $idUsuarioLogeado)->first()){
                 $opcion=2;
-            }
+            }            
             else{abort(403);}
             //Traer los indicadores del proyecto seleccionado
             $indicadores= Indicador::where('id_proy',$idProyecto)->get();

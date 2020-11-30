@@ -258,7 +258,7 @@
 });*/
 </script>
 
-//TODO MODAL en proceso
+<!--//TODO MODAL en proceso-->
 <div class="modal fade" id="modalAgregarComentario" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-top" role="document">
             <div class="modal-content">

@@ -563,6 +563,15 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     ->middleware('has.permission:solicitudes.create');
     Route::get('proyecto/archivos/download/{id}', 'DocumentoController@archivos_download')->name('archivos.download')
     ->middleware('has.permission:solicitudes.create');
+
+
+
+
+
+
+
+
+    
 });
 
 

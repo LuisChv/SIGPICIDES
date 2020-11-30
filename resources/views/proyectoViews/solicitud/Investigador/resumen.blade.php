@@ -111,7 +111,7 @@ Primera etapa
                 <table class="table">
                     @foreach ($objetivos as $objetivo)
                     <tr>
-                        <td>
+                        <td class="text-justify">
                             <i class="tim-icons icon-compass-05"></i> {{$objetivo->descripcion}}
                         </td>
                     </tr>
@@ -131,7 +131,7 @@ Primera etapa
                 <table class="table">
                     @foreach ($alcances as $alcance)
                     <tr>
-                        <td>
+                        <td class="text-justify">
                             <i class="tim-icons icon-compass-05"></i> {{$alcance->descripcion}}
                         </td>
                     </tr>
@@ -151,7 +151,7 @@ Primera etapa
                 <table class="table">
                     @foreach ($indicadores as $indicador)
                     <tr>
-                        <td>
+                        <td class="text-justify">
                             <i class="tim-icons icon-sound-wave"></i> {{$indicador->detalle}}
                         </td>
                     </tr>
@@ -206,27 +206,27 @@ Primera etapa
                     <tr>
                         <td><b>Factibilidad técnica</b></td>
                         
-                        <td>{{$factibilidad->tecnica}}</td>
+                        <td class="text-justify">{{$factibilidad->tecnica}}</td>
                     </tr>    
                     <tr>
                         <td><b>Factibilidad económica</b></td>
 
-                        <td>{{$factibilidad->economia}}</td>
+                        <td class="text-justify">{{$factibilidad->economia}}</td>
                     </tr> 
                     <tr>
                         <td><b>Factibilidad financiera</b></td>
 
-                        <td>{{$factibilidad->financiera}}</td>
+                        <td class="text-justify">{{$factibilidad->financiera}}</td>
                     </tr> 
                     <tr>
                         <td><b>Factibilidad operativa</b></td>
 
-                        <td>{{$factibilidad->operativa}}</td>
+                        <td class="text-justify">{{$factibilidad->operativa}}</td>
                     </tr> 
                     <tr>
                         <td><b>Factibilidad extra</b></td>
 
-                        <td>{{$factibilidad->fac_extra}}</td>
+                        <td class="text-justify">{{$factibilidad->fac_extra}}</td>
                     </tr>                 
                 </table>
             </div>
@@ -352,7 +352,7 @@ Primera etapa
                 Siguiente
             </a>
             @else
-            <a class="btn btn-primary" href="{{ route('factibilidad.create', [$proyecto->id]) }}">
+            <a class="btn btn-primary" href="{{ route('tareas_avance.index', [$proyecto->id]) }}">
                 Siguiente
             </a>
             @endif
