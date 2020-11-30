@@ -48,7 +48,7 @@
                     </a>
                 </td>
                 <td width="50%" align="right">
-                    <a class="btn btn-primary" href="{{ route('solicitud.pre2', [$idProyecto]) }}">
+                    <a class="btn btn-primary" href="{{ route('indicadores.index', [$idProyecto]) }}">
                         Siguiente
                     </a>
                 </td>
@@ -67,13 +67,10 @@
         { name:"text", label: "Nombre de la tarea", tree:true, width:"*",map_to:"text",  resize:true },
         { name:"start_date", label: "Inicio", align:"center"},
         { name:"duration", label: "Duración", align:"center", width:50 },
-        {name: "buttons", label: "Actions", width: 90,
+        {name: "buttons", label: "Avance", width: 50,
     template: function(task){
-            var buttons = 
-            '<input type=button value="Avance" class="btn btn-primary btn-sm btn-round" data-toggle="modal" data-target="#modalAgregarComentario">'
-            +'<input type=button value="Avance" class="btn btn-primary btn-sm btn-round" onclick=task_operations('+task.id+',"avanceAsignado")>'
-            +'<input type=button value="Avance" class="btn btn-primary btn-sm btn-round" onclick=task_operations('+task.id+',"avanceConsulta")>'
-            +'<input type=button value="Avance" class="btn btn-primary btn-sm btn-round" onclick=task_operations('+task.id+',"avanceComite")>';
+            var buttons =
+            '<center><input type=button value="✔" class="btn btn-sm btn-primary btn-round btn-icon align-text-center" data-toggle="modal" data-target="#modalAgregarComentario"></center>';
             return buttons; 
             }
         },
@@ -273,34 +270,34 @@
 </script>
 
 <!--//TODO MODAL en proceso-->
-<div class="modal fade" id="modalAgregarComentario" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-top" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Registrar avance de la tarea</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="false">&times;</span>
-                        </button>
-                </div>
-                <div class="modal-body">
-                    <div class="normal-box">
-                        <textarea class="inputArea" rows="1" placeholder="Descripción del avance" maxlength="64"></textarea>                        
-                        <input type="file" class="form-control">
-                        <p>Archivox disponibles</></p>
+<div class="modal fade" width="110%"  id="modalAgregarComentario" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar avance de la tarea</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="false">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <div class="normal-box">
+                    <textarea class="inputArea" rows="1" placeholder="Descripción del avance" maxlength="900"></textarea>                        
+                    <input type="file" class="form-control">
+                    <p>Archivox disponibles</></p>
                         <!--Listar los archivos que ya estan subidos-->
-                        <ul style="font-size:12px;">
+                    <ul style="font-size:12px;">
                             <li>archivo.docx</li>
                             <li>archivo.docx</li>
                             <li>archivo.docx</li>
                             <li>archivo.docx</li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn btn-primary btn-sm" onClick = "agregarComentario()" id = "agregar" data-dismiss="modal">Añadir</button>
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
-                    <hr>
-                    <p><b>Comentarios</b></p>
+                    </ul>
+                </div>
+                <button type="button" class="btn btn-primary btn-sm" onClick = "agregarComentario()" id = "agregar" data-dismiss="modal">Añadir</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                <br>
+                <p><b>Comentarios</b></p>
                     <!--lista de comentarios-->
-                    <div class="comment-box">
+                <div class="comment-box">
                         <p><b>Pirulo:</b></p>
                         <p>Comentario de Pirulo</p>
                         <p><b>Milaneso:</b></p>
@@ -316,18 +313,25 @@
                         <p><b>Anvorgueso:</b></p>
                         <p>Comentario de Anvorgueso</p>
                         <p><b>Milaneso:</b></p>
-                        <p>CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam, quis nostrud exercitation ullamco pariatur</p>
+                        <p>CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam,CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam,CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam, quis nostrud exercitation ullamco pariatur</p>
                         <p><b>Anvorgueso:</b></p>
                         <p>Comentario de Anvorgueso</p>
-                    </div>
-                    <br>
-                    <textarea class="inputArea" row="2" placeholder="Escribir un comentario..."></textarea>
-                    <button class="btn btn-primary btn-sm">Agregar comentario</button>
                 </div>
-            </div>
+                <br>
+                <table class="col-md-12">
+                    <tr>
+                        <td width="110%" align="left">
+                            <textarea class="inputArea" row="2" placeholder="Escribir un comentario..."></textarea>
+                        </td>
+                        <td align="left">
+                            <button class="btn btn-sm btn-primary btn-round btn-icon"><i class="tim-icons icon-chat-33"></i></button>
+                        </td>
+                    </tr>
+                </table>
+            </div>            
         </div>
     </div>
-
+</div>
 </body>
 
 @endsection

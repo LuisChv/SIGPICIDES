@@ -250,45 +250,6 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     ->middleware('has.permission:comite_de_evaluacion.edit');
 
 
-    //Indicadores
-    Route::post('indicadores/store', 'IndicadorController@store')->name('indicadores.store')
-    ->middleware('has.permission:indicadores.create');
-
-    Route::get('indicadores/{id}', 'IndicadorController@index')->name('indicadores.index')
-    ->middleware('has.permission:indicadores.index');
-
-    Route::get('indicadores/create', 'IndicadorController@create')->name('indicadores.create')
-    ->middleware('has.permission:indicadores.create');
-
-    Route::put('indicadores/{proyecto}', 'IndicadorController@update')->name('indicadores.update')
-    ->middleware('has.permission:indicadores.edit');
-
-    Route::get('indicadores/{proyecto}', 'IndicadorController@show')->name('indicadores.show')
-    ->middleware('has.permission:indicadores.show');
-
-    Route::delete('indicadores/{proyecto}', 'IndicadorController@destroy')->name('indicadores.destroy')
-    ->middleware('has.permission:indicadores.destroy');
-
-    Route::get('indicador/tipo/{id}', 'IndicadorController@cambiar_tipo')->name('indicador.tipo');
-
-    Route::get('indicador/tipo_grafico/{id}', 'IndicadorController@cambiar_tipo_grafico')->name('indicador.tipo_grafico');
-
-    Route::post('indicador/variable', 'IndicadorController@variable')->name('indicador.variable');
-
-    Route::delete('variable', 'IndicadorController@destroy_variable')->name('variable.destroy');
-
-    Route::get('indicador/confirmar/{id}', 'IndicadorController@confirmar')->name('indicador.confirmar');
-
-    Route::post('datos/barra', 'DatosController@barra')->name('datos.barra');
-
-    Route::get('indicador/general/{id}', 'IndicadorController@general')->name('indicador.general');
-
-    Route::get('indicador/estadistica/{id}', 'IndicadorController@estadistica')->name('indicador.estadistica');
-
-    Route::get('indicador/task/{id}', 'IndicadorController@task')->name('indicador.task');
-
-    Route::post('indicador/descripcion', 'IndicadorController@descripcion')->name('indicador.descripcion');
-
 
     //Tipo de investigacion
     Route::get('tipo_investigacion', 'TipoInvestigacionController@index')->name('tipo_investigacion.index')
@@ -431,18 +392,6 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::delete('proyecto/alcances', 'AlcanceController@destroy')->name('proyecto_alcances.destroy')
     ->middleware('has.permission:solicitudes.index');
 
-
-    /**********************Indicador******************/
-
-    Route::post('proyecto/indicadores', 'IndicadorController@store')->name('proyecto_indicadores.store')
-    ->middleware('has.permission:solicitudes.index');
-
-    Route::put('proyecto/indicadores_update', 'IndicadorController@update')->name('proyecto_indicadores.update')
-    ->middleware('has.permission:solicitudes.index');
-
-    Route::delete('proyecto/indicadores', 'IndicadorController@destroy')->name('proyecto_indicadores.destroy')
-    ->middleware('has.permission:solicitudes.index');
-
     /*********************Solicitude de proyecto Admin*******************/
     
     Route::get('solicitudes', 'SolicitudController@index')->name('solicitud.index')
@@ -516,8 +465,60 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     ->middleware('has.permission:solicitudes.create');
 
     //planificacion
-    Route::get('proyecto/avances', 'SolicitudController@archivos2')->name('avance.index');
-    Route::get('proyecto/{id}/indicadores', 'IndicadorController@index')->name('indicadores.index');
+    
+    /**********************Indicador******************/
+    //Solicitud
+    Route::post('proyecto/indicadores', 'IndicadorController@store')->name('proyecto_indicadores.store')
+    ->middleware('has.permission:solicitudes.index');
+
+    Route::put('proyecto/indicadores_update', 'IndicadorController@update')->name('proyecto_indicadores.update')
+    ->middleware('has.permission:solicitudes.index');
+
+    Route::delete('proyecto/indicadores', 'IndicadorController@destroy')->name('proyecto_indicadores.destroy')
+    ->middleware('has.permission:solicitudes.index');
+
+    Route::post('indicadores/store', 'IndicadorController@store')->name('indicadores.store')
+    ->middleware('has.permission:indicadores.create');
+
+    Route::get('indicadores/{id}', 'IndicadorController@index')->name('indicadores.index')
+    ->middleware('has.permission:indicadores.index');
+
+    Route::get('indicadores/create', 'IndicadorController@create')->name('indicadores.create')
+    ->middleware('has.permission:indicadores.create');
+
+    Route::put('indicadores/{proyecto}', 'IndicadorController@update')->name('indicadores.update')
+    ->middleware('has.permission:indicadores.edit');
+
+    Route::get('indicadores/{proyecto}', 'IndicadorController@show')->name('indicadores.show')
+    ->middleware('has.permission:indicadores.show');
+
+    Route::delete('indicadores/{proyecto}', 'IndicadorController@destroy')->name('indicadores.destroy')
+    ->middleware('has.permission:indicadores.destroy');
+
+    //proyecto aprobado
+
+    Route::get('proyecto/indicadores/{id}', 'IndicadorController@index')->name('indicadores.index');
+
+    Route::get('indicador/tipo/{id}', 'IndicadorController@cambiar_tipo')->name('indicador.tipo');
+
+    Route::get('indicador/tipo_grafico/{id}', 'IndicadorController@cambiar_tipo_grafico')->name('indicador.tipo_grafico');
+
+    Route::post('indicador/variable', 'IndicadorController@variable')->name('indicador.variable');
+
+    Route::delete('variable', 'IndicadorController@destroy_variable')->name('variable.destroy');
+
+    Route::get('indicador/confirmar/{id}', 'IndicadorController@confirmar')->name('indicador.confirmar');
+
+    Route::post('datos/barra', 'DatosController@barra')->name('datos.barra');
+
+    Route::get('indicador/general/{id}', 'IndicadorController@general')->name('indicador.general');
+
+    Route::get('indicador/estadistica/{id}', 'IndicadorController@estadistica')->name('indicador.estadistica');
+
+    Route::get('indicador/task/{id}', 'IndicadorController@task')->name('indicador.task');
+
+    Route::post('indicador/descripcion', 'IndicadorController@descripcion')->name('indicador.descripcion');
+
     
     Route::get('stats/index', 'SolicitudController@stats2')->name('stats.index');
 

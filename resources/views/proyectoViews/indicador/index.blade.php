@@ -31,7 +31,7 @@ Indicadores
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 text-justify">
-                                <h3>{{$indicador->detalle}}</h3>
+                                <h5>{{$indicador->detalle}}</h5>
                             </div>
 
                             <!-- INICIO DE IF A.1 -->
