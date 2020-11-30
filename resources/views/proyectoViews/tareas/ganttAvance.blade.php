@@ -71,7 +71,7 @@
         {name: "buttons", label: "Avance", width: 50,
     template: function(task){
             var buttons =
-            '<center><input onclick="avanceGantt(this)" type=button value="✔" class="btn btn-sm btn-primary btn-round btn-icon align-text-center" data-toggle="modal" data-target="#modalAgregarComentario"></center>';
+            '<center><input onclick="avanceGantt(this)" type=button value="✔" class="btn btn-sm btn-primary btn-round btn-icon align-text-center"></center>';
             return buttons; 
             }
         },
@@ -268,6 +268,9 @@
 //fUNCION PARA TRAER AL MODAL DEL AVANCE EL ID_TASK CORRESPONDIENTE PARA UTILIZARLO EN LOGICA
 function avanceGantt(NODE) {
     console.log(NODE.parentNode.parentNode.parentNode.parentNode.attributes.task_id.value);
+    //let modalAvance= document.getElementById("modalAgregarComentario");
+    $('#modalAgregarComentario').modal('show');
+    //modalAvance.modal('show');
     } 
 </script>
 
