@@ -82,21 +82,8 @@ function displayRadioValue() {
     } 
 } 
 
-
-
-function modalLinea(id_variable){
-    var id=$('#modalLinea');    
-    id.val(id_variable);
-}
-
-//antes recibia como parametro "this" pero this es una palabra reservada
-function avanceGantt(valor) {
-    console.log(valor.parentNode.parentNode.parentNode.parentNode.attributes.task_id.value);
-}
-
 //Dentro de aquí se pueden cargar funciones que necesitan que el html se carguen primero
 $(document).ready(function(){//lo que este dentro de aquí se cargara hasta que la pagina este totalmente cargada
-    console.log("imprimir algo");
     $('#selector1').change(function () {
         $('#selector2').show();
         $('#prepend').show();
@@ -113,3 +100,8 @@ $(document).ready(function(){//lo que este dentro de aquí se cargara hasta que 
         }
     });
 });
+
+function modalLinea(id_variable){
+    var id=$('#modalLinea');    
+    id.val(id_variable);
+}

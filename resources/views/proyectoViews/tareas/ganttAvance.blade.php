@@ -276,82 +276,98 @@ function avanceGantt(NODE) {
 
 <!--//TODO MODAL en proceso-->
 <div class="modal fade" width="110%"  id="modalAgregarComentario" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Registrar avance de la tarea</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="false">&times;</span>
-                    </button>
+                <ul class="nav nav-pills" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Archivos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Comentarios</a>
+                    </li>
+                </ul>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="false">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                <div class="normal-box">
-                    <table class="col-md-12">
-                        <tr>
-                            <td width="110%" align="left">
-                        <textarea class="inputArea" rows="1" placeholder="Descripción del avance" maxlength="900"></textarea>                        
-                        </td>
-                            <td align="left">
-                                <button class="btn btn-sm btn-primary btn-round btn-icon" onClick = "agregarComentario()" id = "agregar" title="Añadir descripción"><i class="tim-icons icon-bullet-list-67"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                        <td width="90%" align="left">
-                    <input type="file" class="form-control">
-                    <p>Archivox disponibles</></p>
-                        <!--Listar los archivos que ya estan subidos-->
-                    <ul style="font-size:12px;">
-                            <li>archivo.docx</li>
-                            <li>archivo.docx</li>
-                            <li>archivo.docx</li>
-                            <li>archivo.docx</li>
-                    </ul>
-                    </td>
-                    <td valign="top">
-                                <button class="btn btn-sm btn-primary btn-round btn-icon" onClick = "agregarArchivo()" id = "agregarArchivo" data-dismiss="modal"><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <!--Area de subida de archivos-->
+                        <div class="normal-box">
+                            <table class="col-md-12">
+                                <tr>
+                                    <td width="110%" align="left">
+                                <textarea class="inputArea" rows="1" placeholder="Descripción del avance" maxlength="900"></textarea>                        
                                 </td>
-                                <td valign="top">
-                                <button class="btn btn-sm btn-default btn-round btn-icon" data-dismiss="modal" title="Cancelar"><i class="tim-icons icon-simple-remove"></i></button>
+                                    <td align="left">
+                                        <button class="btn btn-sm btn-primary btn-round btn-icon" onClick = "agregarComentario()" id = "agregar" title="Añadir descripción"><i class="tim-icons icon-bullet-list-67"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                <td width="90%" align="left">
+                            <input type="file" class="form-control">
+                            <p>Archivox disponibles</></p>
+                                <!--Listar los archivos que ya estan subidos-->
+                            <ul style="font-size:12px;">
+                                    <li>archivo.docx</li>
+                                    <li>archivo.docx</li>
+                                    <li>archivo.docx</li>
+                                    <li>archivo.docx</li>
+                            </ul>
                             </td>
+                            <td valign="top">
+                                        <button class="btn btn-sm btn-primary btn-round btn-icon" onClick = "agregarArchivo()" id = "agregarArchivo" data-dismiss="modal"><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>
+                                        </td>
+                                        <td valign="top">
+                                        <button class="btn btn-sm btn-default btn-round btn-icon" data-dismiss="modal" title="Cancelar"><i class="tim-icons icon-simple-remove"></i></button>
+                                    </td>
 
-                    </tr>
-                    </table>
+                            </tr>
+                            </table>
+                        </div>
+                        <!--Fin Area de subida de archivos-->                    
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <!--Area de subida de comentarios-->
+                        <br>
+                        <p><b>Comentarios</b></p>
+                            <!--lista de comentarios-->
+                        <div class="comment-box">
+                                <p><b>Pirulo:</b></p>
+                                <p>Comentario de Pirulo</p>
+                                <p><b>Milaneso:</b></p>
+                                <p>Comentario de Milaneso</p>
+                                <p><b>Anvorgueso:</b></p>
+                                <p>Comentario de Anvorgueso</p>
+                                <p><b>Milaneso:</b></p>
+                                <p>Comentario de Milaneso</p>
+                                <p><b>Anvorgueso:</b></p>
+                                <p>Comentario de Anvorgueso</p>
+                                <p><b>Milaneso:</b></p>
+                                <p>Comentario de Milaneso</p>
+                                <p><b>Anvorgueso:</b></p>
+                                <p>Comentario de Anvorgueso</p>
+                                <p><b>Milaneso:</b></p>
+                                <p>CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam,CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam,CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam, quis nostrud exercitation ullamco pariatur</p>
+                                <p><b>Anvorgueso:</b></p>
+                                <p>Comentario de Anvorgueso</p>
+                        </div>
+                        <br>
+                        <table class="col-md-12">
+                            <tr>
+                                <td width="110%" align="left">
+                                    <textarea class="inputArea" row="2" placeholder="Escribir un comentario..."></textarea>
+                                </td>
+                                <td align="left">
+                                    <button class="btn btn-sm btn-primary btn-round btn-icon" title="Añadir comentario"><i class="tim-icons icon-chat-33"></i></button>
+                                </td>
+                            </tr>
+                        </table>                    
+                        <!--Fin Area de subida de comentarios-->
+                    </div>
                 </div>
-               
-                <br>
-                <p><b>Comentarios</b></p>
-                    <!--lista de comentarios-->
-                <div class="comment-box">
-                        <p><b>Pirulo:</b></p>
-                        <p>Comentario de Pirulo</p>
-                        <p><b>Milaneso:</b></p>
-                        <p>Comentario de Milaneso</p>
-                        <p><b>Anvorgueso:</b></p>
-                        <p>Comentario de Anvorgueso</p>
-                        <p><b>Milaneso:</b></p>
-                        <p>Comentario de Milaneso</p>
-                        <p><b>Anvorgueso:</b></p>
-                        <p>Comentario de Anvorgueso</p>
-                        <p><b>Milaneso:</b></p>
-                        <p>Comentario de Milaneso</p>
-                        <p><b>Anvorgueso:</b></p>
-                        <p>Comentario de Anvorgueso</p>
-                        <p><b>Milaneso:</b></p>
-                        <p>CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam,CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam,CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam, quis nostrud exercitation ullamco pariatur</p>
-                        <p><b>Anvorgueso:</b></p>
-                        <p>Comentario de Anvorgueso</p>
-                </div>
-                <br>
-                <table class="col-md-12">
-                    <tr>
-                        <td width="110%" align="left">
-                            <textarea class="inputArea" row="2" placeholder="Escribir un comentario..."></textarea>
-                        </td>
-                        <td align="left">
-                            <button class="btn btn-sm btn-primary btn-round btn-icon" title="Añadir comentario"><i class="tim-icons icon-chat-33"></i></button>
-                        </td>
-                    </tr>
-                </table>
             </div>            
         </div>
     </div>
