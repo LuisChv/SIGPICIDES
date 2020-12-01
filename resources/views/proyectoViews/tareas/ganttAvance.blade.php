@@ -276,7 +276,7 @@ function avanceGantt(NODE) {
 
 <!--//TODO MODAL en proceso-->
 <div class="modal fade" width="110%"  id="modalAgregarComentario" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Registrar avance de la tarea</h5>
