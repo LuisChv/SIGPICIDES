@@ -79,16 +79,14 @@
     gantt.attachEvent("onLightbox", function (task_id){
         //document.getElementsByName("indicador")[0].checked= true;
         //console.log(task_id);
+        /*
         var checkboxes = document.querySelectorAll('input[type="checkbox"]');
             for (var checkbox of checkboxes) {
             checkbox.disabled=true;
-        }
-        textarea[0].disabled=true;
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            for (var checkbox of checkboxes) {
-            checkbox.disabled=true;
-        }
+            checkbox.style.backgroundColor="blue";    
+        } */               
         var textarea = document.querySelectorAll('textarea');
+        textarea[0].disabled=true;
         $.ajax({
             url: '/tareasAsignaciones/'+ task_id,
             type: 'get',
