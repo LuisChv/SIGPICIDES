@@ -3,6 +3,7 @@
 Primera etapa
 @endsection
 @section('content')
+<script src="{{ asset('black') }}/js/oai.js"></script>
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -288,8 +289,7 @@ Primera etapa
     @foreach ($evaluaciones as $eva)        
         @if ($eva->etapa==1)
             @foreach ($miembros_comite as $miembro) 
-                @if ( $eva->id_user == $miembro->id_usuario) 
-
+                @if ( $eva->id_user == $miembro->id_usuario)
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
@@ -315,7 +315,6 @@ Primera etapa
         @if ($eva->etapa==2)
             @foreach ($miembros_comite as $miembro) 
                 @if ( $eva->id_user == $miembro->id_usuario) 
-
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
@@ -330,42 +329,71 @@ Primera etapa
             @endforeach
         @endif        
     @endforeach
-</div>
-<table class="col-md-12">
-    <tr>
-        <td width="50%" align="right">
-            @if ($solicitud->id_estado==5)
-                <table width="100%">
+
+    <div class="col-md-12">
+        <tr>
+            <td width="50%" align="right">
+                @if ($solicitud->id_estado==4)
+                    <table width="100%">
+                        <tr>
+                            <td width="50%">
+                                <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
+                                    Regresar
+                                </a>
+                            </td>
+                            <td width="50%" align="right">
+                                <a class="btn btn-primary" href="{{ route('solicitud.edit', [$proyecto->id])}}">
+                                    Siguiente
+                                </a>
+                            </td>
+                        </tr>
+                    </table> 
+                @else
+                    @if ($solicitud->etapa==2 && ($solicitud->id_estado==4 || $solicitud->id_estado==5 || $solicitud->id_estado==6))    
+                    <table width="100%">
                     <tr>
                         <td width="50%">
-                            <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
-                                Regresar
-                            </a>
-                        </td>
-                        <td width="50%" align="right">
-                            <a class="btn btn-primary" href="{{ route('solicitud.edit', [$proyecto->id])}}">
-                                Siguiente
-                            </a>
-                        </td>
-                    </tr>
-                </table> 
-            @else
-                @if ($solicitud->etapa==2 && $proyecto->id_estado!=1)    
-                    <a class="btn btn-primary" href="{{ route('factibilidad.create', [$proyecto->id]) }}">
-                        Siguiente
-                    </a>
-                @else        
-                
-                    <a class="btn btn-primary"  href="{{ route('tareas_avance.index', $proyecto->id)  }}">
-                        Ver planificacion
-                    </a>
-                @endif                
-            @endif    
-        </td>
-    </tr>
-</table>
-<div class="col-md-12 text-right">
-    
+                                <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
+                                    Regresar
+                                </a>
+                            </td>
+                            <td width="50%" align="right">
+                                <a class="btn btn-primary" href="{{ route('factibilidad.create', [$proyecto->id]) }}">
+                                    Factibilidad
+                                </a>                      
+                            </td>
+                        </tr>
+                    </table>
+                    @else        
+                        @if ($proyecto->id_estado==1)                       
+                            <div class="container menuF-container">
+                                <input type="checkbox" id="toggleF">
+                                <label for="toggleF" class="buttonF"></label>
+                                <nav class="navF">                 
+                                    <a href="{{ route('mis_proyectos.index')}}">Mis proyectos</a>              
+                                    <a href="{{ route('solicitud.resumen', [$proyecto->id])}}">Resumen</a>  
+                                    <a href="{{ route('tareas_avance.index', [$proyecto->id])}}">Planificación</a>
+                                    <a href="{{ route('indicadores.index', [$proyecto->id])}}">Indicadores</a>
+                                </nav>
+                            </div>   
+                        @else        
+                            @if ($solicitud->id_estado==8 || $solicitud->id_estado==9)
+                                <table width="100%">
+                                    <tr>
+                                        <td width="50%">
+                                            <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
+                                                Regresar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>                                            
+                            @endif                                               
+                        @endif                         
+                    @endif                
+                @endif
+            </td>
+        </tr>
+    </div> 
 </div>
-<script src="{{ asset('black') }}/js/oai.js"></script>
+
 @endsection

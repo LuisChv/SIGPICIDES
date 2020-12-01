@@ -44,12 +44,12 @@
             <tr>
                 <td width="50%">
                     <a class="btn btn-primary" href="{{ route('solicitud.resumen', [$idProyecto]) }}">
-                        Anterior
+                        Resumen
                     </a>
                 </td>
                 <td width="50%" align="right">
                     <a class="btn btn-primary" href="{{ route('indicadores.index', [$idProyecto]) }}">
-                        Siguiente
+                        Indicadores
                     </a>
                 </td>
             </tr>
@@ -281,7 +281,17 @@
             </div>
             <div class="modal-body">
                 <div class="normal-box">
-                    <textarea class="inputArea" rows="1" placeholder="Descripción del avance" maxlength="900"></textarea>                        
+                    <table class="col-md-12">
+                        <tr>
+                            <td width="110%" align="left">
+                        <textarea class="inputArea" rows="1" placeholder="Descripción del avance" maxlength="900"></textarea>                        
+                        </td>
+                            <td align="left">
+                                <button class="btn btn-sm btn-primary btn-round btn-icon" onClick = "agregarComentario()" id = "agregar" title="Añadir descripción"><i class="tim-icons icon-bullet-list-67"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                        <td width="90%" align="left">
                     <input type="file" class="form-control">
                     <p>Archivox disponibles</></p>
                         <!--Listar los archivos que ya estan subidos-->
@@ -291,9 +301,18 @@
                             <li>archivo.docx</li>
                             <li>archivo.docx</li>
                     </ul>
+                    </td>
+                    <td valign="top">
+                                <button class="btn btn-sm btn-primary btn-round btn-icon" onClick = "agregarArchivo()" id = "agregarArchivo" data-dismiss="modal"><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>
+                                </td>
+                                <td valign="top">
+                                <button class="btn btn-sm btn-default btn-round btn-icon" data-dismiss="modal" title="Cancelar"><i class="tim-icons icon-simple-remove"></i></button>
+                            </td>
+
+                    </tr>
+                    </table>
                 </div>
-                <button type="button" class="btn btn-primary btn-sm" onClick = "agregarComentario()" id = "agregar" data-dismiss="modal">Añadir</button>
-                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+               
                 <br>
                 <p><b>Comentarios</b></p>
                     <!--lista de comentarios-->
@@ -324,7 +343,7 @@
                             <textarea class="inputArea" row="2" placeholder="Escribir un comentario..."></textarea>
                         </td>
                         <td align="left">
-                            <button class="btn btn-sm btn-primary btn-round btn-icon"><i class="tim-icons icon-chat-33"></i></button>
+                            <button class="btn btn-sm btn-primary btn-round btn-icon" title="Añadir comentario"><i class="tim-icons icon-chat-33"></i></button>
                         </td>
                     </tr>
                 </table>

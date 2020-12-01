@@ -53,6 +53,6 @@ Factibilidad
                 <a href="#">Acciones largaaaaaaaaas</a>
                 </nav>
             </div>
-        </div>
         -->
-        @endsection
+</div>
+@endsection
