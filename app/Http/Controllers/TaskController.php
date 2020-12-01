@@ -160,6 +160,11 @@ class TaskController extends Controller
         if($request->has("target")){
             $this->updateOrder($id, $request->target);
         }
+        if($request->has("progreso")){
+            return response()->json([
+                "action"=> "updated 2"
+            ]);
+        }
         $idEquipo= Proyecto::select('id_equipo')->where('id', $request->idProyecto)->first();
         /**********Guardar asignacion de tareas a miembros del equipo***************/
         //Hacer el proceso en caso haya seleccionado al menos un miembro
