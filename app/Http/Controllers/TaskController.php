@@ -38,17 +38,21 @@ class TaskController extends Controller
             $idUsuarioLogeado=auth()->user()->id;
             //Comprobando si el usuario equipo rol existe (id del equipo y id del usuario logeado)
             $opcion;
+            //Atributo para utilizar en logica del modal de avance (saber el rol del usuario en el proyecto)
+            $rolProyecto;
             //Si es miembro del equipo sera opcion 1
             if($usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $proyecto->id_equipo)->where('id_usuario', $idUsuarioLogeado)->first()){
                 if($usuarioEquipoRol->id_rol==5){
                     $opcion=1;
                 }else{
                     $opcion=3;
-                }                
+                }
+                $rolProyecto=$usuarioEquipoRol->id_rol;                
             }
             //En caso sea miembro del comite se mostrara el gant pero no se podra modificar y sera opcion 2
             elseif($usuarioComite= ComiteUsuario::where('id_comite',$proyecto->id_comite)->where('id_usuario', $idUsuarioLogeado)->first()){
                 $opcion=2;
+                $rolProyecto="comite";
             }            
             else{abort(403);}
             //Traer los indicadores del proyecto seleccionado
@@ -59,7 +63,8 @@ class TaskController extends Controller
             
             //Gantt para cuando el proyecto este en marcha y se quieran agregar avances
             if($proyecto->id_estado==1 && ($opcion==1 || $opcion==2 || $opcion==3)){
-                return view('proyectoViews.tareas.ganttAvance',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
+                return view('proyectoViews.tareas.ganttAvance',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo, 
+                'rolProyecto'=>$rolProyecto]);
             }
             //Gantt de vista (no se puede modificar) (Para miembros del comite y cuando el se este evaluando la planificacion)
             elseif($opcion==2 || !$modificable){

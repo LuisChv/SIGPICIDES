@@ -277,6 +277,13 @@ function avanceGantt(NODE) {
     console.log(NODE.parentNode.parentNode.parentNode.parentNode.attributes.task_id.value);
     //let modalAvance= document.getElementById("modalAgregarComentario");
     $('#modalAgregarComentario').modal('show');
+    //Si el usuario no es lider de proyecto o miembro del comite, no dejar insertar comentario
+    
+    console.log(@json(auth()->user()));
+    if(@json($rolProyecto)==6 || @json($rolProyecto)==7){
+        $('#avanceComentarioEntrada').hide();
+    }       
+
     //modalAvance.modal('show');
     } 
 </script>
@@ -362,7 +369,7 @@ function avanceGantt(NODE) {
                                 <p>Comentario de Anvorgueso</p>
                         </div>
                         <br>
-                        <table class="col-md-12">
+                        <table id="avanceComentarioEntrada" class="col-md-12">
                             <tr>
                                 <td width="110%" align="left">
                                     <textarea class="inputArea" row="2" placeholder="Escribir un comentario..."></textarea>
