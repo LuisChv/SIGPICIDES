@@ -18,8 +18,8 @@ class ComentarioHito extends Migration
             $table->string('comentario',1000);
             $table->integer("id_user");
             $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer("id_hito");
-            $table->foreign('id_hito')->references('id')->on('hito')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer("id_task");
+            $table->foreign('id_task')->references('id')->on('tasks')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -277,9 +277,7 @@ function avanceGantt(NODE) {
     console.log(NODE.parentNode.parentNode.parentNode.parentNode.attributes.task_id.value);
     //let modalAvance= document.getElementById("modalAgregarComentario");
     $('#modalAgregarComentario').modal('show');
-    //Si el usuario no es lider de proyecto o miembro del comite, no dejar insertar comentario
-    
-    console.log(@json(auth()->user()));
+    //Si el usuario no es lider de proyecto o miembro del comite, no dejar insertar comentario    
     if(@json($rolProyecto)==6 || @json($rolProyecto)==7){
         $('#avanceComentarioEntrada').hide();
     }       
