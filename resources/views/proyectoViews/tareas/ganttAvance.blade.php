@@ -130,6 +130,12 @@
     //Evento lanzado antes de que un usuario arrastre algo (tarea, progreso, link, etc)
     gantt.attachEvent("onBeforeTaskDrag", function(id, mode, e){
         if(mode=="progress"){
+            //console.log(@json(auth()->user()->roles[0]->name));
+            //Validacion de que si el usuario es del comite no permitirles modificar los avances
+            let rol= @json(auth()->user()->roles[0]->name);
+            if(rol== "Coordinador" || rol=="Director"){
+                return false;
+            }
             return true;
         }
         return false;

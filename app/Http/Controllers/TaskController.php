@@ -58,7 +58,7 @@ class TaskController extends Controller
             //Retornar vista
             
             //Gantt para cuando el proyecto este en marcha y se quieran agregar avances
-            if($proyecto->id_estado==1 && ($opcion==3 || $opcion==1)){
+            if($proyecto->id_estado==1 && ($opcion==1 || $opcion==2 || $opcion==3)){
                 return view('proyectoViews.tareas.ganttAvance',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
             }
             //Gantt de vista (no se puede modificar) (Para miembros del comite y cuando el se este evaluando la planificacion)
