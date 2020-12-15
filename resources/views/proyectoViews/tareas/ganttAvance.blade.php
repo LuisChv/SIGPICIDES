@@ -98,7 +98,7 @@
         var checkboxes = document.querySelectorAll('input[type="checkbox"]');
             for (var checkbox of checkboxes) {
             checkbox.disabled=true;
-        }*/
+        }*/        
         var textarea = document.querySelectorAll('textarea');
         textarea[0].disabled=true;
         $.ajax({
@@ -347,23 +347,23 @@ function avanceGantt(NODE) {
                         <p><b>Comentarios</b></p>
                             <!--lista de comentarios-->
                         <div class="comment-box">
-                                <p><b>Pirulo:</b></p>
+                                <p class="font-weight-bold">Pirulo:</p>
                                 <p>Comentario de Pirulo</p>
-                                <p><b>Milaneso:</b></p>
+                                <p>Milaneso:</p>
                                 <p>Comentario de Milaneso</p>
-                                <p><b>Anvorgueso:</b></p>
+                                <p>Anvorgueso:</p>
                                 <p>Comentario de Anvorgueso</p>
-                                <p><b>Milaneso:</b></p>
+                                <p>Milaneso:</p>
                                 <p>Comentario de Milaneso</p>
-                                <p><b>Anvorgueso:</b></p>
+                                <p>Anvorgueso:</p>
                                 <p>Comentario de Anvorgueso</p>
-                                <p><b>Milaneso:</b></p>
+                                <p>Milaneso:</p>
                                 <p>Comentario de Milaneso</p>
-                                <p><b>Anvorgueso:</b></p>
+                                <p>Anvorgueso:</p>
                                 <p>Comentario de Anvorgueso</p>
-                                <p><b>Milaneso:</b></p>
+                                <p>Milaneso:</p>
                                 <p>CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam,CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam,CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam, quis nostrud exercitation ullamco pariatur</p>
-                                <p><b>Anvorgueso:</b></p>
+                                <p>Anvorgueso:</p>
                                 <p>Comentario de Anvorgueso</p>
                         </div>
                         <br>

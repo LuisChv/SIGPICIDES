@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ComentarioHito extends Migration
+class ComentarioTarea extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class ComentarioHito extends Migration
      */
     public function up()
     {
-        Schema::create('comentario_hito', function (Blueprint $table) {
+        Schema::create('comentario_tarea', function (Blueprint $table) {
             $table->id();
             $table->string('comentario',1000);
             $table->integer("id_user");
@@ -31,6 +31,6 @@ class ComentarioHito extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comentario_hito');
+        Schema::dropIfExists('comentario_tarea');
     }
 }
