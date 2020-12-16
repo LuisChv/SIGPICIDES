@@ -274,14 +274,34 @@
 });*/
 //fUNCION PARA TRAER AL MODAL DEL AVANCE EL ID_TASK CORRESPONDIENTE PARA UTILIZARLO EN LOGICA
 function avanceGantt(NODE) {
-    console.log(NODE.parentNode.parentNode.parentNode.parentNode.attributes.task_id.value);
+    let idTask= NODE.parentNode.parentNode.parentNode.parentNode.attributes.task_id.value;
+    console.log(idTask);
     //let modalAvance= document.getElementById("modalAgregarComentario");
     $('#modalAgregarComentario').modal('show');
     //Si el usuario no es lider de proyecto o miembro del comite, no dejar insertar comentario    
     if(@json($rolProyecto)==6 || @json($rolProyecto)==7){
         $('#avanceComentarioEntrada').hide();
     }       
-
+    //Traer comentarios
+    $.ajax({
+        url: '/comentariosTarea/'+ idTask,
+        type: 'get',
+        dataType: 'json',
+        success: function(response){            
+        let comentarios= response.comentarios;        
+        let comentariosLista=document.getElementById('comentariosList');
+            for(let i=0; i<response.comentarios.length; i++){                
+                var nodeDueño= document.createElement("p");
+                var textNodeDueño= document.createTextNode(comentarios[i].id_user);
+                nodeDueño.appendChild(textNodeDueño);
+                var nodeComentario = document.createElement("p");
+                var textNodeComentario= document.createTextNode(comentarios[i].comentario);
+                nodeComentario.appendChild(textNodeComentario);
+                comentariosLista.appendChild(nodeDueño);
+                comentariosLista.appendChild(nodeComentario);
+            }            
+        }
+    });
     //modalAvance.modal('show');
     } 
 </script>
@@ -346,25 +366,13 @@ function avanceGantt(NODE) {
                         <br>
                         <p><b>Comentarios</b></p>
                             <!--lista de comentarios-->
-                        <div class="comment-box">
+                        <div id="comentariosList" class="comment-box">
                                 <p class="font-weight-bold">Pirulo:</p>
                                 <p>Comentario de Pirulo</p>
                                 <p>Milaneso:</p>
                                 <p>Comentario de Milaneso</p>
                                 <p>Anvorgueso:</p>
-                                <p>Comentario de Anvorgueso</p>
-                                <p>Milaneso:</p>
-                                <p>Comentario de Milaneso</p>
-                                <p>Anvorgueso:</p>
-                                <p>Comentario de Anvorgueso</p>
-                                <p>Milaneso:</p>
-                                <p>Comentario de Milaneso</p>
-                                <p>Anvorgueso:</p>
-                                <p>Comentario de Anvorgueso</p>
-                                <p>Milaneso:</p>
-                                <p>CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam,CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam,CLorem ipsum dolor sit amet, consectetur adipiscing elit, im ad minim veniam, quis nostrud exercitation ullamco pariatur</p>
-                                <p>Anvorgueso:</p>
-                                <p>Comentario de Anvorgueso</p>
+                                <p>Comentario de Anvorgueso</p>                               
                         </div>
                         <br>
                         <table id="avanceComentarioEntrada" class="col-md-12">

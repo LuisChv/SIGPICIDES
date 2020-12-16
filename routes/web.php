@@ -565,11 +565,9 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::get('proyecto/archivos/download/{id}', 'DocumentoController@archivos_download')->name('archivos.download')
     ->middleware('has.permission:solicitudes.create');
 
-
-
-
-
-
+    /****************************COMENTARIOS TAREAS************************************** */
+    //TODO agregar permisos
+    Route::get('comentariosTarea/{id}', 'ComentarioTareaController@traerComentarios')->name('comentarioTarea.traer');
 
 
     
