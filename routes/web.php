@@ -568,6 +568,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     /****************************COMENTARIOS TAREAS************************************** */
     //TODO agregar permisos
     Route::get('comentariosTarea/{id}', 'ComentarioTareaController@traerComentarios')->name('comentarioTarea.traer');
+    Route::post('comentariosTarea', 'ComentarioTareaController@guardarComentarios')->name('comentarioTarea.guardar');
 
 
     

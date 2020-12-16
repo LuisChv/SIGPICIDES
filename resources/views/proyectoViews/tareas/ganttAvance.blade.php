@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!--Explicacion de los componentes del gantt https://docs.dhtmlx.com/gantt/desktop__table_templates.html
         
         para convertir a pdf también tiene a png y demás https://docs.dhtmlx.com/gantt/api__gantt_exporttopdf.html
@@ -276,8 +276,6 @@
 function avanceGantt(NODE) {
     let idTask= NODE.parentNode.parentNode.parentNode.parentNode.attributes.task_id.value;
     console.log(idTask);
-    //let modalAvance= document.getElementById("modalAgregarComentario");
-    $('#modalAgregarComentario').modal('show');
     //Si el usuario no es lider de proyecto o miembro del comite, no dejar insertar comentario    
     if(@json($rolProyecto)==6 || @json($rolProyecto)==7){
         $('#avanceComentarioEntrada').hide();
@@ -288,9 +286,9 @@ function avanceGantt(NODE) {
     while (comentariosLista.firstChild){
         comentariosLista.removeChild(comentariosLista.firstChild);
     } 
-    //Traer comentarios
+    //Traer comentarios para mostrarlos en modal
     $.ajax({
-        url: '/comentariosTarea/'+ idTask,
+        url: '/comentariosTarea/'+ idTask,        
         type: 'get',
         dataType: 'json',
         success: function(response){            
@@ -304,14 +302,20 @@ function avanceGantt(NODE) {
                 var nodeComentario = document.createElement("p");
                 var textNodeComentario= document.createTextNode(comentarios[i].comentario);
                 nodeComentario.appendChild(textNodeComentario);
+                nodeDueño.style.marginBottom=0;
+                nodeComentario.style.marginBottom=0;                
                 comentariosLista.appendChild(nodeDueño);
                 comentariosLista.appendChild(nodeComentario);
             }            
         }
-    });
-    //Guardar comentrios
-    
-    } 
+    });    
+    //let modalAvance= document.getElementById("modalAgregarComentario");
+    $('#modalAgregarComentario').modal('show');
+    //Agregar id_tarea como atributo del boton de guardar comentario, para que al guardar comentario lo haga a esa tarea    
+    let botonGuardarC=document.getElementById('BotonGuardarComentarioGA');
+    botonGuardarC.setAttribute("id_task", idTask);
+    console.log(botonGuardarC);
+} 
 </script>
 
 <!--//TODO MODAL en proceso-->
@@ -381,10 +385,10 @@ function avanceGantt(NODE) {
                         <table id="avanceComentarioEntrada" class="col-md-12">
                             <tr>
                                 <td width="110%" align="left">
-                                    <textarea class="inputArea" row="2" placeholder="Escribir un comentario..."></textarea>
+                                    <textarea id="ComentarioAvance" class="inputArea" row="2" name="comentario" placeholder="Escribir un comentario..."></textarea>
                                 </td>
                                 <td align="left">
-                                    <button class="btn btn-sm btn-primary btn-round btn-icon" title="Añadir comentario"><i class="tim-icons icon-chat-33"></i></button>
+                                <button onclick="agregarComentarioAvance(this, {{auth()->user()->id}})" id="BotonGuardarComentarioGA"  class="btn btn-sm btn-primary btn-round btn-icon" title="Añadir comentario"><i class="tim-icons icon-chat-33"></i></button>
                                 </td>
                             </tr>
                         </table>                    

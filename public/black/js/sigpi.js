@@ -105,3 +105,39 @@ function modalLinea(id_variable){
     var id=$('#modalLinea');    
     id.val(id_variable);
 }
+
+function agregarComentarioAvance(element, idUSer) {
+    //console.log(element.attributes.id_task.value);
+    //console.log(idUSer);
+    let _token   = $('meta[name="csrf-token"]').attr('content');
+    let idTask = element.attributes.id_task.value;
+    let comentario = document.getElementById('ComentarioAvance').value;
+    document.getElementById('ComentarioAvance').value = "";
+    var data = { comentario: comentario, _token: _token, idTask: idTask, idUser: idUSer };
+    //elemento donde se encuentran los comentarios
+    let comentariosLista = document.getElementById('comentariosList');          
+    //console.log(comentario);
+    $.ajax({
+        url: '/comentariosTarea',
+        type: 'post',
+        dataType: 'json',
+        data: data,
+        success: function(response){            
+            let comentario = response.comentario;
+            console.log(comentario);
+            //Agregar el comentario agregado a la lista            
+            var nodeDueño= document.createElement("p");
+            nodeDueño.classList.add("font-weight-bold");
+            var textNodeDueño = document.createTextNode(comentario.usuario +':');
+            nodeDueño.appendChild(textNodeDueño);
+            var nodeComentario = document.createElement("p");
+            var textNodeComentario = document.createTextNode(comentario.comentario);
+            nodeDueño.style.marginBottom=0;
+            nodeComentario.style.marginBottom=0;
+            nodeComentario.appendChild(textNodeComentario);
+            comentariosLista.appendChild(nodeDueño);
+            comentariosLista.appendChild(nodeComentario);
+        }
+    }); 
+}
+
