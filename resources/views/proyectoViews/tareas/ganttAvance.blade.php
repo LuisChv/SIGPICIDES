@@ -281,7 +281,13 @@ function avanceGantt(NODE) {
     //Si el usuario no es lider de proyecto o miembro del comite, no dejar insertar comentario    
     if(@json($rolProyecto)==6 || @json($rolProyecto)==7){
         $('#avanceComentarioEntrada').hide();
-    }       
+    }
+    //Elemento donde se agregaran los comentarios
+    let comentariosLista=document.getElementById('comentariosList');
+    //Eliminar todos los comentarios para que solo se muestren los comentarios del avance abierto
+    while (comentariosLista.firstChild){
+        comentariosLista.removeChild(comentariosLista.firstChild);
+    } 
     //Traer comentarios
     $.ajax({
         url: '/comentariosTarea/'+ idTask,
@@ -289,10 +295,11 @@ function avanceGantt(NODE) {
         dataType: 'json',
         success: function(response){            
         let comentarios= response.comentarios;        
-        let comentariosLista=document.getElementById('comentariosList');
+        
             for(let i=0; i<response.comentarios.length; i++){                
                 var nodeDueño= document.createElement("p");
-                var textNodeDueño= document.createTextNode(comentarios[i].id_user);
+                nodeDueño.classList.add("font-weight-bold");
+                var textNodeDueño= document.createTextNode(comentarios[i].name +':');
                 nodeDueño.appendChild(textNodeDueño);
                 var nodeComentario = document.createElement("p");
                 var textNodeComentario= document.createTextNode(comentarios[i].comentario);
@@ -302,7 +309,8 @@ function avanceGantt(NODE) {
             }            
         }
     });
-    //modalAvance.modal('show');
+    //Guardar comentrios
+    
     } 
 </script>
 
@@ -362,17 +370,12 @@ function avanceGantt(NODE) {
                         <!--Fin Area de subida de archivos-->                    
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <!--Area de subida de comentarios-->
-                        <br>
+                        <!--Area de subida de comentarios-->                        
                         <p><b>Comentarios</b></p>
                             <!--lista de comentarios-->
-                        <div id="comentariosList" class="comment-box">
+                        <div id="comentariosList" class="comment-box cuadroComentario">
                                 <p class="font-weight-bold">Pirulo:</p>
-                                <p>Comentario de Pirulo</p>
-                                <p>Milaneso:</p>
-                                <p>Comentario de Milaneso</p>
-                                <p>Anvorgueso:</p>
-                                <p>Comentario de Anvorgueso</p>                               
+                                <p>Comentario de Pirulo</p>                                                           
                         </div>
                         <br>
                         <table id="avanceComentarioEntrada" class="col-md-12">
