@@ -132,10 +132,11 @@
         if(mode=="progress"){
             //console.log(@json(auth()->user()->roles[0]->name));
             //Validacion de que si el usuario es del comite no permitirles modificar los avances
-            let rol= @json(auth()->user()->roles[0]->name);
-            if(rol== "Coordinador" || rol=="Director"){
+            let rol= @json(auth()->user()->roles[0]->name);            
+            if(@json($rolProyecto)=="comite"){
                 return false;
-            }
+                console.log('si entro');
+            }            
             return true;
         }
         return false;
@@ -275,7 +276,7 @@
 //fUNCION PARA TRAER AL MODAL DEL AVANCE EL ID_TASK CORRESPONDIENTE PARA UTILIZARLO EN LOGICA
 function avanceGantt(NODE) {
     let idTask= NODE.parentNode.parentNode.parentNode.parentNode.attributes.task_id.value;
-    console.log(idTask);
+    //console.log(idTask);
     //Si el usuario no es lider de proyecto o miembro del comite, no dejar insertar comentario    
     if(@json($rolProyecto)==6 || @json($rolProyecto)==7){
         $('#avanceComentarioEntrada').hide();
@@ -313,8 +314,7 @@ function avanceGantt(NODE) {
     $('#modalAgregarComentario').modal('show');
     //Agregar id_tarea como atributo del boton de guardar comentario, para que al guardar comentario lo haga a esa tarea    
     let botonGuardarC=document.getElementById('BotonGuardarComentarioGA');
-    botonGuardarC.setAttribute("id_task", idTask);
-    console.log(botonGuardarC);
+    botonGuardarC.setAttribute("id_task", idTask);    
 } 
 </script>
 

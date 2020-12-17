@@ -124,7 +124,7 @@ function agregarComentarioAvance(element, idUSer) {
         data: data,
         success: function(response){            
             let comentario = response.comentario;
-            console.log(comentario);
+            //console.log(comentario);
             //Agregar el comentario agregado a la lista            
             var nodeDueño= document.createElement("p");
             nodeDueño.classList.add("font-weight-bold");
