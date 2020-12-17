@@ -122,7 +122,10 @@ function agregarComentarioAvance(element, idUSer) {
         type: 'post',
         dataType: 'json',
         data: data,
-        success: function(response){            
+        success: function (response) {
+            if (response.respuestaLarga) {
+                alert(response.respuestaLarga);
+            }
             let comentario = response.comentario;
             //console.log(comentario);
             //Agregar el comentario agregado a la lista            

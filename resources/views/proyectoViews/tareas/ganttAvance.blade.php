@@ -385,7 +385,7 @@ function avanceGantt(NODE) {
                         <table id="avanceComentarioEntrada" class="col-md-12">
                             <tr>
                                 <td width="110%" align="left">
-                                    <textarea id="ComentarioAvance" class="inputArea" row="2" name="comentario" placeholder="Escribir un comentario..."></textarea>
+                                    <textarea id="ComentarioAvance" class="inputArea" row="2" name="comentario" placeholder="Escribir un comentario..." maxlength="900"></textarea>
                                 </td>
                                 <td align="left">
                                 <button onclick="agregarComentarioAvance(this, {{auth()->user()->id}})" id="BotonGuardarComentarioGA"  class="btn btn-sm btn-primary btn-round btn-icon" title="Añadir comentario"><i class="tim-icons icon-chat-33"></i></button>

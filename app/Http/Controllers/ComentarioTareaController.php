@@ -31,7 +31,12 @@ class ComentarioTareaController extends Controller
                 "Respuesta"=> 'Intento de hackeo',
             ]);
         }
-        //TODOValidación de tamaño de comentario
+        //Validación de tamaño de comentario
+        if(strlen($request->comentario)>900){
+            return response()->json([                
+                "respuestaLarga"=> 'Comentario demasiado largo',
+            ]);
+        }
         //Verificiación de seguridad 
         //Solo miembros del comite (Coordinador y director) y el lider pueden añadir comentarios
         $proyecto=DB::table('proyecto')
