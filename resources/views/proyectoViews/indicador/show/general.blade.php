@@ -243,4 +243,10 @@
     </div>	
 </div>
 
+<script>
+    $("#color").spectrum({
+        color: "#f00"
+    });
+</script>
+
 @endsection
