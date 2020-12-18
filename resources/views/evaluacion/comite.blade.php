@@ -1,6 +1,6 @@
 @extends('layouts.app',['pageSlug' => 'dashboard'])
 @section('title')
-    Comite de Evalucion
+    Comité de Evaluación
 @endsection
 @section('content')
 <div class="row">
@@ -9,14 +9,18 @@
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-12 text-left">
-                        <h2 class="card-title"><b> Comite de evaluacion </b></h2>
+                        <h2 class="card-title"><b> Comité de evaluación </b></h2>
                     </div> 
                 </div>
             </div>
             <div class="card-body">
                 <div class="mr-auto col-md-12">
+                @if ( $cantidad_miembros < 3 )
                     <input autocomplete="off" id="buscador" class="form-control" name="experto" 
                                 placeholder="Buscar nombre del experto" onclick="ejecutarBuscador({{json_encode($usuarios)}},'name' ,'buscador')">
+                @else
+                    <p class="text-danger">Número máximo de miembros del comité: 3</p>
+                @endif
                 </div>
                 <p><br></p>
                 <table class="table">
@@ -34,7 +38,7 @@
                                 <td> {{ $miembro->name }} </td>
                                 <td> 
                                     <select class="form-control selectorWapis" value="" id="rol" name="rol" disabled>
-                                        <option value="">{{ $miembro->name1 }}</option>
+                                        <option value="">{{ $miembro->name }}</option>
                                     </select> 
                                 </td>
                                 <form method="POST" id="formulario{{$miembro->id_usuario}}" action="{{ route('comite.destroy', [$miembro->id_usuario, $proyecto->id] )}}" >

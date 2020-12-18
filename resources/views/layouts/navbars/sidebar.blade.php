@@ -122,7 +122,7 @@
             @can('recursos.index')
             <li @if ($pageSlug == 'informes') class="active " @endif>
                 <a data-toggle="collapse" href="#informes" aria-expanded="false">
-                    <i class="tim-icons icon-email-85" ></i>
+                    <i class="tim-icons icon-chart-bar-32" ></i>
                     <span class="nav-link-text" >{{ __('Informes') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
@@ -131,7 +131,7 @@
                     <ul class="nav pl-4">
                             <li @if ($pageSlug == 'informes.general') class="active " @endif>
                                 <a href="{{ route('stats.index') }}">
-                                    <i class="tim-icons icon-bullet-list-67"></i>
+                                    <i class="tim-icons icon-app"></i>
                                     <p>{{ __('General') }}</p>
                                 </a>
                             </li>
