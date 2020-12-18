@@ -352,3 +352,9 @@ p .archivo_ppt {
 .cuadroComentario {
     height: 120rem;
 }
+
+/*comentarios en evaluacion final*/
+.eva-box{
+    height: 110px;
+    overflow: auto;    
+}
