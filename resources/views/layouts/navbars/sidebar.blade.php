@@ -121,7 +121,7 @@
 
             @can('recursos.index')
                 <li @if ($pageSlug == 'informes') class="active " @endif>
-                    <a href="{{ route('home')  }}">
+                    <a href="{{ route('stats.index')  }}">
                         <i class="tim-icons icon-chart-bar-32"></i>
                         <p>{{ __('Informes') }}</p>
                     </a>
