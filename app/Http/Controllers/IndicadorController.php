@@ -103,9 +103,15 @@ class IndicadorController extends Controller
     public function general($id)
     {
         $indicador = Indicador::findOrFail($id);
+        $variables = DB::select(
+            "SELECT V.id, V.id_indicador, V.modificable, V.nombre, V.color, VE.valor_y FROM variable V
+            LEFT JOIN valor_eje VE ON V.id = VE.id_variable
+            WHERE id_indicador = ?
+            ORDER BY V.id", [$id]);
         
         return view('proyectoViews.indicador.show.general', [
             'indicador' => $indicador,
+            'variables' => $variables
         ]);
     }
 

@@ -38,13 +38,15 @@ Indicadores
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="pills-home-tab">
-                    @foreach ($indicadores as $indicador)
-                        <table class="table">
+                         <table class="table">
                             <tr>
                                 <th>Nombre</th>
                                 <th>Tipo</th>
                                 <th></th>
                             </tr>
+                    
+                            @foreach ($indicadores as $indicador)
+                        
                             <tr>
                                 <td>{{$indicador->detalle}}</td>
                                 @if($indicador->tipo)
@@ -54,11 +56,11 @@ Indicadores
                                 @endif
                                 <td>
                                     <a class="btn btn-success btn-icon btn-round" href="{{route('indicador.general', $indicador->id)}}"><i class="tim-icons icon-pencil"></i></a>
-                                    <button class="btn btn-warning btn-icon btn-round"><i class="tim-icons icon-simple-remove"></i></button>
                                 </td>
                             </tr>
+                            @endforeach 
                         </table>
-                    @endforeach                    
+                                      
                     </div>
                     @foreach ($indicadores as $indicador)
                     <div class="tab-pane fade" id="cuantitativo" role="tabpanel" aria-labelledby="cuantitativo-tab">                    
