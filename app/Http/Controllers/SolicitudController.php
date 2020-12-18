@@ -713,7 +713,13 @@ class SolicitudController extends Controller
 
     public function stats1()
     {
-        //
-        return view('statsViews.stats_por_proy');
+        $proyectos = DB::table('proyecto')
+                ->join('equipo_de_investigacion', 'proyecto.id_equipo','equipo_de_investigacion.id')               
+                ->select('proyecto.nombre','proyecto.id')                
+                ->paginate(3);           
+                 
+        return view('statsViews.stats_por_proy', [
+            'proyectos' => $proyectos
+        ]);
     }
 }
