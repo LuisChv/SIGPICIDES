@@ -710,4 +710,10 @@ class SolicitudController extends Controller
         //
         return view('statsViews.index');
     }
+
+    public function stats1()
+    {
+        //
+        return view('statsViews.stats_por_proy');
+    }
 }

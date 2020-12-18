@@ -522,6 +522,8 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     
     Route::get('stats/index', 'SolicitudController@stats2')->name('stats.index');
 
+    Route::get('stats/index/proyectos', 'SolicitudController@stats1')->name('stats.proyecto');
+
     /***********************Equipo por Proyecto ***************************/
 
     Route::get('proyecto/miembros/{id}', 'UsuarioEquipoRolController@index')->name('miembros_proyecto.index')

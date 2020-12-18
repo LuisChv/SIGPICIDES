@@ -1,4 +1,4 @@
-@extends('layouts.app',['pageSlug' => 'dashboard'])
+@extends('layouts.app',['pageSlug' => 'informes.general'])
 @section('title')
     Estadísticas del sistema
 @endsection
