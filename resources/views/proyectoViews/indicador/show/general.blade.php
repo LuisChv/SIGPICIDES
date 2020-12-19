@@ -234,13 +234,14 @@
                         <textarea class="inputArea" disabled>{{$comentario->comentario}}</textarea>
                     @endforeach                    
                   </div>
-                  <table id="ComentarioIndicador" class="col-md-12">
+                  <table class="col-md-12">
                     <tr>
                         <td width="100%" align="left">
                             <textarea id="ComentarioIndicador" class="inputArea" rows="4" name="comentario" placeholder="Escribir un comentario..." maxlength="900"></textarea>
                         </td>
                         <td align="left">
-                        <button  id="BotonGuardarComentarioI"  class="btn btn-sm btn-primary btn-round btn-icon" title="Añadir comentario"><i class="tim-icons icon-chat-33"></i></button>
+                        <button id="BotonGuardarComentarioI" onclick="agregarComentarioIndicador({{$indicador->id}})" class="btn btn-sm btn-primary btn-round btn-icon" title="Añadir comentario"><i class="tim-icons icon-chat-33"></i></button>
+                        
                         </td>
                     </tr>
                   </table> 
@@ -256,7 +257,9 @@
 <script>
     $("#color").spectrum({
         color: "#f00"
-    });
+    });    
 </script>
-
 @endsection
+
+
+
