@@ -108,10 +108,16 @@ class IndicadorController extends Controller
             LEFT JOIN valor_eje VE ON V.id = VE.id_variable
             WHERE id_indicador = ?
             ORDER BY V.id", [$id]);
-        
+        $comentarios= DB::table('comentario_indicador')
+            ->join('users', 'comentario_indicador.id_user', 'users.id')
+            ->select('comentario_indicador.*', 'users.name')
+            ->orderBy('comentario_indicador.created_at')
+            ->get();
+        //dd($comentarios);
         return view('proyectoViews.indicador.show.general', [
             'indicador' => $indicador,
-            'variables' => $variables
+            'variables' => $variables,
+            'comentarios'=> $comentarios,
         ]);
     }
 

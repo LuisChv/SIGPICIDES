@@ -228,12 +228,23 @@
                   <br>
                   <p class="font-weight-bold">Comentarios:</p>
                   <hr>
-                  <p class="font-italic">Usuario1:</p>
-                  <textarea class="inputArea" disabled>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </textarea>
-                  <p class="font-italic">Usuario2:</p>
-                  <textarea class="inputArea" disabled>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </textarea>
-                  <p class="font-italic">Usuario3:</p>
-                  <textarea class="inputArea" disabled>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </textarea>	 
+                  <div id="ListaComentariosIndicador">
+                    @foreach ($comentarios as $comentario)
+                        <p class="font-italic">{{$comentario->name}}:</p>
+                        <textarea class="inputArea" disabled>{{$comentario->comentario}}</textarea>
+                    @endforeach                    
+                  </div>
+                  <table class="col-md-12">
+                    <tr>
+                        <td width="100%" align="left">
+                            <textarea id="ComentarioIndicador" class="inputArea" rows="4" name="comentario" placeholder="Escribir un comentario..." maxlength="900"></textarea>
+                        </td>
+                        <td align="left">
+                        <button id="BotonGuardarComentarioI" onclick="agregarComentarioIndicador({{$indicador->id}})" class="btn btn-sm btn-primary btn-round btn-icon" title="Añadir comentario"><i class="tim-icons icon-chat-33"></i></button>
+                        
+                        </td>
+                    </tr>
+                  </table> 
               </div>
               
           </div>
@@ -246,7 +257,9 @@
 <script>
     $("#color").spectrum({
         color: "#f00"
-    });
+    });    
 </script>
-
 @endsection
+
+
+
