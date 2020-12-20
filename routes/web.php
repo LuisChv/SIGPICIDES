@@ -576,6 +576,10 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     //TODO agregar permisos
     Route::post('comentariosIndicador', 'ComentarioIndicadorController@guardarComentarios')->name('comentarioIndicador.guardar');
 
+
+    /*---------------------------- ESTADISTICAS -------------------------------*/
+    Route::get('estadisticas', 'EstadisticaController@general')->name('estadistica.general');
+
     
 });
 
