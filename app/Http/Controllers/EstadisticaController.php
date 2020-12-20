@@ -43,6 +43,6 @@ class EstadisticaController extends Controller
 
     	dd($recursos, $marcas, $tipo_recurso, $tipo_investigacion, $subtipo_investigacion);
 
-    	return view("simpleViews.estadistica");
+    	return view("statsViews.index");
     }
 }
