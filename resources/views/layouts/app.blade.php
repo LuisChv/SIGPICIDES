@@ -104,6 +104,7 @@
         {{-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> --}}
         <!-- Chart JS -->
         {{-- <script src="{{ asset('black') }}/js/plugins/chartjs.min.js"></script> --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
         <!--  Notifications Plugin    -->
         <script src="{{ asset('black') }}/js/plugins/bootstrap-notify.js"></script>
 
@@ -112,6 +113,7 @@
         <script src="{{ asset('black') }}/js/sweet.js"> </script>
         <script src="{{ asset('black') }}/js/sigpi.js"></script>
         <script src="{{ asset('black') }}/js/buscador.js"></script>
+        <script src="{{ asset('black') }}/js/chart.js"></script>
 
         @stack('js')
 

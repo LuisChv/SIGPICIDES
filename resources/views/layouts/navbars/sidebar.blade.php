@@ -130,7 +130,7 @@
                 <div class="collapse" id="informes">
                     <ul class="nav pl-4">
                             <li @if ($pageSlug == 'informes.general') class="active " @endif>
-                                <a href="{{ route('stats.index') }}">
+                                <a href="{{ route('estadistica.general') }}">
                                     <i class="tim-icons icon-app"></i>
                                     <p>{{ __('General') }}</p>
                                 </a>

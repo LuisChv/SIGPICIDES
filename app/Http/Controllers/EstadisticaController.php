@@ -41,8 +41,14 @@ class EstadisticaController extends Controller
 			GROUP BY SDI.id"
     	);
 
-    	dd($recursos, $marcas, $tipo_recurso, $tipo_investigacion, $subtipo_investigacion);
+    	//dd($recursos, $marcas, $tipo_recurso, $tipo_investigacion, $subtipo_investigacion);
 
-    	return view("statsViews.index");
+    	return view("statsViews.index", [
+			'recursos' => $recursos,
+			'marcas' => $marcas,
+			'tipo_recurso' => $tipo_recurso,
+			'tipo_investigacion' => $tipo_investigacion,
+			'subtipo_investigacion' => $subtipo_investigacion
+		]);
     }
 }
