@@ -230,8 +230,9 @@
                   <hr>
                   <div id="ListaComentariosIndicador">
                     @foreach ($comentarios as $comentario)
-                        <p class="font-italic">{{$comentario->name}}:</p>
-                        <textarea class="inputArea" disabled>{{$comentario->comentario}}</textarea>
+                        <p class="font-weight-bold">{{$comentario->name}}:</p>
+                        <p >{{$comentario->comentario}}</p>
+                        <hr>
                     @endforeach                    
                   </div>
                   <table class="col-md-12">

@@ -137,7 +137,7 @@ function agregarComentarioAvance(element, idUSer) {
                 nodeComentario.style.marginBottom=0;
                 nodeComentario.appendChild(textNodeComentario);
                 comentariosLista.appendChild(nodeDueño);
-                comentariosLista.appendChild(nodeComentario);
+                comentariosLista.appendChild(nodeComentario);                
             }
             
         }
@@ -172,7 +172,10 @@ function agregarComentarioIndicador(idIndicador) {
                 nodeComentario.style.marginBottom=0;
                 nodeComentario.appendChild(textNodeComentario);
                 comentariosLista.appendChild(nodeDueño);
-                comentariosLista.appendChild(nodeComentario);    
+                comentariosLista.appendChild(nodeComentario);
+                //Agregar linea divisoria entre cada comentario
+                var hr = document.createElement("HR");                
+                comentariosLista.appendChild(hr);
             }            
         }
     }); 
