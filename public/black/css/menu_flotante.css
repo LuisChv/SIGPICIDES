@@ -254,7 +254,6 @@ p .archivo_ppt {
     overflow: auto;
     width: 100%;
     height: auto;
-    
 }
 
 .indicador__grafica {
@@ -353,7 +352,7 @@ p .archivo_ppt {
 }
 
 /*comentarios en evaluacion final*/
-.eva-box{
+.eva-box {
     height: 110px;
-    overflow: auto;    
+    overflow: auto;
 }
