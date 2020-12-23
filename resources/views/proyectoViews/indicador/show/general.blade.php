@@ -234,7 +234,8 @@
                         <p >{{$comentario->comentario}}</p>
                         <hr>
                     @endforeach                    
-                  </div>
+                  </div>                                    
+                  @if (!$miembro)
                   <table class="col-md-12">
                     <tr>
                         <td width="100%" align="left">
@@ -245,7 +246,8 @@
                         
                         </td>
                     </tr>
-                  </table> 
+                  </table>
+                  @endif 
               </div>
               
           </div>

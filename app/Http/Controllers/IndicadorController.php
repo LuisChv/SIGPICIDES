@@ -103,21 +103,48 @@ class IndicadorController extends Controller
     public function general($id)
     {
         $indicador = Indicador::findOrFail($id);
+        //Verificiación de seguridad
+        //Solo miembros del equipo y del comite pueden ver esta pantalla
+        $proyecto=DB::table('proyecto')
+            ->where('id', $indicador->id_proy)->first();
+        if($proyecto){
+            $miembro=DB::table('usuario_equipo_rol')
+            ->where([['id_usuario',auth()->user()->id],['id_equipo',$proyecto->id_equipo]])->first();
+            $lider= DB::table('usuario_equipo_rol')
+            ->where([['id_usuario',auth()->user()->id],['id_rol','=',5],['id_equipo',$proyecto->id_equipo]])->first();
+            $comite=DB::table('comite_usuario')
+            ->where([['id_usuario',auth()->user()->id],['id_comite',$proyecto->id_comite]])->first();
+            if(!$miembro && !$comite){
+                abort(403);
+                
+            }
+            $miembro=false;
+            if(!$lider && !$comite){
+                $miembro= true;
+            }
+        }else{
+            abort(404);
+        }
+
         $variables = DB::select(
             "SELECT V.id, V.id_indicador, V.modificable, V.nombre, V.color, VE.valor_y FROM variable V
             LEFT JOIN valor_eje VE ON V.id = VE.id_variable
             WHERE id_indicador = ?
             ORDER BY V.id", [$id]);
+        //Traer comentarios del indicador
         $comentarios= DB::table('comentario_indicador')
             ->join('users', 'comentario_indicador.id_user', 'users.id')
-            ->select('comentario_indicador.*', 'users.name')
+            ->where('id_indicador', $indicador->id)
+            ->select('comentario_indicador.*', 'users.name')            
             ->orderBy('comentario_indicador.created_at')
             ->get();
+        
         //dd($comentarios);
         return view('proyectoViews.indicador.show.general', [
             'indicador' => $indicador,
             'variables' => $variables,
             'comentarios'=> $comentarios,
+            'miembro'=>$miembro,
         ]);
     }
 
