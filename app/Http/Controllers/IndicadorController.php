@@ -81,7 +81,7 @@ class IndicadorController extends Controller
     public function variable(){
         $variable = new Variable();
         $variable->id_indicador = request('id_indicador');
-        $variable->color = request('color');
+        $variable->color = str_replace("#", "", request('color'));
         $variable->nombre = request('nombre');
         $variable->save();
         return redirect()->back();

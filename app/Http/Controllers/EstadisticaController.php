@@ -51,4 +51,16 @@ class EstadisticaController extends Controller
 			'subtipo_investigacion' => $subtipo_investigacion
 		]);
     }
+
+    public function proyectos(){
+        $proyectos = DB::SELECT(
+            "SELECT nombre, duracion AS estimado, date_part('d', NOW() - created_at)/7 AS real FROM proyecto"
+        );
+        $mayor = DB::SELECT("SELECT MAX(duracion) AS real FROM proyecto")[0]->real;
+
+        return view("statsViews.stats_por_proy", [
+            "proyectos" => $proyectos,
+            "mayor" => $mayor
+        ]);
+    }
 }
