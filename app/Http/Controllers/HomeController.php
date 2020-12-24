@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 
 class HomeController extends Controller
 {
@@ -21,6 +22,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $tiposProy=DB::table('tipo_de_investigacion')->get();
+        $subtiposProy=DB::table('subtipo_de_investigacion')->get();;
+        return view('dashboard', ['tiposProy' => $tiposProy, 'subtiposProy' => $subtiposProy]);
     }
 }
