@@ -580,6 +580,8 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     /*---------------------------- ESTADISTICAS -------------------------------*/
     Route::get('estadisticas', 'EstadisticaController@general')->name('estadistica.general');
 
+    Route::get('estadisticas/proyectos', 'EstadisticaController@proyectos')->name('estadistica.proyectos');
+
     
 });
 

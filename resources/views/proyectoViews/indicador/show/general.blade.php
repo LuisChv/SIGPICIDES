@@ -107,7 +107,7 @@
                                                               <input required id="nombre" class="form-control" placeholder="Nombre" name="nombre">
                                                           </div>
                                                           <div class="mr-auto ml-auto col-md-6">
-                                                              <input pattern="[0-F]{6}" maxlength="6" id="color" class="form-control" placeholder="Color (2395FC)" name="color">
+                                                              <input pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" maxlength="7" id="color" class="form-control" placeholder="Color (2395FC)" name="color">
                                                           </div>
                                                           <input hidden name="id_indicador" value="{{$indicador->id}}"/>
                                                       </div>
@@ -133,7 +133,7 @@
                                               {{$variable->nombre}}
                                           </td>
                                           <td class="text-right">
-                                              <a disabled href="#" class="btn btn-sm btn-round btn-icon" style="background:#{{$variable->color}}"><i class="fas fa-tint"></i></a>
+                                              <i style="color:#{{$variable->color}}" class="fas fa-tint fa-2x"></i>
                                           </td>
                                           <form id="formulario_variable{{$variable->id}}" method="POST" action="{{route('variable.destroy')}}">
                                               @csrf
@@ -259,7 +259,7 @@
 
 <script>
     $("#color").spectrum({
-        color: "#f00"
+        color: "#4d71dd"
     });    
 </script>
 @endsection
