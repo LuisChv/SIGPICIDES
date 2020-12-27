@@ -21,6 +21,7 @@
                                     <li class="nav-item dropdown">
                                         <a class="btn btn-secondary dropdown-toggle" href="#" data-toggle="dropdown">  Filtrar por:  </a>
                                         <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Todos los proyectos</a>
                                         @foreach ($tiposProy as $tipo)
                                             <li><a class="dropdown-item" href="#">{{$tipo->nombre}}</a>
                                                 <ul class="submenu dropdown-menu">
@@ -31,24 +32,12 @@
                                                     @endforeach                                                
                                                 </ul>
                                             </li>
-                                        @endforeach
-                                        <li><a class="dropdown-item" href="#"> Second level 2 </a>
-                                            <ul class="submenu dropdown-menu">
-                                               <li><a class="dropdown-item" href=""> Third level 1</a></li>
-                                               <li><a class="dropdown-item" href=""> Third level 2</a></li>
-                                               <li><a class="dropdown-item" href=""> Third level 3 &raquo </a>
-                                               <ul class="submenu dropdown-menu">
-                                                   <li><a class="dropdown-item" href=""> Fourth level 1</a></li>
-                                                   <li><a class="dropdown-item" href=""> Fourth level 2</a></li>
-                                               </ul>
-                                               </li>
-                                               <li><a class="dropdown-item" href=""> Second level  4</a></li>
-                                               <li><a class="dropdown-item" href=""> Second level  5</a></li>
-                                            </ul>
-                                         </li>                                        
+                                        @endforeach                                                                               
                                         </ul>
                                     </li>                                                     
-                                    </ul>                                
+                                    </ul>
+                                    <input autocomplete="off" id="buscador2" class="form-control" name="proyectoNombre" 
+                                    placeholder="Buscar nombre del proyecto" onclick="ejecutarBuscador({{json_encode($proyectos)}},'nombre' ,'buscador2')">                           
                                 </div> <!-- navbar-collapse.// -->
                             </nav>
                         </div>                        
@@ -65,6 +54,18 @@
                             <th>Proyecto</th>
                             <th>Acciones</th>
                         </tr>
+                        @foreach ($proyectos as $proyecto)
+                        <tr>
+                            <td>{{$proyecto->nombre}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
+                                    <a href="{{route('tareas_avance.index', $proyecto->id)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
+                                    <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
+                                </div>
+                            </td>
+                        </tr>    
+                        @endforeach
                         <tr>
                             <td>Proyecto de investigación sobre porque mi gato no se llama Anvorgueso</td>
                             <td>

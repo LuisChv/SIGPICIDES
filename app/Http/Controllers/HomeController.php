@@ -24,6 +24,8 @@ class HomeController extends Controller
     {
         $tiposProy=DB::table('tipo_de_investigacion')->get();
         $subtiposProy=DB::table('subtipo_de_investigacion')->get();;
-        return view('dashboard', ['tiposProy' => $tiposProy, 'subtiposProy' => $subtiposProy]);
+        $proyectos=DB::table('proyecto')->paginate(15);
+        //dd($proyectos[0]);
+        return view('dashboard', ['tiposProy' => $tiposProy, 'subtiposProy' => $subtiposProy, 'proyectos'=>$proyectos]);
     }
 }

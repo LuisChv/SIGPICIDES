@@ -125,7 +125,8 @@ function autocomplete(inp, arr, arr2) {
 
     //primero se valida si el argumento arr es un objeto un array
     if(typeof(arr)=='object'){
-      arr=Object.values(arr);
+      arr = Object.values(arr);
+      console.log(arr);
       console.log('entra a typeof');
     }
     
