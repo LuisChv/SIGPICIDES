@@ -43,6 +43,7 @@ Route::get('password/restablecer/{token}/{email}', 'Auth\ResetPasswordController
 //---------fin
 
 Route::get('home/', 'HomeController@index')->name('home')->middleware(['auth', 'has.permission:validacion']);
+Route::get('home/filtros', 'HomeController@indexFiltrado')->name('home.filtros')->middleware(['auth', 'has.permission:validacion']);
 //<a href="{{route('routename', párametros)}}"
 
 //Routes de Icons, Maps, notificaciones ........

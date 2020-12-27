@@ -1,7 +1,7 @@
 @extends('layouts.app', ['pageSlug' => 'dashboard'])
 
 @section('title')
-    Próximamente
+    Proyectos
 @endsection
 
 @section('content')
@@ -12,22 +12,26 @@
                     <div class="row">
                         <div class="col-sm-12 text-left">
                             <h2 class="card-title, font-weight-bold">Proyectos</h2>
-                            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                            <div><input autocomplete="off" id="buscador2" class="form-control" name="proyectoNombre" 
+                                placeholder="Buscar nombre del proyecto" onclick="ejecutarBuscador({{json_encode($proyectos)}},'nombre' ,'buscador2')">
+                            </div>                            
+                            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">                                
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav">
                                     <span class="navbar-toggler-icon"></span>
                                 </button>
+                                <form action="{{ route('home.filtros')}}" id="formFiltrarProyecto" method="get">                                
                                 <div class="collapse navbar-collapse" id="main_nav">                                
                                     <ul class="navbar-nav">                                
                                     <li class="nav-item dropdown">
-                                        <a class="btn btn-secondary dropdown-toggle" href="#" data-toggle="dropdown">  Filtrar por:  </a>
+                                        <p id="botonSeleccionadorProyectoFiltro" class="btn btn-secondary dropdown-toggle text-white" data-toggle="dropdown">  Filtrar por:  </p>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Todos los proyectos</a>
+                                            <li><a onclick="filtrotipo(this,0)" class="dropdown-item">Todos los proyectos</a>
                                         @foreach ($tiposProy as $tipo)
-                                            <li><a class="dropdown-item" href="#">{{$tipo->nombre}}</a>
+                                            <li><a  onclick="filtrotipo(this,1)" class="dropdown-item">{{$tipo->nombre}}</a>
                                                 <ul class="submenu dropdown-menu">
                                                     @foreach ($subtiposProy as $subtipo)
                                                         @if ($subtipo->id_tipo==$tipo->id)
-                                                        <li><a class="dropdown-item" href="#">{{$subtipo->nombre}}</a></li>    
+                                                        <li><a onclick="filtrotipo(this,2)" class="dropdown-item">{{$subtipo->nombre}}</a></li>    
                                                         @endif
                                                     @endforeach                                                
                                                 </ul>
@@ -35,10 +39,18 @@
                                         @endforeach                                                                               
                                         </ul>
                                     </li>                                                     
-                                    </ul>
-                                    <input autocomplete="off" id="buscador2" class="form-control" name="proyectoNombre" 
-                                    placeholder="Buscar nombre del proyecto" onclick="ejecutarBuscador({{json_encode($proyectos)}},'nombre' ,'buscador2')">                           
+                                    </ul>                                    
+                                    <input name="nombre" id="ocultoNombreProyecto" type="text" hidden>
+                                    <input name="tisubti" id="ocultoTipoProyecto" type="text" hidden>
+                                    <select name="estadoProy" id="estadoProy">
+                                        <option value="1">Todos</option>
+                                        <option value="2">Finalizados</option>
+                                        <option value="3">En progreso</option>
+                                        <option value="4">Abandonados</option>
+                                    </select>
+                                    <button class="btn btn-light" type="submit" form="formFiltrarProyecto">Buscar</button>                                    
                                 </div> <!-- navbar-collapse.// -->
+                                </form>
                             </nav>
                         </div>                        
                         <p>&nbsp;</p><br>
