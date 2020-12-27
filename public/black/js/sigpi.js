@@ -197,11 +197,10 @@ $(document).on('click', '.dropdown-menu', function (e) {
     })
     });
   }
-
 //Funcion para la seleccion de tipo o subtipo de proyecto para listarlos
 function filtrotipo(seleccion,tipo){
-    console.log(seleccion);
-    console.log(seleccion.textContent);
+    //console.log(seleccion);
+    //console.log(seleccion.textContent);
     document.getElementById('botonSeleccionadorProyectoFiltro').innerHTML = seleccion.textContent;
     document.getElementById('ocultoNombreProyecto').value = seleccion.textContent;
     document.getElementById('ocultoTipoProyecto').value = tipo;

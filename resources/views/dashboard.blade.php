@@ -23,7 +23,7 @@
                                 <div class="collapse navbar-collapse" id="main_nav">                                
                                     <ul class="navbar-nav">                                
                                     <li class="nav-item dropdown">
-                                        <p id="botonSeleccionadorProyectoFiltro" class="btn btn-secondary dropdown-toggle text-white" data-toggle="dropdown">  Filtrar por:  </p>
+                                        <p id="botonSeleccionadorProyectoFiltro" class="btn btn-secondary dropdown-toggle text-white" data-toggle="dropdown">{{$nombreElegido ?? 'Filtrar por:'}}</p>
                                         <ul class="dropdown-menu">
                                             <li><a onclick="filtrotipo(this,0)" class="dropdown-item">Todos los proyectos</a>
                                         @foreach ($tiposProy as $tipo)
@@ -40,13 +40,17 @@
                                         </ul>
                                     </li>                                                     
                                     </ul>                                    
-                                    <input name="nombre" id="ocultoNombreProyecto" type="text" hidden>
-                                    <input name="tisubti" id="ocultoTipoProyecto" type="text" hidden>
+                                    <input name="nombre" id="ocultoNombreProyecto" value="{{$nombreElegido ?? 'Todos los proyectos'}}" type="text" hidden>
+                                    <input name="tisubti" id="ocultoTipoProyecto" value="{{$tisubtiElegido ?? '0'}}" type="text" hidden>
                                     <select name="estadoProy" id="estadoProy">
-                                        <option value="1">Todos</option>
-                                        <option value="2">Finalizados</option>
-                                        <option value="3">En progreso</option>
-                                        <option value="4">Abandonados</option>
+                                        <option value="0">Todos</option>
+                                        @foreach ($estados as $estado)
+                                        @if ($estado->id==$estadoElegido)
+                                        <option value="{{$estado->id}}" selected>{{$estado->estado}}</option>    
+                                        @else
+                                        <option value="{{$estado->id}}">{{$estado->estado}}</option>
+                                        @endif                                        
+                                        @endforeach                                
                                     </select>
                                     <button class="btn btn-light" type="submit" form="formFiltrarProyecto">Buscar</button>                                    
                                 </div> <!-- navbar-collapse.// -->
@@ -66,58 +70,21 @@
                             <th>Proyecto</th>
                             <th>Acciones</th>
                         </tr>
-                        @foreach ($proyectos as $proyecto)
-                        <tr>
-                            <td>{{$proyecto->nombre}}</td>
-                            <td>
-                                <div class="btn-group">
-                                    <a class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
-                                    <a href="{{route('tareas_avance.index', $proyecto->id)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
-                                    <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
-                                </div>
-                            </td>
-                        </tr>    
-                        @endforeach
-                        <tr>
-                            <td>Proyecto de investigación sobre porque mi gato no se llama Anvorgueso</td>
-                            <td>
-                                <div class="btn-group">
-                                    <a class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
-                                    <a href="{{route('tareas_avance.index', 1)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
-                                    <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proyecto de investigación sobre porque mi gato no se llama Milaneso</td>
-                            <td>
-                                <div class="btn-group">
-                                    <a class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
-                                    <a href="{{route('tareas_avance.index', 1)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
-                                    <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proyecto de investigación sobre por qué los gatos ronronean</td>
-                            <td>
-                                <div class="btn-group">
-                                    <a class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
-                                    <a href="{{route('tareas_avance.index', 1)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
-                                    <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proyecto de investigación sobre encontrar tuber: tuberdaderoamor</td>
-                            <td>
-                                <div class="btn-group">
-                                    <a class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
-                                    <a href="{{route('tareas_avance.index', 1)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
-                                    <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
-                                </div>
-                            </td>
-                        </tr>
+                        <div class="container">
+                            @foreach ($proyectos as $proyecto)
+                            <tr>
+                                <td>{{$proyecto->nombre}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
+                                        <a href="{{route('tareas_avance.index', $proyecto->id)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
+                                        <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
+                                    </div>
+                                </td>
+                            </tr>    
+                            @endforeach
+                        </div>
+                        {{ $proyectos->links() }}
                     </table>
                 </div>
             </div>
