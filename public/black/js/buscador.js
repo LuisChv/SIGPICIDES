@@ -1,4 +1,4 @@
-function autocomplete(inp, arr, arr2) {
+function autocomplete(inp, arr, arr2, procedencia) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
     var currentFocus;
@@ -27,21 +27,27 @@ function autocomplete(inp, arr, arr2) {
             b.setAttribute("data-toggle", "modal");
             b.setAttribute("data-target", "#create");
             //se settea el valor del id del usuario 
-            b.setAttribute("onClick", "agregarMiembro("+arr2[i]+")");
-
+            b.setAttribute("onClick", "agregarMiembro(" + arr2[i] + ")");
+            if (procedencia == 'filtroProyectos') {
+              //window.location = "solicitud/"+arr2[i]+"/resumen";
+              b.setAttribute("id", arr2[i]);
+            }
             //data-toggle="modal" data-target="#create" onClick="agregarMiembro({{ $use->id }})"
             
             /*make the matching letters bold:*/
             b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
             b.innerHTML += arr[i].substr(val.length);
             /*insert a input field that will hold the current array item's value:*/
-            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-            
-            
+            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";                       
             /*execute a function when someone clicks on the item value (DIV element):*/
                 b.addEventListener("click", function(e) {
-                /*insert the value for the autocomplete text field:*/
-                inp.value = this.getElementsByTagName("input")[0].value;
+                /*insert the value for the autocomplete text field:*/                  
+                  inp.value = this.getElementsByTagName("input")[0].value;
+                  //redirección al resume
+                  if (procedencia == 'filtroProyectos') {
+                    window.location= "/solicitud/"+this.attributes.id.value+"/resumen";
+                  }
+                  
                 //console.log(ind.value);
                 /*close the list of autocompleted values,
                 (or any other open lists of autocompleted values:*/
@@ -109,7 +115,7 @@ function autocomplete(inp, arr, arr2) {
   }
 
 
-  function ejecutarBuscador(arr, atributo, id){
+  function ejecutarBuscador(arr, atributo, id, procedencia){
     /* 
       INFORMACION:
       arr -> arreglo de objetos que se van a iterar
@@ -125,9 +131,8 @@ function autocomplete(inp, arr, arr2) {
 
     //primero se valida si el argumento arr es un objeto un array
     if(typeof(arr)=='object'){
-      arr = Object.values(arr);
-      console.log(arr);
-      console.log('entra a typeof');
+      arr = Object.values(arr);      
+      //console.log('entra a typeof');
     }
     
     for (let i=0; i<arr.length; i++){
@@ -137,7 +142,7 @@ function autocomplete(inp, arr, arr2) {
     } 
     /*initiate the autocomplete function on the "buscador" element*/
 
-    autocomplete(document.getElementById(id), nombres, ids);
+    autocomplete(document.getElementById(id), nombres, ids, procedencia);
   }
 
   

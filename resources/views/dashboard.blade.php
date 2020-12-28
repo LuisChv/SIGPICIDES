@@ -13,7 +13,7 @@
                         <div class="col-sm-12 text-left">
                             <h2 class="card-title, font-weight-bold">Proyectos</h2>
                             <div><input autocomplete="off" id="buscador2" class="form-control" name="proyectoNombre" 
-                                placeholder="Buscar nombre del proyecto" onclick="ejecutarBuscador({{json_encode($proyectos)}},'nombre' ,'buscador2')">
+                                placeholder="Buscar nombre del proyecto" onclick="ejecutarBuscador({{json_encode($proyectosBuscador)}},'nombre' ,'buscador2','filtroProyectos')">
                             </div>                            
                             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">                                
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav">
@@ -23,7 +23,7 @@
                                 <div class="collapse navbar-collapse" id="main_nav">                                
                                     <ul class="navbar-nav">                                
                                     <li class="nav-item dropdown">
-                                        <p id="botonSeleccionadorProyectoFiltro" class="btn btn-secondary dropdown-toggle text-white" data-toggle="dropdown">{{$nombreElegido ?? 'Filtrar por:'}}</p>
+                                        <p id="botonSeleccionadorProyectoFiltro" class="btn btn-secondary dropdown-toggle text-white" data-toggle="dropdown">{{$nombreElegido ?? 'Todos los proyectos'}}</p>
                                         <ul class="dropdown-menu">
                                             <li><a onclick="filtrotipo(this,0)" class="dropdown-item">Todos los proyectos</a>
                                         @foreach ($tiposProy as $tipo)
@@ -43,7 +43,7 @@
                                     <input name="nombre" id="ocultoNombreProyecto" value="{{$nombreElegido ?? 'Todos los proyectos'}}" type="text" hidden>
                                     <input name="tisubti" id="ocultoTipoProyecto" value="{{$tisubtiElegido ?? '0'}}" type="text" hidden>
                                     <select name="estadoProy" id="estadoProy">
-                                        <option value="0">Todos</option>
+                                        <option value="0">Todos los estados</option>
                                         @foreach ($estados as $estado)
                                         @if ($estado->id==$estadoElegido)
                                         <option value="{{$estado->id}}" selected>{{$estado->estado}}</option>    
@@ -76,7 +76,7 @@
                                 <td>{{$proyecto->nombre}}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
+                                        <a href="{{ route('solicitud.resumen', $proyecto->id)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
                                         <a href="{{route('tareas_avance.index', $proyecto->id)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
                                         <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
                                     </div>
