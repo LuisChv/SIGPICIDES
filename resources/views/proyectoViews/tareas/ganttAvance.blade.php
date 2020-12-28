@@ -43,7 +43,7 @@
         <table width="100%">
             <tr>
                 <td width="50%">
-                    <a class="btn btn-primary" href="{{ route('solicitud.resumen', [$idProyecto]) }}">
+                    <a class="btn btn-primary" href="{{ route('proyecto.resumen', [$idProyecto]) }}">
                         Resumen
                     </a>
                 </td>

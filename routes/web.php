@@ -350,6 +350,8 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::get('solicitud/{solicitud}/resumen', 'SolicitudController@resumen')->name('solicitud.resumen')
     ->middleware('has.permission:solicitudes.create');
+    //TODO Agregar validacion de url
+    Route::get('proyecto/{id}/resumen', 'ProyectoController@resumen')->name('proyecto.resumen');
 
     Route::get('solicitud/{solicitud}/pre2', 'SolicitudController@pre2')->name('solicitud.pre2')
     ->middleware('has.permission:solicitudes.create');

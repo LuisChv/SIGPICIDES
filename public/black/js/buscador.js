@@ -45,7 +45,7 @@ function autocomplete(inp, arr, arr2, procedencia) {
                   inp.value = this.getElementsByTagName("input")[0].value;
                   //redirección al resume
                   if (procedencia == 'filtroProyectos') {
-                    window.location= "/solicitud/"+this.attributes.id.value+"/resumen";
+                    window.location= "/proyecto/"+this.attributes.id.value+"/resumen";
                   }
                   
                 //console.log(ind.value);
