@@ -222,11 +222,11 @@ class EvaluacionSolicitudController extends Controller
     public function evaluacion_final($id)
     {
         $proyecto = Proyecto::findOrFail($id);
+        $id_comite = $proyecto->id_comite;
         $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
         $solicitud->enviada = false;
         $solicitud->noti_inv = false;
         $solicitud->save();
-        $id_comite = $proyecto->id_comite;
 
         $miembros_comite = DB::select("SELECT CU.id_usuario, U.name FROM comite_usuario CU JOIN users U ON CU.id_usuario = U.id WHERE id_comite = ?", [$id_comite]);
 
@@ -283,10 +283,15 @@ class EvaluacionSolicitudController extends Controller
         if($respuesta == 5){
             $solicitud->etapa = 2;
         }
-
+        //Eliminamos al experto e inicia el proyecto
         if($respuesta == 7){
+            DB::select("DELETE FROM comite_usuario WHERE id_comite = ? AND id_usuario not in (?,?) ", [$proyecto->id_comite,2,3]);
             $proyecto->id_estado = 1;
             $proyecto->save();
+        }
+
+        if($respuesta == 8){
+            DB::select("DELETE FROM comite_usuario WHERE id_comite = ? AND id_usuario not in (?,?) ", [$proyecto->id_comite,2,3]);
         }
         
         $solicitud->save();
