@@ -17,7 +17,7 @@
                 <div class="mr-auto col-md-12">
                 @if ( $cantidad_miembros < 3 )
                     <input autocomplete="off" id="buscador" class="form-control" name="experto" 
-                                placeholder="Buscar nombre del experto" onclick="ejecutarBuscador({{json_encode($usuarios)}},'name' ,'buscador')">
+                                placeholder="Buscar nombre del experto" onclick="ejecutarBuscador({{json_encode($usuarios)}},'name' ,'buscador','')">
                 @else
                     <p class="text-danger">Número máximo de miembros del comité: 3</p>
                 @endif

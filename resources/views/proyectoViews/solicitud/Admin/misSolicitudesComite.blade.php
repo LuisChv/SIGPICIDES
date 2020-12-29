@@ -1,4 +1,4 @@
-@extends('layouts.app',['pageSlug' => 'dashboard'])
+@extends('layouts.app',['pageSlug' => 'solicitudes_a_evaluar'])
 @section('title')
 	Consultar solicitudes 
 @endsection
