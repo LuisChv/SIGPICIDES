@@ -42,7 +42,7 @@
                                     </ul>                                    
                                     <input name="nombre" id="ocultoNombreProyecto" value="{{$nombreElegido ?? 'Todos los proyectos'}}" type="text" hidden>
                                     <input name="tisubti" id="ocultoTipoProyecto" value="{{$tisubtiElegido ?? '0'}}" type="text" hidden>
-                                    <select name="estadoProy" id="estadoProy">
+                                    <select name="estadoProy" id="estadoProy" class="btn btn-secondary dropdown-toggle text-white">
                                         <option value="0">Todos los estados</option>
                                         @foreach ($estados as $estado)
                                         @if ($estado->id==$estadoElegido)
