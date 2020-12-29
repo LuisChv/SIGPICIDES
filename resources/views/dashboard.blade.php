@@ -76,7 +76,7 @@
                                 <td>{{$proyecto->nombre}}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('solicitud.resumen', $proyecto->id)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
+                                        <a href="{{ route('proyecto.resumen', $proyecto->id)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
                                         <a href="{{route('tareas_avance.index', $proyecto->id)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
                                         <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
                                     </div>

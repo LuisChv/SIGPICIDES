@@ -93,6 +93,7 @@ class ProyectoController extends Controller
         $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$equipo->id]);
         $roles = DB::select('SELECT * FROM roles');        
         $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$equipo->id])->get();
+        $estados=DB::table('estado_de_proy')->get();
 
         return view('proyectoViews.mis_proyectos.resumen', [
             'objetivos'=> $objetivos, 'alcances'=> $alcances, 'indicadores'=> $indicadores,
@@ -100,7 +101,7 @@ class ProyectoController extends Controller
             'tiposrec'=>$tiposrec, 'recursos'=>$recursos, 'recursosProy'=>$recursosProy,
             'solicitud'=>$solicitud, 'evaluaciones'=>$evaluaciones, 'estados'=>$estados_soli,
             'miembros_comite'=>$miembros_comite, 'factibilidad' => $factibilidad, 'miembros' => $miembros,
-            'roles'=>$roles, 'miembrosEquipo'=>$miembrosEquipo,
+            'roles'=>$roles, 'miembrosEquipo'=>$miembrosEquipo, 'estados'=>$estados,
             ]);
     }
     /**
@@ -108,9 +109,14 @@ class ProyectoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function cambiarEstado(Request $request, $id)
+    {        
+        $proyecto= Proyecto::findOrFail($id);
+        $proyecto->id_estado=$request->estadoProy;
+        $proyecto->save();
+        return back();
+        //return back()->withErrors('Todos los campos son obligatorios');
+        return redirect()->route('estado_resultado_create', $id_periodo)->with('status', 'Cuenta '.$request->nombre.' creada exitosamente');
     }
 
     /**

@@ -137,11 +137,13 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::get('proyectos', 'ProyectoController@index')->name('proyectos.index')
     ->middleware('has.permission:proyectos.index');
 
+    //TODO agragar validacion de url
     Route::get('mis_proyectos', 'ProyectoController@misProyectos')->name('mis_proyectos.index');
-
+    //TODO agragar validacion de url
     //Lista de colaboraciones
     Route::get('proyectos/colaboraciones', 'ProyectoController@indexColaboracion')->name('proyectos.colaboracion');
-    
+    //TODO agragar validacion de url
+    Route::post('proyectos/estado/{id}', 'ProyectoController@cambiarEstado')->name('proyecto.CambioEstado');
 
     Route::get('proyectos/create', 'ProyectoController@create')->name('proyectos.create')
     ->middleware('has.permission:proyectos.create');

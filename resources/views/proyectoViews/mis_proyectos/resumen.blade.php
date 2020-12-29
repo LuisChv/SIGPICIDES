@@ -12,27 +12,44 @@ Primera etapa
                     <h3>
                         Información general
                     </h3>
+                    <!--TODO alejandro modificar if segun sea miembro o coordinador-->
+                    @if (true)
                     <button class="btn btn-primary text-center" data-toggle="modal" data-target="#estadoProyModal">
                         Cambiar Estado
-                    </button>
+                    </button>    
+                    @endif                    
                     <!-- Modal -->
                     <div class="modal fade bd-example-modal-lg" id="estadoProyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                        <div class="modal-content modal-lg">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <div class="modal-content modal-lg">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" id="exampleModalLabel">Estado del proyecto</h3>                                    
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                <div class="modal-body">
+                                    <form action="{{route('proyecto.CambioEstado', $proyecto->id)}}" method="post" id="formCambiarEstado">
+                                        @csrf
+                                        <div class=" d-flex flex-column">
+                                            <p class="text-center font-weight-bold">Cambiar estado:</p>
+                                            <select name="estadoProy" id="estadoProyResumen">
+                                                @foreach ($estados as $estado)
+                                                @if ($proyecto->id_estado==$estado->id)
+                                                    <option selected value="{{$estado->id}}">{{$estado->estado}}</option>    
+                                                @else
+                                                    <option value="{{$estado->id}}">{{$estado->estado}}</option>    
+                                                @endif                                                
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary" form="formCambiarEstado">Guardar</button>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                            ...
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
                         </div>
                     </div>
                 </div>
