@@ -17,7 +17,7 @@
                     <div class="mr-auto col-md-12">
                     @if ( $cantidad_miembros < $equipo->miembros )
                         <input autocomplete="off" id="buscador" class="form-control" name="investigador" 
-                                    placeholder="Buscar nombre del investigador" onclick="ejecutarBuscador({{json_encode($usuarios)}},'name' ,'buscador')">
+                                    placeholder="Buscar nombre del investigador" onclick="ejecutarBuscador({{json_encode($usuarios)}},'name' ,'buscador', '')">
                     @else
                         <p class="text-danger">Número máximo de miembros: {{$equipo->miembros}}</p>
                     @endif
