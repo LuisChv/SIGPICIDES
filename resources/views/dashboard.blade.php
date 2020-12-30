@@ -14,8 +14,9 @@
                             <h2 class="card-title, font-weight-bold">Proyectos</h2>
                             <div><input autocomplete="off" id="buscador2" class="form-control" name="proyectoNombre" 
                                 placeholder="Buscar nombre del proyecto" onclick="ejecutarBuscador({{json_encode($proyectosBuscador)}},'nombre' ,'buscador2','filtroProyectos')">
-                            </div>                            
-                            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">                                
+                            </div>
+                            <br>                         
+                            <nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded">                                
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav">
                                     <span class="navbar-toggler-icon"></span>
                                 </button>
@@ -23,7 +24,7 @@
                                 <div class="collapse navbar-collapse" id="main_nav">                                
                                     <ul class="navbar-nav">                                
                                     <li class="nav-item dropdown">
-                                        <p id="botonSeleccionadorProyectoFiltro" class="btn btn-secondary dropdown-toggle text-white" data-toggle="dropdown">{{$nombreElegido ?? 'Todos los proyectos'}}</p>
+                                        <p id="botonSeleccionadorProyectoFiltro" class="btn btn-secondary btn-sm dropdown-toggle text-white" data-toggle="dropdown">{{$nombreElegido ?? 'Todos los proyectos'}}</p>
                                         <ul class="dropdown-menu">
                                             <li><a onclick="filtrotipo(this,0)" class="dropdown-item">Todos los proyectos</a>
                                         @foreach ($tiposProy as $tipo)
@@ -42,7 +43,7 @@
                                     </ul>                                    
                                     <input name="nombre" id="ocultoNombreProyecto" value="{{$nombreElegido ?? 'Todos los proyectos'}}" type="text" hidden>
                                     <input name="tisubti" id="ocultoTipoProyecto" value="{{$tisubtiElegido ?? '0'}}" type="text" hidden>
-                                    <select name="estadoProy" id="estadoProy" class="btn btn-secondary dropdown-toggle text-white">
+                                    <select name="estadoProy" id="estadoProy" class="text-white btn btn-secondary ">
                                         <option value="0">Todos los estados</option>
                                         @foreach ($estados as $estado)
                                         @if ($estado->id==$estadoElegido)
