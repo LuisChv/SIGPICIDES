@@ -1,4 +1,4 @@
-@extends('layouts.app',['pageSlug' => 'dashboard'])
+@extends('layouts.app',['pageSlug' => 'permisos'])
 @section('title')
 Roles
 @endsection
@@ -9,7 +9,7 @@ Roles
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-9 text-left">
-                        <h2 class="card-title"><b>Gestion de Roles</b></h2>
+                        <h2 class="card-title"><b>Gestión de Roles</b></h2>
                     </div>
                     <div class="col-sm-3 text-right">
                         <a role="button" class="btn btn-primary" href="{{ route('roles.create')  }}">
