@@ -13,6 +13,7 @@
                 <h2>{{$indicador->detalle}}</h2>
 
                 <!-- GRAFICO-->
+                <canvas id="graficoBarras"></canvas>
 
             </div>
             </div>
@@ -181,6 +182,14 @@
     </div>
 </div>
 <script>
+    $( document ).ready(function() {
+            let labels =  {!! json_encode($variables) !!};
+            let valores = {!! json_encode($valores)};
+            console.log("WRYYYYYYYYYYYYYYYYYY");
+            console.log(labels);
+            console.log(valores);
+			ejectuarChart(labels, valores, 'graficoBarras');
+		});
     $(function(){
         $("#selectorVariables").on("change", function () {
             $(".hideCustom").hide();
