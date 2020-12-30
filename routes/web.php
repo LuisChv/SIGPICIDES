@@ -516,6 +516,10 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::post('datos/barra', 'DatosController@barra')->name('datos.barra');
 
+    Route::post('datos/linea', 'DatosController@linea')->name('datos.linea');
+
+    Route::post('datos/punto', 'DatosController@punto')->name('datos.punto');
+
     Route::get('indicador/general/{id}', 'IndicadorController@general')->name('indicador.general');
 
     Route::get('indicador/estadistica/{id}', 'IndicadorController@estadistica')->name('indicador.estadistica');

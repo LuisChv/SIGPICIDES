@@ -5,121 +5,181 @@
 @section('seccion')
 
 <div>
-    <!--Las estadisticas son solo para los indicadores cuantitativos, hay que validar que no se genere este tab-->
-    <h2 class="card-title">{{$indicador->detalle}}</h2>
-    <div class="indicador">
-        <!--TODO Se debe decidir como ira la interfaz para el llenado de datos de la grafica-->
-          <div class="indicador__grafica">[Gráfica]</div>
-    </div>
-    <!-- INICIO DE IF A.2 -->
-    @if ($indicador->tipo_de_grafico)
-          <div class="col-md-12 text-right">
-              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalBarra">Modificar datos</button>
-              <form method="POST" action="{{route('datos.barra')}}">
-                  @csrf
-                  <div class="modal fade" id="modalBarra" tabindex="-1" role="dialog" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                              <div class="modal-header">
-                                  <h5 class="modal-title">Modificar datos</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="false">&times;</span>
-                                  </button>
-                              </div>
-                              <div class="modal-body" >   
-                                  <div class="row">                
-                                      @foreach ($variables as $variable)
-                                          <!-- INICIO DE IF A.2.1  -->
-                                          @if ($variable->id_indicador)
-                                              <div class="col-md-3">
-                                                  {{$variable->nombre}}
-                                              </div>
-                                              <div class="col-md-3">
-                                                  <input required name="{{$variable->id}}" class="form-control form-control-sm" type="number" step="0.01" value="{{$variable->valor_y}}">
-                                              </div>
-                                          @endif
-                                      <!-- FIN DE IF A.2.1  -->
+    <div class="row">
+        @if ($indicador->tipo_de_grafico)
+        <div class="col-md-9">
+            <div class="card">
+            <div class="card-header">
+                <h2>{{$indicador->detalle}}</h2>
 
-                                      @endforeach
-                                  </div>
-                              </div>
-                              <div class="modal-footer">
-                                  <input hidden name="indicador" value="{{$indicador->id}}">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                  <button type="submit" class="btn btn-primary">Guardar</button>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </form>
-          </div>
-  <!-- INICIO DE ELSE A.2 
-  @e lse
-      <div class="col-md-12">
-          <div class="btn-group" role="group">
-              <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Variables
-              </button>
-              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-              @foreach ($variables as $variable)
-                  
-                       INICIO DE IF A.2.2 
-                  @if($variable->id_indicador == $indicador->id)
-                      <button type="button" class="form-control" data-toggle="modal" data-target="#modalLinea" onclick="modalLinea({{$variable->id}})">
-                          {{$variable->nombre}}
-                      </button>                                   
-                  @endif
-                       FIN DE IF A.2.2 
+                <!-- GRAFICO-->
 
-              @endforeach
-              </div>
-          </div>
-      </div>
-  @e ndif
-  FIN DE IF A.2 -->
-  @else
-      <div class="col-md-12">
-              <select class="btn btn-primary dropdown-toggle" id="selectorVariables">
-                <option>-Variables-</option>
-              @foreach ($variables as $variable)
-                  
-                      <!-- INICIO DE IF A.2.2 -->
-                  @if($variable->id_indicador == $indicador->id)
-                      <option value="{{$variable->id}}">
-                          {{$variable->nombre}}
-                      </option>                                   
-                  @endif
-                      <!-- FIN DE IF A.2.2 -->
-
-              @endforeach
-              </select>
-              @foreach ($variables as $variable)
-              <div class="hideCustom" id="container{{$variable->id}}">
-                <table class="table" id="tabla{{$variable->id}}">
-                    <thead>
-                        <tr>
-                            <th>Eje 1</th>
-                            <th>Eje 2</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <button class="btn btn-primary">+</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>asdf</td>
-                            <td>ghjk {{$variable->id}}</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-              @endforeach
-      </div>
-  @endif
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="{{route('datos.barra')}}">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6">
+                                
+                            </div>
+                            <div class="col-md-6 text-center">
+                                Valor
+                            </div>
+                        </div>
+                        <hr>
+                        @foreach ($variables as $variable)
+                            @if ($variable->id_indicador)
+                            
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {{$variable->nombre}}
+                                    </div>
+                                    <div class="col-md-6">
+                                        @foreach ($valores as $valor)
+                                            @if ($valor->id_variable == $variable->id)
+                                                <input required name="x{{$variable->id}}" class="form-control form-control-sm" type="number" step="0.01" value="{{$valor->valor_x}}">
+                                                @break
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <hr>
+                            @endif
+                        @endforeach
+                        <div class="text-center">
+                            <input hidden name="indicador" value="{{$indicador->id}}"/>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                    <br>
+                </div>
+            </div>
+        </div>
+        @else
+            <div class="col-md-8">
+                <div class="card">
+                <div class="card-header">
+                    <h2>{{$indicador->detalle}}</h2>
+                    
+                    <!-- GRAFICO-->
+                
+                </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <select class="btn btn-sm btn-primary dropdown-toggle" id="selectorVariables">
+                                    <option>Variables</option>
+                                    @foreach ($variables as $variable)
+                                        @if($variable->id_indicador == $indicador->id)
+                                            <option value="{{$variable->id}}">
+                                                {{$variable->nombre}}
+                                            </option>                                   
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalVariable">+</button>
+                                  <form method="POST" action="{{route('datos.punto')}}">
+                                      @csrf
+                                      <div class="modal fade" id="modalVariable" tabindex="-1" role="dialog" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                  <div class="modal-header">
+                                                      <h5 class="modal-title">Agregar punto</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="false">&times;</span>
+                                                      </button>
+                                                  </div>
+                                                  <div class="modal-body" >                     
+                                                      <div class="row">
+                                                          <div  class="mr-auto ml-auto col-md-12">
+                                                            <select class="form-control" name="variable">
+                                                                <option>Seleccione una variable...</option>
+                                                                @foreach ($variables as $variable)
+                                                                    @if($variable->id_indicador == $indicador->id)
+                                                                        <option value="{{$variable->id}}">
+                                                                            {{$variable->nombre}}
+                                                                        </option>                                   
+                                                                    @endif
+                                                                @endforeach
+                                                            </select>
+                                                          </div>
+                                                      </div>
+                                                      <hr>
+                                                      <div class="row">
+                                                            <div class="mr-auto ml-auto col-md-6">
+                                                                <input required name="x" class="form-control" type="number" step="0.01" placeholder="Valor en X">
+                                                            </div>
+                                                            <div class="mr-auto ml-auto col-md-6">
+                                                                <input required name="y" class="form-control" type="number" step="0.01" placeholder="Valor en Y">
+                                                            </div>
+                                                            <input hidden name="id_indicador" value="{{$indicador->id}}"/>
+                                                      </div>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                      <button type="submit" class="btn btn-primary">Añadir</button>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </form> 
+                            </div>
+                        </div>
+                        
+                        <hr>
+                        <form method="POST" action="{{route('datos.linea')}}">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6 text-center">
+                                    <b>Eje X</b>
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <b>Eje Y</b>
+                                </div>
+                            </div>
+                            <br>
+                            @foreach ($variables as $variable)
+                                <div style="display: none" class="hideCustom" id="container{{$variable->id}}">
+                                    <table class="table" id="tabla{{$variable->id}}">
+                                        <tbody>
+                                            @foreach ($valores as $valor)
+                                                @if ($valor->id_variable == $variable->id)
+                                                    <tr>
+                                                        <td>
+                                                            <input required name="x{{$valor->id}}" class="form-control form-control-sm" type="number" step="0.01" value="{{$valor->valor_x}}">
+                                                        </td>
+                                                        <td>
+                                                            <input required name="y{{$valor->id}}" class="form-control form-control-sm" type="number" step="0.01" value="{{$valor->valor_y}}">
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endforeach
+                            <div class="text-center">
+                                <input hidden name="indicador" value="{{$indicador->id}}"/>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        @endif
+    </div>
 </div>
-
 <script>
     $(function(){
         $("#selectorVariables").on("change", function () {
