@@ -39,12 +39,14 @@
                                         {{$variable->nombre}}
                                     </div>
                                     <div class="col-md-6">
+                                        <input required name="{{$variable->id}}" class="form-control form-control-sm" type="number" step="0.01" 
                                         @foreach ($valores as $valor)
-                                            @if ($valor->id_variable == $variable->id)
-                                                <input required name="x{{$variable->id}}" class="form-control form-control-sm" type="number" step="0.01" value="{{$valor->valor_x}}">
+                                            @if ($valor->id_variable==$variable->id)
+                                                value="{{$valor->valor_y}}"
                                                 @break
                                             @endif
                                         @endforeach
+                                        >
                                     </div>
                                 </div>
                                 <hr>
