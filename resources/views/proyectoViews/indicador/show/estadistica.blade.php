@@ -186,11 +186,11 @@
 <script>
     $( document ).ready(function() {
             let labels =  {!! json_encode($variables) !!};
-            let valores = {!! json_encode($valores)};
+            let valores = {!! json_encode($valores) !!};
             console.log("WRYYYYYYYYYYYYYYYYYY");
             console.log(labels);
             console.log(valores);
-			ejectuarChart(labels, valores, 'graficoBarras');
+			procesarChart(labels, valores, 'graficoBarras', 'nombre', 'valor_y');
 		});
     $(function(){
         $("#selectorVariables").on("change", function () {

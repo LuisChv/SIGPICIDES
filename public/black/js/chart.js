@@ -115,3 +115,50 @@ function buildChart(arr, identificador , attr1, attr2){
     ejecutarChart(labels, dataset, identificador);
 
 }
+
+function procesarChart(arr1, arr2, id, attr1, attr2){
+  /*Descripción:
+    Se encarga de procesar los valores cuando labels y datasets estan en arreglos distintos.
+    Función que construyte un gráfico basado en la librería Chart JS. Recibe cuatro argumentos:
+
+    arr1 -> arreglo que contiene los labels
+
+    arr2 -> arreglo que contiene el dataset
+
+    identificador -> ID del elemento HTML donde se renderizará el gráfico
+
+    attr1 -> nombre del atributo que servirá para seleccionar los labels 
+
+    attr2 -> nombre del atributo que servirá para obtener el dataset (los números a graficar)
+  */
+  let labels = [];
+  let dataset = [];
+
+  if(typeof(arr1)=='object'){
+     arr1=Object.values(arr1);
+     console.log('entra a typeof');
+  }
+  if(typeof(arr2)=='object'){
+    arr2=Object.values(arr2);
+    console.log('entra a typeof');
+ }
+
+  for (let i=0; i<arr1.length; i++){
+     if(arr1[i][attr1]!=null && arr2[i][attr2]>0){
+         if(arr1[i][attr1].length>25){
+             let aux= arr1[i][attr1].substring(0,1) + ". ";
+             let cadena =aux + arr1[i][attr1].substr(-20);
+             labels.push(cadena);
+         }else{
+             labels.push(arr1[i][attr1]);
+         }
+         //labels.push(arr[i][attr1]);
+         dataset.push(arr2[i][attr2]);
+     }
+ } 
+ //console.log("LABELS:" +labels);
+ //console.log("DATA:" +dataset);
+ ejecutarChart(labels, dataset, id);
+
+
+}
