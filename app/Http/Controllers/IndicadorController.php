@@ -127,10 +127,9 @@ class IndicadorController extends Controller
         }
 
         $variables = DB::select(
-            "SELECT V.id, V.id_indicador, V.modificable, V.nombre, V.color, VE.valor_y FROM variable V
-            LEFT JOIN valor_eje VE ON V.id = VE.id_variable
+            "SELECT * FROM variable
             WHERE id_indicador = ?
-            ORDER BY V.id", [$id]);
+            ORDER BY id", [$id]);
         //Traer comentarios del indicador
         $comentarios= DB::table('comentario_indicador')
             ->join('users', 'comentario_indicador.id_user', 'users.id')
@@ -175,15 +174,20 @@ class IndicadorController extends Controller
     public function estadistica($id){
         $indicador = Indicador::findOrFail($id);
         $variables = DB::select(
-            "SELECT V.id, V.id_indicador, V.modificable, V.nombre, V.color, VE.valor_y FROM variable V
+            "SELECT * FROM variable
+            WHERE id_indicador = ?
+            ORDER BY id", [$id]);
+        $valores = DB::select(
+            "SELECT VE.id, id_variable, VE.valor_x, VE.valor_y FROM variable V
             LEFT JOIN valor_eje VE ON V.id = VE.id_variable
             WHERE id_indicador = ?
-            ORDER BY V.id", [$id]);
-            
+            ORDER BY VE.id", [$id]);
+                
         return view('proyectoViews.indicador.show.estadistica', [
             'indicador' => $indicador,
-            'variables' => $variables
-        ]);
+            'variables' => $variables,
+            'valores'   => $valores
+        ]); 
     }
 
     public function descripcion(){
