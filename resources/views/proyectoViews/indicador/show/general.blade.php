@@ -107,7 +107,7 @@
                                                               <input required id="nombre" class="form-control" placeholder="Nombre" name="nombre">
                                                           </div>
                                                           <div class="mr-auto ml-auto col-md-6">
-                                                              <input pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" maxlength="7" id="color" class="form-control" placeholder="Color (2395FC)" name="color">
+                                                              <input readonly maxlength="7" id="color" class="form-control" placeholder="Color (2395FC)" name="color">
                                                           </div>
                                                           <input hidden name="id_indicador" value="{{$indicador->id}}"/>
                                                       </div>
@@ -133,7 +133,7 @@
                                               {{$variable->nombre}}
                                           </td>
                                           <td class="text-right">
-                                              <i style="color:#{{$variable->color}}" class="fas fa-tint fa-2x"></i>
+                                              <i style="color:{{$variable->color}}" class="fas fa-tint fa-2x"></i>
                                           </td>
                                           <form id="formulario_variable{{$variable->id}}" method="POST" action="{{route('variable.destroy')}}">
                                               @csrf
