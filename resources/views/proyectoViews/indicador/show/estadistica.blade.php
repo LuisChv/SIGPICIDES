@@ -67,8 +67,11 @@
                 <div class="card">
                 <div class="card-header">
                     <h2>{{$indicador->detalle}}</h2>
+                    <h3>Variable:</h3>
+                    <h3 id="nombreVar"></h3>
                     
                     <!-- GRAFICO-->
+                    <canvas id="graficoLineas"></canvas>
                 
                 </div>
                 </div>
@@ -82,7 +85,7 @@
                                     <option>Variables</option>
                                     @foreach ($variables as $variable)
                                         @if($variable->id_indicador == $indicador->id)
-                                            <option value="{{$variable->id}}">
+                                            <option value="{{$variable->id}}" >
                                                 {{$variable->nombre}}
                                             </option>                                   
                                         @endif
@@ -105,7 +108,7 @@
                                                   <div class="modal-body" >                     
                                                       <div class="row">
                                                           <div  class="mr-auto ml-auto col-md-12">
-                                                            <select class="form-control" name="variable">
+                                                            <select required class="form-control" name="variable">
                                                                 <option>Seleccione una variable...</option>
                                                                 @foreach ($variables as $variable)
                                                                     @if($variable->id_indicador == $indicador->id)
@@ -185,17 +188,28 @@
 </div>
 <script>
     $( document ).ready(function() {
-            let labels =  {!! json_encode($variables) !!};
-            let valores = {!! json_encode($valores) !!};
-            console.log("WRYYYYYYYYYYYYYYYYYY");
-            console.log(labels);
-            console.log(valores);
-			procesarChart(labels, valores, 'graficoBarras', 'nombre', 'valor_y');
+            let flag = {!! json_encode($indicador->tipo_de_grafico) !!};
+            //console.log(flag);
+            if(flag){
+                let labels =  {!! json_encode($variables) !!};
+                let valores = {!! json_encode($valores) !!};
+                console.log("WRYYYYYYYYYYYYYYYYYY");
+                //console.log(labels);
+                //console.log(valores);
+			    procesarChart(labels, valores, 'graficoBarras', 'nombre', 'valor_y');
+            }
+            
 		});
     $(function(){
         $("#selectorVariables").on("change", function () {
             $(".hideCustom").hide();
             $("div[id='container" + $(this).val() + "']").show();
+
+            let vars =  {!! json_encode($variables) !!};
+            let vals = {!! json_encode($valores) !!};
+            let idVar = $(this).children("option:selected").val();
+            procesarLines(idVar, vars, vals, 'graficoLineas');
+            console.log("ejecuta hasta procesar lines");
         });
     });
 </script>
