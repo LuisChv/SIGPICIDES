@@ -177,6 +177,7 @@ class IndicadorController extends Controller
             "SELECT * FROM variable
             WHERE id_indicador = ?
             ORDER BY id", [$id]);
+            
         $valores = DB::select(
             "SELECT VE.id, id_variable, VE.valor_x, VE.valor_y FROM variable V
             LEFT JOIN valor_eje VE ON V.id = VE.id_variable

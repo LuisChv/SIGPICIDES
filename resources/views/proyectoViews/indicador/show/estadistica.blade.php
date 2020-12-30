@@ -11,6 +11,9 @@
             <div class="card">
             <div class="card-header">
                 <h2>{{$indicador->detalle}}</h2>
+
+                <!-- GRAFICO-->
+
             </div>
             </div>
         </div>
@@ -61,7 +64,9 @@
                 <div class="card">
                 <div class="card-header">
                     <h2>{{$indicador->detalle}}</h2>
-                    <canvas id="chart6"></canvas>
+                    
+                    <!-- GRAFICO-->
+                
                 </div>
                 </div>
             </div>
@@ -182,61 +187,6 @@
             $("div[id='container" + $(this).val() + "']").show();
         });
     });
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-
-      var datos = [4.99, 5.14, 4.85, 5.00, 4.92, 4.71, 5.05, 5.09, 5.30, 5.66, 5.52];
-      var nombres = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
-
-      var ctx = document.getElementById("chart6").getContext('2d');
-      var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-
-      gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
-      gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
-      gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
-
-      var datos = {
-        labels : nombres,
-        datasets : [{
-              label : "",
-              backgroundColor : "rgba(29, 140, 248, 0.5)",
-              data : datos,
-              borderWidth : 1,
-              borderColor : "rgb(0,0,0)",
-            },
-        ]
-
-      };
-
-      var canvas = document.getElementById('chart6').getContext('2d');
-      window.bar = new Chart(canvas, {
-        type : "line",
-        data : datos,
-        options : {
-          legend: {
-              display:false
-          },	
-          responsive : true,
-          fill: true,
-          scales: {
-                   yAxes: [{
-                       ticks: {
-                           beginAtZero: false,
-                           steps: 2,
-                           stepValue: 2,
-                           max: 6,
-                           min: 4,
-                           }
-                   }],
-               },
-        },
-        
-      });
-    });
-
-
 </script>
 
 @endsection
