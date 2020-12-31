@@ -21,40 +21,40 @@
                                     <span class="navbar-toggler-icon"></span>
                                 </button>
                                 <form action="{{ route('proyectos.filtros')}}" id="formFiltrarProyecto" method="get">                                
-                                <div class="collapse navbar-collapse" id="main_nav">                                
-                                    <ul class="navbar-nav">                                
-                                    <li class="nav-item dropdown">
-                                        <p id="botonSeleccionadorProyectoFiltro" class="btn btn-secondary btn-sm dropdown-toggle text-white" data-toggle="dropdown">{{$nombreElegido ?? 'Todos los proyectos'}}</p>
-                                        <ul class="dropdown-menu">
-                                            <li><a onclick="filtrotipo(this,0)" class="dropdown-item">Todos los proyectos</a>
-                                        @foreach ($tiposProy as $tipo)
-                                            <li><a  onclick="filtrotipo(this,1)" class="dropdown-item">{{$tipo->nombre}}</a>
-                                                <ul class="submenu dropdown-menu">
-                                                    @foreach ($subtiposProy as $subtipo)
-                                                        @if ($subtipo->id_tipo==$tipo->id)
-                                                        <li><a onclick="filtrotipo(this,2)" class="dropdown-item">{{$subtipo->nombre}}</a></li>    
-                                                        @endif
-                                                    @endforeach                                                
-                                                </ul>
-                                            </li>
-                                        @endforeach                                                                               
-                                        </ul>
-                                    </li>                                                     
-                                    </ul>                                    
-                                    <input name="nombre" id="ocultoNombreProyecto" value="{{$nombreElegido ?? 'Todos los proyectos'}}" type="text" hidden>
-                                    <input name="tisubti" id="ocultoTipoProyecto" value="{{$tisubtiElegido ?? '0'}}" type="text" hidden>
-                                    <select name="estadoProy" id="estadoProy" class="text-white btn btn-secondary ">
-                                        <option value="0">Todos los estados</option>
-                                        @foreach ($estados as $estado)
-                                        @if ($estado->id==$estadoElegido)
-                                        <option value="{{$estado->id}}" selected>{{$estado->estado}}</option>    
-                                        @else
-                                        <option value="{{$estado->id}}">{{$estado->estado}}</option>
-                                        @endif                                        
-                                        @endforeach                                
-                                    </select>
-                                    <button class="btn btn-light" type="submit" form="formFiltrarProyecto">Buscar</button>                                    
-                                </div> <!-- navbar-collapse.// -->
+                                    <div class="collapse navbar-collapse" id="main_nav">                                
+                                        <ul class="navbar-nav">                                
+                                        <li class="nav-item dropdown">
+                                            <p id="botonSeleccionadorProyectoFiltro" class="btn btn-secondary text-white" data-toggle="dropdown">{{$nombreElegido ?? 'Todos los proyectos'}} &nbsp;<i class="tim-icons icon-minimal-down"></i></p>
+                                            <ul class="dropdown-menu">
+                                                <li><a onclick="filtrotipo(this,0)" class="dropdown-item">Todos los proyectos</a>
+                                            @foreach ($tiposProy as $tipo)
+                                                <li><a  onclick="filtrotipo(this,1)" class="dropdown-item">{{$tipo->nombre}}</a>
+                                                    <ul class="submenu dropdown-menu">
+                                                        @foreach ($subtiposProy as $subtipo)
+                                                            @if ($subtipo->id_tipo==$tipo->id)
+                                                            <li><a onclick="filtrotipo(this,2)" class="dropdown-item">{{$subtipo->nombre}}</a></li>    
+                                                            @endif
+                                                        @endforeach                                                
+                                                    </ul>
+                                                </li>
+                                            @endforeach                                                                               
+                                            </ul>
+                                        </li>                                                     
+                                        </ul>                                    
+                                        <input name="nombre" id="ocultoNombreProyecto" value="{{$nombreElegido ?? 'Todos los proyectos'}}" type="text" hidden>
+                                        <input name="tisubti" id="ocultoTipoProyecto" value="{{$tisubtiElegido ?? '0'}}" type="text" hidden>
+                                        <select name="estadoProy" id="estadoProy" class="botondash"> 
+                                            <option value="0">Todos los estados</option>
+                                            @foreach ($estados as $estado)
+                                            @if ($estado->id==$estadoElegido)
+                                            <option value="{{$estado->id}}" selected>{{$estado->estado}}</option>    
+                                            @else
+                                            <option value="{{$estado->id}}">{{$estado->estado}}</option>
+                                            @endif                                        
+                                            @endforeach                                
+                                        </select>
+                                        <button class="btn btn-default botondash2" type="submit" form="formFiltrarProyecto">Buscar</button>                                    
+                                    </div> <!-- navbar-collapse.// -->
                                 </form>
                             </nav>
                         </div>                        
