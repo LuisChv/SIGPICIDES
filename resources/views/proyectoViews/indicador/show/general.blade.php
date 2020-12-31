@@ -13,7 +13,9 @@
       @if ($indicador->modificable)
           <h2 class="col-md-8 card-title">{{$indicador->detalle}}</h2>
           <div class="col-md-4 text-right">
-              <a href="{{ route('indicador.confirmar', $indicador->id) }}" class="btn btn-primary">Confirmar</a>
+              @if (!$indicador->tipo || count($variables) > 1)
+                <a href="{{ route('indicador.confirmar', $indicador->id) }}" class="btn btn-primary">Confirmar</a>   
+              @endif
           </div>
           <div class="col-md-6">
               <div class="card">
