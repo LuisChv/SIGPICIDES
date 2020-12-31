@@ -19,8 +19,6 @@ class SolicitudTest extends TestCase
      * @return void
      */
     use RefreshDatabase;
-
-
     public function testCreate()
     {
         $this->withoutExceptionHandling();
@@ -47,7 +45,7 @@ class SolicitudTest extends TestCase
         $response->assertViewHas('sub_tipos', $subtipos);
     }
     
-    public function testStore(){    
+    public function testStore(){
         $this->withoutExceptionHandling();
         /* Inicio de sesión */
         $this->artisan('db:seed');

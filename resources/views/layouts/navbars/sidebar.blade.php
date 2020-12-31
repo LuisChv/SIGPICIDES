@@ -20,28 +20,20 @@
                         <ul class="nav pl-4">
                             @can('mis_proyectos')
                                 <li @if ($pageSlug == 'mis_proyectos') class="active " @endif>
-                                    <a href="{{ route('mis_proyectos.index')  }}">
+                                    <a href="{{ route('home')  }}">
                                         <i class="tim-icons icon-shape-star"></i>
                                         <p>{{ __('Mis proyectos') }}</p>
                                     </a>
                                 </li>
                             @endcan
-                            @can('mis_proyectos')<!--TODO Comprobar Permiso con Daris o Luis-->
-                                <li @if ($pageSlug == 'colaboraciones') class="active " @endif>
-                                    <a href="{{ route('proyectos.colaboracion')  }}">
-                                        <i class="tim-icons icon-shape-star"></i>
-                                        <p>{{ __('Mis colaboraciones') }}</p>
-                                    </a>
-                                </li>
-                            @endcan
                             @can('proyectos.index')
                                 <li @if ($pageSlug == 'proyectos') class="active " @endif>
-                                    <a href="{{ route('proyectos.index')  }}">
+                                    <a href="{{ route('home')  }}">
                                         <i class="tim-icons icon-bullet-list-67"></i>
                                         <p>{{ __('Consultar proyectos') }}</p>
                                     </a>
                                 </li>
-                            @endcan    
+                            @endcan
                             @can('tipo_de_investigacion.index')
                                 <li @if ($pageSlug == 'tipos_de_investigacion') class="active " @endif>
                                     <a href="{{ route('tipo_investigacion.index')  }}">
@@ -120,30 +112,12 @@
             @endcan
 
             @can('recursos.index')
-            <li @if ($pageSlug == 'informes') class="active " @endif>
-                <a data-toggle="collapse" href="#informes" aria-expanded="false">
-                    <i class="tim-icons icon-chart-bar-32" ></i>
-                    <span class="nav-link-text" >{{ __('Informes') }}</span>
-                    <b class="caret mt-1"></b>
-                </a>
-
-                <div class="collapse" id="informes">
-                    <ul class="nav pl-4">
-                            <li @if ($pageSlug == 'informes.general') class="active " @endif>
-                                <a href="{{ route('estadistica.general') }}">
-                                    <i class="tim-icons icon-app"></i>
-                                    <p>{{ __('General') }}</p>
-                                </a>
-                            </li>
-                            <li @if ($pageSlug == 'informes.proyecto') class="active " @endif>
-                                <a href="{{ route('stats.proyecto')  }}">
-                                    <i class="tim-icons icon-notes"></i>
-                                    <p>{{ __('Proyectos') }}</p>
-                                </a>
-                            </li>                       
-                    </ul>
-                </div>
-            </li>
+                <li @if ($pageSlug == 'informes') class="active " @endif>
+                    <a href="{{ route('home')  }}">
+                        <i class="tim-icons icon-chart-bar-32"></i>
+                        <p>{{ __('Informes') }}</p>
+                    </a>
+                </li>
             @endcan
 
             @canany(['users.index', 'roles.index', 'permission.index'])

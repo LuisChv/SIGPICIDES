@@ -78,15 +78,7 @@
     //Evento lanzado al abrir una tarea
     gantt.attachEvent("onLightbox", function (task_id){
         //document.getElementsByName("indicador")[0].checked= true;
-        //console.log(task_id);
-        /*
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            for (var checkbox of checkboxes) {
-            checkbox.disabled=true;
-            checkbox.style.backgroundColor="blue";    
-        } */               
-        var textarea = document.querySelectorAll('textarea');
-        textarea[0].disabled=true;
+        console.log(task_id);
         $.ajax({
             url: '/tareasAsignaciones/'+ task_id,
             type: 'get',
@@ -110,25 +102,16 @@
         });
         
     });
-    //Evento lanzado cuando se apreta el boton de guardar
-    gantt.attachEvent("onLightboxSave", function(id, task, is_new){
-    //any custom logic here
-        return false;
-    })
-    //No permitir arrastar tareas
     gantt.attachEvent("onBeforeTaskDrag", function(id, mode, e){
         return false;           //allows dragging if the global task index is even
     });
-    //No permitir mover tareas de fila
     gantt.attachEvent("onBeforeRowDragEnd", function(id, parent, tindex){    
         return false;
     });
-    //No permitir crear links entre tareas
     gantt.attachEvent("onBeforeLinkAdd", function(id,link){
     //any custom logic here
         return false;
     });
-    //No permitir eliminar links
     gantt.attachEvent("onBeforeLinkDelete", function(id,item){
     //any custom logic here
         return false;
@@ -177,9 +160,7 @@
     gantt.config.buttons_right = [];
     //Scroll
     gantt.config.autoscroll = true;
-    gantt.config.autoscroll_speed = 50;    
-    //Permitir o no mover la barra de progreso
-    gantt.config.drag_progress = false;
+    gantt.config.autoscroll_speed = 50;
     //Inicializa el gant
     gantt.init("gantt_here");
     //Llamar al controlador para llenar los datos, aca paso por parametro el id del proyecto seleccionado

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="csrf-token" content="{{ csrf_token() }}" />        
+         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -24,9 +24,6 @@
         <link href="{{ asset('black') }}/css/menu_flotante.css" rel="stylesheet" />
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
-        <script src="https://unpkg.com/@popperjs/core@2"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css">
 
         
     </head>
@@ -105,7 +102,6 @@
         {{-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> --}}
         <!-- Chart JS -->
         {{-- <script src="{{ asset('black') }}/js/plugins/chartjs.min.js"></script> --}}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
         <!--  Notifications Plugin    -->
         <script src="{{ asset('black') }}/js/plugins/bootstrap-notify.js"></script>
 
@@ -113,8 +109,6 @@
         <script src="{{ asset('black') }}/js/theme.js"></script>
         <script src="{{ asset('black') }}/js/sweet.js"> </script>
         <script src="{{ asset('black') }}/js/sigpi.js"></script>
-        <script src="{{ asset('black') }}/js/buscador.js"></script>
-        <script src="{{ asset('black') }}/js/chart.js"></script>
 
         @stack('js')
 

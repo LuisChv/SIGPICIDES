@@ -1,4 +1,4 @@
-@extends('layouts.app',['pageSlug' => 'usuarios'])
+@extends('layouts.app',['pageSlug' => 'dashboard'])
 @section('title')
     Usuarios
 @endsection
@@ -61,7 +61,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $data->links() }}
                     </div>
                 </div>
             </div>

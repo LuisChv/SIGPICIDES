@@ -26,7 +26,7 @@ Evaluar Solicitud
                                 <h4 class="text-center"><b>{{ $estado->estado }}</b></h4>
                             @endif
                         @endforeach
-                        <p class="text-justify eva-box"><b>Comentario: </b> {{ $eva->comentario }} </p>
+                        <p class="text-justify"><b>Comentario: </b> {{ $eva->comentario }} </p>
                         <br>
                     </div>
                 </div>

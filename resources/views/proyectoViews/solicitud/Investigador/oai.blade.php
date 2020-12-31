@@ -48,14 +48,14 @@
                 <table class="table">
                     @foreach ($objetivos as $objetivo)
                         <tr>
-                            <td class="align-text-top"><i class="tim-icons icon-check-2"></i></td>
+                            <td class="align-content-xl-between"><i class="tim-icons icon-compass-05"></i></td>
                             <td>
                                 {{$objetivo->descripcion}}
                             </td>
                             <form id="formulario_objetivo{{$objetivo->id}}" method="POST" action="{{route('proyecto_objetivos.destroy')}}">
                                 @csrf
                                 @method('DELETE')
-                                <td class="align-text-top">
+                                <td class="text-right">
                                     <input hidden name="objetivo" value="{{$objetivo->id}}"/>
                                     <div class="btn-group" role="group">
                                         <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#modalEditarObjetivo" onclick="editarObjetivo({{$objetivo->id}},'{{$objetivo->descripcion}}')">
@@ -119,14 +119,14 @@
                 <table class="table">
                     @foreach ($alcances as $alcance)
                         <tr>
-                            <td class="align-text-top"><i class="tim-icons icon-check-2"></i></td>
+                            <td class="align-text-top"><i class="tim-icons icon-wifi"></i></td>
                             <td>
                                 {{$alcance->descripcion}}
                             </td>
                             <form id="formulario_alcance{{$alcance->id}}" method="POST" action="{{route('proyecto_alcances.destroy')}}">
                                 @csrf
                                 @method('DELETE')
-                                <td class="align-text-top">
+                                <td class="text-right">
                                     <input hidden name="alcance" value="{{$alcance->id}}"/>
                                     <div class="btn-group" role="group">
                                         <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#modalEditarAlcance" onclick="editarAlcance({{$alcance->id}},'{{$alcance->descripcion}}')">
@@ -167,7 +167,8 @@
                                                 </button>
                                         </div>
                                         <div class="modal-body" >                     
-                                            <table class="table" style="background-color: white !important;" >                                                                                               
+                                            <table class="table" style="background-color: white !important;" >
+                                                                                               
                                                 <tr>
                                                     <td><textarea required placeholder=" Descripción del indicador" rows="3" style="color: #222a42 !important;" maxlength="512" class="inputArea" name="descripcion_indicador"></textarea></td>
                                                 </tr>
@@ -189,14 +190,14 @@
                 <table class="table">
                     @foreach ($indicadores as $indicador)
                         <tr>
-                            <td class="align-text-top"><i class="tim-icons icon-check-2"></i></td>
+                            <td class="align-text-top"><i class="tim-icons icon-sound-wave"></i></td>
                             <td>
                                 {{$indicador->detalle}}
                             </td>
                             <form id="formulario_indicador{{$indicador->id}}" method="POST" action="{{route('proyecto_indicadores.destroy')}}">
                                 @csrf
                                 @method('DELETE')
-                                <td class="align-text-top">
+                                <td class="text-right">
                                     <input hidden name="indicador" value="{{$indicador->id}}"/>
                                     <div class="btn-group" role="group">
                                         <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#modalEditarIndicador" onclick="editarIndicador({{$indicador->id}},'{{$indicador->detalle}}')">
@@ -230,7 +231,8 @@
                         </button>
                 </div>
                 <div class="modal-body" >                     
-                    <table class="table" style="background-color: white !important;" >                                                                                               
+                    <table class="table" style="background-color: white !important;" >
+                                                                                               
                         <tr>
                             <td><textarea required placeholder="Descripción del objetivo" rows="3" style="color: #222a42 !important;" class="inputArea" maxlength="512" name="descripcion_objetivo" id="editarDetalleObjetivo"></textarea>
                             </td>

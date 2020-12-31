@@ -11,59 +11,28 @@
                 <div class="card-header ">
                     <div class="row">
                         <div class="col-sm-6 text-left">
-                            <h2 class="card-title"><b>Proyectos de investigación</b></h2>
+                            <h2 class="card-title"><b></b></h2>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table">
-                        <tr>
-                            <th>Proyecto</th>
-                            <th>Acciones</th>
-                        </tr>
-                        <tr>
-                            <td>Proyecto de investigación sobre porque mi gato no se llama Anvorgueso</td>
-                            <td>
-                                <div class="btn-group">
-                                    <a class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
-                                    <a href="{{route('tareas_avance.index', 1)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
-                                    <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proyecto de investigación sobre porque mi gato no se llama Milaneso</td>
-                            <td>
-                                <div class="btn-group">
-                                    <a class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
-                                    <a href="{{route('tareas_avance.index', 1)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
-                                    <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proyecto de investigación sobre por qué los gatos ronronean</td>
-                            <td>
-                                <div class="btn-group">
-                                    <a class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
-                                    <a href="{{route('tareas_avance.index', 1)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
-                                    <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proyecto de investigación sobre encontrar tuber: tuberdaderoamor</td>
-                            <td>
-                                <div class="btn-group">
-                                    <a class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
-                                    <a href="{{route('tareas_avance.index', 1)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
-                                    <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="card-body text-center">
+                        <div class="icon icon-warning">
+                            <img src="{{ asset('black') }}/img/favicon.png" alt="" width="25%">
+                        </div>
+                        <p style="font-size:800%;"><b>Próximamente!!!</b></p>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="container menuF-container">
+            <input type="checkbox" id="toggleF">
+            <label for="toggleF" class="buttonF"></label>
+            <nav class="navF">
+                <a href="#">Nueva solicitud</a>
+                <!--a href="{{ route('cides') }}">Acerca de</a>
+                <a href="#">Acciones largaaaaaaaaas</a-->
+            </nav>
         </div>
     </div>
     @endsection

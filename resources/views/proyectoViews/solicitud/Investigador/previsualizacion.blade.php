@@ -102,7 +102,7 @@ Vista previa
     </div>
     <div class="col-md-4">
         <div class="card" id="objetivosCard">
-            <div class="card-header">
+            <div class="card-header ">
                 <h4>
                     Objetivos
                 </h4>
@@ -112,7 +112,7 @@ Vista previa
                     @foreach ($objetivos as $objetivo)
                     <tr>
                         <td class="text-justify">
-                            <i class="tim-icons icon-check-2"></i> {{$objetivo->descripcion}}
+                            <i class="tim-icons icon-icon-wifi"></i> {{$objetivo->descripcion}}
                         </td>
                     </tr>
                     @endforeach
@@ -132,7 +132,7 @@ Vista previa
                     @foreach ($alcances as $alcance)
                     <tr>
                         <td class="text-justify">
-                            <i class="tim-icons icon-check-2"></i> {{$alcance->descripcion}}
+                            <i class="tim-icons icon-wifi"></i> {{$alcance->descripcion}}
                         </td>
                     </tr>
                     @endforeach
@@ -152,7 +152,7 @@ Vista previa
                     @foreach ($indicadores as $indicador)
                     <tr>
                         <td class="text-justify">
-                            <i class="tim-icons icon-check-2"></i> {{$indicador->detalle}}
+                            <i class="tim-icons icon-sound-wave"></i> {{$indicador->detalle}}
                         </td>
                     </tr>
                     @endforeach
@@ -177,7 +177,7 @@ Vista previa
                         @foreach($recursosProy as $rec)
                         <tr>                     
                             <td>
-                                <i class="tim-icons icon-check-2"></i>
+                                <i class="tim-icons icon-planet"></i>
                                 &nbsp;{{ $rec->nombre }}
                             </td> 
                             <td>

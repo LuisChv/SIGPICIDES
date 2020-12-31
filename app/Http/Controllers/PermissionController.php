@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\User;
-use App\Tabla;
 
 class PermissionController extends Controller
 {
     public function index($u)
     {
         $user = User::findOrFail($u);
-        $tablas = Tabla::paginate(10);
+        $tablas = DB::select(
+            "SELECT * FROM tabla");
 
         $permisos = DB::select(
             "SELECT * FROM permissions");
@@ -33,7 +33,7 @@ class PermissionController extends Controller
                 }
             }
         }
-        $data = User::paginate(5);
+        $data = User::all();
         return view ('simpleViews.permisos.listar', [
             'permisos'=>$permisos,
             "permisos_usuario" => $permisos_usuario,

@@ -21,7 +21,7 @@ class TaskController extends Controller
         //hay que verificar si el proyecto que se esta llamando es uno en el que la persona logeada sea parte del equipo
         //Trayendo el id del equipo del proyecto de la base de datos
         //Si el equipo existe sigue el flujo, sino se muestra un not found
-        if ($proyecto= Proyecto::select('id_equipo', 'id_comite', 'id_estado')->where('id',$idProyecto)->first()) {
+        if ($proyecto= Proyecto::select('id_equipo', 'id_comite')->where('id',$idProyecto)->first()) {
             //Obteniendo datos del usuario logeado
             $solicitud= Solicitud::where('id_proy', $idProyecto)->first();
             //Validacion para que solo permita modificar perfiles aprobados
@@ -30,50 +30,35 @@ class TaskController extends Controller
             if($solicitud->id_estado==5 || ($solicitud->id_estado==6 && $solicitud->etapa==2)){
                 $modificable=true;
             }
-            //Si se ha enviado a evaluacion de fase 2 o es del comite puede verlo pero sin modificar
-            elseif($solicitud->id_estado==3 || ($solicitud->id_estado==7 && $solicitud->etapa==2)){
+            //Si se ha enviado a evaluacion de fase 2 o es del comite
+            elseif($solicitud->id_estado=3){
                 $modificable=false;
             }
             else{ abort(403);}
             $idUsuarioLogeado=auth()->user()->id;
             //Comprobando si el usuario equipo rol existe (id del equipo y id del usuario logeado)
             $opcion;
-            //Atributo para utilizar en logica del modal de avance (saber el rol del usuario en el proyecto)
-            $rolProyecto;
             //Si es miembro del equipo sera opcion 1
             if($usuarioEquipoRol= UsuarioEquipoRol::where('id_equipo', $proyecto->id_equipo)->where('id_usuario', $idUsuarioLogeado)->first()){
-                if($usuarioEquipoRol->id_rol==5){
-                    $opcion=1;
-                }else{
-                    $opcion=3;
-                }
-                $rolProyecto=$usuarioEquipoRol->id_rol;                
+                $opcion=1;
             }
             //En caso sea miembro del comite se mostrara el gant pero no se podra modificar y sera opcion 2
             elseif($usuarioComite= ComiteUsuario::where('id_comite',$proyecto->id_comite)->where('id_usuario', $idUsuarioLogeado)->first()){
                 $opcion=2;
-                $rolProyecto="comite";
-            }            
+            }
             else{abort(403);}
             //Traer los indicadores del proyecto seleccionado
             $indicadores= Indicador::where('id_proy',$idProyecto)->get();
             //Traer los miembros del equipo del proyecto seleccionado
             $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$proyecto->id_equipo])->get();
+            //dd($indicadores);
             //Retornar vista
-            
-            //Gantt para cuando el proyecto este en marcha y se quieran agregar avances
-            if($proyecto->id_estado==1 && ($opcion==1 || $opcion==2 || $opcion==3)){
-                return view('proyectoViews.tareas.ganttAvance',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo, 
-                'rolProyecto'=>$rolProyecto]);
-            }
-            //Gantt de vista (no se puede modificar) (Para miembros del comite y cuando el se este evaluando la planificacion)
-            elseif($opcion==2 || !$modificable){
+            if($opcion==2 || !$modificable){
                 return view('proyectoViews.tareas.ganttComite',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
             }
-            //Gantt para crear tareas y asignar responsables (Para el lider del proyecto)
             elseif($opcion==1 && $modificable){
                 return view('proyectoViews.tareas.gantt',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo]);
-            }            
+            }
         }
         else {
             abort(404);
@@ -164,11 +149,6 @@ class TaskController extends Controller
 
         if($request->has("target")){
             $this->updateOrder($id, $request->target);
-        }
-        if($request->has("progreso")){
-            return response()->json([
-                "action"=> "updated 2"
-            ]);
         }
         $idEquipo= Proyecto::select('id_equipo')->where('id', $request->idProyecto)->first();
         /**********Guardar asignacion de tareas a miembros del equipo***************/

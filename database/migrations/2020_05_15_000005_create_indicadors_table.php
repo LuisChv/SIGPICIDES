@@ -18,11 +18,11 @@ class CreateIndicadorsTable extends Migration
             $table->integer('id_proy');
             $table->string('detalle', 1000);
             $table->integer('cant_variables')->nullable();
-            $table->boolean('tipo')->nullable()->default(false);
+            $table->boolean('tipo')->nullable();
             $table->boolean('modificable')->default(true);
             $table->boolean('finalizado')->default(false);
             $table->string('descrip_avance', 1000)->nullable();
-            $table->boolean('tipo_de_grafico')->nullable()->default(true);
+            $table->boolean('tipo_de_grafico')->nullable();
             $table->foreign('id_proy')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

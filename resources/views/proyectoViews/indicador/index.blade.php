@@ -1,6 +1,6 @@
 @extends('layouts.app',['pageSlug' => 'dashboard'])
 @section('title')
-Indicadores
+    Indicadores
 @endsection
 @section('content')
 <div class="row">
@@ -22,99 +22,93 @@ Indicadores
             </div>
         </div>
     </div>
-    <div class="col-md-12">
+    @foreach ($indicadores as $indicador) 
+    <!--cajita indicador-->
+    <div class="col-md-6">
         <div class="card">
-            <div class="card-header">
-                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="general-tab" data-toggle="pill" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="cuantitativo-tab" data-toggle="pill" href="#cuantitativo" role="tab" aria-controls="cuantitativo" aria-selected="false">Cuantitativos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="cualitativo-tab" data-toggle="pill" href="#cualitativo" role="tab" aria-controls="cualitativo" aria-selected="false">Cualitativos</a>
-                    </li>
-                </ul>
-                <p class="text-danger">Por defecto todos los indicadores son cualitativos</p>
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="pills-home-tab">
-                         <table class="table">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Tipo</th>
-                                <th></th>
-                            </tr>
-                    
-                            @foreach ($indicadores as $indicador)
-                        
-                            <tr>
-                                <td>{{$indicador->detalle}}</td>
-                                @if($indicador->tipo)
-                                <td>{{$indicador->tipo}}</td>
-                                @else
-                                <td>Cualitativo</td>
-                                @endif
-                                <td>
-                                    <a class="btn btn-success btn-icon btn-round" href="{{route('indicador.general', $indicador->id)}}"><i class="tim-icons icon-pencil"></i></a>
-                                </td>
-                            </tr>
-                            @endforeach 
-                        </table>
-                                      
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-12 text-left">
+                        <h2 class="card-title">[Nombre indicador]</h2>
                     </div>
-                    @foreach ($indicadores as $indicador)
-                    <div class="tab-pane fade" id="cuantitativo" role="tabpanel" aria-labelledby="cuantitativo-tab">                    
-                        <table class="table">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Tipo</th>
-                                <th></th>
-                            </tr>
-                            @if($indicador->tipo==true)
-                            <tr>
-                                <td>{{$indicador->detalle}}</td>
-                                @if($indicador->tipo)
-                                <td>{{$indicador->tipo}}</td>
-                                @else
-                                <td>Por definir</td>
-                                @endif
-                                <td>
-                                    <button class="btn btn-warning btn-icon btn-round">X</button>
-                                </td>
-                            </tr>
-                            @endif
-                        </table>                    
+                    <div class="indicador">
+                        <div class="indicador__grafica">[Gráfica]</div>
+                        <div><p><b>Descripción:</b></p>
+                            <p>{{$indicador->detalle}}</p></div>
                     </div>
-                    <div class="tab-pane fade" id="cualitativo" role="tabpanel" aria-labelledby="cualitativo-tab">
-                        <table class="table">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Tipo</th>
-                                <th></th>
-                            </tr>
-                            @if($indicador->tipo==false)
-                            <tr>
-                                <td>{{$indicador->detalle}}</td>
-                                @if($indicador->tipo)
-                                <td>{{$indicador->tipo}}</td>
-                                @else
-                                <td>Por definir</td>
-                                @endif
-                                <td>
-                                    <button class="btn btn-warning btn-icon btn-round">X</button>
-                                </td>
-                            </tr>
-                            @endif
-                        </table>  
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+    <!--fin cajita-->
+    <!--plantilla para indicador cuantitativo-->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-12 text-left">
+                        <h2 class="card-title">[Nombre indicador]</h2>
                     </div>
-                    @endforeach
+                    <div class="indicador">
+                        <div class="indicador__grafica">[Gráfica]</div>
+                        <div><p><b>Descripción:</b></p>
+                            <p>Descripcion de prueba</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--fin plantilla indicador cuantitativo-->
+    <!--plantilla indicador cualitativo-->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-12 text-left">
+                        <h2 class="card-title">[Nombre indicador]</h2>
+                    </div>
+                    <div class="indicador">
+                        <div><p><b>Descripción:</b></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+                        </div>
+                        <div><p><b>Descripción final:</b></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+                        </div>
+                        <div>
+                            <hr>
+                            <p><b>Archivos:</b></p>
+                            <table>
+                                <tr>
+                                    <td><p>Documentos: 0</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Hojas de cálculo: 1</p></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--fin plantilla indicador cualitativo-->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-12 text-left">
+                        <h2 class="card-title">[Nombre indicador]</h2>
+                    </div>
+                    <div class="indicador">
+                        <div class="indicador__grafica">[Gráfica]</div>
+                        <div><p><b>Descripción:</b></p><br>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-            
 </div>
-        @endsection
-        
+@endsection

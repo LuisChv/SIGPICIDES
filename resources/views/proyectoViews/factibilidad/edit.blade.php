@@ -12,16 +12,28 @@ Factibilidad
                 </div>
                 <div class="card-body">
                     @method('PUT')
-                    @csrf                         
-                    <textarea maxlength="1050" class="inputArea" rows="5" name="economica" placeholder="Factibilidad económica">{{$factibilidad->economia}}</textarea>   
-                    <br>                    
-                    <textarea maxlength="1050" class="inputArea" rows="5" name="financiera" placeholder="Factibilidad financiera">{{$factibilidad->financiera}}</textarea>
-                    <br>                    
-                    <textarea maxlength="1050" class="inputArea" rows="5" name="operativa" placeholder="Factibilidad operativa">{{$factibilidad->operativa}}</textarea>
-                    <br>
-                    <textarea maxlength="1050" class="inputArea" rows="5" name="tecnica" placeholder="Factibilidad técnica">{{$factibilidad->tecnica}}</textarea>
-                    <br>
-                    <textarea maxlength="1050" class="inputArea" rows="5" name="extra" placeholder="Factibilidad extra">{{$factibilidad->fac_extra}}</textarea>                        
+                    @csrf 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <textarea maxlength="1050" class="inputArea" rows="5" name="economica" placeholder="Factibilidad económica">{{$factibilidad->economia}}</textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea maxlength="1050" class="form-control border border-light" rows="6" name="financiera" placeholder="Factibilidad financiera">{{$factibilidad->financiera}}</textarea>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <textarea maxlength="1050" class="inputArea" rows="5" name="operativa" placeholder="Factibilidad operativa">{{$factibilidad->operativa}}</textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea maxlength="1050" class="inputArea" rows="5" name="tecnica" placeholder="Factibilidad técnica">{{$factibilidad->tecnica}}</textarea>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <textarea maxlength="1050" class="inputArea" rows="5" name="extra" placeholder="Factibilidad extra">{{$factibilidad->fac_extra}}</textarea>
+                        </div>
+                    </div>
                     <br>
                     
                 </div>
@@ -43,7 +55,7 @@ Factibilidad
     </div>
     
     
-    <!--
+    
     <div class="container menuF-container">
         <input type="checkbox" id="toggleF">
         <label for="toggleF" class="buttonF"></label>
@@ -52,10 +64,9 @@ Factibilidad
             <a href="{{ route('solicitud.create')}}">Factibilidad</a>
             
             <a href="{{ route('solicitud.create')}}">Planificación</a>
-            <a href="{{ route('cides') }}">Acerca de</a>
-                <a href="#">Acciones largaaaaaaaaas</a>
+            <!--a href="{{ route('cides') }}">Acerca de</a>
+                <a href="#">Acciones largaaaaaaaaas</a-->
                 </nav>
             </div>
-        -->
-</div>
-@endsection
+        </div>
+        @endsection

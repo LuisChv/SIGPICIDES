@@ -112,8 +112,8 @@ Evaluar Solicitud
                 <table class="table">
                     @foreach ($objetivos as $objetivo)
                     <tr>
-                        <td class="text-justify">
-                            <i class="tim-icons icon-check-2"></i> {{$objetivo->descripcion}}
+                        <td>
+                            <i class="tim-icons icon-compass-05"></i> {{$objetivo->descripcion}}
                         </td>
                     </tr>
                     @endforeach
@@ -132,8 +132,8 @@ Evaluar Solicitud
                 <table class="table">
                     @foreach ($alcances as $alcance)
                     <tr>
-                        <td class="text-justify">
-                            <i class="tim-icons icon-check-2"></i> {{$alcance->descripcion}}
+                        <td>
+                            <i class="tim-icons icon-compass-05"></i> {{$alcance->descripcion}}
                         </td>
                     </tr>
                     @endforeach
@@ -152,8 +152,8 @@ Evaluar Solicitud
                 <table class="table">
                     @foreach ($indicadores as $indicador)
                     <tr>
-                        <td class="text-justify">
-                            <i class="tim-icons icon-check-2"></i> {{$indicador->detalle}}
+                        <td>
+                            <i class="tim-icons icon-sound-wave"></i> {{$indicador->detalle}}
                         </td>
                     </tr>
                     @endforeach
@@ -178,8 +178,8 @@ Evaluar Solicitud
                         </tr>
                         @foreach($recursosProy as $rec)
                         <tr>                     
-                            <td class="text-justify">
-                                <i class="tim-icons icon-check-2"></i>
+                            <td>
+                                <i class="tim-icons icon-planet"></i>
                                 &nbsp;{{ $rec->nombre }}
                             </td> 
                             <td>

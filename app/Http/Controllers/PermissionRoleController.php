@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Caffeinated\Shinobi\Models\Role;
 use Caffeinated\Shinobi\Models\Permission;
-use App\Tabla;
-
 use DB;
 
 class PermissionRoleController extends Controller
@@ -14,9 +12,11 @@ class PermissionRoleController extends Controller
     public function index($rol)
     {
         $role = Role::findOrFail($rol);
-        $tablas = Tabla::paginate(10);
+        $tablas = DB::select(
+            "SELECT * FROM tabla");
 
-        $permisos = Permission::paginate(5);
+        $permisos = DB::select(
+            "SELECT * FROM permissions");
 
         $permisos_role = DB::select(
             "SELECT p.id, p.name, p.id_tabla 
@@ -34,7 +34,7 @@ class PermissionRoleController extends Controller
                 }
             }
         }
-        $data = Role::paginate(5);
+        $data = Role::all();
         return view ('simpleViews.roles.permisos', [
             'permisos'=>$permisos,
             "permisos_role" => $permisos_role,

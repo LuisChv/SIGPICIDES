@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-12">
+    <div class="col-6">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
@@ -14,15 +14,6 @@
                 </div>
             </div>
             <div class="card-body">
-                    <div class="mr-auto col-md-12">
-                    @if ( $cantidad_miembros < $equipo->miembros )
-                        <input autocomplete="off" id="buscador" class="form-control" name="investigador" 
-                                    placeholder="Buscar nombre del investigador" onclick="ejecutarBuscador({{json_encode($usuarios)}},'name' ,'buscador', '')">
-                    @else
-                        <p class="text-danger">Número máximo de miembros: {{$equipo->miembros}}</p>
-                    @endif
-                    </div>
-                    <p><br></p>
                 <table class="table">
                     <thead>
                         <tr>
@@ -74,7 +65,7 @@
         </div>
     </div>
 
-	<!--div class="col-6">
+	<div class="col-6">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
@@ -82,8 +73,7 @@
                         <h2 class="card-title"><b>Investigadores del sistema</b></h2>
                     </div>
                 </div>
-                <div class="card-body">                   
-
+                <div class="card-body">
                     <div class="container list-group">
                         <table class="table">
                             <thead>
@@ -113,7 +103,7 @@
                     </div>
                 </div>
             </div>
-        </div-->
+        </div>
 
         <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -131,7 +121,7 @@
                             <select required class="form-control selectorWapis" name="rolmiembro" id="rolmiembro">
                                 <option value=""  selected disabled hidden >Seleccionar rol</option>
                                 @foreach ($roles as $rol)
-                                    @if ($rol->id == 5 ||  $rol->id < 4)
+                                    @if ($rol->id == 5)
                                         <option style="display:none;"></option>
                                     @else
                                         <option style="color: black !important;">{{ $rol->name }}</option>
@@ -197,7 +187,7 @@
             </div>
         </div>
         
-    </div-->
+    </div>
     <div class="col-md-12">
         <table width="100%">
             <tr>
