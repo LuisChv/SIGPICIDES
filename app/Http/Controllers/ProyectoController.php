@@ -65,7 +65,10 @@ class ProyectoController extends Controller
     }
 
     public function resumen($id){
-        $proyecto = Proyecto::findOrFail($id);
+        $proyecto = Proyecto::where('proyecto.id',$id)
+        ->join('estado_de_proy','proyecto.id_estado','estado_de_proy.id')
+        ->select('proyecto.*', 'estado_de_proy.estado')
+        ->first();        
         $solicitud = Solicitud::where('id_proy', $proyecto->id)->first();
         $equipo = EquipoDeInvestigacion::findOrFail($proyecto->id_equipo);
         $subtipo = SubTipoDeInvestigacion::findOrFail($proyecto->id_subtipo);
