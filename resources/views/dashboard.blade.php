@@ -24,7 +24,7 @@
                                 <div class="collapse navbar-collapse" id="main_nav">                                
                                     <ul class="navbar-nav">                                
                                     <li class="nav-item dropdown">
-                                        <p id="botonSeleccionadorProyectoFiltro" class="btn btn-secondary btn-sm dropdown-toggle text-white" data-toggle="dropdown">{{$nombreElegido ?? 'Todos los proyectos'}}</p>
+                                        <p id="botonSeleccionadorProyectoFiltro" class="btn btn-secondary text-white" data-toggle="dropdown">{{$nombreElegido ?? 'Todos los proyectos'}} &nbsp;<i class="tim-icons icon-minimal-down"></i></p>
                                         <ul class="dropdown-menu">
                                             <li><a onclick="filtrotipo(this,0)" class="dropdown-item">Todos los proyectos</a>
                                         @foreach ($tiposProy as $tipo)
@@ -43,7 +43,7 @@
                                     </ul>                                    
                                     <input name="nombre" id="ocultoNombreProyecto" value="{{$nombreElegido ?? 'Todos los proyectos'}}" type="text" hidden>
                                     <input name="tisubti" id="ocultoTipoProyecto" value="{{$tisubtiElegido ?? '0'}}" type="text" hidden>
-                                    <select name="estadoProy" id="estadoProy" class="text-white btn btn-secondary ">
+                                    <select name="estadoProy" id="estadoProy" class="botondash"> 
                                         <option value="0">Todos los estados</option>
                                         @foreach ($estados as $estado)
                                         @if ($estado->id==$estadoElegido)
@@ -53,7 +53,7 @@
                                         @endif                                        
                                         @endforeach                                
                                     </select>
-                                    <button class="btn btn-light" type="submit" form="formFiltrarProyecto">Buscar</button>                                    
+                                    <button class="btn btn-default botondash2" type="submit" form="formFiltrarProyecto">Buscar</button>                                    
                                 </div> <!-- navbar-collapse.// -->
                                 </form>
                             </nav>
