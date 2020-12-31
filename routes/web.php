@@ -591,7 +591,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     /*---------------------------- ESTADISTICAS -------------------------------*/
     Route::get('estadisticas', 'EstadisticaController@general')->name('estadistica.general');
-
+    Route::get('estadisticas/filtradas', 'EstadisticaController@statsFiltrado')->name('estadistica.filtradas');
     Route::get('estadisticas/proyectos', 'EstadisticaController@proyectos')->name('estadistica.proyectos');
 
     

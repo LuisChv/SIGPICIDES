@@ -129,6 +129,7 @@ class ProyectoController extends Controller
     //Proyectos filtrados
     public function indexFiltrado(Request $request)
     {
+        dd($request->request);
         $tiposProy=DB::table('tipo_de_investigacion')->get();
         $subtiposProy=DB::table('subtipo_de_investigacion')->get();;
         //Traer los proyectos segun los filtros indicados
