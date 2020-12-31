@@ -36,7 +36,7 @@
                             @endcan
                             @can('proyectos.index')
                                 <li @if ($pageSlug == 'proyectos') class="active " @endif>
-                                    <a href="{{ route('home')  }}">
+                                    <a href="{{ route('proyectos.index')  }}">
                                         <i class="tim-icons icon-bullet-list-67"></i>
                                         <p>{{ __('Consultar proyectos') }}</p>
                                     </a>

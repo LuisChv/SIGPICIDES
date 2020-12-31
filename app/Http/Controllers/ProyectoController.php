@@ -25,15 +25,6 @@ use App\User;
 
 class ProyectoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     public function misProyectos(){
         $user = auth()->user()->id;
@@ -119,59 +110,70 @@ class ProyectoController extends Controller
         return redirect()->route('estado_resultado_create', $id_periodo)->with('status', 'Cuenta '.$request->nombre.' creada exitosamente');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    //Controlador de la vista para mostrar todos los proyectos
+    public function index()
     {
-        //
+        $tiposProy=DB::table('tipo_de_investigacion')->get();
+        $subtiposProy=DB::table('subtipo_de_investigacion')->get();;
+        $proyectos=DB::table('proyecto')->paginate(10);
+        //Proyectos que apareceran en el buscador
+        $proyectosBuscador=DB::table('proyecto')->get();
+        $estados=DB::table('estado_de_proy')->get();
+        //dd($proyectos[0]);
+        return view('proyectoViews.proyectos', ['tiposProy' => $tiposProy, 'subtiposProy' => $subtiposProy, 'proyectos'=>$proyectos, 
+        'estados'=>$estados, 'estadoElegido'=>0, 'proyectosBuscador'=>$proyectosBuscador]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    //Proyectos filtrados
+    public function indexFiltrado(Request $request)
     {
-        //
+        $tiposProy=DB::table('tipo_de_investigacion')->get();
+        $subtiposProy=DB::table('subtipo_de_investigacion')->get();;
+        //Traer los proyectos segun los filtros indicados
+        //Si tisubti es 0 quiere decir que hay que traer todos los proyectos
+        if($request->tisubti==0){
+            if($request->estadoProy==0){ 
+                $proyectos=DB::table('proyecto')->paginate(10)->appends(request()->query());
+            }else{
+                $proyectos=DB::table('proyecto')->where('id_estado',$request->estadoProy)->paginate(10)->appends(request()->query());
+            }
+            
+        }
+        else{
+            //Si es 1 quiere decir que es filtro por tipo de proyecto (incluye varias subtipos)
+            if($request->tisubti==1){
+                $where="id_subtipo in 
+                (select id from subtipo_de_investigacion where id_tipo=
+                (select id from tipo_de_investigacion where nombre=?))";
+            }
+            //Si es 2 quiere decir que es filtro por subtipo de proyecto
+            if($request->tisubti==2){
+                $where="id_subtipo= 
+                (select id from subtipo_de_investigacion where nombre=?)";
+            }
+            //Si el estado es 0 quiere decir que no importa el estado
+            if($request->estadoProy==0){                
+                $proyectos=DB::table('proyecto')                
+                ->whereRaw($where,[$request->nombre])
+                ->paginate(10)
+                ->appends(request()->query());
+            }
+            //Si es diferente a 0, hay que treaer los proyectos con el estado que fue indicado
+            else{
+                $where=$where."and id_estado= ?";
+                $proyectos=DB::table('proyecto')
+                ->whereRaw($where,[$request->nombre, $request->estadoProy])
+                ->paginate(10)
+                ->appends(request()->query());
+            }
+            
+        }        
+        //dd($request->request);
+        $estados=DB::table('estado_de_proy')->get();
+        //Proyectos que apareceran en el buscador
+        $proyectosBuscador=DB::table('proyecto')->get();     
+        return view('proyectoViews.proyectos', ['tiposProy' => $tiposProy, 'subtiposProy' => $subtiposProy, 'proyectos'=>$proyectos, 
+        'estados'=>$estados, 'nombreElegido'=>$request->nombre, 'estadoElegido'=>$request->estadoProy, 
+        'tisubtiElegido'=>$request->tisubti, 'proyectosBuscador'=>$proyectosBuscador]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

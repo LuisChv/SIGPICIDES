@@ -43,7 +43,7 @@ Route::get('password/restablecer/{token}/{email}', 'Auth\ResetPasswordController
 //---------fin
 
 Route::get('home/', 'HomeController@index')->name('home')->middleware(['auth', 'has.permission:validacion']);
-Route::get('home/filtros', 'HomeController@indexFiltrado')->name('home.filtros')->middleware(['auth', 'has.permission:validacion']);
+
 //<a href="{{route('routename', párametros)}}"
 
 //Routes de Icons, Maps, notificaciones ........
@@ -131,12 +131,15 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
 
     //Proyectos
+
     Route::post('proyectos/store', 'ProyectoController@store')->name('proyectos.store')
     ->middleware('has.permission:proyectos.create');
 
     Route::get('proyectos', 'ProyectoController@index')->name('proyectos.index')
     ->middleware('has.permission:proyectos.index');
-
+    //TODO agregar validacion ulr
+    Route::get('proyectos/filtros', 'ProyectoController@indexFiltrado')->name('proyectos.filtros')
+    ->middleware(['auth', 'has.permission:validacion']);
     //TODO agragar validacion de url
     Route::get('mis_proyectos', 'ProyectoController@misProyectos')->name('mis_proyectos.index');
     //TODO agragar validacion de url
