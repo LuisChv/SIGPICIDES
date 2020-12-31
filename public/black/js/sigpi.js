@@ -17,6 +17,12 @@ function añadirPermiso(valor){
 function eliminarPermiso(valor){
     document.getElementById("eliminarPermiso"+valor).submit();   
 }
+
+
+function agregarMiembro(id){
+    $('#investigador').val(id);
+}
+
 //editar indicador vista OAI
 function editarIndicador(id_indicador, descripcion){
     //console.log(id_indicador);
@@ -94,3 +100,108 @@ $(document).ready(function(){//lo que este dentro de aquí se cargara hasta que 
         }
     });
 });
+
+function modalLinea(id_variable){
+    var id=$('#modalLinea');    
+    id.val(id_variable);
+}
+function agregarComentarioAvance(element, idUSer) {
+    //console.log(element.attributes.id_task.value);
+    //console.log(idUSer);
+    let _token   = $('meta[name="csrf-token"]').attr('content');
+    let idTask = element.attributes.id_task.value;
+    let comentario = document.getElementById('ComentarioAvance').value;    
+    var data = { comentario: comentario, _token: _token, idTask: idTask, idUser: idUSer };
+    //elemento donde se encuentran los comentarios
+    let comentariosLista = document.getElementById('comentariosList');          
+    //console.log(comentario);
+    $.ajax({
+        url: '/comentariosTarea',
+        type: 'post',
+        dataType: 'json',
+        data: data,
+        success: function (response) {
+            if (response.respuestaLarga) {
+                alert(response.respuestaLarga);
+            } else {
+                document.getElementById('ComentarioAvance').value = "";
+                let comentario = response.comentario;            
+                //Agregar el comentario agregado a la lista            
+                var nodeDueño= document.createElement("p");
+                nodeDueño.classList.add("font-weight-bold");
+                var textNodeDueño = document.createTextNode(comentario.usuario +':');
+                nodeDueño.appendChild(textNodeDueño);
+                var nodeComentario = document.createElement("p");
+                var textNodeComentario = document.createTextNode(comentario.comentario);
+                nodeDueño.style.marginBottom=0;
+                nodeComentario.style.marginBottom=0;
+                nodeComentario.appendChild(textNodeComentario);
+                comentariosLista.appendChild(nodeDueño);
+                comentariosLista.appendChild(nodeComentario);                
+            }
+            
+        }
+    }); 
+}
+function agregarComentarioIndicador(idIndicador) {        
+    let _token = $('meta[name="csrf-token"]').attr('content');        
+    let comentario = document.getElementById('ComentarioIndicador').value;        
+    var data = { comentario: comentario, _token: _token, idIndicador: idIndicador };    
+    //elemento donde se encuentran los comentarios
+    let comentariosLista = document.getElementById('ListaComentariosIndicador');          
+    //console.log(comentario);
+    $.ajax({
+        url: '/comentariosIndicador',
+        type: 'post',
+        dataType: 'json',
+        data: data,
+        success: function (response) {
+            if (response.respuestaLarga) {
+                swal("Error!",response.respuestaLarga);
+            } else {
+                document.getElementById('ComentarioIndicador').value = "";
+                let comentario = response.comentario;            
+                //Agregar el comentario agregado a la lista            
+                var nodeDueño= document.createElement("p");
+                nodeDueño.classList.add("font-weight-bold");
+                var textNodeDueño = document.createTextNode(comentario.usuario +':');
+                nodeDueño.appendChild(textNodeDueño);
+                var nodeComentario = document.createElement("p");
+                var textNodeComentario = document.createTextNode(comentario.comentario);
+                nodeDueño.style.marginBottom=0;
+                nodeComentario.style.marginBottom=0;
+                nodeComentario.appendChild(textNodeComentario);
+                comentariosLista.appendChild(nodeDueño);
+                comentariosLista.appendChild(nodeComentario);
+                //Agregar linea divisoria entre cada comentario
+                var hr = document.createElement("HR");                
+                comentariosLista.appendChild(hr);
+            }            
+        }
+    }); 
+}
+
+$(document).on('click', '.dropdown-menu', function (e) {
+    e.stopPropagation();
+  });
+  
+  // make it as accordion for smaller screens
+  if ($(window).width() < 992) {
+    $('.dropdown-menu a').click(function(e){
+      e.preventDefault();
+        if($(this).next('.submenu').length){
+          $(this).next('.submenu').toggle();
+        }
+        $('.dropdown').on('hide.bs.dropdown', function () {
+       $(this).find('.submenu').hide();
+    })
+    });
+  }
+//Funcion para la seleccion de tipo o subtipo de proyecto para listarlos
+function filtrotipo(seleccion,tipo){
+    //console.log(seleccion);
+    //console.log(seleccion.textContent);
+    document.getElementById('botonSeleccionadorProyectoFiltro').innerHTML = seleccion.textContent;
+    document.getElementById('ocultoNombreProyecto').value = seleccion.textContent;
+    document.getElementById('ocultoTipoProyecto').value = tipo;
+}

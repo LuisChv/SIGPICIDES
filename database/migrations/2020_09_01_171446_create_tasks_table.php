@@ -27,6 +27,7 @@ class CreateTasksTable extends Migration
             $table->boolean('readonly')->default(false);
             $table->boolean('modificable')->default(true);
             $table->timestamps();
+            $table->string('avance',1000)->nullable();
         });
     }
 

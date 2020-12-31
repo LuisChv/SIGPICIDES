@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-12">
+    <div class="col-6">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
@@ -58,7 +58,7 @@
                                     <td width="15%" class="text-right">
                                         <div class="btn-group" role="group">
                                             <a title="Resumen" type="button" class="btn btn-primary btn-sm btn-round" href="{{ route('solicitud.resumen', [$soli->id_proy])}}">
-                                                <i class="tim-icons icon-notes"></i>
+                                                <i class="tim-icons icon-book-bookmark"></i>
                                             </a>
                                             <a title="Información principal" type="button" class="btn btn-primary btn-sm btn-round" href="{{ route('solicitud.edit', [$soli->id_proy])}}">
                                                 <i class="tim-icons icon-notes"></i>
@@ -89,7 +89,7 @@
         </div>
     </div>
 
-	<div class="col-12">
+	<div class="col-6">
         <div class="card">
             <div class="card-header ">
                 <div class="row">
