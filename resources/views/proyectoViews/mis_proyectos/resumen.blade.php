@@ -136,6 +136,15 @@ Primera etapa
                                 <td></td>
                             </tr>
                         </table>
+                        <hr>
+                        <h3 class="text-center font-weight-bold">ESTADO DEL PROYECTO:</h3>
+                        @if ($proyecto->id_estado==3)
+                            <h2 class="text-center text-danger text-uppercase">{{$proyecto->estado}}</h2>    
+                        @elseif($proyecto->id_estado==2)
+                            <h2 class="text-center text-success text-uppercase">{{$proyecto->estado}}</h2>    
+                        @else
+                            <h2 class="text-center text-primary text-uppercase">{{$proyecto->estado}}</h2>    
+                        @endif
                     </div>
                 </div>
                 <br>
@@ -374,63 +383,15 @@ Primera etapa
     <div class="col-md-12">
         <tr>
             <td width="50%" align="right">
-                @if ($solicitud->id_estado==4)
-                    <table width="100%">
-                        <tr>
-                            <td width="50%">
-                                <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
-                                    Regresar
-                                </a>
-                            </td>
-                            <td width="50%" align="right">
-                                <a class="btn btn-primary" href="{{ route('solicitud.edit', [$proyecto->id])}}">
-                                    Siguiente
-                                </a>
-                            </td>
-                        </tr>
-                    </table> 
-                @else
-                    @if ($solicitud->etapa==2 && ($solicitud->id_estado==4 || $solicitud->id_estado==5 || $solicitud->id_estado==6))    
-                    <table width="100%">
-                    <tr>
-                        <td width="50%">
-                                <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
-                                    Regresar
-                                </a>
-                            </td>
-                            <td width="50%" align="right">
-                                <a class="btn btn-primary" href="{{ route('factibilidad.create', [$proyecto->id]) }}">
-                                    Factibilidad
-                                </a>                      
-                            </td>
-                        </tr>
-                    </table>
-                    @else        
-                        @if ($proyecto->id_estado==1)                       
-                            <div class="container menuF-container">
-                                <input type="checkbox" id="toggleF">
-                                <label for="toggleF" class="buttonF"></label>
-                                <nav class="navF">                                                  
-                                    <a href="{{ route('proyecto.resumen', [$proyecto->id])}}">Resumen</a>  
-                                    <a href="{{ route('tareas_avance.index', [$proyecto->id])}}">Planificación</a>
-                                    <a href="{{ route('indicadores.index', [$proyecto->id])}}">Indicadores</a>
-                                </nav>
-                            </div>   
-                        @else        
-                            @if ($solicitud->id_estado==8 || $solicitud->id_estado==9)
-                                <table width="100%">
-                                    <tr>
-                                        <td width="50%">
-                                            <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
-                                                Regresar
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </table>                                            
-                            @endif                                               
-                        @endif                         
-                    @endif                
-                @endif
+                <div class="container menuF-container">
+                    <input type="checkbox" id="toggleF">
+                    <label for="toggleF" class="buttonF"></label>
+                    <nav class="navF">                                                  
+                        <a href="{{ route('proyecto.resumen', [$proyecto->id])}}">Resumen</a>  
+                        <a href="{{ route('tareas_avance.index', [$proyecto->id])}}">Planificación</a>
+                        <a href="{{ route('indicadores.index', [$proyecto->id])}}">Indicadores</a>
+                    </nav>
+                </div> 
             </td>
         </tr>
     </div> 
