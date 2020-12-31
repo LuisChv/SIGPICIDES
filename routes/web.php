@@ -488,8 +488,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::post('indicadores/store', 'IndicadorController@store')->name('indicadores.store')
     ->middleware('has.permission:indicadores.create');
 
-    Route::get('indicadores/{id}', 'IndicadorController@index')->name('indicadores.index')
-    ->middleware('has.permission:indicadores.index');
+    Route::get('indicadores/{id}', 'IndicadorController@index')->name('indicadores.index');
 
     Route::get('indicadores/create', 'IndicadorController@create')->name('indicadores.create')
     ->middleware('has.permission:indicadores.create');
