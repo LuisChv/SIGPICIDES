@@ -101,28 +101,18 @@ class EstadisticaController extends Controller
 					subtipo_de_investigacion SDI ON SDI.id_tipo = TDI.id LEFT JOIN
 					proyecto P ON SDI.id = P.id_subtipo					
 					GROUP BY TDI.id"
-					//WHERE SDI.id_tipo = 2
-					////WHERE P.id_estado = 3
-					//WHERE P.id_subtipo = 1
 				);
 			}
 			else{
 				//Si es 1 quiere decir que se graficaran todos los subtipos del tipo que se escogio
 				if($request->tisubti==1){					
-					$tipo_investigacion=DB::table('proyecto')
-					->join('subptipo_de_investigacion', 'subptipo_de_investigacion.id', 'proyecto.id_estado')
-					->whereRaw('subptipo_de_investigacion.id_tipo=(select id from tipo_de_investigacion where nombre = "?")', [$request->nombre])
-					->g
-
-
-					$tipo_investigacion = DB::table('proyecto')->whereraw(
+					$tipo_investigacion=DB::select(DB::raw(
 						"SELECT SDI.nombre, COUNT(P.id) FROM tipo_de_investigacion TDI JOIN
 						subtipo_de_investigacion SDI ON SDI.id_tipo = TDI.id LEFT JOIN
 						proyecto P ON SDI.id = P.id_subtipo
-						WHERE SDI.id_tipo =2
+						where TDI.nombre= '$request->nombre'
 						GROUP BY SDI.id"
-					);
-					//dd($tipo_investigacion);
+					));
 				}
 				//Si es 2 quiere decir que solo se mostrara la grafica del subtipo que eligio
 				if($request->tisubti==2){
@@ -130,13 +120,11 @@ class EstadisticaController extends Controller
 						"SELECT SDI.nombre, COUNT(P.id) FROM tipo_de_investigacion TDI JOIN
 						subtipo_de_investigacion SDI ON SDI.id_tipo = TDI.id LEFT JOIN
 						proyecto P ON SDI.id = P.id_subtipo
-						WHERE SDI.nombre = '?'
-						GROUP BY SDI.id", [$request->nombre]
+						WHERE SDI.nombre = '$request->nombre'
+						GROUP BY SDI.id", 
 					);
-				}           
-				
-			} 
-			
+				}           				
+			} 			
 		}else{
 			//Si tisubti es 0 quiere decir que hay que traer todos los proyectos
 			if($request->tisubti==0){
@@ -144,8 +132,8 @@ class EstadisticaController extends Controller
 					"SELECT TDI.nombre, COUNT(P.id) FROM tipo_de_investigacion TDI JOIN
 					subtipo_de_investigacion SDI ON SDI.id_tipo = TDI.id LEFT JOIN
 					proyecto P ON SDI.id = P.id_subtipo	
-					WHERE P.id_estado = ?
-					GROUP BY TDI.id", [$request->estadoProy]
+					WHERE P.id_estado = $request->estadoProy
+					GROUP BY TDI.id"
 				);
 			}
 			else{
@@ -154,10 +142,10 @@ class EstadisticaController extends Controller
 					$tipo_investigacion = DB::SELECT(
 						"SELECT SDI.nombre, COUNT(P.id) FROM tipo_de_investigacion TDI JOIN
 						subtipo_de_investigacion SDI ON SDI.id_tipo = TDI.id LEFT JOIN
-						proyecto P ON SDI.id = P.id_subtipo
-						WHERE TDI.nombre = '?'
-						WHERE P.id_estado = ?
-						GROUP BY SDI.id", [$request->nombre, $request->estadoProy]
+						proyecto P ON SDI.id = P.id_subtipo						
+						WHERE TDI.nombre = '$request->nombre'
+						AND P.id_estado = $request->estadoProy
+						GROUP BY SDI.id"
 					);
 				}
 				//Si es 2 quiere decir que solo se mostrara la grafica del subtipo que eligio
@@ -166,14 +154,12 @@ class EstadisticaController extends Controller
 						"SELECT SDI.nombre, COUNT(P.id) FROM tipo_de_investigacion TDI JOIN
 						subtipo_de_investigacion SDI ON SDI.id_tipo = TDI.id LEFT JOIN
 						proyecto P ON SDI.id = P.id_subtipo
-						WHERE SDI.nombre = '?'
-						WHERE P.id_estado = ?
-						GROUP BY SDI.id", [$request->nombre, $request->estadoProy]
+						WHERE SDI.nombre = '$request->nombre'
+						AND P.id_estado = $request->estadoProy
+						GROUP BY SDI.id"
 					);
-				}           
-				
-			} 
-			
+				}
+			}
 		}
                
         //dd($request->request);
@@ -189,7 +175,9 @@ class EstadisticaController extends Controller
 			'tiposProy' => $tiposProy,
 			'subtiposProy' => $subtiposProy,
 			'estados' => $estados,
-			'estadoElegido'=>$request->estadoProy,			
+			'estadoElegido'=>$request->estadoProy,
+			'nombreElegido'=>$request->nombre,
+			'tisubtiElegido'=>$request->tisubti,		
 		]);
     }
 
