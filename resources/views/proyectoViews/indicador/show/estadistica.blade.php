@@ -67,9 +67,6 @@
                 <div class="card">
                 <div class="card-header">
                     <h2>{{$indicador->detalle}}</h2>
-                    <h3>Variable:</h3>
-                    <h3 id="nombreVar"></h3>
-                    
                     <!-- GRAFICO-->
                     <canvas id="graficoLineas"></canvas>
                 
@@ -109,7 +106,7 @@
                                                       <div class="row">
                                                           <div  class="mr-auto ml-auto col-md-12">
                                                             <select required class="form-control" name="variable">
-                                                                <option>Seleccione una variable...</option>
+                                                                <option selected disabled hidden value="" >Seleccione una variable...</option>
                                                                 @foreach ($variables as $variable)
                                                                     @if($variable->id_indicador == $indicador->id)
                                                                         <option value="{{$variable->id}}">
