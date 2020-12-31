@@ -3,6 +3,7 @@
 Primera etapa
 @endsection
 @section('content')
+<script src="{{ asset('black') }}/js/oai.js"></script>
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -111,7 +112,7 @@ Primera etapa
                 <table class="table">
                     @foreach ($objetivos as $objetivo)
                     <tr>
-                        <td>
+                        <td class="text-justify">
                             <i class="tim-icons icon-compass-05"></i> {{$objetivo->descripcion}}
                         </td>
                     </tr>
@@ -131,7 +132,7 @@ Primera etapa
                 <table class="table">
                     @foreach ($alcances as $alcance)
                     <tr>
-                        <td>
+                        <td class="text-justify">
                             <i class="tim-icons icon-compass-05"></i> {{$alcance->descripcion}}
                         </td>
                     </tr>
@@ -151,7 +152,7 @@ Primera etapa
                 <table class="table">
                     @foreach ($indicadores as $indicador)
                     <tr>
-                        <td>
+                        <td class="text-justify">
                             <i class="tim-icons icon-sound-wave"></i> {{$indicador->detalle}}
                         </td>
                     </tr>
@@ -206,27 +207,27 @@ Primera etapa
                     <tr>
                         <td><b>Factibilidad técnica</b></td>
                         
-                        <td>{{$factibilidad->tecnica}}</td>
+                        <td class="text-justify">{{$factibilidad->tecnica}}</td>
                     </tr>    
                     <tr>
                         <td><b>Factibilidad económica</b></td>
 
-                        <td>{{$factibilidad->economia}}</td>
+                        <td class="text-justify">{{$factibilidad->economia}}</td>
                     </tr> 
                     <tr>
                         <td><b>Factibilidad financiera</b></td>
 
-                        <td>{{$factibilidad->financiera}}</td>
+                        <td class="text-justify">{{$factibilidad->financiera}}</td>
                     </tr> 
                     <tr>
                         <td><b>Factibilidad operativa</b></td>
 
-                        <td>{{$factibilidad->operativa}}</td>
+                        <td class="text-justify">{{$factibilidad->operativa}}</td>
                     </tr> 
                     <tr>
                         <td><b>Factibilidad extra</b></td>
 
-                        <td>{{$factibilidad->fac_extra}}</td>
+                        <td class="text-justify">{{$factibilidad->fac_extra}}</td>
                     </tr>                 
                 </table>
             </div>
@@ -288,8 +289,7 @@ Primera etapa
     @foreach ($evaluaciones as $eva)        
         @if ($eva->etapa==1)
             @foreach ($miembros_comite as $miembro) 
-                @if ( $eva->id_user == $miembro->id_usuario) 
-
+                @if ( $eva->id_user == $miembro->id_usuario)
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
@@ -315,7 +315,6 @@ Primera etapa
         @if ($eva->etapa==2)
             @foreach ($miembros_comite as $miembro) 
                 @if ( $eva->id_user == $miembro->id_usuario) 
-
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
@@ -330,38 +329,71 @@ Primera etapa
             @endforeach
         @endif        
     @endforeach
+
+    <div class="col-md-12">
+        <tr>
+            <td width="50%" align="right">
+                @if ($solicitud->id_estado==4)
+                    <table width="100%">
+                        <tr>
+                            <td width="50%">
+                                <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
+                                    Regresar
+                                </a>
+                            </td>
+                            <td width="50%" align="right">
+                                <a class="btn btn-primary" href="{{ route('solicitud.edit', [$proyecto->id])}}">
+                                    Siguiente
+                                </a>
+                            </td>
+                        </tr>
+                    </table> 
+                @else
+                    @if ($solicitud->etapa==2 && ($solicitud->id_estado==4 || $solicitud->id_estado==5 || $solicitud->id_estado==6))    
+                    <table width="100%">
+                    <tr>
+                        <td width="50%">
+                                <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
+                                    Regresar
+                                </a>
+                            </td>
+                            <td width="50%" align="right">
+                                <a class="btn btn-primary" href="{{ route('factibilidad.create', [$proyecto->id]) }}">
+                                    Factibilidad
+                                </a>                      
+                            </td>
+                        </tr>
+                    </table>
+                    @else        
+                        @if ($proyecto->id_estado==1)                       
+                            <div class="container menuF-container">
+                                <input type="checkbox" id="toggleF">
+                                <label for="toggleF" class="buttonF"></label>
+                                <nav class="navF">                 
+                                    <a href="{{ route('mis_proyectos.index')}}">Mis proyectos</a>              
+                                    <a href="{{ route('solicitud.resumen', [$proyecto->id])}}">Resumen</a>  
+                                    <a href="{{ route('tareas_avance.index', [$proyecto->id])}}">Planificación</a>
+                                    <a href="{{ route('indicadores.index', [$proyecto->id])}}">Indicadores</a>
+                                </nav>
+                            </div>   
+                        @else        
+                            @if ($solicitud->id_estado==8 || $solicitud->id_estado==9)
+                                <table width="100%">
+                                    <tr>
+                                        <td width="50%">
+                                            <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
+                                                Regresar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>                                            
+                            @endif                                               
+                        @endif                         
+                    @endif                
+                @endif
+            </td>
+        </tr>
+    </div> 
 </div>
-<table class="col-md-12">
-    <tr>
-        @if ($solicitud->etapa==2)
-            <td width="50%">
-                <a class="btn btn-primary" target="_blank" href="{{ route('proyecto_tareas.index', $proyecto->id)  }}">
-                    Ver planificacion
-                </a>
-            </td>    
-        @endif
-        
-        <td width="50%" align="right">
-        @if($solicitud->id_estado == 8)
-            <a class="btn btn-primary" href="{{ route('solicitud.mis_solicitudes') }}">
-                Regresar
-            </a>
-        @else
-            @if ($solicitud->etapa == 1)
-            <a class="btn btn-primary" href="{{ route('solicitud.edit', [$proyecto->id])}}">
-                Siguiente
-            </a>
-            @else
-            <a class="btn btn-primary" href="{{ route('factibilidad.create', [$proyecto->id]) }}">
-                Siguiente
-            </a>
-            @endif
-        @endif
-        </td>
-    </tr>
-</table>
-<div class="col-md-12 text-right">
-    
-</div>
-<script src="{{ asset('black') }}/js/oai.js"></script>
+
 @endsection

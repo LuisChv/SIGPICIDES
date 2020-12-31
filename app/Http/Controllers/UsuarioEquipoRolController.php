@@ -56,12 +56,23 @@ class UsuarioEquipoRolController extends Controller
                   }
               }
           }
+
+          //Omitir Experto
+          $evaluadores= DB::select('SELECT * FROM comite_usuario');
+  
+          foreach ($evaluadores as $eva) { 
+              foreach($noMiembros as $user){ 
+                  if($user->id == $eva->id_usuario){
+                      unset($noMiembros[$user->id - 1]);
+                  }
+              }
+          }
  
            //Miembros del equipo 
             $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$id_equipo]);
           
           //Roles
-          $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [true]);
+          $roles = DB::select('SELECT * FROM roles');
 
           $cantidad_miembros = DB::table('usuario_equipo_rol')->where('id_equipo',[$equipo->id])->count();
 

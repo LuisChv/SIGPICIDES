@@ -25,7 +25,7 @@ class UserController extends Controller
     }
 
     public function index(){
-        $data = User::all();
+        $data = User::paginate(5);
         return view ('users.index',[
             'data' => $data
         ]);
@@ -33,8 +33,8 @@ class UserController extends Controller
 
 
     public function create(){
-        $roles = DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [false]);
-        $data = User::all();
+        $roles = DB::select('SELECT * FROM roles');
+        $data = User::paginate(5);
         return view ('users.crear', [
             'roles'=> $roles, 
             'data' => $data
@@ -98,7 +98,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $data= User::all();
+        $data= User::paginate(5);
        
         //Buscar el usuario con el id de entrada
         $user= User::findOrFail($id);
@@ -115,8 +115,8 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $data= User::all();
-        $roles= DB::select('SELECT * FROM roles WHERE tipo_rol = ?', [false]);
+        $data= User::paginate(5);
+        $roles= DB::select('SELECT * FROM roles');
     
         //Buscar user y su respectivo rol
         $user= User::findOrFail($id);

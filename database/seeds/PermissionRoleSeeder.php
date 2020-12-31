@@ -647,25 +647,25 @@ class PermissionRoleSeeder extends Seeder
         ]);
 
 /*----------------------------------------------------------------------------------------*/
-        //Experto
+        //Experto ----Agregados a Investigador
         DB::table('rol_permiso')->insert([
-            'role_id' => 8,
+            'role_id' => 4,
             'permission_id' => 71,
         ]);
         DB::table('rol_permiso')->insert([
-            'role_id' => 8,
+            'role_id' => 4,
             'permission_id' => 72,
         ]);
         DB::table('rol_permiso')->insert([
-            'role_id' => 8,
+            'role_id' => 4,
             'permission_id' => 73,
         ]);
         DB::table('rol_permiso')->insert([
-            'role_id' => 8,
+            'role_id' => 4,
             'permission_id' => 74,
         ]);
         DB::table('rol_permiso')->insert([
-            'role_id' => 8,
+            'role_id' => 4,
             'permission_id' => 75,
         ]);
     }

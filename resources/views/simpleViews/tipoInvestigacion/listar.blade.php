@@ -1,4 +1,4 @@
-@extends('layouts.app',['pageSlug' => 'dashboard'])
+@extends('layouts.app',['pageSlug' => 'tipos_de_investigacion'])
 @section('title')
 	Cat&aacute;logo de tipos de investigaci&oacute;n 
 @endsection
@@ -12,10 +12,10 @@
                             <h2 class="card-title"><b>Catálogo de tipos de investigaci&oacute;n</b></h2>
                         </div>
                         <div class="col-sm-12 text-right">
-                                <a role="button" class="btn btn-primary col-sm-4" href="{{ route('tipo_investigacion.create')  }}">
+                                <a role="button" class="btn btn-primary" href="{{ route('tipo_investigacion.create')  }}">
                                     <i class="tim-icons icon-simple-add"></i>&nbsp;&nbsp;Tipo
                                 </a>
-                                <a role="button" class="btn btn-primary col-sm-4" href="{{ route('subtipo_investigacion.create')  }}">
+                                <a role="button" class="btn btn-primary" href="{{ route('subtipo_investigacion.create')  }}">
                                     <i class="tim-icons icon-simple-add"></i>&nbsp;&nbsp;Subtipo
                                 </a>
                         </div>

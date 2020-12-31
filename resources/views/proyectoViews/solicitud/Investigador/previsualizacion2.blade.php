@@ -3,61 +3,9 @@
 Vista previa
 @endsection
 @section('content')
-
-<link rel="stylesheet" href="https://files.dhtmlx.com/30d/0801b74b161df383f7de350535901db6/dhtmlxgantt_contrast_black.css">
-    <link href="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.css" rel="stylesheet">
-    <!--Agregando libreria de ajax-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
-    <script src="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.js"></script>
-    <style type="text/css">
-    html, body{
-            height:100%;
-            padding:0px;
-            margin:0px;
-            overflow: hidden;            
-        }
-            .gantt_cal_ltext{
-            overflow: auto;
-        }
-    </style>
+    
 <div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h3>Factibilidad</h3>
-            </div>
-            <div class="card-body">
-                <table class="table">
-                    <tr>
-                        <td><b>Factibilidad técnica</b></td>
-                        
-                        <td>{{$factibilidad->tecnica}}</td>
-                    </tr>    
-                    <tr>
-                        <td><b>Factibilidad económica</b></td>
-
-                        <td>{{$factibilidad->economia}}</td>
-                    </tr> 
-                    <tr>
-                        <td><b>Factibilidad financiera</b></td>
-
-                        <td>{{$factibilidad->financiera}}</td>
-                    </tr> 
-                    <tr>
-                        <td><b>Factibilidad operativa</b></td>
-
-                        <td>{{$factibilidad->operativa}}</td>
-                    </tr> 
-                    <tr>
-                        <td><b>Factibilidad extra</b></td>
-
-                        <td>{{$factibilidad->fac_extra}}</td>
-                    </tr>                 
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
+<div class="col-md-6">
         <div class="card">
             <div class="card">
                 <div class="card-header">
@@ -95,6 +43,43 @@ Vista previa
             </div>
         </div>
     </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3>Factibilidad</h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <td><b>Factibilidad técnica</b></td>
+                        
+                        <td class="text-justify">{{$factibilidad->tecnica}}</td>
+                    </tr>    
+                    <tr>
+                        <td><b>Factibilidad económica</b></td>
+
+                        <td class="text-justify">{{$factibilidad->economia}}</td>
+                    </tr> 
+                    <tr>
+                        <td><b>Factibilidad financiera</b></td>
+
+                        <td class="text-justify">{{$factibilidad->financiera}}</td>
+                    </tr> 
+                    <tr>
+                        <td><b>Factibilidad operativa</b></td>
+
+                        <td class="text-justify">{{$factibilidad->operativa}}</td>
+                    </tr> 
+                    <tr>
+                        <td><b>Factibilidad extra</b></td>
+
+                        <td class="text-justify">{{$factibilidad->fac_extra}}</td>
+                    </tr>                 
+                </table>
+            </div>
+        </div>
+    </div>
+    
 </div>
 <body>
     <input type="hidden" name="idProyecto" value="{{$idProyecto}}">
