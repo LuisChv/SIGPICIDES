@@ -89,6 +89,13 @@ class ProyectoController extends Controller
         $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$equipo->id])->get();
         $estados=DB::table('estado_de_proy')->get();
 
+        $tiempo = DB::SELECT(
+            "SELECT duracion AS estimado, ROUND(date_part('d', NOW() - created_at)/7) AS real FROM proyecto"
+        )[0];
+        $total = DB::SELECT("SELECT COUNT(id) FROM indicador WHERE id_proy = ?", [$id])[0];
+        $finalizados = DB::SELECT("SELECT COUNT(id) FROM indicador WHERE id_proy = ? AND finalizado = true", [$id])[0];
+        $estimados = round(($total->count/$tiempo->estimado) * $tiempo->real);
+
         return view('proyectoViews.mis_proyectos.resumen', [
             'objetivos'=> $objetivos, 'alcances'=> $alcances, 'indicadores'=> $indicadores,
             'proyecto' => $proyecto, 'equipo' => $equipo, 't' => $tipo, 'st' => $subtipo,
@@ -96,6 +103,7 @@ class ProyectoController extends Controller
             'solicitud'=>$solicitud, 'evaluaciones'=>$evaluaciones, 'estados'=>$estados_soli,
             'miembros_comite'=>$miembros_comite, 'factibilidad' => $factibilidad, 'miembros' => $miembros,
             'roles'=>$roles, 'miembrosEquipo'=>$miembrosEquipo, 'estados'=>$estados,
+            'tiempo' => $tiempo, 'total' => $total, 'finalizados' => $finalizados, 'estimados' => $estimados
             ]);
     }
     /**

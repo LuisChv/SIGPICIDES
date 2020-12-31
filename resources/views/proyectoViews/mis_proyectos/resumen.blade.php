@@ -5,6 +5,91 @@ Primera etapa
 @section('content')
 <script src="{{ asset('black') }}/js/oai.js"></script>
 <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <p><b>Tiempo:</b> </p>
+                    </div>
+                    <div class="col-6 text-right">
+                        {{$tiempo->estimado}} 
+                        @if($tiempo->estimado != 1)
+                            semanas 
+                        @else 
+                            semana 
+                        @endif
+                    </div>
+                </div>
+                
+                <div class="progreso_container">
+                    <div class="progress">
+                        <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{($tiempo->real/$tiempo->estimado)*100}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                            {{$tiempo->real}} 
+                            @if($tiempo->real != 1)
+                                semanas 
+                            @else 
+                                semana 
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-6">
+                        <p><b>Progreso estimado:</b> </p>
+                    </div>
+                    <div class="col-6 text-right">
+                        {{$total->count}} 
+                        @if ($finalizados->count != 1)
+                            indicadores
+                        @else
+                            indicador
+                        @endif
+                    </div>
+                </div>
+                <div class="progreso_container">
+                    <div class="progress">
+                        <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{($estimados/$total->count)*100}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                            {{$estimados}} 
+                            @if ($estimados != 1)
+                                indicadores
+                            @else 
+                                indicador
+                            @endif 
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-6">
+                        <p><b>Progreso real:</b> </p>
+                    </div>
+                    <div class="col-6 text-right">
+                        {{$total->count}} 
+                        @if ($finalizados->count != 1)
+                            indicadores
+                        @else
+                            indicador
+                        @endif
+                    </div>
+                </div>
+                <div class="progreso_container">
+                    <div class="progress">
+                        <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{($finalizados->count/$total->count)*100}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                            {{$finalizados->count}}
+                            @if ($finalizados->count != 1)
+                                indicadores
+                            @else
+                                indicador
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
     <div class="col-md-12">
         <div class="card">            
             <div class="card-body">                
