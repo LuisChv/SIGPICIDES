@@ -1,4 +1,4 @@
-@extends('layouts.app',['pageSlug' => 'dashboard'])
+@extends('layouts.app',['pageSlug' => 'permisos'])
 @section('title')
 Roles
 @endsection
@@ -9,7 +9,7 @@ Roles
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-9 text-left">
-                        <h2 class="card-title"><b>Gestion de Roles</b></h2>
+                        <h2 class="card-title"><b>Gestión de Roles</b></h2>
                     </div>
                     <div class="col-sm-3 text-right">
                         <a role="button" class="btn btn-primary" href="{{ route('roles.create')  }}">
@@ -30,7 +30,6 @@ Roles
                             </thead>
                             <tbody>
                                 @foreach ($data as $rol) 
-                                @if($rol->tipo_rol)
                                 <tr>                     
                                     <td width="80%" id={{$rol->id}} onMouseOver="ResaltarFila({{$rol->id}});" onMouseOut="RestablecerFila({{$rol->id}}, '')" onClick="CrearEnlace('{{ route('roles.show', $rol->id)}}');">
                                         {{$rol->name}}
@@ -60,10 +59,11 @@ Roles
                                         @endisset
                                     </td>
                                 </tr>
-                                @endif
                                 @endforeach
                             </tbody>
                         </table>
+
+                        {{ $data->links() }}
                     </div>
                 </div>
             </div>

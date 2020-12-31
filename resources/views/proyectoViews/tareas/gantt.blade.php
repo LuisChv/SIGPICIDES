@@ -60,6 +60,7 @@
     gantt.config.date_format = "%Y/%m/%d %H:%i:%s";
     
     //Permitir reordenar las tareas con interfaz grafica
+    
     gantt.config.order_branch = true;
     gantt.config.order_branch_free = true;
     
@@ -117,6 +118,26 @@
         });
         
     });
+    //Se lansa despues de guardar una tarea
+    gantt.attachEvent("onAfterTaskAdd", function(id,item){
+        gantt.setSizes();
+    });
+    //Se lansa despues de actualizar una tarea
+    gantt.attachEvent("onAfterTaskUpdate", function(id,item){
+        gantt.setSizes();
+    });
+    //Se lansa despues de eliminar una tarea
+    gantt.attachEvent("onAfterTaskDelete", function(id,item){
+        gantt.setSizes();
+    });
+    //Se lansa despues de agarrar una tarea
+    gantt.attachEvent("onAfterTaskDrag", function(id,item){
+        gantt.setSizes();
+    });
+    //Se lansa despues de Mover una tarea
+    gantt.attachEvent("onAfterTaskMove", function(id,item){
+        gantt.setSizes();
+    });
     //Evento lanzado cuando se apreta el boton de guardar
     gantt.attachEvent("onLightboxSave", function(id, task, is_new){
     //any custom logic here
@@ -171,6 +192,8 @@
     //Scroll
     gantt.config.autoscroll = true;
     gantt.config.autoscroll_speed = 50;
+    //Permitir o no mover la barra de progreso
+    gantt.config.drag_progress = false;
     //Inicializa el gant
     gantt.init("gantt_here");
     //Llamar al controlador para llenar los datos, aca paso por parametro el id del proyecto seleccionado

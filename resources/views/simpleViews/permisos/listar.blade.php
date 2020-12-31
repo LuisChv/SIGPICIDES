@@ -57,6 +57,7 @@
                         <!--fin de dropdown-->                  
                     </div>
                 </div>
+                {{ $tablas->links() }}
             </div>
         </div>
     </div>
@@ -87,7 +88,6 @@
                                 <div id="listaB{{$tb->id}}" class="collapse" aria-labelledby="rec{{$tb->id}}" data-parent="#accordion">
                                     <table width='100%' class="table">
                                         @foreach ($permisos as $permiso)
-                                            @if($permiso->id_tabla==$tb->id && !$permiso->tipo_permiso)  
                                             <tr  id="p{{$permiso->id}}" onMouseOver="ResaltarFila('p{{$permiso->id}}');" onMouseOut="RestablecerFila('p{{$permiso->id}}', '')" onClick="añadirPermiso({{ $permiso->id }});" >
                                                 <td></td>
                                                 <td>
@@ -102,7 +102,6 @@
                                                     <i class="tim-icons icon-simple-add "></i>
                                                 </td>
                                             </tr>
-                                            @endif
                                         @endforeach
                                     </table>
                                 </div>                    
