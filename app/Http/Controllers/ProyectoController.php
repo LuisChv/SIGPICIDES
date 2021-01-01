@@ -36,9 +36,9 @@ class ProyectoController extends Controller
                 ->where([
                     ['id_usuario',$user],
                     ['id_rol','=',5],
-                    ['id_estado','=',1]
+                    ['id_estado','!=',null]
                 ])
-                ->paginate(3);           
+                ->paginate(10);           
                 
         return view ('proyectoViews.mis_proyectos.index', [
             'proyectos' => $proyectos
@@ -57,9 +57,9 @@ class ProyectoController extends Controller
                 ->where([
                     ['id_usuario',$idUsuarioLogeado],
                     ['id_rol','!=',5],
-                    ['id_estado','=',1]
+                    ['id_estado','!=',null]
                 ])
-                ->paginate(3);           
+                ->paginate(10);           
                 
         return view ('proyectoViews.Colaboraciones.index', ['colaboraciones'=>$colaboraciones]);                
     }
