@@ -26,13 +26,13 @@
                                         <li class="nav-item dropdown">
                                             <p id="botonSeleccionadorProyectoFiltro" class="btn btn-secondary text-white" data-toggle="dropdown">{{$nombreElegido ?? 'Todos los proyectos'}} &nbsp;<i class="tim-icons icon-minimal-down"></i></p>
                                             <ul class="dropdown-menu">
-                                                <li><a onclick="filtrotipo(this,0)" class="dropdown-item">Todos los proyectos</a>
+                                                <li><a onclick="filtrotipo(this,0)" class="dropdown-item text-dark">Todos los proyectos</a>
                                             @foreach ($tiposProy as $tipo)
-                                                <li><a  onclick="filtrotipo(this,1)" class="dropdown-item">{{$tipo->nombre}}</a>
+                                                <li><a  onclick="filtrotipo(this,1)" class="dropdown-item text-dark">{{$tipo->nombre}}</a>
                                                     <ul class="submenu dropdown-menu">
                                                         @foreach ($subtiposProy as $subtipo)
                                                             @if ($subtipo->id_tipo==$tipo->id)
-                                                            <li><a onclick="filtrotipo(this,2)" class="dropdown-item">{{$subtipo->nombre}}</a></li>    
+                                                            <li><a onclick="filtrotipo(this,2)" class="dropdown-item text-dark">{{$subtipo->nombre}}</a></li>    
                                                             @endif
                                                         @endforeach                                                
                                                     </ul>

@@ -9,8 +9,6 @@
 				<div class="nav nav-tabs" id="nav-tab" role="tablist">
 					<a style="color:primary; !important font-style: bold; !important"class="nav-item nav-link" id="nav-investigaciones-tab" data-toggle="tab" 
 					href="#nav-investigaciones" role="tab" aria-controls="nav-investigaciones" aria-selected="true" onclick="buildChart({{json_encode($tipo_investigacion)}},'tipo_inv' , 'nombre', 'count')">Investigaciones</a>
-					<a style="color:primary; !important font-style: bold; !important"class="nav-item nav-link" id="nav-estados-tab" data-toggle="tab" 
-					href="#nav-estados" role="tab" aria-controls="nav-estados" aria-selected="false" onclick="buildChart({{json_encode($subtipo_investigacion)}}, 'subtipo_inv' , 'nombre', 'count')">Subtipo de investigación</a>
 					<a style="color:primary; !important font-style: bold; !important"class="nav-item nav-link" id="nav-recursos-tab" data-toggle="tab" 
 					href="#nav-recursos" role="tab" aria-controls="nav-recursos" aria-selected="false" onclick="buildChart({{json_encode($recursos)}},'recursos', 'nombre', 'sum')">Recursos</a>
 					<a style="color:primary; !important font-style: bold; !important"class="nav-item nav-link" id="nav-tiempos-tab" data-toggle="tab" 
@@ -36,13 +34,13 @@
                                         <li class="nav-item dropdown">
                                             <p id="botonSeleccionadorProyectoFiltro" class="btn btn-secondary text-white" data-toggle="dropdown">{{$nombreElegido ?? 'Todos los proyectos'}} &nbsp;<i class="tim-icons icon-minimal-down"></i></p>
                                             <ul class="dropdown-menu">
-                                                <li><a onclick="filtrotipo(this,0)" class="dropdown-item">Todos los proyectos</a>
+                                                <li><a onclick="filtrotipo(this,0)" class="dropdown-item text-dark">Todos los proyectos</a>
                                             @foreach ($tiposProy as $tipo)
-                                                <li><a  onclick="filtrotipo(this,1)" class="dropdown-item">{{$tipo->nombre}}</a>
+                                                <li><a  onclick="filtrotipo(this,1)" class="dropdown-item text-dark">{{$tipo->nombre}}</a>
                                                     <ul class="submenu dropdown-menu">
                                                         @foreach ($subtiposProy as $subtipo)
                                                             @if ($subtipo->id_tipo==$tipo->id)
-                                                            <li><a onclick="filtrotipo(this,2)" class="dropdown-item">{{$subtipo->nombre}}</a></li>    
+                                                            <li><a onclick="filtrotipo(this,2)" class="dropdown-item text-dark">{{$subtipo->nombre}}</a></li>    
                                                             @endif 
                                                         @endforeach                                                
                                                     </ul>
@@ -77,30 +75,6 @@
 					</div>			  		
 			  	</div>
 
-			  	<div class="tab-pane fade" id="nav-estados" role="tabpanel" aria-labelledby="nav-estados-tab">
-			  		<!--Estados de los proyectos del sistema-->
-			  		<div class="card">
-						<div class="card-header"> 
-							<h2 class="card-title">Preferencias de subtipo de investigación</h2>
-						</div>
-						<div class="card-body">
-							<div class="indicador">
-								<!--TODO Grafica de uso de recursos-->
-								<div class="indicador__grafica">
-									<canvas id="subtipo_inv"></canvas>								
-								</div>
-							</div> 
-							<p>Detalle de los nombre de subtipos de investigación en el orden de aparición (de izquierda a derecha)</p>
-							<ul>
-							@foreach($subtipo_investigacion as $subtipo)
-								@if($subtipo->count>0)
-								<li>{{$subtipo->nombre}}</li>
-								@endif
-							@endforeach
-							<ul>
-						</div> 
-					</div>
-			  	</div>
 			  	<div class="tab-pane fade" id="nav-recursos" role="tabpanel" aria-labelledby="nav-recursos-tab">
                     <!--Estadísticas del uso de recursos-->
 			  		<div class="card">
