@@ -43,7 +43,7 @@ Route::get('password/restablecer/{token}/{email}', 'Auth\ResetPasswordController
 //---------fin
 
 Route::get('home/', 'HomeController@index')->name('home')->middleware(['auth', 'has.permission:validacion']);
-Route::get('home/filtros', 'HomeController@indexFiltrado')->name('home.filtros')->middleware(['auth', 'has.permission:validacion']);
+
 //<a href="{{route('routename', párametros)}}"
 
 //Routes de Icons, Maps, notificaciones ........
@@ -131,17 +131,22 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
 
     //Proyectos
+
     Route::post('proyectos/store', 'ProyectoController@store')->name('proyectos.store')
     ->middleware('has.permission:proyectos.create');
 
     Route::get('proyectos', 'ProyectoController@index')->name('proyectos.index')
     ->middleware('has.permission:proyectos.index');
-
+    //TODO agregar validacion ulr
+    Route::get('proyectos/filtros', 'ProyectoController@indexFiltrado')->name('proyectos.filtros')
+    ->middleware(['auth', 'has.permission:validacion']);
+    //TODO agragar validacion de url
     Route::get('mis_proyectos', 'ProyectoController@misProyectos')->name('mis_proyectos.index');
-
+    //TODO agragar validacion de url
     //Lista de colaboraciones
     Route::get('proyectos/colaboraciones', 'ProyectoController@indexColaboracion')->name('proyectos.colaboracion');
-    
+    //TODO agragar validacion de url
+    Route::post('proyectos/estado/{id}', 'ProyectoController@cambiarEstado')->name('proyecto.CambioEstado');
 
     Route::get('proyectos/create', 'ProyectoController@create')->name('proyectos.create')
     ->middleware('has.permission:proyectos.create');
@@ -350,6 +355,8 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::get('solicitud/{solicitud}/resumen', 'SolicitudController@resumen')->name('solicitud.resumen')
     ->middleware('has.permission:solicitudes.create');
+    //TODO Agregar validacion de url
+    Route::get('proyecto/{id}/resumen', 'ProyectoController@resumen')->name('proyecto.resumen');
 
     Route::get('solicitud/{solicitud}/pre2', 'SolicitudController@pre2')->name('solicitud.pre2')
     ->middleware('has.permission:solicitudes.create');
@@ -481,8 +488,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::post('indicadores/store', 'IndicadorController@store')->name('indicadores.store')
     ->middleware('has.permission:indicadores.create');
 
-    Route::get('indicadores/{id}', 'IndicadorController@index')->name('indicadores.index')
-    ->middleware('has.permission:indicadores.index');
+    Route::get('indicadores/{id}', 'IndicadorController@index')->name('indicadores.index');
 
     Route::get('indicadores/create', 'IndicadorController@create')->name('indicadores.create')
     ->middleware('has.permission:indicadores.create');
@@ -511,6 +517,10 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     Route::get('indicador/confirmar/{id}', 'IndicadorController@confirmar')->name('indicador.confirmar');
 
     Route::post('datos/barra', 'DatosController@barra')->name('datos.barra');
+
+    Route::post('datos/linea', 'DatosController@linea')->name('datos.linea');
+
+    Route::post('datos/punto', 'DatosController@punto')->name('datos.punto');
 
     Route::get('indicador/general/{id}', 'IndicadorController@general')->name('indicador.general');
 
@@ -580,7 +590,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     /*---------------------------- ESTADISTICAS -------------------------------*/
     Route::get('estadisticas', 'EstadisticaController@general')->name('estadistica.general');
-
+    Route::get('estadisticas/filtradas', 'EstadisticaController@statsFiltrado')->name('estadistica.filtradas');
     Route::get('estadisticas/proyectos', 'EstadisticaController@proyectos')->name('estadistica.proyectos');
 
     

@@ -36,6 +36,7 @@ Indicadores
                         <a class="nav-link" id="cualitativo-tab" data-toggle="pill" href="#cualitativo" role="tab" aria-controls="cualitativo" aria-selected="false">Cualitativos</a>
                     </li>
                 </ul>
+                <p class="text-danger">Por defecto todos los indicadores son cualitativos</p>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="pills-home-tab">
                          <table class="table">
@@ -52,7 +53,7 @@ Indicadores
                                 @if($indicador->tipo)
                                 <td>{{$indicador->tipo}}</td>
                                 @else
-                                <td>Por definir</td>
+                                <td>Cualitativo</td>
                                 @endif
                                 <td>
                                     <a class="btn btn-success btn-icon btn-round" href="{{route('indicador.general', $indicador->id)}}"><i class="tim-icons icon-pencil"></i></a>

@@ -36,7 +36,7 @@
                             @endcan
                             @can('proyectos.index')
                                 <li @if ($pageSlug == 'proyectos') class="active " @endif>
-                                    <a href="{{ route('home')  }}">
+                                    <a href="{{ route('proyectos.index')  }}">
                                         <i class="tim-icons icon-bullet-list-67"></i>
                                         <p>{{ __('Consultar proyectos') }}</p>
                                     </a>
@@ -134,13 +134,7 @@
                                     <i class="tim-icons icon-app"></i>
                                     <p>{{ __('General') }}</p>
                                 </a>
-                            </li>
-                            <li @if ($pageSlug == 'informes.proyecto') class="active " @endif>
-                                <a href="{{ route('stats.proyecto')  }}">
-                                    <i class="tim-icons icon-notes"></i>
-                                    <p>{{ __('Proyectos') }}</p>
-                                </a>
-                            </li>                       
+                            </li>                  
                     </ul>
                 </div>
             </li>

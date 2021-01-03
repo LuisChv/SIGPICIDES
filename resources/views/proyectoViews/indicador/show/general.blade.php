@@ -13,7 +13,9 @@
       @if ($indicador->modificable)
           <h2 class="col-md-8 card-title">{{$indicador->detalle}}</h2>
           <div class="col-md-4 text-right">
-              <a href="{{ route('indicador.confirmar', $indicador->id) }}" class="btn btn-primary">Confirmar</a>
+              @if (!$indicador->tipo || count($variables) > 1)
+                <a href="{{ route('indicador.confirmar', $indicador->id) }}" class="btn btn-primary">Confirmar</a>   
+              @endif
           </div>
           <div class="col-md-6">
               <div class="card">
@@ -107,7 +109,7 @@
                                                               <input required id="nombre" class="form-control" placeholder="Nombre" name="nombre">
                                                           </div>
                                                           <div class="mr-auto ml-auto col-md-6">
-                                                              <input pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" maxlength="7" id="color" class="form-control" placeholder="Color (2395FC)" name="color">
+                                                              <input readonly maxlength="7" id="color" class="form-control" placeholder="Color (2395FC)" name="color">
                                                           </div>
                                                           <input hidden name="id_indicador" value="{{$indicador->id}}"/>
                                                       </div>
@@ -133,7 +135,7 @@
                                               {{$variable->nombre}}
                                           </td>
                                           <td class="text-right">
-                                              <i style="color:#{{$variable->color}}" class="fas fa-tint fa-2x"></i>
+                                              <i style="color:{{$variable->color}}" class="fas fa-tint fa-2x"></i>
                                           </td>
                                           <form id="formulario_variable{{$variable->id}}" method="POST" action="{{route('variable.destroy')}}">
                                               @csrf
@@ -227,14 +229,15 @@
                   </div>
                   <br>
                   <p class="font-weight-bold">Comentarios:</p>
-                  <hr>
-                  <div id="ListaComentariosIndicador">
+                  <hr>  
+                  <div id="ListaComentariosIndicador" class="comment-box cuadroComentario" style="background-color: gainsboro; max-height: 400px;">
                     @foreach ($comentarios as $comentario)
                         <p class="font-weight-bold">{{$comentario->name}}:</p>
                         <p >{{$comentario->comentario}}</p>
                         <hr>
                     @endforeach                    
-                  </div>                                    
+                  </div>
+                  <br>                             
                   @if (!$miembro)
                   <table class="col-md-12">
                     <tr>

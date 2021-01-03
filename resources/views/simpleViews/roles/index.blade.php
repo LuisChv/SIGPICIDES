@@ -1,4 +1,4 @@
-@extends('layouts.app',['pageSlug' => 'dashboard'])
+@extends('layouts.app',['pageSlug' => 'permisos'])
 @section('title')
 Roles
 @endsection
@@ -9,7 +9,7 @@ Roles
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-9 text-left">
-                        <h2 class="card-title"><b>Gestion de Roles</b></h2>
+                        <h2 class="card-title"><b>Gestión de Roles</b></h2>
                     </div>
                     <div class="col-sm-3 text-right">
                         <a role="button" class="btn btn-primary" href="{{ route('roles.create')  }}">
@@ -45,7 +45,7 @@ Roles
                                                 </a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <button @if ($rol->id < 5) disabled @endif type="button" onClick="" style="pointer-events: auto;" title="No se puede eliminar un rol primario" class="btn btn-warning btn-sm btn-icon btn-round ">
+                                                <button @if ($rol->id < 5) disabled @endif type="button" onClick="confirmar({{$rol->id}})" style="pointer-events: auto;" title="No se puede eliminar un rol primario" class="btn btn-warning btn-sm btn-icon btn-round ">
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button> 
                                             </div>
