@@ -11,6 +11,7 @@ use App\tareaUsuario;
 use App\TareaIndicador;
 use App\Solicitud;
 use App\ComiteUsuario;
+use App\Documento;
 use DB;
 
 class TaskController extends Controller
@@ -63,8 +64,9 @@ class TaskController extends Controller
             
             //Gantt para cuando el proyecto este en marcha y se quieran agregar avances
             if($proyecto->id_estado==1 && ($opcion==1 || $opcion==2 || $opcion==3)){
+                $files = Documento::all();
                 return view('proyectoViews.tareas.ganttAvance',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo, 
-                'rolProyecto'=>$rolProyecto]);
+                'rolProyecto'=>$rolProyecto,'files'=>$files,]);
             }
             //Gantt de vista (no se puede modificar) (Para miembros del comite y cuando el se este evaluando la planificacion)
             elseif($opcion==2 || !$modificable){

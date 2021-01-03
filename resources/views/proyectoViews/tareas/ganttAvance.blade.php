@@ -339,38 +339,56 @@ function avanceGantt(NODE) {
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <!--Area de subida de archivos-->
-                        <div class="normal-box">
-                            <table class="col-md-12">
-                                <tr>
-                                    <td width="110%" align="left">
-                                <textarea class="inputArea" rows="1" placeholder="Descripción del avance" maxlength="900"></textarea>                        
-                                </td>
-                                    <td align="left">
-                                        <button class="btn btn-sm btn-primary btn-round btn-icon" onClick = "agregarComentario()" id = "agregar" title="Añadir descripción"><i class="tim-icons icon-bullet-list-67"></i></button>
+                        <form class="form" method="POST" action="{{ route('archivos.store')}}" enctype="multipart/form-data">
+                            @csrf  
+                            <div class="normal-box">
+                                <table class="col-md-12">
+                                    <tr>
+                                        <td width="110%" align="left">
+                                    <textarea class="inputArea" rows="1" placeholder="Descripción del avance" maxlength="900"></textarea>                        
                                     </td>
-                                </tr>
-                                <tr>
-                                <td width="90%" align="left">
-                            <input type="file" class="form-control">
-                            <p>Archivox disponibles</></p>
-                                <!--Listar los archivos que ya estan subidos-->
-                            <ul style="font-size:12px;">
-                                    <li>archivo.docx</li>
-                                    <li>archivo.docx</li>
-                                    <li>archivo.docx</li>
-                                    <li>archivo.docx</li>
-                            </ul>
-                            </td>
-                            <td valign="top">
-                                        <button class="btn btn-sm btn-primary btn-round btn-icon" onClick = "agregarArchivo()" id = "agregarArchivo" data-dismiss="modal"><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>
+                                        <td align="left">
+                                            <button class="btn btn-sm btn-primary btn-round btn-icon" onClick = "agregarComentario()" id = "agregar" title="Añadir descripción"><i class="tim-icons icon-bullet-list-67"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td width="90%" align="left">
+                                    <tr>
+                                        <td>
+                                            <input type="file" name="files[]" class="form-control border" multiple required>
                                         </td>
                                         <td valign="top">
-                                        <button class="btn btn-sm btn-default btn-round btn-icon" data-dismiss="modal" title="Cancelar"><i class="tim-icons icon-simple-remove"></i></button>
-                                    </td>
+                                            <button class="btn btn-sm btn-primary btn-round btn-icon" id = "agregarArchivo" ><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>
+                                            </td>
+                                            <td valign="top">
+                                            <button class="btn btn-sm btn-default btn-round btn-icon" data-dismiss="modal" title="Cancelar"><i class="tim-icons icon-simple-remove"></i></button>
+                                        </td>
+                                    </tr>
+                                <p>Archivox disponibles</></p>
+                                    <!--Listar los archivos que ya estan subidos-->
+                                
+                                @foreach($files as $file)
+                                    <tr class="archivo">
+                                        <td>{{$file->id}}</td>
+                                        <td><i class="icon icon-file"></i></td>
+                                        <td>
+                                            <p class="archivo_doc">{{$file->nombre}}</p>
+                                        </td>
+                                        <td><a href="{{ route('archivos.download', $file->id) }}">Descargar</a></td>
+                                    </tr>
+                                    @endforeach
+                            
+                                </td>
 
-                            </tr>
-                            </table>
-                        </div>
+                                </tr>
+                                </table>
+                            </div>                                  
+                            
+                            <div class="card-footer">
+                                <a class="btn btn-primary" href="#">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a> <br><br>              
+                            </div>                    
+                        </form>
+                        
                         <!--Fin Area de subida de archivos-->                    
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

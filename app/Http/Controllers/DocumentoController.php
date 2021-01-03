@@ -10,7 +10,7 @@ class DocumentoController extends Controller
 {
     public function archivos(){
         $files = Documento::all();
-        return view('proyectoViews.indicador.archivos', [
+        return view('proyectoViews.tareas.ganttAvance', [
             'files'=>$files,
         ]);
     }
@@ -34,7 +34,7 @@ class DocumentoController extends Controller
         }
 
         $files = Documento::all();
-        return redirect()->route('archivos.index');
+        return redirect()->route('tareas_avance.index', $id_proyecto);
     }
 
     public function archivos_download($id){
