@@ -48,8 +48,7 @@ class ProyectoController extends Controller
     //Lista de proyectos donde el usuario ha colaborado
     public function indexColaboracion()
     {
-        $idUsuarioLogeado=auth()->user()->id;
-        //return DB::table('permissions')->paginate(3);
+        $idUsuarioLogeado=auth()->user()->id;        
         $colaboraciones=DB::table('proyecto')
                 ->join('equipo_de_investigacion', 'proyecto.id_equipo','equipo_de_investigacion.id')
                 ->join('usuario_equipo_rol', 'equipo_de_investigacion.id','usuario_equipo_rol.id_equipo')                

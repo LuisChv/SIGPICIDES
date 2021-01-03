@@ -229,14 +229,15 @@
                   </div>
                   <br>
                   <p class="font-weight-bold">Comentarios:</p>
-                  <hr>
-                  <div id="ListaComentariosIndicador">
+                  <hr>  
+                  <div id="ListaComentariosIndicador" class="comment-box cuadroComentario" style="background-color: gainsboro; max-height: 400px;">
                     @foreach ($comentarios as $comentario)
                         <p class="font-weight-bold">{{$comentario->name}}:</p>
                         <p >{{$comentario->comentario}}</p>
                         <hr>
                     @endforeach                    
-                  </div>                                    
+                  </div>
+                  <br>                             
                   @if (!$miembro)
                   <table class="col-md-12">
                     <tr>

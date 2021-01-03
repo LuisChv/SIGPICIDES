@@ -306,7 +306,7 @@ class IndicadorController extends Controller
             ->where([['id_usuario',auth()->user()->id],['id_rol','=',5],['id_equipo',$proyecto->id_equipo]])->first();
             $comite=DB::table('comite_usuario')
             ->where([['id_usuario',auth()->user()->id],['id_comite',$proyecto->id_comite]])->first();
-            if(!$miembro && !$comite){
+            if(!$miembro && !$comite && $proyecto->id_estado!=null){
                 abort(403);
                 
             }

@@ -378,8 +378,8 @@ function avanceGantt(NODE) {
                         <p><b>Comentarios</b></p>
                             <!--lista de comentarios-->
                         <div id="comentariosList" class="comment-box cuadroComentario">
-                                <p class="font-weight-bold">Pirulo:</p>
-                                <p>Comentario de Pirulo</p>                                                           
+                                <p class="font-weight-bold">Nombre persona:</p>
+                                <p>Comentario de persona</p>                                                           
                         </div>
                         <br>
                         <table id="avanceComentarioEntrada" class="col-md-12">
