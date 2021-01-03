@@ -1,6 +1,6 @@
 @extends('simpleViews.roles.index')  
 @section('title')
-	Nuevo Role
+	Nuevo Rol
 @endsection
 @section('opcion')
 <div class="col-5">

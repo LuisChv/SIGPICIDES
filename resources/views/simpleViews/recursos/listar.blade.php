@@ -24,11 +24,11 @@
                     <div class="list-group">
                         @foreach ($tiposrec as $tipo)
                             <div>
-                                <table width='100%'>
-                                    <tr class="list-group-item list-group-flush" data-toggle="collapse" data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false" aria-controls="lista{{ $tipo->id }}">
+                                <table class="table-sm" width='100%'>
+                                    <tr class="py-1 list-group-flush" data-toggle="collapse" data-toggle="collapse" data-target="#lista{{ $tipo->id }}" aria-expanded="false" aria-controls="lista{{ $tipo->id }}">
                                         <td>
-                                            {{ $tipo->nombre }}&nbsp;&nbsp;
-                                            <i class="tim-icons icon-minimal-down"></i>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;{{ $tipo->nombre }}&nbsp;&nbsp;
+                                            <i class="tim-icons icon-minimal-down"></i></p>
                                         </td>
                                     </tr>
                                 </table>
