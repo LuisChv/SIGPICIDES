@@ -17,6 +17,9 @@
                         </a>
                     </div>
                 </div>
+                <div><input autocomplete="off" id="buscador2" class="form-control col-sm-9" name="proyectoNombre" 
+                    placeholder="Buscar nombre del proyecto" onclick="ejecutarBuscador({{json_encode($usersBuscador)}},'email' ,'buscador2','filtroUsuarios')">
+                </div>
                 <div class="card-body">
                     <div class="container list-group">
                         <table class="table">

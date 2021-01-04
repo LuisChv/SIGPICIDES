@@ -28,7 +28,7 @@ function autocomplete(inp, arr, arr2, procedencia) {
             b.setAttribute("data-target", "#create");
             //se settea el valor del id del usuario 
             b.setAttribute("onClick", "agregarMiembro(" + arr2[i] + ")");
-            if (procedencia == 'filtroProyectos') {
+            if (procedencia == 'filtroProyectos' || procedencia== 'filtroUsuarios') {
               //window.location = "solicitud/"+arr2[i]+"/resumen";
               b.setAttribute("id", arr2[i]);
             }
@@ -43,9 +43,14 @@ function autocomplete(inp, arr, arr2, procedencia) {
                 b.addEventListener("click", function(e) {
                 /*insert the value for the autocomplete text field:*/                  
                   inp.value = this.getElementsByTagName("input")[0].value;
-                  //redirección al resume
+                  //redirección al resumen
                   if (procedencia == 'filtroProyectos') {
                     window.location= "/proyecto/"+this.attributes.id.value+"/resumen";
+                  }
+                  //redirección al editar usuario
+                  if (procedencia == 'filtroUsuarios') {
+                    window.location = "/users/" + this.attributes.id.value + "/edit";
+                    
                   }
                   
                 //console.log(ind.value);
