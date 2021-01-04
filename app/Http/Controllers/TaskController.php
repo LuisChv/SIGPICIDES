@@ -63,8 +63,9 @@ class TaskController extends Controller
             //Retornar vista
             
             //Gantt para cuando el proyecto este en marcha y se quieran agregar avances
+
             if($proyecto->id_estado!=null && ($opcion==1 || $opcion==2 || $opcion==3)){
-                $files = Documento::all();
+                $files = Documento::whereRaw('id_task in (select id from tasks where id_proyecto= ?)',[$idProyecto])->get(); 
                 return view('proyectoViews.tareas.ganttAvance',['idProyecto'=>$idProyecto, 'indicadores'=>$indicadores, 'miembrosEquipo'=>$miembrosEquipo, 
                 'rolProyecto'=>$rolProyecto,'files'=>$files, 'proyecto'=>$proyecto]);
             }
