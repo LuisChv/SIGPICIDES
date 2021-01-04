@@ -28,6 +28,10 @@ class ProyectoController extends Controller
 
     public function misProyectos(){
         $user = auth()->user()->id;
+        //dd(auth()->user()->roles[0]->name);
+        if(auth()->user()->roles[0]->name!='Investigador'){
+            abort(403);
+        }
         //return DB::table('permissions')->paginate(3);
         $proyectos = DB::table('proyecto')
                 ->join('equipo_de_investigacion', 'proyecto.id_equipo','equipo_de_investigacion.id')
@@ -48,6 +52,9 @@ class ProyectoController extends Controller
     //Lista de proyectos donde el usuario ha colaborado
     public function indexColaboracion()
     {
+        if(auth()->user()->roles[0]->name!='Investigador'){
+            abort(403);
+        }
         $idUsuarioLogeado=auth()->user()->id;        
         $colaboraciones=DB::table('proyecto')
                 ->join('equipo_de_investigacion', 'proyecto.id_equipo','equipo_de_investigacion.id')
@@ -64,6 +71,7 @@ class ProyectoController extends Controller
     }
 
     public function resumen($id){
+        $rol=auth()->user()->roles[0]->name;
         $proyecto = Proyecto::where('proyecto.id',$id)
         ->join('estado_de_proy','proyecto.id_estado','estado_de_proy.id')
         ->select('proyecto.*', 'estado_de_proy.estado')
@@ -102,7 +110,8 @@ class ProyectoController extends Controller
             'solicitud'=>$solicitud, 'evaluaciones'=>$evaluaciones, 'estados'=>$estados_soli,
             'miembros_comite'=>$miembros_comite, 'factibilidad' => $factibilidad, 'miembros' => $miembros,
             'roles'=>$roles, 'miembrosEquipo'=>$miembrosEquipo, 'estados'=>$estados,
-            'tiempo' => $tiempo, 'total' => $total, 'finalizados' => $finalizados, 'estimados' => $estimados
+            'tiempo' => $tiempo, 'total' => $total, 'finalizados' => $finalizados, 'estimados' => $estimados,
+            'rol'=>$rol
             ]);
     }
     /**
@@ -112,6 +121,9 @@ class ProyectoController extends Controller
      */
     public function cambiarEstado(Request $request, $id)
     {        
+        if(auth()->user()->roles[0]->name!='Coordinador'){
+            abort(403);
+        }
         $proyecto= Proyecto::findOrFail($id);
         $proyecto->id_estado=$request->estadoProy;
         $proyecto->save();
@@ -123,6 +135,9 @@ class ProyectoController extends Controller
     //Controlador de la vista para mostrar todos los proyectos
     public function index()
     {
+        if(auth()->user()->roles[0]->name=='Investigador'){
+            abort(403);
+        }
         $tiposProy=DB::table('tipo_de_investigacion')->get();
         $subtiposProy=DB::table('subtipo_de_investigacion')->get();;
         $proyectos=DB::table('proyecto')->paginate(10);
@@ -136,7 +151,9 @@ class ProyectoController extends Controller
     //Proyectos filtrados
     public function indexFiltrado(Request $request)
     {
-        //dd($request->request);
+        if(auth()->user()->roles[0]->name=='Investigador'){
+            abort(403);
+        }
         $tiposProy=DB::table('tipo_de_investigacion')->get();
         $subtiposProy=DB::table('subtipo_de_investigacion')->get();;
         //Traer los proyectos segun los filtros indicados
