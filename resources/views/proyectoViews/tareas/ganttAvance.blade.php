@@ -278,7 +278,7 @@ function avanceGantt(NODE) {
     let idTask= NODE.parentNode.parentNode.parentNode.parentNode.attributes.task_id.value;
     //console.log(idTask);
     //Si el usuario no es lider de proyecto o miembro del comite, no dejar insertar comentario    
-    if(@json($rolProyecto)==6 || @json($rolProyecto)==7){
+    if((@json($rolProyecto)==6 || @json($rolProyecto)==7) || @json($proyecto->id_estado)!=1){
         $('#avanceComentarioEntrada').hide();
     }
     //Elemento donde se agregaran los comentarios
