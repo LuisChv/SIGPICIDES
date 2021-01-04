@@ -276,6 +276,7 @@
 //fUNCION PARA TRAER AL MODAL DEL AVANCE EL ID_TASK CORRESPONDIENTE PARA UTILIZARLO EN LOGICA
 function avanceGantt(NODE) {
     let idTask= NODE.parentNode.parentNode.parentNode.parentNode.attributes.task_id.value;
+    $('#archivosTarea').val(idTask);
     //console.log(idTask);
     //Si el usuario no es lider de proyecto o miembro del comite, no dejar insertar comentario    
     if(@json($rolProyecto)==6 || @json($rolProyecto)==7){
@@ -310,12 +311,53 @@ function avanceGantt(NODE) {
             }            
         }
     });    
+
+    let archivosLista=document.getElementById('archivosList');
+    
+    while (archivosLista.firstChild){
+        archivosLista.removeChild(archivosLista.firstChild);
+    } 
+    //Traer archivos para mostrarlos en modal
+    $.ajax({
+        url: '/archivosTarea/'+ idTask,        
+        type: 'get',
+        dataType: 'json',
+        success: function(response){            
+        let documentos= response.documentos;        
+        
+            for(let i=0; i<response.documentos.length; i++){                
+                var node= document.createElement("p");
+                var textNode= document.createTextNode(documentos[i].nombre); 
+                node.appendChild(textNode);                  
+                let id_doc = documentos[i].id;
+                
+                var ref= document.createElement("a");
+                var textRef= document.createTextNode("Descargar");
+                ref.appendChild(textRef); 
+                ref.setAttribute("href", "#");
+                        
+                archivosLista.appendChild(node);
+                archivosLista.appendChild(ref);
+            }            
+        }
+    }); 
+
     //let modalAvance= document.getElementById("modalAgregarComentario");
     $('#modalAgregarComentario').modal('show');
     //Agregar id_tarea como atributo del boton de guardar comentario, para que al guardar comentario lo haga a esa tarea    
     let botonGuardarC=document.getElementById('BotonGuardarComentarioGA');
     botonGuardarC.setAttribute("id_task", idTask);    
-} 
+    
+}
+
+function filtroArchivos(id_task){
+    if($('#archivosTarea').val(idTask) == id_task){
+        return true;
+    }
+    else{
+        return false;
+    }   
+}
 </script>
 
 <!--//TODO MODAL en proceso-->
@@ -339,8 +381,9 @@ function avanceGantt(NODE) {
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <!--Area de subida de archivos-->
-                        <form class="form" method="POST" action="{{ route('archivos.store')}}" enctype="multipart/form-data">
+                        <form class="form" method="POST" action="{{ route('archivos.tareas.store', $idProyecto )}}" enctype="multipart/form-data">
                             @csrf  
+                            <input type="hidden" name="archivosTarea" id = "archivosTarea">
                             <div class="normal-box">
                                 <table class="col-md-12">
                                     <tr>
@@ -365,28 +408,15 @@ function avanceGantt(NODE) {
                                         </td>
                                     </tr>
                                 <p>Archivox disponibles</></p>
-                                    <!--Listar los archivos que ya estan subidos-->
-                                
-                                @foreach($files as $file)
-                                    <tr class="archivo">
-                                        <td>{{$file->id}}</td>
-                                        <td><i class="icon icon-file"></i></td>
-                                        <td>
-                                            <p class="archivo_doc">{{$file->nombre}}</p>
-                                        </td>
-                                        <td><a href="{{ route('archivos.download', $file->id) }}">Descargar</a></td>
-                                    </tr>
-                                    @endforeach
+                                    <!--Listar los archivos que ya estan subidos-->                           
                             
-                                </td>
+                                <div id="archivosList" class="list">
+                                                                                                                       
+                                </div>
 
                                 </tr>
                                 </table>
-                            </div>                                  
-                            
-                            <div class="card-footer">
-                                <a class="btn btn-primary" href="#">Siguiente &nbsp;&nbsp;&nbsp;<i class="tim-icons icon-double-right font-weight-bold"></i></a> <br><br>              
-                            </div>                    
+                            </div>                                                  
                         </form>
                         
                         <!--Fin Area de subida de archivos-->                    

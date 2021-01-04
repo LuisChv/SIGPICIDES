@@ -214,19 +214,40 @@
                       <p class="font-weight-bold">Tipo de indicador: Cualitativo</p><hr>
                   @endif
 
-                  <p class="font-weight-bold">Archivos disponibles:</p><hr>
-                  <div class="row">
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                  </div>
+                   <form class="form" method="POST" action="{{ route('archivos.indicador.store', $indicador->id )}}" enctype="multipart/form-data">
+                            @csrf  
+                            <div class="normal-box">
+                                <table class="col-md-12">
+                                
+                                    <tr>
+                                    <td width="90%" align="left">
+                                    <tr>
+                                        <td>
+                                            <input type="file" name="files[]" class="form-control border" multiple required>
+                                        </td>
+                                        <td valign="top">
+                                            <button class="btn btn-sm btn-primary btn-round btn-icon" id = "agregarArchivo" ><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>
+                                            </td>
+                                        </td>
+                                    </tr>
+                                <p>Archivox disponibles</></p>
+                                    <!--Listar los archivos que ya estan subidos-->                           
+                            
+                                @foreach($files as $file)
+                                <tr class="archivo">
+                                    <td>{{$file->id}}</td>
+                                    <td><i class="icon icon-file"></i></td>
+                                    <td>
+                                        <p class="archivo_doc">{{$file->nombre}}</p>
+                                    </td>
+                                    <td><a href="#">Descargar</a></td>
+                                </tr>
+                                @endforeach
+
+                                </tr>
+                                </table>
+                            </div>                                                  
+                        </form>
                   <br>
                   <p class="font-weight-bold">Comentarios:</p>
                   <hr>  

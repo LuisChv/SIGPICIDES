@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Indicador;
 use App\Proyecto;
 use App\Variable;
+use App\Documento;
 use DB;
 
 class IndicadorController extends Controller
@@ -329,6 +330,9 @@ class IndicadorController extends Controller
             ->select('comentario_indicador.*', 'users.name')            
             ->orderBy('comentario_indicador.created_at')
             ->get();
+
+        
+        $files = Documento::where('id_indicador',$indicador->id)->get(); 
         
         //dd($comentarios);
         return view('proyectoViews.indicador.show.general', [
@@ -336,6 +340,7 @@ class IndicadorController extends Controller
             'variables' => $variables,
             'comentarios'=> $comentarios,
             'miembro'=>$miembro,
+            'files'=>$files,
         ]);
     }
 
