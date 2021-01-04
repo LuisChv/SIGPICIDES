@@ -13,6 +13,7 @@ class PermissionController extends Controller
     {
         $user = User::findOrFail($u);
         $tablas = Tabla::paginate(10);
+        $usersBuscador= User::all();
 
         $permisos = DB::select(
             "SELECT * FROM permissions");
@@ -39,7 +40,9 @@ class PermissionController extends Controller
             "permisos_usuario" => $permisos_usuario,
             "data" => $data,
             "tablas" => $tablas,
-            "user" => $user]);
+            "user" => $user,
+            'usersBuscador'=>$usersBuscador,
+            ]);
     }
 
     public function store()
