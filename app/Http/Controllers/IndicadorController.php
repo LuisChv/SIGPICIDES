@@ -429,7 +429,8 @@ class IndicadorController extends Controller
         return view('proyectoViews.indicador.show.estadistica', [
             'indicador' => $indicador,
             'variables' => $variables,
-            'valores'   => $valores
+            'valores'   => $valores,
+            'lider' => $lider
         ]); 
     }
 

@@ -56,7 +56,7 @@ Indicadores
                                 <td>Cualitativo</td>
                                 @endif
                                 <td>
-                                    <a class="btn btn-success btn-icon btn-round" href="{{route('indicador.general', $indicador->id)}}"><i class="tim-icons icon-pencil"></i></a>
+                                    <a class="btn btn-success btn-icon btn-round" href="{{route('indicador.general', $indicador->id)}}"><i class="tim-icons icon-double-right"></i></a>
                                 </td>
                             </tr>
                             @endforeach 
