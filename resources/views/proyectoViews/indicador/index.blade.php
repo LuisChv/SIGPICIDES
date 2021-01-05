@@ -4,24 +4,6 @@ Indicadores
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header ">
-                <div class="row">
-                    <div class="col-sm-12 text-left">
-                        <h2 class="card-title">Indicadores</h2>
-                        <p><i>Progreso</i></p>
-                        <div class="progreso_container">
-                            <div class="progress">
-                                <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                            </div>
-                        </div>
-                    </div>
-                    <p>&nbsp;</p><br>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
