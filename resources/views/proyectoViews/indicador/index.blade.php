@@ -113,7 +113,20 @@ Indicadores
             </div>
         </div>
     </div>
-
+    <table width="100%">
+        <tr>
+            <td width="50%">
+                <a class="btn btn-primary" href="{{ route('proyecto.resumen', [$proyecto->id]) }}">
+                    Resumen
+                </a>
+            </td>
+            <td width="50%" align="right">
+                <a class="btn btn-primary" href="{{ route('tareas_avance.index', [$proyecto->id]) }}">
+                    planificaci&oacuten
+                </a>
+            </td>
+        </tr>
+    </table>
             
 </div>
         @endsection

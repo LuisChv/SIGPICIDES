@@ -142,7 +142,8 @@ class IndicadorController extends Controller
 
         return view('proyectoViews.indicador.index', [
            'indicadores' => $indicadores,
-           'variables' => $variables
+           'variables' => $variables,
+           'proyecto'=> $proyecto
         ]);
     }
 
