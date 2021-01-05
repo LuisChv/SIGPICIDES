@@ -25,7 +25,6 @@ class DocumentoController extends Controller
             if(Storage::putFileAs('/public/'.$id_proyecto.'/tareas/',$file,$file->getClientOriginalName())){
                 $doc = new Documento;
                 $doc->nombre = $file->getClientOriginalName();
-                $doc->doc = "Prueba";
                 $doc->id_tipo_doc = 1;
                 $doc->id_task = request('archivosTarea');
                 $doc->save();
@@ -47,7 +46,6 @@ class DocumentoController extends Controller
             if(Storage::putFileAs('/public/'.$indicador->id_proy.'/indicadores/',$file,$file->getClientOriginalName())){
                 $doc = new Documento;
                 $doc->nombre = $file->getClientOriginalName();
-                $doc->doc = "Prueba";
                 $doc->id_tipo_doc = 1;
                 $doc->id_indicador = $indicador->id;
                 $doc->save();

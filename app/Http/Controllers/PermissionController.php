@@ -12,7 +12,7 @@ class PermissionController extends Controller
     public function index($u)
     {
         $user = User::findOrFail($u);
-        $tablas = Tabla::paginate(10);
+        $tablas = Tabla::all();
         $usersBuscador= User::all();
 
         $permisos = DB::select(

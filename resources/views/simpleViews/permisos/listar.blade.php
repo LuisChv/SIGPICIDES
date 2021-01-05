@@ -57,7 +57,7 @@
                         <!--fin de dropdown-->                  
                     </div>
                 </div>
-                {{ $tablas->links() }}
+            
             </div>
         </div>
     </div>
