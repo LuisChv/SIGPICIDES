@@ -231,12 +231,12 @@
                                         <td>
                                             <input type="file" name="files[]" class="form-control border" multiple required>
                                         </td>
-                                        <td valign="top">
+                                        <td valign="top" class="text-right">
                                             <button class="btn btn-sm btn-primary btn-round btn-icon" id = "agregarArchivo" ><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>
                                             </td>
                                         </td>
                                     </tr>
-                                <p>Archivox disponibles</></p>
+                                <p>Archivos disponibles</></p>
                                     <!--Listar los archivos que ya estan subidos-->                           
                             
                                 @foreach($files as $file)
