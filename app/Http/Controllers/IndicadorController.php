@@ -342,6 +342,7 @@ class IndicadorController extends Controller
             'comentarios'=> $comentarios,
             'miembro'=>$miembro,
             'files'=>$files,
+            'proyecto'=>$proyecto,
         ]);
     }
 

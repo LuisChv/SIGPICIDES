@@ -259,7 +259,7 @@
                     @endforeach                    
                   </div>
                   <br>                             
-                  @if (!$miembro)
+                  @if (!$miembro && $proyecto->id_estado==1)
                   <table class="col-md-12">
                     <tr>
                         <td width="100%" align="left">
