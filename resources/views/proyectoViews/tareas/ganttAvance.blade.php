@@ -133,7 +133,7 @@
             //console.log(@json(auth()->user()->roles[0]->name));
             //Validacion de que si el usuario es del comite no permitirles modificar los avances
             let rol= @json(auth()->user()->roles[0]->name);            
-            if(@json($rolProyecto)=="comite"){
+            if(@json($rolProyecto)=="comite" || @json($proyecto->id_estado!=1)){
                 return false;
                 console.log('si entro');
             }            
