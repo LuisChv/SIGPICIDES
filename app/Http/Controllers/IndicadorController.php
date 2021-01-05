@@ -143,7 +143,8 @@ class IndicadorController extends Controller
         return view('proyectoViews.indicador.index', [
            'indicadores' => $indicadores,
            'variables' => $variables,
-           'proyecto'=> $proyecto
+           'proyecto'=> $proyecto,
+           'lider' => $lider
         ]);
     }
 
@@ -308,9 +309,8 @@ class IndicadorController extends Controller
             ->where([['id_usuario',auth()->user()->id],['id_rol','=',5],['id_equipo',$proyecto->id_equipo]])->first();
             $comite=DB::table('comite_usuario')
             ->where([['id_usuario',auth()->user()->id],['id_comite',$proyecto->id_comite]])->first();
-            if(!$miembro && !$comite && $proyecto->id_estado!=null){
+            if((!$miembro && !$comite && $proyecto->id_estado!=null) || (!$lider && $indicador->modificable)){
                 abort(403);
-                
             }
             $miembro=false;
             if(!$lider && !$comite){
@@ -431,7 +431,7 @@ class IndicadorController extends Controller
             "SELECT VE.id, id_variable, VE.valor_x, VE.valor_y FROM variable V
             LEFT JOIN valor_eje VE ON V.id = VE.id_variable
             WHERE id_indicador = ?
-            ORDER BY VE.valor_x", [$id]);
+            ORDER BY VE.id", [$id]);
                 
         return view('proyectoViews.indicador.show.estadistica', [
             'indicador' => $indicador,

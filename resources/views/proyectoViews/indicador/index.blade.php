@@ -36,10 +36,13 @@ Indicadores
                                 <td>{{$indicador->tipo}}</td>
                                 @else
                                 <td>Cualitativo</td>
-                                @endif
+                                @endif                
                                 <td>
-                                    <a class="btn btn-success btn-icon btn-round" href="{{route('indicador.general', $indicador->id)}}"><i class="tim-icons icon-double-right"></i></a>
+                                    @if (!$indicador->modificable || $lider)
+                                        <a class="btn btn-success btn-icon btn-round" href="{{route('indicador.general', $indicador->id)}}"><i class="tim-icons icon-double-right"></i></a>
+                                    @endif
                                 </td>
+                                
                             </tr>
                             @endforeach 
                         </table>
