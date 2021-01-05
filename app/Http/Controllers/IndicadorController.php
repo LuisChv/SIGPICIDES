@@ -469,4 +469,25 @@ class IndicadorController extends Controller
         $indicador->save();
         return redirect()->back();
     }
+
+    public function finalizar(){
+        $indicador = Indicador::findOrFail(request('id_indicador'));
+
+        $proyecto=DB::table('proyecto')
+            ->where('id', $indicador->id_proy)->first();
+        if($proyecto){
+            $lider= DB::table('usuario_equipo_rol')
+            ->where([['id_usuario',auth()->user()->id],['id_rol','=',5],['id_equipo',$proyecto->id_equipo]])->first();
+            if(!$lider){
+                abort(403);
+            }
+
+        }else{
+            abort(404);
+        }
+
+        $indicador->finalizado = true;
+        $indicador->save();
+        return redirect()->back();
+    }
 }

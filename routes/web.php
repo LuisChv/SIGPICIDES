@@ -530,6 +530,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::post('indicador/descripcion', 'IndicadorController@descripcion')->name('indicador.descripcion');
 
+    Route::post('indicador/finalizar', 'IndicadorController@finalizar')->name('indicador.finalizar');
     
     Route::get('stats/index', 'SolicitudController@stats2')->name('stats.index');
 

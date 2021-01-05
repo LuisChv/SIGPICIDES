@@ -163,10 +163,16 @@
         @else
           <h2 class="col-md-8 card-title">{{$indicador->detalle}}</h2>
           <div class="col-md-4 text-right">
-              <label class="container2">
-                  <input type="checkbox" checked disabled title="Completado">
-                  <span class="checkmark"></span>
-              </label>
+              @if ($indicador->finalizado)
+                <h2 class="text-right text-primary text-uppercase">Finalizado</h2>
+              @else
+                <form method="POST" action="{{route('indicador.finalizar')}}">
+                    @csrf
+                    <input hidden name="id_indicador" value="{{$indicador->id}}">
+                    <button class="btn btn-primary btn-sm btn-icon" title="Finalizar"><i class="tim-icons icon-check-2"></i></button>
+                </form>
+              @endif
+                  
           </div>
           <div class="card">
               <div class="card-body">
