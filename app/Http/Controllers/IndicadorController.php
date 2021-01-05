@@ -431,7 +431,7 @@ class IndicadorController extends Controller
             "SELECT VE.id, id_variable, VE.valor_x, VE.valor_y FROM variable V
             LEFT JOIN valor_eje VE ON V.id = VE.id_variable
             WHERE id_indicador = ?
-            ORDER BY VE.id", [$id]);
+            ORDER BY VE.valor_x", [$id]);
                 
         return view('proyectoViews.indicador.show.estadistica', [
             'indicador' => $indicador,
