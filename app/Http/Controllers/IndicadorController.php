@@ -133,7 +133,7 @@ class IndicadorController extends Controller
             abort(404);
         }
 
-        $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ?", [$id]);
+        $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ? ORDER BY created_at", [$id]);
         $variables = DB::select(
             "SELECT V.id, V.id_indicador, V.modificable, V.nombre, V.color, VE.valor_y FROM variable V
             LEFT JOIN valor_eje VE ON V.id = VE.id_variable
@@ -376,7 +376,7 @@ class IndicadorController extends Controller
         $tareas = DB::select(
             "SELECT T.id, T.text, T.progress FROM tasks T
             JOIN task_indicador TI ON TI.id_task = T.id
-            WHERE TI.id_indicador = ?", [$id]);
+            WHERE TI.id_indicador = ? ORDER BY sortorder", [$id]);
 
         $usuarios = DB::select(
             "SELECT U.name, TU.id_task FROM users U
