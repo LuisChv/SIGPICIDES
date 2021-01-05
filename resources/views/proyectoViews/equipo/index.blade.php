@@ -166,7 +166,9 @@
                             <select class="form-control selectorWapis" name="rolmiembro" id="rolmiembroEditar">
                                 <option selected disabled hidden >Seleccionar rol</option>
                                 @foreach ($roles as $rol)
-                                    @if ($rol->id != 5)
+                                    @if ($rol->id < 6 || $rol->id>7)
+                                        <option style="display:none;"></option>
+                                    @else
                                         <option val="{{$rol->id}}" style="color: black !important;">{{ $rol->name }}</option>
                                     @endif
                                 @endforeach
