@@ -390,7 +390,8 @@ class IndicadorController extends Controller
         return view('proyectoViews.indicador.show.task',[
             'indicador' => $indicador,
             'tareas' => $tareas,
-            'usuarios' => $usuarios
+            'usuarios' => $usuarios,
+            'proyecto'=>$proyecto,
         ]);
     }
 
@@ -437,7 +438,9 @@ class IndicadorController extends Controller
             'indicador' => $indicador,
             'variables' => $variables,
             'valores'   => $valores,
-            'lider' => $lider
+            'lider' => $lider,
+            'proyecto'=>$proyecto,
+            
         ]); 
     }
 
