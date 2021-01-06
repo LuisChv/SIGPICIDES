@@ -98,7 +98,7 @@ Primera etapa
                         Información general
                     </h3>
                     <!--TODO alejandro modificar if segun sea miembro o coordinador-->
-                    @if (true)
+                    @if ($rol=='Coordinador')
                     <button class="btn btn-primary text-center" data-toggle="modal" data-target="#estadoProyModal">
                         Cambiar Estado
                     </button>    

@@ -18,7 +18,7 @@ class CreateTasksTable extends Migration
             $table->integer("id_proyecto")->nullable();
             $table->foreign('id_proyecto')->references('id')->on('proyecto')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('sortorder')->default(0);
-            $table->string('text');
+            $table->string('text',1000);
             $table->integer('duration')->default(1);
             $table->float('progress')->default(0);
             $table->dateTime('start_date');

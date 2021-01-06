@@ -16,7 +16,12 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $data = Role::paginate(5);
+        $data = Role::where([
+            ['id', '!=', '5'], 
+            ['id', '!=', '6'], 
+            ['id', '!=', '7'], 
+            ['id', '!=', '8']
+        ])->paginate(5);
         return view ('simpleViews.roles.index',[
             'data' => $data
         ]);
@@ -59,7 +64,7 @@ class RoleController extends Controller
         $rol = new Role();
         $rol->name = request('name');
         $rol->slug = request('slug');
-        $rol->tipoRol = false;
+        //$rol->tipoRol = false;
 
         $rol->save();
 

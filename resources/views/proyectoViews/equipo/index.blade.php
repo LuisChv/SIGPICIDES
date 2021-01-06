@@ -53,7 +53,7 @@
                                 <td width='10%' align="right">
                                     <div class="btn-group" role="group">
                                         @if ( $miembro->id_rol != 5  )
-                                            <button type="button" data-toggle=modal data-target="#update" class="btn btn-success btn-sm btn-sm btn-icon btn-round" onclick="editarRolMiembro({{$miembro->id}},{{$miembro->id_rol}})">
+                                            <button type="button" data-toggle=modal data-target="#update" class="btn btn-success btn-sm btn-sm btn-icon btn-round" onclick="editarRolMiembro({{$miembro->id_usuario}})">
                                                 <i class="tim-icons icon-pencil"></i>
                                             </button>
                                             @csrf
@@ -131,7 +131,7 @@
                             <select required class="form-control selectorWapis" name="rolmiembro" id="rolmiembro">
                                 <option value=""  selected disabled hidden >Seleccionar rol</option>
                                 @foreach ($roles as $rol)
-                                    @if ($rol->id == 5 ||  $rol->id < 4)
+                                    @if ($rol->id < 6 || $rol->id>7)
                                         <option style="display:none;"></option>
                                     @else
                                         <option style="color: black !important;">{{ $rol->name }}</option>
@@ -163,19 +163,20 @@
                         </div>
                         <div class="modal-body">
                             <label for="rol">ROL DE EQUIPO</label>
-                            <select class="form-control selectorWapis" name="rolmiembro" id="rolmiembroEditar">
-                                <option selected disabled hidden >Seleccionar rol</option>
+                            <select required class="form-control selectorWapis" name="rolmiembro" id="rolmiembroEditar">
+                                <option selected disabled hidden value="">Seleccionar rol</option>
                                 @foreach ($roles as $rol)
-                                    @if ($rol->id != 5)
-                                        <option val="{{$rol->id}}" style="color: black !important;">{{ $rol->name }}</option>
+                                    @if ($rol->id < 6 || $rol->id>7)
+                                        <option style="display:none;"></option>
+                                    @else
+                                        <option value="{{$rol->id}}" style="color: black !important;">{{ $rol->name }}</option>
                                     @endif
                                 @endforeach
                             </select> 
-                            <input hidden id="id_proy" val={{$proyecto->id}}>
-                            <input hidden id="id_miembro">
+                            <input hidden name="id_proy" value={{$proyecto->id}}>
+                            <input hidden name="investigador" id="id_miembro">
                         </div>
                         <div class="modal-footer">
-                            <input type="hidden" name="investigador" id="investigador">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary">Actualizar</button>
                         </div>

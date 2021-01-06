@@ -45,7 +45,7 @@ Roles
                                                 </a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <button @if ($rol->id < 5) disabled @endif type="button" onClick="" style="pointer-events: auto;" title="No se puede eliminar un rol primario" class="btn btn-warning btn-sm btn-icon btn-round ">
+                                                <button @if ($rol->id < 5) disabled @endif type="button" onClick="confirmar({{$rol->id}})" style="pointer-events: auto;" title="No se puede eliminar un rol primario" class="btn btn-warning btn-sm btn-icon btn-round ">
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button> 
                                             </div>

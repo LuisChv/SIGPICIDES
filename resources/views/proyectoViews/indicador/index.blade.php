@@ -4,24 +4,6 @@ Indicadores
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header ">
-                <div class="row">
-                    <div class="col-sm-12 text-left">
-                        <h2 class="card-title">Indicadores</h2>
-                        <p><i>Progreso</i></p>
-                        <div class="progreso_container">
-                            <div class="progress">
-                                <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                            </div>
-                        </div>
-                    </div>
-                    <p>&nbsp;</p><br>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
@@ -51,19 +33,22 @@ Indicadores
                             <tr>
                                 <td>{{$indicador->detalle}}</td>
                                 @if($indicador->tipo)
-                                <td>{{$indicador->tipo}}</td>
+                                    <td>Cuantitativo</td>
                                 @else
-                                <td>Cualitativo</td>
-                                @endif
+                                    <td>Cualitativo</td>
+                                @endif                
                                 <td>
-                                    <a class="btn btn-success btn-icon btn-round" href="{{route('indicador.general', $indicador->id)}}"><i class="tim-icons icon-pencil"></i></a>
+                                    @if (!$indicador->modificable || $lider)
+                                        <a class="btn btn-success btn-icon btn-round" href="{{route('indicador.general', $indicador->id)}}"><i class="tim-icons icon-double-right"></i></a>
+                                    @endif
                                 </td>
+                                
                             </tr>
                             @endforeach 
                         </table>
                                       
                     </div>
-                    @foreach ($indicadores as $indicador)
+                    
                     <div class="tab-pane fade" id="cuantitativo" role="tabpanel" aria-labelledby="cuantitativo-tab">                    
                         <table class="table">
                             <tr>
@@ -71,21 +56,23 @@ Indicadores
                                 <th>Tipo</th>
                                 <th></th>
                             </tr>
-                            @if($indicador->tipo==true)
-                            <tr>
-                                <td>{{$indicador->detalle}}</td>
+                            @foreach ($indicadores as $indicador)
                                 @if($indicador->tipo)
-                                <td>{{$indicador->tipo}}</td>
-                                @else
-                                <td>Por definir</td>
+                                    <tr>
+                                        <td>{{$indicador->detalle}}</td>
+                                        <td>Cuantitativo</td>
+                                        <td>
+                                            @if (!$indicador->modificable || $lider)
+                                                <a class="btn btn-success btn-icon btn-round" href="{{route('indicador.general', $indicador->id)}}"><i class="tim-icons icon-double-right"></i></a>
+                                            @endif
+                                        </td>
+                                    </tr>
                                 @endif
-                                <td>
-                                    <button class="btn btn-warning btn-icon btn-round">X</button>
-                                </td>
-                            </tr>
-                            @endif
+                            @endforeach
                         </table>                    
                     </div>
+                    
+                    
                     <div class="tab-pane fade" id="cualitativo" role="tabpanel" aria-labelledby="cualitativo-tab">
                         <table class="table">
                             <tr>
@@ -93,27 +80,40 @@ Indicadores
                                 <th>Tipo</th>
                                 <th></th>
                             </tr>
-                            @if($indicador->tipo==false)
-                            <tr>
-                                <td>{{$indicador->detalle}}</td>
-                                @if($indicador->tipo)
-                                <td>{{$indicador->tipo}}</td>
-                                @else
-                                <td>Por definir</td>
+                            @foreach ($indicadores as $indicador)
+                                @if(!$indicador->tipo)
+                                <tr>
+                                    <td>{{$indicador->detalle}}</td>
+                                    <td>Cualitativo</td>
+                                    <td>
+                                        @if (!$indicador->modificable || $lider)
+                                            <a class="btn btn-success btn-icon btn-round" href="{{route('indicador.general', $indicador->id)}}"><i class="tim-icons icon-double-right"></i></a>
+                                        @endif
+                                    </td>
+                                </tr>
                                 @endif
-                                <td>
-                                    <button class="btn btn-warning btn-icon btn-round">X</button>
-                                </td>
-                            </tr>
-                            @endif
+                            @endforeach
                         </table>  
                     </div>
-                    @endforeach
+                   
                 </div>
             </div>
         </div>
     </div>
-
+    <table width="100%">
+        <tr>
+            <td width="50%">
+                <a class="btn btn-primary" href="{{ route('proyecto.resumen', [$proyecto->id]) }}">
+                    Resumen
+                </a>
+            </td>
+            <td width="50%" align="right">
+                <a class="btn btn-primary" href="{{ route('tareas_avance.index', [$proyecto->id]) }}">
+                    planificaci&oacuten
+                </a>
+            </td>
+        </tr>
+    </table>
             
 </div>
         @endsection

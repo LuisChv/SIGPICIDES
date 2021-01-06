@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Indicador;
 use App\Proyecto;
 use App\Variable;
+use App\Documento;
 use DB;
 
 class IndicadorController extends Controller
@@ -132,7 +133,7 @@ class IndicadorController extends Controller
             abort(404);
         }
 
-        $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ?", [$id]);
+        $indicadores = DB::select("SELECT * FROM indicador WHERE id_proy = ? ORDER BY created_at", [$id]);
         $variables = DB::select(
             "SELECT V.id, V.id_indicador, V.modificable, V.nombre, V.color, VE.valor_y FROM variable V
             LEFT JOIN valor_eje VE ON V.id = VE.id_variable
@@ -141,7 +142,9 @@ class IndicadorController extends Controller
 
         return view('proyectoViews.indicador.index', [
            'indicadores' => $indicadores,
-           'variables' => $variables
+           'variables' => $variables,
+           'proyecto'=> $proyecto,
+           'lider' => $lider
         ]);
     }
 
@@ -306,9 +309,8 @@ class IndicadorController extends Controller
             ->where([['id_usuario',auth()->user()->id],['id_rol','=',5],['id_equipo',$proyecto->id_equipo]])->first();
             $comite=DB::table('comite_usuario')
             ->where([['id_usuario',auth()->user()->id],['id_comite',$proyecto->id_comite]])->first();
-            if(!$miembro && !$comite){
+            if((!$miembro && !$comite && $proyecto->id_estado!=null) || (!$lider && $indicador->modificable)){
                 abort(403);
-                
             }
             $miembro=false;
             if(!$lider && !$comite){
@@ -329,6 +331,9 @@ class IndicadorController extends Controller
             ->select('comentario_indicador.*', 'users.name')            
             ->orderBy('comentario_indicador.created_at')
             ->get();
+
+        
+        $files = Documento::where('id_indicador',$indicador->id)->get(); 
         
         //dd($comentarios);
         return view('proyectoViews.indicador.show.general', [
@@ -336,6 +341,8 @@ class IndicadorController extends Controller
             'variables' => $variables,
             'comentarios'=> $comentarios,
             'miembro'=>$miembro,
+            'files'=>$files,
+            'proyecto'=>$proyecto,
         ]);
     }
 
@@ -369,7 +376,7 @@ class IndicadorController extends Controller
         $tareas = DB::select(
             "SELECT T.id, T.text, T.progress FROM tasks T
             JOIN task_indicador TI ON TI.id_task = T.id
-            WHERE TI.id_indicador = ?", [$id]);
+            WHERE TI.id_indicador = ? ORDER BY sortorder", [$id]);
 
         $usuarios = DB::select(
             "SELECT U.name, TU.id_task FROM users U
@@ -383,7 +390,8 @@ class IndicadorController extends Controller
         return view('proyectoViews.indicador.show.task',[
             'indicador' => $indicador,
             'tareas' => $tareas,
-            'usuarios' => $usuarios
+            'usuarios' => $usuarios,
+            'proyecto'=>$proyecto,
         ]);
     }
 
@@ -429,7 +437,10 @@ class IndicadorController extends Controller
         return view('proyectoViews.indicador.show.estadistica', [
             'indicador' => $indicador,
             'variables' => $variables,
-            'valores'   => $valores
+            'valores'   => $valores,
+            'lider' => $lider,
+            'proyecto'=>$proyecto,
+            
         ]); 
     }
 
@@ -458,6 +469,27 @@ class IndicadorController extends Controller
         }
 
         $indicador->descrip_avance = request('descripcion');
+        $indicador->save();
+        return redirect()->back();
+    }
+
+    public function finalizar(){
+        $indicador = Indicador::findOrFail(request('id_indicador'));
+
+        $proyecto=DB::table('proyecto')
+            ->where('id', $indicador->id_proy)->first();
+        if($proyecto){
+            $lider= DB::table('usuario_equipo_rol')
+            ->where([['id_usuario',auth()->user()->id],['id_rol','=',5],['id_equipo',$proyecto->id_equipo]])->first();
+            if(!$lider){
+                abort(403);
+            }
+
+        }else{
+            abort(404);
+        }
+
+        $indicador->finalizado = true;
         $indicador->save();
         return redirect()->back();
     }

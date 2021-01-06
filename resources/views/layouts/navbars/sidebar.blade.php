@@ -134,13 +134,7 @@
                                     <i class="tim-icons icon-app"></i>
                                     <p>{{ __('General') }}</p>
                                 </a>
-                            </li>
-                            <li @if ($pageSlug == 'informes.proyecto') class="active " @endif>
-                                <a href="{{ route('stats.proyecto')  }}">
-                                    <i class="tim-icons icon-notes"></i>
-                                    <p>{{ __('Proyectos') }}</p>
-                                </a>
-                            </li>                       
+                            </li>                  
                     </ul>
                 </div>
             </li>

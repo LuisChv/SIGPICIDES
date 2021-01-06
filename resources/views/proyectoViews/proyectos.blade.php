@@ -26,13 +26,13 @@
                                         <li class="nav-item dropdown">
                                             <p id="botonSeleccionadorProyectoFiltro" class="btn btn-secondary text-white" data-toggle="dropdown">{{$nombreElegido ?? 'Todos los proyectos'}} &nbsp;<i class="tim-icons icon-minimal-down"></i></p>
                                             <ul class="dropdown-menu">
-                                                <li><a onclick="filtrotipo(this,0)" class="dropdown-item">Todos los proyectos</a>
+                                                <li><a onclick="filtrotipo(this,0)" class="dropdown-item text-dark">Todos los proyectos</a>
                                             @foreach ($tiposProy as $tipo)
-                                                <li><a  onclick="filtrotipo(this,1)" class="dropdown-item">{{$tipo->nombre}}</a>
+                                                <li><a  onclick="filtrotipo(this,1)" class="dropdown-item text-dark">{{$tipo->nombre}}</a>
                                                     <ul class="submenu dropdown-menu">
                                                         @foreach ($subtiposProy as $subtipo)
                                                             @if ($subtipo->id_tipo==$tipo->id)
-                                                            <li><a onclick="filtrotipo(this,2)" class="dropdown-item">{{$subtipo->nombre}}</a></li>    
+                                                            <li><a onclick="filtrotipo(this,2)" class="dropdown-item text-dark">{{$subtipo->nombre}}</a></li>    
                                                             @endif
                                                         @endforeach                                                
                                                     </ul>
@@ -79,7 +79,7 @@
                                     <div class="btn-group">
                                         <a href="{{ route('proyecto.resumen', $proyecto->id)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Información general"><i class="tim-icons icon-notes"></i></a>
                                         <a href="{{route('tareas_avance.index', $proyecto->id)}}" class="btn btn-primary btn-sm btn-round btn-icon" title="Planificación & avances"><i class="tim-icons icon-map-big"></i></a>
-                                        <button onclick="confirmar()" class="btn btn-danger btn-sm btn-round btn-icon" title="Eliminar proyecto"><i class="tim-icons icon-simple-remove"></i></button>
+                                        <a href="{{ route('indicadores.index', $proyecto->id) }}" class="btn btn-primary btn-sm btn-round btn-icon" title="Indicadores"><i class="tim-icons icon-chart-bar-32"></i></a>
                                     </div>
                                 </td>
                             </tr>    

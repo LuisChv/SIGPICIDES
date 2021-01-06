@@ -69,7 +69,10 @@ class UsuarioEquipoRolController extends Controller
           }
  
            //Miembros del equipo 
-            $miembros= DB::select('SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ?', [$id_equipo]);
+            $miembros= DB::select(
+                'SELECT * FROM users INNER JOIN usuario_equipo_rol ON users.id = usuario_equipo_rol.id_usuario AND id_equipo = ? ORDER BY usuario_equipo_rol.id', 
+                [$id_equipo]
+            );
           
           //Roles
           $roles = DB::select('SELECT * FROM roles');
@@ -156,19 +159,16 @@ class UsuarioEquipoRolController extends Controller
     //public function update(Request $request, $id)
     public function update($id)
     {
-        /*
-        $id=request('id_proy');
-        $id_investigador = request('investigador');
-        $role = Role::where('name', request('rolmiembro'))->first();;
-        $rol_miembro = Role::where('name', request('rolmiembro'))->first();
+        $proyecto = Proyecto::findOrFail($id);
 
+        $uer = UsuarioEquipoRol::where([
+            ['id_usuario', request('investigador')],
+            ['id_equipo', $proyecto->id_equipo]
+        ])->first();
+        $uer->id_rol = request('rolmiembro');
+        $uer->save();
 
-        DB::table('usuario_equipo_rol')->where('id_investigador', $id_investigador)->update([    
-            'id_rol'=>$role->id,
-        ]);
-
-
-        return redirect()->route('miembros.index',[$id]);*/
+        return redirect()->back();
     }
 
     /**

@@ -38,7 +38,7 @@ Colaboraciones
                             </tr>
                             <div class="container">
                             @foreach ($colaboraciones as $colab)
-                                <tr id="{{$colab->id}}" onMouseOver="ResaltarFila({{$colab->id}});" onMouseOut="RestablecerFila({{$colab->id}}, '')"  onClick="CrearEnlace('{{ route('solicitud.resumen', $colab->id)}}');">
+                                <tr id="{{$colab->id}}" onMouseOver="ResaltarFila({{$colab->id}});" onMouseOut="RestablecerFila({{$colab->id}}, '')"  onClick="CrearEnlace('{{ route('proyecto.resumen', $colab->id)}}');">
                                     <td>{{$colab->nombre ?? 'nombre proyecto'}}</td>
                                     @if ($colab->id_rol==6)
                                         <td>{{"Investigador Adjunto"}}</td>

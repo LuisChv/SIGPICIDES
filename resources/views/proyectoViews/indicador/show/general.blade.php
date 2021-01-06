@@ -10,7 +10,7 @@
         
       <!-- INICIO DE IF A -->
       
-      @if ($indicador->modificable)
+      @if ($indicador->modificable && !$indicador->finalizado && $proyecto->id_estado == 1)
           <h2 class="col-md-8 card-title">{{$indicador->detalle}}</h2>
           <div class="col-md-4 text-right">
               @if (!$indicador->tipo || count($variables) > 1)
@@ -161,12 +161,23 @@
           
         <!-- ELSE DE IF A -->
         @else
-          <h2 class="col-md-8 card-title">{{$indicador->detalle}}</h2>
-          <div class="col-md-4 text-right">
-              <label class="container2">
-                  <input type="checkbox" checked disabled title="Completado">
-                  <span class="checkmark"></span>
-              </label>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <h2 class="col-md-8 text-justify">{{$indicador->detalle}}</h2>
+                    <div class="col-md-4 text-right">
+                        @if ($indicador->finalizado)
+                            <h2 class="text-right text-primary text-uppercase">Finalizado</h2>
+                        @else
+                            <form method="POST" action="{{route('indicador.finalizar')}}">
+                                @csrf
+                                <input hidden name="id_indicador" value="{{$indicador->id}}">
+                                <button class="btn btn-primary btn-sm btn-icon" title="Finalizar"><i class="tim-icons icon-check-2"></i></button>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+            </div>
           </div>
           <div class="card">
               <div class="card-body">
@@ -175,34 +186,37 @@
                           <p class="font-weight-bold">Descripción</p>
                       </div>
                       <div class="col-md-4 text-right">
-                          <button class="btn btn-primary btn-sm btn-icon" data-toggle="modal" data-target="#modalDescripcion"><i class="tim-icons icon-pencil"></i></button>
-                                  <form method="POST" action="{{route('indicador.descripcion')}}">
-                                      @csrf
-                                      <div class="modal fade" id="modalDescripcion" tabindex="-1" role="dialog" aria-hidden="true">
-                                          <div class="modal-dialog" role="document">
-                                              <div class="modal-content">
-                                                  <div class="modal-header">
-                                                      <h5 class="modal-title">Actualizar descripción de avance</h5>
-                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                          <span aria-hidden="false">&times;</span>
-                                                      </button>
-                                                  </div>
-                                                  <div class="modal-body" >                     
-                                                      <div class="row">
-                                                          <div class="mr-auto ml-auto col-md-12">
-                                                              <textarea class="inputArea" name="descripcion" rows="3" maxlength="750"></textarea>	
-                                                          </div>
-                                                          <input hidden name="id_indicador" value="{{$indicador->id}}"/>
-                                                      </div>
-                                                  </div>
-                                                  <div class="modal-footer">
-                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                      <button type="submit" class="btn btn-primary">Añadir</button>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </form>
+                          @if (!$indicador->finalizado && $proyecto->id_estado == 1)
+                            <button class="btn btn-primary btn-sm btn-icon" data-toggle="modal" data-target="#modalDescripcion"><i class="tim-icons icon-pencil"></i></button>
+                            <form method="POST" action="{{route('indicador.descripcion')}}">
+                                @csrf
+                                <div class="modal fade" id="modalDescripcion" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Actualizar descripción de avance</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="false">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" >                     
+                                                <div class="row">
+                                                    <div class="mr-auto ml-auto col-md-12">
+                                                        <textarea class="inputArea" name="descripcion" rows="3" maxlength="750"></textarea>	
+                                                    </div>
+                                                    <input hidden name="id_indicador" value="{{$indicador->id}}"/>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-primary">Añadir</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                          @endif
+                          
                       </div>
                   </div>
                   <hr>
@@ -214,30 +228,57 @@
                       <p class="font-weight-bold">Tipo de indicador: Cualitativo</p><hr>
                   @endif
 
-                  <p class="font-weight-bold">Archivos disponibles:</p><hr>
-                  <div class="row">
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                      <div class="col-md-3">archivo.jpg</div>
-                  </div>
+                   <form class="form" method="POST" action="{{ route('archivos.indicador.store', $indicador->id )}}" enctype="multipart/form-data">
+                            @csrf  
+                            <br><h4 class ="title">AVANCE INDICADOR </h4>
+                            @if (!$indicador->finalizado  && $proyecto->id_estado == 1)
+                                <input type="file" name="files[]" class="form-control border" multiple>
+                            @endif
+                            <div class="normal-box">
+                                <table class="col-md-12">
+                                    <tr>
+                                        <p>  <center> <b> Archivos disponibles </b> </center> </p>
+                                    </tr>
+                                    <!--Listar los archivos que ya estan subidos-->                           
+                            
+                                @foreach($files as $file)
+                                <tr class="archivo">
+                                    <td>{{$file->id}}</td>
+                                    <td><i class="icon icon-file"></i></td>
+                                    <td>
+                                        <p class="archivo_doc">{{$file->nombre}}</p>
+                                    </td>
+                                    <td><a href="{{ route('archivos.download', [$indicador->id , $file->id] )}}">Descargar</a></td>
+                                </tr>
+                                @endforeach
+
+                                </tr>
+                                </table>
+                                @if (!$indicador->finalizado && $proyecto->id_estado == 1)
+                                    <br><p class ="title">Descripcion de Avance </p>
+                                    <input type="text" class= "inputArea" name="descripcionAvance" placeholder="Descripción del avance" maxlength="900"><br>
+                                @endif
+                            </div> 
+
+                            @if (!$indicador->finalizado && $proyecto->id_estado == 1)
+                                <div>
+                                    <button class="btn btn-primary" id = "agregarArchivo" ><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>  
+                                </div>
+                            @endif
+                                     
+                        </form>
                   <br>
                   <p class="font-weight-bold">Comentarios:</p>
-                  <hr>
-                  <div id="ListaComentariosIndicador">
+                  <hr>  
+                  <div id="ListaComentariosIndicador" class="comment-box cuadroComentario" style="background-color: gainsboro; max-height: 400px;">
                     @foreach ($comentarios as $comentario)
                         <p class="font-weight-bold">{{$comentario->name}}:</p>
                         <p >{{$comentario->comentario}}</p>
                         <hr>
                     @endforeach                    
-                  </div>                                    
-                  @if (!$miembro)
+                  </div>
+                  <br>                             
+                  @if (!$miembro && $proyecto->id_estado==1 && !$indicador->finalizado && $proyecto->id_estado == 1)
                   <table class="col-md-12">
                     <tr>
                         <td width="100%" align="left">

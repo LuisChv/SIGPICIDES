@@ -23,5 +23,11 @@
 
 			</div>
 		</div>	
+		<div class="col-md-6">
+			<a class="btn btn-primary btn-icon" href="{{ route('indicadores.index', [$proyecto->id]) }}">
+				<i class="tim-icons icon-double-left"></i>
+			</a>
+		</div>
+
 	</div>
 @endsection

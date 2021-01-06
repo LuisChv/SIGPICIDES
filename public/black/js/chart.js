@@ -44,26 +44,18 @@ function ejecutarChart(labels, datavalues, id){
             borderWidth: 1
           }]
         },
-        options: {
+        options: {          
+          tooltips: {
+              callbacks: {
+                  label: tooltipItem => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`, 
+                  title: () => null,
+              }
+          },
           responsive: true,
           scales: {
             xAxes: [{
-              ticks: {
-                maxRotation: 90,
-                minRotation: 80
-              },
                 gridLines: {
                 offsetGridLines: true // à rajouter
-              }
-            },
-            {
-              position: "top",
-              ticks: {
-                maxRotation: 90,
-                minRotation: 80
-              },
-              gridLines: {
-                offsetGridLines: true // et matcher pareil ici
               }
             }],
             yAxes: [{
@@ -139,6 +131,7 @@ function buildChart(arr, identificador , attr1, attr2){
     for (let i=0; i<arr.length; i++){
         //console.log(arr[i]);
         if(arr[i][attr2]!=null && arr[i][attr2]>0){
+            /*
             if(arr[i][attr1].length>25){
                 let aux= arr[i][attr1].substring(0,1) + ". ";
                 let cadena =aux + arr[i][attr1].substr(-20);
@@ -146,7 +139,8 @@ function buildChart(arr, identificador , attr1, attr2){
             }else{
                 labels.push(arr[i][attr1]);
             }
-            //labels.push(arr[i][attr1]);
+            */
+            labels.push(arr[i][attr1]);
             dataset.push(arr[i][attr2]);
         }
     } 

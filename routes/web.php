@@ -530,6 +530,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
 
     Route::post('indicador/descripcion', 'IndicadorController@descripcion')->name('indicador.descripcion');
 
+    Route::post('indicador/finalizar', 'IndicadorController@finalizar')->name('indicador.finalizar');
     
     Route::get('stats/index', 'SolicitudController@stats2')->name('stats.index');
 
@@ -573,10 +574,12 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     /*********************Documentos************************************** */
     Route::get('proyecto/archivos', 'DocumentoController@archivos')->name('archivos.index')
     ->middleware('has.permission:solicitudes.create');
-    Route::post('proyecto/archivos/store', 'DocumentoController@archivos_store')->name('archivos.store')
+    Route::post('proyecto/archivosTarea/store/{id}', 'DocumentoController@archivos_tareas_store')->name('archivos.tareas.store')
     ->middleware('has.permission:solicitudes.create');
-    Route::get('proyecto/archivos/download/{id}', 'DocumentoController@archivos_download')->name('archivos.download')
+    Route::post('proyecto/archivosIndicador/store/{id}', 'DocumentoController@archivos_indicador_store')->name('archivos.indicador.store')
     ->middleware('has.permission:solicitudes.create');
+    Route::get('proyecto/archivos/download/{id_indicador}/{id}', 'DocumentoController@archivos_download')->name('archivos.download');
+    Route::get('archivosTarea/{id}', 'DocumentoController@traerArchivos')->name('archivosTarea.traer');
 
     /****************************COMENTARIOS TAREAS************************************** */
     //TODO agregar permisos

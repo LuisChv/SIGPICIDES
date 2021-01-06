@@ -47,19 +47,10 @@ function editarObjetivo(id_objetivo, descripcion){
     id.val(id_objetivo);
 }
 //editar rol de miembro vista Index controlador: UsuarioEquipoRol
-function editarRolMiembro(id_miembro, id_rol){
-    var rol=$('#rolMiembroEditar');
+function editarRolMiembro(id_miembro){
     var miembro=$('#id_miembro');
     miembro.val(id_miembro);
     console.log(miembro);
-    //rol.removeAttr('selected').filter(['value='+id_rol+']']).attr('selected', true);
-    //rol.val(id_rol)
-    rol.each(function() {
-        if($(this).val() == id_rol) {
-            $(this).attr('selected', 'selected');
-        }
-    });
-    console.log(rol);
 }
 function bloquearRecurso(valor){
     var btnrecurso=$('btnAñadirRec'+valor);

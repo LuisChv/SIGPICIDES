@@ -133,7 +133,7 @@
             //console.log(@json(auth()->user()->roles[0]->name));
             //Validacion de que si el usuario es del comite no permitirles modificar los avances
             let rol= @json(auth()->user()->roles[0]->name);            
-            if(@json($rolProyecto)=="comite"){
+            if(@json($rolProyecto)=="comite" || @json($proyecto->id_estado!=1)){
                 return false;
                 console.log('si entro');
             }            
@@ -276,9 +276,10 @@
 //fUNCION PARA TRAER AL MODAL DEL AVANCE EL ID_TASK CORRESPONDIENTE PARA UTILIZARLO EN LOGICA
 function avanceGantt(NODE) {
     let idTask= NODE.parentNode.parentNode.parentNode.parentNode.attributes.task_id.value;
+    $('#archivosTarea').val(idTask);
     //console.log(idTask);
     //Si el usuario no es lider de proyecto o miembro del comite, no dejar insertar comentario    
-    if(@json($rolProyecto)==6 || @json($rolProyecto)==7){
+    if((@json($rolProyecto)==6 || @json($rolProyecto)==7) || @json($proyecto->id_estado)!=1){
         $('#avanceComentarioEntrada').hide();
     }
     //Elemento donde se agregaran los comentarios
@@ -310,12 +311,46 @@ function avanceGantt(NODE) {
             }            
         }
     });    
+
+    let archivosLista=document.getElementById('archivosList');
+    
+    while (archivosLista.firstChild){
+        archivosLista.removeChild(archivosLista.firstChild);
+    } 
+    //Traer archivos para mostrarlos en modal
+    $.ajax({
+        url: '/archivosTarea/'+ idTask,        
+        type: 'get',
+        dataType: 'json',
+        success: function(response){            
+        let documentos= response.documentos;        
+        
+            for(let i=0; i<response.documentos.length; i++){                
+                var node= document.createElement("p");
+                var textNode= document.createTextNode(documentos[i].nombre); 
+                node.appendChild(textNode);                  
+                let id_doc = documentos[i].id;
+                
+                var ref= document.createElement("a");
+                var textRef= document.createTextNode("Descargar");
+                //ref.href ="{{ route('archivos.download', [$indicador->id , $file->id] )}}"   
+                
+                ref.appendChild(textRef); 
+                        
+                archivosLista.appendChild(node);
+                archivosLista.appendChild(ref);
+            }            
+        }
+    }); 
+
     //let modalAvance= document.getElementById("modalAgregarComentario");
     $('#modalAgregarComentario').modal('show');
     //Agregar id_tarea como atributo del boton de guardar comentario, para que al guardar comentario lo haga a esa tarea    
     let botonGuardarC=document.getElementById('BotonGuardarComentarioGA');
     botonGuardarC.setAttribute("id_task", idTask);    
-} 
+    
+}
+
 </script>
 
 <!--//TODO MODAL en proceso-->
@@ -339,38 +374,35 @@ function avanceGantt(NODE) {
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <!--Area de subida de archivos-->
-                        <div class="normal-box">
-                            <table class="col-md-12">
-                                <tr>
-                                    <td width="110%" align="left">
-                                <textarea class="inputArea" rows="1" placeholder="Descripción del avance" maxlength="900"></textarea>                        
-                                </td>
-                                    <td align="left">
-                                        <button class="btn btn-sm btn-primary btn-round btn-icon" onClick = "agregarComentario()" id = "agregar" title="Añadir descripción"><i class="tim-icons icon-bullet-list-67"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                <td width="90%" align="left">
-                            <input type="file" class="form-control">
-                            <p>Archivox disponibles</></p>
-                                <!--Listar los archivos que ya estan subidos-->
-                            <ul style="font-size:12px;">
-                                    <li>archivo.docx</li>
-                                    <li>archivo.docx</li>
-                                    <li>archivo.docx</li>
-                                    <li>archivo.docx</li>
-                            </ul>
-                            </td>
-                            <td valign="top">
-                                        <button class="btn btn-sm btn-primary btn-round btn-icon" onClick = "agregarArchivo()" id = "agregarArchivo" data-dismiss="modal"><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>
-                                        </td>
-                                        <td valign="top">
-                                        <button class="btn btn-sm btn-default btn-round btn-icon" data-dismiss="modal" title="Cancelar"><i class="tim-icons icon-simple-remove"></i></button>
-                                    </td>
+                        <form class="form" method="POST" action="{{ route('archivos.tareas.store', $idProyecto )}}" enctype="multipart/form-data">
+                            @csrf  
+                            <input type="hidden" name="archivosTarea" id = "archivosTarea">
+                            <p class ="title"> Subir Archivos </p>
+                            <input type="file" name="files[]" class = "form-control" multiple>
+                            <div class="normal-box">
+                                <table class="col-md-12">
+                                    <tr>
+                                        <p>  <center> <b> Archivos disponibles </b> </center> </p>
+                                    </tr>
+                               
+                                    <!--Listar los archivos que ya estan subidos-->                           
+                                    <tr>
+                                        <div id="archivosList" class="list"></div>
+                                    </tr>                          
+                                </table>
+                                    
+                            </div> 
 
-                            </tr>
-                            </table>
-                        </div>
+                            <br><p class ="title">Descripcion de Avance </p>
+                            <input type="text" class= "inputArea" name="descripcionAvance" placeholder="Descripción del avance" maxlength="900">
+
+                            <div class = "">
+                                <button class="btn btn-primary" id = "agregarArchivo" value = "Guardar" ><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>
+                                <button class="btn btn-default" value = "Cancelar" data-dismiss="modal" title="Cancelar"><i class="tim-icons icon-simple-remove"></i></button>
+                            </div>
+                                                                                     
+                        </form>
+                        
                         <!--Fin Area de subida de archivos-->                    
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -378,8 +410,8 @@ function avanceGantt(NODE) {
                         <p><b>Comentarios</b></p>
                             <!--lista de comentarios-->
                         <div id="comentariosList" class="comment-box cuadroComentario">
-                                <p class="font-weight-bold">Pirulo:</p>
-                                <p>Comentario de Pirulo</p>                                                           
+                                <p class="font-weight-bold">Nombre persona:</p>
+                                <p>Comentario de persona</p>                                                           
                         </div>
                         <br>
                         <table id="avanceComentarioEntrada" class="col-md-12">
