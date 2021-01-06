@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            @if ($lider)
+            @if ($lider  && !$indicador->finalizado)
                 <div class="card">
                     <div class="card-body">
                         <form method="POST" action="{{route('datos.barra')}}">
@@ -92,7 +92,7 @@
                                 </select>
                             </div>
                             <div class="col-md-2">
-                                @if ($lider)
+                                @if ($lider && !$indicador->finalizado)
                                 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalVariable">+</button>
                                 <form method="POST" action="{{route('datos.punto')}}">
                                     @csrf
@@ -146,7 +146,7 @@
                         
                         <hr>
 
-                        @if ($lider)
+                        @if ($lider && !$indicador->finalizado)
                             <form method="POST" action="{{route('datos.linea')}}">
                                 @csrf
                                 <div class="row">
