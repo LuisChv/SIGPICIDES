@@ -221,7 +221,7 @@ Evaluar Solicitud
                     </div>
                 </div>
                 <br>
-                <textarea maxlength="2048" disabled min-row="3"  id="comentario1" class="inputArea"> </textarea>
+                <textarea style="background: #EDF8FF" maxlength="2048" disabled min-row="3"  id="comentario1" class="inputArea"> </textarea>
                 <br>
             </div>
             <div class="card-footer"><br></div>
