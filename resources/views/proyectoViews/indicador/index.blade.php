@@ -33,9 +33,9 @@ Indicadores
                             <tr>
                                 <td>{{$indicador->detalle}}</td>
                                 @if($indicador->tipo)
-                                <td>{{$indicador->tipo}}</td>
+                                    <td>Cuantitativo</td>
                                 @else
-                                <td>Cualitativo</td>
+                                    <td>Cualitativo</td>
                                 @endif                
                                 <td>
                                     @if (!$indicador->modificable || $lider)
@@ -48,7 +48,7 @@ Indicadores
                         </table>
                                       
                     </div>
-                    @foreach ($indicadores as $indicador)
+                    
                     <div class="tab-pane fade" id="cuantitativo" role="tabpanel" aria-labelledby="cuantitativo-tab">                    
                         <table class="table">
                             <tr>
@@ -56,21 +56,23 @@ Indicadores
                                 <th>Tipo</th>
                                 <th></th>
                             </tr>
-                            @if($indicador->tipo==true)
-                            <tr>
-                                <td>{{$indicador->detalle}}</td>
+                            @foreach ($indicadores as $indicador)
                                 @if($indicador->tipo)
-                                <td>{{$indicador->tipo}}</td>
-                                @else
-                                <td>Por definir</td>
+                                    <tr>
+                                        <td>{{$indicador->detalle}}</td>
+                                        <td>Cuantitativo</td>
+                                        <td>
+                                            @if (!$indicador->modificable || $lider)
+                                                <a class="btn btn-success btn-icon btn-round" href="{{route('indicador.general', $indicador->id)}}"><i class="tim-icons icon-double-right"></i></a>
+                                            @endif
+                                        </td>
+                                    </tr>
                                 @endif
-                                <td>
-                                    <button class="btn btn-warning btn-icon btn-round">X</button>
-                                </td>
-                            </tr>
-                            @endif
+                            @endforeach
                         </table>                    
                     </div>
+                    
+                    
                     <div class="tab-pane fade" id="cualitativo" role="tabpanel" aria-labelledby="cualitativo-tab">
                         <table class="table">
                             <tr>
@@ -78,22 +80,22 @@ Indicadores
                                 <th>Tipo</th>
                                 <th></th>
                             </tr>
-                            @if($indicador->tipo==false)
-                            <tr>
-                                <td>{{$indicador->detalle}}</td>
-                                @if($indicador->tipo)
-                                <td>{{$indicador->tipo}}</td>
-                                @else
-                                <td>Por definir</td>
+                            @foreach ($indicadores as $indicador)
+                                @if(!$indicador->tipo)
+                                <tr>
+                                    <td>{{$indicador->detalle}}</td>
+                                    <td>Cualitativo</td>
+                                    <td>
+                                        @if (!$indicador->modificable || $lider)
+                                            <a class="btn btn-success btn-icon btn-round" href="{{route('indicador.general', $indicador->id)}}"><i class="tim-icons icon-double-right"></i></a>
+                                        @endif
+                                    </td>
+                                </tr>
                                 @endif
-                                <td>
-                                    <button class="btn btn-warning btn-icon btn-round">X</button>
-                                </td>
-                            </tr>
-                            @endif
+                            @endforeach
                         </table>  
                     </div>
-                    @endforeach
+                   
                 </div>
             </div>
         </div>
