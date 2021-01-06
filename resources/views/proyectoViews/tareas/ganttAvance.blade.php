@@ -277,7 +277,7 @@
 function avanceGantt(NODE) {
     let idTask= NODE.parentNode.parentNode.parentNode.parentNode.attributes.task_id.value;
     $('#archivosTarea').val(idTask);
-    //console.log(idTask);
+    console.log(idTask);
     //Si el usuario no es lider de proyecto o miembro del comite, no dejar insertar comentario    
     if((@json($rolProyecto)==6 || @json($rolProyecto)==7) || @json($proyecto->id_estado)!=1){
         $('#avanceComentarioEntrada').hide();
@@ -327,18 +327,12 @@ function avanceGantt(NODE) {
         
             for(let i=0; i<response.documentos.length; i++){                
                 var node= document.createElement("p");
-                var textNode= document.createTextNode(documentos[i].nombre); 
-                node.appendChild(textNode);                  
-                let id_doc = documentos[i].id;
-                
-                var ref= document.createElement("a");
-                var textRef= document.createTextNode("Descargar");
-                //ref.href ="{{ route('archivos.download', [$indicador->id , $file->id] )}}"   
-                
-                ref.appendChild(textRef); 
-                        
-                archivosLista.appendChild(node);
-                archivosLista.appendChild(ref);
+                var textNode= document.createTextNode(documentos[i].nombre);
+                node.setAttribute("onClick", "clickDetarea("+idTask+","+documentos[i].id+")");                
+                node.appendChild(textNode);
+                let id_doc = documentos[i].id;                
+                var ref= document.createElement("a");                                                                            
+                archivosLista.appendChild(node);                
             }            
         }
     }); 
@@ -392,7 +386,6 @@ function avanceGantt(NODE) {
                                 </table>
                                     
                             </div> 
-
                             <br><p class ="title">Descripcion de Avance </p>
                             <textarea required rows="3" style="color: #222a42 !important;" class="inputArea"  name="descripcionAvance" placeholder="Descripción del avance" maxlength="900">
                             </textarea>

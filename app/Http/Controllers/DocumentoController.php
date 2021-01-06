@@ -88,6 +88,15 @@ class DocumentoController extends Controller
         return response()->download($path);
     }
 
+    public function archivos_download_tarea($id_task, $id){
+        $tarea = Task::find($id_task);
+        $id_proyecto = $tarea->id_proyecto;
+        $file = Documento::find($id);        
+        $path = public_path('storage/'.$id_proyecto.'/tareas/'.$file->nombre);
+        return response()->download($path);
+    }
+    
+
     public function archivos2(){
         return view('proyectoViews.avance.index');
     }
