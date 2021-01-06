@@ -394,8 +394,8 @@ function avanceGantt(NODE) {
                             </div> 
 
                             <br><p class ="title">Descripcion de Avance </p>
-                            <input type="text" class= "inputArea" name="descripcionAvance" placeholder="Descripción del avance" maxlength="900">
-
+                            <textarea required rows="3" style="color: #222a42 !important;" class="inputArea"  name="descripcionAvance" placeholder="Descripción del avance" maxlength="900">
+                            </textarea>
                             <div class = "">
                                 <button class="btn btn-primary" id = "agregarArchivo" value = "Guardar" ><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>
                                 <button class="btn btn-default" value = "Cancelar" data-dismiss="modal" title="Cancelar"><i class="tim-icons icon-simple-remove"></i></button>
