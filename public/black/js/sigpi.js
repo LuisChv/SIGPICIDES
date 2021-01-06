@@ -196,3 +196,10 @@ function filtrotipo(seleccion,tipo){
     document.getElementById('ocultoNombreProyecto').value = seleccion.textContent;
     document.getElementById('ocultoTipoProyecto').value = tipo;
 }
+function clickDetarea(idTask, idDoc) {
+    console.log(idDoc);
+    console.log(idTask);
+    window.open(`/proyecto/archivos/downloadt/${idTask}/${idDoc}`,'_blank');
+    //'proyecto/archivos/downloadt/{id_tarea}/{id}'
+
+}
