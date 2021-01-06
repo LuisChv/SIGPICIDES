@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Documento;
 use App\Indicador;
+use App\Task;
+use DB;
 
 class DocumentoController extends Controller
 {
@@ -20,16 +22,24 @@ class DocumentoController extends Controller
     public function archivos_tareas_store(Request $request, $id_proyecto){
         $max_size = (int)ini_get('upload_max_filesize')*10240;
         $files = $request->file('files');
+        $id_tarea = request('archivosTarea');
+        $avance = request('descripcionAvance');
+        
+        if($avance != null){
+            $tarea = DB::table('tasks')->where('id',$id_tarea)->update(['avance' => $avance]);
+        }
+       
 
-        foreach($files as $file){
-            if(Storage::putFileAs('/public/'.$id_proyecto.'/tareas/',$file,$file->getClientOriginalName())){
-                $doc = new Documento;
-                $doc->nombre = $file->getClientOriginalName();
-                $doc->id_tipo_doc = 1;
-                $doc->id_task = request('archivosTarea');
-                $doc->save();
-            }
-            
+        if($files != null){
+            foreach($files as $file){
+                if(Storage::putFileAs('/public/'.$id_proyecto.'/tareas/',$file,$file->getClientOriginalName())){
+                    $doc = new Documento;
+                    $doc->nombre = $file->getClientOriginalName();
+                    $doc->id_tipo_doc = 1;
+                    $doc->id_task = $id_tarea;
+                    $doc->save();
+                }            
+            }   
         }
 
         $files = Documento::all();
@@ -39,18 +49,24 @@ class DocumentoController extends Controller
     public function archivos_indicador_store(Request $request, $id){
         $max_size = (int)ini_get('upload_max_filesize')*10240;
         $files = $request->file('files');
-
+        $avance = request('descripcionAvance');
         $indicador = Indicador::find($id);
 
-        foreach($files as $file){
-            if(Storage::putFileAs('/public/'.$indicador->id_proy.'/indicadores/',$file,$file->getClientOriginalName())){
-                $doc = new Documento;
-                $doc->nombre = $file->getClientOriginalName();
-                $doc->id_tipo_doc = 1;
-                $doc->id_indicador = $indicador->id;
-                $doc->save();
+        if($avance != null){
+            $indicador->descrip_avance = $avance;
+            $indicador->save();
+        }
+        if($files != null){
+            foreach($files as $file){
+                if(Storage::putFileAs('/public/'.$indicador->id_proy.'/indicadores/',$file,$file->getClientOriginalName())){
+                    $doc = new Documento;
+                    $doc->nombre = $file->getClientOriginalName();
+                    $doc->id_tipo_doc = 1;
+                    $doc->id_indicador = $indicador->id;
+                    $doc->save();
+                }
+                
             }
-            
         }
 
         $files = Documento::all();

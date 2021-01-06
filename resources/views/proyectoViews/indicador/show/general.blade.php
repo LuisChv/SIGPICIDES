@@ -222,21 +222,13 @@
 
                    <form class="form" method="POST" action="{{ route('archivos.indicador.store', $indicador->id )}}" enctype="multipart/form-data">
                             @csrf  
+                            <br><h4 class ="title">AVANCE INDICADOR </h4>
+                            <input type="file" name="files[]" class="form-control border" multiple>
                             <div class="normal-box">
                                 <table class="col-md-12">
-                                
                                     <tr>
-                                    <td width="90%" align="left">
-                                    <tr>
-                                        <td>
-                                            <input type="file" name="files[]" class="form-control border" multiple required>
-                                        </td>
-                                        <td valign="top" class="text-right">
-                                            <button class="btn btn-sm btn-primary btn-round btn-icon" id = "agregarArchivo" ><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>
-                                            </td>
-                                        </td>
+                                        <p>  <center> <b> Archivos disponibles </b> </center> </p>
                                     </tr>
-                                <p>Archivos disponibles</></p>
                                     <!--Listar los archivos que ya estan subidos-->                           
                             
                                 @foreach($files as $file)
@@ -252,7 +244,15 @@
 
                                 </tr>
                                 </table>
-                            </div>                                                  
+
+                                <br><p class ="title">Descripcion de Avance </p>
+                                <input type="text" class= "inputArea" name="descripcionAvance" placeholder="Descripción del avance" maxlength="900"><br>
+                            </div> 
+
+                            <div>
+                                <button class="btn btn-primary" id = "agregarArchivo" ><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>  
+                            </div>
+                                     
                         </form>
                   <br>
                   <p class="font-weight-bold">Comentarios:</p>
