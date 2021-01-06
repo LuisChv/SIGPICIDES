@@ -333,8 +333,9 @@ function avanceGantt(NODE) {
                 
                 var ref= document.createElement("a");
                 var textRef= document.createTextNode("Descargar");
+                //ref.href ="{{ route('archivos.download', [$indicador->id , $file->id] )}}"   
+                
                 ref.appendChild(textRef); 
-                ref.setAttribute("href", "#");
                         
                 archivosLista.appendChild(node);
                 archivosLista.appendChild(ref);

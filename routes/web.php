@@ -578,7 +578,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     ->middleware('has.permission:solicitudes.create');
     Route::post('proyecto/archivosIndicador/store/{id}', 'DocumentoController@archivos_indicador_store')->name('archivos.indicador.store')
     ->middleware('has.permission:solicitudes.create');
-    Route::get('proyecto/archivos/download/{id}', 'DocumentoController@archivos_download')->name('archivos.download');
+    Route::get('proyecto/archivos/download/{id_indicador}/{id}', 'DocumentoController@archivos_download')->name('archivos.download');
     Route::get('archivosTarea/{id}', 'DocumentoController@traerArchivos')->name('archivosTarea.traer');
 
     /****************************COMENTARIOS TAREAS************************************** */

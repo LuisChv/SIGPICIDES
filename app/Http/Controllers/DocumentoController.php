@@ -80,8 +80,9 @@ class DocumentoController extends Controller
         ]);
     }  
 
-    public function archivos_download($id){
-        $id_proyecto = 1;
+    public function archivos_download($id_indicador, $id){
+        $indicador = Indicador::find($id_indicador);
+        $id_proyecto = $indicador->id_proy;
         $file = Documento::find($id);
         $path = public_path('storage/'.$id_proyecto.'/indicadores/'.$file->nombre);
         return response()->download($path);

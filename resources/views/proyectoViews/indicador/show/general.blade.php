@@ -238,7 +238,7 @@
                                     <td>
                                         <p class="archivo_doc">{{$file->nombre}}</p>
                                     </td>
-                                    <td><a href="#">Descargar</a></td>
+                                    <td><a href="{{ route('archivos.download', [$indicador->id , $file->id] )}}">Descargar</a></td>
                                 </tr>
                                 @endforeach
 
