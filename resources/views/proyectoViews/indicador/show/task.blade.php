@@ -23,7 +23,7 @@
                         @endif
                     @endforeach
                 </td>
-                <td>{{$tarea->progress*100}} %</td>
+                <td>{{round($tarea->progress*100, 2)}} %</td>
                 <td>
                     @if ($tarea->progress == 1)
                         Completada

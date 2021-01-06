@@ -16,7 +16,7 @@ class PermissionRoleController extends Controller
         $role = Role::findOrFail($rol);
         $tablas = Tabla::all();
 
-        $permisos = Permission::paginate(5);
+        $permisos = Permission::all();
 
         $permisos_role = DB::select(
             "SELECT p.id, p.name, p.id_tabla 
