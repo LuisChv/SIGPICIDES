@@ -10,7 +10,7 @@
         
       <!-- INICIO DE IF A -->
       
-      @if ($indicador->modificable && !$indicador->finalizado)
+      @if ($indicador->modificable && !$indicador->finalizado && $proyecto->id_estado == 1)
           <h2 class="col-md-8 card-title">{{$indicador->detalle}}</h2>
           <div class="col-md-4 text-right">
               @if (!$indicador->tipo || count($variables) > 1)
@@ -186,7 +186,7 @@
                           <p class="font-weight-bold">Descripción</p>
                       </div>
                       <div class="col-md-4 text-right">
-                          @if (!$indicador->finalizado)
+                          @if (!$indicador->finalizado && $proyecto->id_estado == 1)
                             <button class="btn btn-primary btn-sm btn-icon" data-toggle="modal" data-target="#modalDescripcion"><i class="tim-icons icon-pencil"></i></button>
                             <form method="POST" action="{{route('indicador.descripcion')}}">
                                 @csrf
@@ -231,7 +231,7 @@
                    <form class="form" method="POST" action="{{ route('archivos.indicador.store', $indicador->id )}}" enctype="multipart/form-data">
                             @csrf  
                             <br><h4 class ="title">AVANCE INDICADOR </h4>
-                            @if (!$indicador->finalizado)
+                            @if (!$indicador->finalizado  && $proyecto->id_estado == 1)
                                 <input type="file" name="files[]" class="form-control border" multiple>
                             @endif
                             <div class="normal-box">
@@ -254,13 +254,13 @@
 
                                 </tr>
                                 </table>
-                                @if (!$indicador->finalizado)
+                                @if (!$indicador->finalizado && $proyecto->id_estado == 1)
                                     <br><p class ="title">Descripcion de Avance </p>
                                     <input type="text" class= "inputArea" name="descripcionAvance" placeholder="Descripción del avance" maxlength="900"><br>
                                 @endif
                             </div> 
 
-                            @if (!$indicador->finalizado)
+                            @if (!$indicador->finalizado && $proyecto->id_estado == 1)
                                 <div>
                                     <button class="btn btn-primary" id = "agregarArchivo" ><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>  
                                 </div>
@@ -278,7 +278,7 @@
                     @endforeach                    
                   </div>
                   <br>                             
-                  @if (!$miembro && $proyecto->id_estado==1 && !$indicador->finalizado)
+                  @if (!$miembro && $proyecto->id_estado==1 && !$indicador->finalizado && $proyecto->id_estado == 1)
                   <table class="col-md-12">
                     <tr>
                         <td width="100%" align="left">
