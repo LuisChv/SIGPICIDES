@@ -11,19 +11,39 @@ use DB;
 
 class DocumentoController extends Controller
 {
-    //NO SE USA
-    public function archivos(){
-        $files = Documento::all();
-        return view('proyectoViews.tareas.ganttAvance', [
-            'files'=>$files,
-        ]);
-    }
 
     public function archivos_tareas_store(Request $request, $id_proyecto){
         $max_size = (int)ini_get('upload_max_filesize')*10240;
         $files = $request->file('files');
         $id_tarea = request('archivosTarea');
         $avance = request('descripcionAvance');
+        
+        if($avance != null){
+            $tarea = DB::table('tasks')->where('id',$id_tarea)->update(['avance' => $avance]);
+        }
+       
+
+        if($files != null){
+            foreach($files as $file){
+                if(Storage::putFileAs('/public/'.$id_proyecto.'/tareas/',$file,$file->getClientOriginalName())){
+                    $doc = new Documento;
+                    $doc->nombre = $file->getClientOriginalName();
+                    $doc->id_tipo_doc = 1;
+                    $doc->id_task = $id_tarea;
+                    $doc->save();
+                }            
+            }   
+        }
+
+        $files = Documento::all();
+        return redirect()->route('tareas_avance.index', $id_proyecto);
+    }
+
+    public function archivos_tareas_store1($id_proyecto){
+        $max_size = (int)ini_get('upload_max_filesize')*10240;
+        $files = request('files');
+        $id_tarea = request('idTarea');
+        $avance = request('descripcion');
         
         if($avance != null){
             $tarea = DB::table('tasks')->where('id',$id_tarea)->update(['avance' => $avance]);
@@ -75,8 +95,10 @@ class DocumentoController extends Controller
 
     public function traerArchivos($id_task){
         $documentos = Documento::where('id_task', $id_task)->get();
+        $tarea = Task::find($id_task);
         return response()->json([
             "documentos" => $documentos,
+            "descripcion" => $tarea->avance,
         ]);
     }  
 
