@@ -313,8 +313,7 @@ function avanceGantt(NODE) {
     });    
 
     let archivosLista=document.getElementById('archivosList');
-    let archivosLista2=document.getElementById('archivosList2');
-    
+ 
     while (archivosLista.firstChild){
         archivosLista.removeChild(archivosLista.firstChild);
     } 
@@ -333,14 +332,25 @@ function avanceGantt(NODE) {
                 var node= document.createElement("li");
                 var textNode= document.createTextNode(documentos[i].nombre);
                 node.appendChild(textNode);
-                
+
                 var link= document.createElement("a");
                 var text= document.createTextNode("Descargar");
                 link.setAttribute("href","#");
                 link.setAttribute("onClick", "clickDetarea("+idTask+","+documentos[i].id+")");                
-                link.appendChild(text);                                                                                              
+                link.appendChild(text); 
+
+                var button = document.createElement("button");
+                button.setAttribute("onClick", "eliminarArchivo_tarea("+documentos[i].id+")");
+                button.setAttribute("class","btn btn-sm btn-danger btn-round btn-icon");
+                
+                var icono = document.createElement("i");
+                icono.setAttribute("class","tim-icons icon-simple-remove");
+
+                button.appendChild(icono);
+
                 archivosLista.appendChild(node);   
-                archivosLista.appendChild(link);                
+                archivosLista.appendChild(link); 
+                archivosLista.appendChild(button);
             }            
         }
     }); 
@@ -357,37 +367,49 @@ function avanceGantt(NODE) {
     
 }
 
-function clickDetarea(idTask, idDoc) {
-    window.open(`/proyecto/archivos/downloadt/${idTask}/${idDoc}`,'_blank');  
+function eliminarArchivo_tarea(idDoc) {
+    $.ajax({
+        url: '/proyecto/archivos_tarea/delete/'+idDoc,
+        type: 'get',
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            let docs= response.docs;  
+            let archivosLista=document.getElementById('archivosList');
+            for (let i = 0; i < response.docs.length; i++){
+                if (docs[i].id) {
+                    var node= document.createElement("li");
+                    var textNode= document.createTextNode(docs[i].nombre);
+                    node.appendChild(textNode);                
+                    var link= document.createElement("a");
+                    var text= document.createTextNode("Descargar");
+                    link.setAttribute("href","#");
+                    link.setAttribute("onClick", "clickDetarea("+docs[i].id_task+","+docs[i].id+")");                
+                    link.appendChild(text); 
+                    
+                    var button = document.createElement("button");
+                    button.setAttribute("onClick", "eliminarArchivo_tarea("+docs[i].id+")");
+                    button.setAttribute("class","btn btn-sm btn-danger btn-round btn-icon");
+                    
+                    var icono = document.createElement("i");
+                    icono.setAttribute("class","tim-icons icon-simple-remove");
+    
+                    button.appendChild(icono);
+
+                    archivosLista.appendChild(node);   
+                    archivosLista.appendChild(link);  
+                    archivosLista.appendChild(button);                    
+                }
+            }
+            $('#files').val('');
+        }
+        }); 
 }
 
-function subirArchivosTarea(idproy) {
-    $.ajax({
-        url: '/proyecto/archivosTarea/store/'+ idproy,        
-        type: 'post',
-        data:{idTarea: $('#archivosTarea').val(),descripcion:$('#descripcionAvance').val(), files:$('#files').val()},
-        dataType: 'json',
-        success: function(response){            
-        let documentos= response.documentos;  
-        let descripcion = response.descripcion;
-
-        $('#descripcionAvance').val(descripcion);  
-        
-            for(let i=0; i<response.documentos.length; i++){                
-                var node= document.createElement("li");
-                var textNode= document.createTextNode(documentos[i].nombre);
-                node.appendChild(textNode);
-                
-                var link= document.createElement("a");
-                var text= document.createTextNode("Descargar");
-                link.setAttribute("href","#");
-                link.setAttribute("onClick", "clickDetarea("+idTask+","+documentos[i].id+")");                
-                link.appendChild(text);                                                                                              
-                archivosLista.appendChild(node);   
-                archivosLista.appendChild(link);                
-            }            
-        }
-    });  
+function clickDetarea(idTask, idDoc) {
+    window.open(`/proyecto/archivos/downloadt/${idTask}/${idDoc}`,'_blank');  
 }
 
 </script>

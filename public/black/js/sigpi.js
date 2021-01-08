@@ -228,9 +228,20 @@ $("#formDocumentosAvance").submit(function (e) {
                     var text= document.createTextNode("Descargar");
                     link.setAttribute("href","#");
                     link.setAttribute("onClick", "clickDetarea("+docs[i].id_task+","+docs[i].id+")");                
-                    link.appendChild(text);                                                                                              
+                    link.appendChild(text); 
+                    
+                    var button = document.createElement("button");
+                    button.setAttribute("onClick", "eliminarArchivo_tarea("+docs[i].id+")");
+                    button.setAttribute("class","btn btn-sm btn-danger btn-round btn-icon");
+                    
+                    var icono = document.createElement("i");
+                    icono.setAttribute("class","tim-icons icon-simple-remove");
+    
+                    button.appendChild(icono);
+
                     archivosLista.appendChild(node);   
-                    archivosLista.appendChild(link);                    
+                    archivosLista.appendChild(link);  
+                    archivosLista.appendChild(button);                    
                 }
             }
             $('#files').val('');
@@ -238,3 +249,23 @@ $("#formDocumentosAvance").submit(function (e) {
     });
     
 })
+
+function eliminarArchivo(idDoc) {
+    $.ajax({
+        url: '/proyecto/archivos_indicador/delete/'+idDoc,
+        type: 'get',
+        success: function () {
+
+        }
+    }); 
+}
+
+function eliminarArchivo_tarea(idDoc) {
+    $.ajax({
+        url: '/proyecto/archivos_tarea/delete/'+idDoc,
+        type: 'get',
+        success: function () {
+            
+        }
+    }); 
+}
