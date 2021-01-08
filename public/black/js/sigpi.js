@@ -171,7 +171,6 @@ function agregarComentarioIndicador(idIndicador) {
         }
     }); 
 }
-
 $(document).on('click', '.dropdown-menu', function (e) {
     e.stopPropagation();
   });
@@ -196,6 +195,7 @@ function filtrotipo(seleccion,tipo){
     document.getElementById('ocultoNombreProyecto').value = seleccion.textContent;
     document.getElementById('ocultoTipoProyecto').value = tipo;
 }
+//funcon para descargar documentos en avances de tarea
 function clickDetarea(idTask, idDoc) {
     console.log(idDoc);
     console.log(idTask);
@@ -203,3 +203,37 @@ function clickDetarea(idTask, idDoc) {
     //'proyecto/archivos/downloadt/{id_tarea}/{id}'
 
 }
+
+$("#formDocumentosAvance").submit(function (e) {
+    e.preventDefault();
+    var formData = new FormData(this);   
+    let archivosLista=document.getElementById('archivosList');
+    //console.log(form.serialize());        
+    $.ajax({        
+        url: '/proyecto/archivosTarea/store',
+        type: 'post',
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function (response) {            
+            let docs= response.docs;  
+            for (let i = 0; i < response.docs.length; i++){
+                if (docs[i].id) {
+                    var node= document.createElement("li");
+                    var textNode= document.createTextNode(docs[i].nombre);
+                    node.appendChild(textNode);                
+                    var link= document.createElement("a");
+                    var text= document.createTextNode("Descargar");
+                    link.setAttribute("href","#");
+                    link.setAttribute("onClick", "clickDetarea("+docs[i].id_task+","+docs[i].id+")");                
+                    link.appendChild(text);                                                                                              
+                    archivosLista.appendChild(node);   
+                    archivosLista.appendChild(link);                    
+                }
+            }     
+        }
+    });
+    
+})

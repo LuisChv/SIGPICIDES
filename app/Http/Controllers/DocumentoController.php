@@ -12,31 +12,36 @@ use DB;
 class DocumentoController extends Controller
 {
 
-    public function archivos_tareas_store(Request $request, $id_proyecto){
+    public function archivos_tareas_store(Request $request){
         $max_size = (int)ini_get('upload_max_filesize')*10240;
         $files = $request->file('files');
         $id_tarea = request('archivosTarea');
         $avance = request('descripcionAvance');
-        
+        $task = Task::find($id_tarea);
         if($avance != null){
             $tarea = DB::table('tasks')->where('id',$id_tarea)->update(['avance' => $avance]);
         }
        
-
+        $archivos_guardados= array();
         if($files != null){
             foreach($files as $file){
-                if(Storage::putFileAs('/public/'.$id_proyecto.'/tareas/',$file,$file->getClientOriginalName())){
+                if(Storage::putFileAs('/public/'.$task->id_proyecto.'/tareas/',$file,$file->getClientOriginalName())){
                     $doc = new Documento;
                     $doc->nombre = $file->getClientOriginalName();
                     $doc->id_tipo_doc = 1;
                     $doc->id_task = $id_tarea;
                     $doc->save();
+                    array_push($archivos_guardados, $doc);
+                }else{
+                    array_push($archivos_guardados, $file->getClientOriginalName());
                 }            
             }   
         }
-
-        $files = Documento::all();
-        return redirect()->route('tareas_avance.index', $id_proyecto);
+        return response()->json([
+            "docs"=> $archivos_guardados,            
+        ]);
+        //$files = Documento::all();
+        //return redirect()->route('tareas_avance.index', $id_proyecto);
     }
 
     public function archivos_tareas_store1($id_proyecto){
@@ -44,26 +49,32 @@ class DocumentoController extends Controller
         $files = request('files');
         $id_tarea = request('idTarea');
         $avance = request('descripcion');
-        
+        $task = Task::find($id_tarea);
         if($avance != null){
             $tarea = DB::table('tasks')->where('id',$id_tarea)->update(['avance' => $avance]);
         }
        
-
+        $archivos_guardados= array();
         if($files != null){
             foreach($files as $file){
-                if(Storage::putFileAs('/public/'.$id_proyecto.'/tareas/',$file,$file->getClientOriginalName())){
+                if(Storage::putFileAs('/public/'.$task->id_proyecto.'/tareas/',$file,$file->getClientOriginalName())){
                     $doc = new Documento;
                     $doc->nombre = $file->getClientOriginalName();
                     $doc->id_tipo_doc = 1;
                     $doc->id_task = $id_tarea;
                     $doc->save();
+                    array_push($archivos_guardados, $doc);
+                }else{
+                    array_push($archivos_guardados, $file);
                 }            
             }   
         }
-
-        $files = Documento::all();
-        return redirect()->route('tareas_avance.index', $id_proyecto);
+        return response()->json([
+            "docs"=> $archivos_guardados,
+            "files"=>$files,
+        ]);
+        //$files = Documento::all();
+        //return redirect()->route('tareas_avance.index', $id_proyecto);
     }
 
     public function archivos_indicador_store(Request $request, $id){

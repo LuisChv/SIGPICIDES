@@ -338,8 +338,7 @@ function avanceGantt(NODE) {
                 var text= document.createTextNode("Descargar");
                 link.setAttribute("href","#");
                 link.setAttribute("onClick", "clickDetarea("+idTask+","+documentos[i].id+")");                
-                link.appendChild(text);
-                                                                                              
+                link.appendChild(text);                                                                                              
                 archivosLista.appendChild(node);   
                 archivosLista.appendChild(link);                
             }            
@@ -350,7 +349,11 @@ function avanceGantt(NODE) {
     $('#modalAgregarComentario').modal('show');
     //Agregar id_tarea como atributo del boton de guardar comentario, para que al guardar comentario lo haga a esa tarea    
     let botonGuardarC=document.getElementById('BotonGuardarComentarioGA');
-    botonGuardarC.setAttribute("id_task", idTask);    
+    botonGuardarC.setAttribute("id_task", idTask);
+    /*
+    let botonGuardarDoc= document.getElementsByName("BotonGuardarDoc");
+    botonGuardarDoc[0].setAttribute("id_task", idTask);;
+    botonGuardarDoc[1].setAttribute("id_task", idTask);;//*/
     
 }
 
@@ -379,8 +382,7 @@ function subirArchivosTarea(idproy) {
                 var text= document.createTextNode("Descargar");
                 link.setAttribute("href","#");
                 link.setAttribute("onClick", "clickDetarea("+idTask+","+documentos[i].id+")");                
-                link.appendChild(text);
-                                                                                              
+                link.appendChild(text);                                                                                              
                 archivosLista.appendChild(node);   
                 archivosLista.appendChild(link);                
             }            
@@ -411,13 +413,15 @@ function subirArchivosTarea(idproy) {
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <!--Area de subida de archivos-->
-                        <form class="form" method="POST" action="{{ route('archivos.tareas.store', $idProyecto )}}" enctype="multipart/form-data">
+                        <form class="form" id="formDocumentosAvance" method="POST" enctype="multipart/form-data">
                             @csrf  
                             <input type="hidden" name="archivosTarea" id = "archivosTarea">
                             <p class ="title"> Subir Archivos </p>
                             <table>
                                 <td><input type="file" id="files" name="files[]" class = "form-control" width="90%" multiple></td>
-                                <td><button class="btn btn-sm btn-primary" onClick = ""><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button></td>
+                                <td><button class="btn btn-sm btn-primary" name="BotonGuardarDoc" >
+                                    <i class="tim-icons icon-attach-87" title="Agregar archivos"></i>
+                                </button></td>
                             </table>
                             
                             
@@ -441,12 +445,12 @@ function subirArchivosTarea(idproy) {
                             <textarea required rows="3" style="color: #222a42 !important;" class="inputArea"  name="descripcionAvance" id = "descripcionAvance" placeholder="Descripción del avance" maxlength="900">
                             </textarea>
                             <div class = "">
-                                <button class="btn btn-primary" id = "agregarArchivo" value = "Guardar" ><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>
+                                <button class="btn btn-primary" id = "agregarArchivo" name="BotonGuardarDoc" value = "Guardar">
+                                    <i class="tim-icons icon-attach-87" title="Agregar archivos"></i>
+                                </button>
                                 <button class="btn btn-default" value = "Cancelar" data-dismiss="modal" title="Cancelar"><i class="tim-icons icon-simple-remove"></i></button>
-                            </div>
-                                                                                     
+                            </div>                                                                                                             
                         </form>
-                        
                         <!--Fin Area de subida de archivos-->                    
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
