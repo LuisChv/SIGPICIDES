@@ -232,7 +232,8 @@ $("#formDocumentosAvance").submit(function (e) {
                     archivosLista.appendChild(node);   
                     archivosLista.appendChild(link);                    
                 }
-            }     
+            }
+            $('#files').val('');
         }
     });
     
