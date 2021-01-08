@@ -109,7 +109,7 @@ class DocumentoController extends Controller
         $file = Documento::find($id_doc); 
         $tarea = Task::find($file->id_task);
         DB::table('documento')->where('id', $id_doc)->delete();
-        
-        return redirect()->route('tareas_avance.index',[$tarea->id]);
+        $documentos = Documento::where('id_task', $tarea->id)->get();
+        return redirect()->route('tareas_avance.index',[$tarea->id_proyecto]);
     }
 }

@@ -199,7 +199,7 @@ function filtrotipo(seleccion,tipo){
 function clickDetarea(idTask, idDoc) {
     console.log(idDoc);
     console.log(idTask);
-    window.open(`/proyecto/archivos/downloadt/${idTask}/${idDoc}`,'_blank');
+    window.open(`/proyecto/archivos/downloadt/${idTask}/${idDoc}`);
     //'proyecto/archivos/downloadt/{id_tarea}/{id}'
 
 }
@@ -231,7 +231,7 @@ $("#formDocumentosAvance").submit(function (e) {
                     link.appendChild(text); 
                     
                     var button = document.createElement("button");
-                    button.setAttribute("onClick", "eliminarArchivo_tarea("+docs[i].id+")");
+                    button.setAttribute("onClick", "eliminarArchivo_tarea1("+docs[i].id+")");
                     button.setAttribute("class","btn btn-sm btn-danger btn-round btn-icon");
                     
                     var icono = document.createElement("i");
@@ -260,12 +260,8 @@ function eliminarArchivo(idDoc) {
     }); 
 }
 
-function eliminarArchivo_tarea(idDoc) {
-    $.ajax({
-        url: '/proyecto/archivos_tarea/delete/'+idDoc,
-        type: 'get',
-        success: function () {
-            
-        }
-    }); 
+function eliminarArchivo_tarea1(idDoc) {
+    window.open(`/proyecto/archivos_tarea/delete/${idDoc}`,'_self');
 }
+
+

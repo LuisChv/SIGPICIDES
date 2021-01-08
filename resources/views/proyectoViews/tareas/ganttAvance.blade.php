@@ -340,7 +340,7 @@ function avanceGantt(NODE) {
                 link.appendChild(text); 
 
                 var button = document.createElement("button");
-                button.setAttribute("onClick", "eliminarArchivo_tarea("+documentos[i].id+")");
+                button.setAttribute("onClick", "eliminarArchivo_tarea1("+documentos[i].id+")");
                 button.setAttribute("class","btn btn-sm btn-danger btn-round btn-icon");
                 
                 var icono = document.createElement("i");
@@ -367,49 +367,8 @@ function avanceGantt(NODE) {
     
 }
 
-function eliminarArchivo_tarea(idDoc) {
-    $.ajax({
-        url: '/proyecto/archivos_tarea/delete/'+idDoc,
-        type: 'get',
-        dataType: 'json',
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (response) {
-            let docs= response.docs;  
-            let archivosLista=document.getElementById('archivosList');
-            for (let i = 0; i < response.docs.length; i++){
-                if (docs[i].id) {
-                    var node= document.createElement("li");
-                    var textNode= document.createTextNode(docs[i].nombre);
-                    node.appendChild(textNode);                
-                    var link= document.createElement("a");
-                    var text= document.createTextNode("Descargar");
-                    link.setAttribute("href","#");
-                    link.setAttribute("onClick", "clickDetarea("+docs[i].id_task+","+docs[i].id+")");                
-                    link.appendChild(text); 
-                    
-                    var button = document.createElement("button");
-                    button.setAttribute("onClick", "eliminarArchivo_tarea("+docs[i].id+")");
-                    button.setAttribute("class","btn btn-sm btn-danger btn-round btn-icon");
-                    
-                    var icono = document.createElement("i");
-                    icono.setAttribute("class","tim-icons icon-simple-remove");
-    
-                    button.appendChild(icono);
-
-                    archivosLista.appendChild(node);   
-                    archivosLista.appendChild(link);  
-                    archivosLista.appendChild(button);                    
-                }
-            }
-            $('#files').val('');
-        }
-        }); 
-}
-
 function clickDetarea(idTask, idDoc) {
-    window.open(`/proyecto/archivos/downloadt/${idTask}/${idDoc}`,'_blank');  
+    window.open(`/proyecto/archivos/downloadt/${idTask}/${idDoc}`);  
 }
 
 </script>
