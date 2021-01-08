@@ -430,7 +430,7 @@ Primera etapa
                         <div class="card-body">
                             <h3 class="card-title text-center"><b>{{ $miembro->name }}</b></h3>           
                                 <h4 class="text-center"><b>{{ $eva->estado }}</b></h4>
-                            <p class="text-justify"><b>Comentario: </b> {{ $eva->comentario }} </p>
+                            <p class="text-justify eva-box"><b>Comentario: </b> {{ $eva->comentario }} </p>
                             <br>
                         </div>
                     </div>
@@ -455,7 +455,7 @@ Primera etapa
                         <div class="card-body">
                             <h3 class="card-title text-center"><b>{{ $miembro->name }}</b></h3>           
                                 <h4 class="text-center"><b>{{ $eva->estado }}</b></h4>
-                            <p class="text-justify"><b>Comentario: </b> {{ $eva->comentario }} </p>
+                            <p class="text-justify eva-box"><b>Comentario: </b> {{ $eva->comentario }} </p>
                             <br>
                         </div>
                     </div>

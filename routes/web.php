@@ -574,7 +574,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     /*********************Documentos************************************** */
     Route::get('proyecto/archivos', 'DocumentoController@archivos')->name('archivos.index')
     ->middleware('has.permission:solicitudes.create');
-    Route::post('proyecto/archivosTarea/store/{id}', 'DocumentoController@archivos_tareas_store')->name('archivos.tareas.store')
+    Route::post('proyecto/archivosTarea/store', 'DocumentoController@archivos_tareas_store')->name('archivos.tareas.store')
     ->middleware('has.permission:solicitudes.create');
     Route::post('proyecto/archivosIndicador/store/{id}', 'DocumentoController@archivos_indicador_store')->name('archivos.indicador.store')
     ->middleware('has.permission:solicitudes.create');

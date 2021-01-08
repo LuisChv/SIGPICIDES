@@ -313,6 +313,7 @@ function avanceGantt(NODE) {
     });    
 
     let archivosLista=document.getElementById('archivosList');
+    let archivosLista2=document.getElementById('archivosList2');
     
     while (archivosLista.firstChild){
         archivosLista.removeChild(archivosLista.firstChild);
@@ -323,16 +324,23 @@ function avanceGantt(NODE) {
         type: 'get',
         dataType: 'json',
         success: function(response){            
-        let documentos= response.documentos;        
+        let documentos= response.documentos;  
+        let descripcion = response.descripcion;
+
+        $('#descripcionAvance').val(descripcion);  
         
             for(let i=0; i<response.documentos.length; i++){                
-                var node= document.createElement("p");
+                var node= document.createElement("li");
                 var textNode= document.createTextNode(documentos[i].nombre);
-                node.setAttribute("onClick", "clickDetarea("+idTask+","+documentos[i].id+")");                
                 node.appendChild(textNode);
-                let id_doc = documentos[i].id;                
-                var ref= document.createElement("a");                                                                            
-                archivosLista.appendChild(node);                
+                
+                var link= document.createElement("a");
+                var text= document.createTextNode("Descargar");
+                link.setAttribute("href","#");
+                link.setAttribute("onClick", "clickDetarea("+idTask+","+documentos[i].id+")");                
+                link.appendChild(text);                                                                                              
+                archivosLista.appendChild(node);   
+                archivosLista.appendChild(link);                
             }            
         }
     }); 
@@ -341,8 +349,45 @@ function avanceGantt(NODE) {
     $('#modalAgregarComentario').modal('show');
     //Agregar id_tarea como atributo del boton de guardar comentario, para que al guardar comentario lo haga a esa tarea    
     let botonGuardarC=document.getElementById('BotonGuardarComentarioGA');
-    botonGuardarC.setAttribute("id_task", idTask);    
+    botonGuardarC.setAttribute("id_task", idTask);
+    /*
+    let botonGuardarDoc= document.getElementsByName("BotonGuardarDoc");
+    botonGuardarDoc[0].setAttribute("id_task", idTask);;
+    botonGuardarDoc[1].setAttribute("id_task", idTask);;//*/
     
+}
+
+function clickDetarea(idTask, idDoc) {
+    window.open(`/proyecto/archivos/downloadt/${idTask}/${idDoc}`,'_blank');  
+}
+
+function subirArchivosTarea(idproy) {
+    $.ajax({
+        url: '/proyecto/archivosTarea/store/'+ idproy,        
+        type: 'post',
+        data:{idTarea: $('#archivosTarea').val(),descripcion:$('#descripcionAvance').val(), files:$('#files').val()},
+        dataType: 'json',
+        success: function(response){            
+        let documentos= response.documentos;  
+        let descripcion = response.descripcion;
+
+        $('#descripcionAvance').val(descripcion);  
+        
+            for(let i=0; i<response.documentos.length; i++){                
+                var node= document.createElement("li");
+                var textNode= document.createTextNode(documentos[i].nombre);
+                node.appendChild(textNode);
+                
+                var link= document.createElement("a");
+                var text= document.createTextNode("Descargar");
+                link.setAttribute("href","#");
+                link.setAttribute("onClick", "clickDetarea("+idTask+","+documentos[i].id+")");                
+                link.appendChild(text);                                                                                              
+                archivosLista.appendChild(node);   
+                archivosLista.appendChild(link);                
+            }            
+        }
+    });  
 }
 
 </script>
@@ -368,11 +413,18 @@ function avanceGantt(NODE) {
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <!--Area de subida de archivos-->
-                        <form class="form" method="POST" action="{{ route('archivos.tareas.store', $idProyecto )}}" enctype="multipart/form-data">
+                        <form class="form" id="formDocumentosAvance" method="POST" enctype="multipart/form-data">
                             @csrf  
                             <input type="hidden" name="archivosTarea" id = "archivosTarea">
                             <p class ="title"> Subir Archivos </p>
-                            <input type="file" name="files[]" class = "form-control" multiple>
+                            <table>
+                                <td><input type="file" id="files" name="files[]" class = "form-control" width="90%" multiple></td>
+                                <td><button class="btn btn-sm btn-primary" name="BotonGuardarDoc" >
+                                    <i class="tim-icons icon-attach-87" title="Agregar archivos"></i>
+                                </button></td>
+                            </table>
+                            
+                            
                             <div class="normal-box">
                                 <table class="col-md-12">
                                     <tr>
@@ -380,22 +432,25 @@ function avanceGantt(NODE) {
                                     </tr>
                                
                                     <!--Listar los archivos que ya estan subidos-->                           
-                                    <tr>
-                                        <div id="archivosList" class="list"></div>
-                                    </tr>                          
+                                    <div>
+                                        <ul class="left" id="archivosList">
+
+                                        </ul>
+                                    
+                                    </div>                          
                                 </table>
                                     
                             </div> 
                             <br><p class ="title">Descripcion de Avance </p>
-                            <textarea required rows="3" style="color: #222a42 !important;" class="inputArea"  name="descripcionAvance" placeholder="Descripción del avance" maxlength="900">
+                            <textarea required rows="3" style="color: #222a42 !important;" class="inputArea"  name="descripcionAvance" id = "descripcionAvance" placeholder="Descripción del avance" maxlength="900">
                             </textarea>
                             <div class = "">
-                                <button class="btn btn-primary" id = "agregarArchivo" value = "Guardar" ><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>
+                                <button class="btn btn-primary" id = "agregarArchivo" name="BotonGuardarDoc" value = "Guardar">
+                                    <i class="tim-icons icon-attach-87" title="Agregar archivos"></i>
+                                </button>
                                 <button class="btn btn-default" value = "Cancelar" data-dismiss="modal" title="Cancelar"><i class="tim-icons icon-simple-remove"></i></button>
-                            </div>
-                                                                                     
+                            </div>                                                                                                             
                         </form>
-                        
                         <!--Fin Area de subida de archivos-->                    
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

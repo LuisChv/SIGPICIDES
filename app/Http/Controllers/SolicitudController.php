@@ -380,6 +380,9 @@ class SolicitudController extends Controller
     }
     public function oai($id){
         $solicitud= Solicitud::where('id_proy', $id)->first();
+        if($solicitud == null){
+            abort(404);
+        }
         if(!($solicitud->id_estado==1 || $solicitud->id_estado==2 || $solicitud->id_estado==4)){
             abort(403);
         }

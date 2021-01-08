@@ -243,7 +243,6 @@
                             
                                 @foreach($files as $file)
                                 <tr class="archivo">
-                                    <td>{{$file->id}}</td>
                                     <td><i class="icon icon-file"></i></td>
                                     <td>
                                         <p class="archivo_doc">{{$file->nombre}}</p>
@@ -256,7 +255,7 @@
                                 </table>
                                 @if (!$indicador->finalizado && $proyecto->id_estado == 1)
                                     <br><p class ="title">Descripcion de Avance </p>
-                                    <input type="text" class= "inputArea" name="descripcionAvance" placeholder="Descripción del avance" maxlength="900"><br>
+                                    <input type="text" class= "inputArea" name="descripcionAvance" placeholder="Descripción del avance" maxlength="900" value = "{{$indicador->descrip_avance}}"><br>
                                 @endif
                             </div> 
 
