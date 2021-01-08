@@ -13,7 +13,7 @@ class PermissionRoleSeeder extends Seeder
     {
         //Administrador
         for($i = 1; $i <= 195; $i++){
-            if($i != 21 AND $i != 61){
+            if($i != 21 AND $i != 22 AND $i != 23 AND $i != 24 AND $i != 25 AND $i != 61 AND $i != 62 AND $i != 63 AND $i != 64 AND $i != 65 AND $i != 71){
                 DB::table('rol_permiso')->insert([
                     'role_id' => 1,
                     'permission_id' => $i,
