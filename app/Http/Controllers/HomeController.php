@@ -22,6 +22,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $role = DB::SELECT(
+			"SELECT RU.role_id FROM userS U JOIN role_user RU 
+			ON U.id = RU.user_id WHERE U.id = ?", [auth()->user()->id]
+        )[0];
+        
+        return view('dashboard', [
+            'role' => $role->role_id
+        ]);
     }    
 }

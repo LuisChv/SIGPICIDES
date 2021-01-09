@@ -48,12 +48,12 @@ class UserController extends Controller
     public function store(){
          //Validacion de los datos      
         request()->validate([
-            'name'=> 'required',
+            'name'=> ['required', 'string', 'email', 'max:200'],
             'email'=> ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'=> 'required',
+            'password'=> ['required', 'string', 'email', 'max:120'],
             'fecha_nac'=> 'required',
-            'institucion'=> 'required',
-            'descripcion'=> 'required',
+            'institucion'=> ['required', 'string', 'email', 'max:1024'],
+            'descripcion'=> ['required', 'string', 'email', 'max:2048'],
             'sexo' => ['required'],
             'rol' => 'required',
         ],
