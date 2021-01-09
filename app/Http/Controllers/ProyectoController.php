@@ -96,8 +96,9 @@ class ProyectoController extends Controller
         $miembrosEquipo= User::whereRaw('id in (select id_usuario from usuario_equipo_rol where id_equipo= ?)',[$equipo->id])->get();
         $estados=DB::table('estado_de_proy')->get();
 
-        $tiempo = DB::SELECT(
-            "SELECT duracion AS estimado, ROUND(date_part('d', NOW() - created_at)/7) AS real FROM proyecto"
+	$tiempo = DB::SELECT(
+            "SELECT duracion AS estimado, ROUND(date_part('d', NOW() - created_at)/7) AS real FROM proyecto WHERE id = ?",
+            [$id]
         )[0];
         $total = DB::SELECT("SELECT COUNT(id) FROM indicador WHERE id_proy = ?", [$id])[0];
         $finalizados = DB::SELECT("SELECT COUNT(id) FROM indicador WHERE id_proy = ? AND finalizado = true", [$id])[0];
