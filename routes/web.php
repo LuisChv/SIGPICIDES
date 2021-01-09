@@ -582,8 +582,7 @@ Route::middleware(['auth', 'has.permission:validacion'])->group(function(){
     ->middleware('has.permission:solicitudes.create');
     Route::get('proyecto/archivos/downloadt/{id_tarea}/{id}', 'DocumentoController@archivos_download_tarea')->name('archivos.download_t')
     ->middleware('has.permission:solicitudes.create');
-    Route::get('archivosTarea/{id}', 'DocumentoController@traerArchivos')->name('archivosTarea.traer')
-    ->middleware('has.permission:solicitudes.create');
+    Route::get('archivosTarea/{id}', 'DocumentoController@traerArchivos')->name('archivosTarea.traer');
     Route::get('proyecto/archivos_indicador/delete/{id_doc}', 'DocumentoController@destroy_indicador')->name('archivos_indicador.destroy')
     ->middleware('has.permission:solicitudes.create');
     Route::get('proyecto/archivos_tarea/delete/{id_doc}', 'DocumentoController@destroy_tarea')->name('archivos_tarea.destroy')
