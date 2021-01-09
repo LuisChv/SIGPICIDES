@@ -231,6 +231,7 @@ $("#formDocumentosAvance").submit(function (e) {
                     link.appendChild(text); 
                     
                     var button = document.createElement("button");
+                    button.setAttribute("id","eliminarArchivo"+docs[i].id);
                     button.setAttribute("onClick", "eliminarArchivo_tarea1("+docs[i].id+")");
                     button.setAttribute("class","btn btn-sm btn-danger btn-round btn-icon");
                     

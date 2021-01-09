@@ -255,11 +255,13 @@ class TaskController extends Controller
         $encargados=0;
         $indicadoresT=0;
         $encargados= tareaUsuario::select('id', 'id_usuario')->where('id_task', $id_task*1 )->get();
-        $indicadoresT= TareaIndicador::select('id', 'id_indicador')->where('id_task', $id_task*1)->get();         
+        $indicadoresT= TareaIndicador::select('id', 'id_indicador')->where('id_task', $id_task*1)->get();
+        $documentos = Documento::where('id_task', $id_task*1)->get();         
         return response()->json([
             "encargados"=> $encargados,
             "indicadores"=> $indicadoresT,
             "id_task"=>$id_task,
+            "docs"=>$documentos
         ]);
     }
 }

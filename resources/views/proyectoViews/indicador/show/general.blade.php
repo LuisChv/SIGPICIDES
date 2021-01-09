@@ -227,7 +227,7 @@
                   @else
                       <p class="font-weight-bold">Tipo de indicador: Cualitativo</p><hr>
                   @endif
-
+                    
                    <form class="form" method="POST" action="{{ route('archivos.indicador.store', $indicador->id )}}" enctype="multipart/form-data">
                             @csrf  
                             <br><h4 class ="title">AVANCE INDICADOR </h4>
@@ -247,9 +247,11 @@
                                         <p class="archivo_doc">{{$file->nombre}}</p>
                                     </td>
                                     <td class = "col-md-2"><a href="{{ route('archivos.download', [$indicador->id , $file->id] )}}">Descargar</a></td>
+                                    @if (!$indicador->finalizado  && $proyecto->id_estado == 1)
                                     <td class = "col-md-1">  
                                         <button id="eliminarArchivos" onclick="eliminarArchivo({{$file->id}})" class="btn btn-sm btn-danger btn-round btn-icon" title="Eliminar"><i class="tim-icons icon-simple-remove"></i></button>
-                                    </td>
+                                    <td>
+                                    @endif
                                 </tr>
                                 @endforeach
 

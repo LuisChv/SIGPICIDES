@@ -282,12 +282,55 @@ function avanceGantt(NODE) {
     if((@json($rolProyecto)==6 || @json($rolProyecto)==7) || @json($proyecto->id_estado)!=1){
         $('#avanceComentarioEntrada').hide();
     }
+    //Si el usuario no es lider de proyecto o miembro del comite, no dejar insertar archivos
+    if((@json($rolProyecto)==6 || @json($rolProyecto)==7) || @json($proyecto->id_estado)!=1){
+       
+    }
     //Elemento donde se agregaran los comentarios
     let comentariosLista=document.getElementById('comentariosList');
     //Eliminar todos los comentarios para que solo se muestren los comentarios del avance abierto
     while (comentariosLista.firstChild){
         comentariosLista.removeChild(comentariosLista.firstChild);
     } 
+     
+    //Traer Asignaciones
+    $.ajax({
+        url: '/tareasAsignaciones/'+ idTask,
+        type: 'get',
+        dataType: 'json',
+        success: function(response){
+            var asignacion = false;
+
+            for(let i=0; i<response.encargados.length; i++){
+                if(response.encargados[i].id_usuario == @json(auth()->user()->id)) {
+                    asignacion = true;
+                }    
+            }
+            
+            //Si es lider
+            if(@json($rolProyecto)==5){
+                asignacion=true;
+            }
+
+            if(asignacion == false){
+                $('#subirArchivosTarea').hide();
+                $('#agregarArchivo').hide();
+                for(let i=0; i<response.docs.length; i++){
+                    $('#eliminarArchivo'+response.docs[i].id).hide();                     
+                }                 
+            }
+
+            if(asignacion ==  true){
+                $('#subirArchivosTarea').show();
+                $('#agregarArchivo').show();
+                for(let i=0; i<response.docs.length; i++){
+                    $('#eliminarArchivo'+response.docs[i].id).show();
+                    
+                }   
+            }
+        }
+    });
+    
     //Traer comentarios para mostrarlos en modal
     $.ajax({
         url: '/comentariosTarea/'+ idTask,        
@@ -340,6 +383,7 @@ function avanceGantt(NODE) {
                 link.appendChild(text); 
 
                 var button = document.createElement("button");
+                button.setAttribute("id","eliminarArchivo"+documentos[i].id);
                 button.setAttribute("onClick", "eliminarArchivo_tarea1("+documentos[i].id+")");
                 button.setAttribute("class","btn btn-sm btn-danger btn-round btn-icon");
                 
@@ -354,6 +398,8 @@ function avanceGantt(NODE) {
             }            
         }
     }); 
+
+   
 
     //let modalAvance= document.getElementById("modalAgregarComentario");
     $('#modalAgregarComentario').modal('show');
@@ -398,7 +444,8 @@ function clickDetarea(idTask, idDoc) {
                             @csrf  
                             <input type="hidden" name="archivosTarea" id = "archivosTarea">
                             <p class ="title"> Subir Archivos </p>
-                            <table>
+                            
+                            <table id ="subirArchivosTarea">
                                 <td><input type="file" id="files" name="files[]" class = "form-control" width="90%" multiple></td>
                                 <td><button class="btn btn-sm btn-primary" name="BotonGuardarDoc" >
                                     <i class="tim-icons icon-attach-87" title="Agregar archivos"></i>
