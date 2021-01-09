@@ -282,12 +282,55 @@ function avanceGantt(NODE) {
     if((@json($rolProyecto)==6 || @json($rolProyecto)==7) || @json($proyecto->id_estado)!=1){
         $('#avanceComentarioEntrada').hide();
     }
+    //Si el usuario no es lider de proyecto o miembro del comite, no dejar insertar archivos
+    if((@json($rolProyecto)==6 || @json($rolProyecto)==7) || @json($proyecto->id_estado)!=1){
+       
+    }
     //Elemento donde se agregaran los comentarios
     let comentariosLista=document.getElementById('comentariosList');
     //Eliminar todos los comentarios para que solo se muestren los comentarios del avance abierto
     while (comentariosLista.firstChild){
         comentariosLista.removeChild(comentariosLista.firstChild);
     } 
+     
+    //Traer Asignaciones
+    $.ajax({
+        url: '/tareasAsignaciones/'+ idTask,
+        type: 'get',
+        dataType: 'json',
+        success: function(response){
+            var asignacion = false;
+
+            for(let i=0; i<response.encargados.length; i++){
+                if(response.encargados[i].id_usuario == @json(auth()->user()->id)) {
+                    asignacion = true;
+                }    
+            }
+            
+            //Si es lider
+            if(@json($rolProyecto)==5){
+                asignacion=true;
+            }
+
+            if(asignacion == false){
+                $('#subirArchivosTarea').hide();
+                $('#agregarArchivo').hide();
+                for(let i=0; i<response.docs.length; i++){
+                    $('#eliminarArchivo'+response.docs[i].id).hide();                     
+                }                 
+            }
+
+            if(asignacion ==  true){
+                $('#subirArchivosTarea').show();
+                $('#agregarArchivo').show();
+                for(let i=0; i<response.docs.length; i++){
+                    $('#eliminarArchivo'+response.docs[i].id).show();
+                    
+                }   
+            }
+        }
+    });
+    
     //Traer comentarios para mostrarlos en modal
     $.ajax({
         url: '/comentariosTarea/'+ idTask,        
@@ -313,8 +356,7 @@ function avanceGantt(NODE) {
     });    
 
     let archivosLista=document.getElementById('archivosList');
-    let archivosLista2=document.getElementById('archivosList2');
-    
+ 
     while (archivosLista.firstChild){
         archivosLista.removeChild(archivosLista.firstChild);
     } 
@@ -333,17 +375,31 @@ function avanceGantt(NODE) {
                 var node= document.createElement("li");
                 var textNode= document.createTextNode(documentos[i].nombre);
                 node.appendChild(textNode);
-                
+
                 var link= document.createElement("a");
                 var text= document.createTextNode("Descargar");
                 link.setAttribute("href","#");
                 link.setAttribute("onClick", "clickDetarea("+idTask+","+documentos[i].id+")");                
-                link.appendChild(text);                                                                                              
+                link.appendChild(text); 
+
+                var button = document.createElement("button");
+                button.setAttribute("id","eliminarArchivo"+documentos[i].id);
+                button.setAttribute("onClick", "eliminarArchivo_tarea1("+documentos[i].id+")");
+                button.setAttribute("class","btn btn-sm btn-danger btn-round btn-icon");
+                
+                var icono = document.createElement("i");
+                icono.setAttribute("class","tim-icons icon-simple-remove");
+
+                button.appendChild(icono);
+
                 archivosLista.appendChild(node);   
-                archivosLista.appendChild(link);                
+                archivosLista.appendChild(link); 
+                archivosLista.appendChild(button);
             }            
         }
     }); 
+
+   
 
     //let modalAvance= document.getElementById("modalAgregarComentario");
     $('#modalAgregarComentario').modal('show');
@@ -358,36 +414,7 @@ function avanceGantt(NODE) {
 }
 
 function clickDetarea(idTask, idDoc) {
-    window.open(`/proyecto/archivos/downloadt/${idTask}/${idDoc}`,'_blank');  
-}
-
-function subirArchivosTarea(idproy) {
-    $.ajax({
-        url: '/proyecto/archivosTarea/store/'+ idproy,        
-        type: 'post',
-        data:{idTarea: $('#archivosTarea').val(),descripcion:$('#descripcionAvance').val(), files:$('#files').val()},
-        dataType: 'json',
-        success: function(response){            
-        let documentos= response.documentos;  
-        let descripcion = response.descripcion;
-
-        $('#descripcionAvance').val(descripcion);  
-        
-            for(let i=0; i<response.documentos.length; i++){                
-                var node= document.createElement("li");
-                var textNode= document.createTextNode(documentos[i].nombre);
-                node.appendChild(textNode);
-                
-                var link= document.createElement("a");
-                var text= document.createTextNode("Descargar");
-                link.setAttribute("href","#");
-                link.setAttribute("onClick", "clickDetarea("+idTask+","+documentos[i].id+")");                
-                link.appendChild(text);                                                                                              
-                archivosLista.appendChild(node);   
-                archivosLista.appendChild(link);                
-            }            
-        }
-    });  
+    window.open(`/proyecto/archivos/downloadt/${idTask}/${idDoc}`);  
 }
 
 </script>
@@ -417,7 +444,8 @@ function subirArchivosTarea(idproy) {
                             @csrf  
                             <input type="hidden" name="archivosTarea" id = "archivosTarea">
                             <p class ="title"> Subir Archivos </p>
-                            <table>
+                            
+                            <table id ="subirArchivosTarea">
                                 <td><input type="file" id="files" name="files[]" class = "form-control" width="90%" multiple></td>
                                 <td><button class="btn btn-sm btn-primary" name="BotonGuardarDoc" >
                                     <i class="tim-icons icon-attach-87" title="Agregar archivos"></i>

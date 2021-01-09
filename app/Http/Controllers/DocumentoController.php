@@ -44,39 +44,6 @@ class DocumentoController extends Controller
         //return redirect()->route('tareas_avance.index', $id_proyecto);
     }
 
-    public function archivos_tareas_store1($id_proyecto){
-        $max_size = (int)ini_get('upload_max_filesize')*10240;
-        $files = request('files');
-        $id_tarea = request('idTarea');
-        $avance = request('descripcion');
-        $task = Task::find($id_tarea);
-        if($avance != null){
-            $tarea = DB::table('tasks')->where('id',$id_tarea)->update(['avance' => $avance]);
-        }
-       
-        $archivos_guardados= array();
-        if($files != null){
-            foreach($files as $file){
-                if(Storage::putFileAs('/public/'.$task->id_proyecto.'/tareas/',$file,$file->getClientOriginalName())){
-                    $doc = new Documento;
-                    $doc->nombre = $file->getClientOriginalName();
-                    $doc->id_tipo_doc = 1;
-                    $doc->id_task = $id_tarea;
-                    $doc->save();
-                    array_push($archivos_guardados, $doc);
-                }else{
-                    array_push($archivos_guardados, $file);
-                }            
-            }   
-        }
-        return response()->json([
-            "docs"=> $archivos_guardados,
-            "files"=>$files,
-        ]);
-        //$files = Documento::all();
-        //return redirect()->route('tareas_avance.index', $id_proyecto);
-    }
-
     public function archivos_indicador_store(Request $request, $id){
         $max_size = (int)ini_get('upload_max_filesize')*10240;
         $files = $request->file('files');
@@ -130,7 +97,19 @@ class DocumentoController extends Controller
     }
     
 
-    public function archivos2(){
-        return view('proyectoViews.avance.index');
+    public function destroy_indicador($id_doc)
+    {
+        $file = Documento::find($id_doc); 
+        DB::table('documento')->where('id', $id_doc)->delete();
+        return redirect()->route('indicador.estadistica',[$file->id_indicador]);
+    }
+
+    public function destroy_tarea($id_doc)
+    {
+        $file = Documento::find($id_doc); 
+        $tarea = Task::find($file->id_task);
+        DB::table('documento')->where('id', $id_doc)->delete();
+        $documentos = Documento::where('id_task', $tarea->id)->get();
+        return redirect()->route('tareas_avance.index',[$tarea->id_proyecto]);
     }
 }

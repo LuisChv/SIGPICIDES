@@ -8,6 +8,15 @@ use DB;
 class EstadisticaController extends Controller
 {
     public function general(){
+		$role = DB::SELECT(
+			"SELECT RU.role_id FROM userS U JOIN role_user RU 
+			ON U.id = RU.user_id WHERE U.id = ?", [auth()->user()->id]
+		)[0];
+
+		if($role->role_id != 1 && $role->role_id != 2 && $role->role_id != 3){
+			abort(403);
+		}
+
     	$recursos = DB::SELECT(
     		"SELECT R.nombre, SUM(RPP.cantidad) FROM recurso R LEFT JOIN
     		recursos_por_proy RPP ON R.id = RPP.id_recurso
@@ -64,6 +73,14 @@ class EstadisticaController extends Controller
 	
 	public function statsFiltrado(Request $request)
     {
+		$role = DB::SELECT(
+			"SELECT RU.role_id FROM userS U JOIN role_user RU 
+			ON U.id = RU.user_id WHERE U.id = ?", [auth()->user()->id]
+		)[0];
+
+		if($role->role_id != 1 && $role->role_id != 2 && $role->role_id != 13){
+			abort(403);
+		}
 		//dd($request->request);
 		$recursos = DB::SELECT(
     		"SELECT R.nombre, SUM(RPP.cantidad) FROM recurso R LEFT JOIN
@@ -182,6 +199,14 @@ class EstadisticaController extends Controller
     }
 
     public function proyectos(){
+		$role = DB::SELECT(
+			"SELECT RU.role_id FROM userS U JOIN role_user RU 
+			ON U.id = RU.user_id WHERE U.id = ?", [auth()->user()->id]
+		)[0];
+
+		if($role->role_id != 1 && $role->role_id != 2 && $role->role_id != 13){
+			abort(403);
+		}
         $proyectos = DB::SELECT(
             "SELECT nombre, duracion AS estimado, date_part('d', NOW() - created_at)/7 AS real FROM proyecto"
         );

@@ -199,7 +199,7 @@ function filtrotipo(seleccion,tipo){
 function clickDetarea(idTask, idDoc) {
     console.log(idDoc);
     console.log(idTask);
-    window.open(`/proyecto/archivos/downloadt/${idTask}/${idDoc}`,'_blank');
+    window.open(`/proyecto/archivos/downloadt/${idTask}/${idDoc}`);
     //'proyecto/archivos/downloadt/{id_tarea}/{id}'
 
 }
@@ -228,12 +228,41 @@ $("#formDocumentosAvance").submit(function (e) {
                     var text= document.createTextNode("Descargar");
                     link.setAttribute("href","#");
                     link.setAttribute("onClick", "clickDetarea("+docs[i].id_task+","+docs[i].id+")");                
-                    link.appendChild(text);                                                                                              
+                    link.appendChild(text); 
+                    
+                    var button = document.createElement("button");
+                    button.setAttribute("id","eliminarArchivo"+docs[i].id);
+                    button.setAttribute("onClick", "eliminarArchivo_tarea1("+docs[i].id+")");
+                    button.setAttribute("class","btn btn-sm btn-danger btn-round btn-icon");
+                    
+                    var icono = document.createElement("i");
+                    icono.setAttribute("class","tim-icons icon-simple-remove");
+    
+                    button.appendChild(icono);
+
                     archivosLista.appendChild(node);   
-                    archivosLista.appendChild(link);                    
+                    archivosLista.appendChild(link);  
+                    archivosLista.appendChild(button);                    
                 }
-            }     
+            }
+            $('#files').val('');
         }
     });
     
 })
+
+function eliminarArchivo(idDoc) {
+    $.ajax({
+        url: '/proyecto/archivos_indicador/delete/'+idDoc,
+        type: 'get',
+        success: function () {
+
+        }
+    }); 
+}
+
+function eliminarArchivo_tarea1(idDoc) {
+    window.open(`/proyecto/archivos_tarea/delete/${idDoc}`,'_self');
+}
+
+
