@@ -343,6 +343,7 @@ class IndicadorController extends Controller
             'miembro'=>$miembro,
             'files'=>$files,
             'proyecto'=>$proyecto,
+            'lider'=>$lider
         ]);
     }
 

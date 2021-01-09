@@ -169,11 +169,13 @@
                         @if ($indicador->finalizado)
                             <h2 class="text-right text-primary text-uppercase">Finalizado</h2>
                         @else
-                            <form method="POST" action="{{route('indicador.finalizar')}}">
-                                @csrf
-                                <input hidden name="id_indicador" value="{{$indicador->id}}">
-                                <button class="btn btn-primary btn-sm btn-icon" title="Finalizar"><i class="tim-icons icon-check-2"></i></button>
-                            </form>
+                            @if ($lider  && !$indicador->finalizado && $proyecto->id_estado == 1)
+                                <form method="POST" action="{{route('indicador.finalizar')}}">
+                                    @csrf
+                                    <input hidden name="id_indicador" value="{{$indicador->id}}">
+                                    <button class="btn btn-primary btn-sm btn-icon" title="Finalizar"><i class="tim-icons icon-check-2"></i></button>
+                                </form>
+                            @endif
                         @endif
                     </div>
                 </div>
@@ -186,7 +188,7 @@
                           <p class="font-weight-bold">Descripción</p>
                       </div>
                       <div class="col-md-4 text-right">
-                          @if (!$indicador->finalizado && $proyecto->id_estado == 1)
+                        @if ($miembro  && !$indicador->finalizado && $proyecto->id_estado == 1)
                             <button class="btn btn-primary btn-sm btn-icon" data-toggle="modal" data-target="#modalDescripcion"><i class="tim-icons icon-pencil"></i></button>
                             <form method="POST" action="{{route('indicador.descripcion')}}">
                                 @csrf
@@ -231,7 +233,7 @@
                    <form class="form" method="POST" action="{{ route('archivos.indicador.store', $indicador->id )}}" enctype="multipart/form-data">
                             @csrf  
                             <br><h4 class ="title">AVANCE INDICADOR </h4>
-                            @if (!$indicador->finalizado  && $proyecto->id_estado == 1)
+                            @if ($miembro  && !$indicador->finalizado && $proyecto->id_estado == 1)
                                 <input type="file" name="files[]" class="form-control border" multiple>
                             @endif
                             <div class="normal-box">
@@ -247,7 +249,7 @@
                                         <p class="archivo_doc">{{$file->nombre}}</p>
                                     </td>
                                     <td class = "col-md-2"><a href="{{ route('archivos.download', [$indicador->id , $file->id] )}}">Descargar</a></td>
-                                    @if (!$indicador->finalizado  && $proyecto->id_estado == 1)
+                                    @if ($miembro  && !$indicador->finalizado && $proyecto->id_estado == 1)
                                     <td class = "col-md-1">  
                                         <button id="eliminarArchivos" onclick="eliminarArchivo({{$file->id}})" class="btn btn-sm btn-danger btn-round btn-icon" title="Eliminar"><i class="tim-icons icon-simple-remove"></i></button>
                                     <td>
@@ -257,13 +259,12 @@
 
                                 </tr>
                                 </table>
-                                @if (!$indicador->finalizado && $proyecto->id_estado == 1)
                                     <br><p class ="title">Descripcion de Avance </p>
-                                    <input type="text" class= "inputArea" name="descripcionAvance" placeholder="Descripción del avance" maxlength="900" value = "{{$indicador->descrip_avance}}"><br>
-                                @endif
+                                    <input readonly type="text" class= "inputArea" name="descripcionAvance" placeholder="Descripción del avance" maxlength="900" value = "{{$indicador->descrip_avance}}"><br>
+                                
                             </div> 
 
-                            @if (!$indicador->finalizado && $proyecto->id_estado == 1)
+                            @if ($miembro  && !$indicador->finalizado && $proyecto->id_estado == 1)
                                 <div>
                                     <button class="btn btn-primary" id = "agregarArchivo" ><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>  
                                 </div>
