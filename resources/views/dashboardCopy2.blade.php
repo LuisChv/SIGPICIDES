@@ -11,7 +11,7 @@
 
                 @if ($role == 1)            <!-- CAROUSEL PARA ADMIN -->
 
-                <div data-interval="false" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin:0.5%" data-interval="false">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin:0.5%" data-interval="false">
                     <ol class="carousel-indicators">
                       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -53,12 +53,19 @@
                       </div>
                     </div>
                     <br><br>
-                    
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
                 </div>
 
                 @elseif ($role == 2)        <!-- CAROUSEL PARA COORDINADOR -->
 
-                <div data-interval="false" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin:0.5%">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin:0.5%">
                     <ol class="carousel-indicators">
                       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -106,12 +113,19 @@
                       </div>
                     </div>
                     <br><br>
-                    
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
                 </div>
 
                 @elseif ($role == 3)        <!-- CAROUSEL PARA DIRECTOR -->
 
-                <div data-interval="false" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin:0.5%">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin:0.5%">
                     <ol class="carousel-indicators">
                       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -159,12 +173,19 @@
                       </div>
                     </div>
                     <br><br>
-                    
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
                 </div>
 
                 @elseif ($role == 4)        <!-- CAROUSEL PARA INVESTIGADOR -->
                 
-                <div data-interval="false" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin:0.5%">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin:0.5%">
                     <ol class="carousel-indicators">
                       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -200,7 +221,14 @@
                       </div>
                     </div>
                     <br><br>
-                    
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
                 </div>
 
                 @else                       <!-- DEFAULR -->
