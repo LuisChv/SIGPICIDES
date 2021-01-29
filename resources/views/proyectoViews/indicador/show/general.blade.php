@@ -183,12 +183,18 @@
           </div>
           <div class="card">
               <div class="card-body">
+                  @if($indicador->tipo)
+                      <p class="font-weight-bold">Tipo de indicador: Cuantitativo</p><hr>
+                  @else
+                      <p class="font-weight-bold">Tipo de indicador: Cualitativo</p><hr>
+                  @endif
+                  <br><br>
                   <div class="row">
                       <div class="col-md-8">
-                          <p class="font-weight-bold">Descripción</p>
+                          <p class="font-weight-bold">Descripción de avance</p>
                       </div>
                       <div class="col-md-4 text-right">
-                        @if ($miembro  && !$indicador->finalizado && $proyecto->id_estado == 1)
+                        @if ($es_miembro  && !$indicador->finalizado && $proyecto->id_estado == 1)
                             <button class="btn btn-primary btn-sm btn-icon" data-toggle="modal" data-target="#modalDescripcion"><i class="tim-icons icon-pencil"></i></button>
                             <form method="POST" action="{{route('indicador.descripcion')}}">
                                 @csrf
@@ -223,23 +229,20 @@
                   </div>
                   <hr>
                   <p>{{$indicador->descrip_avance}}</p><br>
-
-                  @if($indicador->tipo)
-                      <p class="font-weight-bold">Tipo de indicador: Cuantitativo</p><hr>
-                  @else
-                      <p class="font-weight-bold">Tipo de indicador: Cualitativo</p><hr>
-                  @endif
                     
                    <form class="form" method="POST" action="{{ route('archivos.indicador.store', $indicador->id )}}" enctype="multipart/form-data">
                             @csrf  
                             <br><h4 class ="title">AVANCE INDICADOR </h4>
-                            @if ($miembro  && !$indicador->finalizado && $proyecto->id_estado == 1)
-                                <input type="file" name="files[]" class="form-control border" multiple>
-                            @endif
+                            
                             <div class="normal-box">
                                 <table class="col-md-12">
                                     <tr>
-                                        <p> <b> Archivos disponibles </b>  </p>
+                                    @if ($es_miembro  && !$indicador->finalizado && $proyecto->id_estado == 1)
+                                        <input type="file" name="files[]" class="form-control border border-dark" multiple>
+                                    @endif
+                                    </tr>
+                                    <tr>
+                                        <br><p class="font-weight-bold">Archivos disponibles</p>
                                     </tr>
                                     <!--Listar los archivos que ya estan subidos-->                           
                             
@@ -249,7 +252,7 @@
                                         <p class="archivo_doc">{{$file->nombre}}</p>
                                     </td>
                                     <td class = "col-md-2"><a href="{{ route('archivos.download', [$indicador->id , $file->id] )}}">Descargar</a></td>
-                                    @if ($miembro  && !$indicador->finalizado && $proyecto->id_estado == 1)
+                                    @if ($es_miembro  && !$indicador->finalizado && $proyecto->id_estado == 1)
                                     <td class = "col-md-1">  
                                         <button id="eliminarArchivos" onclick="eliminarArchivo({{$file->id}})" class="btn btn-sm btn-danger btn-round btn-icon" title="Eliminar"><i class="tim-icons icon-simple-remove"></i></button>
                                     <td>
@@ -259,12 +262,10 @@
 
                                 </tr>
                                 </table>
-                                    <br><p class ="title">Descripcion de Avance </p>
-                                    <input readonly type="text" class= "inputArea" name="descripcionAvance" placeholder="Descripción del avance" maxlength="900" value = "{{$indicador->descrip_avance}}"><br>
-                                
+                                    
                             </div> 
 
-                            @if ($miembro  && !$indicador->finalizado && $proyecto->id_estado == 1)
+                            @if ($es_miembro  && !$indicador->finalizado && $proyecto->id_estado == 1)
                                 <div>
                                     <button class="btn btn-primary" id = "agregarArchivo" ><i class="tim-icons icon-attach-87" title="Agregar archivos"></i></button>  
                                 </div>

@@ -334,6 +334,12 @@ class IndicadorController extends Controller
 
         
         $files = Documento::where('id_indicador',$indicador->id)->get(); 
+        $miembros = DB::table('usuario_equipo_rol')
+        ->where([['id_usuario',auth()->user()->id],['id_equipo',$proyecto->id_equipo]])->first();
+        $es_miembro = false;
+        if($miembros){
+            $es_miembro = true;
+        }
         
         //dd($comentarios);
         return view('proyectoViews.indicador.show.general', [
@@ -343,7 +349,8 @@ class IndicadorController extends Controller
             'miembro'=>$miembro,
             'files'=>$files,
             'proyecto'=>$proyecto,
-            'lider'=>$lider
+            'lider'=>$lider,
+            'es_miembro'=>$es_miembro
         ]);
     }
 

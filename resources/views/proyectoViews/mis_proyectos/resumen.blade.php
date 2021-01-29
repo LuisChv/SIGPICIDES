@@ -423,12 +423,12 @@ Primera etapa
     </div>
     @foreach ($evaluaciones as $eva)        
         @if ($eva->etapa==1)
-            @foreach ($miembros_comite as $miembro) 
+            @foreach ($evaluadores as $miembro) 
                 @if ( $eva->id_user == $miembro->id_usuario)
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title text-center"><b>{{ $miembro->name }}</b></h3>           
+                            <h3 class="card-title text-center"><b>{{ $miembro->nombre }}</b></h3>           
                                 <h4 class="text-center"><b>{{ $eva->estado }}</b></h4>
                             <p class="text-justify eva-box"><b>Comentario: </b> {{ $eva->comentario }} </p>
                             <br>
@@ -448,12 +448,12 @@ Primera etapa
     </div>
     @foreach ($evaluaciones as $eva)        
         @if ($eva->etapa==2)
-            @foreach ($miembros_comite as $miembro) 
+            @foreach ($evaluadores as $miembro) 
                 @if ( $eva->id_user == $miembro->id_usuario) 
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title text-center"><b>{{ $miembro->name }}</b></h3>           
+                            <h3 class="card-title text-center"><b>{{ $miembro->nombre }}</b></h3>           
                                 <h4 class="text-center"><b>{{ $eva->estado }}</b></h4>
                             <p class="text-justify eva-box"><b>Comentario: </b> {{ $eva->comentario }} </p>
                             <br>

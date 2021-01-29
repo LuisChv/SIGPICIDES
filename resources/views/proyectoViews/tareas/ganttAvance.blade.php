@@ -292,14 +292,18 @@ function avanceGantt(NODE) {
     while (comentariosLista.firstChild){
         comentariosLista.removeChild(comentariosLista.firstChild);
     } 
-     
+    var asignacion = false;
     //Traer Asignaciones
     $.ajax({
         url: '/tareasAsignaciones/'+ idTask,
         type: 'get',
         dataType: 'json',
         success: function(response){
-            var asignacion = false;
+            asignacion = false;
+
+            for(let i=0; i<response.docs.length; i++){
+                    $('#eliminarArchivo'+response.docs[i].id).hide();                     
+                }      
 
             for(let i=0; i<response.encargados.length; i++){
                 if(response.encargados[i].id_usuario == @json(auth()->user()->id)) {
@@ -328,6 +332,7 @@ function avanceGantt(NODE) {
                     
                 }   
             }
+            asignacion = false;
         }
     });
     
@@ -366,11 +371,11 @@ function avanceGantt(NODE) {
         type: 'get',
         dataType: 'json',
         success: function(response){            
-        let documentos= response.documentos;  
-        let descripcion = response.descripcion;
+            let documentos= response.documentos;  
+            let descripcion = response.descripcion;
 
-        $('#descripcionAvance').val(descripcion);  
-        
+            $('#descripcionAvance').val(descripcion);  
+            
             for(let i=0; i<response.documentos.length; i++){                
                 var node= document.createElement("li");
                 var textNode= document.createTextNode(documentos[i].nombre);
@@ -391,6 +396,7 @@ function avanceGantt(NODE) {
                 icono.setAttribute("class","tim-icons icon-simple-remove");
 
                 button.appendChild(icono);
+               
 
                 archivosLista.appendChild(node);   
                 archivosLista.appendChild(link); 
@@ -446,7 +452,7 @@ function clickDetarea(idTask, idDoc) {
                             <p class ="title"> Subir Archivos </p>
                             
                             <table id ="subirArchivosTarea">
-                                <td><input type="file" id="files" name="files[]" class = "form-control" width="90%" multiple></td>
+                                <td><input type="file" id="files" name="files[]" class="form-control border border-dark" width="90%" multiple></td>
                                 <td><button class="btn btn-sm btn-primary" name="BotonGuardarDoc" >
                                     <i class="tim-icons icon-attach-87" title="Agregar archivos"></i>
                                 </button></td>

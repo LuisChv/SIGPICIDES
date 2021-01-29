@@ -254,9 +254,9 @@ class TaskController extends Controller
     public function tareaAsignacionesFetch($id_task){
         $encargados=0;
         $indicadoresT=0;
-        $encargados= tareaUsuario::select('id', 'id_usuario')->where('id_task', $id_task*1 )->get();
-        $indicadoresT= TareaIndicador::select('id', 'id_indicador')->where('id_task', $id_task*1)->get();
-        $documentos = Documento::where('id_task', $id_task*1)->get();         
+        $encargados= tareaUsuario::select('id', 'id_usuario')->where('id_task', $id_task )->get();
+        $indicadoresT= TareaIndicador::select('id', 'id_indicador')->where('id_task', $id_task)->get();
+        $documentos = Documento::where('id_task', $id_task)->get();         
         return response()->json([
             "encargados"=> $encargados,
             "indicadores"=> $indicadoresT,
